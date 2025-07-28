@@ -304,14 +304,13 @@ import (
 // Sign generates a HMAC SHA256 hash using the provided payload and secret.
 func Sign(payload []byte, secret string) string {
     if secret == "" {
-        return ""
+      return ""
     }
     if len(payload) == 0 {
-        return ""
+      return ""
     }
 
-    s, _ := base64.StdEncoding.DecodeString(secret)
-    sign := hmac.New(sha256.New, s)
+    sign := hmac.New(sha256.New, []byte(secret))
     sign.Write(payload)
     return base64.StdEncoding.EncodeToString(sign.Sum(nil))
 }
@@ -326,28 +325,32 @@ func VerifySignature(payload []byte, receivedSignature, secret string) bool {
 ### TypeScript example
 
 ```typescript
-import * as crypto from 'crypto';
+import { createHmac, timingSafeEqual } from 'crypto';
 
 /**
- * Generates an HMAC SHA256 signature using the payload and shared secret.
- * @param payload - The raw body of the request (as a Buffer).
- * @param secret - The shared secret from Producerflow portal.
- * @returns The generated signature as a base64 string.
+ * Generates a HMAC signature for the given payload using the provided secret.
+ * The payload is hashed using SHA-256, and the resulting HMAC is encoded in base64.
+ *
+ * @param payload - The data to sign
+ * @param secret - The secret key for HMAC generation
+ * @returns Base64-encoded HMAC signature, or empty string if inputs are invalid
  */
-function signPayload(payload: Buffer, secret: string): string {
-  if (!secret || !payload.length) {
-    return '';
-  }
+export function signPayload(payload: Buffer | string, secret: string): string {
+    if (!secret) {
+      return '';
+    }
 
-  // Decode the secret from Base64
-  const key = Buffer.from(secret, 'base64');
-  
-  // Create the HMAC-SHA256 hash
-  const hmac = crypto.createHmac('sha256', key);
-  hmac.update(payload);
-  
-  // Return the generated signature in base64 encoding
-  return hmac.digest('base64');
+    if (
+      !payload ||
+      (Buffer.isBuffer(payload) && payload.length === 0) ||
+      (typeof payload === 'string' && payload.length === 0)
+    ) {
+      return '';
+    }
+
+    const hmac = createHmac('sha256', secret);
+    hmac.update(payload);
+    return hmac.digest('base64');
 }
 
 /**
@@ -361,7 +364,7 @@ function verifySignature(payload: Buffer, receivedSignature: string, secret: str
   const computedSignature = signPayload(payload, secret);
 
   // Use time-safe comparison to avoid timing attacks
-  return crypto.timingSafeEqual(Buffer.from(computedSignature), Buffer.from(receivedSignature));
+  return timingSafeEqual(Buffer.from(computedSignature), Buffer.from(receivedSignature));
 }
 
 ```
