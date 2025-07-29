@@ -868,9 +868,20 @@ message Producer {
   // Internal ID of the producer.
 
   string id = 1;
-  // The full name of the producer.
 
-  string name = 2;
+  // The full name of the producer.
+  // This field is deprecated. Use first_name and last_name instead.
+  string name = 2 [deprecated = true];
+
+  // First name of the producer.
+  string first_name = 15;
+
+  // Middle name of the producer.
+  string middle_name = 16;
+
+  // Last name of the producer.
+  string last_name = 17;
+
   // The email address of the producer.
   // Used for communication and must be unique within the tenant.
   // Must be a valid email format.
