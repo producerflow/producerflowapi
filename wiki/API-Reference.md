@@ -1559,8 +1559,11 @@ Internal ID of the producer.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | The full name of the producer. |
-| name | [string](#string) |  |  |
+| id | [string](#string) |  |  |
+| name | [string](#string) |  | **Deprecated.** The full name of the producer. This field is deprecated. Use first_name and last_name instead. |
+| first_name | [string](#string) |  | First name of the producer. |
+| middle_name | [string](#string) |  | Middle name of the producer. |
+| last_name | [string](#string) |  | Last name of the producer. |
 | email | [string](#string) |  | The email address of the producer. Used for communication and must be unique within the tenant. Must be a valid email format. |
 | npn | [string](#string) |  | The National Producer Number (NPN) of the producer. This is used to retrieve license information from the NIPR API. Must be non-empty. |
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the producer is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |

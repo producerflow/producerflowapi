@@ -1560,8 +1560,18 @@ func (x *Agency) GetRequestedAppointments() []string {
 // Producer represents a producer that has been onboarded.
 type Producer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"` // The full name of the producer.
-	Name  string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The full name of the producer.
+	// This field is deprecated. Use first_name and last_name instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// First name of the producer.
+	FirstName string `protobuf:"bytes,15,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	// Middle name of the producer.
+	MiddleName string `protobuf:"bytes,16,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
+	// Last name of the producer.
+	LastName string `protobuf:"bytes,17,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	// The email address of the producer.
 	// Used for communication and must be unique within the tenant.
 	// Must be a valid email format.
@@ -1630,9 +1640,31 @@ func (x *Producer) GetId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Producer) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *Producer) GetFirstName() string {
+	if x != nil {
+		return x.FirstName
+	}
+	return ""
+}
+
+func (x *Producer) GetMiddleName() string {
+	if x != nil {
+		return x.MiddleName
+	}
+	return ""
+}
+
+func (x *Producer) GetLastName() string {
+	if x != nil {
+		return x.LastName
 	}
 	return ""
 }
@@ -6480,10 +6512,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fams_software\x18\x02 \x01(\tR\vamsSoftware\x12\x1f\n" +
 	"\vams_version\x18\x03 \x01(\tR\n" +
 	"amsVersion\x12%\n" +
-	"\x0emailbox_number\x18\x04 \x01(\tR\rmailboxNumber\"\xe3\x19\n" +
+	"\x0emailbox_number\x18\x04 \x01(\tR\rmailboxNumber\"\xc4\x1a\n" +
 	"\bProducer\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x04name\x18\x02 \x01(\tB\x02\x18\x01R\x04name\x12\x1d\n" +
+	"\n" +
+	"first_name\x18\x0f \x01(\tR\tfirstName\x12\x1f\n" +
+	"\vmiddle_name\x18\x10 \x01(\tR\n" +
+	"middleName\x12\x1b\n" +
+	"\tlast_name\x18\x11 \x01(\tR\blastName\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x10\n" +
 	"\x03npn\x18\x04 \x01(\tR\x03npn\x125\n" +
 	"\x17pdb_alerts_sync_enabled\x18\r \x01(\bR\x14pdbAlertsSyncEnabled\x12A\n" +
