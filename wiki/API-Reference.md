@@ -1566,6 +1566,7 @@ Internal ID of the producer.
 | last_name | [string](#string) |  | Last name of the producer. |
 | email | [string](#string) |  | The email address of the producer. Used for communication and must be unique within the tenant. Must be a valid email format. |
 | npn | [string](#string) |  | The National Producer Number (NPN) of the producer. This is used to retrieve license information from the NIPR API. Must be non-empty. |
+| phone | [string](#string) |  | Phone number of the producer. |
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the producer is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
 | agency | [Producer.Agency](#producerflow-producer-v1-Producer-Agency) |  | Basic information about the agency this producer is associated with. |
 | nipr | [Producer.NIPR](#producerflow-producer-v1-Producer-NIPR) |  | Data synchronized from the NIPR service. Contains license information, biographic data, regulatory actions, and carrier appointments. |
