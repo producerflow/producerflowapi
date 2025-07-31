@@ -892,6 +892,9 @@ message Producer {
   // Must be non-empty.
   string npn = 4;
 
+  // Phone number of the producer.
+  string phone = 5;
+
   // Indicates whether the producer is enabled to be synchronized with NIPR API.
   // When true, the system will regularly check for updates from NIPR.
   bool pdb_alerts_sync_enabled = 13;
