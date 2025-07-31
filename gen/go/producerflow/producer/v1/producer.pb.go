@@ -1580,6 +1580,8 @@ type Producer struct {
 	// This is used to retrieve license information from the NIPR API.
 	// Must be non-empty.
 	Npn string `protobuf:"bytes,4,opt,name=npn,proto3" json:"npn,omitempty"`
+	// Phone number of the producer.
+	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	// Indicates whether the producer is enabled to be synchronized with NIPR API.
 	// When true, the system will regularly check for updates from NIPR.
 	PdbAlertsSyncEnabled bool `protobuf:"varint,13,opt,name=pdb_alerts_sync_enabled,json=pdbAlertsSyncEnabled,proto3" json:"pdb_alerts_sync_enabled,omitempty"`
@@ -1679,6 +1681,13 @@ func (x *Producer) GetEmail() string {
 func (x *Producer) GetNpn() string {
 	if x != nil {
 		return x.Npn
+	}
+	return ""
+}
+
+func (x *Producer) GetPhone() string {
+	if x != nil {
+		return x.Phone
 	}
 	return ""
 }
@@ -6512,7 +6521,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fams_software\x18\x02 \x01(\tR\vamsSoftware\x12\x1f\n" +
 	"\vams_version\x18\x03 \x01(\tR\n" +
 	"amsVersion\x12%\n" +
-	"\x0emailbox_number\x18\x04 \x01(\tR\rmailboxNumber\"\xc4\x1a\n" +
+	"\x0emailbox_number\x18\x04 \x01(\tR\rmailboxNumber\"\xda\x1a\n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x04name\x18\x02 \x01(\tB\x02\x18\x01R\x04name\x12\x1d\n" +
@@ -6522,7 +6531,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"middleName\x12\x1b\n" +
 	"\tlast_name\x18\x11 \x01(\tR\blastName\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x10\n" +
-	"\x03npn\x18\x04 \x01(\tR\x03npn\x125\n" +
+	"\x03npn\x18\x04 \x01(\tR\x03npn\x12\x14\n" +
+	"\x05phone\x18\x05 \x01(\tR\x05phone\x125\n" +
 	"\x17pdb_alerts_sync_enabled\x18\r \x01(\bR\x14pdbAlertsSyncEnabled\x12A\n" +
 	"\x06agency\x18\a \x01(\v2).producerflow.producer.v1.Producer.AgencyR\x06agency\x12;\n" +
 	"\x04nipr\x18\x06 \x01(\v2'.producerflow.producer.v1.Producer.NIPRR\x04nipr\x12b\n" +
