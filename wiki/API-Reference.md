@@ -5,6 +5,7 @@
 
 - [producerflow/appointment/v1/appointment.proto](#producerflow_appointment_v1_appointment-proto)
     - [Appointment](#producerflow-appointment-v1-Appointment)
+    - [AppointmentOperationalStatus](#producerflow-appointment-v1-AppointmentOperationalStatus)
     - [Carrier](#producerflow-appointment-v1-Carrier)
     - [GetAppointableCarriersRequest](#producerflow-appointment-v1-GetAppointableCarriersRequest)
     - [GetAppointableCarriersResponse](#producerflow-appointment-v1-GetAppointableCarriersResponse)
@@ -27,7 +28,9 @@
     - [TerminateAppointmentResponse](#producerflow-appointment-v1-TerminateAppointmentResponse)
   
     - [AppointmentType](#producerflow-appointment-v1-AppointmentType)
+    - [OperationalStatus](#producerflow-appointment-v1-OperationalStatus)
     - [ProcessingStatus](#producerflow-appointment-v1-ProcessingStatus)
+    - [RiskReason](#producerflow-appointment-v1-RiskReason)
     - [TerminationReason](#producerflow-appointment-v1-TerminationReason)
   
     - [AppointmentService](#producerflow-appointment-v1-AppointmentService)
@@ -160,6 +163,26 @@ Represents an appointment for a license.
 | effective_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the last update to the appointment. |
 | termination_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional | Timestamp of the termination of the appointment. |
 | updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the last update to the appointment. |
+| operational_status | [AppointmentOperationalStatus](#producerflow-appointment-v1-AppointmentOperationalStatus) |  | Operational status information for the appointment. This field provides insight into the current operational health and any risk factors that may affect the appointment. |
+
+
+
+
+
+
+<a name="producerflow-appointment-v1-AppointmentOperationalStatus"></a>
+
+### AppointmentOperationalStatus
+AppointmentOperationalStatus contains operational status information for an appointment.
+This message provides detailed information about the current operational state
+and any risk factors that may affect the appointment&#39;s continued validity.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [OperationalStatus](#producerflow-appointment-v1-OperationalStatus) |  | The current operational status of the appointment. |
+| risk_reasons | [RiskReason](#producerflow-appointment-v1-RiskReason) | repeated | Specific reason(s) why the appointment is at risk, if applicable. This field is only populated when status is AT_RISK. |
+| last_updated | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the operational status was last updated. This helps track when status changes occurred. |
 
 
 
@@ -493,6 +516,20 @@ Type of appointment.
 
 
 
+<a name="producerflow-appointment-v1-OperationalStatus"></a>
+
+### OperationalStatus
+OperationalStatus represents the current operational status of an appointment.
+This indicates whether the appointment is actively functioning or at risk of termination.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| OPERATIONAL_STATUS_UNSPECIFIED | 0 |  |
+| OPERATIONAL_STATUS_ACTIVE | 1 | Appointment is actively functioning and meeting all requirements. |
+| OPERATIONAL_STATUS_AT_RISK | 2 | Appointment is at risk of termination due to various factors. |
+
+
+
 <a name="producerflow-appointment-v1-ProcessingStatus"></a>
 
 ### ProcessingStatus
@@ -507,6 +544,24 @@ Processing status of the appointment.
 | PROCESSING_STATUS_REJECTED | 4 |  |
 | PROCESSING_STATUS_MISSING_LICENSE | 5 |  |
 | PROCESSING_STATUS_TERMINATION_REQUESTED | 6 |  |
+
+
+
+<a name="producerflow-appointment-v1-RiskReason"></a>
+
+### RiskReason
+RiskReason represents the specific reason why an appointment is considered at risk.
+These reasons correspond to business rules and compliance requirements that may
+trigger operational status changes.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RISK_REASON_UNSPECIFIED | 0 |  |
+| RISK_REASON_LICENSE_INACTIVE | 1 | License is inactive (License Active = false). |
+| RISK_REASON_LICENSE_EXPIRED | 2 | License has expired (License ExpirationDate &lt; current date). |
+| RISK_REASON_EO_NOT_FOUND | 3 | No E&amp;O coverage exists for agency. |
+| RISK_REASON_EO_INACTIVE | 4 | E&amp;O Status is not &#34;Active&#34;. |
+| RISK_REASON_EO_EXPIRED | 5 | E&amp;O coverage has expired (E&amp;O ExpirationDate &lt; current date). |
 
 
 
