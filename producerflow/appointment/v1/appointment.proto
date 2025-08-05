@@ -212,6 +212,49 @@ message Carrier {
   string fein = 4;
 }
 
+// OperationalStatus represents the current operational status of an appointment.
+// This indicates whether the appointment is actively functioning or at risk of termination.
+enum OperationalStatus {
+  OPERATIONAL_STATUS_UNSPECIFIED = 0;
+  // Appointment is actively functioning and meeting all requirements.
+  OPERATIONAL_STATUS_ACTIVE = 1;
+  // Appointment is at risk of termination due to various factors.
+  OPERATIONAL_STATUS_AT_RISK = 2;
+}
+
+// RiskReason represents the specific reason why an appointment is considered at risk.
+// These reasons correspond to business rules and compliance requirements that may
+// trigger operational status changes.
+enum RiskReason {
+  RISK_REASON_UNSPECIFIED = 0;
+  // License is inactive (License Active = false).
+  RISK_REASON_LICENSE_INACTIVE = 1;
+  // License has expired (License ExpirationDate < current date).
+  RISK_REASON_LICENSE_EXPIRED = 2;
+  // No E&O coverage exists for agency.
+  RISK_REASON_EO_NOT_FOUND = 3;
+  // E&O Status is not "Active".
+  RISK_REASON_EO_INACTIVE = 4;
+  // E&O coverage has expired (E&O ExpirationDate < current date).
+  RISK_REASON_EO_EXPIRED = 5;
+}
+
+// AppointmentOperationalStatus contains operational status information for an appointment.
+// This message provides detailed information about the current operational state
+// and any risk factors that may affect the appointment's continued validity.
+message AppointmentOperationalStatus {
+  // The current operational status of the appointment.
+  OperationalStatus status = 1;
+
+  // Specific reason(s) why the appointment is at risk, if applicable.
+  // This field is only populated when status is AT_RISK.
+  repeated RiskReason risk_reasons = 2;
+
+  // Timestamp when the operational status was last updated.
+  // This helps track when status changes occurred.
+  google.protobuf.Timestamp last_updated = 3;
+}
+
 // Represents an appointment for a license.
 message Appointment {
   // Unique identifier for the appointment.
@@ -249,6 +292,11 @@ message Appointment {
 
   // Timestamp of the last update to the appointment.
   google.protobuf.Timestamp updated_at = 12;
+
+  // Operational status information for the appointment.
+  // This field provides insight into the current operational health
+  // and any risk factors that may affect the appointment.
+  AppointmentOperationalStatus operational_status = 13;
 }
 
 // Processing status of the appointment.
