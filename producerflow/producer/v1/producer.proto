@@ -763,10 +763,12 @@ message Agency {
     // ZIP/Postal code of the location.
     string zip = 4;
   }
-  // Address type field named address.
-  Address address = 3;
-  // Address type field named mailing_address.
+  // Physical address of the agency.
+  Address physical_address = 3;
+  // Mailing address of the agency.
   Address mailing_address = 4;
+  // Invoicing address of the agency.
+  Address invoicing_address = 10;
 
   // BankAccount contains information about a bank account for commission payments.
   message BankAccount {
@@ -805,6 +807,8 @@ message Agency {
     string coverage_amount = 3;
     // Per occurrence limit for the E&O policy
     string per_occurrence = 4;
+    // Effective date of the E&O policy
+    google.protobuf.Timestamp effective_date = 5;
   }
 
   EOInfo eo_info = 6;
@@ -833,9 +837,9 @@ message Agency {
     // Used for communication.
     string phone = 6;
 
-    // Mailing address of the principal.
+    // Address of the principal.
     // This may differ from the agency address.
-    Address mailing_address = 8;
+    Address address = 8;
   }
 
   // Information about the agency's principal.
@@ -861,6 +865,25 @@ message Agency {
 
   // The list of requested appointments for the agency.
   repeated string requested_appointments = 9;
+
+  // BusinessHours contains the operating hours of the agency.
+  message BusinessHours {
+    // BusinessHour represents operating hours for specific days.
+    message BusinessHour {
+      // Days of the week when the agency is open.
+      repeated google.type.DayOfWeek week_days = 1;
+      // Time when the agency opens.
+      google.type.TimeOfDay opening_time = 2;
+      // Time when the agency closes.
+      google.type.TimeOfDay closing_time = 3;
+    }
+    // Timezone of the agency.
+    string timezone = 1;
+    // List of business hour entries.
+    repeated BusinessHour business_hours = 2;
+  }
+  // Operating hours of the agency.
+  BusinessHours business_hours = 11;
 }
 
 // Producer represents a producer that has been onboarded.
@@ -1106,6 +1129,24 @@ message Producer {
 
   // The list of requested appointments for the producer.
   repeated string requested_appointments = 14;
+
+  // Address represents a mailing address for the producer.
+  message Address {
+    // Street address of the producer.
+    string street = 1;
+
+    // City of the producer.
+    string city = 2;
+
+    // State of the producer.
+    string state = 3;
+
+    // Zip code of the producer.
+    string zip = 4;
+  }
+
+  // Address of the producer.
+  Address address = 18;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -1151,6 +1192,7 @@ message NewProducer {
     // State of the producer.
     // Required and must be a 2-letter state code.
     string state = 3 [(buf.validate.field).string.len = 2];
+
     // Zip code of the producer.
     // Required and must be between 1 and 10 characters.
     string zip = 4 [
@@ -1271,7 +1313,7 @@ message NewContact {
   string tenant_id = 8;
 
   // National Producer Number (NPN) of the contact.
-  string npn = 9;
+  optional string npn = 9;
 }
 
 // NewContactRequest is used to create a new contact and associate it with an agency.
