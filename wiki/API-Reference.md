@@ -41,6 +41,8 @@
     - [Agency.Address](#producerflow-producer-v1-Agency-Address)
     - [Agency.AgencyInfo](#producerflow-producer-v1-Agency-AgencyInfo)
     - [Agency.BankAccount](#producerflow-producer-v1-Agency-BankAccount)
+    - [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours)
+    - [Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-Agency-BusinessHours-BusinessHour)
     - [Agency.EOInfo](#producerflow-producer-v1-Agency-EOInfo)
     - [Agency.IvansAccount](#producerflow-producer-v1-Agency-IvansAccount)
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
@@ -90,6 +92,7 @@
     - [NewProducersResponse](#producerflow-producer-v1-NewProducersResponse)
     - [Organization](#producerflow-producer-v1-Organization)
     - [Producer](#producerflow-producer-v1-Producer)
+    - [Producer.Address](#producerflow-producer-v1-Producer-Address)
     - [Producer.Agency](#producerflow-producer-v1-Producer-Agency)
     - [Producer.NIPR](#producerflow-producer-v1-Producer-NIPR)
     - [Producer.NIPR.Appointment](#producerflow-producer-v1-Producer-NIPR-Appointment)
@@ -686,13 +689,15 @@ Agency represents a complete agency entity with all associated information.
 | ----- | ---- | ----- | ----------- |
 | agency_id | [string](#string) |  | Unique identifier for the agency. |
 | agency_info | [Agency.AgencyInfo](#producerflow-producer-v1-Agency-AgencyInfo) |  | AgencyInfo type field named agency_info |
-| address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Address type field named address. |
-| mailing_address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Address type field named mailing_address. |
+| physical_address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Physical address of the agency. |
+| mailing_address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Mailing address of the agency. |
+| invoicing_address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Invoicing address of the agency. |
 | bank_account | [Agency.BankAccount](#producerflow-producer-v1-Agency-BankAccount) |  | Banking information for commission payments. Used for electronic transfers of commissions and other payments. |
 | eo_info | [Agency.EOInfo](#producerflow-producer-v1-Agency-EOInfo) |  |  |
 | principal | [Agency.Principal](#producerflow-producer-v1-Agency-Principal) |  | Information about the agency&#39;s principal. This is a required field as each agency must have a principal. |
 | ivans_account | [Agency.IvansAccount](#producerflow-producer-v1-Agency-IvansAccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS. |
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the agency. |
+| business_hours | [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours) |  | Operating hours of the agency. |
 
 
 
@@ -760,6 +765,39 @@ BankAccount contains information about a bank account for commission payments.
 
 
 
+<a name="producerflow-producer-v1-Agency-BusinessHours"></a>
+
+### Agency.BusinessHours
+BusinessHours contains the operating hours of the agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timezone | [string](#string) |  | Timezone of the agency. |
+| business_hours | [Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-Agency-BusinessHours-BusinessHour) | repeated | List of business hour entries. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-BusinessHours-BusinessHour"></a>
+
+### Agency.BusinessHours.BusinessHour
+BusinessHour represents operating hours for specific days.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| week_days | [google.type.DayOfWeek](#google-type-DayOfWeek) | repeated | Days of the week when the agency is open. |
+| opening_time | [google.type.TimeOfDay](#google-type-TimeOfDay) |  | Time when the agency opens. |
+| closing_time | [google.type.TimeOfDay](#google-type-TimeOfDay) |  | Time when the agency closes. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-Agency-EOInfo"></a>
 
 ### Agency.EOInfo
@@ -772,6 +810,7 @@ EOInfo contains Errors &amp; Omissions insurance information
 | expiration_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date when the E&amp;O coverage will expire |
 | coverage_amount | [string](#string) |  | Amount of coverage provided by the E&amp;O policy (aggregate limit) |
 | per_occurrence | [string](#string) |  | Per occurrence limit for the E&amp;O policy |
+| effective_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Effective date of the E&amp;O policy |
 
 
 
@@ -814,7 +853,7 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | email | [string](#string) |  | Email address of the principal. Must be unique and is used for communication. |
 | npn | [string](#string) |  | The NPN of the principal. This is used to retrieve the license information of the principal from the NIPR API. |
 | phone | [string](#string) |  | Phone number of the principal. Used for communication. |
-| mailing_address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Mailing address of the principal. This may differ from the agency address. |
+| address | [Agency.Address](#producerflow-producer-v1-Agency-Address) |  | Address of the principal. This may differ from the agency address. |
 
 
 
@@ -1393,7 +1432,7 @@ Contacts represent non-producer individuals associated with an agency.
 | address | [NewContact.Address](#producerflow-producer-v1-NewContact-Address) |  | Mailing address of the contact. |
 | role | [string](#string) |  | Role or position of the contact within the agency. Required and must be non-empty. |
 | tenant_id | [string](#string) |  | External tenant identifier for the contact. Used for integration with external systems. |
-| npn | [string](#string) |  | National Producer Number (NPN) of the contact. |
+| npn | [string](#string) | optional | National Producer Number (NPN) of the contact. |
 
 
 
@@ -1628,6 +1667,25 @@ Internal ID of the producer.
 | onboarding_status | [ProducerOnboardingState](#producerflow-producer-v1-ProducerOnboardingState) |  | **Deprecated.** The status of the producer onboarding process. This field is deprecated and should not be used in new code. |
 | is_principal | [bool](#bool) |  | Indicates whether this producer is the principal of an agency. A principal producer has additional responsibilities and permissions. |
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the producer. |
+| address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Producer-Address"></a>
+
+### Producer.Address
+Address represents a mailing address for the producer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| street | [string](#string) |  | Street address of the producer. |
+| city | [string](#string) |  | City of the producer. |
+| state | [string](#string) |  | State of the producer. |
+| zip | [string](#string) |  | Zip code of the producer. |
 
 
 
