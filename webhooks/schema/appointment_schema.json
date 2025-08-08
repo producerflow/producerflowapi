@@ -88,6 +88,35 @@
           "description": "Reasons for appointment termination"
         }
       }
+    },
+    "operational_status": {
+      "type": "object",
+      "description": "Operational status information for the appointment",
+      "properties": {
+        "previous_status": {
+          "type": "string",
+          "enum": ["active", "at_risk"],
+          "description": "Previous operational status of the appointment"
+        },
+        "current_status": {
+          "type": "string",
+          "enum": ["active", "at_risk"],
+          "description": "Current operational status of the appointment"
+        },
+        "at_risk_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["license_inactive", "license_expired", "eo_not_found", "eo_inactive", "eo_expired"]
+          },
+          "description": "Specific reasons why the appointment is considered at risk"
+        },
+        "changed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operational status was changed"
+        }
+      }
     }
   }
 }

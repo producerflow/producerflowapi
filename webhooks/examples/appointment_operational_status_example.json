@@ -1,0 +1,28 @@
+{
+  "id": "evt_appointment_987654321",
+  "event_type": "appointment.updated",
+  "origin": "ProducerFlowAPI",
+  "timestamp": "2025-07-21T16:45:00Z",
+  "appointment_id": "app_123456789",
+  "producer_id": "prod_789123456",
+  "agency_id": "agcy_456789123",
+  "external_agency_id": "ext_agcy_789",
+  "external_producer_id": "ext_prod_456",
+  "agency_npn": "56789123",
+  "producer_npn": "98765432",
+  "appointment_data": {
+    "carrier": "progressive",
+    "state": "ca",
+    "status": "appointed",
+    "license_number": "ca98765",
+    "effective_date": "2025-01-15T00:00:00Z",
+    "termination_date": null,
+    "reasons": ["license_verified", "background_check_passed"]
+  },
+  "operational_status": {
+    "previous_status": "active",
+    "current_status": "at_risk",
+    "at_risk_reasons": ["license_expired", "eo_inactive"],
+    "changed_at": "2025-07-21T16:45:00Z"
+  }
+}
