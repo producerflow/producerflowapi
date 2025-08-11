@@ -33,6 +33,14 @@ Welcome to [Producerflow](https://www.producerflow.com)'s developer docs, where 
   - [Event Types & Mechanics](https://github.com/producerflow/producerflowapi/wiki/Webhooks#5-event-mechanics-and-types)
   - [Payload Structure](https://github.com/producerflow/producerflowapi/wiki/Webhooks#6-webhook-payload)
   - [Security & Signature Verification](Webhooks.md#10-signature-verification)
+- [📋 Appointment Events](https://github.com/producerflow/producerflowapi/wiki/Appointment-events) - Detailed appointment webhook documentation
+
+#### Appointment Features
+
+- [⚕️ Appointment Operational Status](https://github.com/producerflow/producerflowapi/wiki/Appointment-Operational-Status) - Daily monitoring of appointment health and compliance
+  - [Status Types & Risk Reasons](https://github.com/producerflow/producerflowapi/wiki/Appointment-Operational-Status#2-operational-status-types)
+  - [API Integration](https://github.com/producerflow/producerflowapi/wiki/Appointment-Operational-Status#4-retrieving-operational-status)
+  - [Webhook Notifications](https://github.com/producerflow/producerflowapi/wiki/Appointment-Operational-Status#5-webhook-notifications)
 
 ---
 

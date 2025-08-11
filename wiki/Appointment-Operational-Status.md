@@ -1,0 +1,349 @@
+# Appointment Operational Status
+
+## Table of Contents
+
+- [Appointment Operational Status](#appointment-operational-status)
+  - [Table of Contents](#table-of-contents)
+  - [1. Overview](#1-overview)
+  - [2. Operational Status Types](#2-operational-status-types)
+    - [ACTIVE Status](#active-status)
+    - [AT\_RISK Status](#at_risk-status)
+  - [3. Risk Reasons](#3-risk-reasons)
+    - [License-Related Risks](#license-related-risks)
+      - [`RISK_REASON_LICENSE_INACTIVE`](#risk_reason_license_inactive)
+      - [`RISK_REASON_LICENSE_EXPIRED`](#risk_reason_license_expired)
+    - [E\&O Insurance Risks](#eo-insurance-risks)
+      - [`RISK_REASON_EO_NOT_FOUND`](#risk_reason_eo_not_found)
+      - [`RISK_REASON_EO_INACTIVE`](#risk_reason_eo_inactive)
+      - [`RISK_REASON_EO_EXPIRED`](#risk_reason_eo_expired)
+  - [4. Retrieving Operational Status](#4-retrieving-operational-status)
+    - [GetAppointment RPC](#getappointment-rpc)
+    - [ListAppointments RPC](#listappointments-rpc)
+    - [Operational Status Response Structure](#operational-status-response-structure)
+  - [5. Webhook Notifications](#5-webhook-notifications)
+    - [Event Types](#event-types)
+    - [Webhook Payload Structure](#webhook-payload-structure)
+    - [Example Webhook Payload](#example-webhook-payload)
+  - [6. Status Transitions](#6-status-transitions)
+  - [7. Frequently Asked Questions](#7-frequently-asked-questions)
+
+## 1. Overview
+
+Appointment Operational Status is a ProducerFlow feature that provides daily monitoring of appointment health and compliance. This system automatically evaluates producer-carrier appointments against various business rules and regulatory requirements to determine their operational viability. The evaluation runs daily as NIPR data is updated every 24 hours.
+
+The operational status system helps insurance agencies and carriers:
+
+- **Proactively identify compliance risks** before they result in appointment terminations
+- **Monitor license and E&O insurance status** across all appointments
+- **Receive daily notifications** when appointments require attention
+- **Maintain regulatory compliance** through automated risk assessment
+
+Every appointment in ProducerFlow has an operational status that is evaluated daily and updated based on changes to:
+
+- License status and expiration dates
+- Errors & Omissions (E&O) insurance coverage
+- Agency compliance requirements
+- NIPR data updates
+
+## 2. Operational Status Types
+
+### ACTIVE Status
+
+An appointment with `OPERATIONAL_STATUS_ACTIVE` indicates that the appointment is functioning properly and meeting all compliance requirements.
+
+**Characteristics:**
+
+- License is active and not expired
+- E&O insurance coverage is active and current
+- No compliance issues detected
+- Ready for business operations
+
+**Business Impact:**
+
+- Appointment can process business transactions
+- Producer can sell insurance products under this appointment
+- No immediate action required
+
+### AT_RISK Status
+
+An appointment with `OPERATIONAL_STATUS_AT_RISK` indicates that the appointment has one or more compliance issues that may lead to termination if not addressed.
+
+**Characteristics:**
+
+- One or more risk factors have been identified
+- Requires immediate attention to prevent termination
+- Specific risk reasons are provided for remediation
+
+**Business Impact:**
+
+- Appointment may be subject to carrier review
+- Business operations may be restricted
+- Immediate action required to resolve risk factors
+
+## 3. Risk Reasons
+
+When an appointment is marked as `AT_RISK`, specific risk reasons are provided to help identify the exact compliance issues that need to be addressed.
+
+### License-Related Risks
+
+#### `RISK_REASON_LICENSE_INACTIVE`
+
+- **Description**: The producer's license is marked as inactive in NIPR
+- **Impact**: Appointment cannot process business until license is reactivated
+- **Resolution**: Contact the state insurance department to reactivate the license
+
+#### `RISK_REASON_LICENSE_EXPIRED`
+
+- **Description**: The producer's license has passed its expiration date
+- **Impact**: Appointment is invalid for new business transactions
+- **Resolution**: Renew the license through the appropriate state authority
+
+### E&O Insurance Risks
+
+#### `RISK_REASON_EO_NOT_FOUND`
+
+- **Description**: No Errors & Omissions insurance coverage found for the agency
+- **Impact**: Appointment may not meet carrier requirements
+- **Resolution**: Obtain appropriate E&O insurance coverage
+
+#### `RISK_REASON_EO_INACTIVE`
+
+- **Description**: E&O insurance coverage exists but is not in active status
+- **Impact**: Compliance requirements may not be met
+- **Resolution**: Contact insurance provider to activate E&O coverage
+
+#### `RISK_REASON_EO_EXPIRED`
+
+- **Description**: E&O insurance coverage has expired
+- **Impact**: Appointment does not meet carrier insurance requirements
+- **Resolution**: Renew E&O insurance coverage immediately
+
+## 4. Retrieving Operational Status
+
+### GetAppointment RPC
+
+Retrieve the operational status for a specific appointment:
+
+```protobuf
+rpc GetAppointment(GetAppointmentRequest) returns (GetAppointmentResponse);
+```
+
+**Request:**
+
+```protobuf
+message GetAppointmentRequest {
+  string appointment_id = 1; // Required. The ID of the appointment
+}
+```
+
+**Response includes operational status:**
+
+```protobuf
+message GetAppointmentResponse {
+  Appointment appointment = 1;
+}
+```
+
+### ListAppointments RPC
+
+Retrieve operational status for multiple appointments with optional filtering:
+
+```protobuf
+rpc ListAppointments(ListAppointmentsRequest) returns (ListAppointmentsResponse);
+```
+
+**Request:**
+
+```protobuf
+message ListAppointmentsRequest {
+  repeated ProcessingStatus processing_status = 1; // Optional filter
+  oneof license_owner {
+    string producer_id = 2;
+    string agency_id = 3;
+  }
+}
+```
+
+### Operational Status Response Structure
+
+The operational status is included in the `Appointment` message:
+
+```protobuf
+message AppointmentOperationalStatus {
+  // Current operational status
+  OperationalStatus status = 1;
+  
+  // Specific risk reasons (only when status is AT_RISK)
+  repeated RiskReason risk_reasons = 2;
+  
+  // When the status was last updated
+  google.protobuf.Timestamp last_updated = 3;
+}
+
+message Appointment {
+  // ... other appointment fields
+  
+  // Operational status information
+  AppointmentOperationalStatus operational_status = 13;
+}
+```
+
+**Example Response:**
+
+```json
+{
+  "appointment": {
+    "appointment_id": "app_123456789",
+    "license": { /* license details */ },
+    "carrier": "Progressive Insurance",
+    "processing_status": "PROCESSING_STATUS_APPOINTED",
+    "operational_status": {
+      "status": "OPERATIONAL_STATUS_AT_RISK",
+      "risk_reasons": [
+        "RISK_REASON_LICENSE_EXPIRED",
+        "RISK_REASON_EO_INACTIVE"
+      ],
+      "last_updated": "2024-03-20T15:30:45Z"
+    }
+  }
+}
+```
+
+## 5. Webhook Notifications
+
+ProducerFlow sends webhook notifications whenever an appointment's operational status changes during daily evaluations, enabling automated monitoring and response workflows.
+
+### Event Types
+
+**`appointment.updated`**
+
+- Triggered when operational status changes from ACTIVE to AT_RISK or vice versa
+- Triggered when risk reasons are added, removed, or modified
+- Includes full operational status details in the payload
+
+### Webhook Payload Structure
+
+Operational status webhooks follow the standard appointment webhook structure with additional operational status information:
+
+```json
+{
+  "id": "string",                    // Unique event identifier
+  "event_type": "appointment.updated", // Event type
+  "origin": "string",                // Source system
+  "timestamp": "string",             // ISO 8601 timestamp
+  "appointment_id": "string",        // Appointment identifier
+  "producer_id": "string",           // Producer identifier
+  "agency_id": "string",             // Agency identifier
+  "operational_status": {            // Operational status details
+    "previous_status": "string",
+    "current_status": "string",
+    "at_risk_reasons": ["string"],
+    "changed_at": "string"
+  }
+}
+```
+
+### Example Webhook Payload
+
+**Status Change to AT_RISK:**
+
+```json
+{
+  "id": "evt_appointment_987654321",
+  "event_type": "appointment.updated",
+  "origin": "ProducerFlowAPI",
+  "timestamp": "2025-01-15T16:45:00Z",
+  "appointment_id": "app_123456789",
+  "producer_id": "prod_789123456",
+  "agency_id": "agcy_456789123",
+  "external_agency_id": "ext_agcy_789",
+  "external_producer_id": "ext_prod_456",
+  "agency_npn": "56789123",
+  "producer_npn": "98765432",
+  "appointment_data": {
+    "carrier": "progressive",
+    "state": "ca",
+    "status": "appointed",
+    "license_number": "ca98765",
+    "effective_date": "2025-01-15T00:00:00Z",
+    "termination_date": null
+  },
+  "operational_status": {
+    "previous_status": "active",
+    "current_status": "at_risk",
+    "at_risk_reasons": ["license_expired", "eo_inactive"],
+    "changed_at": "2025-01-15T16:45:00Z"
+  }
+}
+```
+
+**Status Change to ACTIVE:**
+
+```json
+{
+  "id": "evt_appointment_987654322",
+  "event_type": "appointment.updated",
+  "origin": "ProducerFlowAPI",
+  "timestamp": "2025-01-16T09:30:00Z",
+  "appointment_id": "app_123456789",
+  "producer_id": "prod_789123456",
+  "agency_id": "agcy_456789123",
+  "operational_status": {
+    "previous_status": "at_risk",
+    "current_status": "active",
+    "at_risk_reasons": [],
+    "changed_at": "2025-01-16T09:30:00Z"
+  }
+}
+```
+
+## 6. Status Transitions
+
+Understanding how operational status changes occur:
+
+**ACTIVE → AT_RISK Transitions:**
+
+- License expiration date passes
+- License becomes inactive in NIPR
+- E&O insurance expires or becomes inactive
+- E&O insurance coverage is not found
+
+**AT_RISK → ACTIVE Transitions:**
+
+- All risk factors are resolved
+- License is renewed and becomes active
+- E&O insurance is renewed and activated
+- Missing E&O coverage is obtained
+
+**Status Update Frequency:**
+
+- Operational status is evaluated daily (every 24 hours)
+- Updates occur when NIPR data is refreshed and processed
+- Webhook notifications are sent when status changes are detected during daily evaluation
+
+## 7. Frequently Asked Questions
+
+**Q: How often is operational status updated?**
+A: Operational status is evaluated daily (every 24 hours) when NIPR data is refreshed and processed. Status changes are detected during this daily evaluation and webhook notifications are sent accordingly.
+
+**Q: Can an appointment have multiple risk reasons?**
+A: Yes, an appointment can have multiple risk reasons simultaneously. For example, both license expiration and E&O insurance issues can exist at the same time.
+
+**Q: What happens to business operations when an appointment is AT_RISK?**
+A: While an appointment marked AT_RISK may still be technically valid, it indicates compliance issues that could lead to termination. Business operations may be restricted depending on carrier policies.
+
+**Q: How do I resolve risk reasons?**
+A: Resolution depends on the specific risk reason:
+
+- License issues: Contact the state insurance department
+- E&O insurance issues: Contact your insurance provider
+- Specific resolution steps are provided in the risk reason descriptions above
+
+**Q: Are operational status changes included in all appointment webhooks?**
+A: Operational status information is included when it's part of the change that triggered the webhook. Status-specific changes will always include the operational status details.
+
+**Q: Can I filter appointments by operational status via the API?**
+A: While there's no direct operational status filter in the current API, you can retrieve all appointments and filter by operational status in your application logic.
+
+**Q: What's the difference between processing status and operational status?**
+A: Processing status relates to the appointment's lifecycle (in_progress, appointed, terminated, etc.), while operational status relates to ongoing compliance and business viability (active, at_risk).
