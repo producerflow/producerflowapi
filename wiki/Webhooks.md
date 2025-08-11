@@ -87,7 +87,7 @@ To configure the webhook:
 
 ## 6. Webhook Payload
 
-ProducerFlow delivers real-time notifications for changes to agencies, producers, and contacts through structured webhook payloads. Each webhook contains JSON data that follows our published schemas for validation and documentation purposes.
+ProducerFlow delivers real-time notifications for changes to agencies, producers, contacts, and appointments through structured webhook payloads. Each webhook contains JSON data that follows our published schemas for validation and documentation purposes.
 
 ### Common Payload Structure
 
@@ -138,7 +138,7 @@ All webhook payloads share a common base structure with the following fields:
 
 #### Appointment Webhooks
 
-Appointment webhooks deliver real-time notifications when license appointment statuses change due to processing by NIPR (National Insurance Producer Registry) or direct actions by tenant admins. ProducerFlow supports two types of carrier integrations:
+Appointment webhooks deliver real-time notifications when producer-carrier appointment relationships are created, updated, or when their operational status changes. ProducerFlow supports two types of carrier integrations:
 
 1. **NIPR Integration (Asynchronous)**: Appointments go through NIPR processing with statuses like `in_progress`, `appointed`, `termination_requested`, `terminated`, and `rejected`
 2. **ProducerFlow Direct Integration (Synchronous)**: Tenant admins create/terminate appointments directly with immediate `appointed` or `terminated` status
@@ -149,9 +149,24 @@ Appointment webhooks deliver real-time notifications when license appointment st
 - `appointment.updated` - Appointment status changed (NIPR processing results or admin updates)
 
 **Schema Reference**: [appointment_schema.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/schema/appointment_schema.json)  
-**Example Payload**: [appointment_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/appointment_example.json)
+**Example Payloads**:
+
+- [appointment_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/appointment_example.json) - Basic appointment event
+- [appointment_operational_status_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/appointment_operational_status_example.json) - Operational status change
+
+**Key Data Included:**
+
+- Appointment details (carrier, state, status, license number)
+- Effective and termination dates
+- Associated producer and agency information
+- National Producer Numbers (NPN) for both agency and producer
+- Operational status tracking (`active`, `at_risk`)
+- Risk assessment reasons (license expiration, E&O insurance status)
+- Appointment termination reasons when applicable
 
 **📋 For comprehensive appointment webhook documentation, including detailed examples, integration patterns, and handling of both NIPR and direct integrations, see: [Appointment Webhook Events](Appointment-events.md)**
+
+**⚕️ For appointment health and compliance monitoring, including operational status tracking and risk management, see: [Appointment Operational Status](Appointment-Operational-Status.md)**
 
 ### Key Elements
 
@@ -162,6 +177,7 @@ Each webhook type has specific required fields:
 - **Agency**: `id`, `timestamp`, `agency_id`
 - **Producer**: `id`, `timestamp`, `producer_id`  
 - **Contact**: `id`, `timestamp`, `contact_id`
+- **Appointment**: `id`, `timestamp`, `appointment_id`
 
 #### Identifier Fields
 

@@ -2,6 +2,8 @@
 
 This document provides comprehensive documentation for webhook events related to license appointments in the ProducerFlow system. Appointment webhooks deliver real-time notifications when appointment statuses change due to processing by NIPR (National Insurance Producer Registry) or direct actions by the tenant admin in Producerflow's portal.
 
+**⚕️ For appointment health and compliance monitoring, including operational status tracking and risk management, see: [Appointment Operational Status](Appointment-Operational-Status.md)**
+
 ## Overview
 
 ProducerFlow supports two types of carrier integrations for license appointments:
@@ -341,7 +343,7 @@ Handle these common error scenarios:
    - Don't treat delayed webhooks as failures
    - Monitor appointment status via API if needed
 
-3. **Termination Processing**: 
+3. **Termination Processing**:
    - Status moves from `appointed` → `termination_requested` → `terminated`
    - Handle `termination_requested` status to notify users that termination is pending
 

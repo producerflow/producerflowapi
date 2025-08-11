@@ -9,6 +9,7 @@ ProducerFlow webhooks deliver real-time notifications for changes to:
 - **Agencies** - Insurance agency information and licensing data
 - **Producers** - Individual producer/agent information and licensing data  
 - **Contacts** - Contact information for agency personnel
+- **Appointments** - Producer-carrier appointment relationships and operational status
 
 Each webhook payload contains structured data that follows JSON Schema specifications for validation and documentation purposes.
 
@@ -78,6 +79,30 @@ Triggered when contact information is created, updated, or deleted.
 - Associated agency and external identifiers
 - National Producer Number (NPN) if applicable
 
+### Appointment Webhooks
+
+Triggered when producer-carrier appointment relationships are created, updated, or when their operational status changes.
+
+**Schema**: [appointment_schema.json](./schema/appointment_schema.json)  
+**Example Payloads**: 
+- [appointment_example.json](./examples/appointment_example.json) - Basic appointment event
+- [appointment_operational_status_example.json](./examples/appointment_operational_status_example.json) - Operational status change
+
+**Event Types:**
+
+- `appointment.created` - New appointment relationship established
+- `appointment.updated` - Existing appointment modified or status changed
+
+**Key Data Included:**
+
+- Appointment details (carrier, state, status, license number)
+- Effective and termination dates
+- Associated producer and agency information
+- National Producer Numbers (NPN) for both agency and producer
+- Operational status tracking (`active`, `at_risk`)
+- Risk assessment reasons (license expiration, E&O insurance status)
+- Appointment termination reasons when applicable
+
 ## Common Payload Structure
 
 All webhook payloads share a common base structure:
@@ -115,6 +140,7 @@ Each webhook type has specific required fields:
 - **Agency**: `id`, `timestamp`, `agency_id`
 - **Producer**: `id`, `timestamp`, `producer_id`  
 - **Contact**: `id`, `timestamp`, `contact_id`
+- **Appointment**: `id`, `timestamp`, `appointment_id`
 
 ## Integration Tips
 
