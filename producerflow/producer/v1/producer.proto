@@ -217,7 +217,7 @@ message CreateAgencyOnboardingURLRequest {
   // All fields within the Agency message are also optional.
   message Agency {
     // Name of the agency
-    string name = 1 [(buf.validate.field).string.min_len = 1];
+    string name = 1;
     // Entity type of the agency: Sole Proprietor, Agency or Ask during onboarding
     EntityType entity_type = 2 [(buf.validate.field).enum = {
       in: [
