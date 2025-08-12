@@ -9,9 +9,6 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: write
-  pull-requests: write
-  repository-projects: read
-  issues: write
 
 env:
   NODE_VERSION: 24
@@ -51,65 +48,31 @@ jobs:
         run: buf --version
       - name: Run buf generate
         run: buf generate
-      - name: Close existing PRs and delete branches
+      - name: Commit and push changes
         run: |
-          echo "Searching for existing PRs with pattern: dev/producerflowapi/regenerate-api-clients-*"
+          # Configure git
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           
-          # List all open PRs to debug
-          echo "All open PRs:"
-          gh pr list --state open --json number,title,headRefName || echo "Failed to list PRs"
-          
-          # Find existing PRs with our specific pattern
-          echo "Searching for PRs with regenerate-api-clients pattern..."
-          existing_prs=$(gh pr list --state open --json number,headRefName | jq -r '.[] | select(.headRefName | startswith("dev/producerflowapi/regenerate-api-clients-")) | .number' 2>/dev/null || echo "")
-          
-          echo "Found PR numbers: '$existing_prs'"
-          
-          if [ ! -z "$existing_prs" ] && [ "$existing_prs" != "" ]; then
-            echo "Found existing PRs to close: $existing_prs"
-            echo "$existing_prs" | while read -r pr_number; do
-              if [ ! -z "$pr_number" ]; then
-                echo "Processing PR #$pr_number"
-                
-                # Get the branch name first
-                branch_name=$(gh pr view $pr_number --json headRefName --jq -r '.headRefName' 2>/dev/null || echo "")
-                echo "Branch name: $branch_name"
-                
-                # Close the PR
-                echo "Closing PR #$pr_number"
-                gh pr close $pr_number --comment "Closing this PR as a new API client regeneration is being created." || echo "Failed to close PR #$pr_number"
-                
-                # Delete the branch if we got the name
-                if [ ! -z "$branch_name" ] && [ "$branch_name" != "null" ]; then
-                  echo "Deleting branch: $branch_name"
-                  git push origin --delete "$branch_name" 2>/dev/null || echo "Branch $branch_name may not exist or already deleted"
-                fi
-              fi
-            done
+          # Check if there are any changes
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Changes detected, committing and pushing..."
+            
+            # Add all changes
+            git add .
+            
+            # Commit changes
+            git commit -m "chore(producerflowapi): regenerate client libraries" \
+                       -m "Generated from the latest protocol buffer definitions in the producerflow/ directory." \
+                       -m "Changes:" \
+                       -m "- Updated Go client libraries" \
+                       -m "- Updated TypeScript client libraries"
+            
+            # Push directly to main branch
+            git push origin main
+            
+            echo "Successfully committed and pushed changes to main branch"
           else
-            echo "No existing PRs found to close"
+            echo "No changes to commit"
           fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(producerflowapi): regenerate client libraries"
-          title: "chore(producerflowapi): regenerate client libraries"
-          body: |
-            This PR contains automatically generated changes to the Producerflow API client libraries.
-            
-            Generated from the latest protocol buffer definitions in the `producerflow/` directory.
-            
-            ## Changes
-            - Updated Go client libraries
-            - Updated TypeScript client libraries
-            
-            ## Review
-            Please review the generated code to ensure all changes are as expected.
-          branch: "dev/producerflowapi/regenerate-api-clients-${{ github.run_number }}"
-          delete-branch: true
-          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
 
