@@ -105,6 +105,12 @@ const (
 	// ProducerServiceCreateProducerUploadURLProcedure is the fully-qualified name of the
 	// ProducerService's CreateProducerUploadURL RPC.
 	ProducerServiceCreateProducerUploadURLProcedure = "/producerflow.producer.v1.ProducerService/CreateProducerUploadURL"
+	// ProducerServiceAddAgencyLocationsProcedure is the fully-qualified name of the ProducerService's
+	// AddAgencyLocations RPC.
+	ProducerServiceAddAgencyLocationsProcedure = "/producerflow.producer.v1.ProducerService/AddAgencyLocations"
+	// ProducerServiceRemoveAgencyLocationsProcedure is the fully-qualified name of the
+	// ProducerService's RemoveAgencyLocations RPC.
+	ProducerServiceRemoveAgencyLocationsProcedure = "/producerflow.producer.v1.ProducerService/RemoveAgencyLocations"
 )
 
 // ProducerServiceClient is a client for the producerflow.producer.v1.ProducerService service.
@@ -241,6 +247,33 @@ type ProducerServiceClient interface {
 	// - NOT_FOUND: if agency NPN doesn't exist
 	// - INTERNAL: for other unexpected errors
 	CreateProducerUploadURL(context.Context, *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error)
+	// AddAgencyLocations adds one or more locations to an existing agency.
+	//
+	// Each location must have a unique name within the agency and valid address information.
+	// You can add up to 100 locations in a single request. This is a bulk operation with
+	// all-or-nothing behavior - if any location fails validation, the entire request will
+	// fail and no locations will be added.
+	//
+	// Returns the IDs of successfully added locations.
+	//
+	// Returns errors in the following cases:
+	//   - UNAUTHENTICATED: if the API key is invalid or missing.
+	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
+	//     location names are duplicated within the request or already exist for the agency,
+	//     or if the agency already has a primary location and the request includes a primary.
+	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	//   - INTERNAL: for unexpected errors during database operations.
+	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
+	// RemoveAgencyLocations removes one or more locations from an agency.
+	//
+	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
+	//
+	// Returns errors in the following cases:
+	// - UNAUTHENTICATED: if the API key is invalid or missing.
+	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
+	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// - INTERNAL: for unexpected errors during database operations.
+	RemoveAgencyLocations(context.Context, *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error)
 }
 
 // NewProducerServiceClient constructs a client for the producerflow.producer.v1.ProducerService
@@ -398,6 +431,18 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("CreateProducerUploadURL")),
 			connect.WithClientOptions(opts...),
 		),
+		addAgencyLocations: connect.NewClient[v1.AddAgencyLocationsRequest, v1.AddAgencyLocationsResponse](
+			httpClient,
+			baseURL+ProducerServiceAddAgencyLocationsProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("AddAgencyLocations")),
+			connect.WithClientOptions(opts...),
+		),
+		removeAgencyLocations: connect.NewClient[v1.RemoveAgencyLocationsRequest, v1.RemoveAgencyLocationsResponse](
+			httpClient,
+			baseURL+ProducerServiceRemoveAgencyLocationsProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("RemoveAgencyLocations")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -427,6 +472,8 @@ type producerServiceClient struct {
 	stopSyncProducerWithNIPR  *connect.Client[v1.StopSyncProducerWithNIPRRequest, v1.StopSyncProducerWithNIPRResponse]
 	stopSyncAgencyWithNIPR    *connect.Client[v1.StopSyncAgencyWithNIPRRequest, v1.StopSyncAgencyWithNIPRResponse]
 	createProducerUploadURL   *connect.Client[v1.CreateProducerUploadURLRequest, v1.CreateProducerUploadURLResponse]
+	addAgencyLocations        *connect.Client[v1.AddAgencyLocationsRequest, v1.AddAgencyLocationsResponse]
+	removeAgencyLocations     *connect.Client[v1.RemoveAgencyLocationsRequest, v1.RemoveAgencyLocationsResponse]
 }
 
 // CreateAgencyOnboardingURL calls
@@ -552,6 +599,16 @@ func (c *producerServiceClient) StopSyncAgencyWithNIPR(ctx context.Context, req 
 // CreateProducerUploadURL calls producerflow.producer.v1.ProducerService.CreateProducerUploadURL.
 func (c *producerServiceClient) CreateProducerUploadURL(ctx context.Context, req *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error) {
 	return c.createProducerUploadURL.CallUnary(ctx, req)
+}
+
+// AddAgencyLocations calls producerflow.producer.v1.ProducerService.AddAgencyLocations.
+func (c *producerServiceClient) AddAgencyLocations(ctx context.Context, req *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error) {
+	return c.addAgencyLocations.CallUnary(ctx, req)
+}
+
+// RemoveAgencyLocations calls producerflow.producer.v1.ProducerService.RemoveAgencyLocations.
+func (c *producerServiceClient) RemoveAgencyLocations(ctx context.Context, req *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error) {
+	return c.removeAgencyLocations.CallUnary(ctx, req)
 }
 
 // ProducerServiceHandler is an implementation of the producerflow.producer.v1.ProducerService
@@ -689,6 +746,33 @@ type ProducerServiceHandler interface {
 	// - NOT_FOUND: if agency NPN doesn't exist
 	// - INTERNAL: for other unexpected errors
 	CreateProducerUploadURL(context.Context, *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error)
+	// AddAgencyLocations adds one or more locations to an existing agency.
+	//
+	// Each location must have a unique name within the agency and valid address information.
+	// You can add up to 100 locations in a single request. This is a bulk operation with
+	// all-or-nothing behavior - if any location fails validation, the entire request will
+	// fail and no locations will be added.
+	//
+	// Returns the IDs of successfully added locations.
+	//
+	// Returns errors in the following cases:
+	//   - UNAUTHENTICATED: if the API key is invalid or missing.
+	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
+	//     location names are duplicated within the request or already exist for the agency,
+	//     or if the agency already has a primary location and the request includes a primary.
+	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	//   - INTERNAL: for unexpected errors during database operations.
+	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
+	// RemoveAgencyLocations removes one or more locations from an agency.
+	//
+	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
+	//
+	// Returns errors in the following cases:
+	// - UNAUTHENTICATED: if the API key is invalid or missing.
+	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
+	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// - INTERNAL: for unexpected errors during database operations.
+	RemoveAgencyLocations(context.Context, *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error)
 }
 
 // NewProducerServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -842,6 +926,18 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("CreateProducerUploadURL")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceAddAgencyLocationsHandler := connect.NewUnaryHandler(
+		ProducerServiceAddAgencyLocationsProcedure,
+		svc.AddAgencyLocations,
+		connect.WithSchema(producerServiceMethods.ByName("AddAgencyLocations")),
+		connect.WithHandlerOptions(opts...),
+	)
+	producerServiceRemoveAgencyLocationsHandler := connect.NewUnaryHandler(
+		ProducerServiceRemoveAgencyLocationsProcedure,
+		svc.RemoveAgencyLocations,
+		connect.WithSchema(producerServiceMethods.ByName("RemoveAgencyLocations")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/producerflow.producer.v1.ProducerService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProducerServiceCreateAgencyOnboardingURLProcedure:
@@ -892,6 +988,10 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceStopSyncAgencyWithNIPRHandler.ServeHTTP(w, r)
 		case ProducerServiceCreateProducerUploadURLProcedure:
 			producerServiceCreateProducerUploadURLHandler.ServeHTTP(w, r)
+		case ProducerServiceAddAgencyLocationsProcedure:
+			producerServiceAddAgencyLocationsHandler.ServeHTTP(w, r)
+		case ProducerServiceRemoveAgencyLocationsProcedure:
+			producerServiceRemoveAgencyLocationsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -995,4 +1095,12 @@ func (UnimplementedProducerServiceHandler) StopSyncAgencyWithNIPR(context.Contex
 
 func (UnimplementedProducerServiceHandler) CreateProducerUploadURL(context.Context, *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.CreateProducerUploadURL is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.AddAgencyLocations is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) RemoveAgencyLocations(context.Context, *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.RemoveAgencyLocations is not implemented"))
 }

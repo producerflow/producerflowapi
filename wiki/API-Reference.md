@@ -36,6 +36,8 @@
     - [AppointmentService](#producerflow-appointment-v1-AppointmentService)
   
 - [producerflow/producer/v1/producer.proto](#producerflow_producer_v1_producer-proto)
+    - [AddAgencyLocationsRequest](#producerflow-producer-v1-AddAgencyLocationsRequest)
+    - [AddAgencyLocationsResponse](#producerflow-producer-v1-AddAgencyLocationsResponse)
     - [Address](#producerflow-producer-v1-Address)
     - [Agency](#producerflow-producer-v1-Agency)
     - [Agency.Address](#producerflow-producer-v1-Agency-Address)
@@ -67,6 +69,8 @@
     - [ListNewProducersResponse](#producerflow-producer-v1-ListNewProducersResponse)
     - [ListOrganizationsRequest](#producerflow-producer-v1-ListOrganizationsRequest)
     - [ListOrganizationsResponse](#producerflow-producer-v1-ListOrganizationsResponse)
+    - [Location](#producerflow-producer-v1-Location)
+    - [LocationInput](#producerflow-producer-v1-LocationInput)
     - [LookupNPNByFEINRequest](#producerflow-producer-v1-LookupNPNByFEINRequest)
     - [LookupNPNByFEINResponse](#producerflow-producer-v1-LookupNPNByFEINResponse)
     - [NewAgencyRequest](#producerflow-producer-v1-NewAgencyRequest)
@@ -104,6 +108,8 @@
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryActionsByStateEntry)
     - [RejectProducerRequest](#producerflow-producer-v1-RejectProducerRequest)
     - [RejectProducerResponse](#producerflow-producer-v1-RejectProducerResponse)
+    - [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest)
+    - [RemoveAgencyLocationsResponse](#producerflow-producer-v1-RemoveAgencyLocationsResponse)
     - [ResyncAgencyRequest](#producerflow-producer-v1-ResyncAgencyRequest)
     - [ResyncAgencyResponse](#producerflow-producer-v1-ResyncAgencyResponse)
     - [ResyncProducerRequest](#producerflow-producer-v1-ResyncProducerRequest)
@@ -659,6 +665,37 @@ The termination reasons returned are based on NIPR&#39;s valid termination codes
 
 
 
+<a name="producerflow-producer-v1-AddAgencyLocationsRequest"></a>
+
+### AddAgencyLocationsRequest
+AddAgencyLocationsRequest adds new locations to an agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | Required. Agency ID to add locations to. |
+| locations | [LocationInput](#producerflow-producer-v1-LocationInput) | repeated | Required. List of locations to add. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-AddAgencyLocationsResponse"></a>
+
+### AddAgencyLocationsResponse
+AddAgencyLocationsResponse contains the results of adding locations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| location_ids | [string](#string) | repeated | IDs of successfully created locations, in the same order as the input. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-Address"></a>
 
 ### Address
@@ -1206,6 +1243,48 @@ the organizations list will be empty.
 
 
 
+<a name="producerflow-producer-v1-Location"></a>
+
+### Location
+Location represents a physical or virtual location where an agency operates.
+Each location includes address information and optional contact details.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Unique identifier for the location. |
+| name | [string](#string) |  | Required. Name of the location. Must be unique within the agency. |
+| address | [Address](#producerflow-producer-v1-Address) |  | Required. Physical address of the location. |
+| phone | [string](#string) |  | Required. Phone number for the location. |
+| email | [string](#string) |  | Required. Email address for the location. |
+| is_primary | [bool](#bool) |  | Whether this is the primary location for the agency. |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the location was created. |
+| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the location was last updated. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-LocationInput"></a>
+
+### LocationInput
+LocationInput represents the input data for creating a new location.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. Name of the location. Must be unique within the agency. |
+| address | [Address](#producerflow-producer-v1-Address) |  | Required. Physical address of the location. |
+| phone | [string](#string) |  | Required. Phone number for the location. |
+| email | [string](#string) |  | Required. Email address for the location. |
+| is_primary | [bool](#bool) |  | Whether this should be marked as the primary location. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-LookupNPNByFEINRequest"></a>
 
 ### LookupNPNByFEINRequest
@@ -1637,6 +1716,7 @@ such as agency networks, aggregators, or other business hierarchies.
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  | Unique identifier for the organization. This is a UUID that can be used to reference the organization in other API calls. |
 | name | [string](#string) |  | Display name of the organization. This is the human-readable name that identifies the organization to users. |
+| external_id | [string](#string) |  | External identifier for the organization. This is the identifier used by the tenant&#39;s system to identify the organization. |
 
 
 
@@ -1890,6 +1970,37 @@ RejectProducerRequest requests rejection of a producer in the onboarding process
 
 ### RejectProducerResponse
 RejectProducerResponse is the empty response returned after successfully rejecting a producer.
+
+
+
+
+
+
+<a name="producerflow-producer-v1-RemoveAgencyLocationsRequest"></a>
+
+### RemoveAgencyLocationsRequest
+RemoveAgencyLocationsRequest removes locations from an agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | Required. Agency ID to remove locations from. |
+| location_ids | [string](#string) | repeated | Required. IDs of locations to remove. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-RemoveAgencyLocationsResponse"></a>
+
+### RemoveAgencyLocationsResponse
+RemoveAgencyLocationsResponse contains the results of removing locations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| removed_location_ids | [string](#string) | repeated | IDs of successfully removed locations. |
 
 
 
@@ -2339,6 +2450,18 @@ The URL is time-limited and includes necessary security tokens. A default expira
 The agency must: - Exist and belong to the authenticated tenant - Have a valid NPN
 
 Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: - INVALID_ARGUMENT: if agency NPN is empty or invalid format - NOT_FOUND: if agency NPN doesn&#39;t exist - INTERNAL: for other unexpected errors |
+| AddAgencyLocations | [AddAgencyLocationsRequest](#producerflow-producer-v1-AddAgencyLocationsRequest) | [AddAgencyLocationsResponse](#producerflow-producer-v1-AddAgencyLocationsResponse) | AddAgencyLocations adds one or more locations to an existing agency.
+
+Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added.
+
+Returns the IDs of successfully added locations.
+
+Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency, or if the agency already has a primary location and the request includes a primary. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. - INTERNAL: for unexpected errors during database operations. |
+| RemoveAgencyLocations | [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest) | [RemoveAgencyLocationsResponse](#producerflow-producer-v1-RemoveAgencyLocationsResponse) | RemoveAgencyLocations removes one or more locations from an agency.
+
+Locations that don&#39;t exist will be silently ignored. Returns the IDs of successfully removed locations.
+
+Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. - INTERNAL: for unexpected errors during database operations. |
 
  
 
