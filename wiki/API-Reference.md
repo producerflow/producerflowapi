@@ -2072,6 +2072,7 @@ Only one entity type can be specified.
 | producer_id | [string](#string) |  | The UUID of the producer to set an external ID for. |
 | agency_id | [string](#string) |  | The UUID of the agency to set an external ID for. |
 | contact_id | [string](#string) |  | The UUID of the contact to set an external ID for. |
+| organization_id | [string](#string) |  | The UUID of the organization to set an external ID for. |
 | tenant_id | [string](#string) |  | The external tenant identifier to associate with the entity. Required and must be non-empty. |
 
 

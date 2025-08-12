@@ -2447,6 +2447,7 @@ type SetExternalIDRequest struct {
 	//	*SetExternalIDRequest_ProducerId
 	//	*SetExternalIDRequest_AgencyId
 	//	*SetExternalIDRequest_ContactId
+	//	*SetExternalIDRequest_OrganizationId
 	EntityId isSetExternalIDRequest_EntityId `protobuf_oneof:"entity_id"`
 	// The external tenant identifier to associate with the entity.
 	// Required and must be non-empty.
@@ -2519,6 +2520,15 @@ func (x *SetExternalIDRequest) GetContactId() string {
 	return ""
 }
 
+func (x *SetExternalIDRequest) GetOrganizationId() string {
+	if x != nil {
+		if x, ok := x.EntityId.(*SetExternalIDRequest_OrganizationId); ok {
+			return x.OrganizationId
+		}
+	}
+	return ""
+}
+
 func (x *SetExternalIDRequest) GetTenantId() string {
 	if x != nil {
 		return x.TenantId
@@ -2545,11 +2555,18 @@ type SetExternalIDRequest_ContactId struct {
 	ContactId string `protobuf:"bytes,3,opt,name=contact_id,json=contactId,proto3,oneof"`
 }
 
+type SetExternalIDRequest_OrganizationId struct {
+	// The UUID of the organization to set an external ID for.
+	OrganizationId string `protobuf:"bytes,5,opt,name=organization_id,json=organizationId,proto3,oneof"`
+}
+
 func (*SetExternalIDRequest_ProducerId) isSetExternalIDRequest_EntityId() {}
 
 func (*SetExternalIDRequest_AgencyId) isSetExternalIDRequest_EntityId() {}
 
 func (*SetExternalIDRequest_ContactId) isSetExternalIDRequest_EntityId() {}
+
+func (*SetExternalIDRequest_OrganizationId) isSetExternalIDRequest_EntityId() {}
 
 // SetExternalIDResponse is the empty response returned after successfully setting an external ID.
 type SetExternalIDResponse struct {
@@ -7323,13 +7340,14 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\bcontacts\x18\x02 \x03(\v2$.producerflow.producer.v1.NewContactB\b\xbaH\x05\x92\x01\x02\b\x01R\bcontacts\"6\n" +
 	"\x13NewContactsResponse\x12\x1f\n" +
 	"\vcontact_ids\x18\x01 \x03(\tR\n" +
-	"contactIds\"\xd1\x01\n" +
+	"contactIds\"\x86\x02\n" +
 	"\x14SetExternalIDRequest\x12+\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\n" +
 	"producerId\x12'\n" +
 	"\tagency_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12)\n" +
 	"\n" +
-	"contact_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tcontactId\x12$\n" +
+	"contact_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tcontactId\x123\n" +
+	"\x0forganization_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0eorganizationId\x12$\n" +
 	"\ttenant_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\btenantIdB\x12\n" +
 	"\tentity_id\x12\x05\xbaH\x02\b\x01\"\x17\n" +
 	"\x15SetExternalIDResponse\"Y\n" +
@@ -7736,6 +7754,7 @@ func file_producerflow_producer_v1_producer_proto_init() {
 		(*SetExternalIDRequest_ProducerId)(nil),
 		(*SetExternalIDRequest_AgencyId)(nil),
 		(*SetExternalIDRequest_ContactId)(nil),
+		(*SetExternalIDRequest_OrganizationId)(nil),
 	}
 	file_producerflow_producer_v1_producer_proto_msgTypes[33].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[64].OneofWrappers = []any{}
