@@ -184,19 +184,25 @@ service ProducerService {
   //   location names are duplicated within the request or already exist for the agency,
   //   or if the agency already has a primary location and the request includes a primary.
   // - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-  // - INTERNAL: for unexpected errors during database operations.
   rpc AddAgencyLocations(AddAgencyLocationsRequest) returns (AddAgencyLocationsResponse);
 
   // RemoveAgencyLocations removes one or more locations from an agency.
   //
   // Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-  //
+  // When a location is removed, all the producers associated with that location will be unassigned from that location.
   // Returns errors in the following cases:
   // - UNAUTHENTICATED: if the API key is invalid or missing.
   // - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
   // - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-  // - INTERNAL: for unexpected errors during database operations.
   rpc RemoveAgencyLocations(RemoveAgencyLocationsRequest) returns (RemoveAgencyLocationsResponse);
+
+  // ListAgencyLocations retrieves all locations associated with an agency.
+  //
+  // Returns errors in the following cases:
+  // - UNAUTHENTICATED: if the API key is invalid or missing.
+  // - INVALID_ARGUMENT: if the agency_id is empty.
+  // - NOT_FOUND: if the agency doesn't exist.
+  rpc ListAgencyLocations(ListAgencyLocationsRequest) returns (ListAgencyLocationsResponse);
 }
 
 // EntityType defines the business entity type for an agency.
@@ -1607,7 +1613,7 @@ message Location {
 // AddAgencyLocationsRequest adds new locations to an agency.
 message AddAgencyLocationsRequest {
   // Required. Agency ID to add locations to.
-  string agency_id = 1 [(buf.validate.field).string.min_len = 1];
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
 
   // Required. List of locations to add.
   repeated LocationInput locations = 2 [
@@ -1643,17 +1649,32 @@ message AddAgencyLocationsResponse {
 // RemoveAgencyLocationsRequest removes locations from an agency.
 message RemoveAgencyLocationsRequest {
   // Required. Agency ID to remove locations from.
-  string agency_id = 1 [(buf.validate.field).string.min_len = 1];
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
 
   // Required. IDs of locations to remove.
-  repeated string location_ids = 2 [
-    (buf.validate.field).repeated.min_items = 1,
-    (buf.validate.field).repeated.max_items = 100
-  ];
+  repeated string location_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      string: {uuid: true}
+    }
+  }];
 }
 
 // RemoveAgencyLocationsResponse contains the results of removing locations.
 message RemoveAgencyLocationsResponse {
   // IDs of successfully removed locations.
   repeated string removed_location_ids = 1;
+}
+
+// ListAgencyLocationsRequest retrieves all locations for an agency.
+message ListAgencyLocationsRequest {
+  // Required. Agency ID to list locations for.
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+// ListAgencyLocationsResponse contains the list of agency locations.
+message ListAgencyLocationsResponse {
+  // List of all locations associated with the agency.
+  repeated Location locations = 1;
 }
