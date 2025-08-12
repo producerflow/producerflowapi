@@ -1538,6 +1538,10 @@ message Organization {
   // Display name of the organization.
   // This is the human-readable name that identifies the organization to users.
   string name = 2;
+
+  // External identifier for the organization.
+  // This is the identifier used by the tenant's system to identify the organization.
+  string external_id = 3;
 }
 
 // ListOrganizationsResponse contains the list of organizations associated with the tenant.
