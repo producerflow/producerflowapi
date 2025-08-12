@@ -1581,11 +1581,11 @@ message Location {
   // Required. Physical address of the location.
   Address address = 3 [(buf.validate.field).required = true];
 
-  // Optional. Phone number for the location.
-  optional string phone = 4;
+  // Required. Phone number for the location.
+  string phone = 4;
 
-  // Optional. Email address for the location.
-  optional string email = 5;
+  // Required. Email address for the location.
+  string email = 5;
 
   // Whether this is the primary location for the agency.
   bool is_primary = 6;
@@ -1617,11 +1617,11 @@ message LocationInput {
   // Required. Physical address of the location.
   Address address = 2 [(buf.validate.field).required = true];
 
-  // Optional. Phone number for the location.
-  optional string phone = 3;
+  // Required. Phone number for the location.
+  string phone = 3 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
 
-  // Optional. Email address for the location.
-  optional string email = 4;
+  // Required. Email address for the location.
+  string email = 4 [(buf.validate.field).string.email = true];
 
   // Whether this should be marked as the primary location.
   bool is_primary = 5;
