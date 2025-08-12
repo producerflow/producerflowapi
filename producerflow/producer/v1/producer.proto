@@ -1396,6 +1396,9 @@ message SetExternalIDRequest {
     // The UUID of the contact to set an external ID for.
     string contact_id = 3 [(buf.validate.field).string.uuid = true];
 
+    // The UUID of the organization to set an external ID for.
+    string organization_id = 5 [(buf.validate.field).string.uuid = true];
+
     // This oneof is required; exactly one entity must be specified.
     option (buf.validate.oneof).required = true;
   }
