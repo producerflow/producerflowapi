@@ -168,6 +168,35 @@ service ProducerService {
   // - NOT_FOUND: if agency NPN doesn't exist
   // - INTERNAL: for other unexpected errors
   rpc CreateProducerUploadURL(CreateProducerUploadURLRequest) returns (CreateProducerUploadURLResponse);
+
+  // AddAgencyLocations adds one or more locations to an existing agency.
+  //
+  // Each location must have a unique name within the agency and valid address information.
+  // You can add up to 100 locations in a single request. This is a bulk operation with
+  // all-or-nothing behavior - if any location fails validation, the entire request will
+  // fail and no locations will be added.
+  //
+  // Returns the IDs of successfully added locations.
+  //
+  // Returns errors in the following cases:
+  // - UNAUTHENTICATED: if the API key is invalid or missing.
+  // - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
+  //   location names are duplicated within the request or already exist for the agency,
+  //   or if the agency already has a primary location and the request includes a primary.
+  // - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+  // - INTERNAL: for unexpected errors during database operations.
+  rpc AddAgencyLocations(AddAgencyLocationsRequest) returns (AddAgencyLocationsResponse);
+
+  // RemoveAgencyLocations removes one or more locations from an agency.
+  //
+  // Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
+  //
+  // Returns errors in the following cases:
+  // - UNAUTHENTICATED: if the API key is invalid or missing.
+  // - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
+  // - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+  // - INTERNAL: for unexpected errors during database operations.
+  rpc RemoveAgencyLocations(RemoveAgencyLocationsRequest) returns (RemoveAgencyLocationsResponse);
 }
 
 // EntityType defines the business entity type for an agency.
@@ -1538,4 +1567,86 @@ message CreateProducerUploadURLResponse {
   // URL that can be shared with the agency for producer uploads.
   // The URL is time-limited and includes necessary security tokens.
   string url = 1;
+}
+
+// Location represents a physical or virtual location where an agency operates.
+// Each location includes address information and optional contact details.
+message Location {
+  // Unique identifier for the location.
+  string id = 1;
+
+  // Required. Name of the location. Must be unique within the agency.
+  string name = 2 [(buf.validate.field).string.min_len = 1];
+
+  // Required. Physical address of the location.
+  Address address = 3 [(buf.validate.field).required = true];
+
+  // Optional. Phone number for the location.
+  optional string phone = 4;
+
+  // Optional. Email address for the location.
+  optional string email = 5;
+
+  // Whether this is the primary location for the agency.
+  bool is_primary = 6;
+
+  // Timestamp when the location was created.
+  google.protobuf.Timestamp created_at = 7;
+
+  // Timestamp when the location was last updated.
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// AddAgencyLocationsRequest adds new locations to an agency.
+message AddAgencyLocationsRequest {
+  // Required. Agency ID to add locations to.
+  string agency_id = 1 [(buf.validate.field).string.min_len = 1];
+
+  // Required. List of locations to add.
+  repeated LocationInput locations = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100
+  ];
+}
+
+// LocationInput represents the input data for creating a new location.
+message LocationInput {
+  // Required. Name of the location. Must be unique within the agency.
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+
+  // Required. Physical address of the location.
+  Address address = 2 [(buf.validate.field).required = true];
+
+  // Optional. Phone number for the location.
+  optional string phone = 3;
+
+  // Optional. Email address for the location.
+  optional string email = 4;
+
+  // Whether this should be marked as the primary location.
+  bool is_primary = 5;
+}
+
+// AddAgencyLocationsResponse contains the results of adding locations.
+message AddAgencyLocationsResponse {
+  // IDs of successfully created locations, in the same order as the input.
+  repeated string location_ids = 1;
+}
+
+// RemoveAgencyLocationsRequest removes locations from an agency.
+message RemoveAgencyLocationsRequest {
+  // Required. Agency ID to remove locations from.
+  string agency_id = 1 [(buf.validate.field).string.min_len = 1];
+
+  // Required. IDs of locations to remove.
+  repeated string location_ids = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100
+  ];
+}
+
+// RemoveAgencyLocationsResponse contains the results of removing locations.
+message RemoveAgencyLocationsResponse {
+  // IDs of successfully removed locations.
+  repeated string removed_location_ids = 1;
 }
