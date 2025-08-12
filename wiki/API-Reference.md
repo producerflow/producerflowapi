@@ -65,6 +65,8 @@
     - [GetProducerRequest.ProducerIDLookup](#producerflow-producer-v1-GetProducerRequest-ProducerIDLookup)
     - [GetProducerRequest.ProducerNPNLookup](#producerflow-producer-v1-GetProducerRequest-ProducerNPNLookup)
     - [GetProducerResponse](#producerflow-producer-v1-GetProducerResponse)
+    - [ListAgencyLocationsRequest](#producerflow-producer-v1-ListAgencyLocationsRequest)
+    - [ListAgencyLocationsResponse](#producerflow-producer-v1-ListAgencyLocationsResponse)
     - [ListNewProducersRequest](#producerflow-producer-v1-ListNewProducersRequest)
     - [ListNewProducersResponse](#producerflow-producer-v1-ListNewProducersResponse)
     - [ListOrganizationsRequest](#producerflow-producer-v1-ListOrganizationsRequest)
@@ -1178,6 +1180,36 @@ GetProducerResponse contains the producer information retrieved by the GetProduc
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | producer | [Producer](#producerflow-producer-v1-Producer) |  | The complete producer information including personal details, agency association, and NIPR data. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgencyLocationsRequest"></a>
+
+### ListAgencyLocationsRequest
+ListAgencyLocationsRequest retrieves all locations for an agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | Required. Agency ID to list locations for. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgencyLocationsResponse"></a>
+
+### ListAgencyLocationsResponse
+ListAgencyLocationsResponse contains the list of agency locations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| locations | [Location](#producerflow-producer-v1-Location) | repeated | List of all locations associated with the agency. |
 
 
 
@@ -2457,12 +2489,13 @@ Each location must have a unique name within the agency and valid address inform
 
 Returns the IDs of successfully added locations.
 
-Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency, or if the agency already has a primary location and the request includes a primary. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. - INTERNAL: for unexpected errors during database operations. |
+Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency, or if the agency already has a primary location and the request includes a primary. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. |
 | RemoveAgencyLocations | [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest) | [RemoveAgencyLocationsResponse](#producerflow-producer-v1-RemoveAgencyLocationsResponse) | RemoveAgencyLocations removes one or more locations from an agency.
 
-Locations that don&#39;t exist will be silently ignored. Returns the IDs of successfully removed locations.
+Locations that don&#39;t exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. |
+| ListAgencyLocations | [ListAgencyLocationsRequest](#producerflow-producer-v1-ListAgencyLocationsRequest) | [ListAgencyLocationsResponse](#producerflow-producer-v1-ListAgencyLocationsResponse) | ListAgencyLocations retrieves all locations associated with an agency.
 
-Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. - INTERNAL: for unexpected errors during database operations. |
+Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the agency_id is empty. - NOT_FOUND: if the agency doesn&#39;t exist. |
 
  
 

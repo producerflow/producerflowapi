@@ -45,6 +45,7 @@ const (
 	ProducerService_CreateProducerUploadURL_FullMethodName   = "/producerflow.producer.v1.ProducerService/CreateProducerUploadURL"
 	ProducerService_AddAgencyLocations_FullMethodName        = "/producerflow.producer.v1.ProducerService/AddAgencyLocations"
 	ProducerService_RemoveAgencyLocations_FullMethodName     = "/producerflow.producer.v1.ProducerService/RemoveAgencyLocations"
+	ProducerService_ListAgencyLocations_FullMethodName       = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
 )
 
 // ProducerServiceClient is the client API for ProducerService service.
@@ -200,18 +201,23 @@ type ProducerServiceClient interface {
 	//     location names are duplicated within the request or already exist for the agency,
 	//     or if the agency already has a primary location and the request includes a primary.
 	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-	//   - INTERNAL: for unexpected errors during database operations.
 	AddAgencyLocations(ctx context.Context, in *AddAgencyLocationsRequest, opts ...grpc.CallOption) (*AddAgencyLocationsResponse, error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
 	//
 	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-	//
+	// When a location is removed, all the producers associated with that location will be unassigned from that location.
 	// Returns errors in the following cases:
 	// - UNAUTHENTICATED: if the API key is invalid or missing.
 	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
 	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-	// - INTERNAL: for unexpected errors during database operations.
 	RemoveAgencyLocations(ctx context.Context, in *RemoveAgencyLocationsRequest, opts ...grpc.CallOption) (*RemoveAgencyLocationsResponse, error)
+	// ListAgencyLocations retrieves all locations associated with an agency.
+	//
+	// Returns errors in the following cases:
+	// - UNAUTHENTICATED: if the API key is invalid or missing.
+	// - INVALID_ARGUMENT: if the agency_id is empty.
+	// - NOT_FOUND: if the agency doesn't exist.
+	ListAgencyLocations(ctx context.Context, in *ListAgencyLocationsRequest, opts ...grpc.CallOption) (*ListAgencyLocationsResponse, error)
 }
 
 type producerServiceClient struct {
@@ -484,6 +490,16 @@ func (c *producerServiceClient) RemoveAgencyLocations(ctx context.Context, in *R
 	return out, nil
 }
 
+func (c *producerServiceClient) ListAgencyLocations(ctx context.Context, in *ListAgencyLocationsRequest, opts ...grpc.CallOption) (*ListAgencyLocationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAgencyLocationsResponse)
+	err := c.cc.Invoke(ctx, ProducerService_ListAgencyLocations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProducerServiceServer is the server API for ProducerService service.
 // All implementations must embed UnimplementedProducerServiceServer
 // for forward compatibility.
@@ -637,18 +653,23 @@ type ProducerServiceServer interface {
 	//     location names are duplicated within the request or already exist for the agency,
 	//     or if the agency already has a primary location and the request includes a primary.
 	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-	//   - INTERNAL: for unexpected errors during database operations.
 	AddAgencyLocations(context.Context, *AddAgencyLocationsRequest) (*AddAgencyLocationsResponse, error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
 	//
 	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-	//
+	// When a location is removed, all the producers associated with that location will be unassigned from that location.
 	// Returns errors in the following cases:
 	// - UNAUTHENTICATED: if the API key is invalid or missing.
 	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
 	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
-	// - INTERNAL: for unexpected errors during database operations.
 	RemoveAgencyLocations(context.Context, *RemoveAgencyLocationsRequest) (*RemoveAgencyLocationsResponse, error)
+	// ListAgencyLocations retrieves all locations associated with an agency.
+	//
+	// Returns errors in the following cases:
+	// - UNAUTHENTICATED: if the API key is invalid or missing.
+	// - INVALID_ARGUMENT: if the agency_id is empty.
+	// - NOT_FOUND: if the agency doesn't exist.
+	ListAgencyLocations(context.Context, *ListAgencyLocationsRequest) (*ListAgencyLocationsResponse, error)
 	mustEmbedUnimplementedProducerServiceServer()
 }
 
@@ -736,6 +757,9 @@ func (UnimplementedProducerServiceServer) AddAgencyLocations(context.Context, *A
 }
 func (UnimplementedProducerServiceServer) RemoveAgencyLocations(context.Context, *RemoveAgencyLocationsRequest) (*RemoveAgencyLocationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveAgencyLocations not implemented")
+}
+func (UnimplementedProducerServiceServer) ListAgencyLocations(context.Context, *ListAgencyLocationsRequest) (*ListAgencyLocationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAgencyLocations not implemented")
 }
 func (UnimplementedProducerServiceServer) mustEmbedUnimplementedProducerServiceServer() {}
 func (UnimplementedProducerServiceServer) testEmbeddedByValue()                         {}
@@ -1226,6 +1250,24 @@ func _ProducerService_RemoveAgencyLocations_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProducerService_ListAgencyLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAgencyLocationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).ListAgencyLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_ListAgencyLocations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).ListAgencyLocations(ctx, req.(*ListAgencyLocationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProducerService_ServiceDesc is the grpc.ServiceDesc for ProducerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1336,6 +1378,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveAgencyLocations",
 			Handler:    _ProducerService_RemoveAgencyLocations_Handler,
+		},
+		{
+			MethodName: "ListAgencyLocations",
+			Handler:    _ProducerService_ListAgencyLocations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
