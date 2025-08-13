@@ -1780,6 +1780,7 @@ Internal ID of the producer.
 | is_principal | [bool](#bool) |  | Indicates whether this producer is the principal of an agency. A principal producer has additional responsibilities and permissions. |
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the producer. |
 | address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
+| locations | [Location](#producerflow-producer-v1-Location) | repeated | Locations assigned to this producer. |
 
 
 
