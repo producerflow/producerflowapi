@@ -128,6 +128,8 @@
     - [SyncAgencyWithNIPRResponse](#producerflow-producer-v1-SyncAgencyWithNIPRResponse)
     - [SyncProducerWithNIPRRequest](#producerflow-producer-v1-SyncProducerWithNIPRRequest)
     - [SyncProducerWithNIPRResponse](#producerflow-producer-v1-SyncProducerWithNIPRResponse)
+    - [UnassignProducerFromLocationsRequest](#producerflow-producer-v1-UnassignProducerFromLocationsRequest)
+    - [UnassignProducerFromLocationsResponse](#producerflow-producer-v1-UnassignProducerFromLocationsResponse)
     - [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest)
     - [UpdateProducerRequest.Producer](#producerflow-producer-v1-UpdateProducerRequest-Producer)
     - [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse)
@@ -2258,6 +2260,37 @@ SyncProducerWithNIPRResponse is the empty response returned after successfully s
 
 
 
+<a name="producerflow-producer-v1-UnassignProducerFromLocationsRequest"></a>
+
+### UnassignProducerFromLocationsRequest
+UnassignProducerFromLocationsRequest removes location assignments from a producer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| producer_id | [string](#string) |  | Required. Producer ID to unassign locations from. |
+| location_ids | [string](#string) | repeated | Required. Location IDs to unassign (1-100 items). |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-UnassignProducerFromLocationsResponse"></a>
+
+### UnassignProducerFromLocationsResponse
+UnassignProducerFromLocationsResponse contains the unassigned location IDs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| unassigned_location_ids | [string](#string) | repeated | IDs of successfully unassigned locations. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-UpdateProducerRequest"></a>
 
 ### UpdateProducerRequest
@@ -2533,6 +2566,9 @@ Returns errors in the following cases: - UNAUTHENTICATED: if the API key is inva
 | AssignProducerToLocations | [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest) | [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse) | AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer.
 
 Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: Empty producer_id or no location_ids - NOT_FOUND: Producer or locations don&#39;t exist - PERMISSION_DENIED: Locations don&#39;t belong to the producer&#39;s agency |
+| UnassignProducerFromLocations | [UnassignProducerFromLocationsRequest](#producerflow-producer-v1-UnassignProducerFromLocationsRequest) | [UnassignProducerFromLocationsResponse](#producerflow-producer-v1-UnassignProducerFromLocationsResponse) | UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer.
+
+Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: Empty producer_id or no location_ids - NOT_FOUND: Producer doesn&#39;t exist |
 
  
 

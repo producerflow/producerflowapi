@@ -117,6 +117,9 @@ const (
 	// ProducerServiceAssignProducerToLocationsProcedure is the fully-qualified name of the
 	// ProducerService's AssignProducerToLocations RPC.
 	ProducerServiceAssignProducerToLocationsProcedure = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
+	// ProducerServiceUnassignProducerFromLocationsProcedure is the fully-qualified name of the
+	// ProducerService's UnassignProducerFromLocations RPC.
+	ProducerServiceUnassignProducerFromLocationsProcedure = "/producerflow.producer.v1.ProducerService/UnassignProducerFromLocations"
 )
 
 // ProducerServiceClient is a client for the producerflow.producer.v1.ProducerService service.
@@ -294,6 +297,14 @@ type ProducerServiceClient interface {
 	// - NOT_FOUND: Producer or locations don't exist
 	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
 	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
+	// UnassignProducerFromLocations removes one or more location assignments from a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer doesn't exist
+	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
 }
 
 // NewProducerServiceClient constructs a client for the producerflow.producer.v1.ProducerService
@@ -475,39 +486,46 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("AssignProducerToLocations")),
 			connect.WithClientOptions(opts...),
 		),
+		unassignProducerFromLocations: connect.NewClient[v1.UnassignProducerFromLocationsRequest, v1.UnassignProducerFromLocationsResponse](
+			httpClient,
+			baseURL+ProducerServiceUnassignProducerFromLocationsProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("UnassignProducerFromLocations")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // producerServiceClient implements ProducerServiceClient.
 type producerServiceClient struct {
-	createAgencyOnboardingURL *connect.Client[v1.CreateAgencyOnboardingURLRequest, v1.CreateAgencyOnboardingURLResponse]
-	newAgency                 *connect.Client[v1.NewAgencyRequest, v1.NewAgencyResponse]
-	listOrganizations         *connect.Client[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse]
-	newProducer               *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
-	newProducers              *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
-	getAgencyAndProducers     *connect.Client[v1.GetAgencyAndProducersRequest, v1.GetAgencyAndProducersResponse]
-	getProducer               *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
-	getAgencyFiles            *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
-	updateProducer            *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
-	approveProducer           *connect.Client[v1.ApproveProducerRequest, v1.ApproveProducerResponse]
-	rejectProducer            *connect.Client[v1.RejectProducerRequest, v1.RejectProducerResponse]
-	newContact                *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
-	newContacts               *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
-	setExternalID             *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
-	validateProducerNPN       *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
-	validateAgencyNPN         *connect.Client[v1.ValidateAgencyNPNRequest, v1.ValidateAgencyNPNResponse]
-	lookupNPNByFEIN           *connect.Client[v1.LookupNPNByFEINRequest, v1.LookupNPNByFEINResponse]
-	resyncProducer            *connect.Client[v1.ResyncProducerRequest, v1.ResyncProducerResponse]
-	resyncAgency              *connect.Client[v1.ResyncAgencyRequest, v1.ResyncAgencyResponse]
-	syncProducerWithNIPR      *connect.Client[v1.SyncProducerWithNIPRRequest, v1.SyncProducerWithNIPRResponse]
-	syncAgencyWithNIPR        *connect.Client[v1.SyncAgencyWithNIPRRequest, v1.SyncAgencyWithNIPRResponse]
-	stopSyncProducerWithNIPR  *connect.Client[v1.StopSyncProducerWithNIPRRequest, v1.StopSyncProducerWithNIPRResponse]
-	stopSyncAgencyWithNIPR    *connect.Client[v1.StopSyncAgencyWithNIPRRequest, v1.StopSyncAgencyWithNIPRResponse]
-	createProducerUploadURL   *connect.Client[v1.CreateProducerUploadURLRequest, v1.CreateProducerUploadURLResponse]
-	addAgencyLocations        *connect.Client[v1.AddAgencyLocationsRequest, v1.AddAgencyLocationsResponse]
-	removeAgencyLocations     *connect.Client[v1.RemoveAgencyLocationsRequest, v1.RemoveAgencyLocationsResponse]
-	listAgencyLocations       *connect.Client[v1.ListAgencyLocationsRequest, v1.ListAgencyLocationsResponse]
-	assignProducerToLocations *connect.Client[v1.AssignProducerToLocationsRequest, v1.AssignProducerToLocationsResponse]
+	createAgencyOnboardingURL     *connect.Client[v1.CreateAgencyOnboardingURLRequest, v1.CreateAgencyOnboardingURLResponse]
+	newAgency                     *connect.Client[v1.NewAgencyRequest, v1.NewAgencyResponse]
+	listOrganizations             *connect.Client[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse]
+	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
+	newProducers                  *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
+	getAgencyAndProducers         *connect.Client[v1.GetAgencyAndProducersRequest, v1.GetAgencyAndProducersResponse]
+	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
+	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
+	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
+	approveProducer               *connect.Client[v1.ApproveProducerRequest, v1.ApproveProducerResponse]
+	rejectProducer                *connect.Client[v1.RejectProducerRequest, v1.RejectProducerResponse]
+	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
+	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
+	setExternalID                 *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
+	validateProducerNPN           *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
+	validateAgencyNPN             *connect.Client[v1.ValidateAgencyNPNRequest, v1.ValidateAgencyNPNResponse]
+	lookupNPNByFEIN               *connect.Client[v1.LookupNPNByFEINRequest, v1.LookupNPNByFEINResponse]
+	resyncProducer                *connect.Client[v1.ResyncProducerRequest, v1.ResyncProducerResponse]
+	resyncAgency                  *connect.Client[v1.ResyncAgencyRequest, v1.ResyncAgencyResponse]
+	syncProducerWithNIPR          *connect.Client[v1.SyncProducerWithNIPRRequest, v1.SyncProducerWithNIPRResponse]
+	syncAgencyWithNIPR            *connect.Client[v1.SyncAgencyWithNIPRRequest, v1.SyncAgencyWithNIPRResponse]
+	stopSyncProducerWithNIPR      *connect.Client[v1.StopSyncProducerWithNIPRRequest, v1.StopSyncProducerWithNIPRResponse]
+	stopSyncAgencyWithNIPR        *connect.Client[v1.StopSyncAgencyWithNIPRRequest, v1.StopSyncAgencyWithNIPRResponse]
+	createProducerUploadURL       *connect.Client[v1.CreateProducerUploadURLRequest, v1.CreateProducerUploadURLResponse]
+	addAgencyLocations            *connect.Client[v1.AddAgencyLocationsRequest, v1.AddAgencyLocationsResponse]
+	removeAgencyLocations         *connect.Client[v1.RemoveAgencyLocationsRequest, v1.RemoveAgencyLocationsResponse]
+	listAgencyLocations           *connect.Client[v1.ListAgencyLocationsRequest, v1.ListAgencyLocationsResponse]
+	assignProducerToLocations     *connect.Client[v1.AssignProducerToLocationsRequest, v1.AssignProducerToLocationsResponse]
+	unassignProducerFromLocations *connect.Client[v1.UnassignProducerFromLocationsRequest, v1.UnassignProducerFromLocationsResponse]
 }
 
 // CreateAgencyOnboardingURL calls
@@ -654,6 +672,12 @@ func (c *producerServiceClient) ListAgencyLocations(ctx context.Context, req *co
 // producerflow.producer.v1.ProducerService.AssignProducerToLocations.
 func (c *producerServiceClient) AssignProducerToLocations(ctx context.Context, req *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error) {
 	return c.assignProducerToLocations.CallUnary(ctx, req)
+}
+
+// UnassignProducerFromLocations calls
+// producerflow.producer.v1.ProducerService.UnassignProducerFromLocations.
+func (c *producerServiceClient) UnassignProducerFromLocations(ctx context.Context, req *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error) {
+	return c.unassignProducerFromLocations.CallUnary(ctx, req)
 }
 
 // ProducerServiceHandler is an implementation of the producerflow.producer.v1.ProducerService
@@ -832,6 +856,14 @@ type ProducerServiceHandler interface {
 	// - NOT_FOUND: Producer or locations don't exist
 	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
 	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
+	// UnassignProducerFromLocations removes one or more location assignments from a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer doesn't exist
+	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
 }
 
 // NewProducerServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -1009,6 +1041,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("AssignProducerToLocations")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceUnassignProducerFromLocationsHandler := connect.NewUnaryHandler(
+		ProducerServiceUnassignProducerFromLocationsProcedure,
+		svc.UnassignProducerFromLocations,
+		connect.WithSchema(producerServiceMethods.ByName("UnassignProducerFromLocations")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/producerflow.producer.v1.ProducerService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProducerServiceCreateAgencyOnboardingURLProcedure:
@@ -1067,6 +1105,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceListAgencyLocationsHandler.ServeHTTP(w, r)
 		case ProducerServiceAssignProducerToLocationsProcedure:
 			producerServiceAssignProducerToLocationsHandler.ServeHTTP(w, r)
+		case ProducerServiceUnassignProducerFromLocationsProcedure:
+			producerServiceUnassignProducerFromLocationsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1186,4 +1226,8 @@ func (UnimplementedProducerServiceHandler) ListAgencyLocations(context.Context, 
 
 func (UnimplementedProducerServiceHandler) AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.AssignProducerToLocations is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.UnassignProducerFromLocations is not implemented"))
 }

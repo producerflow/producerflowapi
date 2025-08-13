@@ -19,34 +19,35 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProducerService_CreateAgencyOnboardingURL_FullMethodName = "/producerflow.producer.v1.ProducerService/CreateAgencyOnboardingURL"
-	ProducerService_NewAgency_FullMethodName                 = "/producerflow.producer.v1.ProducerService/NewAgency"
-	ProducerService_ListOrganizations_FullMethodName         = "/producerflow.producer.v1.ProducerService/ListOrganizations"
-	ProducerService_NewProducer_FullMethodName               = "/producerflow.producer.v1.ProducerService/NewProducer"
-	ProducerService_NewProducers_FullMethodName              = "/producerflow.producer.v1.ProducerService/NewProducers"
-	ProducerService_GetAgencyAndProducers_FullMethodName     = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
-	ProducerService_GetProducer_FullMethodName               = "/producerflow.producer.v1.ProducerService/GetProducer"
-	ProducerService_GetAgencyFiles_FullMethodName            = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
-	ProducerService_UpdateProducer_FullMethodName            = "/producerflow.producer.v1.ProducerService/UpdateProducer"
-	ProducerService_ApproveProducer_FullMethodName           = "/producerflow.producer.v1.ProducerService/ApproveProducer"
-	ProducerService_RejectProducer_FullMethodName            = "/producerflow.producer.v1.ProducerService/RejectProducer"
-	ProducerService_NewContact_FullMethodName                = "/producerflow.producer.v1.ProducerService/NewContact"
-	ProducerService_NewContacts_FullMethodName               = "/producerflow.producer.v1.ProducerService/NewContacts"
-	ProducerService_SetExternalID_FullMethodName             = "/producerflow.producer.v1.ProducerService/SetExternalID"
-	ProducerService_ValidateProducerNPN_FullMethodName       = "/producerflow.producer.v1.ProducerService/ValidateProducerNPN"
-	ProducerService_ValidateAgencyNPN_FullMethodName         = "/producerflow.producer.v1.ProducerService/ValidateAgencyNPN"
-	ProducerService_LookupNPNByFEIN_FullMethodName           = "/producerflow.producer.v1.ProducerService/LookupNPNByFEIN"
-	ProducerService_ResyncProducer_FullMethodName            = "/producerflow.producer.v1.ProducerService/ResyncProducer"
-	ProducerService_ResyncAgency_FullMethodName              = "/producerflow.producer.v1.ProducerService/ResyncAgency"
-	ProducerService_SyncProducerWithNIPR_FullMethodName      = "/producerflow.producer.v1.ProducerService/SyncProducerWithNIPR"
-	ProducerService_SyncAgencyWithNIPR_FullMethodName        = "/producerflow.producer.v1.ProducerService/SyncAgencyWithNIPR"
-	ProducerService_StopSyncProducerWithNIPR_FullMethodName  = "/producerflow.producer.v1.ProducerService/StopSyncProducerWithNIPR"
-	ProducerService_StopSyncAgencyWithNIPR_FullMethodName    = "/producerflow.producer.v1.ProducerService/StopSyncAgencyWithNIPR"
-	ProducerService_CreateProducerUploadURL_FullMethodName   = "/producerflow.producer.v1.ProducerService/CreateProducerUploadURL"
-	ProducerService_AddAgencyLocations_FullMethodName        = "/producerflow.producer.v1.ProducerService/AddAgencyLocations"
-	ProducerService_RemoveAgencyLocations_FullMethodName     = "/producerflow.producer.v1.ProducerService/RemoveAgencyLocations"
-	ProducerService_ListAgencyLocations_FullMethodName       = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
-	ProducerService_AssignProducerToLocations_FullMethodName = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
+	ProducerService_CreateAgencyOnboardingURL_FullMethodName     = "/producerflow.producer.v1.ProducerService/CreateAgencyOnboardingURL"
+	ProducerService_NewAgency_FullMethodName                     = "/producerflow.producer.v1.ProducerService/NewAgency"
+	ProducerService_ListOrganizations_FullMethodName             = "/producerflow.producer.v1.ProducerService/ListOrganizations"
+	ProducerService_NewProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewProducer"
+	ProducerService_NewProducers_FullMethodName                  = "/producerflow.producer.v1.ProducerService/NewProducers"
+	ProducerService_GetAgencyAndProducers_FullMethodName         = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
+	ProducerService_GetProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/GetProducer"
+	ProducerService_GetAgencyFiles_FullMethodName                = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
+	ProducerService_UpdateProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/UpdateProducer"
+	ProducerService_ApproveProducer_FullMethodName               = "/producerflow.producer.v1.ProducerService/ApproveProducer"
+	ProducerService_RejectProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/RejectProducer"
+	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
+	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
+	ProducerService_SetExternalID_FullMethodName                 = "/producerflow.producer.v1.ProducerService/SetExternalID"
+	ProducerService_ValidateProducerNPN_FullMethodName           = "/producerflow.producer.v1.ProducerService/ValidateProducerNPN"
+	ProducerService_ValidateAgencyNPN_FullMethodName             = "/producerflow.producer.v1.ProducerService/ValidateAgencyNPN"
+	ProducerService_LookupNPNByFEIN_FullMethodName               = "/producerflow.producer.v1.ProducerService/LookupNPNByFEIN"
+	ProducerService_ResyncProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/ResyncProducer"
+	ProducerService_ResyncAgency_FullMethodName                  = "/producerflow.producer.v1.ProducerService/ResyncAgency"
+	ProducerService_SyncProducerWithNIPR_FullMethodName          = "/producerflow.producer.v1.ProducerService/SyncProducerWithNIPR"
+	ProducerService_SyncAgencyWithNIPR_FullMethodName            = "/producerflow.producer.v1.ProducerService/SyncAgencyWithNIPR"
+	ProducerService_StopSyncProducerWithNIPR_FullMethodName      = "/producerflow.producer.v1.ProducerService/StopSyncProducerWithNIPR"
+	ProducerService_StopSyncAgencyWithNIPR_FullMethodName        = "/producerflow.producer.v1.ProducerService/StopSyncAgencyWithNIPR"
+	ProducerService_CreateProducerUploadURL_FullMethodName       = "/producerflow.producer.v1.ProducerService/CreateProducerUploadURL"
+	ProducerService_AddAgencyLocations_FullMethodName            = "/producerflow.producer.v1.ProducerService/AddAgencyLocations"
+	ProducerService_RemoveAgencyLocations_FullMethodName         = "/producerflow.producer.v1.ProducerService/RemoveAgencyLocations"
+	ProducerService_ListAgencyLocations_FullMethodName           = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
+	ProducerService_AssignProducerToLocations_FullMethodName     = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
+	ProducerService_UnassignProducerFromLocations_FullMethodName = "/producerflow.producer.v1.ProducerService/UnassignProducerFromLocations"
 )
 
 // ProducerServiceClient is the client API for ProducerService service.
@@ -228,6 +229,14 @@ type ProducerServiceClient interface {
 	// - NOT_FOUND: Producer or locations don't exist
 	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
 	AssignProducerToLocations(ctx context.Context, in *AssignProducerToLocationsRequest, opts ...grpc.CallOption) (*AssignProducerToLocationsResponse, error)
+	// UnassignProducerFromLocations removes one or more location assignments from a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer doesn't exist
+	UnassignProducerFromLocations(ctx context.Context, in *UnassignProducerFromLocationsRequest, opts ...grpc.CallOption) (*UnassignProducerFromLocationsResponse, error)
 }
 
 type producerServiceClient struct {
@@ -520,6 +529,16 @@ func (c *producerServiceClient) AssignProducerToLocations(ctx context.Context, i
 	return out, nil
 }
 
+func (c *producerServiceClient) UnassignProducerFromLocations(ctx context.Context, in *UnassignProducerFromLocationsRequest, opts ...grpc.CallOption) (*UnassignProducerFromLocationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnassignProducerFromLocationsResponse)
+	err := c.cc.Invoke(ctx, ProducerService_UnassignProducerFromLocations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProducerServiceServer is the server API for ProducerService service.
 // All implementations must embed UnimplementedProducerServiceServer
 // for forward compatibility.
@@ -699,6 +718,14 @@ type ProducerServiceServer interface {
 	// - NOT_FOUND: Producer or locations don't exist
 	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
 	AssignProducerToLocations(context.Context, *AssignProducerToLocationsRequest) (*AssignProducerToLocationsResponse, error)
+	// UnassignProducerFromLocations removes one or more location assignments from a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer doesn't exist
+	UnassignProducerFromLocations(context.Context, *UnassignProducerFromLocationsRequest) (*UnassignProducerFromLocationsResponse, error)
 	mustEmbedUnimplementedProducerServiceServer()
 }
 
@@ -792,6 +819,9 @@ func (UnimplementedProducerServiceServer) ListAgencyLocations(context.Context, *
 }
 func (UnimplementedProducerServiceServer) AssignProducerToLocations(context.Context, *AssignProducerToLocationsRequest) (*AssignProducerToLocationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignProducerToLocations not implemented")
+}
+func (UnimplementedProducerServiceServer) UnassignProducerFromLocations(context.Context, *UnassignProducerFromLocationsRequest) (*UnassignProducerFromLocationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnassignProducerFromLocations not implemented")
 }
 func (UnimplementedProducerServiceServer) mustEmbedUnimplementedProducerServiceServer() {}
 func (UnimplementedProducerServiceServer) testEmbeddedByValue()                         {}
@@ -1318,6 +1348,24 @@ func _ProducerService_AssignProducerToLocations_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProducerService_UnassignProducerFromLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnassignProducerFromLocationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).UnassignProducerFromLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_UnassignProducerFromLocations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).UnassignProducerFromLocations(ctx, req.(*UnassignProducerFromLocationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProducerService_ServiceDesc is the grpc.ServiceDesc for ProducerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1436,6 +1484,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AssignProducerToLocations",
 			Handler:    _ProducerService_AssignProducerToLocations_Handler,
+		},
+		{
+			MethodName: "UnassignProducerFromLocations",
+			Handler:    _ProducerService_UnassignProducerFromLocations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
