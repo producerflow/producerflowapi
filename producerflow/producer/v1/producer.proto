@@ -1182,6 +1182,9 @@ message Producer {
 
   // Address of the producer.
   Address address = 18;
+
+  // Locations assigned to this producer.
+  repeated Location locations = 19;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
