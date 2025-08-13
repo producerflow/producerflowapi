@@ -46,6 +46,7 @@ const (
 	ProducerService_AddAgencyLocations_FullMethodName        = "/producerflow.producer.v1.ProducerService/AddAgencyLocations"
 	ProducerService_RemoveAgencyLocations_FullMethodName     = "/producerflow.producer.v1.ProducerService/RemoveAgencyLocations"
 	ProducerService_ListAgencyLocations_FullMethodName       = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
+	ProducerService_AssignProducerToLocations_FullMethodName = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
 )
 
 // ProducerServiceClient is the client API for ProducerService service.
@@ -218,6 +219,15 @@ type ProducerServiceClient interface {
 	// - INVALID_ARGUMENT: if the agency_id is empty.
 	// - NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(ctx context.Context, in *ListAgencyLocationsRequest, opts ...grpc.CallOption) (*ListAgencyLocationsResponse, error)
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer or locations don't exist
+	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	AssignProducerToLocations(ctx context.Context, in *AssignProducerToLocationsRequest, opts ...grpc.CallOption) (*AssignProducerToLocationsResponse, error)
 }
 
 type producerServiceClient struct {
@@ -500,6 +510,16 @@ func (c *producerServiceClient) ListAgencyLocations(ctx context.Context, in *Lis
 	return out, nil
 }
 
+func (c *producerServiceClient) AssignProducerToLocations(ctx context.Context, in *AssignProducerToLocationsRequest, opts ...grpc.CallOption) (*AssignProducerToLocationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssignProducerToLocationsResponse)
+	err := c.cc.Invoke(ctx, ProducerService_AssignProducerToLocations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProducerServiceServer is the server API for ProducerService service.
 // All implementations must embed UnimplementedProducerServiceServer
 // for forward compatibility.
@@ -670,6 +690,15 @@ type ProducerServiceServer interface {
 	// - INVALID_ARGUMENT: if the agency_id is empty.
 	// - NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(context.Context, *ListAgencyLocationsRequest) (*ListAgencyLocationsResponse, error)
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer or locations don't exist
+	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	AssignProducerToLocations(context.Context, *AssignProducerToLocationsRequest) (*AssignProducerToLocationsResponse, error)
 	mustEmbedUnimplementedProducerServiceServer()
 }
 
@@ -760,6 +789,9 @@ func (UnimplementedProducerServiceServer) RemoveAgencyLocations(context.Context,
 }
 func (UnimplementedProducerServiceServer) ListAgencyLocations(context.Context, *ListAgencyLocationsRequest) (*ListAgencyLocationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAgencyLocations not implemented")
+}
+func (UnimplementedProducerServiceServer) AssignProducerToLocations(context.Context, *AssignProducerToLocationsRequest) (*AssignProducerToLocationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignProducerToLocations not implemented")
 }
 func (UnimplementedProducerServiceServer) mustEmbedUnimplementedProducerServiceServer() {}
 func (UnimplementedProducerServiceServer) testEmbeddedByValue()                         {}
@@ -1268,6 +1300,24 @@ func _ProducerService_ListAgencyLocations_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProducerService_AssignProducerToLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignProducerToLocationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).AssignProducerToLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_AssignProducerToLocations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).AssignProducerToLocations(ctx, req.(*AssignProducerToLocationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProducerService_ServiceDesc is the grpc.ServiceDesc for ProducerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1382,6 +1432,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAgencyLocations",
 			Handler:    _ProducerService_ListAgencyLocations_Handler,
+		},
+		{
+			MethodName: "AssignProducerToLocations",
+			Handler:    _ProducerService_AssignProducerToLocations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -114,6 +114,9 @@ const (
 	// ProducerServiceListAgencyLocationsProcedure is the fully-qualified name of the ProducerService's
 	// ListAgencyLocations RPC.
 	ProducerServiceListAgencyLocationsProcedure = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
+	// ProducerServiceAssignProducerToLocationsProcedure is the fully-qualified name of the
+	// ProducerService's AssignProducerToLocations RPC.
+	ProducerServiceAssignProducerToLocationsProcedure = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
 )
 
 // ProducerServiceClient is a client for the producerflow.producer.v1.ProducerService service.
@@ -282,6 +285,15 @@ type ProducerServiceClient interface {
 	// - INVALID_ARGUMENT: if the agency_id is empty.
 	// - NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(context.Context, *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error)
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer or locations don't exist
+	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
 }
 
 // NewProducerServiceClient constructs a client for the producerflow.producer.v1.ProducerService
@@ -457,6 +469,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("ListAgencyLocations")),
 			connect.WithClientOptions(opts...),
 		),
+		assignProducerToLocations: connect.NewClient[v1.AssignProducerToLocationsRequest, v1.AssignProducerToLocationsResponse](
+			httpClient,
+			baseURL+ProducerServiceAssignProducerToLocationsProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("AssignProducerToLocations")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -489,6 +507,7 @@ type producerServiceClient struct {
 	addAgencyLocations        *connect.Client[v1.AddAgencyLocationsRequest, v1.AddAgencyLocationsResponse]
 	removeAgencyLocations     *connect.Client[v1.RemoveAgencyLocationsRequest, v1.RemoveAgencyLocationsResponse]
 	listAgencyLocations       *connect.Client[v1.ListAgencyLocationsRequest, v1.ListAgencyLocationsResponse]
+	assignProducerToLocations *connect.Client[v1.AssignProducerToLocationsRequest, v1.AssignProducerToLocationsResponse]
 }
 
 // CreateAgencyOnboardingURL calls
@@ -629,6 +648,12 @@ func (c *producerServiceClient) RemoveAgencyLocations(ctx context.Context, req *
 // ListAgencyLocations calls producerflow.producer.v1.ProducerService.ListAgencyLocations.
 func (c *producerServiceClient) ListAgencyLocations(ctx context.Context, req *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error) {
 	return c.listAgencyLocations.CallUnary(ctx, req)
+}
+
+// AssignProducerToLocations calls
+// producerflow.producer.v1.ProducerService.AssignProducerToLocations.
+func (c *producerServiceClient) AssignProducerToLocations(ctx context.Context, req *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error) {
+	return c.assignProducerToLocations.CallUnary(ctx, req)
 }
 
 // ProducerServiceHandler is an implementation of the producerflow.producer.v1.ProducerService
@@ -798,6 +823,15 @@ type ProducerServiceHandler interface {
 	// - INVALID_ARGUMENT: if the agency_id is empty.
 	// - NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(context.Context, *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error)
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	// The locations must belong to the same agency as the producer.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
+	// - NOT_FOUND: Producer or locations don't exist
+	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
 }
 
 // NewProducerServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -969,6 +1003,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("ListAgencyLocations")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceAssignProducerToLocationsHandler := connect.NewUnaryHandler(
+		ProducerServiceAssignProducerToLocationsProcedure,
+		svc.AssignProducerToLocations,
+		connect.WithSchema(producerServiceMethods.ByName("AssignProducerToLocations")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/producerflow.producer.v1.ProducerService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProducerServiceCreateAgencyOnboardingURLProcedure:
@@ -1025,6 +1065,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceRemoveAgencyLocationsHandler.ServeHTTP(w, r)
 		case ProducerServiceListAgencyLocationsProcedure:
 			producerServiceListAgencyLocationsHandler.ServeHTTP(w, r)
+		case ProducerServiceAssignProducerToLocationsProcedure:
+			producerServiceAssignProducerToLocationsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1140,4 +1182,8 @@ func (UnimplementedProducerServiceHandler) RemoveAgencyLocations(context.Context
 
 func (UnimplementedProducerServiceHandler) ListAgencyLocations(context.Context, *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListAgencyLocations is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.AssignProducerToLocations is not implemented"))
 }

@@ -50,6 +50,8 @@
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
     - [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest)
     - [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse)
+    - [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest)
+    - [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse)
     - [CreateAgencyOnboardingURLRequest](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest)
     - [CreateAgencyOnboardingURLRequest.Agency](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency)
     - [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency-Principal)
@@ -918,6 +920,37 @@ ApproveProducerRequest requests approval for a producer in the onboarding proces
 
 ### ApproveProducerResponse
 ApproveProducerResponse is the empty response returned after successfully approving a producer.
+
+
+
+
+
+
+<a name="producerflow-producer-v1-AssignProducerToLocationsRequest"></a>
+
+### AssignProducerToLocationsRequest
+AssignProducerToLocationsRequest assigns locations to a producer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| producer_id | [string](#string) |  | Required. Producer ID to assign locations to. |
+| location_ids | [string](#string) | repeated | Required. Location IDs to assign (1-100 items). These locations must belong to the same agency as the producer. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-AssignProducerToLocationsResponse"></a>
+
+### AssignProducerToLocationsResponse
+AssignProducerToLocationsResponse contains the assigned location IDs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| assigned_location_ids | [string](#string) | repeated | IDs of successfully assigned locations. |
 
 
 
@@ -2497,6 +2530,9 @@ Locations that don&#39;t exist will be silently ignored. Returns the IDs of succ
 | ListAgencyLocations | [ListAgencyLocationsRequest](#producerflow-producer-v1-ListAgencyLocationsRequest) | [ListAgencyLocationsResponse](#producerflow-producer-v1-ListAgencyLocationsResponse) | ListAgencyLocations retrieves all locations associated with an agency.
 
 Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the agency_id is empty. - NOT_FOUND: if the agency doesn&#39;t exist. |
+| AssignProducerToLocations | [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest) | [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse) | AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer.
+
+Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: Empty producer_id or no location_ids - NOT_FOUND: Producer or locations don&#39;t exist - PERMISSION_DENIED: Locations don&#39;t belong to the producer&#39;s agency |
 
  
 
