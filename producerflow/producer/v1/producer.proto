@@ -203,6 +203,16 @@ service ProducerService {
   // - INVALID_ARGUMENT: if the agency_id is empty.
   // - NOT_FOUND: if the agency doesn't exist.
   rpc ListAgencyLocations(ListAgencyLocationsRequest) returns (ListAgencyLocationsResponse);
+
+  // AssignProducerToLocations assigns one or more locations to a producer.
+  // The locations must belong to the same agency as the producer.
+  //
+  // Error cases:
+  // - UNAUTHENTICATED: Invalid or missing API key
+  // - INVALID_ARGUMENT: Empty producer_id or no location_ids
+  // - NOT_FOUND: Producer or locations don't exist
+  // - PERMISSION_DENIED: Locations don't belong to the producer's agency
+  rpc AssignProducerToLocations(AssignProducerToLocationsRequest) returns (AssignProducerToLocationsResponse);
 }
 
 // EntityType defines the business entity type for an agency.
@@ -1680,4 +1690,26 @@ message ListAgencyLocationsRequest {
 message ListAgencyLocationsResponse {
   // List of all locations associated with the agency.
   repeated Location locations = 1;
+}
+
+// AssignProducerToLocationsRequest assigns locations to a producer.
+message AssignProducerToLocationsRequest {
+  // Required. Producer ID to assign locations to.
+  string producer_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Required. Location IDs to assign (1-100 items).
+  // These locations must belong to the same agency as the producer.
+  repeated string location_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      string: {uuid: true}
+    }
+  }];
+}
+
+// AssignProducerToLocationsResponse contains the assigned location IDs.
+message AssignProducerToLocationsResponse {
+  // IDs of successfully assigned locations.
+  repeated string assigned_location_ids = 1;
 }
