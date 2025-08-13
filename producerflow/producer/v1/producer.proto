@@ -213,6 +213,15 @@ service ProducerService {
   // - NOT_FOUND: Producer or locations don't exist
   // - PERMISSION_DENIED: Locations don't belong to the producer's agency
   rpc AssignProducerToLocations(AssignProducerToLocationsRequest) returns (AssignProducerToLocationsResponse);
+
+  // UnassignProducerFromLocations removes one or more location assignments from a producer.
+  // The locations must belong to the same agency as the producer.
+  //
+  // Error cases:
+  // - UNAUTHENTICATED: Invalid or missing API key
+  // - INVALID_ARGUMENT: Empty producer_id or no location_ids
+  // - NOT_FOUND: Producer doesn't exist
+  rpc UnassignProducerFromLocations(UnassignProducerFromLocationsRequest) returns (UnassignProducerFromLocationsResponse);
 }
 
 // EntityType defines the business entity type for an agency.
@@ -1712,4 +1721,25 @@ message AssignProducerToLocationsRequest {
 message AssignProducerToLocationsResponse {
   // IDs of successfully assigned locations.
   repeated string assigned_location_ids = 1;
+}
+
+// UnassignProducerFromLocationsRequest removes location assignments from a producer.
+message UnassignProducerFromLocationsRequest {
+  // Required. Producer ID to unassign locations from.
+  string producer_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Required. Location IDs to unassign (1-100 items).
+  repeated string location_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      string: {uuid: true}
+    }
+  }];
+}
+
+// UnassignProducerFromLocationsResponse contains the unassigned location IDs.
+message UnassignProducerFromLocationsResponse {
+  // IDs of successfully unassigned locations.
+  repeated string unassigned_location_ids = 1;
 }
