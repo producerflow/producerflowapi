@@ -1392,6 +1392,7 @@ NewAgencyRequest contains complete information for creating a new agency
 | ----- | ---- | ----- | ----------- |
 | agency | [NewAgencyRequest.Agency](#producerflow-producer-v1-NewAgencyRequest-Agency) |  |  |
 | auto_approve | [bool](#bool) |  | **Deprecated.** Determines if the agency should be auto approved. |
+| sync_with_nipr | [bool](#bool) | optional | Optional. Overrides the tenant&#39;s default NIPR sync setting during onboarding. Most tenants have this enabled by default, so it usually doesn&#39;t need to be set. If specified, this value takes precedence over the tenant&#39;s default behavior. |
 
 
 
@@ -1719,6 +1720,7 @@ This will trigger a call to the NIPR API to retrieve license information of the 
 | ----- | ---- | ----- | ----------- |
 | agency_id | [string](#string) |  | The UUID of the agency to associate the producer with. Must be a valid UUID format. |
 | producer | [NewProducer](#producerflow-producer-v1-NewProducer) |  | Information about the producer to create. This field is required. |
+| sync_with_nipr | [bool](#bool) | optional | Optional. Overrides the tenant&#39;s default NIPR sync setting during onboarding. Most tenants have this enabled by default, so it usually doesn&#39;t need to be set. If specified, this value takes precedence over the tenant&#39;s default behavior. |
 
 
 
@@ -1751,6 +1753,7 @@ All producers will be associated with the specified agency.
 | ----- | ---- | ----- | ----------- |
 | agency_id | [string](#string) |  | The UUID of the agency to associate the producers with. Must be a valid UUID format. |
 | producers | [NewProducer](#producerflow-producer-v1-NewProducer) | repeated | List of producers to create. This field is required and must contain at least one producer. |
+| sync_with_nipr | [bool](#bool) | optional | Optional. Overrides the tenant&#39;s default NIPR sync setting during onboarding. Most tenants have this enabled by default, so it usually doesn&#39;t need to be set. If specified, this value takes precedence over the tenant&#39;s default behavior. |
 
 
 

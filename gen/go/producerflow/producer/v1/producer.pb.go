@@ -561,7 +561,11 @@ type NewAgencyRequest struct {
 	// Determines if the agency should be auto approved.
 	//
 	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
-	AutoApprove   bool `protobuf:"varint,2,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	AutoApprove bool `protobuf:"varint,2,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	// Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+	// Most tenants have this enabled by default, so it usually doesn't need to be set.
+	// If specified, this value takes precedence over the tenant's default behavior.
+	SyncWithNipr  *bool `protobuf:"varint,3,opt,name=sync_with_nipr,json=syncWithNipr,proto3,oneof" json:"sync_with_nipr,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -607,6 +611,13 @@ func (x *NewAgencyRequest) GetAgency() *NewAgencyRequest_Agency {
 func (x *NewAgencyRequest) GetAutoApprove() bool {
 	if x != nil {
 		return x.AutoApprove
+	}
+	return false
+}
+
+func (x *NewAgencyRequest) GetSyncWithNipr() bool {
+	if x != nil && x.SyncWithNipr != nil {
+		return *x.SyncWithNipr
 	}
 	return false
 }
@@ -1921,7 +1932,11 @@ type NewProducerRequest struct {
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
 	// Information about the producer to create.
 	// This field is required.
-	Producer      *NewProducer `protobuf:"bytes,2,opt,name=producer,proto3" json:"producer,omitempty"`
+	Producer *NewProducer `protobuf:"bytes,2,opt,name=producer,proto3" json:"producer,omitempty"`
+	// Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+	// Most tenants have this enabled by default, so it usually doesn't need to be set.
+	// If specified, this value takes precedence over the tenant's default behavior.
+	SyncWithNipr  *bool `protobuf:"varint,3,opt,name=sync_with_nipr,json=syncWithNipr,proto3,oneof" json:"sync_with_nipr,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1968,6 +1983,13 @@ func (x *NewProducerRequest) GetProducer() *NewProducer {
 		return x.Producer
 	}
 	return nil
+}
+
+func (x *NewProducerRequest) GetSyncWithNipr() bool {
+	if x != nil && x.SyncWithNipr != nil {
+		return *x.SyncWithNipr
+	}
+	return false
 }
 
 // NewProducerResponse contains the ID of the created producer.
@@ -2026,7 +2048,11 @@ type NewProducersRequest struct {
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
 	// List of producers to create.
 	// This field is required and must contain at least one producer.
-	Producers     []*NewProducer `protobuf:"bytes,2,rep,name=producers,proto3" json:"producers,omitempty"`
+	Producers []*NewProducer `protobuf:"bytes,2,rep,name=producers,proto3" json:"producers,omitempty"`
+	// Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+	// Most tenants have this enabled by default, so it usually doesn't need to be set.
+	// If specified, this value takes precedence over the tenant's default behavior.
+	SyncWithNipr  *bool `protobuf:"varint,3,opt,name=sync_with_nipr,json=syncWithNipr,proto3,oneof" json:"sync_with_nipr,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2073,6 +2099,13 @@ func (x *NewProducersRequest) GetProducers() []*NewProducer {
 		return x.Producers
 	}
 	return nil
+}
+
+func (x *NewProducersRequest) GetSyncWithNipr() bool {
+	if x != nil && x.SyncWithNipr != nil {
+		return *x.SyncWithNipr
+	}
+	return false
 }
 
 // NewProducersResponse contains the IDs of all created producers.
@@ -7271,10 +7304,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x03npn\x18\a \x01(\tR\x03npn\x12;\n" +
 	"\aaddress\x18\b \x01(\v2!.producerflow.producer.v1.AddressR\aaddress\"5\n" +
 	"!CreateAgencyOnboardingURLResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"\xc7\x18\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"\x85\x19\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12%\n" +
-	"\fauto_approve\x18\x02 \x01(\bB\x02\x18\x01R\vautoApprove\x1a\xb8\x17\n" +
+	"\fauto_approve\x18\x02 \x01(\bB\x02\x18\x01R\vautoApprove\x12)\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xb8\x17\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
@@ -7343,7 +7377,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"#COMMUNICATION_ROLE_CUSTOMER_SERVICE\x10\x05\x12\x1a\n" +
 	"\x16COMMUNICATION_ROLE_ALL\x10\x06B\x17\n" +
 	"\x15_root_organization_idB\a\n" +
-	"\x05_fein\"v\n" +
+	"\x05_feinB\x11\n" +
+	"\x0f_sync_with_nipr\"v\n" +
 	"\x11NewAgencyResponse\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12!\n" +
 	"\fproducer_ids\x18\x02 \x03(\tR\vproducerIds\x12!\n" +
@@ -7614,16 +7649,20 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12\x1b\n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
-	"R\x03zip\"\x86\x01\n" +
+	"R\x03zip\"\xc4\x01\n" +
 	"\x12NewProducerRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12I\n" +
-	"\bproducer\x18\x02 \x01(\v2%.producerflow.producer.v1.NewProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\"@\n" +
+	"\bproducer\x18\x02 \x01(\v2%.producerflow.producer.v1.NewProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x12)\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01B\x11\n" +
+	"\x0f_sync_with_nipr\"@\n" +
 	"\x13NewProducerResponse\x12)\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
-	"producerId\"\x8b\x01\n" +
+	"producerId\"\xc9\x01\n" +
 	"\x13NewProducersRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12M\n" +
-	"\tproducers\x18\x02 \x03(\v2%.producerflow.producer.v1.NewProducerB\b\xbaH\x05\x92\x01\x02\b\x01R\tproducers\"9\n" +
+	"\tproducers\x18\x02 \x03(\v2%.producerflow.producer.v1.NewProducerB\b\xbaH\x05\x92\x01\x02\b\x01R\tproducers\x12)\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01B\x11\n" +
+	"\x0f_sync_with_nipr\"9\n" +
 	"\x14NewProducersResponse\x12!\n" +
 	"\fproducer_ids\x18\x01 \x03(\tR\vproducerIds\"\xf6\x03\n" +
 	"\n" +
@@ -8092,12 +8131,15 @@ func file_producerflow_producer_v1_producer_proto_init() {
 	if File_producerflow_producer_v1_producer_proto != nil {
 		return
 	}
+	file_producerflow_producer_v1_producer_proto_msgTypes[3].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[5].OneofWrappers = []any{
 		(*GetProducerRequest_ProducerIdLookup)(nil),
 		(*GetProducerRequest_NpnLookup)(nil),
 		(*GetProducerRequest_EmailLookup_)(nil),
 	}
 	file_producerflow_producer_v1_producer_proto_msgTypes[13].OneofWrappers = []any{}
+	file_producerflow_producer_v1_producer_proto_msgTypes[22].OneofWrappers = []any{}
+	file_producerflow_producer_v1_producer_proto_msgTypes[24].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[26].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[31].OneofWrappers = []any{
 		(*SetExternalIDRequest_ProducerId)(nil),
