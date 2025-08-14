@@ -524,6 +524,8 @@ message NewAgencyRequest {
     // TenantAgencyID represents the ID of the agency in the tenant.
     // This is used to link the agency to the tenant.
     string tenant_agency_id = 19;
+    // Optional field that allows specifying multiple locations during agency creation.
+    repeated LocationInput locations = 20 [(buf.validate.field).repeated.max_items = 100];
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -547,6 +549,9 @@ message NewAgencyResponse {
 
   // Unique identifier for the principal producer
   string principal_id = 3;
+
+  // IDs of the locations created for the agency (if any were provided in the request)
+  repeated string location_ids = 4;
 }
 
 // GetProducerRequest allows retrieving producer information through one of three
@@ -582,6 +587,9 @@ message GetProducerRequest {
 
     // Look up producer by email.
     EmailLookup email_lookup = 3;
+
+    // This oneof is required. One of the lookup methods must be provided.
+    option (buf.validate.oneof).required = true;
   }
 }
 
