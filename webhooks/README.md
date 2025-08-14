@@ -13,6 +13,10 @@ ProducerFlow webhooks deliver real-time notifications for changes to:
 
 Each webhook payload contains structured data that follows JSON Schema specifications for validation and documentation purposes.
 
+## Organizations
+
+Organizations provide a way to group multiple agencies within ProducerFlow. An organization can contain several agencies, creating a hierarchical structure for managing related insurance businesses. Producers inherit organization information from their associated agency, ensuring consistent organizational grouping throughout the system.
+
 ## Webhook Types
 
 ### Agency Webhooks
@@ -36,6 +40,7 @@ Triggered when agency data is created, updated, or synchronized from external so
 - IVANS account configuration
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) information
+- Organization information (organization ID, name, and external ID)
 
 ### Producer Webhooks
 
@@ -57,6 +62,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) and continuing education status
 - License expiration dates and compliance information
+- Organization information (inherited from associated agency)
 
 ### Contact Webhooks
 
@@ -84,7 +90,8 @@ Triggered when contact information is created, updated, or deleted.
 Triggered when producer-carrier appointment relationships are created, updated, or when their operational status changes.
 
 **Schema**: [appointment_schema.json](./schema/appointment_schema.json)  
-**Example Payloads**: 
+**Example Payloads**:
+
 - [appointment_example.json](./examples/appointment_example.json) - Basic appointment event
 - [appointment_operational_status_example.json](./examples/appointment_operational_status_example.json) - Operational status change
 

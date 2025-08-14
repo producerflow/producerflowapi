@@ -6,6 +6,7 @@
   - [Table of Contents](#table-of-contents)
   - [1. Introduction](#1-introduction)
   - [2. System Overview](#2-system-overview)
+    - [Organizations](#organizations)
   - [3. Webhook Integration Overview](#3-webhook-integration-overview)
     - [Key Requirements](#key-requirements)
   - [4. Webhook Configuration](#4-webhook-configuration)
@@ -45,6 +46,10 @@ This document provides detailed instructions for integrating your system to rece
 ## 2. System Overview
 
 Our system processes various types of data changes, such as producer and agency creation using the API, changes coming from NIPR, or manual updates in the Producerflow portal. By integrating with our Webhook system, you can stay in sync with these updates automatically.
+
+### Organizations
+
+Organizations provide a way to group multiple agencies within ProducerFlow, creating a hierarchical structure for managing related insurance businesses. When agencies are associated with an organization, their producers automatically inherit this organizational relationship, ensuring consistent grouping throughout the system. This organizational information is included in both agency and producer webhook payloads.
 
 ## 3. Webhook Integration Overview
 
@@ -206,6 +211,7 @@ For update events, only the changed section(s) will be included:
 - **`agency_nipr_appointments`**: Carrier appointments from NIPR
 - **`agency_nipr_licenses`**: License information from NIPR
 - **`agency_nipr_addresses`**: Address information from NIPR
+- **`organization`**: Organization information (organization ID, name, and external ID for grouping agencies)
 
 #### Producer Data Sections  
 
@@ -217,6 +223,7 @@ For update events, only the changed section(s) will be included:
 - **`producer_nipr_appointments`**: Carrier appointments from NIPR
 - **`producer_nipr_licenses`**: License information and Lines of Authority from NIPR
 - **`producer_nipr_addresses`**: Address information from NIPR
+- **`organization`**: Organization information (inherited from associated agency)
 
 #### Contact Data
 
