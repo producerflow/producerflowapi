@@ -1803,7 +1803,10 @@ type NewProducer struct {
 	// This field is deprecated and should not be used in new code.
 	//
 	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
-	AutoApprove   bool `protobuf:"varint,9,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	AutoApprove bool `protobuf:"varint,9,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
+	// Optional list of location IDs to assign to the producer during creation.
+	// All locations must exist and belong to the specified agency.
+	LocationIds   []string `protobuf:"bytes,10,rep,name=location_ids,json=locationIds,proto3" json:"location_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1900,6 +1903,13 @@ func (x *NewProducer) GetAutoApprove() bool {
 		return x.AutoApprove
 	}
 	return false
+}
+
+func (x *NewProducer) GetLocationIds() []string {
+	if x != nil {
+		return x.LocationIds
+	}
+	return nil
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
@@ -7584,7 +7594,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
-	"\x03zip\x18\x04 \x01(\tR\x03zip\"\x84\x04\n" +
+	"\x03zip\x18\x04 \x01(\tR\x03zip\"\xb8\x04\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -7596,7 +7606,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12V\n" +
 	"\x0fmailing_address\x18\x06 \x01(\v2-.producerflow.producer.v1.NewProducer.AddressR\x0emailingAddress\x12\x1b\n" +
 	"\ttenant_id\x18\b \x01(\tR\btenantId\x12%\n" +
-	"\fauto_approve\x18\t \x01(\bB\x02\x18\x01R\vautoApprove\x1a\x84\x01\n" +
+	"\fauto_approve\x18\t \x01(\bB\x02\x18\x01R\vautoApprove\x122\n" +
+	"\flocation_ids\x18\n" +
+	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x1a\x84\x01\n" +
 	"\aAddress\x12\x1f\n" +
 	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +

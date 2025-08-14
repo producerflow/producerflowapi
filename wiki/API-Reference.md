@@ -1683,6 +1683,7 @@ NewProducer represents the data needed to create a new producer in the system.
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
 | tenant_id | [string](#string) |  | External tenant identifier for the producer. Used for integration with external systems. |
 | auto_approve | [bool](#bool) |  | **Deprecated.** Indicates whether the producer should be automatically approved. This field is deprecated and should not be used in new code. |
+| location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
 
 
 
