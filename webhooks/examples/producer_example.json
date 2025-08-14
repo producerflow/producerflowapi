@@ -90,5 +90,10 @@
       "zip_code": "94105"
     }
   ],
-  "requested_appointment_states": ["OH", "FL"]
+  "requested_appointment_states": ["OH", "FL"],
+  "organization": {
+    "organization_id": "org_987654321",
+    "name": "ProducerFlow Organization",
+    "external_id": "ext_org_789"
+  }
 }

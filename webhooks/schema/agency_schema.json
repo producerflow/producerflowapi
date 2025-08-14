@@ -171,6 +171,24 @@
       "items": {
         "type": "string"
       }
+    },
+    "organization": {
+      "type": "object",
+      "description": "Organization information associated with the agency",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "description": "Unique internal identifier for the organization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the organization"
+        },
+        "external_id": {
+          "type": "string",
+          "description": "External identifier for the organization from an external system"
+        }
+      }
     }
   },
   "required": ["id", "timestamp", "agency_id"],
