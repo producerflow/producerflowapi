@@ -1269,6 +1269,15 @@ message NewProducer {
   // Indicates whether the producer should be automatically approved.
   // This field is deprecated and should not be used in new code.
   bool auto_approve = 9 [deprecated = true];
+
+  // Optional list of location IDs to assign to the producer during creation.
+  // All locations must exist and belong to the specified agency.
+  repeated string location_ids = 10 [(buf.validate.field).repeated = {
+    max_items: 100
+    items: {
+      string: {uuid: true}
+    }
+  }];
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
