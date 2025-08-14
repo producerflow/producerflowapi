@@ -1425,6 +1425,7 @@ Agency contains all information about the agency to be created
 | physical_address | [Address](#producerflow-producer-v1-Address) |  | PhysicalAddress represents the physical address of the agency. |
 | invoicing_address | [Address](#producerflow-producer-v1-Address) |  | InvoicingAddress represents the invoicing address of the agency. |
 | tenant_agency_id | [string](#string) |  | TenantAgencyID represents the ID of the agency in the tenant. This is used to link the agency to the tenant. |
+| locations | [LocationInput](#producerflow-producer-v1-LocationInput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
 
 
 
@@ -1556,6 +1557,7 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 | agency_id | [string](#string) |  | Unique identifier for the created agency |
 | producer_ids | [string](#string) | repeated | List of unique identifiers for any producers created with the agency |
 | principal_id | [string](#string) |  | Unique identifier for the principal producer |
+| location_ids | [string](#string) | repeated | IDs of the locations created for the agency (if any were provided in the request) |
 
 
 
