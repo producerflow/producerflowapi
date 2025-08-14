@@ -530,6 +530,11 @@ message NewAgencyRequest {
 
   // Determines if the agency should be auto approved.
   bool auto_approve = 2 [deprecated = true];
+
+  // Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+  // Most tenants have this enabled by default, so it usually doesn't need to be set.
+  // If specified, this value takes precedence over the tenant's default behavior.
+  optional bool sync_with_nipr = 3;
 }
 
 // NewAgencyResponse contains the IDs of created resources after a successful agency creation
@@ -1290,6 +1295,11 @@ message NewProducerRequest {
   // Information about the producer to create.
   // This field is required.
   NewProducer producer = 2 [(buf.validate.field).required = true];
+
+  // Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+  // Most tenants have this enabled by default, so it usually doesn't need to be set.
+  // If specified, this value takes precedence over the tenant's default behavior.
+  optional bool sync_with_nipr = 3;
 }
 
 // NewProducerResponse contains the ID of the created producer.
@@ -1309,6 +1319,11 @@ message NewProducersRequest {
   // List of producers to create.
   // This field is required and must contain at least one producer.
   repeated NewProducer producers = 2 [(buf.validate.field).repeated.min_items = 1];
+
+  // Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+  // Most tenants have this enabled by default, so it usually doesn't need to be set.
+  // If specified, this value takes precedence over the tenant's default behavior.
+  optional bool sync_with_nipr = 3;
 }
 
 // NewProducersResponse contains the IDs of all created producers.
