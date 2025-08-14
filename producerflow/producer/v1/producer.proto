@@ -222,6 +222,19 @@ service ProducerService {
   // - INVALID_ARGUMENT: Empty producer_id or no location_ids
   // - NOT_FOUND: Producer doesn't exist
   rpc UnassignProducerFromLocations(UnassignProducerFromLocationsRequest) returns (UnassignProducerFromLocationsResponse);
+
+  // UpdateAgencyLocation updates an existing agency location.
+  // You can update the name, address, contact information, and primary status of a location.
+  // All fields are optional - only provide the fields you want to update.
+  // Location name must be unique within the agency.
+  // Returns the updated location details.
+  //
+  // Error cases:
+  // - UNAUTHENTICATED: Invalid or missing API key
+  // - INVALID_ARGUMENT: Missing agency_id or location_id
+  // - NOT_FOUND: Agency or location doesn't exist
+  // - ALREADY_EXISTS: Location name already exists within the agency
+  rpc UpdateAgencyLocation(UpdateAgencyLocationRequest) returns (UpdateAgencyLocationResponse);
 }
 
 // EntityType defines the business entity type for an agency.
@@ -1656,12 +1669,6 @@ message Location {
 
   // Whether this is the primary location for the agency.
   bool is_primary = 6;
-
-  // Timestamp when the location was created.
-  google.protobuf.Timestamp created_at = 7;
-
-  // Timestamp when the location was last updated.
-  google.protobuf.Timestamp updated_at = 8;
 }
 
 // AddAgencyLocationsRequest adds new locations to an agency.
@@ -1731,6 +1738,36 @@ message ListAgencyLocationsRequest {
 message ListAgencyLocationsResponse {
   // List of all locations associated with the agency.
   repeated Location locations = 1;
+}
+
+// UpdateAgencyLocationRequest updates an existing agency location.
+message UpdateAgencyLocationRequest {
+  // Required. Agency ID that owns the location.
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Required. Location ID to update.
+  string location_id = 2 [(buf.validate.field).string.uuid = true];
+
+  // Optional. New name for the location. Must be unique within the agency.
+  optional string name = 3 [(buf.validate.field).string.min_len = 1];
+
+  // Optional. New address for the location.
+  optional Address address = 4;
+
+  // Optional. New phone number. Must be in E.164 format.
+  optional string phone = 5 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+
+  // Optional. New email address.
+  optional string email = 6 [(buf.validate.field).string.email = true];
+
+  // Optional. Whether this should be the primary location.
+  optional bool is_primary = 7;
+}
+
+// UpdateAgencyLocationResponse contains the updated location details.
+message UpdateAgencyLocationResponse {
+  // The updated location with all current values.
+  Location location = 1;
 }
 
 // AssignProducerToLocationsRequest assigns locations to a producer.
