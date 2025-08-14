@@ -48,6 +48,7 @@ const (
 	ProducerService_ListAgencyLocations_FullMethodName           = "/producerflow.producer.v1.ProducerService/ListAgencyLocations"
 	ProducerService_AssignProducerToLocations_FullMethodName     = "/producerflow.producer.v1.ProducerService/AssignProducerToLocations"
 	ProducerService_UnassignProducerFromLocations_FullMethodName = "/producerflow.producer.v1.ProducerService/UnassignProducerFromLocations"
+	ProducerService_UpdateAgencyLocation_FullMethodName          = "/producerflow.producer.v1.ProducerService/UpdateAgencyLocation"
 )
 
 // ProducerServiceClient is the client API for ProducerService service.
@@ -237,6 +238,18 @@ type ProducerServiceClient interface {
 	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
 	// - NOT_FOUND: Producer doesn't exist
 	UnassignProducerFromLocations(ctx context.Context, in *UnassignProducerFromLocationsRequest, opts ...grpc.CallOption) (*UnassignProducerFromLocationsResponse, error)
+	// UpdateAgencyLocation updates an existing agency location.
+	// You can update the name, address, contact information, and primary status of a location.
+	// All fields are optional - only provide the fields you want to update.
+	// Location name must be unique within the agency.
+	// Returns the updated location details.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Missing agency_id or location_id
+	// - NOT_FOUND: Agency or location doesn't exist
+	// - ALREADY_EXISTS: Location name already exists within the agency
+	UpdateAgencyLocation(ctx context.Context, in *UpdateAgencyLocationRequest, opts ...grpc.CallOption) (*UpdateAgencyLocationResponse, error)
 }
 
 type producerServiceClient struct {
@@ -539,6 +552,16 @@ func (c *producerServiceClient) UnassignProducerFromLocations(ctx context.Contex
 	return out, nil
 }
 
+func (c *producerServiceClient) UpdateAgencyLocation(ctx context.Context, in *UpdateAgencyLocationRequest, opts ...grpc.CallOption) (*UpdateAgencyLocationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAgencyLocationResponse)
+	err := c.cc.Invoke(ctx, ProducerService_UpdateAgencyLocation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProducerServiceServer is the server API for ProducerService service.
 // All implementations must embed UnimplementedProducerServiceServer
 // for forward compatibility.
@@ -726,6 +749,18 @@ type ProducerServiceServer interface {
 	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
 	// - NOT_FOUND: Producer doesn't exist
 	UnassignProducerFromLocations(context.Context, *UnassignProducerFromLocationsRequest) (*UnassignProducerFromLocationsResponse, error)
+	// UpdateAgencyLocation updates an existing agency location.
+	// You can update the name, address, contact information, and primary status of a location.
+	// All fields are optional - only provide the fields you want to update.
+	// Location name must be unique within the agency.
+	// Returns the updated location details.
+	//
+	// Error cases:
+	// - UNAUTHENTICATED: Invalid or missing API key
+	// - INVALID_ARGUMENT: Missing agency_id or location_id
+	// - NOT_FOUND: Agency or location doesn't exist
+	// - ALREADY_EXISTS: Location name already exists within the agency
+	UpdateAgencyLocation(context.Context, *UpdateAgencyLocationRequest) (*UpdateAgencyLocationResponse, error)
 	mustEmbedUnimplementedProducerServiceServer()
 }
 
@@ -822,6 +857,9 @@ func (UnimplementedProducerServiceServer) AssignProducerToLocations(context.Cont
 }
 func (UnimplementedProducerServiceServer) UnassignProducerFromLocations(context.Context, *UnassignProducerFromLocationsRequest) (*UnassignProducerFromLocationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnassignProducerFromLocations not implemented")
+}
+func (UnimplementedProducerServiceServer) UpdateAgencyLocation(context.Context, *UpdateAgencyLocationRequest) (*UpdateAgencyLocationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgencyLocation not implemented")
 }
 func (UnimplementedProducerServiceServer) mustEmbedUnimplementedProducerServiceServer() {}
 func (UnimplementedProducerServiceServer) testEmbeddedByValue()                         {}
@@ -1366,6 +1404,24 @@ func _ProducerService_UnassignProducerFromLocations_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProducerService_UpdateAgencyLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAgencyLocationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).UpdateAgencyLocation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_UpdateAgencyLocation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).UpdateAgencyLocation(ctx, req.(*UpdateAgencyLocationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProducerService_ServiceDesc is the grpc.ServiceDesc for ProducerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1488,6 +1544,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UnassignProducerFromLocations",
 			Handler:    _ProducerService_UnassignProducerFromLocations_Handler,
+		},
+		{
+			MethodName: "UpdateAgencyLocation",
+			Handler:    _ProducerService_UpdateAgencyLocation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

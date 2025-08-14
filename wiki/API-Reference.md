@@ -130,6 +130,8 @@
     - [SyncProducerWithNIPRResponse](#producerflow-producer-v1-SyncProducerWithNIPRResponse)
     - [UnassignProducerFromLocationsRequest](#producerflow-producer-v1-UnassignProducerFromLocationsRequest)
     - [UnassignProducerFromLocationsResponse](#producerflow-producer-v1-UnassignProducerFromLocationsResponse)
+    - [UpdateAgencyLocationRequest](#producerflow-producer-v1-UpdateAgencyLocationRequest)
+    - [UpdateAgencyLocationResponse](#producerflow-producer-v1-UpdateAgencyLocationResponse)
     - [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest)
     - [UpdateProducerRequest.Producer](#producerflow-producer-v1-UpdateProducerRequest-Producer)
     - [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse)
@@ -1325,8 +1327,6 @@ Each location includes address information and optional contact details.
 | phone | [string](#string) |  | Required. Phone number for the location. |
 | email | [string](#string) |  | Required. Email address for the location. |
 | is_primary | [bool](#bool) |  | Whether this is the primary location for the agency. |
-| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the location was created. |
-| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the location was last updated. |
 
 
 
@@ -2297,6 +2297,42 @@ UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 
 
 
+<a name="producerflow-producer-v1-UpdateAgencyLocationRequest"></a>
+
+### UpdateAgencyLocationRequest
+UpdateAgencyLocationRequest updates an existing agency location.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | Required. Agency ID that owns the location. |
+| location_id | [string](#string) |  | Required. Location ID to update. |
+| name | [string](#string) | optional | Optional. New name for the location. Must be unique within the agency. |
+| address | [Address](#producerflow-producer-v1-Address) | optional | Optional. New address for the location. |
+| phone | [string](#string) | optional | Optional. New phone number. Must be in E.164 format. |
+| email | [string](#string) | optional | Optional. New email address. |
+| is_primary | [bool](#bool) | optional | Optional. Whether this should be the primary location. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-UpdateAgencyLocationResponse"></a>
+
+### UpdateAgencyLocationResponse
+UpdateAgencyLocationResponse contains the updated location details.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| location | [Location](#producerflow-producer-v1-Location) |  | The updated location with all current values. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-UpdateProducerRequest"></a>
 
 ### UpdateProducerRequest
@@ -2575,6 +2611,9 @@ Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: E
 | UnassignProducerFromLocations | [UnassignProducerFromLocationsRequest](#producerflow-producer-v1-UnassignProducerFromLocationsRequest) | [UnassignProducerFromLocationsResponse](#producerflow-producer-v1-UnassignProducerFromLocationsResponse) | UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer.
 
 Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: Empty producer_id or no location_ids - NOT_FOUND: Producer doesn&#39;t exist |
+| UpdateAgencyLocation | [UpdateAgencyLocationRequest](#producerflow-producer-v1-UpdateAgencyLocationRequest) | [UpdateAgencyLocationResponse](#producerflow-producer-v1-UpdateAgencyLocationResponse) | UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details.
+
+Error cases: - UNAUTHENTICATED: Invalid or missing API key - INVALID_ARGUMENT: Missing agency_id or location_id - NOT_FOUND: Agency or location doesn&#39;t exist - ALREADY_EXISTS: Location name already exists within the agency |
 
  
 
