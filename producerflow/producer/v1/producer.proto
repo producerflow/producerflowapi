@@ -1100,9 +1100,8 @@ message Agency {
         // Unique identifier for the regulatory action.
         string action_id = 1;
 
-        // The regulatory body that originated the action.
-        // Typically a state insurance department or FINRA.
-        string origin_of_action = 2;
+        // The state code where this regulatory action applies.
+        string state_code = 2;
 
         // The reason why the regulatory action was taken.
         string reason_for_action = 3;
@@ -1129,15 +1128,9 @@ message Agency {
         string length_of_order = 10;
       }
 
-      // Map of regulatory actions by state.
-      // The key is the state code, and the value is the regulatory action.
-      map<string, RegulatoryAction> regulatory_actions_by_state = 1;
-
-      // Clearance certification information.
-      string clearance_certification_info = 2;
-
-      // Details about NASD/FINRA examinations.
-      string nasd_exam_details = 3;
+      // List of regulatory actions across different states.
+      // Each regulatory action includes the state code where it applies.
+      repeated RegulatoryAction regulatory_actions = 1;
     }
     // Regulatory information from NIPR
     RegulatoryInfo regulatory_info = 4;
