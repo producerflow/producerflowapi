@@ -55,7 +55,6 @@
     - [Agency.NIPR.License.LineOfAuthority](#producerflow-producer-v1-Agency-NIPR-License-LineOfAuthority)
     - [Agency.NIPR.RegulatoryInfo](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo)
     - [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction)
-    - [Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry)
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
     - [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest)
     - [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse)
@@ -1032,9 +1031,7 @@ including any regulatory actions.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| regulatory_actions_by_state | [Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry) | repeated | Map of regulatory actions by state. The key is the state code, and the value is the regulatory action. |
-| clearance_certification_info | [string](#string) |  | Clearance certification information. |
-| nasd_exam_details | [string](#string) |  | Details about NASD/FINRA examinations. |
+| regulatory_actions | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction) | repeated | List of regulatory actions across different states. Each regulatory action includes the state code where it applies. |
 
 
 
@@ -1050,7 +1047,7 @@ RegulatoryAction represents a regulatory action.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | action_id | [string](#string) |  | Unique identifier for the regulatory action. |
-| origin_of_action | [string](#string) |  | The regulatory body that originated the action. Typically a state insurance department or FINRA. |
+| state_code | [string](#string) |  | The state code where this regulatory action applies. |
 | reason_for_action | [string](#string) |  | The reason why the regulatory action was taken. |
 | disposition | [string](#string) |  | The outcome or resolution of the regulatory action. |
 | date_of_action | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the regulatory action was taken. |
@@ -1059,22 +1056,6 @@ RegulatoryAction represents a regulatory action.
 | file_ref | [string](#string) |  | Reference number for the regulatory action file. |
 | penalty_fine_forfeiture | [string](#string) |  | Any financial penalties associated with the regulatory action. |
 | length_of_order | [string](#string) |  | Duration of any orders associated with the regulatory action. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry"></a>
-
-### Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction) |  |  |
 
 
 
