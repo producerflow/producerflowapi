@@ -964,6 +964,229 @@ message Agency {
   }
   // Operating hours of the agency.
   BusinessHours business_hours = 11;
+
+  // NIPR contains data synchronized from the National Insurance Producer Registry.
+  message NIPR {
+    // Biographic contains basic information from NIPR.
+    message Biographic {
+      // Company name as recorded in NIPR.
+      string company_name = 1;
+
+      // Federal Employer Identification Number.
+      string fein = 2;
+
+      // National Producer Number.
+      string npn = 3;
+
+      // Business email address.
+      string business_email = 4;
+
+      // Business phone number.
+      string business_phone = 5;
+
+      // The last time this biographic information was updated from NIPR.
+      google.protobuf.Timestamp updated_at = 6;
+    }
+    // Biographic information from NIPR
+    Biographic biographic = 1;
+
+    // Address represents address information from NIPR.
+    message Address {
+      // Type of address (Residence, Business, Mailing).
+      string address_type = 1;
+
+      // License state: state of the license for which the address is registered in NIPR.
+      string state = 2;
+
+      // Address state: state of the actual address registered in NIPR.
+      string address_state = 3;
+
+      // Street address.
+      string street = 4;
+
+      // ZIP code of the address.
+      string zip_code = 5;
+
+      // City of the address.
+      string city = 6;
+
+      // Country of the address.
+      string country = 7;
+
+      // Date when the address was last updated.
+      google.protobuf.Timestamp date_updated = 8;
+
+      // The last time this address information was updated from NIPR.
+      google.protobuf.Timestamp updated_at = 9;
+    }
+
+    // List of addresses from NIPR.
+    repeated Address addresses = 2;
+
+    // License contains information about an insurance license.
+    message License {
+      // LicenseStatus defines the possible statuses of an insurance license.
+      enum LicenseStatus {
+        // Default unspecified value. Avoid using this.
+        LICENSE_STATUS_UNSPECIFIED = 0;
+        // The license has expired and is no longer valid.
+        LICENSE_STATUS_EXPIRED = 1;
+        // License is currently active.
+        LICENSE_STATUS_VALID = 2;
+        // The license exists but is not in an active state.
+        // This could be due to suspension, revocation, or other reasons.
+        LICENSE_STATUS_NOT_ACTIVE = 3;
+      }
+
+      // The license number assigned by the state regulatory authority.
+      string license_number = 1;
+
+      // The state that issued the license.
+      string license_state = 2;
+
+      // Indicates whether this is a resident or non-resident license.
+      string residency_status = 3;
+
+      // Indicates whether the license is currently active.
+      bool active = 4;
+
+      // The current status of the license (valid, expired, etc.).
+      LicenseStatus status = 5;
+
+      // The date when the license will expire if not renewed.
+      google.protobuf.Timestamp expiration_date = 6;
+
+      // License class description.
+      string license_class = 7;
+
+      // License class code.
+      int32 license_class_code = 8;
+
+      // The date when the license was originally issued.
+      google.protobuf.Timestamp issue_date = 9;
+
+      // The date when the license was last updated.
+      google.protobuf.Timestamp update_date = 10;
+
+      // The last time this license information was updated from NIPR.
+      google.protobuf.Timestamp updated_at = 11;
+
+      // LineOfAuthority represents a specific type of insurance coverage
+      // that is authorized under this license.
+      message LineOfAuthority {
+        // The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
+        // This is typically an uppercase string that describes the insurance type.
+        string loa = 1;
+
+        // Whether this Line of Authority is currently active.
+        bool active = 2;
+
+        // The date when this Line of Authority was issued.
+        google.protobuf.Timestamp issue_date = 3;
+      }
+
+      // Lines of Authority associated with this license.
+      repeated LineOfAuthority lines_of_authority = 12;
+    }
+
+    // List of all licenses held across different states.
+    repeated License licenses = 3;
+
+    // RegulatoryInfo contains regulatory information,
+    // including any regulatory actions.
+    message RegulatoryInfo {
+      // RegulatoryAction represents a regulatory action.
+      message RegulatoryAction {
+        // Unique identifier for the regulatory action.
+        string action_id = 1;
+
+        // The regulatory body that originated the action.
+        // Typically a state insurance department or FINRA.
+        string origin_of_action = 2;
+
+        // The reason why the regulatory action was taken.
+        string reason_for_action = 3;
+
+        // The outcome or resolution of the regulatory action.
+        string disposition = 4;
+
+        // The date when the regulatory action was taken.
+        google.protobuf.Timestamp date_of_action = 5;
+
+        // The date when the regulatory action became effective.
+        google.protobuf.Timestamp effective_date = 6;
+
+        // The date when the entity entered into the regulatory action.
+        google.protobuf.Timestamp enter_date = 7;
+
+        // Reference number for the regulatory action file.
+        string file_ref = 8;
+
+        // Any financial penalties associated with the regulatory action.
+        string penalty_fine_forfeiture = 9;
+
+        // Duration of any orders associated with the regulatory action.
+        string length_of_order = 10;
+      }
+
+      // Map of regulatory actions by state.
+      // The key is the state code, and the value is the regulatory action.
+      map<string, RegulatoryAction> regulatory_actions_by_state = 1;
+
+      // Clearance certification information.
+      string clearance_certification_info = 2;
+
+      // Details about NASD/FINRA examinations.
+      string nasd_exam_details = 3;
+    }
+    // Regulatory information from NIPR
+    RegulatoryInfo regulatory_info = 4;
+
+    // Appointment represents a relationship with an insurance carrier.
+    message Appointment {
+      string branch_id = 1;
+
+      // Name of the insurance company for this appointment.
+      string company_name = 2;
+
+      // Federal Employer Identification Number of the carrier.
+      string fein = 3;
+
+      // Company code for the insurance carrier.
+      string co_code = 4;
+
+      // Line of authority for this appointment (e.g., Life, Property, Casualty).
+      // Indicates what types of insurance can be sold.
+      string line_of_authority = 5;
+
+      // Code for the line of authority for this appointment.
+      string loa_code = 6;
+
+      // Current status of the appointment (e.g., Active, Terminated).
+      string status = 7;
+
+      // Reason for termination if the appointment has been terminated.
+      string termination_reason = 8;
+
+      // Date associated with the current status or reason.
+      google.protobuf.Timestamp status_reason_date = 9;
+
+      // Date when the appointment will renew.
+      google.protobuf.Timestamp appointment_renewal_date = 10;
+
+      // Additional affiliations or roles with the agency.
+      string agency_affiliations = 11;
+    }
+
+    // List of carrier appointments held in NIPR.
+    // These represent relationships with insurance carriers.
+    repeated Appointment appointments = 5;
+  }
+
+  // Data synchronized from the NIPR service.
+  // Contains basic information, addresses, licenses, regulatory actions,
+  // and carrier appointments.
+  NIPR nipr = 12;
 }
 
 // Producer represents a producer that has been onboarded.
