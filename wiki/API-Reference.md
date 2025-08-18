@@ -47,6 +47,15 @@
     - [Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-Agency-BusinessHours-BusinessHour)
     - [Agency.EOInfo](#producerflow-producer-v1-Agency-EOInfo)
     - [Agency.IvansAccount](#producerflow-producer-v1-Agency-IvansAccount)
+    - [Agency.NIPR](#producerflow-producer-v1-Agency-NIPR)
+    - [Agency.NIPR.Address](#producerflow-producer-v1-Agency-NIPR-Address)
+    - [Agency.NIPR.Appointment](#producerflow-producer-v1-Agency-NIPR-Appointment)
+    - [Agency.NIPR.Biographic](#producerflow-producer-v1-Agency-NIPR-Biographic)
+    - [Agency.NIPR.License](#producerflow-producer-v1-Agency-NIPR-License)
+    - [Agency.NIPR.License.LineOfAuthority](#producerflow-producer-v1-Agency-NIPR-License-LineOfAuthority)
+    - [Agency.NIPR.RegulatoryInfo](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo)
+    - [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction)
+    - [Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry)
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
     - [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest)
     - [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse)
@@ -141,6 +150,7 @@
     - [ValidateProducerNPNResponse](#producerflow-producer-v1-ValidateProducerNPNResponse)
   
     - [Agency.BankAccount.AccountType](#producerflow-producer-v1-Agency-BankAccount-AccountType)
+    - [Agency.NIPR.License.LicenseStatus](#producerflow-producer-v1-Agency-NIPR-License-LicenseStatus)
     - [EntityType](#producerflow-producer-v1-EntityType)
     - [NewAgencyRequest.Agency.BankAccount.AccountType](#producerflow-producer-v1-NewAgencyRequest-Agency-BankAccount-AccountType)
     - [NewAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact-CommunicationRole)
@@ -743,6 +753,7 @@ Agency represents a complete agency entity with all associated information.
 | ivans_account | [Agency.IvansAccount](#producerflow-producer-v1-Agency-IvansAccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS. |
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the agency. |
 | business_hours | [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours) |  | Operating hours of the agency. |
+| nipr | [Agency.NIPR](#producerflow-producer-v1-Agency-NIPR) |  | Data synchronized from the NIPR service. Contains basic information, addresses, licenses, regulatory actions, and carrier appointments. |
 
 
 
@@ -875,6 +886,195 @@ IVANS is a system for electronic communication between insurance agencies and ca
 | ams_software | [string](#string) |  | Software used for IVANS communication. |
 | ams_version | [string](#string) |  | Version of the IVANS software. |
 | mailbox_number | [string](#string) |  | Mailbox number for the IVANS service. Used for routing electronic messages. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR"></a>
+
+### Agency.NIPR
+NIPR contains data synchronized from the National Insurance Producer Registry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| biographic | [Agency.NIPR.Biographic](#producerflow-producer-v1-Agency-NIPR-Biographic) |  | Biographic information from NIPR |
+| addresses | [Agency.NIPR.Address](#producerflow-producer-v1-Agency-NIPR-Address) | repeated | List of addresses from NIPR. |
+| licenses | [Agency.NIPR.License](#producerflow-producer-v1-Agency-NIPR-License) | repeated | List of all licenses held across different states. |
+| regulatory_info | [Agency.NIPR.RegulatoryInfo](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo) |  | Regulatory information from NIPR |
+| appointments | [Agency.NIPR.Appointment](#producerflow-producer-v1-Agency-NIPR-Appointment) | repeated | List of carrier appointments held in NIPR. These represent relationships with insurance carriers. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-Address"></a>
+
+### Agency.NIPR.Address
+Address represents address information from NIPR.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address_type | [string](#string) |  | Type of address (Residence, Business, Mailing). |
+| state | [string](#string) |  | License state: state of the license for which the address is registered in NIPR. |
+| address_state | [string](#string) |  | Address state: state of the actual address registered in NIPR. |
+| street | [string](#string) |  | Street address. |
+| zip_code | [string](#string) |  | ZIP code of the address. |
+| city | [string](#string) |  | City of the address. |
+| country | [string](#string) |  | Country of the address. |
+| date_updated | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date when the address was last updated. |
+| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The last time this address information was updated from NIPR. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-Appointment"></a>
+
+### Agency.NIPR.Appointment
+Appointment represents a relationship with an insurance carrier.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| branch_id | [string](#string) |  |  |
+| company_name | [string](#string) |  | Name of the insurance company for this appointment. |
+| fein | [string](#string) |  | Federal Employer Identification Number of the carrier. |
+| co_code | [string](#string) |  | Company code for the insurance carrier. |
+| line_of_authority | [string](#string) |  | Line of authority for this appointment (e.g., Life, Property, Casualty). Indicates what types of insurance can be sold. |
+| loa_code | [string](#string) |  | Code for the line of authority for this appointment. |
+| status | [string](#string) |  | Current status of the appointment (e.g., Active, Terminated). |
+| termination_reason | [string](#string) |  | Reason for termination if the appointment has been terminated. |
+| status_reason_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date associated with the current status or reason. |
+| appointment_renewal_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date when the appointment will renew. |
+| agency_affiliations | [string](#string) |  | Additional affiliations or roles with the agency. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-Biographic"></a>
+
+### Agency.NIPR.Biographic
+Biographic contains basic information from NIPR.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| company_name | [string](#string) |  | Company name as recorded in NIPR. |
+| fein | [string](#string) |  | Federal Employer Identification Number. |
+| npn | [string](#string) |  | National Producer Number. |
+| business_email | [string](#string) |  | Business email address. |
+| business_phone | [string](#string) |  | Business phone number. |
+| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The last time this biographic information was updated from NIPR. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-License"></a>
+
+### Agency.NIPR.License
+License contains information about an insurance license.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| license_number | [string](#string) |  | The license number assigned by the state regulatory authority. |
+| license_state | [string](#string) |  | The state that issued the license. |
+| residency_status | [string](#string) |  | Indicates whether this is a resident or non-resident license. |
+| active | [bool](#bool) |  | Indicates whether the license is currently active. |
+| status | [Agency.NIPR.License.LicenseStatus](#producerflow-producer-v1-Agency-NIPR-License-LicenseStatus) |  | The current status of the license (valid, expired, etc.). |
+| expiration_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the license will expire if not renewed. |
+| license_class | [string](#string) |  | License class description. |
+| license_class_code | [int32](#int32) |  | License class code. |
+| issue_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the license was originally issued. |
+| update_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the license was last updated. |
+| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The last time this license information was updated from NIPR. |
+| lines_of_authority | [Agency.NIPR.License.LineOfAuthority](#producerflow-producer-v1-Agency-NIPR-License-LineOfAuthority) | repeated | Lines of Authority associated with this license. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-License-LineOfAuthority"></a>
+
+### Agency.NIPR.License.LineOfAuthority
+LineOfAuthority represents a specific type of insurance coverage
+that is authorized under this license.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| loa | [string](#string) |  | The Line of Authority description (e.g., &#34;Life&#34;, &#34;Property and Casualty&#34;, &#34;Health&#34;). This is typically an uppercase string that describes the insurance type. |
+| active | [bool](#bool) |  | Whether this Line of Authority is currently active. |
+| issue_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when this Line of Authority was issued. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-RegulatoryInfo"></a>
+
+### Agency.NIPR.RegulatoryInfo
+RegulatoryInfo contains regulatory information,
+including any regulatory actions.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| regulatory_actions_by_state | [Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry) | repeated | Map of regulatory actions by state. The key is the state code, and the value is the regulatory action. |
+| clearance_certification_info | [string](#string) |  | Clearance certification information. |
+| nasd_exam_details | [string](#string) |  | Details about NASD/FINRA examinations. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction"></a>
+
+### Agency.NIPR.RegulatoryInfo.RegulatoryAction
+RegulatoryAction represents a regulatory action.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| action_id | [string](#string) |  | Unique identifier for the regulatory action. |
+| origin_of_action | [string](#string) |  | The regulatory body that originated the action. Typically a state insurance department or FINRA. |
+| reason_for_action | [string](#string) |  | The reason why the regulatory action was taken. |
+| disposition | [string](#string) |  | The outcome or resolution of the regulatory action. |
+| date_of_action | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the regulatory action was taken. |
+| effective_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the regulatory action became effective. |
+| enter_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The date when the entity entered into the regulatory action. |
+| file_ref | [string](#string) |  | Reference number for the regulatory action file. |
+| penalty_fine_forfeiture | [string](#string) |  | Any financial penalties associated with the regulatory action. |
+| length_of_order | [string](#string) |  | Duration of any orders associated with the regulatory action. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryActionsByStateEntry"></a>
+
+### Agency.NIPR.RegulatoryInfo.RegulatoryActionsByStateEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction) |  |  |
 
 
 
@@ -2459,6 +2659,20 @@ The type of account.
 | ACCOUNT_TYPE_UNSPECIFIED | 0 | Default unspecified value. Avoid using this. |
 | ACCOUNT_TYPE_CHECKING | 1 | Standard checking account. |
 | ACCOUNT_TYPE_SAVINGS | 2 | Savings account. |
+
+
+
+<a name="producerflow-producer-v1-Agency-NIPR-License-LicenseStatus"></a>
+
+### Agency.NIPR.License.LicenseStatus
+LicenseStatus defines the possible statuses of an insurance license.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LICENSE_STATUS_UNSPECIFIED | 0 | Default unspecified value. Avoid using this. |
+| LICENSE_STATUS_EXPIRED | 1 | The license has expired and is no longer valid. |
+| LICENSE_STATUS_VALID | 2 | License is currently active. |
+| LICENSE_STATUS_NOT_ACTIVE | 3 | The license exists but is not in an active state. This could be due to suspension, revocation, or other reasons. |
 
 
 
