@@ -14,7 +14,11 @@
     - [Creation Events](#creation-events)
     - [Update Events](#update-events)
     - [Resync Events](#resync-events)
-  - [6. Webhook Payload](#6-webhook-payload)
+  - [6. Agency Onboarding Webhook Flow](#6-agency-onboarding-webhook-flow)
+    - [Onboarding Event Sequence](#onboarding-event-sequence)
+    - [What Happens During Onboarding](#what-happens-during-onboarding)
+    - [Ongoing Events After Agency Creation](#ongoing-events-after-agency-creation)
+  - [7. Webhook Payload](#7-webhook-payload)
     - [Common Payload Structure](#common-payload-structure)
     - [Webhook Types and Event Types](#webhook-types-and-event-types)
       - [Agency Webhooks](#agency-webhooks)
@@ -31,13 +35,13 @@
       - [Contact Data](#contact-data)
     - [Schema Validation](#schema-validation)
     - [Integration Best Practices](#integration-best-practices)
-  - [7. Response and Retries](#7-response-and-retries)
-  - [8. Error Handling and Troubleshooting](#8-error-handling-and-troubleshooting)
-  - [9. Security Considerations](#9-security-considerations)
-  - [10. Signature Verification](#10-signature-verification)
+  - [8. Response and Retries](#8-response-and-retries)
+  - [9. Error Handling and Troubleshooting](#9-error-handling-and-troubleshooting)
+  - [10. Security Considerations](#10-security-considerations)
+  - [11. Signature Verification](#11-signature-verification)
     - [Go example](#go-example)
     - [TypeScript example](#typescript-example)
-  - [11. Frequently Asked Questions](#11-frequently-asked-questions)
+  - [12. Frequently Asked Questions](#12-frequently-asked-questions)
 
 ## 1. Introduction
 
@@ -90,9 +94,139 @@ To configure the webhook:
 - This will trigger a similar event to the creation one that will contain all information sections documented below per entity if there is data available for them
 - The event type will be Resync
 
-## 6. Webhook Payload
+## 6. Agency Onboarding Webhook Flow
 
-ProducerFlow delivers real-time notifications for changes to agencies, producers, contacts, and appointments through structured webhook payloads. Each webhook contains JSON data that follows our published schemas for validation and documentation purposes.
+When an agency completes the onboarding process in Producerflow, a series of webhook events are automatically triggered to notify integrated systems about the new agency and its principal (primary producer).
+
+### Onboarding Event Sequence
+
+```mermaid
+sequenceDiagram
+    participant User as Agency User
+    participant PF as Producerflow
+    participant WH as Webhook Endpoint
+    
+    User->>PF: Complete Onboarding Form
+    Note over User,PF: - Agency Information<br/>- Principal Details<br/>- Business Information
+    
+    PF->>PF: Create Agency Record
+    PF->>PF: Create Principal Producer Record
+    
+    rect rgb(200, 230, 250)
+        Note right of PF: Event 1: Agency Created
+        PF->>WH: POST /webhook
+        Note over WH: agency.created event
+        WH-->>PF: 200 OK
+    end
+    
+    rect rgb(250, 230, 200)
+        Note right of PF: Event 2: Producer Created
+        PF->>WH: POST /webhook
+        Note over WH: producer.created event
+        WH-->>PF: 200 OK
+    end
+```
+
+### What Happens During Onboarding
+
+1. **Agency Creation Event (`agency.created`)**: Triggered immediately after the agency record is created
+
+```json
+{
+  "id": "evt_abc123",
+  "event_type": "agency.created",
+  "origin": "ProducerFlowPortal",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "agency_id": "agency_123",
+  "external_id": "ext_agency_456",
+  "fein": "12-3456789",
+  "agency_data": {
+    "name": "Smith Insurance Agency",
+    "email": "contact@smithagency.com",
+    "phone": "555-0100",
+    "is_sole_proprietor": false
+  },
+  "agency_address": [{
+    "address_type": "primary",
+    "street": "123 Main St",
+    "city": "Springfield",
+    "state": "IL",
+    "zip": "62701"
+  }]
+}
+```
+
+2. **Principal Producer Creation Event (`producer.created`)**: Triggered after the principal record is created
+
+```json
+{
+  "id": "evt_def456",
+  "event_type": "producer.created",
+  "origin": "ProducerFlowPortal",
+  "timestamp": "2024-01-15T10:30:05Z",
+  "producer_id": "producer_456",
+  "agency_id": "agency_123",
+  "external_agency_id": "ext_agency_456",
+  "producer_data": {
+    "first_name": "John",
+    "last_name": "Smith",
+    "email": "john.smith@smithagency.com",
+    "phone": "555-0101",
+    "street": "123 Main St",
+    "city": "Springfield",
+    "state": "IL",
+    "zip": "62701",
+    "is_sole_proprietor": false
+  }
+}
+```
+
+### Ongoing Events After Agency Creation
+
+Once an agency is created, every subsequent change will trigger corresponding webhook events:
+
+- **Producer Events**: Any new producer added to the agency triggers a `producer.created` event, and updates trigger `producer.updated` events
+- **Contact Events**: Each contact creation triggers `contact.created`, updates trigger `contact.updated`, and deletions trigger `contact.deleted`
+- **Appointment Events**: When appointments are created or updated for producers in the agency, `appointment.created` and `appointment.updated` events are triggered. For NIPR appointments, status changes flow through multiple states, each triggering an `appointment.updated` event:
+
+```mermaid
+sequenceDiagram
+    participant API as API/Portal
+    participant PF as ProducerFlow
+    participant NIPR as NIPR
+    participant WH as Webhook Endpoint
+    
+    Note over API,NIPR: Appointment Request Flow
+    API->>PF: Request Appointment
+    PF->>NIPR: Submit to NIPR
+    PF->>WH: appointment.created<br/>(status: in_progress)
+    
+    Note over NIPR: Processing Time<br/>(minutes to hours)
+    
+    alt Appointment Approved
+        NIPR-->>PF: Approved
+        PF->>WH: appointment.updated<br/>(status: appointed)
+    else Appointment Rejected
+        NIPR-->>PF: Rejected
+        PF->>WH: appointment.updated<br/>(status: rejected)
+    end
+    
+    Note over API,NIPR: Termination Request Flow
+    API->>PF: Terminate Appointment
+    PF->>NIPR: Submit Termination
+    PF->>WH: appointment.updated<br/>(status: termination_requested)
+    
+    Note over NIPR: Processing Time<br/>(minutes to hours)
+    
+    NIPR-->>PF: Termination Complete
+    PF->>WH: appointment.updated<br/>(status: terminated)
+```
+
+- **Agency Updates**: Any changes to the agency itself trigger `agency.updated` events
+
+This ensures your system stays synchronized with all changes related to the agency throughout its lifecycle.
+
+## 7. Webhook Payload
 
 ### Common Payload Structure
 
@@ -245,7 +379,7 @@ All webhook payloads conform to JSON Schema Draft 2020-12 specifications. Use th
 3. **Schema Validation**: Validate all incoming payloads against the provided JSON schemas
 4. **Partial Updates**: For update events, only process the data sections that are present in the payload
 
-## 7. Response and Retries
+## 8. Response and Retries
 
 Your system must respond to our Webhook call with an HTTP status code within **10 seconds**.  
 
@@ -278,7 +412,7 @@ To prevent overloading your system, we will limit the number of outstanding even
 
 This mechanism ensures that your system does not become overwhelmed by too many concurrent requests and helps maintain stability under high load.
 
-## 8. Error Handling and Troubleshooting
+## 9. Error Handling and Troubleshooting
 
 To ensure smooth operation:
 
@@ -291,7 +425,7 @@ Common issues include:
 - **Timeouts**: Ensure your system can handle large payloads or complex processing efficiently.
 - **Incorrect Responses**: Returning status codes other than 200 OK may trigger retries.
 
-## 9. Security Considerations
+## 10. Security Considerations
 
 To ensure secure communication and data protection, we expect the following measures:
 
@@ -299,7 +433,7 @@ To ensure secure communication and data protection, we expect the following meas
 2. **Signature Verification**: Implement HMAC-based signature verification using the shared secret that you can find in the Producerflow portal to authenticate the integrity of incoming requests.
 3. **IP Whitelisting** (optional): Restrict incoming requests to trusted IP addresses from our infrastructure to further enhance security.
 
-## 10. Signature Verification
+## 11. Signature Verification
 
 To ensure the integrity and authenticity of the events sent to your webhook endpoint, we use HMAC-based signatures. Each request from our service includes a signature header that allows you to verify that the request originated from us and has not been tampered with.
 
@@ -392,7 +526,7 @@ function verifySignature(payload: Buffer, receivedSignature: string, secret: str
 
 ```
 
-## 11. Frequently Asked Questions
+## 12. Frequently Asked Questions
 
 - **Q1**: What happens if my Webhook is down during an event?
   - **A1**: We will attempt to retry the Webhook call up to 3 times before marking it as undelivered.
