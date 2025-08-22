@@ -271,8 +271,7 @@ type ProducerServiceClient interface {
 	// Returns errors in the following cases:
 	//   - UNAUTHENTICATED: if the API key is invalid or missing.
 	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
-	//     location names are duplicated within the request or already exist for the agency,
-	//     or if the agency already has a primary location and the request includes a primary.
+	//     location names are duplicated within the request or already exist for the agency.
 	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
@@ -854,8 +853,7 @@ type ProducerServiceHandler interface {
 	// Returns errors in the following cases:
 	//   - UNAUTHENTICATED: if the API key is invalid or missing.
 	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
-	//     location names are duplicated within the request or already exist for the agency,
-	//     or if the agency already has a primary location and the request includes a primary.
+	//     location names are duplicated within the request or already exist for the agency.
 	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
 	// RemoveAgencyLocations removes one or more locations from an agency.

@@ -753,6 +753,7 @@ Agency represents a complete agency entity with all associated information.
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the agency. |
 | business_hours | [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours) |  | Operating hours of the agency. |
 | nipr | [Agency.NIPR](#producerflow-producer-v1-Agency-NIPR) |  | Data synchronized from the NIPR service. Contains basic information, addresses, licenses, regulatory actions, and carrier appointments. |
+| locations | [Location](#producerflow-producer-v1-Location) | repeated | Locations associated with the agency. |
 
 
 
@@ -2793,7 +2794,7 @@ Each location must have a unique name within the agency and valid address inform
 
 Returns the IDs of successfully added locations.
 
-Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency, or if the agency already has a primary location and the request includes a primary. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. |
+Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. |
 | RemoveAgencyLocations | [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest) | [RemoveAgencyLocationsResponse](#producerflow-producer-v1-RemoveAgencyLocationsResponse) | RemoveAgencyLocations removes one or more locations from an agency.
 
 Locations that don&#39;t exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: - UNAUTHENTICATED: if the API key is invalid or missing. - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. - NOT_FOUND: if the agency doesn&#39;t exist or doesn&#39;t belong to the authenticated tenant. |
