@@ -411,8 +411,11 @@ type RequestAppointmentResponse struct {
 	// The ID of the created appointment.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
 	// Processing status of the appointment request.
+	// For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected
+	// For registry states or non-NIPR carriers: APPOINTED if successful
 	ProcessingStatus ProcessingStatus `protobuf:"varint,2,opt,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
 	// If the appointment was rejected or ineligible, these reasons explain why.
+	// Only populated when processing_status is REJECTED.
 	NotEligibleReasons []string `protobuf:"bytes,3,rep,name=not_eligible_reasons,json=notEligibleReasons,proto3" json:"not_eligible_reasons,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -767,11 +770,16 @@ func (x *TerminateAppointmentRequest) GetReason() TerminationReason {
 
 type TerminateAppointmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Indicates whether the termination request was successfully submitted to NIPR.
-	// This does not indicate that the appointment has been terminated, only that
-	// the request has been accepted for processing. The actual termination will
-	// be processed asynchronously by NIPR, and you will be notified via webhook
-	// when the process completes.
+	// Indicates whether the termination request was successfully processed.
+	//
+	// For NIPR-integrated carriers: Indicates whether the termination request was
+	// successfully submitted to NIPR. This does not indicate that the appointment
+	// has been terminated, only that the request has been accepted for processing.
+	// The actual termination will be processed asynchronously by NIPR, and you
+	// will be notified via webhook when the process completes.
+	//
+	// For registry states or non-NIPR carriers: Indicates whether the termination
+	// was successfully completed immediately.
 	Success       bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1217,9 +1225,15 @@ type Carrier struct {
 	// The NPN of the carrier.
 	Npn string `protobuf:"bytes,3,opt,name=npn,proto3" json:"npn,omitempty"`
 	// The state of the carrier.
-	Fein          string `protobuf:"bytes,4,opt,name=fein,proto3" json:"fein,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Fein string `protobuf:"bytes,4,opt,name=fein,proto3" json:"fein,omitempty"`
+	// The NAIC cocode of the carrier.
+	Cocode string `protobuf:"bytes,5,opt,name=cocode,proto3" json:"cocode,omitempty"`
+	// Indicates whether this carrier has NIPR integration enabled.
+	// Capacity carriers (carriers without NIPR integration) process appointments and terminations
+	// automatically without going through NIPR.
+	HasNiprIntegration bool `protobuf:"varint,6,opt,name=has_nipr_integration,json=hasNiprIntegration,proto3" json:"has_nipr_integration,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Carrier) Reset() {
@@ -1278,6 +1292,20 @@ func (x *Carrier) GetFein() string {
 		return x.Fein
 	}
 	return ""
+}
+
+func (x *Carrier) GetCocode() string {
+	if x != nil {
+		return x.Cocode
+	}
+	return ""
+}
+
+func (x *Carrier) GetHasNiprIntegration() bool {
+	if x != nil {
+		return x.HasNiprIntegration
+	}
+	return false
 }
 
 // AppointmentOperationalStatus contains operational status information for an appointment.
@@ -1379,8 +1407,10 @@ type Appointment struct {
 	// This field provides insight into the current operational health
 	// and any risk factors that may affect the appointment.
 	OperationalStatus *AppointmentOperationalStatus `protobuf:"bytes,13,opt,name=operational_status,json=operationalStatus,proto3" json:"operational_status,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// The NAIC cocode of the carrier.
+	Cocode        string `protobuf:"bytes,14,opt,name=cocode,proto3" json:"cocode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Appointment) Reset() {
@@ -1504,6 +1534,13 @@ func (x *Appointment) GetOperationalStatus() *AppointmentOperationalStatus {
 	return nil
 }
 
+func (x *Appointment) GetCocode() string {
+	if x != nil {
+		return x.Cocode
+	}
+	return ""
+}
+
 type License struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the license.
@@ -1520,9 +1557,12 @@ type License struct {
 	// The two-letter state code of the license.
 	State string `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
 	// The license class.
-	LicenseClass  string `protobuf:"bytes,6,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LicenseClass string `protobuf:"bytes,6,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
+	// Indicates whether this license is in a registry state.
+	// Licenses in registry states and capacity carriers are processed automatically without going through NIPR.
+	IsRegistryState bool `protobuf:"varint,7,opt,name=is_registry_state,json=isRegistryState,proto3" json:"is_registry_state,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *License) Reset() {
@@ -1606,6 +1646,13 @@ func (x *License) GetLicenseClass() string {
 		return x.LicenseClass
 	}
 	return ""
+}
+
+func (x *License) GetIsRegistryState() bool {
+	if x != nil {
+		return x.IsRegistryState
+	}
+	return false
 }
 
 type isLicense_LicenseOwner interface {
@@ -1771,17 +1818,19 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"feeInCents\"\x1f\n" +
 	"\x1dGetAppointableCarriersRequest\"b\n" +
 	"\x1eGetAppointableCarriersResponse\x12@\n" +
-	"\bcarriers\x18\x01 \x03(\v2$.producerflow.appointment.v1.CarrierR\bcarriers\"b\n" +
+	"\bcarriers\x18\x01 \x03(\v2$.producerflow.appointment.v1.CarrierR\bcarriers\"\xac\x01\n" +
 	"\aCarrier\x12\x1d\n" +
 	"\n" +
 	"carrier_id\x18\x01 \x01(\tR\tcarrierId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
 	"\x03npn\x18\x03 \x01(\tR\x03npn\x12\x12\n" +
-	"\x04fein\x18\x04 \x01(\tR\x04fein\"\xf1\x01\n" +
+	"\x04fein\x18\x04 \x01(\tR\x04fein\x12\x16\n" +
+	"\x06cocode\x18\x05 \x01(\tR\x06cocode\x120\n" +
+	"\x14has_nipr_integration\x18\x06 \x01(\bR\x12hasNiprIntegration\"\xf1\x01\n" +
 	"\x1cAppointmentOperationalStatus\x12F\n" +
 	"\x06status\x18\x01 \x01(\x0e2..producerflow.appointment.v1.OperationalStatusR\x06status\x12J\n" +
 	"\frisk_reasons\x18\x02 \x03(\x0e2'.producerflow.appointment.v1.RiskReasonR\vriskReasons\x12=\n" +
-	"\flast_updated\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\x8f\x06\n" +
+	"\flast_updated\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xa7\x06\n" +
 	"\vAppointment\x12%\n" +
 	"\x0eappointment_id\x18\x01 \x01(\tR\rappointmentId\x12>\n" +
 	"\alicense\x18\x02 \x01(\v2$.producerflow.appointment.v1.LicenseR\alicense\x12\x12\n" +
@@ -1798,9 +1847,10 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x10termination_date\x18\v \x01(\v2\x1a.google.protobuf.TimestampH\x01R\x0fterminationDate\x88\x01\x01\x129\n" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12h\n" +
-	"\x12operational_status\x18\r \x01(\v29.producerflow.appointment.v1.AppointmentOperationalStatusR\x11operationalStatusB\x0e\n" +
+	"\x12operational_status\x18\r \x01(\v29.producerflow.appointment.v1.AppointmentOperationalStatusR\x11operationalStatus\x12\x16\n" +
+	"\x06cocode\x18\x0e \x01(\tR\x06cocodeB\x0e\n" +
 	"\f_producer_idB\x13\n" +
-	"\x11_termination_date\"\xf1\x01\n" +
+	"\x11_termination_date\"\x9d\x02\n" +
 	"\aLicense\x12\x1d\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tR\tlicenseId\x12%\n" +
@@ -1809,7 +1859,8 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"producerId\x12'\n" +
 	"\tagency_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12\x14\n" +
 	"\x05state\x18\x05 \x01(\tR\x05state\x12#\n" +
-	"\rlicense_class\x18\x06 \x01(\tR\flicenseClassB\x0f\n" +
+	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12*\n" +
+	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryStateB\x0f\n" +
 	"\rlicense_owner\"?\n" +
 	"\x1dListTerminationReasonsRequest\x12\x1e\n" +
 	"\x05state\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\"\x81\x01\n" +

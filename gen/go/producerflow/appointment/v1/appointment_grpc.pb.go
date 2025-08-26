@@ -46,6 +46,11 @@ const (
 // the final result. Also, any call from this point on to ListAppointments or GetAppointment will
 // also return the final result.
 //
+// IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration)
+// are processed automatically without going through NIPR. In these cases:
+// - RequestAppointment will immediately return APPOINTED status
+// - TerminateAppointment will immediately return TERMINATED status
+//
 // Any call to this service must be authenticated using an API key in the request headers. The API key
 // can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant
 // that is making the request.
@@ -68,8 +73,16 @@ type AppointmentServiceClient interface {
 	// to do this is to call ListEligibleLicenses to get a list of licenses that are eligible to be
 	// appointed. Then, call RequestAppointment for the licenses in the list that you want to appoint.
 	//
-	// If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status.
-	// If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons.
+	// Processing behavior varies based on the license state and carrier NIPR integration:
+	//
+	// For NIPR-integrated carriers in non-registry states:
+	// - If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status
+	// - If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons
+	// - Final result will be delivered via webhook when NIPR completes processing
+	//
+	// For registry states or capacity carriers (carriers without NIPR integration):
+	// - The appointment is processed automatically and immediately
+	// - Returns APPOINTED status immediately upon successful processing
 	RequestAppointment(ctx context.Context, in *RequestAppointmentRequest, opts ...grpc.CallOption) (*RequestAppointmentResponse, error)
 	// Terminates an existing appointment, permanently ending the relationship between
 	// the license holder and the carrier.
@@ -79,16 +92,22 @@ type AppointmentServiceClient interface {
 	// 2. Call ListTerminationReasons to get valid termination reasons for the license's state
 	// 3. Select an appropriate termination reason from the state-specific list
 	//
-	// The termination process works as follows:
+	// Processing behavior varies based on the license state and carrier NIPR integration:
+	//
+	// For NIPR-integrated carriers in non-registry states:
 	// - The request is submitted to NIPR for processing
 	// - Once NIPR completes processing, the status becomes TERMINATED
 	// - If rejected by NIPR, the appointment remains in its current status
+	// - You will receive webhook notifications when the termination is processed by NIPR
+	//
+	// For registry states or capacity carriers (carriers without NIPR integration):
+	// - The termination is processed automatically and immediately
+	// - Returns TERMINATED status immediately upon successful processing
 	//
 	// Important considerations:
 	// - Termination is permanent and cannot be undone
 	// - Termination reasons must be valid for the specific state where the license is issued
 	// - Some terminations may incur fees (check GetTerminationFees first)
-	// - You will receive webhook notifications when the termination is processed by NIPR
 	//
 	// The response indicates whether the termination request was successfully submitted,
 	// not whether the actual termination was completed (since NIPR processes asynchronously).
@@ -221,6 +240,11 @@ func (c *appointmentServiceClient) ListTerminationReasons(ctx context.Context, i
 // the final result. Also, any call from this point on to ListAppointments or GetAppointment will
 // also return the final result.
 //
+// IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration)
+// are processed automatically without going through NIPR. In these cases:
+// - RequestAppointment will immediately return APPOINTED status
+// - TerminateAppointment will immediately return TERMINATED status
+//
 // Any call to this service must be authenticated using an API key in the request headers. The API key
 // can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant
 // that is making the request.
@@ -243,8 +267,16 @@ type AppointmentServiceServer interface {
 	// to do this is to call ListEligibleLicenses to get a list of licenses that are eligible to be
 	// appointed. Then, call RequestAppointment for the licenses in the list that you want to appoint.
 	//
-	// If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status.
-	// If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons.
+	// Processing behavior varies based on the license state and carrier NIPR integration:
+	//
+	// For NIPR-integrated carriers in non-registry states:
+	// - If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status
+	// - If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons
+	// - Final result will be delivered via webhook when NIPR completes processing
+	//
+	// For registry states or capacity carriers (carriers without NIPR integration):
+	// - The appointment is processed automatically and immediately
+	// - Returns APPOINTED status immediately upon successful processing
 	RequestAppointment(context.Context, *RequestAppointmentRequest) (*RequestAppointmentResponse, error)
 	// Terminates an existing appointment, permanently ending the relationship between
 	// the license holder and the carrier.
@@ -254,16 +286,22 @@ type AppointmentServiceServer interface {
 	// 2. Call ListTerminationReasons to get valid termination reasons for the license's state
 	// 3. Select an appropriate termination reason from the state-specific list
 	//
-	// The termination process works as follows:
+	// Processing behavior varies based on the license state and carrier NIPR integration:
+	//
+	// For NIPR-integrated carriers in non-registry states:
 	// - The request is submitted to NIPR for processing
 	// - Once NIPR completes processing, the status becomes TERMINATED
 	// - If rejected by NIPR, the appointment remains in its current status
+	// - You will receive webhook notifications when the termination is processed by NIPR
+	//
+	// For registry states or capacity carriers (carriers without NIPR integration):
+	// - The termination is processed automatically and immediately
+	// - Returns TERMINATED status immediately upon successful processing
 	//
 	// Important considerations:
 	// - Termination is permanent and cannot be undone
 	// - Termination reasons must be valid for the specific state where the license is issued
 	// - Some terminations may incur fees (check GetTerminationFees first)
-	// - You will receive webhook notifications when the termination is processed by NIPR
 	//
 	// The response indicates whether the termination request was successfully submitted,
 	// not whether the actual termination was completed (since NIPR processes asynchronously).
