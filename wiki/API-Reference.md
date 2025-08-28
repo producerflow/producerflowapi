@@ -1629,6 +1629,7 @@ Agency contains all information about the agency to be created
 | invoicing_address | [Address](#producerflow-producer-v1-Address) |  | InvoicingAddress represents the invoicing address of the agency. |
 | tenant_agency_id | [string](#string) |  | TenantAgencyID represents the ID of the agency in the tenant. This is used to link the agency to the tenant. |
 | locations | [LocationInput](#producerflow-producer-v1-LocationInput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
+| metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the agency. |
 
 
 
@@ -1890,6 +1891,7 @@ NewProducer represents the data needed to create a new producer in the system.
 | tenant_id | [string](#string) |  | External tenant identifier for the producer. Used for integration with external systems. |
 | auto_approve | [bool](#bool) |  | **Deprecated.** Indicates whether the producer should be automatically approved. This field is deprecated and should not be used in new code. |
 | location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
+| metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the producer. |
 
 
 

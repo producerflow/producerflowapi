@@ -1904,9 +1904,11 @@ type NewProducer struct {
 	AutoApprove bool `protobuf:"varint,9,opt,name=auto_approve,json=autoApprove,proto3" json:"auto_approve,omitempty"`
 	// Optional list of location IDs to assign to the producer during creation.
 	// All locations must exist and belong to the specified agency.
-	LocationIds   []string `protobuf:"bytes,10,rep,name=location_ids,json=locationIds,proto3" json:"location_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LocationIds []string `protobuf:"bytes,10,rep,name=location_ids,json=locationIds,proto3" json:"location_ids,omitempty"`
+	// MetadataQuestions contains custom metadata questions and answers for the producer.
+	MetadataQuestions string `protobuf:"bytes,11,opt,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *NewProducer) Reset() {
@@ -2008,6 +2010,13 @@ func (x *NewProducer) GetLocationIds() []string {
 		return x.LocationIds
 	}
 	return nil
+}
+
+func (x *NewProducer) GetMetadataQuestions() string {
+	if x != nil {
+		return x.MetadataQuestions
+	}
+	return ""
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
@@ -4960,9 +4969,11 @@ type NewAgencyRequest_Agency struct {
 	// This is used to link the agency to the tenant.
 	TenantAgencyId string `protobuf:"bytes,19,opt,name=tenant_agency_id,json=tenantAgencyId,proto3" json:"tenant_agency_id,omitempty"`
 	// Optional field that allows specifying multiple locations during agency creation.
-	Locations     []*LocationInput `protobuf:"bytes,20,rep,name=locations,proto3" json:"locations,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Locations []*LocationInput `protobuf:"bytes,20,rep,name=locations,proto3" json:"locations,omitempty"`
+	// MetadataQuestions contains custom metadata questions and answers for the agency.
+	MetadataQuestions string `protobuf:"bytes,21,opt,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *NewAgencyRequest_Agency) Reset() {
@@ -5126,6 +5137,13 @@ func (x *NewAgencyRequest_Agency) GetLocations() []*LocationInput {
 		return x.Locations
 	}
 	return nil
+}
+
+func (x *NewAgencyRequest_Agency) GetMetadataQuestions() string {
+	if x != nil {
+		return x.MetadataQuestions
+	}
+	return ""
 }
 
 // Principal is a data structure that represents the principal of a agency.
@@ -8342,11 +8360,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x03npn\x18\a \x01(\tR\x03npn\x12;\n" +
 	"\aaddress\x18\b \x01(\v2!.producerflow.producer.v1.AddressR\aaddress\"5\n" +
 	"!CreateAgencyOnboardingURLResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"\xd6\x19\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"\x85\x1a\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12%\n" +
 	"\fauto_approve\x18\x02 \x01(\bB\x02\x18\x01R\vautoApprove\x12)\n" +
-	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\x89\x18\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xb8\x18\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
@@ -8369,7 +8387,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x10physical_address\x18\x11 \x01(\v2!.producerflow.producer.v1.AddressR\x0fphysicalAddress\x12N\n" +
 	"\x11invoicing_address\x18\x12 \x01(\v2!.producerflow.producer.v1.AddressR\x10invoicingAddress\x12(\n" +
 	"\x10tenant_agency_id\x18\x13 \x01(\tR\x0etenantAgencyId\x12O\n" +
-	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x1a\x87\x02\n" +
+	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x12-\n" +
+	"\x12metadata_questions\x18\x15 \x01(\tR\x11metadataQuestions\x1a\x87\x02\n" +
 	"\tPrincipal\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -8755,7 +8774,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
-	"\x03zip\x18\x04 \x01(\tR\x03zip\"\xb8\x04\n" +
+	"\x03zip\x18\x04 \x01(\tR\x03zip\"\xe7\x04\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -8769,7 +8788,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\ttenant_id\x18\b \x01(\tR\btenantId\x12%\n" +
 	"\fauto_approve\x18\t \x01(\bB\x02\x18\x01R\vautoApprove\x122\n" +
 	"\flocation_ids\x18\n" +
-	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x1a\x84\x01\n" +
+	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x12-\n" +
+	"\x12metadata_questions\x18\v \x01(\tR\x11metadataQuestions\x1a\x84\x01\n" +
 	"\aAddress\x12\x1f\n" +
 	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +
