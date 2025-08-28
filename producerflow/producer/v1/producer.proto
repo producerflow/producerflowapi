@@ -538,6 +538,8 @@ message NewAgencyRequest {
     string tenant_agency_id = 19;
     // Optional field that allows specifying multiple locations during agency creation.
     repeated LocationInput locations = 20 [(buf.validate.field).repeated.max_items = 100];
+    // MetadataQuestions contains custom metadata questions and answers for the agency.
+    string metadata_questions = 21;
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -1522,6 +1524,9 @@ message NewProducer {
       string: {uuid: true}
     }
   }];
+
+  // MetadataQuestions contains custom metadata questions and answers for the producer.
+  string metadata_questions = 11;
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
