@@ -189,6 +189,10 @@
           "description": "External identifier for the organization from an external system"
         }
       }
+    },
+    "metadata_questions": {
+      "type": "string",
+      "description": "Custom metadata questions and answers associated with the agency"
     }
   },
   "required": ["id", "timestamp", "agency_id"],

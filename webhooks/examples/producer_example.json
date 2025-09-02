@@ -95,5 +95,6 @@
     "organization_id": "org_987654321",
     "name": "ProducerFlow Organization",
     "external_id": "ext_org_789"
-  }
+  },
+  "metadata_questions": "{\"years_experience\":\"15\",\"specializations\":\"life,health\",\"certification_level\":\"advanced\"}"
 }

@@ -41,6 +41,7 @@ Triggered when agency data is created, updated, or synchronized from external so
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) information
 - Organization information (organization ID, name, and external ID)
+- Custom metadata questions and answers (JSON string format)
 
 ### Producer Webhooks
 
@@ -63,6 +64,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 - Lines of Authority (LOA) and continuing education status
 - License expiration dates and compliance information
 - Organization information (inherited from associated agency)
+- Custom metadata questions and answers (JSON string format)
 
 ### Contact Webhooks
 

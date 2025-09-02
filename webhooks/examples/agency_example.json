@@ -112,5 +112,6 @@
     "organization_id": "org_123456789",
     "name": "Agentero Insurance Organization",
     "external_id": "ext_org_456"
-  }
+  },
+  "metadata_questions": "{\"agency_size\":\"small\",\"primary_market\":\"commercial\",\"years_in_business\":\"10\"}"
 }
