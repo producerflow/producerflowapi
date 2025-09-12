@@ -45,7 +45,8 @@
         "fax": { "type": "string" },
         "name": { "type": "string" },
         "phone": { "type": "string" },
-        "website": { "type": "string", "format": "uri" }
+        "website": { "type": "string", "format": "uri" },
+        "is_sole_proprietor": { "type": "boolean" }
       }
     },
     "agency_address": {
@@ -193,6 +194,24 @@
     "metadata_questions": {
       "type": "string",
       "description": "Custom metadata questions and answers associated with the agency"
+    },
+    "locations": {
+      "type": "array",
+      "description": "List of agency locations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_id": { "type": "string" },
+          "name": { "type": "string" },
+          "street": { "type": "string" },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "zip": { "type": "string" },
+          "phone": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "is_primary": { "type": "boolean" }
+        }
+      }
     }
   },
   "required": ["id", "timestamp", "agency_id"],
