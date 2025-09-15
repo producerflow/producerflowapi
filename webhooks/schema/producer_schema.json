@@ -156,6 +156,11 @@
       "enum": ["active", "failing", "pending", "disabled"],
       "description": "NIPR synchronization status of the producer"
     },
+    "nipr_sync_status_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the NIPR synchronization status was last updated"
+    },
     "organization": {
       "type": "object",
       "description": "Organization information associated with the producer",

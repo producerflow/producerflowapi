@@ -92,6 +92,7 @@
   ],
   "requested_appointment_states": ["OH", "FL"],
   "nipr_sync_status": "active",
+  "nipr_sync_status_updated_at": "2024-03-20T15:30:00Z",
   "organization": {
     "organization_id": "org_987654321",
     "name": "ProducerFlow Organization",
