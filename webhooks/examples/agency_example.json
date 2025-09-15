@@ -14,8 +14,7 @@
     "name": "Premier Insurance Agency LLC",
     "phone": "555-987-6543",
     "status": "Active",
-    "website": "www.premierinsurance.com",
-    "is_sole_proprietor": false
+    "website": "www.premierinsurance.com"
   },
 
   "agency_address": [
@@ -109,34 +108,10 @@
     }
   ],
   "requested_appointment_states": ["OH", "FL"],
+  "nipr_sync_status": "active",
   "organization": {
     "organization_id": "org_123456789",
     "name": "Agentero Insurance Organization",
     "external_id": "ext_org_456"
-  },
-  "metadata_questions": "{\"agency_size\":\"small\",\"primary_market\":\"commercial\",\"years_in_business\":\"10\"}",
-  "locations": [
-    {
-      "location_id": "loc_001",
-      "name": "Main Office",
-      "street": "123 Insurance Ave",
-      "city": "Chicago",
-      "state": "IL",
-      "zip": "60601",
-      "phone": "555-987-6543",
-      "email": "mainoffice@insuranceagency.com",
-      "is_primary": true
-    },
-    {
-      "location_id": "loc_002",
-      "name": "Branch Office",
-      "street": "456 Coverage Blvd",
-      "city": "Naperville",
-      "state": "IL",
-      "zip": "60540",
-      "phone": "555-123-9876",
-      "email": "branch@insuranceagency.com",
-      "is_primary": false
-    }
-  ]
+  }
 }

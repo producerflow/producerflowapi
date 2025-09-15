@@ -64,8 +64,7 @@
         "phone": { "type": "string" },
         "state": { "type": "string" },
         "street": { "type": "string" },
-        "zip": { "type": "string" },
-        "is_sole_proprietor": { "type": "boolean" }
+        "zip": { "type": "string" }
       }
     },
     "producer_nipr_data": {
@@ -152,6 +151,11 @@
         "type": "string"
       }
     },
+    "nipr_sync_status": {
+      "type": "string",
+      "enum": ["active", "failing", "pending", "disabled"],
+      "description": "NIPR synchronization status of the producer"
+    },
     "organization": {
       "type": "object",
       "description": "Organization information associated with the producer",
@@ -167,28 +171,6 @@
         "external_id": {
           "type": "string",
           "description": "External identifier for the organization from an external system"
-        }
-      }
-    },
-    "metadata_questions": {
-      "type": "string",
-      "description": "Custom metadata questions and answers associated with the producer"
-    },
-    "assigned_locations": {
-      "type": "array",
-      "description": "List of locations assigned to the producer",
-      "items": {
-        "type": "object",
-        "properties": {
-          "location_id": { "type": "string" },
-          "name": { "type": "string" },
-          "street": { "type": "string" },
-          "city": { "type": "string" },
-          "state": { "type": "string" },
-          "zip": { "type": "string" },
-          "phone": { "type": "string" },
-          "email": { "type": "string", "format": "email" },
-          "is_primary": { "type": "boolean" }
         }
       }
     }
