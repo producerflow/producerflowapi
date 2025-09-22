@@ -64,6 +64,8 @@
     - [CreateAgencyOnboardingURLRequest.Agency](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency)
     - [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency-Principal)
     - [CreateAgencyOnboardingURLResponse](#producerflow-producer-v1-CreateAgencyOnboardingURLResponse)
+    - [CreateProducerOnboardingLinkRequest](#producerflow-producer-v1-CreateProducerOnboardingLinkRequest)
+    - [CreateProducerOnboardingLinkResponse](#producerflow-producer-v1-CreateProducerOnboardingLinkResponse)
     - [CreateProducerUploadURLRequest](#producerflow-producer-v1-CreateProducerUploadURLRequest)
     - [CreateProducerUploadURLResponse](#producerflow-producer-v1-CreateProducerUploadURLResponse)
     - [GetAgencyAndProducersRequest](#producerflow-producer-v1-GetAgencyAndProducersRequest)
@@ -1246,6 +1248,37 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | url | [string](#string) |  | URL that can be shared with the agency for self-onboarding |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-CreateProducerOnboardingLinkRequest"></a>
+
+### CreateProducerOnboardingLinkRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) | optional | Optional agency ID for which the producer will be onboarded |
+| npn | [string](#string) | optional | Optional NPN to pre-fill in the onboarding form |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-CreateProducerOnboardingLinkResponse"></a>
+
+### CreateProducerOnboardingLinkResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| onboarding_url | [string](#string) |  | The secure onboarding URL that can be shared with the producer |
 
 
 
@@ -2770,6 +2803,7 @@ RPCs for starting the onboarding agency process.
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | CreateAgencyOnboardingURL | [CreateAgencyOnboardingURLRequest](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest) | [CreateAgencyOnboardingURLResponse](#producerflow-producer-v1-CreateAgencyOnboardingURLResponse) | CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency. The URL contains encoded information about the agency defaults and tenant context. All fields in the request are optional - you can provide as much or as little information as available. Any missing information will be collected during the onboarding process. Returns a URL string that can be shared with the agency for self-onboarding. |
+| CreateProducerOnboardingLink | [CreateProducerOnboardingLinkRequest](#producerflow-producer-v1-CreateProducerOnboardingLinkRequest) | [CreateProducerOnboardingLinkResponse](#producerflow-producer-v1-CreateProducerOnboardingLinkResponse) | CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer with optional pre-filled NPN. The link can be shared directly with the producer. The generated link will take the producer through the onboarding flow with the NPN field pre-populated if provided, reducing friction in the onboarding process. |
 | NewAgency | [NewAgencyRequest](#producerflow-producer-v1-NewAgencyRequest) | [NewAgencyResponse](#producerflow-producer-v1-NewAgencyResponse) | NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: - Ensures all required fields are present and valid - Checks whether the NPN is already registered - Verifies agency and principal information with NIPR
 
 Business rules: - Sole proprietors can&#39;t have an agency NPN or additional producers - Regular agencies must provide either an NPN or a FEIN

@@ -36,6 +36,9 @@ const (
 	// ProducerServiceCreateAgencyOnboardingURLProcedure is the fully-qualified name of the
 	// ProducerService's CreateAgencyOnboardingURL RPC.
 	ProducerServiceCreateAgencyOnboardingURLProcedure = "/producerflow.producer.v1.ProducerService/CreateAgencyOnboardingURL"
+	// ProducerServiceCreateProducerOnboardingLinkProcedure is the fully-qualified name of the
+	// ProducerService's CreateProducerOnboardingLink RPC.
+	ProducerServiceCreateProducerOnboardingLinkProcedure = "/producerflow.producer.v1.ProducerService/CreateProducerOnboardingLink"
 	// ProducerServiceNewAgencyProcedure is the fully-qualified name of the ProducerService's NewAgency
 	// RPC.
 	ProducerServiceNewAgencyProcedure = "/producerflow.producer.v1.ProducerService/NewAgency"
@@ -134,6 +137,11 @@ type ProducerServiceClient interface {
 	// the onboarding process.
 	// Returns a URL string that can be shared with the agency for self-onboarding.
 	CreateAgencyOnboardingURL(context.Context, *connect.Request[v1.CreateAgencyOnboardingURLRequest]) (*connect.Response[v1.CreateAgencyOnboardingURLResponse], error)
+	// CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer
+	// with optional pre-filled NPN. The link can be shared directly with the producer.
+	// The generated link will take the producer through the onboarding flow with the NPN field
+	// pre-populated if provided, reducing friction in the onboarding process.
+	CreateProducerOnboardingLink(context.Context, *connect.Request[v1.CreateProducerOnboardingLinkRequest]) (*connect.Response[v1.CreateProducerOnboardingLinkResponse], error)
 	// NewAgency creates a new agency, optionally with associated producers.
 	// It performs the following validation checks:
 	// - Ensures all required fields are present and valid
@@ -338,6 +346,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("CreateAgencyOnboardingURL")),
 			connect.WithClientOptions(opts...),
 		),
+		createProducerOnboardingLink: connect.NewClient[v1.CreateProducerOnboardingLinkRequest, v1.CreateProducerOnboardingLinkResponse](
+			httpClient,
+			baseURL+ProducerServiceCreateProducerOnboardingLinkProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("CreateProducerOnboardingLink")),
+			connect.WithClientOptions(opts...),
+		),
 		newAgency: connect.NewClient[v1.NewAgencyRequest, v1.NewAgencyResponse](
 			httpClient,
 			baseURL+ProducerServiceNewAgencyProcedure,
@@ -518,6 +532,7 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 // producerServiceClient implements ProducerServiceClient.
 type producerServiceClient struct {
 	createAgencyOnboardingURL     *connect.Client[v1.CreateAgencyOnboardingURLRequest, v1.CreateAgencyOnboardingURLResponse]
+	createProducerOnboardingLink  *connect.Client[v1.CreateProducerOnboardingLinkRequest, v1.CreateProducerOnboardingLinkResponse]
 	newAgency                     *connect.Client[v1.NewAgencyRequest, v1.NewAgencyResponse]
 	listOrganizations             *connect.Client[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse]
 	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
@@ -553,6 +568,12 @@ type producerServiceClient struct {
 // producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL.
 func (c *producerServiceClient) CreateAgencyOnboardingURL(ctx context.Context, req *connect.Request[v1.CreateAgencyOnboardingURLRequest]) (*connect.Response[v1.CreateAgencyOnboardingURLResponse], error) {
 	return c.createAgencyOnboardingURL.CallUnary(ctx, req)
+}
+
+// CreateProducerOnboardingLink calls
+// producerflow.producer.v1.ProducerService.CreateProducerOnboardingLink.
+func (c *producerServiceClient) CreateProducerOnboardingLink(ctx context.Context, req *connect.Request[v1.CreateProducerOnboardingLinkRequest]) (*connect.Response[v1.CreateProducerOnboardingLinkResponse], error) {
+	return c.createProducerOnboardingLink.CallUnary(ctx, req)
 }
 
 // NewAgency calls producerflow.producer.v1.ProducerService.NewAgency.
@@ -716,6 +737,11 @@ type ProducerServiceHandler interface {
 	// the onboarding process.
 	// Returns a URL string that can be shared with the agency for self-onboarding.
 	CreateAgencyOnboardingURL(context.Context, *connect.Request[v1.CreateAgencyOnboardingURLRequest]) (*connect.Response[v1.CreateAgencyOnboardingURLResponse], error)
+	// CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer
+	// with optional pre-filled NPN. The link can be shared directly with the producer.
+	// The generated link will take the producer through the onboarding flow with the NPN field
+	// pre-populated if provided, reducing friction in the onboarding process.
+	CreateProducerOnboardingLink(context.Context, *connect.Request[v1.CreateProducerOnboardingLinkRequest]) (*connect.Response[v1.CreateProducerOnboardingLinkResponse], error)
 	// NewAgency creates a new agency, optionally with associated producers.
 	// It performs the following validation checks:
 	// - Ensures all required fields are present and valid
@@ -916,6 +942,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("CreateAgencyOnboardingURL")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceCreateProducerOnboardingLinkHandler := connect.NewUnaryHandler(
+		ProducerServiceCreateProducerOnboardingLinkProcedure,
+		svc.CreateProducerOnboardingLink,
+		connect.WithSchema(producerServiceMethods.ByName("CreateProducerOnboardingLink")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceNewAgencyHandler := connect.NewUnaryHandler(
 		ProducerServiceNewAgencyProcedure,
 		svc.NewAgency,
@@ -1094,6 +1126,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		switch r.URL.Path {
 		case ProducerServiceCreateAgencyOnboardingURLProcedure:
 			producerServiceCreateAgencyOnboardingURLHandler.ServeHTTP(w, r)
+		case ProducerServiceCreateProducerOnboardingLinkProcedure:
+			producerServiceCreateProducerOnboardingLinkHandler.ServeHTTP(w, r)
 		case ProducerServiceNewAgencyProcedure:
 			producerServiceNewAgencyHandler.ServeHTTP(w, r)
 		case ProducerServiceListOrganizationsProcedure:
@@ -1163,6 +1197,10 @@ type UnimplementedProducerServiceHandler struct{}
 
 func (UnimplementedProducerServiceHandler) CreateAgencyOnboardingURL(context.Context, *connect.Request[v1.CreateAgencyOnboardingURLRequest]) (*connect.Response[v1.CreateAgencyOnboardingURLResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) CreateProducerOnboardingLink(context.Context, *connect.Request[v1.CreateProducerOnboardingLinkRequest]) (*connect.Response[v1.CreateProducerOnboardingLinkResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.CreateProducerOnboardingLink is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error) {
