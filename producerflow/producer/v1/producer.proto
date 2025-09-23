@@ -358,13 +358,37 @@ message CreateAgencyOnboardingURLResponse {
 }
 
 message CreateProducerOnboardingLinkRequest {
-  // Optional agency ID for which the producer will be onboarded
-  optional string agency_id = 1;
-  // Optional NPN to pre-fill in the onboarding form
-  optional string npn = 2 [
+  // Agency ID for which the producer will be onboarded
+  string agency_id = 1;
+  // Optional producer data to pre-fill in the onboarding form
+  ProducerData producer_data = 2;
+}
+
+message ProducerData {
+  optional string npn = 1 [
     (buf.validate.field).string.min_len = 1,
     (buf.validate.field).string.max_len = 10
   ];
+  // First name of the producer
+  optional string first_name = 2;
+  // Last name of the producer
+  optional string last_name = 3;
+  // Middle name of the producer
+  optional string middle_name = 4;
+  // Email address of the producer
+  optional string email = 5;
+  // Phone number of the producer
+  optional string phone = 6;
+  // Mailing address of the producer
+  Address mailing_address = 7;
+
+  message Address {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string zip = 4;
+    string country = 5;
+  }
 }
 
 message CreateProducerOnboardingLinkResponse {
