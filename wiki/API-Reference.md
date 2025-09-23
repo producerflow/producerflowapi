@@ -120,6 +120,8 @@
     - [Producer.NIPR.ProducerRegulatoryInfo](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo)
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryAction)
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryActionsByStateEntry)
+    - [ProducerData](#producerflow-producer-v1-ProducerData)
+    - [ProducerData.Address](#producerflow-producer-v1-ProducerData-Address)
     - [RejectProducerRequest](#producerflow-producer-v1-RejectProducerRequest)
     - [RejectProducerResponse](#producerflow-producer-v1-RejectProducerResponse)
     - [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest)
@@ -1262,8 +1264,8 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agency_id | [string](#string) | optional | Optional agency ID for which the producer will be onboarded |
-| npn | [string](#string) | optional | Optional NPN to pre-fill in the onboarding form |
+| agency_id | [string](#string) |  | Agency ID for which the producer will be onboarded |
+| producer_data | [ProducerData](#producerflow-producer-v1-ProducerData) |  | Optional producer data to pre-fill in the onboarding form |
 
 
 
@@ -2256,6 +2258,46 @@ RegulatoryAction represents a regulatory action taken against a producer.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryAction) |  |  |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ProducerData"></a>
+
+### ProducerData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| npn | [string](#string) | optional |  |
+| first_name | [string](#string) | optional | First name of the producer |
+| last_name | [string](#string) | optional | Last name of the producer |
+| middle_name | [string](#string) | optional | Middle name of the producer |
+| email | [string](#string) | optional | Email address of the producer |
+| phone | [string](#string) | optional | Phone number of the producer |
+| mailing_address | [ProducerData.Address](#producerflow-producer-v1-ProducerData-Address) |  | Mailing address of the producer |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ProducerData-Address"></a>
+
+### ProducerData.Address
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| street | [string](#string) |  |  |
+| city | [string](#string) |  |  |
+| state | [string](#string) |  |  |
+| zip | [string](#string) |  |  |
+| country | [string](#string) |  |  |
 
 
 
