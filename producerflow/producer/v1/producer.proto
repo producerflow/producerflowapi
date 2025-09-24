@@ -21,11 +21,11 @@ service ProducerService {
   // Returns a URL string that can be shared with the agency for self-onboarding.
   rpc CreateAgencyOnboardingURL(CreateAgencyOnboardingURLRequest) returns (CreateAgencyOnboardingURLResponse);
 
-  // CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer
-  // with optional pre-filled NPN. The link can be shared directly with the producer.
-  // The generated link will take the producer through the onboarding flow with the NPN field
+  // CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
+  // with optional pre-filled NPN. The URL can be shared directly with the producer.
+  // The generated URL will take the producer through the onboarding flow with the NPN field
   // pre-populated if provided, reducing friction in the onboarding process.
-  rpc CreateProducerOnboardingLink(CreateProducerOnboardingLinkRequest) returns (CreateProducerOnboardingLinkResponse);
+  rpc CreateProducerOnboardingURL(CreateProducerOnboardingURLRequest) returns (CreateProducerOnboardingURLResponse);
 
   // NewAgency creates a new agency, optionally with associated producers.
   // It performs the following validation checks:
@@ -357,7 +357,7 @@ message CreateAgencyOnboardingURLResponse {
   string url = 1;
 }
 
-message CreateProducerOnboardingLinkRequest {
+message CreateProducerOnboardingURLRequest {
   // Agency ID for which the producer will be onboarded
   string agency_id = 1;
   // Optional producer data to pre-fill in the onboarding form
@@ -391,7 +391,7 @@ message ProducerData {
   }
 }
 
-message CreateProducerOnboardingLinkResponse {
+message CreateProducerOnboardingURLResponse {
   // The secure onboarding URL that can be shared with the producer
   string onboarding_url = 1;
 }
