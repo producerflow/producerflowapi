@@ -612,7 +612,7 @@ func (x *CreateAgencyOnboardingURLResponse) GetUrl() string {
 	return ""
 }
 
-type CreateProducerOnboardingLinkRequest struct {
+type CreateProducerOnboardingURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Agency ID for which the producer will be onboarded
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
@@ -622,20 +622,20 @@ type CreateProducerOnboardingLinkRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateProducerOnboardingLinkRequest) Reset() {
-	*x = CreateProducerOnboardingLinkRequest{}
+func (x *CreateProducerOnboardingURLRequest) Reset() {
+	*x = CreateProducerOnboardingURLRequest{}
 	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateProducerOnboardingLinkRequest) String() string {
+func (x *CreateProducerOnboardingURLRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateProducerOnboardingLinkRequest) ProtoMessage() {}
+func (*CreateProducerOnboardingURLRequest) ProtoMessage() {}
 
-func (x *CreateProducerOnboardingLinkRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateProducerOnboardingURLRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -647,19 +647,19 @@ func (x *CreateProducerOnboardingLinkRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateProducerOnboardingLinkRequest.ProtoReflect.Descriptor instead.
-func (*CreateProducerOnboardingLinkRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateProducerOnboardingURLRequest.ProtoReflect.Descriptor instead.
+func (*CreateProducerOnboardingURLRequest) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateProducerOnboardingLinkRequest) GetAgencyId() string {
+func (x *CreateProducerOnboardingURLRequest) GetAgencyId() string {
 	if x != nil {
 		return x.AgencyId
 	}
 	return ""
 }
 
-func (x *CreateProducerOnboardingLinkRequest) GetProducerData() *ProducerData {
+func (x *CreateProducerOnboardingURLRequest) GetProducerData() *ProducerData {
 	if x != nil {
 		return x.ProducerData
 	}
@@ -764,7 +764,7 @@ func (x *ProducerData) GetMailingAddress() *ProducerData_Address {
 	return nil
 }
 
-type CreateProducerOnboardingLinkResponse struct {
+type CreateProducerOnboardingURLResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The secure onboarding URL that can be shared with the producer
 	OnboardingUrl string `protobuf:"bytes,1,opt,name=onboarding_url,json=onboardingUrl,proto3" json:"onboarding_url,omitempty"`
@@ -772,20 +772,20 @@ type CreateProducerOnboardingLinkResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateProducerOnboardingLinkResponse) Reset() {
-	*x = CreateProducerOnboardingLinkResponse{}
+func (x *CreateProducerOnboardingURLResponse) Reset() {
+	*x = CreateProducerOnboardingURLResponse{}
 	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateProducerOnboardingLinkResponse) String() string {
+func (x *CreateProducerOnboardingURLResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateProducerOnboardingLinkResponse) ProtoMessage() {}
+func (*CreateProducerOnboardingURLResponse) ProtoMessage() {}
 
-func (x *CreateProducerOnboardingLinkResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateProducerOnboardingURLResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -797,12 +797,12 @@ func (x *CreateProducerOnboardingLinkResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateProducerOnboardingLinkResponse.ProtoReflect.Descriptor instead.
-func (*CreateProducerOnboardingLinkResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateProducerOnboardingURLResponse.ProtoReflect.Descriptor instead.
+func (*CreateProducerOnboardingURLResponse) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreateProducerOnboardingLinkResponse) GetOnboardingUrl() string {
+func (x *CreateProducerOnboardingURLResponse) GetOnboardingUrl() string {
 	if x != nil {
 		return x.OnboardingUrl
 	}
@@ -8633,8 +8633,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x03npn\x18\a \x01(\tR\x03npn\x12;\n" +
 	"\aaddress\x18\b \x01(\v2!.producerflow.producer.v1.AddressR\aaddress\"5\n" +
 	"!CreateAgencyOnboardingURLResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"\x8f\x01\n" +
-	"#CreateProducerOnboardingLinkRequest\x12\x1b\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"\x8e\x01\n" +
+	"\"CreateProducerOnboardingURLRequest\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12K\n" +
 	"\rproducer_data\x18\x02 \x01(\v2&.producerflow.producer.v1.ProducerDataR\fproducerData\"\xed\x03\n" +
 	"\fProducerData\x12 \n" +
@@ -8660,8 +8660,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"_last_nameB\x0e\n" +
 	"\f_middle_nameB\b\n" +
 	"\x06_emailB\b\n" +
-	"\x06_phone\"M\n" +
-	"$CreateProducerOnboardingLinkResponse\x12%\n" +
+	"\x06_phone\"L\n" +
+	"#CreateProducerOnboardingURLResponse\x12%\n" +
 	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\x85\x1a\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12%\n" +
@@ -9276,10 +9276,10 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"%PRODUCER_ONBOARDING_STATE_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dPRODUCER_ONBOARDING_STATE_NEW\x10\x01\x120\n" +
 	",PRODUCER_ONBOARDING_STATE_APPROVED_BY_TENANT\x10\x02\x120\n" +
-	",PRODUCER_ONBOARDING_STATE_REJECTED_BY_TENANT\x10\x03\x1a\x02\x18\x012\x94\x1f\n" +
+	",PRODUCER_ONBOARDING_STATE_REJECTED_BY_TENANT\x10\x03\x1a\x02\x18\x012\x91\x1f\n" +
 	"\x0fProducerService\x12\x94\x01\n" +
-	"\x19CreateAgencyOnboardingURL\x12:.producerflow.producer.v1.CreateAgencyOnboardingURLRequest\x1a;.producerflow.producer.v1.CreateAgencyOnboardingURLResponse\x12\x9d\x01\n" +
-	"\x1cCreateProducerOnboardingLink\x12=.producerflow.producer.v1.CreateProducerOnboardingLinkRequest\x1a>.producerflow.producer.v1.CreateProducerOnboardingLinkResponse\x12d\n" +
+	"\x19CreateAgencyOnboardingURL\x12:.producerflow.producer.v1.CreateAgencyOnboardingURLRequest\x1a;.producerflow.producer.v1.CreateAgencyOnboardingURLResponse\x12\x9a\x01\n" +
+	"\x1bCreateProducerOnboardingURL\x12<.producerflow.producer.v1.CreateProducerOnboardingURLRequest\x1a=.producerflow.producer.v1.CreateProducerOnboardingURLResponse\x12d\n" +
 	"\tNewAgency\x12*.producerflow.producer.v1.NewAgencyRequest\x1a+.producerflow.producer.v1.NewAgencyResponse\x12|\n" +
 	"\x11ListOrganizations\x122.producerflow.producer.v1.ListOrganizationsRequest\x1a3.producerflow.producer.v1.ListOrganizationsResponse\x12j\n" +
 	"\vNewProducer\x12,.producerflow.producer.v1.NewProducerRequest\x1a-.producerflow.producer.v1.NewProducerResponse\x12m\n" +
@@ -9337,9 +9337,9 @@ var file_producerflow_producer_v1_producer_proto_goTypes = []any{
 	(*Address)(nil),                                               // 7: producerflow.producer.v1.Address
 	(*CreateAgencyOnboardingURLRequest)(nil),                      // 8: producerflow.producer.v1.CreateAgencyOnboardingURLRequest
 	(*CreateAgencyOnboardingURLResponse)(nil),                     // 9: producerflow.producer.v1.CreateAgencyOnboardingURLResponse
-	(*CreateProducerOnboardingLinkRequest)(nil),                   // 10: producerflow.producer.v1.CreateProducerOnboardingLinkRequest
+	(*CreateProducerOnboardingURLRequest)(nil),                    // 10: producerflow.producer.v1.CreateProducerOnboardingURLRequest
 	(*ProducerData)(nil),                                          // 11: producerflow.producer.v1.ProducerData
-	(*CreateProducerOnboardingLinkResponse)(nil),                  // 12: producerflow.producer.v1.CreateProducerOnboardingLinkResponse
+	(*CreateProducerOnboardingURLResponse)(nil),                   // 12: producerflow.producer.v1.CreateProducerOnboardingURLResponse
 	(*NewAgencyRequest)(nil),                                      // 13: producerflow.producer.v1.NewAgencyRequest
 	(*NewAgencyResponse)(nil),                                     // 14: producerflow.producer.v1.NewAgencyResponse
 	(*GetProducerRequest)(nil),                                    // 15: producerflow.producer.v1.GetProducerRequest
@@ -9455,7 +9455,7 @@ var file_producerflow_producer_v1_producer_proto_goTypes = []any{
 }
 var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
 	80,  // 0: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.agency:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
-	11,  // 1: producerflow.producer.v1.CreateProducerOnboardingLinkRequest.producer_data:type_name -> producerflow.producer.v1.ProducerData
+	11,  // 1: producerflow.producer.v1.CreateProducerOnboardingURLRequest.producer_data:type_name -> producerflow.producer.v1.ProducerData
 	82,  // 2: producerflow.producer.v1.ProducerData.mailing_address:type_name -> producerflow.producer.v1.ProducerData.Address
 	83,  // 3: producerflow.producer.v1.NewAgencyRequest.agency:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency
 	90,  // 4: producerflow.producer.v1.GetProducerRequest.producer_id_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.ProducerIDLookup
@@ -9567,7 +9567,7 @@ var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
 	122, // 110: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
 	118, // 111: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry.value:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
 	8,   // 112: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:input_type -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest
-	10,  // 113: producerflow.producer.v1.ProducerService.CreateProducerOnboardingLink:input_type -> producerflow.producer.v1.CreateProducerOnboardingLinkRequest
+	10,  // 113: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:input_type -> producerflow.producer.v1.CreateProducerOnboardingURLRequest
 	13,  // 114: producerflow.producer.v1.ProducerService.NewAgency:input_type -> producerflow.producer.v1.NewAgencyRequest
 	61,  // 115: producerflow.producer.v1.ProducerService.ListOrganizations:input_type -> producerflow.producer.v1.ListOrganizationsRequest
 	32,  // 116: producerflow.producer.v1.ProducerService.NewProducer:input_type -> producerflow.producer.v1.NewProducerRequest
@@ -9598,7 +9598,7 @@ var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
 	78,  // 141: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:input_type -> producerflow.producer.v1.UnassignProducerFromLocationsRequest
 	74,  // 142: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:input_type -> producerflow.producer.v1.UpdateAgencyLocationRequest
 	9,   // 143: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:output_type -> producerflow.producer.v1.CreateAgencyOnboardingURLResponse
-	12,  // 144: producerflow.producer.v1.ProducerService.CreateProducerOnboardingLink:output_type -> producerflow.producer.v1.CreateProducerOnboardingLinkResponse
+	12,  // 144: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:output_type -> producerflow.producer.v1.CreateProducerOnboardingURLResponse
 	14,  // 145: producerflow.producer.v1.ProducerService.NewAgency:output_type -> producerflow.producer.v1.NewAgencyResponse
 	63,  // 146: producerflow.producer.v1.ProducerService.ListOrganizations:output_type -> producerflow.producer.v1.ListOrganizationsResponse
 	33,  // 147: producerflow.producer.v1.ProducerService.NewProducer:output_type -> producerflow.producer.v1.NewProducerResponse

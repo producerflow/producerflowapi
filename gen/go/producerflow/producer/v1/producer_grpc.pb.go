@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	ProducerService_CreateAgencyOnboardingURL_FullMethodName     = "/producerflow.producer.v1.ProducerService/CreateAgencyOnboardingURL"
-	ProducerService_CreateProducerOnboardingLink_FullMethodName  = "/producerflow.producer.v1.ProducerService/CreateProducerOnboardingLink"
+	ProducerService_CreateProducerOnboardingURL_FullMethodName   = "/producerflow.producer.v1.ProducerService/CreateProducerOnboardingURL"
 	ProducerService_NewAgency_FullMethodName                     = "/producerflow.producer.v1.ProducerService/NewAgency"
 	ProducerService_ListOrganizations_FullMethodName             = "/producerflow.producer.v1.ProducerService/ListOrganizations"
 	ProducerService_NewProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewProducer"
@@ -67,11 +67,11 @@ type ProducerServiceClient interface {
 	// the onboarding process.
 	// Returns a URL string that can be shared with the agency for self-onboarding.
 	CreateAgencyOnboardingURL(ctx context.Context, in *CreateAgencyOnboardingURLRequest, opts ...grpc.CallOption) (*CreateAgencyOnboardingURLResponse, error)
-	// CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer
-	// with optional pre-filled NPN. The link can be shared directly with the producer.
-	// The generated link will take the producer through the onboarding flow with the NPN field
+	// CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
+	// with optional pre-filled NPN. The URL can be shared directly with the producer.
+	// The generated URL will take the producer through the onboarding flow with the NPN field
 	// pre-populated if provided, reducing friction in the onboarding process.
-	CreateProducerOnboardingLink(ctx context.Context, in *CreateProducerOnboardingLinkRequest, opts ...grpc.CallOption) (*CreateProducerOnboardingLinkResponse, error)
+	CreateProducerOnboardingURL(ctx context.Context, in *CreateProducerOnboardingURLRequest, opts ...grpc.CallOption) (*CreateProducerOnboardingURLResponse, error)
 	// NewAgency creates a new agency, optionally with associated producers.
 	// It performs the following validation checks:
 	// - Ensures all required fields are present and valid
@@ -275,10 +275,10 @@ func (c *producerServiceClient) CreateAgencyOnboardingURL(ctx context.Context, i
 	return out, nil
 }
 
-func (c *producerServiceClient) CreateProducerOnboardingLink(ctx context.Context, in *CreateProducerOnboardingLinkRequest, opts ...grpc.CallOption) (*CreateProducerOnboardingLinkResponse, error) {
+func (c *producerServiceClient) CreateProducerOnboardingURL(ctx context.Context, in *CreateProducerOnboardingURLRequest, opts ...grpc.CallOption) (*CreateProducerOnboardingURLResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateProducerOnboardingLinkResponse)
-	err := c.cc.Invoke(ctx, ProducerService_CreateProducerOnboardingLink_FullMethodName, in, out, cOpts...)
+	out := new(CreateProducerOnboardingURLResponse)
+	err := c.cc.Invoke(ctx, ProducerService_CreateProducerOnboardingURL_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -592,11 +592,11 @@ type ProducerServiceServer interface {
 	// the onboarding process.
 	// Returns a URL string that can be shared with the agency for self-onboarding.
 	CreateAgencyOnboardingURL(context.Context, *CreateAgencyOnboardingURLRequest) (*CreateAgencyOnboardingURLResponse, error)
-	// CreateProducerOnboardingLink generates a secure, time-limited link for onboarding a new producer
-	// with optional pre-filled NPN. The link can be shared directly with the producer.
-	// The generated link will take the producer through the onboarding flow with the NPN field
+	// CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
+	// with optional pre-filled NPN. The URL can be shared directly with the producer.
+	// The generated URL will take the producer through the onboarding flow with the NPN field
 	// pre-populated if provided, reducing friction in the onboarding process.
-	CreateProducerOnboardingLink(context.Context, *CreateProducerOnboardingLinkRequest) (*CreateProducerOnboardingLinkResponse, error)
+	CreateProducerOnboardingURL(context.Context, *CreateProducerOnboardingURLRequest) (*CreateProducerOnboardingURLResponse, error)
 	// NewAgency creates a new agency, optionally with associated producers.
 	// It performs the following validation checks:
 	// - Ensures all required fields are present and valid
@@ -793,8 +793,8 @@ type UnimplementedProducerServiceServer struct{}
 func (UnimplementedProducerServiceServer) CreateAgencyOnboardingURL(context.Context, *CreateAgencyOnboardingURLRequest) (*CreateAgencyOnboardingURLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAgencyOnboardingURL not implemented")
 }
-func (UnimplementedProducerServiceServer) CreateProducerOnboardingLink(context.Context, *CreateProducerOnboardingLinkRequest) (*CreateProducerOnboardingLinkResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateProducerOnboardingLink not implemented")
+func (UnimplementedProducerServiceServer) CreateProducerOnboardingURL(context.Context, *CreateProducerOnboardingURLRequest) (*CreateProducerOnboardingURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProducerOnboardingURL not implemented")
 }
 func (UnimplementedProducerServiceServer) NewAgency(context.Context, *NewAgencyRequest) (*NewAgencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewAgency not implemented")
@@ -922,20 +922,20 @@ func _ProducerService_CreateAgencyOnboardingURL_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProducerService_CreateProducerOnboardingLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateProducerOnboardingLinkRequest)
+func _ProducerService_CreateProducerOnboardingURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateProducerOnboardingURLRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProducerServiceServer).CreateProducerOnboardingLink(ctx, in)
+		return srv.(ProducerServiceServer).CreateProducerOnboardingURL(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProducerService_CreateProducerOnboardingLink_FullMethodName,
+		FullMethod: ProducerService_CreateProducerOnboardingURL_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProducerServiceServer).CreateProducerOnboardingLink(ctx, req.(*CreateProducerOnboardingLinkRequest))
+		return srv.(ProducerServiceServer).CreateProducerOnboardingURL(ctx, req.(*CreateProducerOnboardingURLRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1474,8 +1474,8 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProducerService_CreateAgencyOnboardingURL_Handler,
 		},
 		{
-			MethodName: "CreateProducerOnboardingLink",
-			Handler:    _ProducerService_CreateProducerOnboardingLink_Handler,
+			MethodName: "CreateProducerOnboardingURL",
+			Handler:    _ProducerService_CreateProducerOnboardingURL_Handler,
 		},
 		{
 			MethodName: "NewAgency",
