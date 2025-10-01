@@ -106,7 +106,7 @@ function createAuthenticatedClient(apiKey: string) {
         interceptors: [{
             interceptRequest(next, req) {
                 // Add the API key header
-                req.header.set("Authorization", `Bearer ${apiKey}`);
+                req.header.set("x-api-key", apiKey);
                 // Or alternatively:
                 // req.header.set("x-api-key", apiKey);
 
