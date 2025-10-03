@@ -8,6 +8,11 @@
   "fein": "12-3456789",
   "npn": "1234567",
 
+  "agency_principal": {
+    "principal_id": "prd_123456789",
+    "principal_external_id": "ext_prd_456"
+  },
+
   "agency_data": {
     "email": "contact@insuranceagency.com",
     "fax": "555-123-4567",

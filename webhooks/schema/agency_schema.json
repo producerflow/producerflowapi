@@ -38,6 +38,20 @@
       "type": "string",
       "description": "National Producer Number"
     },
+    "agency_principal": {
+      "type": "object",
+      "description": "Principal/lead agent information for the agency",
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "description": "Unique identifier for the principal producer"
+        },
+        "principal_external_id": {
+          "type": "string",
+          "description": "External identifier for the principal producer"
+        }
+      }
+    },
     "agency_data": {
       "type": "object",
       "properties": {
