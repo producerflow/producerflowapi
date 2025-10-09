@@ -56,6 +56,7 @@
     - [Agency.NIPR.RegulatoryInfo](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo)
     - [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction)
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
+    - [AgencySummary](#producerflow-producer-v1-AgencySummary)
     - [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest)
     - [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse)
     - [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest)
@@ -77,6 +78,8 @@
     - [GetProducerRequest.ProducerIDLookup](#producerflow-producer-v1-GetProducerRequest-ProducerIDLookup)
     - [GetProducerRequest.ProducerNPNLookup](#producerflow-producer-v1-GetProducerRequest-ProducerNPNLookup)
     - [GetProducerResponse](#producerflow-producer-v1-GetProducerResponse)
+    - [ListAgenciesRequest](#producerflow-producer-v1-ListAgenciesRequest)
+    - [ListAgenciesResponse](#producerflow-producer-v1-ListAgenciesResponse)
     - [ListAgencyLocationsRequest](#producerflow-producer-v1-ListAgencyLocationsRequest)
     - [ListAgencyLocationsResponse](#producerflow-producer-v1-ListAgencyLocationsResponse)
     - [ListNewProducersRequest](#producerflow-producer-v1-ListNewProducersRequest)
@@ -109,6 +112,7 @@
     - [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest)
     - [NewProducersResponse](#producerflow-producer-v1-NewProducersResponse)
     - [Organization](#producerflow-producer-v1-Organization)
+    - [Pagination](#producerflow-producer-v1-Pagination)
     - [Producer](#producerflow-producer-v1-Producer)
     - [Producer.Address](#producerflow-producer-v1-Producer-Address)
     - [Producer.Agency](#producerflow-producer-v1-Producer-Agency)
@@ -154,7 +158,9 @@
   
     - [Agency.BankAccount.AccountType](#producerflow-producer-v1-Agency-BankAccount-AccountType)
     - [Agency.NIPR.License.LicenseStatus](#producerflow-producer-v1-Agency-NIPR-License-LicenseStatus)
+    - [AgencyType](#producerflow-producer-v1-AgencyType)
     - [EntityType](#producerflow-producer-v1-EntityType)
+    - [NIPRSyncState](#producerflow-producer-v1-NIPRSyncState)
     - [NewAgencyRequest.Agency.BankAccount.AccountType](#producerflow-producer-v1-NewAgencyRequest-Agency-BankAccount-AccountType)
     - [NewAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact-CommunicationRole)
     - [Producer.NIPR.License.LicenseStatus](#producerflow-producer-v1-Producer-NIPR-License-LicenseStatus)
@@ -1112,6 +1118,31 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 
 
 
+<a name="producerflow-producer-v1-AgencySummary"></a>
+
+### AgencySummary
+AgencySummary contains a lightweight summary of an agency for list views.
+This message contains only the essential fields needed for displaying agencies in a list.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | Unique identifier for the agency. |
+| name | [string](#string) |  | Agency name. |
+| email | [string](#string) |  | Agency email address. |
+| phone | [string](#string) |  | Agency phone number. |
+| npn | [string](#string) |  | Agency NPN (National Producer Number). |
+| fein | [string](#string) |  | Agency FEIN (Federal Employer Identification Number). |
+| organization_id | [string](#string) | optional | Organization ID that the agency belongs to. |
+| is_tenant_agency | [bool](#bool) |  | Whether this is an internal tenant agency. |
+| is_sole_proprietor | [bool](#bool) |  | Whether this is a sole proprietor. |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | When the agency was created. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-ApproveProducerRequest"></a>
 
 ### ApproveProducerRequest
@@ -1455,6 +1486,44 @@ GetProducerResponse contains the producer information retrieved by the GetProduc
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | producer | [Producer](#producerflow-producer-v1-Producer) |  | The complete producer information including personal details, agency association, and NIPR data. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgenciesRequest"></a>
+
+### ListAgenciesRequest
+ListAgenciesRequest requests a list of agencies associated with the tenant.
+Supports optional filtering and pagination parameters.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) | optional | Optional. Filter agencies by organization ID. If provided, only agencies belonging to this organization will be returned. |
+| search_query | [string](#string) | optional | Optional. Search query to filter agencies by name, NPN, or email. If provided, only agencies matching the search query will be returned. |
+| pagination | [Pagination](#producerflow-producer-v1-Pagination) |  | Optional. Pagination parameters. If not provided, defaults to page_size=50. |
+| agency_type | [AgencyType](#producerflow-producer-v1-AgencyType) | optional | Optional. Filter by agency type (internal vs external). If not provided, returns all agencies regardless of type. |
+| entity_type | [EntityType](#producerflow-producer-v1-EntityType) | optional | Optional. Filter by entity type (sole proprietor vs agency). If not provided, returns all agencies regardless of entity type. |
+| nipr_sync_statuses | [NIPRSyncState](#producerflow-producer-v1-NIPRSyncState) | repeated | Optional. Filter by NIPR sync status. If not provided, returns all agencies regardless of sync status. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgenciesResponse"></a>
+
+### ListAgenciesResponse
+ListAgenciesResponse contains the list of agencies matching the filter criteria.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agencies | [AgencySummary](#producerflow-producer-v1-AgencySummary) | repeated | List of agency summaries matching the filter criteria. The agencies are ordered by creation date, most recent first. |
+| next_page_token | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. |
+| total_count | [int32](#int32) |  | Total number of agencies matching the filter criteria. |
 
 
 
@@ -2030,6 +2099,22 @@ such as agency networks, aggregators, or other business hierarchies.
 | id | [string](#string) |  | Unique identifier for the organization. This is a UUID that can be used to reference the organization in other API calls. |
 | name | [string](#string) |  | Display name of the organization. This is the human-readable name that identifies the organization to users. |
 | external_id | [string](#string) |  | External identifier for the organization. This is the identifier used by the tenant&#39;s system to identify the organization. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Pagination"></a>
+
+### Pagination
+Pagination provides page token and page size for paginating list results.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_size | [int32](#int32) |  | The maximum number of items to return. The service may return fewer than this value. If unspecified, at most 50 items will be returned. The maximum value is 1000; values above 1000 will be rejected. |
+| page_token | [string](#string) |  | A page token, received from a previous list call. Provide this to retrieve the subsequent page. When paginating, all other parameters must match the call that provided the page token. |
 
 
 
@@ -2756,6 +2841,19 @@ LicenseStatus defines the possible statuses of an insurance license.
 
 
 
+<a name="producerflow-producer-v1-AgencyType"></a>
+
+### AgencyType
+AgencyType defines whether an agency is internal (tenant agency) or external.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| AGENCY_TYPE_UNSPECIFIED | 0 | Default unspecified value. Do not use. |
+| AGENCY_TYPE_INTERNAL | 1 | Internal agencies are the agencies that are tenant agencies. |
+| AGENCY_TYPE_EXTERNAL | 2 | External agencies are the agencies that are not tenant agencies. |
+
+
+
 <a name="producerflow-producer-v1-EntityType"></a>
 
 ### EntityType
@@ -2767,6 +2865,21 @@ EntityType defines the business entity type for an agency.
 | ENTITY_TYPE_SOLE_PROPRIETOR | 1 | An individual producer operating as their own agency. For this type, an agency NPN is not allowed, and additional producers are not supported. |
 | ENTITY_TYPE_AGENCY | 2 | A standard insurance agency that can have multiple producers. For this type, either NPN or FEIN is required. |
 | ENTITY_TYPE_ASK_DURING_ONBOARDING | 3 | Ask during onboarding because the entity type is not known when the agency onboarding url is created. The UI will ask the user to select the entity type. |
+
+
+
+<a name="producerflow-producer-v1-NIPRSyncState"></a>
+
+### NIPRSyncState
+NIPRSyncState defines the synchronization state with the NIPR system.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NIPR_SYNC_STATE_UNSPECIFIED | 0 | Default unspecified value. Do not use. |
+| NIPR_SYNC_STATE_ACTIVE | 1 | Synchronization is active and working properly. |
+| NIPR_SYNC_STATE_FAILING | 2 | Synchronization is failing due to errors. |
+| NIPR_SYNC_STATE_PENDING | 3 | Synchronization is pending and has not started yet. |
+| NIPR_SYNC_STATE_DISABLED | 4 | Synchronization has been disabled. |
 
 
 
@@ -2851,6 +2964,7 @@ RPCs for starting the onboarding agency process.
 Business rules: - Sole proprietors can&#39;t have an agency NPN or additional producers - Regular agencies must provide either an NPN or a FEIN
 
 If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers. |
+| ListAgencies | [ListAgenciesRequest](#producerflow-producer-v1-ListAgenciesRequest) | [ListAgenciesResponse](#producerflow-producer-v1-ListAgenciesResponse) | ListAgencies returns a list of agencies associated with the tenant. Supports optional filtering by organization ID and search queries. |
 | ListOrganizations | [ListOrganizationsRequest](#producerflow-producer-v1-ListOrganizationsRequest) | [ListOrganizationsResponse](#producerflow-producer-v1-ListOrganizationsResponse) | ListOrganizations returns a list of organizations associated with the tenant. Organizations represent logical groupings or hierarchical structures within a tenant that can be used to organize agencies and producers. |
 | NewProducer | [NewProducerRequest](#producerflow-producer-v1-NewProducerRequest) | [NewProducerResponse](#producerflow-producer-v1-NewProducerResponse) | NewProducer creates a new producer and associates them with an existing agency. It validates the producer&#39;s information and checks that the email is unique. Returns the ID of the created producer. |
 | NewProducers | [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest) | [NewProducersResponse](#producerflow-producer-v1-NewProducersResponse) | NewProducers creates multiple producers and associates them with the specified agency. It performs the same validations as NewProducer for each entry. Returns the IDs of all created producers. |

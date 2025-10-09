@@ -42,6 +42,9 @@ const (
 	// ProducerServiceNewAgencyProcedure is the fully-qualified name of the ProducerService's NewAgency
 	// RPC.
 	ProducerServiceNewAgencyProcedure = "/producerflow.producer.v1.ProducerService/NewAgency"
+	// ProducerServiceListAgenciesProcedure is the fully-qualified name of the ProducerService's
+	// ListAgencies RPC.
+	ProducerServiceListAgenciesProcedure = "/producerflow.producer.v1.ProducerService/ListAgencies"
 	// ProducerServiceListOrganizationsProcedure is the fully-qualified name of the ProducerService's
 	// ListOrganizations RPC.
 	ProducerServiceListOrganizationsProcedure = "/producerflow.producer.v1.ProducerService/ListOrganizations"
@@ -155,6 +158,9 @@ type ProducerServiceClient interface {
 	// If validation passes, it creates the agency, principal, and any producers.
 	// Returns the IDs of the created agency, principal, and producers.
 	NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error)
+	// ListAgencies returns a list of agencies associated with the tenant.
+	// Supports optional filtering by organization ID and search queries.
+	ListAgencies(context.Context, *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error)
 	// ListOrganizations returns a list of organizations associated with the tenant.
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
@@ -358,6 +364,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("NewAgency")),
 			connect.WithClientOptions(opts...),
 		),
+		listAgencies: connect.NewClient[v1.ListAgenciesRequest, v1.ListAgenciesResponse](
+			httpClient,
+			baseURL+ProducerServiceListAgenciesProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("ListAgencies")),
+			connect.WithClientOptions(opts...),
+		),
 		listOrganizations: connect.NewClient[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse](
 			httpClient,
 			baseURL+ProducerServiceListOrganizationsProcedure,
@@ -534,6 +546,7 @@ type producerServiceClient struct {
 	createAgencyOnboardingURL     *connect.Client[v1.CreateAgencyOnboardingURLRequest, v1.CreateAgencyOnboardingURLResponse]
 	createProducerOnboardingURL   *connect.Client[v1.CreateProducerOnboardingURLRequest, v1.CreateProducerOnboardingURLResponse]
 	newAgency                     *connect.Client[v1.NewAgencyRequest, v1.NewAgencyResponse]
+	listAgencies                  *connect.Client[v1.ListAgenciesRequest, v1.ListAgenciesResponse]
 	listOrganizations             *connect.Client[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse]
 	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
 	newProducers                  *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
@@ -579,6 +592,11 @@ func (c *producerServiceClient) CreateProducerOnboardingURL(ctx context.Context,
 // NewAgency calls producerflow.producer.v1.ProducerService.NewAgency.
 func (c *producerServiceClient) NewAgency(ctx context.Context, req *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error) {
 	return c.newAgency.CallUnary(ctx, req)
+}
+
+// ListAgencies calls producerflow.producer.v1.ProducerService.ListAgencies.
+func (c *producerServiceClient) ListAgencies(ctx context.Context, req *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error) {
+	return c.listAgencies.CallUnary(ctx, req)
 }
 
 // ListOrganizations calls producerflow.producer.v1.ProducerService.ListOrganizations.
@@ -755,6 +773,9 @@ type ProducerServiceHandler interface {
 	// If validation passes, it creates the agency, principal, and any producers.
 	// Returns the IDs of the created agency, principal, and producers.
 	NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error)
+	// ListAgencies returns a list of agencies associated with the tenant.
+	// Supports optional filtering by organization ID and search queries.
+	ListAgencies(context.Context, *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error)
 	// ListOrganizations returns a list of organizations associated with the tenant.
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
@@ -954,6 +975,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("NewAgency")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceListAgenciesHandler := connect.NewUnaryHandler(
+		ProducerServiceListAgenciesProcedure,
+		svc.ListAgencies,
+		connect.WithSchema(producerServiceMethods.ByName("ListAgencies")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceListOrganizationsHandler := connect.NewUnaryHandler(
 		ProducerServiceListOrganizationsProcedure,
 		svc.ListOrganizations,
@@ -1130,6 +1157,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceCreateProducerOnboardingURLHandler.ServeHTTP(w, r)
 		case ProducerServiceNewAgencyProcedure:
 			producerServiceNewAgencyHandler.ServeHTTP(w, r)
+		case ProducerServiceListAgenciesProcedure:
+			producerServiceListAgenciesHandler.ServeHTTP(w, r)
 		case ProducerServiceListOrganizationsProcedure:
 			producerServiceListOrganizationsHandler.ServeHTTP(w, r)
 		case ProducerServiceNewProducerProcedure:
@@ -1205,6 +1234,10 @@ func (UnimplementedProducerServiceHandler) CreateProducerOnboardingURL(context.C
 
 func (UnimplementedProducerServiceHandler) NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.NewAgency is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) ListAgencies(context.Context, *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListAgencies is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error) {
