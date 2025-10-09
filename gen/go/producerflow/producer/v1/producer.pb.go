@@ -552,7 +552,7 @@ type Pagination struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of items to return. The service may return fewer than this value.
 	// If unspecified, at most 50 items will be returned.
-	// The maximum value is 1000; values above 1000 will be rejected.
+	// The maximum value is 200; values above 200 will be rejected.
 	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// A page token, received from a previous list call.
 	// Provide this to retrieve the subsequent page.
@@ -9061,7 +9061,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"'producerflow/producer/v1/producer.proto\x12\x18producerflow.producer.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\"R\n" +
 	"\n" +
 	"Pagination\x12%\n" +
-	"\tpage_size\x18\x01 \x01(\x05B\b\xbaH\x05\x1a\x03\x18\xe8\aR\bpageSize\x12\x1d\n" +
+	"\tpage_size\x18\x01 \x01(\x05B\b\xbaH\x05\x1a\x03\x18\xc8\x01R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tR\tpageToken\"\x9c\x01\n" +
 	"\aAddress\x12\x1f\n" +

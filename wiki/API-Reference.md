@@ -2113,7 +2113,7 @@ Pagination provides page token and page size for paginating list results.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page_size | [int32](#int32) |  | The maximum number of items to return. The service may return fewer than this value. If unspecified, at most 50 items will be returned. The maximum value is 1000; values above 1000 will be rejected. |
+| page_size | [int32](#int32) |  | The maximum number of items to return. The service may return fewer than this value. If unspecified, at most 50 items will be returned. The maximum value is 200; values above 200 will be rejected. |
 | page_token | [string](#string) |  | A page token, received from a previous list call. Provide this to retrieve the subsequent page. When paginating, all other parameters must match the call that provided the page token. |
 
 
