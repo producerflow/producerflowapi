@@ -268,8 +268,8 @@ enum EntityType {
 message Pagination {
   // The maximum number of items to return. The service may return fewer than this value.
   // If unspecified, at most 50 items will be returned.
-  // The maximum value is 1000; values above 1000 will be rejected.
-  int32 page_size = 1 [(buf.validate.field).int32.lte = 1000];
+  // The maximum value is 200; values above 200 will be rejected.
+  int32 page_size = 1 [(buf.validate.field).int32.lte = 200];
 
   // A page token, received from a previous list call.
   // Provide this to retrieve the subsequent page.
