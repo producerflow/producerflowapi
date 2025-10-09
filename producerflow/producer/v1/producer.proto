@@ -41,6 +41,10 @@ service ProducerService {
   // Returns the IDs of the created agency, principal, and producers.
   rpc NewAgency(NewAgencyRequest) returns (NewAgencyResponse);
 
+  // ListAgencies returns a list of agencies associated with the tenant.
+  // Supports optional filtering by organization ID and search queries.
+  rpc ListAgencies(ListAgenciesRequest) returns (ListAgenciesResponse);
+
   // ListOrganizations returns a list of organizations associated with the tenant.
   // Organizations represent logical groupings or hierarchical structures within a tenant
   // that can be used to organize agencies and producers.
@@ -258,6 +262,43 @@ enum EntityType {
   // Ask during onboarding because the entity type is not known when the agency onboarding url is created.
   // The UI will ask the user to select the entity type.
   ENTITY_TYPE_ASK_DURING_ONBOARDING = 3;
+}
+
+// Pagination provides page token and page size for paginating list results.
+message Pagination {
+  // The maximum number of items to return. The service may return fewer than this value.
+  // If unspecified, at most 50 items will be returned.
+  // The maximum value is 1000; values above 1000 will be rejected.
+  int32 page_size = 1 [(buf.validate.field).int32.lte = 1000];
+
+  // A page token, received from a previous list call.
+  // Provide this to retrieve the subsequent page.
+  // When paginating, all other parameters must match the call that provided the page token.
+  string page_token = 2;
+}
+
+// AgencyType defines whether an agency is internal (tenant agency) or external.
+enum AgencyType {
+  // Default unspecified value. Do not use.
+  AGENCY_TYPE_UNSPECIFIED = 0;
+  // Internal agencies are the agencies that are tenant agencies.
+  AGENCY_TYPE_INTERNAL = 1;
+  // External agencies are the agencies that are not tenant agencies.
+  AGENCY_TYPE_EXTERNAL = 2;
+}
+
+// NIPRSyncState defines the synchronization state with the NIPR system.
+enum NIPRSyncState {
+  // Default unspecified value. Do not use.
+  NIPR_SYNC_STATE_UNSPECIFIED = 0;
+  // Synchronization is active and working properly.
+  NIPR_SYNC_STATE_ACTIVE = 1;
+  // Synchronization is failing due to errors.
+  NIPR_SYNC_STATE_FAILING = 2;
+  // Synchronization is pending and has not started yet.
+  NIPR_SYNC_STATE_PENDING = 3;
+  // Synchronization has been disabled.
+  NIPR_SYNC_STATE_DISABLED = 4;
 }
 
 // Address represents a physical location with standard address components.
@@ -1865,6 +1906,82 @@ message StopSyncAgencyWithNIPRRequest {
 
 // StopSyncAgencyWithNIPRResponse is the empty response returned after successfully stopping the synchronization of an agency's data with the NIPR API.
 message StopSyncAgencyWithNIPRResponse {}
+
+// AgencySummary contains a lightweight summary of an agency for list views.
+// This message contains only the essential fields needed for displaying agencies in a list.
+message AgencySummary {
+  // Unique identifier for the agency.
+  string agency_id = 1;
+
+  // Agency name.
+  string name = 2;
+
+  // Agency email address.
+  string email = 3;
+
+  // Agency phone number.
+  string phone = 4;
+
+  // Agency NPN (National Producer Number).
+  string npn = 5;
+
+  // Agency FEIN (Federal Employer Identification Number).
+  string fein = 6;
+
+  // Organization ID that the agency belongs to.
+  optional string organization_id = 7;
+
+  // Whether this is an internal tenant agency.
+  bool is_tenant_agency = 8;
+
+  // Whether this is a sole proprietor.
+  bool is_sole_proprietor = 9;
+
+  // When the agency was created.
+  google.protobuf.Timestamp created_at = 10;
+}
+
+// ListAgenciesRequest requests a list of agencies associated with the tenant.
+// Supports optional filtering and pagination parameters.
+message ListAgenciesRequest {
+  // Optional. Filter agencies by organization ID.
+  // If provided, only agencies belonging to this organization will be returned.
+  optional string organization_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Optional. Search query to filter agencies by name, NPN, or email.
+  // If provided, only agencies matching the search query will be returned.
+  optional string search_query = 2;
+
+  // Optional. Pagination parameters.
+  // If not provided, defaults to page_size=50.
+  Pagination pagination = 3;
+
+  // Optional. Filter by agency type (internal vs external).
+  // If not provided, returns all agencies regardless of type.
+  optional AgencyType agency_type = 4;
+
+  // Optional. Filter by entity type (sole proprietor vs agency).
+  // If not provided, returns all agencies regardless of entity type.
+  optional EntityType entity_type = 5;
+
+  // Optional. Filter by NIPR sync status.
+  // If not provided, returns all agencies regardless of sync status.
+  repeated NIPRSyncState nipr_sync_statuses = 6;
+}
+
+// ListAgenciesResponse contains the list of agencies matching the filter criteria.
+message ListAgenciesResponse {
+  // List of agency summaries matching the filter criteria.
+  // The agencies are ordered by creation date, most recent first.
+  repeated AgencySummary agencies = 1;
+
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  string next_page_token = 2;
+
+  // Total number of agencies matching the filter criteria.
+  int32 total_count = 3;
+}
 
 // ListOrganizationsRequest requests a list of all organizations associated with the tenant.
 // This request requires no parameters  and will return all organizations that
