@@ -1558,7 +1558,6 @@ message NewProducer {
   string email = 3 [(buf.validate.field).string.email = true];
 
   // National Producer Number (NPN) of the producer.
-  // Optional, but recommended for license verification.
   string npn = 4;
 
   // Phone number of the producer.
