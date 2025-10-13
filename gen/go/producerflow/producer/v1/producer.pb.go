@@ -2256,7 +2256,6 @@ type NewProducer struct {
 	// Must be unique within the tenant.
 	Email string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	// National Producer Number (NPN) of the producer.
-	// Optional, but recommended for license verification.
 	Npn string `protobuf:"bytes,4,opt,name=npn,proto3" json:"npn,omitempty"`
 	// Phone number of the producer.
 	// Optional if default value, but if provided must match the pattern of a valid phone number.

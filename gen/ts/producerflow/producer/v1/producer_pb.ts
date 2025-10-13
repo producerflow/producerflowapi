@@ -3417,7 +3417,6 @@ export type NewProducer = Message<"producerflow.producer.v1.NewProducer"> & {
 
   /**
    * National Producer Number (NPN) of the producer.
-   * Optional, but recommended for license verification.
    *
    * @generated from field: string npn = 4;
    */

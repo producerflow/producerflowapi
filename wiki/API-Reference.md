@@ -1989,7 +1989,7 @@ NewProducer represents the data needed to create a new producer in the system.
 | last_name | [string](#string) |  | Last name of the producer. Required and must be non-empty. |
 | middle_name | [string](#string) |  | Middle name of the producer. Optional. |
 | email | [string](#string) |  | Email address of the producer. Required and must be a valid email format. Must be unique within the tenant. |
-| npn | [string](#string) |  | National Producer Number (NPN) of the producer. Optional, but recommended for license verification. |
+| npn | [string](#string) |  | National Producer Number (NPN) of the producer. |
 | phone | [string](#string) |  | Phone number of the producer. Optional if default value, but if provided must match the pattern of a valid phone number. |
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
 | tenant_id | [string](#string) |  | External tenant identifier for the producer. Used for integration with external systems. |
