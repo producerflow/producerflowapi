@@ -484,6 +484,10 @@ message NewAgencyRequest {
         (buf.validate.field).string.max_len = 10
       ];
       string tenant_id = 6;
+      // Optional. Controls whether the principal should be validated and synced with NIPR.
+      // If set to false, the principal's NPN will not be validated against NIPR and the
+      // principal will not be synced with NIPR. Defaults to true if not specified.
+      optional bool sync_with_nipr = 7;
     }
 
     // Information about the agency's principal.
