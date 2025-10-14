@@ -1848,6 +1848,7 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | phone | [string](#string) |  | The phone number of the principal. |
 | npn | [string](#string) |  | The National Producer Number (NPN) of the principal. |
 | tenant_id | [string](#string) |  |  |
+| sync_with_nipr | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal&#39;s NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
 
 
 
