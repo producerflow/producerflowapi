@@ -220,16 +220,7 @@ export const TerminateAppointmentRequestSchema: GenMessage<TerminateAppointmentR
  */
 export type TerminateAppointmentResponse = Message<"producerflow.appointment.v1.TerminateAppointmentResponse"> & {
   /**
-   * Indicates whether the termination request was successfully processed.
-   *
-   * For NIPR-integrated carriers: Indicates whether the termination request was
-   * successfully submitted to NIPR. This does not indicate that the appointment
-   * has been terminated, only that the request has been accepted for processing.
-   * The actual termination will be processed asynchronously by NIPR, and you
-   * will be notified via webhook when the process completes.
-   *
-   * For registry states or non-NIPR carriers: Indicates whether the termination
-   * was successfully completed immediately.
+   * Indicates whether the termination request was successfully processed. For NIPR-integrated carriers: Indicates whether the termination request was successfully submitted to NIPR. This does not indicate that the appointment has been terminated, only that the request has been accepted for processing. The actual termination will be processed asynchronously by NIPR, and you will be notified via webhook when the process completes. For registry states or non-NIPR carriers: Indicates whether the termination was successfully completed immediately.
    *
    * @generated from field: bool success = 1;
    */
@@ -897,12 +888,7 @@ export const AppointmentTypeSchema: GenEnum<AppointmentType> = /*@__PURE__*/
   enumDesc(file_producerflow_appointment_v1_appointment, 3);
 
 /**
- * TerminationReason represents the reason for the termination of an appointment.
- * These reasons correspond to NIPR's valid termination codes and vary by state.
- * Use ListTerminationReasons to get the valid reasons for a specific state
- * before terminating an appointment.
- *
- * Reference: https://pdb.nipr.com/Gateway/ValidTerms
+ * TerminationReason represents the reason for the termination of an appointment. These reasons correspond to NIPR's valid termination codes and vary by state. Use ListTerminationReasons to get the valid reasons for a specific state before terminating an appointment. Reference: https://pdb.nipr.com/Gateway/ValidTerms
  *
  * @generated from enum producerflow.appointment.v1.TerminationReason
  */
@@ -995,26 +981,7 @@ export const TerminationReasonSchema: GenEnum<TerminationReason> = /*@__PURE__*/
   enumDesc(file_producerflow_appointment_v1_appointment, 4);
 
 /**
- * AppointmentService manages license appointments through NIPR.
- *
- * The appointment flow in NIPR is as follows:
- * 1. A new appointment (or termination) is requested for a license number.
- * 2. Some time later, NIPR processes the request and returns the final result.
- *
- * Since NIPR does not return results immediately, RequestAppointment and TerminateAppointment
- * RPCs will return a processing status of IN_PROGRESS if the request is accepted by NIPR.
- * When the appointment is finally processed by NIPR, ProducerFlow will notify via a webhook of
- * the final result. Also, any call from this point on to ListAppointments or GetAppointment will
- * also return the final result.
- *
- * IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration)
- * are processed automatically without going through NIPR. In these cases:
- * - RequestAppointment will immediately return APPOINTED status
- * - TerminateAppointment will immediately return TERMINATED status
- *
- * Any call to this service must be authenticated using an API key in the request headers. The API key
- * can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant
- * that is making the request.
+ * AppointmentService manages license appointments through NIPR. The appointment flow in NIPR is as follows: 1. A new appointment (or termination) is requested for a license number. 2. Some time later, NIPR processes the request and returns the final result. Since NIPR does not return results immediately, RequestAppointment and TerminateAppointment RPCs will return a processing status of IN_PROGRESS if the request is accepted by NIPR. When the appointment is finally processed by NIPR, ProducerFlow will notify via a webhook of the final result. Also, any call from this point on to ListAppointments or GetAppointment will also return the final result. IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration) are processed automatically without going through NIPR. In these cases: RequestAppointment will immediately return APPOINTED status. TerminateAppointment will immediately return TERMINATED status. Any call to this service must be authenticated using an API key in the request headers. The API key can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant that is making the request.
  *
  * @generated from service producerflow.appointment.v1.AppointmentService
  */
@@ -1082,20 +1049,7 @@ export const AppointmentService: GenService<{
     output: typeof ListEligibleLicensesResponseSchema;
   },
   /**
-   * Requests a new appointment for a license that is eligible to be appointed. The simpler way
-   * to do this is to call ListEligibleLicenses to get a list of licenses that are eligible to be
-   * appointed. Then, call RequestAppointment for the licenses in the list that you want to appoint.
-   *
-   * Processing behavior varies based on the license state and carrier NIPR integration:
-   *
-   * For NIPR-integrated carriers in non-registry states:
-   * - If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status
-   * - If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons
-   * - Final result will be delivered via webhook when NIPR completes processing
-   *
-   * For registry states or capacity carriers (carriers without NIPR integration):
-   * - The appointment is processed automatically and immediately
-   * - Returns APPOINTED status immediately upon successful processing
+   * Requests a new appointment for a license that is eligible to be appointed. The simpler way to do this is to call ListEligibleLicenses to get a list of licenses that are eligible to be appointed. Then, call RequestAppointment for the licenses in the list that you want to appoint. Processing behavior varies based on the license state and carrier NIPR integration: For NIPR-integrated carriers in non-registry states: If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status. If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons. Final result will be delivered via webhook when NIPR completes processing. For registry states or capacity carriers (carriers without NIPR integration): The appointment is processed automatically and immediately. Returns APPOINTED status immediately upon successful processing.
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.RequestAppointment
    */
@@ -1105,33 +1059,7 @@ export const AppointmentService: GenService<{
     output: typeof RequestAppointmentResponseSchema;
   },
   /**
-   * Terminates an existing appointment, permanently ending the relationship between
-   * the license holder and the carrier.
-   *
-   * Before calling this method, you must:
-   * 1. Ensure the appointment exists and is in APPOINTED status
-   * 2. Call ListTerminationReasons to get valid termination reasons for the license's state
-   * 3. Select an appropriate termination reason from the state-specific list
-   *
-   * Processing behavior varies based on the license state and carrier NIPR integration:
-   *
-   * For NIPR-integrated carriers in non-registry states:
-   * - The request is submitted to NIPR for processing
-   * - Once NIPR completes processing, the status becomes TERMINATED
-   * - If rejected by NIPR, the appointment remains in its current status
-   * - You will receive webhook notifications when the termination is processed by NIPR
-   *
-   * For registry states or capacity carriers (carriers without NIPR integration):
-   * - The termination is processed automatically and immediately
-   * - Returns TERMINATED status immediately upon successful processing
-   *
-   * Important considerations:
-   * - Termination is permanent and cannot be undone
-   * - Termination reasons must be valid for the specific state where the license is issued
-   * - Some terminations may incur fees (check GetTerminationFees first)
-   *
-   * The response indicates whether the termination request was successfully submitted,
-   * not whether the actual termination was completed (since NIPR processes asynchronously).
+   * Terminates an existing appointment, permanently ending the relationship between the license holder and the carrier. Before calling this method, you must: 1. Ensure the appointment exists and is in APPOINTED status. 2. Call ListTerminationReasons to get valid termination reasons for the license's state. 3. Select an appropriate termination reason from the state-specific list. Processing behavior varies based on the license state and carrier NIPR integration: For NIPR-integrated carriers in non-registry states: The request is submitted to NIPR for processing. Once NIPR completes processing, the status becomes TERMINATED. If rejected by NIPR, the appointment remains in its current status. You will receive webhook notifications when the termination is processed by NIPR. For registry states or capacity carriers (carriers without NIPR integration): The termination is processed automatically and immediately. Returns TERMINATED status immediately upon successful processing. Important considerations: Termination is permanent and cannot be undone. Termination reasons must be valid for the specific state where the license is issued. Some terminations may incur fees (check GetTerminationFees first). The response indicates whether the termination request was successfully submitted, not whether the actual termination was completed (since NIPR processes asynchronously).
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.TerminateAppointment
    */
@@ -1141,17 +1069,7 @@ export const AppointmentService: GenService<{
     output: typeof TerminateAppointmentResponseSchema;
   },
   /**
-   * Lists the valid termination reasons for appointments in a specific state.
-   *
-   * When terminating an appointment, you must provide a valid termination reason that is
-   * accepted by NIPR for the state where the license is issued. Termination reasons vary
-   * by state, so you should call this method first to retrieve the list of valid reasons
-   * before calling TerminateAppointment.
-   *
-   * The termination reasons returned are based on NIPR's valid termination codes for the
-   * specified state. Each reason corresponds to a specific business scenario for why an
-   * appointment might be terminated (e.g., voluntary termination, inadequate production,
-   * company merger, etc.).
+   * Lists the valid termination reasons for appointments in a specific state. When terminating an appointment, you must provide a valid termination reason that is accepted by NIPR for the state where the license is issued. Termination reasons vary by state, so you should call this method first to retrieve the list of valid reasons before calling TerminateAppointment. The termination reasons returned are based on NIPR's valid termination codes for the specified state. Each reason corresponds to a specific business scenario for why an appointment might be terminated (e.g., voluntary termination, inadequate production, company merger, etc.).
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.ListTerminationReasons
    */

@@ -257,12 +257,7 @@ func (AppointmentType) EnumDescriptor() ([]byte, []int) {
 	return file_producerflow_appointment_v1_appointment_proto_rawDescGZIP(), []int{3}
 }
 
-// TerminationReason represents the reason for the termination of an appointment.
-// These reasons correspond to NIPR's valid termination codes and vary by state.
-// Use ListTerminationReasons to get the valid reasons for a specific state
-// before terminating an appointment.
-//
-// Reference: https://pdb.nipr.com/Gateway/ValidTerms
+// TerminationReason represents the reason for the termination of an appointment. These reasons correspond to NIPR's valid termination codes and vary by state. Use ListTerminationReasons to get the valid reasons for a specific state before terminating an appointment. Reference: https://pdb.nipr.com/Gateway/ValidTerms
 type TerminationReason int32
 
 const (
@@ -770,16 +765,7 @@ func (x *TerminateAppointmentRequest) GetReason() TerminationReason {
 
 type TerminateAppointmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Indicates whether the termination request was successfully processed.
-	//
-	// For NIPR-integrated carriers: Indicates whether the termination request was
-	// successfully submitted to NIPR. This does not indicate that the appointment
-	// has been terminated, only that the request has been accepted for processing.
-	// The actual termination will be processed asynchronously by NIPR, and you
-	// will be notified via webhook when the process completes.
-	//
-	// For registry states or non-NIPR carriers: Indicates whether the termination
-	// was successfully completed immediately.
+	// Indicates whether the termination request was successfully processed. For NIPR-integrated carriers: Indicates whether the termination request was successfully submitted to NIPR. This does not indicate that the appointment has been terminated, only that the request has been accepted for processing. The actual termination will be processed asynchronously by NIPR, and you will be notified via webhook when the process completes. For registry states or non-NIPR carriers: Indicates whether the termination was successfully completed immediately.
 	Success       bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
