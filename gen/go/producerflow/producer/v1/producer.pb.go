@@ -2263,8 +2263,24 @@ type NewProducer struct {
 	// Mailing address of the producer.
 	// This is where correspondence will be sent.
 	MailingAddress *NewProducer_Address `protobuf:"bytes,6,opt,name=mailing_address,json=mailingAddress,proto3" json:"mailing_address,omitempty"`
-	// External tenant identifier for the producer.
-	// Used for integration with external systems.
+	// Optional. External identifier for the producer in the tenant's system.
+	// This field allows tenants to maintain a reference to their own internal ID
+	// for this producer, enabling bi-directional synchronization between ProducerFlow
+	// and the tenant's system.
+	//
+	// Usage:
+	// - Provide this when you have an existing identifier for the producer in your system
+	// - Omit if you don't need to track a reference to your internal system
+	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
+	// - Can be used with SetExternalID RPC to update this value after creation
+	//
+	// Common use cases:
+	// - Linking to an existing CRM or AMS system producer ID
+	// - Maintaining synchronization with legacy systems
+	// - Enabling lookups from external systems back to ProducerFlow
+	//
+	// Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid")
+	// Validation: Maximum length of 255 characters
 	TenantId string `protobuf:"bytes,8,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// Indicates whether the producer should be automatically approved.
 	// This field is deprecated and should not be used in new code.
@@ -2645,8 +2661,24 @@ type NewContact struct {
 	// Role or position of the contact within the agency.
 	// Required and must be non-empty.
 	Role string `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
-	// External tenant identifier for the contact.
-	// Used for integration with external systems.
+	// Optional. External identifier for the contact in the tenant's system.
+	// This field allows tenants to maintain a reference to their own internal ID
+	// for this contact, enabling bi-directional synchronization between ProducerFlow
+	// and the tenant's system.
+	//
+	// Usage:
+	// - Provide this when you have an existing identifier for the contact in your system
+	// - Omit if you don't need to track a reference to your internal system
+	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
+	// - Can be used with SetExternalID RPC to update this value after creation
+	//
+	// Common use cases:
+	// - Linking to an existing CRM or AMS system contact ID
+	// - Maintaining synchronization with legacy systems
+	// - Enabling lookups from external systems back to ProducerFlow
+	//
+	// Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid")
+	// Validation: Maximum length of 255 characters
 	TenantId string `protobuf:"bytes,8,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// National Producer Number (NPN) of the contact.
 	Npn           *string `protobuf:"bytes,9,opt,name=npn,proto3,oneof" json:"npn,omitempty"`
@@ -2966,8 +2998,33 @@ type SetExternalIDRequest struct {
 	//	*SetExternalIDRequest_ContactId
 	//	*SetExternalIDRequest_OrganizationId
 	EntityId isSetExternalIDRequest_EntityId `protobuf_oneof:"entity_id"`
-	// The external tenant identifier to associate with the entity.
-	// Required and must be non-empty.
+	// External identifier to associate with the entity in the tenant's system.
+	// This field allows tenants to maintain a reference to their own internal ID
+	// for the specified entity (producer, agency, contact, or organization), enabling
+	// bi-directional synchronization between ProducerFlow and the tenant's system.
+	//
+	// Purpose:
+	// - Links ProducerFlow entities to corresponding entities in external systems
+	// - Enables lookups and synchronization across systems
+	// - Maintains referential integrity with tenant's internal databases
+	//
+	// Usage:
+	// - Call this RPC after creating an entity if you need to add or update the external reference
+	// - This can also be provided during entity creation for producers and contacts
+	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
+	//
+	// Relationship to authentication:
+	// - The tenant context is determined by the API key used for authentication
+	// - This tenant_id field is purely for storing the tenant's own external identifier
+	// - Multiple tenants cannot share the same entity; each tenant has their own isolated data
+	//
+	// Common use cases:
+	// - Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs)
+	// - Integrating with AMS platforms (e.g., Applied Epic, Vertafore)
+	// - Maintaining references to legacy system identifiers
+	//
+	// Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876")
+	// Validation: Must be non-empty, maximum length of 255 characters
 	TenantId      string `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5478,7 +5535,18 @@ func (x *CreateAgencyOnboardingURLRequest_Agency) GetPrincipal() *CreateAgencyOn
 // All fields within the Principal message are also optional.
 type CreateAgencyOnboardingURLRequest_Agency_Principal struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Tenant ID of the principal
+	// Optional. External identifier for the principal in the tenant's system.
+	// This field allows tenants to maintain a reference to their own internal ID
+	// for this principal, enabling bi-directional synchronization between ProducerFlow
+	// and the tenant's system.
+	//
+	// Usage:
+	// - Provide this when you have an existing identifier for the principal in your system
+	// - Omit if you don't need to track a reference to your internal system
+	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
+	//
+	// Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
+	// Validation: Maximum length of 255 characters
 	TenantId string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// First name of the principal
 	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -5899,7 +5967,19 @@ type NewAgencyRequest_Agency_Principal struct {
 	// The phone number of the principal.
 	Phone string `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
 	// The National Producer Number (NPN) of the principal.
-	Npn      string `protobuf:"bytes,5,opt,name=npn,proto3" json:"npn,omitempty"`
+	Npn string `protobuf:"bytes,5,opt,name=npn,proto3" json:"npn,omitempty"`
+	// Optional. External identifier for the principal in the tenant's system.
+	// This field allows tenants to maintain a reference to their own internal ID
+	// for this principal, enabling bi-directional synchronization between ProducerFlow
+	// and the tenant's system.
+	//
+	// Usage:
+	// - Provide this when you have an existing identifier for the principal in your system
+	// - Omit if you don't need to track a reference to your internal system
+	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
+	//
+	// Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
+	// Validation: Maximum length of 255 characters
 	TenantId string `protobuf:"bytes,6,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// Optional. Controls whether the principal should be validated and synced with NIPR.
 	// If set to false, the principal's NPN will not be validated against NIPR and the
@@ -9080,9 +9160,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12\x1b\n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"R\x03zip\x12\x16\n" +
-	"\x06county\x18\x05 \x01(\tR\x06county\"\xcc\b\n" +
+	"\x06county\x18\x05 \x01(\tR\x06county\"\xd9\b\n" +
 	" CreateAgencyOnboardingURLRequest\x12Y\n" +
-	"\x06agency\x18\x01 \x01(\v2A.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.AgencyR\x06agency\x1a\xcc\a\n" +
+	"\x06agency\x18\x01 \x01(\v2A.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.AgencyR\x06agency\x1a\xd9\a\n" +
 	"\x06Agency\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12S\n" +
 	"\ventity_type\x18\x02 \x01(\x0e2$.producerflow.producer.v1.EntityTypeB\f\xbaH\t\x82\x01\x06\x18\x01\x18\x02\x18\x03R\n" +
@@ -9100,9 +9180,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x10physical_address\x18\f \x01(\v2!.producerflow.producer.v1.AddressR\x0fphysicalAddress\x12N\n" +
 	"\x11invoicing_address\x18\r \x01(\v2!.producerflow.producer.v1.AddressR\x10invoicingAddress\x12'\n" +
 	"\x0forganization_id\x18\x0f \x01(\tR\x0eorganizationId\x12i\n" +
-	"\tprincipal\x18\x0e \x01(\v2K.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.PrincipalR\tprincipal\x1a\x80\x02\n" +
-	"\tPrincipal\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1d\n" +
+	"\tprincipal\x18\x0e \x01(\v2K.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.PrincipalR\tprincipal\x1a\x8d\x02\n" +
+	"\tPrincipal\x12(\n" +
+	"\ttenant_id\x18\x01 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12\x1d\n" +
 	"\n" +
 	"first_name\x18\x02 \x01(\tR\tfirstName\x12\x1b\n" +
 	"\tlast_name\x18\x03 \x01(\tR\blastName\x12\x1f\n" +
@@ -9142,11 +9222,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06_emailB\b\n" +
 	"\x06_phone\"L\n" +
 	"#CreateProducerOnboardingURLResponse\x12%\n" +
-	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xc3\x1a\n" +
+	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xd0\x1a\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12%\n" +
 	"\fauto_approve\x18\x02 \x01(\bB\x02\x18\x01R\vautoApprove\x12)\n" +
-	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xf6\x18\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\x83\x19\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
@@ -9170,7 +9250,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x11invoicing_address\x18\x12 \x01(\v2!.producerflow.producer.v1.AddressR\x10invoicingAddress\x12(\n" +
 	"\x10tenant_agency_id\x18\x13 \x01(\tR\x0etenantAgencyId\x12O\n" +
 	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x12-\n" +
-	"\x12metadata_questions\x18\x15 \x01(\tR\x11metadataQuestions\x1a\xc5\x02\n" +
+	"\x12metadata_questions\x18\x15 \x01(\tR\x11metadataQuestions\x1a\xd2\x02\n" +
 	"\tPrincipal\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -9180,8 +9260,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x122\n" +
 	"\x05phone\x18\x04 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12\x1b\n" +
 	"\x03npn\x18\x05 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
-	"R\x03npn\x12\x1b\n" +
-	"\ttenant_id\x18\x06 \x01(\tR\btenantId\x12)\n" +
+	"R\x03npn\x12(\n" +
+	"\ttenant_id\x18\x06 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12)\n" +
 	"\x0esync_with_nipr\x18\a \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01B\x11\n" +
 	"\x0f_sync_with_nipr\x1a\x81\x03\n" +
 	"\vBankAccount\x120\n" +
@@ -9558,7 +9638,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
-	"\x03zip\x18\x04 \x01(\tR\x03zip\"\xe7\x04\n" +
+	"\x03zip\x18\x04 \x01(\tR\x03zip\"\xf4\x04\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -9568,8 +9648,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
 	"\x03npn\x18\x04 \x01(\tR\x03npn\x122\n" +
 	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12V\n" +
-	"\x0fmailing_address\x18\x06 \x01(\v2-.producerflow.producer.v1.NewProducer.AddressR\x0emailingAddress\x12\x1b\n" +
-	"\ttenant_id\x18\b \x01(\tR\btenantId\x12%\n" +
+	"\x0fmailing_address\x18\x06 \x01(\v2-.producerflow.producer.v1.NewProducer.AddressR\x0emailingAddress\x12(\n" +
+	"\ttenant_id\x18\b \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12%\n" +
 	"\fauto_approve\x18\t \x01(\bB\x02\x18\x01R\vautoApprove\x122\n" +
 	"\flocation_ids\x18\n" +
 	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x12-\n" +
@@ -9594,7 +9674,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01B\x11\n" +
 	"\x0f_sync_with_nipr\"9\n" +
 	"\x14NewProducersResponse\x12!\n" +
-	"\fproducer_ids\x18\x01 \x03(\tR\vproducerIds\"\xf6\x03\n" +
+	"\fproducer_ids\x18\x01 \x03(\tR\vproducerIds\"\x83\x04\n" +
 	"\n" +
 	"NewContact\x12&\n" +
 	"\n" +
@@ -9605,8 +9685,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x122\n" +
 	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12F\n" +
 	"\aaddress\x18\x06 \x01(\v2,.producerflow.producer.v1.NewContact.AddressR\aaddress\x12\x1b\n" +
-	"\x04role\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04role\x12\x1b\n" +
-	"\ttenant_id\x18\b \x01(\tR\btenantId\x12\x15\n" +
+	"\x04role\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04role\x12(\n" +
+	"\ttenant_id\x18\b \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12\x15\n" +
 	"\x03npn\x18\t \x01(\tH\x00R\x03npn\x88\x01\x01\x1a\x84\x01\n" +
 	"\aAddress\x12\x1f\n" +
 	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
@@ -9626,15 +9706,16 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\bcontacts\x18\x02 \x03(\v2$.producerflow.producer.v1.NewContactB\b\xbaH\x05\x92\x01\x02\b\x01R\bcontacts\"6\n" +
 	"\x13NewContactsResponse\x12\x1f\n" +
 	"\vcontact_ids\x18\x01 \x03(\tR\n" +
-	"contactIds\"\x86\x02\n" +
+	"contactIds\"\x89\x02\n" +
 	"\x14SetExternalIDRequest\x12+\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\n" +
 	"producerId\x12'\n" +
 	"\tagency_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12)\n" +
 	"\n" +
 	"contact_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\tcontactId\x123\n" +
-	"\x0forganization_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0eorganizationId\x12$\n" +
-	"\ttenant_id\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\btenantIdB\x12\n" +
+	"\x0forganization_id\x18\x05 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0eorganizationId\x12'\n" +
+	"\ttenant_id\x18\x04 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xff\x01R\btenantIdB\x12\n" +
 	"\tentity_id\x12\x05\xbaH\x02\b\x01\"\x17\n" +
 	"\x15SetExternalIDResponse\"Y\n" +
 	"\x1aValidateProducerNPNRequest\x12\x19\n" +

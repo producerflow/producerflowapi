@@ -1258,7 +1258,11 @@ All fields within the Principal message are also optional.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tenant_id | [string](#string) |  | Tenant ID of the principal |
+| tenant_id | [string](#string) |  | Optional. External identifier for the principal in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system.
+
+Usage: - Provide this when you have an existing identifier for the principal in your system - Omit if you don&#39;t need to track a reference to your internal system - This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context
+
+Format: Any string identifier that is meaningful in your system (e.g., &#34;USR-12345&#34;, &#34;uuid&#34;) Validation: Maximum length of 255 characters |
 | first_name | [string](#string) |  | First name of the principal |
 | last_name | [string](#string) |  | Last name of the principal |
 | middle_name | [string](#string) |  | Middle name of the principal |
@@ -1847,7 +1851,11 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | email | [string](#string) |  | The email address of the principal. |
 | phone | [string](#string) |  | The phone number of the principal. |
 | npn | [string](#string) |  | The National Producer Number (NPN) of the principal. |
-| tenant_id | [string](#string) |  |  |
+| tenant_id | [string](#string) |  | Optional. External identifier for the principal in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system.
+
+Usage: - Provide this when you have an existing identifier for the principal in your system - Omit if you don&#39;t need to track a reference to your internal system - This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context
+
+Format: Any string identifier that is meaningful in your system (e.g., &#34;USR-12345&#34;, &#34;uuid&#34;) Validation: Maximum length of 255 characters |
 | sync_with_nipr | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal&#39;s NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
 
 
@@ -1889,7 +1897,13 @@ Contacts represent non-producer individuals associated with an agency.
 | phone | [string](#string) |  | Phone number of the contact. Optional if default value, but if provided must match the pattern of a valid phone number. |
 | address | [NewContact.Address](#producerflow-producer-v1-NewContact-Address) |  | Mailing address of the contact. |
 | role | [string](#string) |  | Role or position of the contact within the agency. Required and must be non-empty. |
-| tenant_id | [string](#string) |  | External tenant identifier for the contact. Used for integration with external systems. |
+| tenant_id | [string](#string) |  | Optional. External identifier for the contact in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system.
+
+Usage: - Provide this when you have an existing identifier for the contact in your system - Omit if you don&#39;t need to track a reference to your internal system - This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context - Can be used with SetExternalID RPC to update this value after creation
+
+Common use cases: - Linking to an existing CRM or AMS system contact ID - Maintaining synchronization with legacy systems - Enabling lookups from external systems back to ProducerFlow
+
+Format: Any string identifier that is meaningful in your system (e.g., &#34;CONT-12345&#34;, &#34;uuid&#34;) Validation: Maximum length of 255 characters |
 | npn | [string](#string) | optional | National Producer Number (NPN) of the contact. |
 
 
@@ -1993,7 +2007,13 @@ NewProducer represents the data needed to create a new producer in the system.
 | npn | [string](#string) |  | National Producer Number (NPN) of the producer. |
 | phone | [string](#string) |  | Phone number of the producer. Optional if default value, but if provided must match the pattern of a valid phone number. |
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
-| tenant_id | [string](#string) |  | External tenant identifier for the producer. Used for integration with external systems. |
+| tenant_id | [string](#string) |  | Optional. External identifier for the producer in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system.
+
+Usage: - Provide this when you have an existing identifier for the producer in your system - Omit if you don&#39;t need to track a reference to your internal system - This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context - Can be used with SetExternalID RPC to update this value after creation
+
+Common use cases: - Linking to an existing CRM or AMS system producer ID - Maintaining synchronization with legacy systems - Enabling lookups from external systems back to ProducerFlow
+
+Format: Any string identifier that is meaningful in your system (e.g., &#34;PROD-12345&#34;, &#34;uuid&#34;) Validation: Maximum length of 255 characters |
 | auto_approve | [bool](#bool) |  | **Deprecated.** Indicates whether the producer should be automatically approved. This field is deprecated and should not be used in new code. |
 | location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
 | metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the producer. |
@@ -2513,7 +2533,17 @@ Only one entity type can be specified.
 | agency_id | [string](#string) |  | The UUID of the agency to set an external ID for. |
 | contact_id | [string](#string) |  | The UUID of the contact to set an external ID for. |
 | organization_id | [string](#string) |  | The UUID of the organization to set an external ID for. |
-| tenant_id | [string](#string) |  | The external tenant identifier to associate with the entity. Required and must be non-empty. |
+| tenant_id | [string](#string) |  | External identifier to associate with the entity in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system.
+
+Purpose: - Links ProducerFlow entities to corresponding entities in external systems - Enables lookups and synchronization across systems - Maintains referential integrity with tenant&#39;s internal databases
+
+Usage: - Call this RPC after creating an entity if you need to add or update the external reference - This can also be provided during entity creation for producers and contacts - This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context
+
+Relationship to authentication: - The tenant context is determined by the API key used for authentication - This tenant_id field is purely for storing the tenant&#39;s own external identifier - Multiple tenants cannot share the same entity; each tenant has their own isolated data
+
+Common use cases: - Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs) - Integrating with AMS platforms (e.g., Applied Epic, Vertafore) - Maintaining references to legacy system identifiers
+
+Format: Any string identifier that is meaningful in your system (e.g., &#34;SF-001234&#34;, &#34;LEGACY-9876&#34;) Validation: Must be non-empty, maximum length of 255 characters |
 
 
 
