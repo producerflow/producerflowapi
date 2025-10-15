@@ -689,12 +689,7 @@ func (x *Address) GetCounty() string {
 	return ""
 }
 
-// CreateAgencyOnboardingURLRequest contains information needed to generate
-// an agency onboarding URL. This includes basic agency information and defaults.
-//
-// All fields in this request are optional. You can provide as much or as little
-// information as you have available. Any missing information will be collected
-// from the user during the onboarding process through the generated URL.
+// CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.
 type CreateAgencyOnboardingURLRequest struct {
 	state         protoimpl.MessageState                   `protogen:"open.v1"`
 	Agency        *CreateAgencyOnboardingURLRequest_Agency `protobuf:"bytes,1,opt,name=agency,proto3" json:"agency,omitempty"`
@@ -2083,24 +2078,7 @@ type NewProducer struct {
 	// Mailing address of the producer.
 	// This is where correspondence will be sent.
 	MailingAddress *NewProducer_Address `protobuf:"bytes,6,opt,name=mailing_address,json=mailingAddress,proto3" json:"mailing_address,omitempty"`
-	// Optional. External identifier for the producer in the tenant's system.
-	// This field allows tenants to maintain a reference to their own internal ID
-	// for this producer, enabling bi-directional synchronization between ProducerFlow
-	// and the tenant's system.
-	//
-	// Usage:
-	// - Provide this when you have an existing identifier for the producer in your system
-	// - Omit if you don't need to track a reference to your internal system
-	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-	// - Can be used with SetExternalID RPC to update this value after creation
-	//
-	// Common use cases:
-	// - Linking to an existing CRM or AMS system producer ID
-	// - Maintaining synchronization with legacy systems
-	// - Enabling lookups from external systems back to ProducerFlow
-	//
-	// Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid")
-	// Validation: Maximum length of 255 characters
+	// Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters.
 	TenantId string `protobuf:"bytes,8,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// Indicates whether the producer should be automatically approved.
 	// This field is deprecated and should not be used in new code.
@@ -2481,24 +2459,7 @@ type NewContact struct {
 	// Role or position of the contact within the agency.
 	// Required and must be non-empty.
 	Role string `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
-	// Optional. External identifier for the contact in the tenant's system.
-	// This field allows tenants to maintain a reference to their own internal ID
-	// for this contact, enabling bi-directional synchronization between ProducerFlow
-	// and the tenant's system.
-	//
-	// Usage:
-	// - Provide this when you have an existing identifier for the contact in your system
-	// - Omit if you don't need to track a reference to your internal system
-	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-	// - Can be used with SetExternalID RPC to update this value after creation
-	//
-	// Common use cases:
-	// - Linking to an existing CRM or AMS system contact ID
-	// - Maintaining synchronization with legacy systems
-	// - Enabling lookups from external systems back to ProducerFlow
-	//
-	// Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid")
-	// Validation: Maximum length of 255 characters
+	// Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters
 	TenantId string `protobuf:"bytes,8,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// National Producer Number (NPN) of the contact.
 	Npn           *string `protobuf:"bytes,9,opt,name=npn,proto3,oneof" json:"npn,omitempty"`
@@ -2818,33 +2779,7 @@ type SetExternalIDRequest struct {
 	//	*SetExternalIDRequest_ContactId
 	//	*SetExternalIDRequest_OrganizationId
 	EntityId isSetExternalIDRequest_EntityId `protobuf_oneof:"entity_id"`
-	// External identifier to associate with the entity in the tenant's system.
-	// This field allows tenants to maintain a reference to their own internal ID
-	// for the specified entity (producer, agency, contact, or organization), enabling
-	// bi-directional synchronization between ProducerFlow and the tenant's system.
-	//
-	// Purpose:
-	// - Links ProducerFlow entities to corresponding entities in external systems
-	// - Enables lookups and synchronization across systems
-	// - Maintains referential integrity with tenant's internal databases
-	//
-	// Usage:
-	// - Call this RPC after creating an entity if you need to add or update the external reference
-	// - This can also be provided during entity creation for producers and contacts
-	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-	//
-	// Relationship to authentication:
-	// - The tenant context is determined by the API key used for authentication
-	// - This tenant_id field is purely for storing the tenant's own external identifier
-	// - Multiple tenants cannot share the same entity; each tenant has their own isolated data
-	//
-	// Common use cases:
-	// - Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs)
-	// - Integrating with AMS platforms (e.g., Applied Epic, Vertafore)
-	// - Maintaining references to legacy system identifiers
-	//
-	// Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876")
-	// Validation: Must be non-empty, maximum length of 255 characters
+	// External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters
 	TenantId      string `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5355,18 +5290,7 @@ func (x *CreateAgencyOnboardingURLRequest_Agency) GetPrincipal() *CreateAgencyOn
 // All fields within the Principal message are also optional.
 type CreateAgencyOnboardingURLRequest_Agency_Principal struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional. External identifier for the principal in the tenant's system.
-	// This field allows tenants to maintain a reference to their own internal ID
-	// for this principal, enabling bi-directional synchronization between ProducerFlow
-	// and the tenant's system.
-	//
-	// Usage:
-	// - Provide this when you have an existing identifier for the principal in your system
-	// - Omit if you don't need to track a reference to your internal system
-	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-	//
-	// Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
-	// Validation: Maximum length of 255 characters
+	// Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
 	TenantId string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// First name of the principal
 	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
@@ -5788,18 +5712,7 @@ type NewAgencyRequest_Agency_Principal struct {
 	Phone string `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
 	// The National Producer Number (NPN) of the principal.
 	Npn string `protobuf:"bytes,5,opt,name=npn,proto3" json:"npn,omitempty"`
-	// Optional. External identifier for the principal in the tenant's system.
-	// This field allows tenants to maintain a reference to their own internal ID
-	// for this principal, enabling bi-directional synchronization between ProducerFlow
-	// and the tenant's system.
-	//
-	// Usage:
-	// - Provide this when you have an existing identifier for the principal in your system
-	// - Omit if you don't need to track a reference to your internal system
-	// - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-	//
-	// Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
-	// Validation: Maximum length of 255 characters
+	// Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
 	TenantId string `protobuf:"bytes,6,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// Optional. Controls whether the principal should be validated and synced with NIPR.
 	// If set to false, the principal's NPN will not be validated against NIPR and the

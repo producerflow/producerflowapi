@@ -139,18 +139,7 @@ type ProducerServiceClient interface {
 	// The generated URL will take the producer through the onboarding flow with the NPN field
 	// pre-populated if provided, reducing friction in the onboarding process.
 	CreateProducerOnboardingURL(context.Context, *connect.Request[v1.CreateProducerOnboardingURLRequest]) (*connect.Response[v1.CreateProducerOnboardingURLResponse], error)
-	// NewAgency creates a new agency, optionally with associated producers.
-	// It performs the following validation checks:
-	// - Ensures all required fields are present and valid
-	// - Checks whether the NPN is already registered
-	// - Verifies agency and principal information with NIPR
-	//
-	// Business rules:
-	// - Sole proprietors can't have an agency NPN or additional producers
-	// - Regular agencies must provide either an NPN or a FEIN
-	//
-	// If validation passes, it creates the agency, principal, and any producers.
-	// Returns the IDs of the created agency, principal, and producers.
+	// NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.
 	NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error)
 	// ListAgencies returns a list of agencies associated with the tenant.
 	// Supports optional filtering by organization ID and search queries.
@@ -205,33 +194,13 @@ type ProducerServiceClient interface {
 	// Used to help agencies that know their FEIN but not their NPN.
 	// Returns the NPN if found or an error message.
 	LookupNPNByFEIN(context.Context, *connect.Request[v1.LookupNPNByFEINRequest]) (*connect.Response[v1.LookupNPNByFEINResponse], error)
-	// ResyncProducer triggers a manual resynchronization of a producer’s data.
-	// This can be used to refresh data after external changes.
-	//
-	// WARNING: This call counts as an additional NPN lookup for billing purposes.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in extra charges.
+	// ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
 	ResyncProducer(context.Context, *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error)
-	// ResyncAgency triggers a manual resynchronization of an agency’s data.
-	// Similar to ResyncProducer, this can be used to refresh data after external changes.
-	//
-	// WARNING: This call counts as an additional NPN lookup for billing purposes.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in extra charges.
+	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
 	ResyncAgency(context.Context, *connect.Request[v1.ResyncAgencyRequest]) (*connect.Response[v1.ResyncAgencyResponse], error)
-	// SyncAgencyWithNIPR synchronizes an producer’s data with the NIPR system.
-	// Fetches the latest producer information and appointments.
-	//
-	// WARNING: This call counts as an extra NPN lookup against your billing.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in additional charges.
+	// SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
 	SyncProducerWithNIPR(context.Context, *connect.Request[v1.SyncProducerWithNIPRRequest]) (*connect.Response[v1.SyncProducerWithNIPRResponse], error)
-	// SyncAgencyWithNIPR synchronizes an agency’s data with the NIPR system.
-	// Fetches the latest agency information and appointments.
-	//
-	// WARNING: This call counts as an extra NPN lookup against your billing.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in additional charges.
+	// SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
 	SyncAgencyWithNIPR(context.Context, *connect.Request[v1.SyncAgencyWithNIPRRequest]) (*connect.Response[v1.SyncAgencyWithNIPRResponse], error)
 	// StopSyncProducerWithNIPR stops the synchronization process with NIPR for a producer.
 	// Use this to prevent further automatic updates from NIPR.
@@ -239,81 +208,19 @@ type ProducerServiceClient interface {
 	// StopSyncAgencyWithNIPR stops the synchronization process with NIPR for an agency.
 	// Use this to prevent further automatic updates from NIPR.
 	StopSyncAgencyWithNIPR(context.Context, *connect.Request[v1.StopSyncAgencyWithNIPRRequest]) (*connect.Response[v1.StopSyncAgencyWithNIPRResponse], error)
-	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency.
-	// The agency is identified by its NPN, and the URL can be shared with the agency to allow them to
-	// upload producer information securely.
-	//
-	// The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used.
-	//
-	// The agency must:
-	// - Exist and belong to the authenticated tenant
-	// - Have a valid NPN
-	//
-	// Returns a URL string that can be shared with the agency for producer uploads.
-	// Returns errors in the following cases:
-	// - INVALID_ARGUMENT: if agency NPN is empty or invalid format
-	// - NOT_FOUND: if agency NPN doesn't exist
-	// - INTERNAL: for other unexpected errors
+	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.
 	CreateProducerUploadURL(context.Context, *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error)
-	// AddAgencyLocations adds one or more locations to an existing agency.
-	//
-	// Each location must have a unique name within the agency and valid address information.
-	// You can add up to 100 locations in a single request. This is a bulk operation with
-	// all-or-nothing behavior - if any location fails validation, the entire request will
-	// fail and no locations will be added.
-	//
-	// Returns the IDs of successfully added locations.
-	//
-	// Returns errors in the following cases:
-	//   - UNAUTHENTICATED: if the API key is invalid or missing.
-	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
-	//     location names are duplicated within the request or already exist for the agency.
-	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
-	// RemoveAgencyLocations removes one or more locations from an agency.
-	//
-	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-	// When a location is removed, all the producers associated with that location will be unassigned from that location.
-	// Returns errors in the following cases:
-	// - UNAUTHENTICATED: if the API key is invalid or missing.
-	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
-	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	RemoveAgencyLocations(context.Context, *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error)
-	// ListAgencyLocations retrieves all locations associated with an agency.
-	//
-	// Returns errors in the following cases:
-	// - UNAUTHENTICATED: if the API key is invalid or missing.
-	// - INVALID_ARGUMENT: if the agency_id is empty.
-	// - NOT_FOUND: if the agency doesn't exist.
+	// ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(context.Context, *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error)
-	// AssignProducerToLocations assigns one or more locations to a producer.
-	// The locations must belong to the same agency as the producer.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
-	// - NOT_FOUND: Producer or locations don't exist
-	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	// AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.
 	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
-	// UnassignProducerFromLocations removes one or more location assignments from a producer.
-	// The locations must belong to the same agency as the producer.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
-	// - NOT_FOUND: Producer doesn't exist
+	// UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.
 	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
-	// UpdateAgencyLocation updates an existing agency location.
-	// You can update the name, address, contact information, and primary status of a location.
-	// All fields are optional - only provide the fields you want to update.
-	// Location name must be unique within the agency.
-	// Returns the updated location details.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Missing agency_id or location_id
-	// - NOT_FOUND: Agency or location doesn't exist
-	// - ALREADY_EXISTS: Location name already exists within the agency
+	// UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.
 	UpdateAgencyLocation(context.Context, *connect.Request[v1.UpdateAgencyLocationRequest]) (*connect.Response[v1.UpdateAgencyLocationResponse], error)
 }
 
@@ -714,18 +621,7 @@ type ProducerServiceHandler interface {
 	// The generated URL will take the producer through the onboarding flow with the NPN field
 	// pre-populated if provided, reducing friction in the onboarding process.
 	CreateProducerOnboardingURL(context.Context, *connect.Request[v1.CreateProducerOnboardingURLRequest]) (*connect.Response[v1.CreateProducerOnboardingURLResponse], error)
-	// NewAgency creates a new agency, optionally with associated producers.
-	// It performs the following validation checks:
-	// - Ensures all required fields are present and valid
-	// - Checks whether the NPN is already registered
-	// - Verifies agency and principal information with NIPR
-	//
-	// Business rules:
-	// - Sole proprietors can't have an agency NPN or additional producers
-	// - Regular agencies must provide either an NPN or a FEIN
-	//
-	// If validation passes, it creates the agency, principal, and any producers.
-	// Returns the IDs of the created agency, principal, and producers.
+	// NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.
 	NewAgency(context.Context, *connect.Request[v1.NewAgencyRequest]) (*connect.Response[v1.NewAgencyResponse], error)
 	// ListAgencies returns a list of agencies associated with the tenant.
 	// Supports optional filtering by organization ID and search queries.
@@ -780,33 +676,13 @@ type ProducerServiceHandler interface {
 	// Used to help agencies that know their FEIN but not their NPN.
 	// Returns the NPN if found or an error message.
 	LookupNPNByFEIN(context.Context, *connect.Request[v1.LookupNPNByFEINRequest]) (*connect.Response[v1.LookupNPNByFEINResponse], error)
-	// ResyncProducer triggers a manual resynchronization of a producer’s data.
-	// This can be used to refresh data after external changes.
-	//
-	// WARNING: This call counts as an additional NPN lookup for billing purposes.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in extra charges.
+	// ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
 	ResyncProducer(context.Context, *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error)
-	// ResyncAgency triggers a manual resynchronization of an agency’s data.
-	// Similar to ResyncProducer, this can be used to refresh data after external changes.
-	//
-	// WARNING: This call counts as an additional NPN lookup for billing purposes.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in extra charges.
+	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
 	ResyncAgency(context.Context, *connect.Request[v1.ResyncAgencyRequest]) (*connect.Response[v1.ResyncAgencyResponse], error)
-	// SyncAgencyWithNIPR synchronizes an producer’s data with the NIPR system.
-	// Fetches the latest producer information and appointments.
-	//
-	// WARNING: This call counts as an extra NPN lookup against your billing.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in additional charges.
+	// SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
 	SyncProducerWithNIPR(context.Context, *connect.Request[v1.SyncProducerWithNIPRRequest]) (*connect.Response[v1.SyncProducerWithNIPRResponse], error)
-	// SyncAgencyWithNIPR synchronizes an agency’s data with the NIPR system.
-	// Fetches the latest agency information and appointments.
-	//
-	// WARNING: This call counts as an extra NPN lookup against your billing.
-	// Most billing plans are based on unique NPNs per month, so using this
-	// method may result in additional charges.
+	// SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
 	SyncAgencyWithNIPR(context.Context, *connect.Request[v1.SyncAgencyWithNIPRRequest]) (*connect.Response[v1.SyncAgencyWithNIPRResponse], error)
 	// StopSyncProducerWithNIPR stops the synchronization process with NIPR for a producer.
 	// Use this to prevent further automatic updates from NIPR.
@@ -814,81 +690,19 @@ type ProducerServiceHandler interface {
 	// StopSyncAgencyWithNIPR stops the synchronization process with NIPR for an agency.
 	// Use this to prevent further automatic updates from NIPR.
 	StopSyncAgencyWithNIPR(context.Context, *connect.Request[v1.StopSyncAgencyWithNIPRRequest]) (*connect.Response[v1.StopSyncAgencyWithNIPRResponse], error)
-	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency.
-	// The agency is identified by its NPN, and the URL can be shared with the agency to allow them to
-	// upload producer information securely.
-	//
-	// The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used.
-	//
-	// The agency must:
-	// - Exist and belong to the authenticated tenant
-	// - Have a valid NPN
-	//
-	// Returns a URL string that can be shared with the agency for producer uploads.
-	// Returns errors in the following cases:
-	// - INVALID_ARGUMENT: if agency NPN is empty or invalid format
-	// - NOT_FOUND: if agency NPN doesn't exist
-	// - INTERNAL: for other unexpected errors
+	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.
 	CreateProducerUploadURL(context.Context, *connect.Request[v1.CreateProducerUploadURLRequest]) (*connect.Response[v1.CreateProducerUploadURLResponse], error)
-	// AddAgencyLocations adds one or more locations to an existing agency.
-	//
-	// Each location must have a unique name within the agency and valid address information.
-	// You can add up to 100 locations in a single request. This is a bulk operation with
-	// all-or-nothing behavior - if any location fails validation, the entire request will
-	// fail and no locations will be added.
-	//
-	// Returns the IDs of successfully added locations.
-	//
-	// Returns errors in the following cases:
-	//   - UNAUTHENTICATED: if the API key is invalid or missing.
-	//   - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
-	//     location names are duplicated within the request or already exist for the agency.
-	//   - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
-	// RemoveAgencyLocations removes one or more locations from an agency.
-	//
-	// Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-	// When a location is removed, all the producers associated with that location will be unassigned from that location.
-	// Returns errors in the following cases:
-	// - UNAUTHENTICATED: if the API key is invalid or missing.
-	// - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
-	// - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
 	RemoveAgencyLocations(context.Context, *connect.Request[v1.RemoveAgencyLocationsRequest]) (*connect.Response[v1.RemoveAgencyLocationsResponse], error)
-	// ListAgencyLocations retrieves all locations associated with an agency.
-	//
-	// Returns errors in the following cases:
-	// - UNAUTHENTICATED: if the API key is invalid or missing.
-	// - INVALID_ARGUMENT: if the agency_id is empty.
-	// - NOT_FOUND: if the agency doesn't exist.
+	// ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.
 	ListAgencyLocations(context.Context, *connect.Request[v1.ListAgencyLocationsRequest]) (*connect.Response[v1.ListAgencyLocationsResponse], error)
-	// AssignProducerToLocations assigns one or more locations to a producer.
-	// The locations must belong to the same agency as the producer.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
-	// - NOT_FOUND: Producer or locations don't exist
-	// - PERMISSION_DENIED: Locations don't belong to the producer's agency
+	// AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.
 	AssignProducerToLocations(context.Context, *connect.Request[v1.AssignProducerToLocationsRequest]) (*connect.Response[v1.AssignProducerToLocationsResponse], error)
-	// UnassignProducerFromLocations removes one or more location assignments from a producer.
-	// The locations must belong to the same agency as the producer.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Empty producer_id or no location_ids
-	// - NOT_FOUND: Producer doesn't exist
+	// UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.
 	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
-	// UpdateAgencyLocation updates an existing agency location.
-	// You can update the name, address, contact information, and primary status of a location.
-	// All fields are optional - only provide the fields you want to update.
-	// Location name must be unique within the agency.
-	// Returns the updated location details.
-	//
-	// Error cases:
-	// - UNAUTHENTICATED: Invalid or missing API key
-	// - INVALID_ARGUMENT: Missing agency_id or location_id
-	// - NOT_FOUND: Agency or location doesn't exist
-	// - ALREADY_EXISTS: Location name already exists within the agency
+	// UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.
 	UpdateAgencyLocation(context.Context, *connect.Request[v1.UpdateAgencyLocationRequest]) (*connect.Response[v1.UpdateAgencyLocationResponse], error)
 }
 

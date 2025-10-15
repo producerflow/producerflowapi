@@ -102,12 +102,7 @@ export const AddressSchema: GenMessage<Address> = /*@__PURE__*/
   messageDesc(file_producerflow_producer_v1_producer, 1);
 
 /**
- * CreateAgencyOnboardingURLRequest contains information needed to generate
- * an agency onboarding URL. This includes basic agency information and defaults.
- *
- * All fields in this request are optional. You can provide as much or as little
- * information as you have available. Any missing information will be collected
- * from the user during the onboarding process through the generated URL.
+ * CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.
  *
  * @generated from message producerflow.producer.v1.CreateAgencyOnboardingURLRequest
  */
@@ -253,18 +248,7 @@ export const CreateAgencyOnboardingURLRequest_AgencySchema: GenMessage<CreateAge
  */
 export type CreateAgencyOnboardingURLRequest_Agency_Principal = Message<"producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal"> & {
   /**
-   * Optional. External identifier for the principal in the tenant's system.
-   * This field allows tenants to maintain a reference to their own internal ID
-   * for this principal, enabling bi-directional synchronization between ProducerFlow
-   * and the tenant's system.
-   *
-   * Usage:
-   * - Provide this when you have an existing identifier for the principal in your system
-   * - Omit if you don't need to track a reference to your internal system
-   * - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-   *
-   * Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
-   * Validation: Maximum length of 255 characters
+   * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
    *
    * @generated from field: string tenant_id = 1;
    */
@@ -732,18 +716,7 @@ export type NewAgencyRequest_Agency_Principal = Message<"producerflow.producer.v
   npn: string;
 
   /**
-   * Optional. External identifier for the principal in the tenant's system.
-   * This field allows tenants to maintain a reference to their own internal ID
-   * for this principal, enabling bi-directional synchronization between ProducerFlow
-   * and the tenant's system.
-   *
-   * Usage:
-   * - Provide this when you have an existing identifier for the principal in your system
-   * - Omit if you don't need to track a reference to your internal system
-   * - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-   *
-   * Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid")
-   * Validation: Maximum length of 255 characters
+   * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
    *
    * @generated from field: string tenant_id = 6;
    */
@@ -3388,24 +3361,7 @@ export type NewProducer = Message<"producerflow.producer.v1.NewProducer"> & {
   mailingAddress?: NewProducer_Address;
 
   /**
-   * Optional. External identifier for the producer in the tenant's system.
-   * This field allows tenants to maintain a reference to their own internal ID
-   * for this producer, enabling bi-directional synchronization between ProducerFlow
-   * and the tenant's system.
-   *
-   * Usage:
-   * - Provide this when you have an existing identifier for the producer in your system
-   * - Omit if you don't need to track a reference to your internal system
-   * - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-   * - Can be used with SetExternalID RPC to update this value after creation
-   *
-   * Common use cases:
-   * - Linking to an existing CRM or AMS system producer ID
-   * - Maintaining synchronization with legacy systems
-   * - Enabling lookups from external systems back to ProducerFlow
-   *
-   * Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid")
-   * Validation: Maximum length of 255 characters
+   * Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters.
    *
    * @generated from field: string tenant_id = 8;
    */
@@ -3677,24 +3633,7 @@ export type NewContact = Message<"producerflow.producer.v1.NewContact"> & {
   role: string;
 
   /**
-   * Optional. External identifier for the contact in the tenant's system.
-   * This field allows tenants to maintain a reference to their own internal ID
-   * for this contact, enabling bi-directional synchronization between ProducerFlow
-   * and the tenant's system.
-   *
-   * Usage:
-   * - Provide this when you have an existing identifier for the contact in your system
-   * - Omit if you don't need to track a reference to your internal system
-   * - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-   * - Can be used with SetExternalID RPC to update this value after creation
-   *
-   * Common use cases:
-   * - Linking to an existing CRM or AMS system contact ID
-   * - Maintaining synchronization with legacy systems
-   * - Enabling lookups from external systems back to ProducerFlow
-   *
-   * Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid")
-   * Validation: Maximum length of 255 characters
+   * Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters
    *
    * @generated from field: string tenant_id = 8;
    */
@@ -3912,33 +3851,7 @@ export type SetExternalIDRequest = Message<"producerflow.producer.v1.SetExternal
   } | { case: undefined; value?: undefined };
 
   /**
-   * External identifier to associate with the entity in the tenant's system.
-   * This field allows tenants to maintain a reference to their own internal ID
-   * for the specified entity (producer, agency, contact, or organization), enabling
-   * bi-directional synchronization between ProducerFlow and the tenant's system.
-   *
-   * Purpose:
-   * - Links ProducerFlow entities to corresponding entities in external systems
-   * - Enables lookups and synchronization across systems
-   * - Maintains referential integrity with tenant's internal databases
-   *
-   * Usage:
-   * - Call this RPC after creating an entity if you need to add or update the external reference
-   * - This can also be provided during entity creation for producers and contacts
-   * - This is independent of ProducerFlow's internal IDs and the authentication tenant context
-   *
-   * Relationship to authentication:
-   * - The tenant context is determined by the API key used for authentication
-   * - This tenant_id field is purely for storing the tenant's own external identifier
-   * - Multiple tenants cannot share the same entity; each tenant has their own isolated data
-   *
-   * Common use cases:
-   * - Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs)
-   * - Integrating with AMS platforms (e.g., Applied Epic, Vertafore)
-   * - Maintaining references to legacy system identifiers
-   *
-   * Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876")
-   * Validation: Must be non-empty, maximum length of 255 characters
+   * External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters
    *
    * @generated from field: string tenant_id = 4;
    */
@@ -5293,18 +5206,7 @@ export const ProducerService: GenService<{
     output: typeof CreateProducerOnboardingURLResponseSchema;
   },
   /**
-   * NewAgency creates a new agency, optionally with associated producers.
-   * It performs the following validation checks:
-   * - Ensures all required fields are present and valid
-   * - Checks whether the NPN is already registered
-   * - Verifies agency and principal information with NIPR
-   *
-   * Business rules:
-   * - Sole proprietors can't have an agency NPN or additional producers
-   * - Regular agencies must provide either an NPN or a FEIN
-   *
-   * If validation passes, it creates the agency, principal, and any producers.
-   * Returns the IDs of the created agency, principal, and producers.
+   * NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.NewAgency
    */
@@ -5479,12 +5381,7 @@ export const ProducerService: GenService<{
     output: typeof LookupNPNByFEINResponseSchema;
   },
   /**
-   * ResyncProducer triggers a manual resynchronization of a producer’s data.
-   * This can be used to refresh data after external changes.
-   *
-   * WARNING: This call counts as an additional NPN lookup for billing purposes.
-   * Most billing plans are based on unique NPNs per month, so using this
-   * method may result in extra charges.
+   * ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.ResyncProducer
    */
@@ -5494,12 +5391,7 @@ export const ProducerService: GenService<{
     output: typeof ResyncProducerResponseSchema;
   },
   /**
-   * ResyncAgency triggers a manual resynchronization of an agency’s data.
-   * Similar to ResyncProducer, this can be used to refresh data after external changes.
-   *
-   * WARNING: This call counts as an additional NPN lookup for billing purposes.
-   * Most billing plans are based on unique NPNs per month, so using this
-   * method may result in extra charges.
+   * ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.ResyncAgency
    */
@@ -5509,12 +5401,7 @@ export const ProducerService: GenService<{
     output: typeof ResyncAgencyResponseSchema;
   },
   /**
-   * SyncAgencyWithNIPR synchronizes an producer’s data with the NIPR system.
-   * Fetches the latest producer information and appointments.
-   *
-   * WARNING: This call counts as an extra NPN lookup against your billing.
-   * Most billing plans are based on unique NPNs per month, so using this
-   * method may result in additional charges.
+   * SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.SyncProducerWithNIPR
    */
@@ -5524,12 +5411,7 @@ export const ProducerService: GenService<{
     output: typeof SyncProducerWithNIPRResponseSchema;
   },
   /**
-   * SyncAgencyWithNIPR synchronizes an agency’s data with the NIPR system.
-   * Fetches the latest agency information and appointments.
-   *
-   * WARNING: This call counts as an extra NPN lookup against your billing.
-   * Most billing plans are based on unique NPNs per month, so using this
-   * method may result in additional charges.
+   * SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR
    */
@@ -5561,21 +5443,7 @@ export const ProducerService: GenService<{
     output: typeof StopSyncAgencyWithNIPRResponseSchema;
   },
   /**
-   * CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency.
-   * The agency is identified by its NPN, and the URL can be shared with the agency to allow them to
-   * upload producer information securely.
-   *
-   * The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used.
-   *
-   * The agency must:
-   * - Exist and belong to the authenticated tenant
-   * - Have a valid NPN
-   *
-   * Returns a URL string that can be shared with the agency for producer uploads.
-   * Returns errors in the following cases:
-   * - INVALID_ARGUMENT: if agency NPN is empty or invalid format
-   * - NOT_FOUND: if agency NPN doesn't exist
-   * - INTERNAL: for other unexpected errors
+   * CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.CreateProducerUploadURL
    */
@@ -5585,20 +5453,7 @@ export const ProducerService: GenService<{
     output: typeof CreateProducerUploadURLResponseSchema;
   },
   /**
-   * AddAgencyLocations adds one or more locations to an existing agency.
-   *
-   * Each location must have a unique name within the agency and valid address information.
-   * You can add up to 100 locations in a single request. This is a bulk operation with
-   * all-or-nothing behavior - if any location fails validation, the entire request will
-   * fail and no locations will be added.
-   *
-   * Returns the IDs of successfully added locations.
-   *
-   * Returns errors in the following cases:
-   * - UNAUTHENTICATED: if the API key is invalid or missing.
-   * - INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided,
-   *   location names are duplicated within the request or already exist for the agency.
-   * - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+   * AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.AddAgencyLocations
    */
@@ -5608,14 +5463,7 @@ export const ProducerService: GenService<{
     output: typeof AddAgencyLocationsResponseSchema;
   },
   /**
-   * RemoveAgencyLocations removes one or more locations from an agency.
-   *
-   * Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations.
-   * When a location is removed, all the producers associated with that location will be unassigned from that location.
-   * Returns errors in the following cases:
-   * - UNAUTHENTICATED: if the API key is invalid or missing.
-   * - INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided.
-   * - NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+   * RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.RemoveAgencyLocations
    */
@@ -5625,12 +5473,7 @@ export const ProducerService: GenService<{
     output: typeof RemoveAgencyLocationsResponseSchema;
   },
   /**
-   * ListAgencyLocations retrieves all locations associated with an agency.
-   *
-   * Returns errors in the following cases:
-   * - UNAUTHENTICATED: if the API key is invalid or missing.
-   * - INVALID_ARGUMENT: if the agency_id is empty.
-   * - NOT_FOUND: if the agency doesn't exist.
+   * ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.ListAgencyLocations
    */
@@ -5640,14 +5483,7 @@ export const ProducerService: GenService<{
     output: typeof ListAgencyLocationsResponseSchema;
   },
   /**
-   * AssignProducerToLocations assigns one or more locations to a producer.
-   * The locations must belong to the same agency as the producer.
-   *
-   * Error cases:
-   * - UNAUTHENTICATED: Invalid or missing API key
-   * - INVALID_ARGUMENT: Empty producer_id or no location_ids
-   * - NOT_FOUND: Producer or locations don't exist
-   * - PERMISSION_DENIED: Locations don't belong to the producer's agency
+   * AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.AssignProducerToLocations
    */
@@ -5657,13 +5493,7 @@ export const ProducerService: GenService<{
     output: typeof AssignProducerToLocationsResponseSchema;
   },
   /**
-   * UnassignProducerFromLocations removes one or more location assignments from a producer.
-   * The locations must belong to the same agency as the producer.
-   *
-   * Error cases:
-   * - UNAUTHENTICATED: Invalid or missing API key
-   * - INVALID_ARGUMENT: Empty producer_id or no location_ids
-   * - NOT_FOUND: Producer doesn't exist
+   * UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.UnassignProducerFromLocations
    */
@@ -5673,17 +5503,7 @@ export const ProducerService: GenService<{
     output: typeof UnassignProducerFromLocationsResponseSchema;
   },
   /**
-   * UpdateAgencyLocation updates an existing agency location.
-   * You can update the name, address, contact information, and primary status of a location.
-   * All fields are optional - only provide the fields you want to update.
-   * Location name must be unique within the agency.
-   * Returns the updated location details.
-   *
-   * Error cases:
-   * - UNAUTHENTICATED: Invalid or missing API key
-   * - INVALID_ARGUMENT: Missing agency_id or location_id
-   * - NOT_FOUND: Agency or location doesn't exist
-   * - ALREADY_EXISTS: Location name already exists within the agency
+   * UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.UpdateAgencyLocation
    */
