@@ -66,12 +66,6 @@ const (
 	// ProducerServiceUpdateProducerProcedure is the fully-qualified name of the ProducerService's
 	// UpdateProducer RPC.
 	ProducerServiceUpdateProducerProcedure = "/producerflow.producer.v1.ProducerService/UpdateProducer"
-	// ProducerServiceApproveProducerProcedure is the fully-qualified name of the ProducerService's
-	// ApproveProducer RPC.
-	ProducerServiceApproveProducerProcedure = "/producerflow.producer.v1.ProducerService/ApproveProducer"
-	// ProducerServiceRejectProducerProcedure is the fully-qualified name of the ProducerService's
-	// RejectProducer RPC.
-	ProducerServiceRejectProducerProcedure = "/producerflow.producer.v1.ProducerService/RejectProducer"
 	// ProducerServiceNewContactProcedure is the fully-qualified name of the ProducerService's
 	// NewContact RPC.
 	ProducerServiceNewContactProcedure = "/producerflow.producer.v1.ProducerService/NewContact"
@@ -188,18 +182,6 @@ type ProducerServiceClient interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
-	// ApproveProducer changes a producer's onboarding state to APPROVED.
-	// This typically happens after all verification steps are complete.
-	// This method is deprecated. Use SyncProducerWithNIPR instead.
-	//
-	// Deprecated: do not use.
-	ApproveProducer(context.Context, *connect.Request[v1.ApproveProducerRequest]) (*connect.Response[v1.ApproveProducerResponse], error)
-	// RejectProducer changes a producer's onboarding state to REJECTED.
-	// An optional reason for rejection can be provided.
-	// This method is deprecated. Use StopSyncAgencyWithNIPR instead.
-	//
-	// Deprecated: do not use.
-	RejectProducer(context.Context, *connect.Request[v1.RejectProducerRequest]) (*connect.Response[v1.RejectProducerResponse], error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -412,18 +394,6 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("UpdateProducer")),
 			connect.WithClientOptions(opts...),
 		),
-		approveProducer: connect.NewClient[v1.ApproveProducerRequest, v1.ApproveProducerResponse](
-			httpClient,
-			baseURL+ProducerServiceApproveProducerProcedure,
-			connect.WithSchema(producerServiceMethods.ByName("ApproveProducer")),
-			connect.WithClientOptions(opts...),
-		),
-		rejectProducer: connect.NewClient[v1.RejectProducerRequest, v1.RejectProducerResponse](
-			httpClient,
-			baseURL+ProducerServiceRejectProducerProcedure,
-			connect.WithSchema(producerServiceMethods.ByName("RejectProducer")),
-			connect.WithClientOptions(opts...),
-		),
 		newContact: connect.NewClient[v1.NewContactRequest, v1.NewContactResponse](
 			httpClient,
 			baseURL+ProducerServiceNewContactProcedure,
@@ -554,8 +524,6 @@ type producerServiceClient struct {
 	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
 	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
 	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
-	approveProducer               *connect.Client[v1.ApproveProducerRequest, v1.ApproveProducerResponse]
-	rejectProducer                *connect.Client[v1.RejectProducerRequest, v1.RejectProducerResponse]
 	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
 	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
 	setExternalID                 *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
@@ -632,20 +600,6 @@ func (c *producerServiceClient) GetAgencyFiles(ctx context.Context, req *connect
 // UpdateProducer calls producerflow.producer.v1.ProducerService.UpdateProducer.
 func (c *producerServiceClient) UpdateProducer(ctx context.Context, req *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error) {
 	return c.updateProducer.CallUnary(ctx, req)
-}
-
-// ApproveProducer calls producerflow.producer.v1.ProducerService.ApproveProducer.
-//
-// Deprecated: do not use.
-func (c *producerServiceClient) ApproveProducer(ctx context.Context, req *connect.Request[v1.ApproveProducerRequest]) (*connect.Response[v1.ApproveProducerResponse], error) {
-	return c.approveProducer.CallUnary(ctx, req)
-}
-
-// RejectProducer calls producerflow.producer.v1.ProducerService.RejectProducer.
-//
-// Deprecated: do not use.
-func (c *producerServiceClient) RejectProducer(ctx context.Context, req *connect.Request[v1.RejectProducerRequest]) (*connect.Response[v1.RejectProducerResponse], error) {
-	return c.rejectProducer.CallUnary(ctx, req)
 }
 
 // NewContact calls producerflow.producer.v1.ProducerService.NewContact.
@@ -803,18 +757,6 @@ type ProducerServiceHandler interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
-	// ApproveProducer changes a producer's onboarding state to APPROVED.
-	// This typically happens after all verification steps are complete.
-	// This method is deprecated. Use SyncProducerWithNIPR instead.
-	//
-	// Deprecated: do not use.
-	ApproveProducer(context.Context, *connect.Request[v1.ApproveProducerRequest]) (*connect.Response[v1.ApproveProducerResponse], error)
-	// RejectProducer changes a producer's onboarding state to REJECTED.
-	// An optional reason for rejection can be provided.
-	// This method is deprecated. Use StopSyncAgencyWithNIPR instead.
-	//
-	// Deprecated: do not use.
-	RejectProducer(context.Context, *connect.Request[v1.RejectProducerRequest]) (*connect.Response[v1.RejectProducerResponse], error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -1023,18 +965,6 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("UpdateProducer")),
 		connect.WithHandlerOptions(opts...),
 	)
-	producerServiceApproveProducerHandler := connect.NewUnaryHandler(
-		ProducerServiceApproveProducerProcedure,
-		svc.ApproveProducer,
-		connect.WithSchema(producerServiceMethods.ByName("ApproveProducer")),
-		connect.WithHandlerOptions(opts...),
-	)
-	producerServiceRejectProducerHandler := connect.NewUnaryHandler(
-		ProducerServiceRejectProducerProcedure,
-		svc.RejectProducer,
-		connect.WithSchema(producerServiceMethods.ByName("RejectProducer")),
-		connect.WithHandlerOptions(opts...),
-	)
 	producerServiceNewContactHandler := connect.NewUnaryHandler(
 		ProducerServiceNewContactProcedure,
 		svc.NewContact,
@@ -1173,10 +1103,6 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceGetAgencyFilesHandler.ServeHTTP(w, r)
 		case ProducerServiceUpdateProducerProcedure:
 			producerServiceUpdateProducerHandler.ServeHTTP(w, r)
-		case ProducerServiceApproveProducerProcedure:
-			producerServiceApproveProducerHandler.ServeHTTP(w, r)
-		case ProducerServiceRejectProducerProcedure:
-			producerServiceRejectProducerHandler.ServeHTTP(w, r)
 		case ProducerServiceNewContactProcedure:
 			producerServiceNewContactHandler.ServeHTTP(w, r)
 		case ProducerServiceNewContactsProcedure:
@@ -1266,14 +1192,6 @@ func (UnimplementedProducerServiceHandler) GetAgencyFiles(context.Context, *conn
 
 func (UnimplementedProducerServiceHandler) UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.UpdateProducer is not implemented"))
-}
-
-func (UnimplementedProducerServiceHandler) ApproveProducer(context.Context, *connect.Request[v1.ApproveProducerRequest]) (*connect.Response[v1.ApproveProducerResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ApproveProducer is not implemented"))
-}
-
-func (UnimplementedProducerServiceHandler) RejectProducer(context.Context, *connect.Request[v1.RejectProducerRequest]) (*connect.Response[v1.RejectProducerResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.RejectProducer is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) NewContact(context.Context, *connect.Request[v1.NewContactRequest]) (*connect.Response[v1.NewContactResponse], error) {

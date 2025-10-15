@@ -30,8 +30,6 @@ const (
 	ProducerService_GetProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/GetProducer"
 	ProducerService_GetAgencyFiles_FullMethodName                = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
 	ProducerService_UpdateProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/UpdateProducer"
-	ProducerService_ApproveProducer_FullMethodName               = "/producerflow.producer.v1.ProducerService/ApproveProducer"
-	ProducerService_RejectProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/RejectProducer"
 	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
 	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
 	ProducerService_SetExternalID_FullMethodName                 = "/producerflow.producer.v1.ProducerService/SetExternalID"
@@ -116,16 +114,6 @@ type ProducerServiceClient interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(ctx context.Context, in *UpdateProducerRequest, opts ...grpc.CallOption) (*UpdateProducerResponse, error)
-	// Deprecated: Do not use.
-	// ApproveProducer changes a producer's onboarding state to APPROVED.
-	// This typically happens after all verification steps are complete.
-	// This method is deprecated. Use SyncProducerWithNIPR instead.
-	ApproveProducer(ctx context.Context, in *ApproveProducerRequest, opts ...grpc.CallOption) (*ApproveProducerResponse, error)
-	// Deprecated: Do not use.
-	// RejectProducer changes a producer's onboarding state to REJECTED.
-	// An optional reason for rejection can be provided.
-	// This method is deprecated. Use StopSyncAgencyWithNIPR instead.
-	RejectProducer(ctx context.Context, in *RejectProducerRequest, opts ...grpc.CallOption) (*RejectProducerResponse, error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -373,28 +361,6 @@ func (c *producerServiceClient) UpdateProducer(ctx context.Context, in *UpdatePr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateProducerResponse)
 	err := c.cc.Invoke(ctx, ProducerService_UpdateProducer_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *producerServiceClient) ApproveProducer(ctx context.Context, in *ApproveProducerRequest, opts ...grpc.CallOption) (*ApproveProducerResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ApproveProducerResponse)
-	err := c.cc.Invoke(ctx, ProducerService_ApproveProducer_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *producerServiceClient) RejectProducer(ctx context.Context, in *RejectProducerRequest, opts ...grpc.CallOption) (*RejectProducerResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RejectProducerResponse)
-	err := c.cc.Invoke(ctx, ProducerService_RejectProducer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -654,16 +620,6 @@ type ProducerServiceServer interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *UpdateProducerRequest) (*UpdateProducerResponse, error)
-	// Deprecated: Do not use.
-	// ApproveProducer changes a producer's onboarding state to APPROVED.
-	// This typically happens after all verification steps are complete.
-	// This method is deprecated. Use SyncProducerWithNIPR instead.
-	ApproveProducer(context.Context, *ApproveProducerRequest) (*ApproveProducerResponse, error)
-	// Deprecated: Do not use.
-	// RejectProducer changes a producer's onboarding state to REJECTED.
-	// An optional reason for rejection can be provided.
-	// This method is deprecated. Use StopSyncAgencyWithNIPR instead.
-	RejectProducer(context.Context, *RejectProducerRequest) (*RejectProducerResponse, error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -839,12 +795,6 @@ func (UnimplementedProducerServiceServer) GetAgencyFiles(context.Context, *GetAg
 }
 func (UnimplementedProducerServiceServer) UpdateProducer(context.Context, *UpdateProducerRequest) (*UpdateProducerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProducer not implemented")
-}
-func (UnimplementedProducerServiceServer) ApproveProducer(context.Context, *ApproveProducerRequest) (*ApproveProducerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveProducer not implemented")
-}
-func (UnimplementedProducerServiceServer) RejectProducer(context.Context, *RejectProducerRequest) (*RejectProducerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RejectProducer not implemented")
 }
 func (UnimplementedProducerServiceServer) NewContact(context.Context, *NewContactRequest) (*NewContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewContact not implemented")
@@ -1118,42 +1068,6 @@ func _ProducerService_UpdateProducer_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).UpdateProducer(ctx, req.(*UpdateProducerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProducerService_ApproveProducer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApproveProducerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProducerServiceServer).ApproveProducer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProducerService_ApproveProducer_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProducerServiceServer).ApproveProducer(ctx, req.(*ApproveProducerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProducerService_RejectProducer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RejectProducerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProducerServiceServer).RejectProducer(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProducerService_RejectProducer_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProducerServiceServer).RejectProducer(ctx, req.(*RejectProducerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1550,14 +1464,6 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProducer",
 			Handler:    _ProducerService_UpdateProducer_Handler,
-		},
-		{
-			MethodName: "ApproveProducer",
-			Handler:    _ProducerService_ApproveProducer_Handler,
-		},
-		{
-			MethodName: "RejectProducer",
-			Handler:    _ProducerService_RejectProducer_Handler,
 		},
 		{
 			MethodName: "NewContact",

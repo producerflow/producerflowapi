@@ -57,8 +57,6 @@
     - [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Agency-NIPR-RegulatoryInfo-RegulatoryAction)
     - [Agency.Principal](#producerflow-producer-v1-Agency-Principal)
     - [AgencySummary](#producerflow-producer-v1-AgencySummary)
-    - [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest)
-    - [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse)
     - [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest)
     - [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse)
     - [CreateAgencyOnboardingURLRequest](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest)
@@ -126,8 +124,6 @@
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryActionsByStateEntry)
     - [ProducerData](#producerflow-producer-v1-ProducerData)
     - [ProducerData.Address](#producerflow-producer-v1-ProducerData-Address)
-    - [RejectProducerRequest](#producerflow-producer-v1-RejectProducerRequest)
-    - [RejectProducerResponse](#producerflow-producer-v1-RejectProducerResponse)
     - [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest)
     - [RemoveAgencyLocationsResponse](#producerflow-producer-v1-RemoveAgencyLocationsResponse)
     - [ResyncAgencyRequest](#producerflow-producer-v1-ResyncAgencyRequest)
@@ -1137,31 +1133,6 @@ This message contains only the essential fields needed for displaying agencies i
 | is_tenant_agency | [bool](#bool) |  | Whether this is an internal tenant agency. |
 | is_sole_proprietor | [bool](#bool) |  | Whether this is a sole proprietor. |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | When the agency was created. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-ApproveProducerRequest"></a>
-
-### ApproveProducerRequest
-ApproveProducerRequest requests approval for a producer in the onboarding process.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| producer_id | [string](#string) |  | The UUID of the producer to approve. Must be a valid UUID format. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-ApproveProducerResponse"></a>
-
-### ApproveProducerResponse
-ApproveProducerResponse is the empty response returned after successfully approving a producer.
 
 
 
@@ -2410,32 +2381,6 @@ RegulatoryAction represents a regulatory action taken against a producer.
 
 
 
-<a name="producerflow-producer-v1-RejectProducerRequest"></a>
-
-### RejectProducerRequest
-RejectProducerRequest requests rejection of a producer in the onboarding process.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| producer_id | [string](#string) |  | The UUID of the producer to reject. Must be a valid UUID format. |
-| reason | [string](#string) |  | The reason for rejecting the producer. Must be non-empty to provide context for the rejection. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-RejectProducerResponse"></a>
-
-### RejectProducerResponse
-RejectProducerResponse is the empty response returned after successfully rejecting a producer.
-
-
-
-
-
-
 <a name="producerflow-producer-v1-RemoveAgencyLocationsRequest"></a>
 
 ### RemoveAgencyLocationsRequest
@@ -2764,7 +2709,7 @@ All fields are optional, allowing partial updates.
 | phone | [string](#string) | optional | Phone number of the producer. If provided, must be a valid phone number format. |
 | street | [string](#string) | optional | Street address of the producer. If provided, must be non-empty. |
 | city | [string](#string) | optional | City of the producer. If provided, must be non-empty. |
-| state | [string](#string) | optional | State of the producer. If provided, must be non-empty. |
+| state | [string](#string) | optional | State of the producer. If provided, must be a valid 2-letter US state code. |
 | zip | [string](#string) | optional | ZIP code of the producer&#39;s address. If provided, must be at least 5 characters. |
 
 
@@ -3003,8 +2948,6 @@ If validation passes, it creates the agency, principal, and any producers. Retur
 | GetProducer | [GetProducerRequest](#producerflow-producer-v1-GetProducerRequest) | [GetProducerResponse](#producerflow-producer-v1-GetProducerResponse) | GetProducer retrieves detailed information about a specific producer. The producer can be found by ID, NPN, or email. Returns the producer&#39;s information, including NIPR data and agency association. |
 | GetAgencyFiles | [GetAgencyFilesRequest](#producerflow-producer-v1-GetAgencyFilesRequest) | [GetAgencyFilesResponse](#producerflow-producer-v1-GetAgencyFilesResponse) | GetAgencyFiles returns URLs for accessing files associated with an agency, such as contracts. |
 | UpdateProducer | [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest) | [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse) | UpdateProducer updates information for an existing producer. Supports updating contact details, background check responses, employment history, and non-uniform licensing questions. Information from NIPR and other third-party sources cannot be updated. Validates email uniqueness if the email is changed. |
-| ApproveProducer | [ApproveProducerRequest](#producerflow-producer-v1-ApproveProducerRequest) | [ApproveProducerResponse](#producerflow-producer-v1-ApproveProducerResponse) | ApproveProducer changes a producer&#39;s onboarding state to APPROVED. This typically happens after all verification steps are complete. This method is deprecated. Use SyncProducerWithNIPR instead. |
-| RejectProducer | [RejectProducerRequest](#producerflow-producer-v1-RejectProducerRequest) | [RejectProducerResponse](#producerflow-producer-v1-RejectProducerResponse) | RejectProducer changes a producer&#39;s onboarding state to REJECTED. An optional reason for rejection can be provided. This method is deprecated. Use StopSyncAgencyWithNIPR instead. |
 | NewContact | [NewContactRequest](#producerflow-producer-v1-NewContactRequest) | [NewContactResponse](#producerflow-producer-v1-NewContactResponse) | NewContact creates a new contact associated with an agency. Contacts represent non-producer individuals linked to the agency. Returns the ID of the created contact. |
 | NewContacts | [NewContactsRequest](#producerflow-producer-v1-NewContactsRequest) | [NewContactsResponse](#producerflow-producer-v1-NewContactsResponse) | NewContacts creates multiple contacts in a single request. Each contact is associated with the specified agency. Returns the IDs of all created contacts. |
 | SetExternalID | [SetExternalIDRequest](#producerflow-producer-v1-SetExternalIDRequest) | [SetExternalIDResponse](#producerflow-producer-v1-SetExternalIDResponse) | SetExternalID sets an external identifier for a producer or contact. Useful for integrating with external systems that use different ID schemes. |
