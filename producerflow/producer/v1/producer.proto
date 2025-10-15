@@ -79,20 +79,6 @@ service ProducerService {
   // Validates email uniqueness if the email is changed.
   rpc UpdateProducer(UpdateProducerRequest) returns (UpdateProducerResponse);
 
-  // ApproveProducer changes a producer's onboarding state to APPROVED.
-  // This typically happens after all verification steps are complete.
-  // This method is deprecated. Use SyncProducerWithNIPR instead.
-  rpc ApproveProducer(ApproveProducerRequest) returns (ApproveProducerResponse) {
-    option deprecated = true;
-  }
-
-  // RejectProducer changes a producer's onboarding state to REJECTED.
-  // An optional reason for rejection can be provided.
-  // This method is deprecated. Use StopSyncAgencyWithNIPR instead.
-  rpc RejectProducer(RejectProducerRequest) returns (RejectProducerResponse) {
-    option deprecated = true;
-  }
-
   // NewContact creates a new contact associated with an agency.
   // Contacts represent non-producer individuals linked to the agency.
   // Returns the ID of the created contact.
@@ -826,8 +812,8 @@ message UpdateProducerRequest {
     optional string city = 7 [(buf.validate.field).string.min_len = 1];
 
     // State of the producer.
-    // If provided, must be non-empty.
-    optional string state = 8 [(buf.validate.field).string.min_len = 1];
+    // If provided, must be a valid 2-letter US state code.
+    optional string state = 8 [(buf.validate.field).string.max_len = 2];
 
     // ZIP code of the producer's address.
     // If provided, must be at least 5 characters.
@@ -860,31 +846,6 @@ message ListNewProducersResponse {
   // These are producers typically in the NEW or pending onboarding state.
   repeated Producer new_producers = 1;
 }
-
-// ApproveProducerRequest requests approval for a producer in the onboarding process.
-message ApproveProducerRequest {
-  option deprecated = true;
-  // The UUID of the producer to approve.
-  // Must be a valid UUID format.
-  string producer_id = 1 [(buf.validate.field).string.uuid = true];
-}
-
-// ApproveProducerResponse is the empty response returned after successfully approving a producer.
-message ApproveProducerResponse {}
-
-// RejectProducerRequest requests rejection of a producer in the onboarding process.
-message RejectProducerRequest {
-  // The UUID of the producer to reject.
-  // Must be a valid UUID format.
-  string producer_id = 1 [(buf.validate.field).string.uuid = true];
-
-  // The reason for rejecting the producer.
-  // Must be non-empty to provide context for the rejection.
-  string reason = 2 [(buf.validate.field).string.min_len = 1];
-}
-
-// RejectProducerResponse is the empty response returned after successfully rejecting a producer.
-message RejectProducerResponse {}
 
 // ProducerOnboardingState defines the possible states in the producer onboarding workflow.
 // This enum is deprecated and should not be used in new code.
