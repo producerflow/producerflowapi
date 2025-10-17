@@ -636,6 +636,10 @@ TerminationReason represents the reason for the termination of an appointment. T
 ### AppointmentService
 AppointmentService manages license appointments through NIPR. The appointment flow in NIPR is as follows: 1. A new appointment (or termination) is requested for a license number. 2. Some time later, NIPR processes the request and returns the final result. Since NIPR does not return results immediately, RequestAppointment and TerminateAppointment RPCs will return a processing status of IN_PROGRESS if the request is accepted by NIPR. When the appointment is finally processed by NIPR, ProducerFlow will notify via a webhook of the final result. Also, any call from this point on to ListAppointments or GetAppointment will also return the final result. IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration) are processed automatically without going through NIPR. In these cases: RequestAppointment will immediately return APPOINTED status. TerminateAppointment will immediately return TERMINATED status. Any call to this service must be authenticated using an API key in the request headers. The API key can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant that is making the request.
 
+Available endpoints:
+  UAT (User Acceptance Testing): https://api.uat.producerflow.com
+  Production: https://api.producerflow.com
+
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | GetAppointment | [GetAppointmentRequest](#producerflow-appointment-v1-GetAppointmentRequest) | [GetAppointmentResponse](#producerflow-appointment-v1-GetAppointmentResponse) | Retrieves the details of an appointment by its ID. |
@@ -2843,6 +2847,10 @@ This enum is deprecated and should not be used in new code.
 ProducerService provides a comprehensive API for managing insurance producers
 and agencies, including onboarding, data synchronization, and integration with
 external systems like NIPR for license verification.
+
+Available endpoints:
+  UAT (User Acceptance Testing): https://api.uat.producerflow.com
+  Production: https://api.producerflow.com
 
 RPCs for starting the onboarding agency process.
 

@@ -58,6 +58,11 @@ const (
 // ProducerService provides a comprehensive API for managing insurance producers
 // and agencies, including onboarding, data synchronization, and integration with
 // external systems like NIPR for license verification.
+//
+// Available endpoints:
+//
+//	UAT (User Acceptance Testing): https://api.uat.producerflow.com
+//	Production: https://api.producerflow.com
 type ProducerServiceClient interface {
 	// CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency.
 	// The URL contains encoded information about the agency defaults and tenant context.
@@ -471,6 +476,11 @@ func (c *producerServiceClient) UpdateAgencyLocation(ctx context.Context, in *Up
 // ProducerService provides a comprehensive API for managing insurance producers
 // and agencies, including onboarding, data synchronization, and integration with
 // external systems like NIPR for license verification.
+//
+// Available endpoints:
+//
+//	UAT (User Acceptance Testing): https://api.uat.producerflow.com
+//	Production: https://api.producerflow.com
 type ProducerServiceServer interface {
 	// CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency.
 	// The URL contains encoded information about the agency defaults and tenant context.

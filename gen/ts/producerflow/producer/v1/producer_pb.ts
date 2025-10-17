@@ -5172,6 +5172,10 @@ export const ProducerOnboardingStateSchema: GenEnum<ProducerOnboardingState> = /
  * and agencies, including onboarding, data synchronization, and integration with
  * external systems like NIPR for license verification.
  *
+ * Available endpoints:
+ *   UAT (User Acceptance Testing): https://api.uat.producerflow.com
+ *   Production: https://api.producerflow.com
+ *
  * RPCs for starting the onboarding agency process.
  *
  * @generated from service producerflow.producer.v1.ProducerService
