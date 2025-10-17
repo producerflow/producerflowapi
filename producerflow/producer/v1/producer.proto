@@ -10,6 +10,10 @@ import "google/type/timeofday.proto";
 // ProducerService provides a comprehensive API for managing insurance producers
 // and agencies, including onboarding, data synchronization, and integration with
 // external systems like NIPR for license verification.
+//
+// Available endpoints:
+//   UAT (User Acceptance Testing): https://api.uat.producerflow.com
+//   Production: https://api.producerflow.com
 service ProducerService {
   // RPCs for starting the onboarding agency process.
 
