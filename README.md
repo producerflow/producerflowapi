@@ -22,6 +22,7 @@ Trusted by insurance companies of all sizes to manage onboarding, licensing, app
 - [Producerflow API](#producerflow-api)
   - [Table of Contents](#table-of-contents)
   - [Quickstart](#quickstart)
+    - [API Endpoints](#api-endpoints)
     - [API Token Generation](#api-token-generation)
   - [Installation \& Usage](#installation--usage)
     - [Using Protocol Buffer Files](#using-protocol-buffer-files)
@@ -47,6 +48,15 @@ Trusted by insurance companies of all sizes to manage onboarding, licensing, app
 
 > **⚠️ Notice**  
 > Pull requests are disabled for this repository. For support and questions, please contact our team directly.
+
+### API Endpoints
+
+The Producerflow API is available at the following endpoints:
+
+- **Production**: `https://api.producerflow.com`
+- **UAT (User Acceptance Testing)**: `https://api.uat.producerflow.com`
+
+Use the production endpoint for live applications and the UAT endpoint for testing and development purposes.
 
 ### API Token Generation
 

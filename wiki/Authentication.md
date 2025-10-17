@@ -2,6 +2,15 @@
 
 All requests to our API require authentication. This guide explains how to obtain API keys and use them to authenticate your Connect API calls.
 
+## API Endpoints
+
+The Producerflow API is available at the following endpoints:
+
+- **Production**: `https://api.producerflow.com`
+- **UAT (User Acceptance Testing)**: `https://api.uat.producerflow.com`
+
+Use the production endpoint for live applications and the UAT endpoint for testing and development purposes.
+
 ## Obtaining an API Key
 
 To use our API, you'll need to generate an API key from the Producer Flow user interface:
@@ -57,7 +66,7 @@ func (t *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
     return t.base.RoundTrip(req)
 }
 
-func createAuthenticatedClient(apiKey string) producerconnect.ProducerServiceClient {
+func createAuthenticatedClient(apiKey string, useUAT bool) producerconnect.ProducerServiceClient {
     // Create an HTTP client with authentication headers
     httpClient := &http.Client{
         Transport: &authTransport{
@@ -66,15 +75,25 @@ func createAuthenticatedClient(apiKey string) producerconnect.ProducerServiceCli
         },
     }
 
+    // Choose endpoint based on environment
+    endpoint := "https://api.producerflow.com"
+    if useUAT {
+        endpoint = "https://api.uat.producerflow.com"
+    }
+
     return producerconnect.NewProducerServiceClient(
         httpClient,
-        "https://api.producerflow.com",
+        endpoint,
         connect.WithGRPC(), // or WithConnect() depending on protocol
     )
 }
 
 func main() {
-    client := createAuthenticatedClient("YOUR_API_KEY")
+    // For production use
+    client := createAuthenticatedClient("YOUR_API_KEY", false)
+    
+    // For UAT/testing use
+    // client := createAuthenticatedClient("YOUR_API_KEY", true)
 
     // Now you can make authenticated API calls
     req := connect.NewRequest(&producerpb.GetProducerRequest{
@@ -98,10 +117,13 @@ import { createConnectTransport } from "@connectrpc/connect-node";
 import { ProducerService } from "@producerflow/producerflowapi";
 
 // Create an authenticated client
-function createAuthenticatedClient(apiKey: string) {
+function createAuthenticatedClient(apiKey: string, useUAT: boolean = false) {
+    // Choose endpoint based on environment
+    const baseUrl = useUAT ? "https://api.uat.producerflow.com" : "https://api.producerflow.com";
+    
     // Create a transport with authentication headers
     const transport = createConnectTransport({
-        baseUrl: "https://api.producerflow.com",
+        baseUrl: baseUrl,
         httpVersion: "1.1",
         interceptors: [{
             interceptRequest(next, req) {
@@ -119,7 +141,11 @@ function createAuthenticatedClient(apiKey: string) {
 }
 
 async function main() {
-    const client = createAuthenticatedClient("YOUR_API_KEY");
+    // For production use
+    const client = createAuthenticatedClient("YOUR_API_KEY", false);
+    
+    // For UAT/testing use
+    // const client = createAuthenticatedClient("YOUR_API_KEY", true);
 
     // Make authenticated API calls
     try {
@@ -148,9 +174,12 @@ import { createPromiseClient } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { ProducerService } from "@producerflow/producerflowapi";
 
-function createAuthenticatedClient(apiKey: string) {
+function createAuthenticatedClient(apiKey: string, useUAT: boolean = false) {
+    // Choose endpoint based on environment
+    const baseUrl = useUAT ? "https://api.uat.producerflow.com" : "https://api.producerflow.com";
+    
     const transport = createConnectTransport({
-        baseUrl: "https://api.producerflow.com",
+        baseUrl: baseUrl,
         interceptors: [{
             interceptRequest(next, req) {
                 req.header.set("Authorization", `Bearer ${apiKey}`);
@@ -166,7 +195,11 @@ function createAuthenticatedClient(apiKey: string) {
 }
 
 // Usage in browser code
-const client = createAuthenticatedClient("YOUR_API_KEY");
+// For production use
+const client = createAuthenticatedClient("YOUR_API_KEY", false);
+
+// For UAT/testing use
+// const client = createAuthenticatedClient("YOUR_API_KEY", true);
 
 // Make authenticated API calls
 async function fetchProducer(producerId: string) {
