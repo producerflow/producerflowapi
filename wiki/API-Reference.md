@@ -59,6 +59,8 @@
     - [AgencySummary](#producerflow-producer-v1-AgencySummary)
     - [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest)
     - [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse)
+    - [Contact](#producerflow-producer-v1-Contact)
+    - [Contact.Address](#producerflow-producer-v1-Contact-Address)
     - [CreateAgencyOnboardingURLRequest](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest)
     - [CreateAgencyOnboardingURLRequest.Agency](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency)
     - [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency-Principal)
@@ -78,6 +80,8 @@
     - [GetProducerResponse](#producerflow-producer-v1-GetProducerResponse)
     - [ListAgenciesRequest](#producerflow-producer-v1-ListAgenciesRequest)
     - [ListAgenciesResponse](#producerflow-producer-v1-ListAgenciesResponse)
+    - [ListAgencyContactsRequest](#producerflow-producer-v1-ListAgencyContactsRequest)
+    - [ListAgencyContactsResponse](#producerflow-producer-v1-ListAgencyContactsResponse)
     - [ListAgencyLocationsRequest](#producerflow-producer-v1-ListAgencyLocationsRequest)
     - [ListAgencyLocationsResponse](#producerflow-producer-v1-ListAgencyLocationsResponse)
     - [ListNewProducersRequest](#producerflow-producer-v1-ListNewProducersRequest)
@@ -1124,6 +1128,50 @@ AssignProducerToLocationsResponse contains the assigned location IDs.
 
 
 
+<a name="producerflow-producer-v1-Contact"></a>
+
+### Contact
+Contact represents a contact associated with an agency.
+Contacts are non-producer individuals linked to the agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Unique identifier for the contact. |
+| first_name | [string](#string) |  | First name of the contact. |
+| middle_name | [string](#string) |  | Middle name of the contact. |
+| last_name | [string](#string) |  | Last name of the contact. |
+| email | [string](#string) |  | Email address of the contact. Must be unique within the tenant. |
+| phone | [string](#string) |  | Phone number of the contact. |
+| role | [string](#string) |  | Role or position of the contact within the agency. |
+| address | [Contact.Address](#producerflow-producer-v1-Contact-Address) |  |  |
+| npn | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | When the contact was created. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Contact-Address"></a>
+
+### Contact.Address
+Mailing address of the contact.
+Address represents a mailing address for the contact.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| street | [string](#string) |  | Street address of the contact. |
+| city | [string](#string) |  | City of the contact. |
+| state | [string](#string) |  | State of the contact. |
+| zip | [string](#string) |  | Zip code of the contact. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-CreateAgencyOnboardingURLRequest"></a>
 
 ### CreateAgencyOnboardingURLRequest
@@ -1444,6 +1492,36 @@ ListAgenciesResponse contains the list of agencies matching the filter criteria.
 | agencies | [AgencySummary](#producerflow-producer-v1-AgencySummary) | repeated | List of agency summaries matching the filter criteria. The agencies are ordered by creation date, most recent first. |
 | next_page_token | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. |
 | total_count | [int32](#int32) |  | Total number of agencies matching the filter criteria. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgencyContactsRequest"></a>
+
+### ListAgencyContactsRequest
+ListAgencyContactsRequest requests all contacts associated with an agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agency_id | [string](#string) |  | The UUID of the agency to retrieve contacts for. Must be a valid UUID format. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-ListAgencyContactsResponse"></a>
+
+### ListAgencyContactsResponse
+ListAgencyContactsResponse contains all contacts associated with an agency.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| contacts | [Contact](#producerflow-producer-v1-Contact) | repeated | List of all contacts associated with the specified agency. |
 
 
 
@@ -2869,6 +2947,7 @@ RPCs for starting the onboarding agency process.
 | UpdateProducer | [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest) | [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse) | UpdateProducer updates information for an existing producer. Supports updating contact details, background check responses, employment history, and non-uniform licensing questions. Information from NIPR and other third-party sources cannot be updated. Validates email uniqueness if the email is changed. |
 | NewContact | [NewContactRequest](#producerflow-producer-v1-NewContactRequest) | [NewContactResponse](#producerflow-producer-v1-NewContactResponse) | NewContact creates a new contact associated with an agency. Contacts represent non-producer individuals linked to the agency. Returns the ID of the created contact. |
 | NewContacts | [NewContactsRequest](#producerflow-producer-v1-NewContactsRequest) | [NewContactsResponse](#producerflow-producer-v1-NewContactsResponse) | NewContacts creates multiple contacts in a single request. Each contact is associated with the specified agency. Returns the IDs of all created contacts. |
+| ListAgencyContacts | [ListAgencyContactsRequest](#producerflow-producer-v1-ListAgencyContactsRequest) | [ListAgencyContactsResponse](#producerflow-producer-v1-ListAgencyContactsResponse) | ListAgencyContacts retrieves all contacts associated with an agency. Returns a list of contacts with their full details. |
 | SetExternalID | [SetExternalIDRequest](#producerflow-producer-v1-SetExternalIDRequest) | [SetExternalIDResponse](#producerflow-producer-v1-SetExternalIDResponse) | SetExternalID sets an external identifier for a producer or contact. Useful for integrating with external systems that use different ID schemes. |
 | ValidateProducerNPN | [ValidateProducerNPNRequest](#producerflow-producer-v1-ValidateProducerNPNRequest) | [ValidateProducerNPNResponse](#producerflow-producer-v1-ValidateProducerNPNResponse) | ValidateProducerNPN checks whether a producer’s National Producer Number (NPN) is valid. It performs a lookup against NIPR and applies internal validation rules. Returns a validity flag and any associated error messages. |
 | ValidateAgencyNPN | [ValidateAgencyNPNRequest](#producerflow-producer-v1-ValidateAgencyNPNRequest) | [ValidateAgencyNPNResponse](#producerflow-producer-v1-ValidateAgencyNPNResponse) | ValidateAgencyNPN checks whether an agency’s National Producer Number (NPN) is valid. It performs a lookup against NIPR and applies internal validation rules. Returns a validity flag and any associated error messages. |

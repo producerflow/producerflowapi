@@ -32,6 +32,7 @@ const (
 	ProducerService_UpdateProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/UpdateProducer"
 	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
 	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
+	ProducerService_ListAgencyContacts_FullMethodName            = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
 	ProducerService_SetExternalID_FullMethodName                 = "/producerflow.producer.v1.ProducerService/SetExternalID"
 	ProducerService_ValidateProducerNPN_FullMethodName           = "/producerflow.producer.v1.ProducerService/ValidateProducerNPN"
 	ProducerService_ValidateAgencyNPN_FullMethodName             = "/producerflow.producer.v1.ProducerService/ValidateAgencyNPN"
@@ -116,6 +117,9 @@ type ProducerServiceClient interface {
 	// Each contact is associated with the specified agency.
 	// Returns the IDs of all created contacts.
 	NewContacts(ctx context.Context, in *NewContactsRequest, opts ...grpc.CallOption) (*NewContactsResponse, error)
+	// ListAgencyContacts retrieves all contacts associated with an agency.
+	// Returns a list of contacts with their full details.
+	ListAgencyContacts(ctx context.Context, in *ListAgencyContactsRequest, opts ...grpc.CallOption) (*ListAgencyContactsResponse, error)
 	// SetExternalID sets an external identifier for a producer or contact.
 	// Useful for integrating with external systems that use different ID schemes.
 	SetExternalID(ctx context.Context, in *SetExternalIDRequest, opts ...grpc.CallOption) (*SetExternalIDResponse, error)
@@ -293,6 +297,16 @@ func (c *producerServiceClient) NewContacts(ctx context.Context, in *NewContacts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(NewContactsResponse)
 	err := c.cc.Invoke(ctx, ProducerService_NewContacts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, in *ListAgencyContactsRequest, opts ...grpc.CallOption) (*ListAgencyContactsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAgencyContactsResponse)
+	err := c.cc.Invoke(ctx, ProducerService_ListAgencyContacts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -534,6 +548,9 @@ type ProducerServiceServer interface {
 	// Each contact is associated with the specified agency.
 	// Returns the IDs of all created contacts.
 	NewContacts(context.Context, *NewContactsRequest) (*NewContactsResponse, error)
+	// ListAgencyContacts retrieves all contacts associated with an agency.
+	// Returns a list of contacts with their full details.
+	ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error)
 	// SetExternalID sets an external identifier for a producer or contact.
 	// Useful for integrating with external systems that use different ID schemes.
 	SetExternalID(context.Context, *SetExternalIDRequest) (*SetExternalIDResponse, error)
@@ -625,6 +642,9 @@ func (UnimplementedProducerServiceServer) NewContact(context.Context, *NewContac
 }
 func (UnimplementedProducerServiceServer) NewContacts(context.Context, *NewContactsRequest) (*NewContactsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewContacts not implemented")
+}
+func (UnimplementedProducerServiceServer) ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAgencyContacts not implemented")
 }
 func (UnimplementedProducerServiceServer) SetExternalID(context.Context, *SetExternalIDRequest) (*SetExternalIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetExternalID not implemented")
@@ -928,6 +948,24 @@ func _ProducerService_NewContacts_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).NewContacts(ctx, req.(*NewContactsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_ListAgencyContacts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAgencyContactsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).ListAgencyContacts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_ListAgencyContacts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).ListAgencyContacts(ctx, req.(*ListAgencyContactsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1296,6 +1334,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NewContacts",
 			Handler:    _ProducerService_NewContacts_Handler,
+		},
+		{
+			MethodName: "ListAgencyContacts",
+			Handler:    _ProducerService_ListAgencyContacts_Handler,
 		},
 		{
 			MethodName: "SetExternalID",

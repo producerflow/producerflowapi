@@ -72,6 +72,9 @@ const (
 	// ProducerServiceNewContactsProcedure is the fully-qualified name of the ProducerService's
 	// NewContacts RPC.
 	ProducerServiceNewContactsProcedure = "/producerflow.producer.v1.ProducerService/NewContacts"
+	// ProducerServiceListAgencyContactsProcedure is the fully-qualified name of the ProducerService's
+	// ListAgencyContacts RPC.
+	ProducerServiceListAgencyContactsProcedure = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
 	// ProducerServiceSetExternalIDProcedure is the fully-qualified name of the ProducerService's
 	// SetExternalID RPC.
 	ProducerServiceSetExternalIDProcedure = "/producerflow.producer.v1.ProducerService/SetExternalID"
@@ -179,6 +182,9 @@ type ProducerServiceClient interface {
 	// Each contact is associated with the specified agency.
 	// Returns the IDs of all created contacts.
 	NewContacts(context.Context, *connect.Request[v1.NewContactsRequest]) (*connect.Response[v1.NewContactsResponse], error)
+	// ListAgencyContacts retrieves all contacts associated with an agency.
+	// Returns a list of contacts with their full details.
+	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
 	// SetExternalID sets an external identifier for a producer or contact.
 	// Useful for integrating with external systems that use different ID schemes.
 	SetExternalID(context.Context, *connect.Request[v1.SetExternalIDRequest]) (*connect.Response[v1.SetExternalIDResponse], error)
@@ -313,6 +319,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("NewContacts")),
 			connect.WithClientOptions(opts...),
 		),
+		listAgencyContacts: connect.NewClient[v1.ListAgencyContactsRequest, v1.ListAgencyContactsResponse](
+			httpClient,
+			baseURL+ProducerServiceListAgencyContactsProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
+			connect.WithClientOptions(opts...),
+		),
 		setExternalID: connect.NewClient[v1.SetExternalIDRequest, v1.SetExternalIDResponse](
 			httpClient,
 			baseURL+ProducerServiceSetExternalIDProcedure,
@@ -433,6 +445,7 @@ type producerServiceClient struct {
 	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
 	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
 	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
+	listAgencyContacts            *connect.Client[v1.ListAgencyContactsRequest, v1.ListAgencyContactsResponse]
 	setExternalID                 *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
 	validateProducerNPN           *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
 	validateAgencyNPN             *connect.Client[v1.ValidateAgencyNPNRequest, v1.ValidateAgencyNPNResponse]
@@ -517,6 +530,11 @@ func (c *producerServiceClient) NewContact(ctx context.Context, req *connect.Req
 // NewContacts calls producerflow.producer.v1.ProducerService.NewContacts.
 func (c *producerServiceClient) NewContacts(ctx context.Context, req *connect.Request[v1.NewContactsRequest]) (*connect.Response[v1.NewContactsResponse], error) {
 	return c.newContacts.CallUnary(ctx, req)
+}
+
+// ListAgencyContacts calls producerflow.producer.v1.ProducerService.ListAgencyContacts.
+func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, req *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
+	return c.listAgencyContacts.CallUnary(ctx, req)
 }
 
 // SetExternalID calls producerflow.producer.v1.ProducerService.SetExternalID.
@@ -661,6 +679,9 @@ type ProducerServiceHandler interface {
 	// Each contact is associated with the specified agency.
 	// Returns the IDs of all created contacts.
 	NewContacts(context.Context, *connect.Request[v1.NewContactsRequest]) (*connect.Response[v1.NewContactsResponse], error)
+	// ListAgencyContacts retrieves all contacts associated with an agency.
+	// Returns a list of contacts with their full details.
+	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
 	// SetExternalID sets an external identifier for a producer or contact.
 	// Useful for integrating with external systems that use different ID schemes.
 	SetExternalID(context.Context, *connect.Request[v1.SetExternalIDRequest]) (*connect.Response[v1.SetExternalIDResponse], error)
@@ -789,6 +810,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		ProducerServiceNewContactsProcedure,
 		svc.NewContacts,
 		connect.WithSchema(producerServiceMethods.ByName("NewContacts")),
+		connect.WithHandlerOptions(opts...),
+	)
+	producerServiceListAgencyContactsHandler := connect.NewUnaryHandler(
+		ProducerServiceListAgencyContactsProcedure,
+		svc.ListAgencyContacts,
+		connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
 		connect.WithHandlerOptions(opts...),
 	)
 	producerServiceSetExternalIDHandler := connect.NewUnaryHandler(
@@ -921,6 +948,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceNewContactHandler.ServeHTTP(w, r)
 		case ProducerServiceNewContactsProcedure:
 			producerServiceNewContactsHandler.ServeHTTP(w, r)
+		case ProducerServiceListAgencyContactsProcedure:
+			producerServiceListAgencyContactsHandler.ServeHTTP(w, r)
 		case ProducerServiceSetExternalIDProcedure:
 			producerServiceSetExternalIDHandler.ServeHTTP(w, r)
 		case ProducerServiceValidateProducerNPNProcedure:
@@ -1014,6 +1043,10 @@ func (UnimplementedProducerServiceHandler) NewContact(context.Context, *connect.
 
 func (UnimplementedProducerServiceHandler) NewContacts(context.Context, *connect.Request[v1.NewContactsRequest]) (*connect.Response[v1.NewContactsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.NewContacts is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListAgencyContacts is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) SetExternalID(context.Context, *connect.Request[v1.SetExternalIDRequest]) (*connect.Response[v1.SetExternalIDResponse], error) {
