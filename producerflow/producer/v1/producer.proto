@@ -82,6 +82,10 @@ service ProducerService {
   // Returns the IDs of all created contacts.
   rpc NewContacts(NewContactsRequest) returns (NewContactsResponse);
 
+  // ListAgencyContacts retrieves all contacts associated with an agency.
+  // Returns a list of contacts with their full details.
+  rpc ListAgencyContacts(ListAgencyContactsRequest) returns (ListAgencyContactsResponse);
+
   // SetExternalID sets an external identifier for a producer or contact.
   // Useful for integrating with external systems that use different ID schemes.
   rpc SetExternalID(SetExternalIDRequest) returns (SetExternalIDResponse);
@@ -1642,6 +1646,68 @@ message NewContactsResponse {
   // List of UUIDs for the newly created contacts.
   // The order matches the order of contacts in the request.
   repeated string contact_ids = 1;
+}
+
+// Contact represents a contact associated with an agency.
+// Contacts are non-producer individuals linked to the agency.
+message Contact {
+  // Unique identifier for the contact.
+  string id = 1;
+
+  // First name of the contact.
+  string first_name = 2;
+
+  // Middle name of the contact.
+  string middle_name = 3;
+
+  // Last name of the contact.
+  string last_name = 4;
+
+  // Email address of the contact.
+  // Must be unique within the tenant.
+  string email = 5;
+
+  // Phone number of the contact.
+  string phone = 6;
+
+  // Role or position of the contact within the agency.
+  string role = 7;
+
+  // Mailing address of the contact.
+  // Address represents a mailing address for the contact.
+  message Address {
+    // Street address of the contact.
+    string street = 1;
+
+    // City of the contact.
+    string city = 2;
+
+    // State of the contact.
+    string state = 3;
+
+    // Zip code of the contact.
+    string zip = 4;
+  }
+  Address address = 8;
+
+  // National Producer Number (NPN) of the contact, if applicable.
+  string npn = 9;
+
+  // When the contact was created.
+  google.protobuf.Timestamp created_at = 10;
+}
+
+// ListAgencyContactsRequest requests all contacts associated with an agency.
+message ListAgencyContactsRequest {
+  // The UUID of the agency to retrieve contacts for.
+  // Must be a valid UUID format.
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+// ListAgencyContactsResponse contains all contacts associated with an agency.
+message ListAgencyContactsResponse {
+  // List of all contacts associated with the specified agency.
+  repeated Contact contacts = 1;
 }
 
 // SetExternalIDRequest is used to associate an external identifier with a producer, agency, or contact.
