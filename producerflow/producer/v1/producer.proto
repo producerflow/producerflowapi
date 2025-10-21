@@ -537,9 +537,6 @@ message NewAgencyRequest {
 
   Agency agency = 1 [(buf.validate.field).required = true];
 
-  // Determines if the agency should be auto approved.
-  bool auto_approve = 2 [deprecated = true];
-
   // Optional. Overrides the tenant's default NIPR sync setting during onboarding.
   // Most tenants have this enabled by default, so it usually doesn't need to be set.
   // If specified, this value takes precedence over the tenant's default behavior.
@@ -733,20 +730,6 @@ message ListNewProducersResponse {
   // List of new producers matching the filter criteria.
   // These are producers typically in the NEW or pending onboarding state.
   repeated Producer new_producers = 1;
-}
-
-// ProducerOnboardingState defines the possible states in the producer onboarding workflow.
-// This enum is deprecated and should not be used in new code.
-enum ProducerOnboardingState {
-  option deprecated = true;
-
-  PRODUCER_ONBOARDING_STATE_UNSPECIFIED = 0;
-  // The producer has been added to the agency and is awaiting approval from the tenant.
-  PRODUCER_ONBOARDING_STATE_NEW = 1;
-  // The producer has been approved by the tenant.
-  PRODUCER_ONBOARDING_STATE_APPROVED_BY_TENANT = 2;
-  // The producer has been rejected by the tenant.
-  PRODUCER_ONBOARDING_STATE_REJECTED_BY_TENANT = 3;
 }
 
 // Agency represents a complete agency entity with all associated information.
@@ -1160,10 +1143,6 @@ message Producer {
 
   string id = 1;
 
-  // The full name of the producer.
-  // This field is deprecated. Use first_name and last_name instead.
-  string name = 2 [deprecated = true];
-
   // First name of the producer.
   string first_name = 15;
 
@@ -1387,10 +1366,6 @@ message Producer {
   // and carrier appointments.
   NIPR nipr = 6;
 
-  // The status of the producer onboarding process.
-  // This field is deprecated and should not be used in new code.
-  ProducerOnboardingState onboarding_status = 11 [deprecated = true];
-
   // Indicates whether this producer is the principal of an agency.
   // A principal producer has additional responsibilities and permissions.
   bool is_principal = 12;
@@ -1480,10 +1455,6 @@ message NewProducer {
     ignore: IGNORE_IF_DEFAULT_VALUE
     string: {max_len: 255}
   }];
-
-  // Indicates whether the producer should be automatically approved.
-  // This field is deprecated and should not be used in new code.
-  bool auto_approve = 9 [deprecated = true];
 
   // Optional list of location IDs to assign to the producer during creation.
   // All locations must exist and belong to the specified agency.
