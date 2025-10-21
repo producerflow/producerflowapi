@@ -164,7 +164,6 @@
     - [NewAgencyRequest.Agency.BankAccount.AccountType](#producerflow-producer-v1-NewAgencyRequest-Agency-BankAccount-AccountType)
     - [NewAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact-CommunicationRole)
     - [Producer.NIPR.License.LicenseStatus](#producerflow-producer-v1-Producer-NIPR-License-LicenseStatus)
-    - [ProducerOnboardingState](#producerflow-producer-v1-ProducerOnboardingState)
   
     - [ProducerService](#producerflow-producer-v1-ProducerService)
   
@@ -1696,7 +1695,6 @@ NewAgencyRequest contains complete information for creating a new agency
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | agency | [NewAgencyRequest.Agency](#producerflow-producer-v1-NewAgencyRequest-Agency) |  |  |
-| auto_approve | [bool](#bool) |  | **Deprecated.** Determines if the agency should be auto approved. |
 | sync_with_nipr | [bool](#bool) | optional | Optional. Overrides the tenant&#39;s default NIPR sync setting during onboarding. Most tenants have this enabled by default, so it usually doesn&#39;t need to be set. If specified, this value takes precedence over the tenant&#39;s default behavior. |
 
 
@@ -1992,7 +1990,6 @@ NewProducer represents the data needed to create a new producer in the system.
 | phone | [string](#string) |  | Phone number of the producer. Optional if default value, but if provided must match the pattern of a valid phone number. |
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
 | tenant_id | [string](#string) |  | Optional. External identifier for the producer in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don&#39;t need to track a reference to your internal system. This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., &#34;PROD-12345&#34;, &#34;uuid&#34;). Validation: Maximum length of 255 characters. |
-| auto_approve | [bool](#bool) |  | **Deprecated.** Indicates whether the producer should be automatically approved. This field is deprecated and should not be used in new code. |
 | location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
 | metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the producer. |
 
@@ -2131,7 +2128,6 @@ Internal ID of the producer.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  |  |
-| name | [string](#string) |  | **Deprecated.** The full name of the producer. This field is deprecated. Use first_name and last_name instead. |
 | first_name | [string](#string) |  | First name of the producer. |
 | middle_name | [string](#string) |  | Middle name of the producer. |
 | last_name | [string](#string) |  | Last name of the producer. |
@@ -2141,7 +2137,6 @@ Internal ID of the producer.
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the producer is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
 | agency | [Producer.Agency](#producerflow-producer-v1-Producer-Agency) |  | Basic information about the agency this producer is associated with. |
 | nipr | [Producer.NIPR](#producerflow-producer-v1-Producer-NIPR) |  | Data synchronized from the NIPR service. Contains license information, biographic data, regulatory actions, and carrier appointments. |
-| onboarding_status | [ProducerOnboardingState](#producerflow-producer-v1-ProducerOnboardingState) |  | **Deprecated.** The status of the producer onboarding process. This field is deprecated and should not be used in new code. |
 | is_principal | [bool](#bool) |  | Indicates whether this producer is the principal of an agency. A principal producer has additional responsibilities and permissions. |
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the producer. |
 | address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
@@ -2897,21 +2892,6 @@ LicenseStatus defines the possible statuses of an insurance license.
 | LICENSE_STATUS_EXPIRED | 1 | The license has expired and is no longer valid. |
 | LICENSE_STATUS_VALID | 2 | License is currently active. |
 | LICENSE_STATUS_NOT_ACTIVE | 3 | The license exists but is not in an active state. This could be due to suspension, revocation, or other reasons. |
-
-
-
-<a name="producerflow-producer-v1-ProducerOnboardingState"></a>
-
-### ProducerOnboardingState
-ProducerOnboardingState defines the possible states in the producer onboarding workflow.
-This enum is deprecated and should not be used in new code.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| PRODUCER_ONBOARDING_STATE_UNSPECIFIED | 0 |  |
-| PRODUCER_ONBOARDING_STATE_NEW | 1 | The producer has been added to the agency and is awaiting approval from the tenant. |
-| PRODUCER_ONBOARDING_STATE_APPROVED_BY_TENANT | 2 | The producer has been approved by the tenant. |
-| PRODUCER_ONBOARDING_STATE_REJECTED_BY_TENANT | 3 | The producer has been rejected by the tenant. |
 
 
  
