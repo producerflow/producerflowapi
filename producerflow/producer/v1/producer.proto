@@ -779,6 +779,11 @@ message Agency {
     // Indicates whether the agency is enabled to be synchronized with NIPR API.
     // When true, the system will regularly check for updates from NIPR.
     bool pdb_alerts_sync_enabled = 10;
+
+    // MetadataQuestions contains custom metadata questions and answers for the agency.
+    // This field stores tenant-specific questions that were collected during agency onboarding.
+    // The map key is the question identifier/text, and the value is the answer provided.
+    map<string, string> metadata_questions = 11;
   }
 
   // AgencyInfo type field named agency_info
