@@ -42,6 +42,7 @@
     - [Agency](#producerflow-producer-v1-Agency)
     - [Agency.Address](#producerflow-producer-v1-Agency-Address)
     - [Agency.AgencyInfo](#producerflow-producer-v1-Agency-AgencyInfo)
+    - [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry)
     - [Agency.BankAccount](#producerflow-producer-v1-Agency-BankAccount)
     - [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours)
     - [Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-Agency-BusinessHours-BusinessHour)
@@ -784,6 +785,23 @@ AgencyInfo contains contact and identification information for an agency.
 | website | [string](#string) |  | Website URL for the agency, if available. |
 | npn | [string](#string) |  | National Producer Number (NPN) of the agency. This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC). |
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the agency is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
+| metadata_questions | [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. This field stores tenant-specific questions that were collected during agency onboarding. The map key is the question identifier/text, and the value is the answer provided. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry"></a>
+
+### Agency.AgencyInfo.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
