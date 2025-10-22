@@ -532,7 +532,8 @@ message NewAgencyRequest {
     // Optional field that allows specifying multiple locations during agency creation.
     repeated LocationInput locations = 20 [(buf.validate.field).repeated.max_items = 100];
     // MetadataQuestions contains custom metadata questions and answers for the agency.
-    string metadata_questions = 21;
+    // The map key is the question identifier/text, and the value is the answer provided.
+    map<string, string> metadata_questions = 21;
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -1393,6 +1394,11 @@ message Producer {
 
   // Locations assigned to this producer.
   repeated Location locations = 19;
+
+  // MetadataQuestions contains custom metadata questions and answers for the producer.
+  // This field stores tenant-specific questions that need to be asked during producer onboarding.
+  // The map key is the question identifier/text, and the value is the answer provided.
+  map<string, string> metadata_questions = 40;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -1466,7 +1472,8 @@ message NewProducer {
   }];
 
   // MetadataQuestions contains custom metadata questions and answers for the producer.
-  string metadata_questions = 11;
+  // The map key is the question identifier/text, and the value is the answer provided.
+  map<string, string> metadata_questions = 11;
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
