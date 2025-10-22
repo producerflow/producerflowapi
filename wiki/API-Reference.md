@@ -98,6 +98,7 @@
     - [NewAgencyRequest.Agency.BusinessHours](#producerflow-producer-v1-NewAgencyRequest-Agency-BusinessHours)
     - [NewAgencyRequest.Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-NewAgencyRequest-Agency-BusinessHours-BusinessHour)
     - [NewAgencyRequest.Agency.EOInfo](#producerflow-producer-v1-NewAgencyRequest-Agency-EOInfo)
+    - [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry)
     - [NewAgencyRequest.Agency.PointOfContact](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact)
     - [NewAgencyRequest.Agency.Principal](#producerflow-producer-v1-NewAgencyRequest-Agency-Principal)
     - [NewAgencyResponse](#producerflow-producer-v1-NewAgencyResponse)
@@ -109,6 +110,7 @@
     - [NewContactsResponse](#producerflow-producer-v1-NewContactsResponse)
     - [NewProducer](#producerflow-producer-v1-NewProducer)
     - [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address)
+    - [NewProducer.MetadataQuestionsEntry](#producerflow-producer-v1-NewProducer-MetadataQuestionsEntry)
     - [NewProducerRequest](#producerflow-producer-v1-NewProducerRequest)
     - [NewProducerResponse](#producerflow-producer-v1-NewProducerResponse)
     - [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest)
@@ -118,6 +120,7 @@
     - [Producer](#producerflow-producer-v1-Producer)
     - [Producer.Address](#producerflow-producer-v1-Producer-Address)
     - [Producer.Agency](#producerflow-producer-v1-Producer-Agency)
+    - [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry)
     - [Producer.NIPR](#producerflow-producer-v1-Producer-NIPR)
     - [Producer.NIPR.Appointment](#producerflow-producer-v1-Producer-NIPR-Appointment)
     - [Producer.NIPR.Biographic](#producerflow-producer-v1-Producer-NIPR-Biographic)
@@ -1729,7 +1732,7 @@ Agency contains all information about the agency to be created
 | invoicing_address | [Address](#producerflow-producer-v1-Address) |  | InvoicingAddress represents the invoicing address of the agency. |
 | tenant_agency_id | [string](#string) |  | TenantAgencyID represents the ID of the agency in the tenant. This is used to link the agency to the tenant. |
 | locations | [LocationInput](#producerflow-producer-v1-LocationInput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
-| metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the agency. |
+| metadata_questions | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. The map key is the question identifier/text, and the value is the answer provided. |
 
 
 
@@ -1801,6 +1804,22 @@ EOInfo contains Errors &amp; Omissions insurance information
 | coverage_amount | [string](#string) |  | Amount of coverage provided by the E&amp;O policy (aggregate limit) |
 | effective_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date when the E&amp;O coverage will become effective |
 | per_occurrence | [string](#string) |  | Per occurrence limit for the E&amp;O policy |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry"></a>
+
+### NewAgencyRequest.Agency.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -1991,7 +2010,7 @@ NewProducer represents the data needed to create a new producer in the system.
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
 | tenant_id | [string](#string) |  | Optional. External identifier for the producer in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don&#39;t need to track a reference to your internal system. This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., &#34;PROD-12345&#34;, &#34;uuid&#34;). Validation: Maximum length of 255 characters. |
 | location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
-| metadata_questions | [string](#string) |  | MetadataQuestions contains custom metadata questions and answers for the producer. |
+| metadata_questions | [NewProducer.MetadataQuestionsEntry](#producerflow-producer-v1-NewProducer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. The map key is the question identifier/text, and the value is the answer provided. |
 
 
 
@@ -2010,6 +2029,22 @@ Address represents a mailing address for the producer.
 | city | [string](#string) |  | City of the producer. Required and must be non-empty. |
 | state | [string](#string) |  | State of the producer. Required and must be a 2-letter state code. |
 | zip | [string](#string) |  | Zip code of the producer. Required and must be between 1 and 10 characters. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-NewProducer-MetadataQuestionsEntry"></a>
+
+### NewProducer.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -2141,6 +2176,7 @@ Internal ID of the producer.
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the producer. |
 | address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
 | locations | [Location](#producerflow-producer-v1-Location) | repeated | Locations assigned to this producer. |
+| metadata_questions | [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. This field stores tenant-specific questions that need to be asked during producer onboarding. The map key is the question identifier/text, and the value is the answer provided. |
 
 
 
@@ -2175,6 +2211,22 @@ Agency contains basic information about the agency this producer is associated w
 | ----- | ---- | ----- | ----------- |
 | agency_id | [string](#string) |  | Unique identifier for the associated agency. |
 | name | [string](#string) |  | Name of the associated agency. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Producer-MetadataQuestionsEntry"></a>
+
+### Producer.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
