@@ -43,6 +43,10 @@ service ProducerService {
   // that can be used to organize agencies and producers.
   rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
 
+  // GetOrganization retrieves details of a specific organization by ID.
+  // Returns the organization's information including name and external ID.
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
+
   // NewProducer creates a new producer and associates them with an existing agency.
   // It validates the producer's information and checks that the email is unique.
   // Returns the ID of the created producer.
@@ -1935,6 +1939,9 @@ message Organization {
   // External identifier for the organization.
   // This is the identifier used by the tenant's system to identify the organization.
   string external_id = 3;
+
+  // Contact email address for the organization.
+  string email = 4;
 }
 
 // ListOrganizationsResponse contains the list of organizations associated with the tenant.
@@ -1945,6 +1952,19 @@ message ListOrganizationsResponse {
   // Each organization includes its unique identifier and display name.
   // The list may be empty if no organizations are associated with the tenant.
   repeated Organization organizations = 1;
+}
+
+// GetOrganizationRequest specifies which organization to retrieve.
+message GetOrganizationRequest {
+  // Unique identifier of the organization to retrieve.
+  // Must be a valid UUID.
+  string organization_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+// GetOrganizationResponse contains the details of the requested organization.
+message GetOrganizationResponse {
+  // The requested organization.
+  Organization organization = 1;
 }
 
 // CreateProducerUploadURLRequest contains information needed to generate
