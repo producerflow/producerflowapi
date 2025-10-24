@@ -74,6 +74,8 @@
     - [GetAgencyAndProducersResponse](#producerflow-producer-v1-GetAgencyAndProducersResponse)
     - [GetAgencyFilesRequest](#producerflow-producer-v1-GetAgencyFilesRequest)
     - [GetAgencyFilesResponse](#producerflow-producer-v1-GetAgencyFilesResponse)
+    - [GetOrganizationRequest](#producerflow-producer-v1-GetOrganizationRequest)
+    - [GetOrganizationResponse](#producerflow-producer-v1-GetOrganizationResponse)
     - [GetProducerRequest](#producerflow-producer-v1-GetProducerRequest)
     - [GetProducerRequest.EmailLookup](#producerflow-producer-v1-GetProducerRequest-EmailLookup)
     - [GetProducerRequest.ProducerIDLookup](#producerflow-producer-v1-GetProducerRequest-ProducerIDLookup)
@@ -1402,6 +1404,36 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 
 
 
+<a name="producerflow-producer-v1-GetOrganizationRequest"></a>
+
+### GetOrganizationRequest
+GetOrganizationRequest specifies which organization to retrieve.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Unique identifier of the organization to retrieve. Must be a valid UUID. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-GetOrganizationResponse"></a>
+
+### GetOrganizationResponse
+GetOrganizationResponse contains the details of the requested organization.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization | [Organization](#producerflow-producer-v1-Organization) |  | The requested organization. |
+
+
+
+
+
+
 <a name="producerflow-producer-v1-GetProducerRequest"></a>
 
 ### GetProducerRequest
@@ -2148,6 +2180,7 @@ such as agency networks, aggregators, or other business hierarchies.
 | id | [string](#string) |  | Unique identifier for the organization. This is a UUID that can be used to reference the organization in other API calls. |
 | name | [string](#string) |  | Display name of the organization. This is the human-readable name that identifies the organization to users. |
 | external_id | [string](#string) |  | External identifier for the organization. This is the identifier used by the tenant&#39;s system to identify the organization. |
+| email | [string](#string) |  | Contact email address for the organization. |
 
 
 
@@ -2989,6 +3022,7 @@ RPCs for starting the onboarding agency process.
 | NewAgency | [NewAgencyRequest](#producerflow-producer-v1-NewAgencyRequest) | [NewAgencyResponse](#producerflow-producer-v1-NewAgencyResponse) | NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can&#39;t have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers. |
 | ListAgencies | [ListAgenciesRequest](#producerflow-producer-v1-ListAgenciesRequest) | [ListAgenciesResponse](#producerflow-producer-v1-ListAgenciesResponse) | ListAgencies returns a list of agencies associated with the tenant. Supports optional filtering by organization ID and search queries. |
 | ListOrganizations | [ListOrganizationsRequest](#producerflow-producer-v1-ListOrganizationsRequest) | [ListOrganizationsResponse](#producerflow-producer-v1-ListOrganizationsResponse) | ListOrganizations returns a list of organizations associated with the tenant. Organizations represent logical groupings or hierarchical structures within a tenant that can be used to organize agencies and producers. |
+| GetOrganization | [GetOrganizationRequest](#producerflow-producer-v1-GetOrganizationRequest) | [GetOrganizationResponse](#producerflow-producer-v1-GetOrganizationResponse) | GetOrganization retrieves details of a specific organization by ID. Returns the organization&#39;s information including name and external ID. |
 | NewProducer | [NewProducerRequest](#producerflow-producer-v1-NewProducerRequest) | [NewProducerResponse](#producerflow-producer-v1-NewProducerResponse) | NewProducer creates a new producer and associates them with an existing agency. It validates the producer&#39;s information and checks that the email is unique. Returns the ID of the created producer. |
 | NewProducers | [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest) | [NewProducersResponse](#producerflow-producer-v1-NewProducersResponse) | NewProducers creates multiple producers and associates them with the specified agency. It performs the same validations as NewProducer for each entry. Returns the IDs of all created producers. |
 | GetAgencyAndProducers | [GetAgencyAndProducersRequest](#producerflow-producer-v1-GetAgencyAndProducersRequest) | [GetAgencyAndProducersResponse](#producerflow-producer-v1-GetAgencyAndProducersResponse) | GetAgencyAndProducers retrieves details for an agency and all associated producers. Returns the agency information and a list of producers. |

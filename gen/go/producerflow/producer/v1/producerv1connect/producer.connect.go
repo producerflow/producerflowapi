@@ -48,6 +48,9 @@ const (
 	// ProducerServiceListOrganizationsProcedure is the fully-qualified name of the ProducerService's
 	// ListOrganizations RPC.
 	ProducerServiceListOrganizationsProcedure = "/producerflow.producer.v1.ProducerService/ListOrganizations"
+	// ProducerServiceGetOrganizationProcedure is the fully-qualified name of the ProducerService's
+	// GetOrganization RPC.
+	ProducerServiceGetOrganizationProcedure = "/producerflow.producer.v1.ProducerService/GetOrganization"
 	// ProducerServiceNewProducerProcedure is the fully-qualified name of the ProducerService's
 	// NewProducer RPC.
 	ProducerServiceNewProducerProcedure = "/producerflow.producer.v1.ProducerService/NewProducer"
@@ -151,6 +154,9 @@ type ProducerServiceClient interface {
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
 	ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error)
+	// GetOrganization retrieves details of a specific organization by ID.
+	// Returns the organization's information including name and external ID.
+	GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error)
 	// NewProducer creates a new producer and associates them with an existing agency.
 	// It validates the producer's information and checks that the email is unique.
 	// Returns the ID of the created producer.
@@ -269,6 +275,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			httpClient,
 			baseURL+ProducerServiceListOrganizationsProcedure,
 			connect.WithSchema(producerServiceMethods.ByName("ListOrganizations")),
+			connect.WithClientOptions(opts...),
+		),
+		getOrganization: connect.NewClient[v1.GetOrganizationRequest, v1.GetOrganizationResponse](
+			httpClient,
+			baseURL+ProducerServiceGetOrganizationProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("GetOrganization")),
 			connect.WithClientOptions(opts...),
 		),
 		newProducer: connect.NewClient[v1.NewProducerRequest, v1.NewProducerResponse](
@@ -437,6 +449,7 @@ type producerServiceClient struct {
 	newAgency                     *connect.Client[v1.NewAgencyRequest, v1.NewAgencyResponse]
 	listAgencies                  *connect.Client[v1.ListAgenciesRequest, v1.ListAgenciesResponse]
 	listOrganizations             *connect.Client[v1.ListOrganizationsRequest, v1.ListOrganizationsResponse]
+	getOrganization               *connect.Client[v1.GetOrganizationRequest, v1.GetOrganizationResponse]
 	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
 	newProducers                  *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
 	getAgencyAndProducers         *connect.Client[v1.GetAgencyAndProducersRequest, v1.GetAgencyAndProducersResponse]
@@ -490,6 +503,11 @@ func (c *producerServiceClient) ListAgencies(ctx context.Context, req *connect.R
 // ListOrganizations calls producerflow.producer.v1.ProducerService.ListOrganizations.
 func (c *producerServiceClient) ListOrganizations(ctx context.Context, req *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error) {
 	return c.listOrganizations.CallUnary(ctx, req)
+}
+
+// GetOrganization calls producerflow.producer.v1.ProducerService.GetOrganization.
+func (c *producerServiceClient) GetOrganization(ctx context.Context, req *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error) {
+	return c.getOrganization.CallUnary(ctx, req)
 }
 
 // NewProducer calls producerflow.producer.v1.ProducerService.NewProducer.
@@ -648,6 +666,9 @@ type ProducerServiceHandler interface {
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
 	ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error)
+	// GetOrganization retrieves details of a specific organization by ID.
+	// Returns the organization's information including name and external ID.
+	GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error)
 	// NewProducer creates a new producer and associates them with an existing agency.
 	// It validates the producer's information and checks that the email is unique.
 	// Returns the ID of the created producer.
@@ -762,6 +783,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		ProducerServiceListOrganizationsProcedure,
 		svc.ListOrganizations,
 		connect.WithSchema(producerServiceMethods.ByName("ListOrganizations")),
+		connect.WithHandlerOptions(opts...),
+	)
+	producerServiceGetOrganizationHandler := connect.NewUnaryHandler(
+		ProducerServiceGetOrganizationProcedure,
+		svc.GetOrganization,
+		connect.WithSchema(producerServiceMethods.ByName("GetOrganization")),
 		connect.WithHandlerOptions(opts...),
 	)
 	producerServiceNewProducerHandler := connect.NewUnaryHandler(
@@ -932,6 +959,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceListAgenciesHandler.ServeHTTP(w, r)
 		case ProducerServiceListOrganizationsProcedure:
 			producerServiceListOrganizationsHandler.ServeHTTP(w, r)
+		case ProducerServiceGetOrganizationProcedure:
+			producerServiceGetOrganizationHandler.ServeHTTP(w, r)
 		case ProducerServiceNewProducerProcedure:
 			producerServiceNewProducerHandler.ServeHTTP(w, r)
 		case ProducerServiceNewProducersProcedure:
@@ -1011,6 +1040,10 @@ func (UnimplementedProducerServiceHandler) ListAgencies(context.Context, *connec
 
 func (UnimplementedProducerServiceHandler) ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListOrganizations is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetOrganization is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) NewProducer(context.Context, *connect.Request[v1.NewProducerRequest]) (*connect.Response[v1.NewProducerResponse], error) {

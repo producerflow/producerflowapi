@@ -24,6 +24,7 @@ const (
 	ProducerService_NewAgency_FullMethodName                     = "/producerflow.producer.v1.ProducerService/NewAgency"
 	ProducerService_ListAgencies_FullMethodName                  = "/producerflow.producer.v1.ProducerService/ListAgencies"
 	ProducerService_ListOrganizations_FullMethodName             = "/producerflow.producer.v1.ProducerService/ListOrganizations"
+	ProducerService_GetOrganization_FullMethodName               = "/producerflow.producer.v1.ProducerService/GetOrganization"
 	ProducerService_NewProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewProducer"
 	ProducerService_NewProducers_FullMethodName                  = "/producerflow.producer.v1.ProducerService/NewProducers"
 	ProducerService_GetAgencyAndProducers_FullMethodName         = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
@@ -86,6 +87,9 @@ type ProducerServiceClient interface {
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
 	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
+	// GetOrganization retrieves details of a specific organization by ID.
+	// Returns the organization's information including name and external ID.
+	GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error)
 	// NewProducer creates a new producer and associates them with an existing agency.
 	// It validates the producer's information and checks that the email is unique.
 	// Returns the ID of the created producer.
@@ -217,6 +221,16 @@ func (c *producerServiceClient) ListOrganizations(ctx context.Context, in *ListO
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOrganizationsResponse)
 	err := c.cc.Invoke(ctx, ProducerService_ListOrganizations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrganizationResponse)
+	err := c.cc.Invoke(ctx, ProducerService_GetOrganization_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -517,6 +531,9 @@ type ProducerServiceServer interface {
 	// Organizations represent logical groupings or hierarchical structures within a tenant
 	// that can be used to organize agencies and producers.
 	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
+	// GetOrganization retrieves details of a specific organization by ID.
+	// Returns the organization's information including name and external ID.
+	GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error)
 	// NewProducer creates a new producer and associates them with an existing agency.
 	// It validates the producer's information and checks that the email is unique.
 	// Returns the ID of the created producer.
@@ -618,6 +635,9 @@ func (UnimplementedProducerServiceServer) ListAgencies(context.Context, *ListAge
 }
 func (UnimplementedProducerServiceServer) ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrganizations not implemented")
+}
+func (UnimplementedProducerServiceServer) GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrganization not implemented")
 }
 func (UnimplementedProducerServiceServer) NewProducer(context.Context, *NewProducerRequest) (*NewProducerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewProducer not implemented")
@@ -804,6 +824,24 @@ func _ProducerService_ListOrganizations_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).ListOrganizations(ctx, req.(*ListOrganizationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_GetOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).GetOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_GetOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).GetOrganization(ctx, req.(*GetOrganizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1302,6 +1340,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOrganizations",
 			Handler:    _ProducerService_ListOrganizations_Handler,
+		},
+		{
+			MethodName: "GetOrganization",
+			Handler:    _ProducerService_GetOrganization_Handler,
 		},
 		{
 			MethodName: "NewProducer",
