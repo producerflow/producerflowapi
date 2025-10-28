@@ -1648,6 +1648,11 @@ This request requires no parameters  and will return all organizations that
 the authenticated tenant has access to.
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pagination | [Pagination](#producerflow-producer-v1-Pagination) |  | Optional. Pagination parameters. If not provided, defaults to page_size=50. |
+
+
 
 
 
@@ -1656,13 +1661,15 @@ the authenticated tenant has access to.
 
 ### ListOrganizationsResponse
 ListOrganizationsResponse contains the list of organizations associated with the tenant.
-The organizations are returned in no particular order. If the tenant has no organizations,
+The organizations are returned ordered by name. If the tenant has no organizations,
 the organizations list will be empty.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| organizations | [Organization](#producerflow-producer-v1-Organization) | repeated | List of organizations associated with the tenant. Each organization includes its unique identifier and display name. The list may be empty if no organizations are associated with the tenant. |
+| organizations | [Organization](#producerflow-producer-v1-Organization) | repeated | List of organizations associated with the tenant. Each organization includes its unique identifier and display name. The list may be empty if no organizations are associated with the tenant. Organizations are ordered alphabetically by name. |
+| next_page_token | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. |
+| total_count | [int32](#int32) |  | Total number of organizations matching the filter criteria. |
 
 
 
