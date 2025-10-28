@@ -1922,7 +1922,11 @@ message ListAgenciesResponse {
 // ListOrganizationsRequest requests a list of all organizations associated with the tenant.
 // This request requires no parameters  and will return all organizations that
 // the authenticated tenant has access to.
-message ListOrganizationsRequest {}
+message ListOrganizationsRequest {
+  // Optional. Pagination parameters.
+  // If not provided, defaults to page_size=50.
+  Pagination pagination = 1;
+}
 
 // Organization represents a logical grouping or hierarchical structure within a tenant.
 // Organizations can be used to organize agencies into meaningful groups
@@ -1945,13 +1949,21 @@ message Organization {
 }
 
 // ListOrganizationsResponse contains the list of organizations associated with the tenant.
-// The organizations are returned in no particular order. If the tenant has no organizations,
+// The organizations are returned ordered by name. If the tenant has no organizations,
 // the organizations list will be empty.
 message ListOrganizationsResponse {
   // List of organizations associated with the tenant.
   // Each organization includes its unique identifier and display name.
   // The list may be empty if no organizations are associated with the tenant.
+  // Organizations are ordered alphabetically by name.
   repeated Organization organizations = 1;
+
+  // A token that can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  string next_page_token = 2;
+
+  // Total number of organizations matching the filter criteria.
+  int32 total_count = 3;
 }
 
 // GetOrganizationRequest specifies which organization to retrieve.
