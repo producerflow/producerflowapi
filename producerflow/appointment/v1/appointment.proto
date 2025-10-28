@@ -44,10 +44,10 @@ service AppointmentService {
 // Request to create a new appointment.
 message RequestAppointmentRequest {
   // Required. The ID of the license to appoint.
-  string license_id = 1 [(buf.validate.field).string.min_len = 1];
+  string license_id = 1 [(buf.validate.field).string.uuid = true];
 
   // Required. The ID of the carrier to appoint the license with.
-  string carrier_id = 2 [(buf.validate.field).string.min_len = 1];
+  string carrier_id = 2 [(buf.validate.field).string.uuid = true];
 }
 
 message RequestAppointmentResponse {
@@ -65,7 +65,7 @@ message RequestAppointmentResponse {
 // Request to retrieve an appointment by ID.
 message GetAppointmentRequest {
   // Required. The ID of the appointment to retrieve.
-  string appointment_id = 1 [(buf.validate.field).string.min_len = 1];
+  string appointment_id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 message GetAppointmentResponse {
@@ -125,7 +125,7 @@ message ListEligibleLicensesResponse {
 // Request to get appointment fees.
 message GetAppointmentFeesRequest {
   // Required. The ID of the license to get the appointment fee for.
-  string license_id = 1 [(buf.validate.field).string.min_len = 1];
+  string license_id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 message GetAppointmentFeesResponse {
@@ -136,7 +136,7 @@ message GetAppointmentFeesResponse {
 // Request to get termination fees.
 message GetTerminationFeesRequest {
   // Required. The ID of the license to get the termination fee for.
-  string license_id = 1 [(buf.validate.field).string.min_len = 1];
+  string license_id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 message GetTerminationFeesResponse {
@@ -285,10 +285,13 @@ enum AppointmentType {
 
 message License {
   // The ID of the license.
-  string license_id = 1;
+  string license_id = 1 [(buf.validate.field).string.uuid = true];
 
   // The license number.
-  string license_number = 2;
+  string license_number = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 50
+  ];
 
   // The owner of the license, it can be an agency or a producer.
   oneof license_owner {
@@ -297,7 +300,7 @@ message License {
   }
 
   // The two-letter state code of the license.
-  string state = 5;
+  string state = 5 [(buf.validate.field).string.len = 2];
 
   // The license class.
   string license_class = 6;
