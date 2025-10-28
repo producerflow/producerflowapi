@@ -1755,18 +1755,18 @@ var File_producerflow_appointment_v1_appointment_proto protoreflect.FileDescript
 
 const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\n" +
-	"-producerflow/appointment/v1/appointment.proto\x12\x1bproducerflow.appointment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"k\n" +
-	"\x19RequestAppointmentRequest\x12&\n" +
+	"-producerflow/appointment/v1/appointment.proto\x12\x1bproducerflow.appointment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"m\n" +
+	"\x19RequestAppointmentRequest\x12'\n" +
 	"\n" +
-	"license_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tlicenseId\x12&\n" +
+	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x12'\n" +
 	"\n" +
-	"carrier_id\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tcarrierId\"\xd1\x01\n" +
+	"carrier_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierId\"\xd1\x01\n" +
 	"\x1aRequestAppointmentResponse\x12%\n" +
 	"\x0eappointment_id\x18\x01 \x01(\tR\rappointmentId\x12Z\n" +
 	"\x11processing_status\x18\x02 \x01(\x0e2-.producerflow.appointment.v1.ProcessingStatusR\x10processingStatus\x120\n" +
-	"\x14not_eligible_reasons\x18\x03 \x03(\tR\x12notEligibleReasons\"G\n" +
-	"\x15GetAppointmentRequest\x12.\n" +
-	"\x0eappointment_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rappointmentId\"d\n" +
+	"\x14not_eligible_reasons\x18\x03 \x03(\tR\x12notEligibleReasons\"H\n" +
+	"\x15GetAppointmentRequest\x12/\n" +
+	"\x0eappointment_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rappointmentId\"d\n" +
 	"\x16GetAppointmentResponse\x12J\n" +
 	"\vappointment\x18\x01 \x01(\v2(.producerflow.appointment.v1.AppointmentR\vappointment\"\xe3\x01\n" +
 	"\x17ListAppointmentsRequest\x12Z\n" +
@@ -1789,16 +1789,16 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\tagency_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyIdB\x12\n" +
 	"\tapplicant\x12\x05\xbaH\x02\b\x01\"`\n" +
 	"\x1cListEligibleLicensesResponse\x12@\n" +
-	"\blicenses\x18\x01 \x03(\v2$.producerflow.appointment.v1.LicenseR\blicenses\"C\n" +
-	"\x19GetAppointmentFeesRequest\x12&\n" +
+	"\blicenses\x18\x01 \x03(\v2$.producerflow.appointment.v1.LicenseR\blicenses\"D\n" +
+	"\x19GetAppointmentFeesRequest\x12'\n" +
 	"\n" +
-	"license_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tlicenseId\">\n" +
+	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\">\n" +
 	"\x1aGetAppointmentFeesResponse\x12 \n" +
 	"\ffee_in_cents\x18\x01 \x01(\x03R\n" +
-	"feeInCents\"C\n" +
-	"\x19GetTerminationFeesRequest\x12&\n" +
+	"feeInCents\"D\n" +
+	"\x19GetTerminationFeesRequest\x12'\n" +
 	"\n" +
-	"license_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tlicenseId\">\n" +
+	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\">\n" +
 	"\x1aGetTerminationFeesResponse\x12 \n" +
 	"\ffee_in_cents\x18\x01 \x01(\x03R\n" +
 	"feeInCents\"\x1f\n" +
@@ -1836,15 +1836,15 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x12operational_status\x18\r \x01(\v29.producerflow.appointment.v1.AppointmentOperationalStatusR\x11operationalStatus\x12\x16\n" +
 	"\x06cocode\x18\x0e \x01(\tR\x06cocodeB\x0e\n" +
 	"\f_producer_idB\x13\n" +
-	"\x11_termination_date\"\x9d\x02\n" +
-	"\aLicense\x12\x1d\n" +
+	"\x11_termination_date\"\xbc\x02\n" +
+	"\aLicense\x12'\n" +
 	"\n" +
-	"license_id\x18\x01 \x01(\tR\tlicenseId\x12%\n" +
-	"\x0elicense_number\x18\x02 \x01(\tR\rlicenseNumber\x12+\n" +
+	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x120\n" +
+	"\x0elicense_number\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x182R\rlicenseNumber\x12+\n" +
 	"\vproducer_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\n" +
 	"producerId\x12'\n" +
-	"\tagency_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12\x14\n" +
-	"\x05state\x18\x05 \x01(\tR\x05state\x12#\n" +
+	"\tagency_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12\x1e\n" +
+	"\x05state\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12#\n" +
 	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12*\n" +
 	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryStateB\x0f\n" +
 	"\rlicense_owner\"?\n" +
