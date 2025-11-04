@@ -97,5 +97,18 @@
     "organization_id": "org_987654321",
     "name": "ProducerFlow Organization",
     "external_id": "ext_org_789"
-  }
+  },
+  "assigned_locations": [
+    {
+      "location_id": "loc_456789",
+      "name": "San Francisco Main Office",
+      "street": "123 Market Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94105",
+      "phone": "415-555-0123",
+      "email": "sf@business.com",
+      "is_primary": true
+    }
+  ]
 }

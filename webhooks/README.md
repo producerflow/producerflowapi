@@ -7,7 +7,7 @@ This directory contains webhook payload documentation for the ProducerFlow API. 
 ProducerFlow webhooks deliver real-time notifications for changes to:
 
 - **Agencies** - Insurance agency information and licensing data
-- **Producers** - Individual producer/agent information and licensing data  
+- **Producers** - Individual producer/agent information and licensing data
 - **Contacts** - Contact information for agency personnel
 - **Appointments** - Producer-carrier appointment relationships and operational status
 
@@ -23,7 +23,7 @@ Organizations provide a way to group multiple agencies within ProducerFlow. An o
 
 Triggered when agency data is created, updated, or synchronized from external sources.
 
-**Schema**: [agency_schema.json](./schema/agency_schema.json)  
+**Schema**: [agency_schema.json](./schema/agency_schema.json)
 **Example Payload**: [agency_example.json](./examples/agency_example.json)
 
 **Event Types:**
@@ -36,6 +36,7 @@ Triggered when agency data is created, updated, or synchronized from external so
 - Basic agency information (name, contact details, website)
 - Federal Employer Identification Number (FEIN) and National Producer Number (NPN)
 - Business addresses and bank account information
+- Physical locations associated with the agency
 - Errors & Omissions insurance details
 - IVANS account configuration
 - NIPR licensing data including appointments and licenses
@@ -47,7 +48,7 @@ Triggered when agency data is created, updated, or synchronized from external so
 
 Triggered when producer/agent data is created, updated, or synchronized.
 
-**Schema**: [producer_schema.json](./schema/producer_schema.json)  
+**Schema**: [producer_schema.json](./schema/producer_schema.json)
 **Example Payload**: [producer_example.json](./examples/producer_example.json)
 
 **Event Types:**
@@ -59,6 +60,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 
 - Personal information (name, contact details, addresses)
 - National Producer Number (NPN) and agency associations
+- Assigned physical locations where the producer operates
 - Background check results from Accurate Background
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) and continuing education status
@@ -70,7 +72,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 
 Triggered when contact information is created, updated, or deleted.
 
-**Schema**: [contact_schema.json](./schema/contact_schema.json)  
+**Schema**: [contact_schema.json](./schema/contact_schema.json)
 **Example Payload**: [contact_example.json](./examples/contact_example.json)
 
 **Event Types:**
@@ -91,7 +93,7 @@ Triggered when contact information is created, updated, or deleted.
 
 Triggered when producer-carrier appointment relationships are created, updated, or when their operational status changes.
 
-**Schema**: [appointment_schema.json](./schema/appointment_schema.json)  
+**Schema**: [appointment_schema.json](./schema/appointment_schema.json)
 **Example Payloads**:
 
 - [appointment_example.json](./examples/appointment_example.json) - Basic appointment event
@@ -126,6 +128,39 @@ All webhook payloads share a common base structure:
 }
 ```
 
+### Always Sent Fields
+
+The following fields are **always present** in every webhook payload:
+
+| Field | Type | Description | Possible Values |
+|-------|------|-------------|-----------------|
+| `id` | string | Unique identifier for this change event | Any string value (e.g., "chg_123456789") |
+| `event_type` | string | Specific event type that occurred | See [Event Types](#event-types) section below |
+| `origin` | string | Source system that triggered the change | `ProducerFlowAPI`, `ProducerFlowPortal`, or `NIPR` |
+| `timestamp` | string | ISO 8601 datetime when the change occurred | ISO 8601 format (e.g., "2024-03-20T15:30:45Z") |
+
+Additionally, each webhook type has its own required identifier field:
+- **Agency webhooks**: `agency_id` (always present)
+- **Producer webhooks**: `producer_id` (always present)
+- **Contact webhooks**: `contact_id` (always present)
+- **Appointment webhooks**: `appointment_id` (always present)
+
+### Event Types
+
+The `event_type` field follows a consistent pattern: `{object}.{action}`. Here are all possible event types:
+
+| Event Type | Description |
+|------------|-------------|
+| `agency.created` | A new agency record was created |
+| `agency.updated` | An existing agency record was modified |
+| `producer.created` | A new producer record was created |
+| `producer.updated` | An existing producer record was modified |
+| `contact.created` | A new contact record was created |
+| `contact.updated` | An existing contact record was modified |
+| `contact.deleted` | A contact record was removed |
+| `appointment.created` | A new appointment relationship was established |
+| `appointment.updated` | An existing appointment was modified or status changed |
+
 ## Data Origins
 
 Webhook data can originate from multiple sources:
@@ -147,7 +182,7 @@ All webhook payloads conform to JSON Schema Draft 2020-12 specifications. You ca
 Each webhook type has specific required fields:
 
 - **Agency**: `id`, `timestamp`, `agency_id`
-- **Producer**: `id`, `timestamp`, `producer_id`  
+- **Producer**: `id`, `timestamp`, `producer_id`
 - **Contact**: `id`, `timestamp`, `contact_id`
 - **Appointment**: `id`, `timestamp`, `appointment_id`
 

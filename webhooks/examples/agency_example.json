@@ -8,11 +8,6 @@
   "fein": "12-3456789",
   "npn": "1234567",
 
-  "agency_principal": {
-    "principal_id": "prd_123456789",
-    "principal_external_id": "ext_prd_456"
-  },
-
   "agency_data": {
     "email": "contact@insuranceagency.com",
     "fax": "555-123-4567",
@@ -119,5 +114,29 @@
     "organization_id": "org_123456789",
     "name": "Agentero Insurance Organization",
     "external_id": "ext_org_456"
-  }
+  },
+  "locations": [
+    {
+      "location_id": "loc_123456",
+      "name": "Chicago Main Office",
+      "street": "123 Insurance Ave",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60601",
+      "phone": "555-987-6543",
+      "email": "chicago@insuranceagency.com",
+      "is_primary": true
+    },
+    {
+      "location_id": "loc_789012",
+      "name": "Springfield Branch",
+      "street": "456 Capital Blvd",
+      "city": "Springfield",
+      "state": "IL",
+      "zip": "62701",
+      "phone": "555-123-7890",
+      "email": "springfield@insuranceagency.com",
+      "is_primary": false
+    }
+  ]
 }
