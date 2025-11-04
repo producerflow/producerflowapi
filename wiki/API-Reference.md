@@ -2807,7 +2807,7 @@ All fields are optional, allowing partial updates.
 | last_name | [string](#string) | optional | Last name of the producer. If provided, must be non-empty. |
 | middle_name | [string](#string) | optional | Middle name of the producer. If provided, must be non-empty. |
 | email | [string](#string) | optional | Email address of the producer. If provided, must be a valid email format. Must be unique within the tenant. |
-| npn | [string](#string) | optional | National Producer Number (NPN) of the producer. If provided, must be non-empty. |
+| npn | [string](#string) | optional | **Deprecated.** National Producer Number (NPN) of the producer. If provided, must be non-empty. Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version. |
 | phone | [string](#string) | optional | Phone number of the producer. If provided, must be a valid phone number format. |
 | street | [string](#string) | optional | Street address of the producer. If provided, must be non-empty. |
 | city | [string](#string) | optional | City of the producer. If provided, must be non-empty. |

@@ -6555,6 +6555,9 @@ type UpdateProducerRequest_Producer struct {
 	Email *string `protobuf:"bytes,3,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	// National Producer Number (NPN) of the producer.
 	// If provided, must be non-empty.
+	// Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Npn *string `protobuf:"bytes,4,opt,name=npn,proto3,oneof" json:"npn,omitempty"`
 	// Phone number of the producer.
 	// If provided, must be a valid phone number format.
@@ -6633,6 +6636,7 @@ func (x *UpdateProducerRequest_Producer) GetEmail() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *UpdateProducerRequest_Producer) GetNpn() string {
 	if x != nil && x.Npn != nil {
 		return *x.Npn
@@ -9411,11 +9415,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"w9_doc_url\x18\x03 \x01(\tR\bw9DocUrl\x12&\n" +
 	"\x0flicense_doc_url\x18\x04 \x01(\tR\rlicenseDocUrl\x12-\n" +
-	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\xa9\x05\n" +
+	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\xab\x05\n" +
 	"\x15UpdateProducerRequest\x12)\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"producerId\x12\\\n" +
-	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\x86\x04\n" +
+	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\x88\x04\n" +
 	"\bProducer\x12+\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tfirstName\x88\x01\x01\x12)\n" +
@@ -9423,8 +9427,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\vmiddle_name\x18\n" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\n" +
 	"middleName\x88\x01\x01\x12\"\n" +
-	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12\x1e\n" +
-	"\x03npn\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\x03npn\x88\x01\x01\x124\n" +
+	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12 \n" +
+	"\x03npn\x18\x04 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x04R\x03npn\x88\x01\x01\x124\n" +
 	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x05R\x05phone\x88\x01\x01\x12$\n" +
 	"\x06street\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\x06street\x88\x01\x01\x12 \n" +
 	"\x04city\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\x04city\x88\x01\x01\x12\"\n" +
