@@ -70,6 +70,10 @@
           "type": "string",
           "description": "License number associated with the appointment"
         },
+        "is_resident": {
+          "type": "boolean",
+          "description": "Whether the appointment is resident or non-resident"
+        },
         "effective_date": {
           "type": "string",
           "format": "date-time",
@@ -118,5 +122,7 @@
         }
       }
     }
-  }
+  },
+  "required": ["id", "timestamp", "appointment_id"],
+  "additionalProperties": false
 }

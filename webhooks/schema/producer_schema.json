@@ -64,7 +64,9 @@
         "phone": { "type": "string" },
         "state": { "type": "string" },
         "street": { "type": "string" },
-        "zip": { "type": "string" }
+        "zip": { "type": "string" },
+        "is_sole_proprietor": { "type": "boolean", "description": "Whether the producer is a sole proprietor" },
+        "is_principal": { "type": "boolean", "description": "Whether the producer is the principal/lead agent of the agency" }
       }
     },
     "producer_nipr_data": {
@@ -161,6 +163,10 @@
       "format": "date-time",
       "description": "Timestamp when the NIPR synchronization status was last updated"
     },
+    "metadata_questions": {
+      "type": "string",
+      "description": "Custom metadata questions and answers in JSON string format"
+    },
     "organization": {
       "type": "object",
       "description": "Organization information associated with the producer",
@@ -176,6 +182,52 @@
         "external_id": {
           "type": "string",
           "description": "External identifier for the organization from an external system"
+        }
+      }
+    },
+    "assigned_locations": {
+      "type": "array",
+      "description": "Physical locations assigned to the producer",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_id": {
+            "type": "string",
+            "description": "Unique identifier for the location"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the location"
+          },
+          "street": {
+            "type": "string",
+            "description": "Street address"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State or province"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Postal code"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Contact phone number for this location"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact email for this location"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary location for the producer"
+          }
         }
       }
     }

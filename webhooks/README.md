@@ -36,6 +36,7 @@ Triggered when agency data is created, updated, or synchronized from external so
 - Basic agency information (name, contact details, website)
 - Federal Employer Identification Number (FEIN) and National Producer Number (NPN)
 - Business addresses and bank account information
+- Physical locations associated with the agency
 - Errors & Omissions insurance details
 - IVANS account configuration
 - NIPR licensing data including appointments and licenses
@@ -59,6 +60,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 
 - Personal information (name, contact details, addresses)
 - National Producer Number (NPN) and agency associations
+- Assigned physical locations where the producer operates
 - Background check results from Accurate Background
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) and continuing education status
@@ -125,6 +127,39 @@ All webhook payloads share a common base structure:
   // ... entity-specific data
 }
 ```
+
+### Always Sent Fields
+
+The following fields are **always present** in every webhook payload:
+
+| Field | Type | Description | Possible Values |
+|-------|------|-------------|-----------------|
+| `id` | string | Unique identifier for this change event | Any string value (e.g., "chg_123456789") |
+| `event_type` | string | Specific event type that occurred | See [Event Types](#event-types) section below |
+| `origin` | string | Source system that triggered the change | `ProducerFlowAPI`, `ProducerFlowPortal`, or `NIPR` |
+| `timestamp` | string | ISO 8601 datetime when the change occurred | ISO 8601 format (e.g., "2024-03-20T15:30:45Z") |
+
+Additionally, each webhook type has its own required identifier field:
+- **Agency webhooks**: `agency_id` (always present)
+- **Producer webhooks**: `producer_id` (always present)
+- **Contact webhooks**: `contact_id` (always present)
+- **Appointment webhooks**: `appointment_id` (always present)
+
+### Event Types
+
+The `event_type` field follows a consistent pattern: `{object}.{action}`. Here are all possible event types:
+
+| Event Type | Description |
+|------------|-------------|
+| `agency.created` | A new agency record was created |
+| `agency.updated` | An existing agency record was modified |
+| `producer.created` | A new producer record was created |
+| `producer.updated` | An existing producer record was modified |
+| `contact.created` | A new contact record was created |
+| `contact.updated` | An existing contact record was modified |
+| `contact.deleted` | A contact record was removed |
+| `appointment.created` | A new appointment relationship was established |
+| `appointment.updated` | An existing appointment was modified or status changed |
 
 ## Data Origins
 

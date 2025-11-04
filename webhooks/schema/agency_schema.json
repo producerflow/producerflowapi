@@ -59,7 +59,8 @@
         "fax": { "type": "string" },
         "name": { "type": "string" },
         "phone": { "type": "string" },
-        "website": { "type": "string", "format": "uri" }
+        "website": { "type": "string", "format": "uri" },
+        "is_sole_proprietor": { "type": "boolean", "description": "Whether the agency is a sole proprietorship" }
       }
     },
     "agency_address": {
@@ -91,7 +92,8 @@
         "carrier": { "type": "string" },
         "expiration_date": { "type": "string", "format": "date" },
         "effective_date": { "type": "string", "format": "date" },
-        "coverage_amount": { "type": "string" }
+        "coverage_amount": { "type": "string" },
+        "coverage_status": { "type": "string", "description": "Status of the E&O coverage" }
       }
     },
     "agency_ivans_account": {
@@ -196,6 +198,10 @@
       "format": "date-time",
       "description": "Timestamp when the NIPR synchronization status was last updated"
     },
+    "metadata_questions": {
+      "type": "string",
+      "description": "Custom metadata questions and answers in JSON string format"
+    },
     "organization": {
       "type": "object",
       "description": "Organization information associated with the agency",
@@ -211,6 +217,52 @@
         "external_id": {
           "type": "string",
           "description": "External identifier for the organization from an external system"
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "description": "Physical locations associated with the agency",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_id": {
+            "type": "string",
+            "description": "Unique identifier for the location"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the location"
+          },
+          "street": {
+            "type": "string",
+            "description": "Street address"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State or province"
+          },
+          "zip": {
+            "type": "string",
+            "description": "Postal code"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Contact phone number for this location"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact email for this location"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary location for the agency"
+          }
         }
       }
     }
