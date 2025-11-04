@@ -687,7 +687,11 @@ message UpdateProducerRequest {
 
     // National Producer Number (NPN) of the producer.
     // If provided, must be non-empty.
-    optional string npn = 4 [(buf.validate.field).string.min_len = 1];
+    // Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version.
+    optional string npn = 4 [
+      deprecated = true,
+      (buf.validate.field).string.min_len = 1
+    ];
 
     // Phone number of the producer.
     // If provided, must be a valid phone number format.
