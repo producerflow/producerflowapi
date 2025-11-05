@@ -76,6 +76,14 @@ service ProducerService {
   // Validates email uniqueness if the email is changed.
   rpc UpdateProducer(UpdateProducerRequest) returns (UpdateProducerResponse);
 
+  // UpdateAgency updates information for an existing agency.
+  // Supports updating contact details, addresses, business hours, IVANS information,
+  // points of contact, and requested appointments.
+  // Information from NIPR and other third-party sources cannot be updated.
+  // All fields are optional - only provide the fields you want to update.
+  // Validates email uniqueness if the email is changed.
+  rpc UpdateAgency(UpdateAgencyRequest) returns (UpdateAgencyResponse);
+
   // NewContact creates a new contact associated with an agency.
   // Contacts represent non-producer individuals linked to the agency.
   // Returns the ID of the created contact.
@@ -725,6 +733,184 @@ message UpdateProducerRequest {
 
 // UpdateProducerResponse is the empty response returned after successfully updating a producer.
 message UpdateProducerResponse {}
+
+// UpdateAgencyRequest contains the fields that can be updated in an agency record.
+// Only information collected during the onboarding process can be updated.
+// Information from NIPR and other third-party sources cannot be updated directly.
+// All fields are optional, allowing partial updates.
+message UpdateAgencyRequest {
+  // The ID of the agency to update.
+  // Must be a valid UUID format.
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Agency contains the fields that can be updated for an agency.
+  // All fields are optional, allowing partial updates.
+  message Agency {
+    // Address represents a physical location with standard address components.
+    // All fields are optional, allowing partial updates of address fields.
+    // Address fields cannot be cleared - if provided, they must have valid values.
+    message Address {
+      // Street address including house/building number and street name.
+      // If provided, must be non-empty.
+      optional string street = 1 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // City of the address.
+      // If provided, must be non-empty.
+      optional string city = 2 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // State of the address.
+      // If provided, must be exactly 2 characters (state code).
+      optional string state = 3 [
+        (buf.validate.field).string.len = 2,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // Zip code of the address.
+      // If provided, must be between 1 and 10 characters.
+      optional string zip = 4 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).string.max_len = 10,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // County of the address.
+      optional string county = 5 [(buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE];
+    }
+
+    // BusinessHours contains the business hours of the agency.
+    message BusinessHours {
+      message BusinessHour {
+        // Days of the week when the agency is open.
+        repeated google.type.DayOfWeek week_days = 1 [
+          (buf.validate.field).required = true,
+          (buf.validate.field).repeated.min_items = 1,
+          (buf.validate.field).repeated.max_items = 7
+        ];
+        // Time when the agency opens.
+        google.type.TimeOfDay opening_time = 2 [(buf.validate.field).required = true];
+        // Time when the agency closes.
+        google.type.TimeOfDay closing_time = 3 [(buf.validate.field).required = true];
+      }
+      // Timezone of the agency.
+      string timezone = 1 [(buf.validate.field).string.min_len = 1];
+      // Business hour entries.
+      repeated BusinessHour business_hours = 2 [
+        (buf.validate.field).required = true,
+        (buf.validate.field).repeated.min_items = 1
+      ];
+    }
+
+    // IvansAccount contains information for IVANS integration.
+    // IVANS is a system for electronic communication between insurance agencies and carriers.
+    // All fields are optional, allowing partial updates of IVANS information.
+    // IVANS fields cannot be cleared - if provided, they must have valid values.
+    message IvansAccount {
+      // Account number for the IVANS service.
+      optional string account_number = 1 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // Software used for IVANS communication.
+      optional string ams_software = 2 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // Version of the IVANS software.
+      optional string ams_version = 3 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+      // Mailbox number for the IVANS service.
+      optional string mailbox_number = 4 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+      ];
+    }
+
+    // PointOfContact contains contact information for the agency. Each point of contact
+    // consists of an email address with an associated role. Carriers will send specific
+    // information to these email addresses based on their roles.
+    message PointOfContact {
+      enum CommunicationRole {
+        // Default unspecified value. Avoid using this.
+        COMMUNICATION_ROLE_UNSPECIFIED = 0;
+        // Accounting role
+        COMMUNICATION_ROLE_ACCOUNTING = 1;
+        // Licensing role
+        COMMUNICATION_ROLE_LICENSING = 2;
+        // Reporting role
+        COMMUNICATION_ROLE_REPORTING = 3;
+        // Sales role
+        COMMUNICATION_ROLE_SALES = 4;
+        // Customer service role
+        COMMUNICATION_ROLE_CUSTOMER_SERVICE = 5;
+        // All roles
+        COMMUNICATION_ROLE_ALL = 6;
+      }
+      // Email address of the point of contact.
+      string email = 1 [(buf.validate.field).string.email = true];
+      // Role of the point of contact.
+      CommunicationRole role = 2 [(buf.validate.field).required = true];
+    }
+
+    // Email address of the agency.
+    // Required and must be a valid email format.
+    string email = 1 [(buf.validate.field).string.email = true];
+
+    // Phone number of the agency.
+    // Required and must be a valid phone number format.
+    string phone = 2 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+
+    // Physical address of the agency.
+    optional Address physical_address = 3;
+
+    // Mailing address of the agency.
+    optional Address mailing_address = 4;
+
+    // Invoicing address of the agency.
+    optional Address invoicing_address = 5;
+
+    // Business hours of the agency.
+    optional BusinessHours business_hours = 6;
+
+    // Fax number of the agency.
+    optional string fax = 7 [
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
+      (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"
+    ];
+
+    // Website URL of the agency.
+    optional string website = 8 [(buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE];
+
+    // Official name of the agency.
+    // If provided, must be non-empty.
+    // Cannot be cleared (agency must have a name).
+    optional string agency_name = 9 [(buf.validate.field).string.min_len = 1];
+
+    // IVANS account information for electronic carrier communication.
+    optional IvansAccount ivans_account = 10;
+
+    // Points of contact for the agency.
+    repeated PointOfContact points_of_contact = 11;
+
+    // List of requested appointments for the agency (state codes).
+    repeated string requested_appointments = 12;
+
+    // Root organization ID that the agency belongs to.
+    optional string root_organization_id = 13 [
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
+      (buf.validate.field).string.uuid = true
+    ];
+  }
+
+  // The agency information to update.
+  Agency agency = 2 [(buf.validate.field).required = true];
+}
+
+// UpdateAgencyResponse is the empty response returned after successfully updating an agency.
+message UpdateAgencyResponse {}
 
 // ListNewProducersRequest requests a list of new producers, optionally filtered by agency.
 message ListNewProducersRequest {
