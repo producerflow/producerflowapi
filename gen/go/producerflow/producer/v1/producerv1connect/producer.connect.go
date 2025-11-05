@@ -69,6 +69,9 @@ const (
 	// ProducerServiceUpdateProducerProcedure is the fully-qualified name of the ProducerService's
 	// UpdateProducer RPC.
 	ProducerServiceUpdateProducerProcedure = "/producerflow.producer.v1.ProducerService/UpdateProducer"
+	// ProducerServiceUpdateAgencyProcedure is the fully-qualified name of the ProducerService's
+	// UpdateAgency RPC.
+	ProducerServiceUpdateAgencyProcedure = "/producerflow.producer.v1.ProducerService/UpdateAgency"
 	// ProducerServiceNewContactProcedure is the fully-qualified name of the ProducerService's
 	// NewContact RPC.
 	ProducerServiceNewContactProcedure = "/producerflow.producer.v1.ProducerService/NewContact"
@@ -180,6 +183,13 @@ type ProducerServiceClient interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
+	// UpdateAgency updates information for an existing agency.
+	// Supports updating contact details, addresses, business hours, IVANS information,
+	// points of contact, and requested appointments.
+	// Information from NIPR and other third-party sources cannot be updated.
+	// All fields are optional - only provide the fields you want to update.
+	// Validates email uniqueness if the email is changed.
+	UpdateAgency(context.Context, *connect.Request[v1.UpdateAgencyRequest]) (*connect.Response[v1.UpdateAgencyResponse], error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -319,6 +329,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("UpdateProducer")),
 			connect.WithClientOptions(opts...),
 		),
+		updateAgency: connect.NewClient[v1.UpdateAgencyRequest, v1.UpdateAgencyResponse](
+			httpClient,
+			baseURL+ProducerServiceUpdateAgencyProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("UpdateAgency")),
+			connect.WithClientOptions(opts...),
+		),
 		newContact: connect.NewClient[v1.NewContactRequest, v1.NewContactResponse](
 			httpClient,
 			baseURL+ProducerServiceNewContactProcedure,
@@ -456,6 +472,7 @@ type producerServiceClient struct {
 	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
 	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
 	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
+	updateAgency                  *connect.Client[v1.UpdateAgencyRequest, v1.UpdateAgencyResponse]
 	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
 	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
 	listAgencyContacts            *connect.Client[v1.ListAgencyContactsRequest, v1.ListAgencyContactsResponse]
@@ -538,6 +555,11 @@ func (c *producerServiceClient) GetAgencyFiles(ctx context.Context, req *connect
 // UpdateProducer calls producerflow.producer.v1.ProducerService.UpdateProducer.
 func (c *producerServiceClient) UpdateProducer(ctx context.Context, req *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error) {
 	return c.updateProducer.CallUnary(ctx, req)
+}
+
+// UpdateAgency calls producerflow.producer.v1.ProducerService.UpdateAgency.
+func (c *producerServiceClient) UpdateAgency(ctx context.Context, req *connect.Request[v1.UpdateAgencyRequest]) (*connect.Response[v1.UpdateAgencyResponse], error) {
+	return c.updateAgency.CallUnary(ctx, req)
 }
 
 // NewContact calls producerflow.producer.v1.ProducerService.NewContact.
@@ -692,6 +714,13 @@ type ProducerServiceHandler interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
+	// UpdateAgency updates information for an existing agency.
+	// Supports updating contact details, addresses, business hours, IVANS information,
+	// points of contact, and requested appointments.
+	// Information from NIPR and other third-party sources cannot be updated.
+	// All fields are optional - only provide the fields you want to update.
+	// Validates email uniqueness if the email is changed.
+	UpdateAgency(context.Context, *connect.Request[v1.UpdateAgencyRequest]) (*connect.Response[v1.UpdateAgencyResponse], error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -825,6 +854,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		ProducerServiceUpdateProducerProcedure,
 		svc.UpdateProducer,
 		connect.WithSchema(producerServiceMethods.ByName("UpdateProducer")),
+		connect.WithHandlerOptions(opts...),
+	)
+	producerServiceUpdateAgencyHandler := connect.NewUnaryHandler(
+		ProducerServiceUpdateAgencyProcedure,
+		svc.UpdateAgency,
+		connect.WithSchema(producerServiceMethods.ByName("UpdateAgency")),
 		connect.WithHandlerOptions(opts...),
 	)
 	producerServiceNewContactHandler := connect.NewUnaryHandler(
@@ -973,6 +1008,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceGetAgencyFilesHandler.ServeHTTP(w, r)
 		case ProducerServiceUpdateProducerProcedure:
 			producerServiceUpdateProducerHandler.ServeHTTP(w, r)
+		case ProducerServiceUpdateAgencyProcedure:
+			producerServiceUpdateAgencyHandler.ServeHTTP(w, r)
 		case ProducerServiceNewContactProcedure:
 			producerServiceNewContactHandler.ServeHTTP(w, r)
 		case ProducerServiceNewContactsProcedure:
@@ -1068,6 +1105,10 @@ func (UnimplementedProducerServiceHandler) GetAgencyFiles(context.Context, *conn
 
 func (UnimplementedProducerServiceHandler) UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.UpdateProducer is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) UpdateAgency(context.Context, *connect.Request[v1.UpdateAgencyRequest]) (*connect.Response[v1.UpdateAgencyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.UpdateAgency is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) NewContact(context.Context, *connect.Request[v1.NewContactRequest]) (*connect.Response[v1.NewContactResponse], error) {

@@ -31,6 +31,7 @@ const (
 	ProducerService_GetProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/GetProducer"
 	ProducerService_GetAgencyFiles_FullMethodName                = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
 	ProducerService_UpdateProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/UpdateProducer"
+	ProducerService_UpdateAgency_FullMethodName                  = "/producerflow.producer.v1.ProducerService/UpdateAgency"
 	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
 	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
 	ProducerService_ListAgencyContacts_FullMethodName            = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
@@ -113,6 +114,13 @@ type ProducerServiceClient interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(ctx context.Context, in *UpdateProducerRequest, opts ...grpc.CallOption) (*UpdateProducerResponse, error)
+	// UpdateAgency updates information for an existing agency.
+	// Supports updating contact details, addresses, business hours, IVANS information,
+	// points of contact, and requested appointments.
+	// Information from NIPR and other third-party sources cannot be updated.
+	// All fields are optional - only provide the fields you want to update.
+	// Validates email uniqueness if the email is changed.
+	UpdateAgency(ctx context.Context, in *UpdateAgencyRequest, opts ...grpc.CallOption) (*UpdateAgencyResponse, error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -291,6 +299,16 @@ func (c *producerServiceClient) UpdateProducer(ctx context.Context, in *UpdatePr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateProducerResponse)
 	err := c.cc.Invoke(ctx, ProducerService_UpdateProducer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) UpdateAgency(ctx context.Context, in *UpdateAgencyRequest, opts ...grpc.CallOption) (*UpdateAgencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAgencyResponse)
+	err := c.cc.Invoke(ctx, ProducerService_UpdateAgency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -557,6 +575,13 @@ type ProducerServiceServer interface {
 	// Information from NIPR and other third-party sources cannot be updated.
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *UpdateProducerRequest) (*UpdateProducerResponse, error)
+	// UpdateAgency updates information for an existing agency.
+	// Supports updating contact details, addresses, business hours, IVANS information,
+	// points of contact, and requested appointments.
+	// Information from NIPR and other third-party sources cannot be updated.
+	// All fields are optional - only provide the fields you want to update.
+	// Validates email uniqueness if the email is changed.
+	UpdateAgency(context.Context, *UpdateAgencyRequest) (*UpdateAgencyResponse, error)
 	// NewContact creates a new contact associated with an agency.
 	// Contacts represent non-producer individuals linked to the agency.
 	// Returns the ID of the created contact.
@@ -656,6 +681,9 @@ func (UnimplementedProducerServiceServer) GetAgencyFiles(context.Context, *GetAg
 }
 func (UnimplementedProducerServiceServer) UpdateProducer(context.Context, *UpdateProducerRequest) (*UpdateProducerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProducer not implemented")
+}
+func (UnimplementedProducerServiceServer) UpdateAgency(context.Context, *UpdateAgencyRequest) (*UpdateAgencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgency not implemented")
 }
 func (UnimplementedProducerServiceServer) NewContact(context.Context, *NewContactRequest) (*NewContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewContact not implemented")
@@ -950,6 +978,24 @@ func _ProducerService_UpdateProducer_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).UpdateProducer(ctx, req.(*UpdateProducerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_UpdateAgency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAgencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).UpdateAgency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_UpdateAgency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).UpdateAgency(ctx, req.(*UpdateAgencyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1368,6 +1414,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProducer",
 			Handler:    _ProducerService_UpdateProducer_Handler,
+		},
+		{
+			MethodName: "UpdateAgency",
+			Handler:    _ProducerService_UpdateAgency_Handler,
 		},
 		{
 			MethodName: "NewContact",
