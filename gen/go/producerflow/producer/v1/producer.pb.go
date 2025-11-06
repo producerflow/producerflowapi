@@ -319,74 +319,6 @@ func (NewAgencyRequest_Agency_PointOfContact_CommunicationRole) EnumDescriptor()
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{7, 0, 4, 0}
 }
 
-type UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole int32
-
-const (
-	// Default unspecified value. Avoid using this.
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_UNSPECIFIED UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 0
-	// Accounting role
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_ACCOUNTING UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 1
-	// Licensing role
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_LICENSING UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 2
-	// Reporting role
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_REPORTING UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 3
-	// Sales role
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_SALES UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 4
-	// Customer service role
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_CUSTOMER_SERVICE UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 5
-	// All roles
-	UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_ALL UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole = 6
-)
-
-// Enum value maps for UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole.
-var (
-	UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole_name = map[int32]string{
-		0: "COMMUNICATION_ROLE_UNSPECIFIED",
-		1: "COMMUNICATION_ROLE_ACCOUNTING",
-		2: "COMMUNICATION_ROLE_LICENSING",
-		3: "COMMUNICATION_ROLE_REPORTING",
-		4: "COMMUNICATION_ROLE_SALES",
-		5: "COMMUNICATION_ROLE_CUSTOMER_SERVICE",
-		6: "COMMUNICATION_ROLE_ALL",
-	}
-	UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole_value = map[string]int32{
-		"COMMUNICATION_ROLE_UNSPECIFIED":      0,
-		"COMMUNICATION_ROLE_ACCOUNTING":       1,
-		"COMMUNICATION_ROLE_LICENSING":        2,
-		"COMMUNICATION_ROLE_REPORTING":        3,
-		"COMMUNICATION_ROLE_SALES":            4,
-		"COMMUNICATION_ROLE_CUSTOMER_SERVICE": 5,
-		"COMMUNICATION_ROLE_ALL":              6,
-	}
-)
-
-func (x UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) Enum() *UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole {
-	p := new(UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole)
-	*p = x
-	return p
-}
-
-func (x UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) Descriptor() protoreflect.EnumDescriptor {
-	return file_producerflow_producer_v1_producer_proto_enumTypes[5].Descriptor()
-}
-
-func (UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) Type() protoreflect.EnumType {
-	return &file_producerflow_producer_v1_producer_proto_enumTypes[5]
-}
-
-func (x UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole.Descriptor instead.
-func (UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole) EnumDescriptor() ([]byte, []int) {
-	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 3, 0}
-}
-
 // The type of account.
 type Agency_BankAccount_AccountType int32
 
@@ -424,11 +356,11 @@ func (x Agency_BankAccount_AccountType) String() string {
 }
 
 func (Agency_BankAccount_AccountType) Descriptor() protoreflect.EnumDescriptor {
-	return file_producerflow_producer_v1_producer_proto_enumTypes[6].Descriptor()
+	return file_producerflow_producer_v1_producer_proto_enumTypes[5].Descriptor()
 }
 
 func (Agency_BankAccount_AccountType) Type() protoreflect.EnumType {
-	return &file_producerflow_producer_v1_producer_proto_enumTypes[6]
+	return &file_producerflow_producer_v1_producer_proto_enumTypes[5]
 }
 
 func (x Agency_BankAccount_AccountType) Number() protoreflect.EnumNumber {
@@ -482,11 +414,11 @@ func (x Agency_NIPR_License_LicenseStatus) String() string {
 }
 
 func (Agency_NIPR_License_LicenseStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_producerflow_producer_v1_producer_proto_enumTypes[7].Descriptor()
+	return file_producerflow_producer_v1_producer_proto_enumTypes[6].Descriptor()
 }
 
 func (Agency_NIPR_License_LicenseStatus) Type() protoreflect.EnumType {
-	return &file_producerflow_producer_v1_producer_proto_enumTypes[7]
+	return &file_producerflow_producer_v1_producer_proto_enumTypes[6]
 }
 
 func (x Agency_NIPR_License_LicenseStatus) Number() protoreflect.EnumNumber {
@@ -540,11 +472,11 @@ func (x Producer_NIPR_License_LicenseStatus) String() string {
 }
 
 func (Producer_NIPR_License_LicenseStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_producerflow_producer_v1_producer_proto_enumTypes[8].Descriptor()
+	return file_producerflow_producer_v1_producer_proto_enumTypes[7].Descriptor()
 }
 
 func (Producer_NIPR_License_LicenseStatus) Type() protoreflect.EnumType {
-	return &file_producerflow_producer_v1_producer_proto_enumTypes[8]
+	return &file_producerflow_producer_v1_producer_proto_enumTypes[7]
 }
 
 func (x Producer_NIPR_License_LicenseStatus) Number() protoreflect.EnumNumber {
@@ -6848,37 +6780,22 @@ func (x *UpdateProducerRequest_Producer) GetZip() string {
 type UpdateAgencyRequest_Agency struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Email address of the agency.
-	// Required and must be a valid email format.
-	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Email *string `protobuf:"bytes,1,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	// Phone number of the agency.
-	// Required and must be a valid phone number format.
-	Phone string `protobuf:"bytes,2,opt,name=phone,proto3" json:"phone,omitempty"`
-	// Physical address of the agency.
-	PhysicalAddress *UpdateAgencyRequest_Agency_Address `protobuf:"bytes,3,opt,name=physical_address,json=physicalAddress,proto3,oneof" json:"physical_address,omitempty"`
-	// Mailing address of the agency.
-	MailingAddress *UpdateAgencyRequest_Agency_Address `protobuf:"bytes,4,opt,name=mailing_address,json=mailingAddress,proto3,oneof" json:"mailing_address,omitempty"`
-	// Invoicing address of the agency.
-	InvoicingAddress *UpdateAgencyRequest_Agency_Address `protobuf:"bytes,5,opt,name=invoicing_address,json=invoicingAddress,proto3,oneof" json:"invoicing_address,omitempty"`
-	// Business hours of the agency.
-	BusinessHours *UpdateAgencyRequest_Agency_BusinessHours `protobuf:"bytes,6,opt,name=business_hours,json=businessHours,proto3,oneof" json:"business_hours,omitempty"`
+	Phone *string `protobuf:"bytes,2,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	// Fax number of the agency.
-	Fax *string `protobuf:"bytes,7,opt,name=fax,proto3,oneof" json:"fax,omitempty"`
+	Fax *string `protobuf:"bytes,3,opt,name=fax,proto3,oneof" json:"fax,omitempty"`
 	// Website URL of the agency.
-	Website *string `protobuf:"bytes,8,opt,name=website,proto3,oneof" json:"website,omitempty"`
-	// Official name of the agency.
-	// If provided, must be non-empty.
-	// Cannot be cleared (agency must have a name).
-	AgencyName *string `protobuf:"bytes,9,opt,name=agency_name,json=agencyName,proto3,oneof" json:"agency_name,omitempty"`
-	// IVANS account information for electronic carrier communication.
-	IvansAccount *UpdateAgencyRequest_Agency_IvansAccount `protobuf:"bytes,10,opt,name=ivans_account,json=ivansAccount,proto3,oneof" json:"ivans_account,omitempty"`
-	// Points of contact for the agency.
-	PointsOfContact []*UpdateAgencyRequest_Agency_PointOfContact `protobuf:"bytes,11,rep,name=points_of_contact,json=pointsOfContact,proto3" json:"points_of_contact,omitempty"`
+	Website *string `protobuf:"bytes,4,opt,name=website,proto3,oneof" json:"website,omitempty"`
 	// List of requested appointments for the agency (state codes).
-	RequestedAppointments []string `protobuf:"bytes,12,rep,name=requested_appointments,json=requestedAppointments,proto3" json:"requested_appointments,omitempty"`
-	// Root organization ID that the agency belongs to.
-	RootOrganizationId *string `protobuf:"bytes,13,opt,name=root_organization_id,json=rootOrganizationId,proto3,oneof" json:"root_organization_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// The list contains a list of two-lettercd  country codes where the appointments are requested.
+	// The only valid values are the U.S country codes.
+	RequestedAppointments []string `protobuf:"bytes,5,rep,name=requested_appointments,json=requestedAppointments,proto3" json:"requested_appointments,omitempty"`
+	Notes                 *string  `protobuf:"bytes,6,opt,name=notes,proto3,oneof" json:"notes,omitempty"`
+	// Physical address of the agency.
+	PhysicalAddress *UpdateAgencyRequest_Agency_Address `protobuf:"bytes,7,opt,name=physical_address,json=physicalAddress,proto3,oneof" json:"physical_address,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateAgencyRequest_Agency) Reset() {
@@ -6912,45 +6829,17 @@ func (*UpdateAgencyRequest_Agency) Descriptor() ([]byte, []int) {
 }
 
 func (x *UpdateAgencyRequest_Agency) GetEmail() string {
-	if x != nil {
-		return x.Email
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
 
 func (x *UpdateAgencyRequest_Agency) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency) GetPhysicalAddress() *UpdateAgencyRequest_Agency_Address {
-	if x != nil {
-		return x.PhysicalAddress
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency) GetMailingAddress() *UpdateAgencyRequest_Agency_Address {
-	if x != nil {
-		return x.MailingAddress
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency) GetInvoicingAddress() *UpdateAgencyRequest_Agency_Address {
-	if x != nil {
-		return x.InvoicingAddress
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency) GetBusinessHours() *UpdateAgencyRequest_Agency_BusinessHours {
-	if x != nil {
-		return x.BusinessHours
-	}
-	return nil
 }
 
 func (x *UpdateAgencyRequest_Agency) GetFax() string {
@@ -6967,27 +6856,6 @@ func (x *UpdateAgencyRequest_Agency) GetWebsite() string {
 	return ""
 }
 
-func (x *UpdateAgencyRequest_Agency) GetAgencyName() string {
-	if x != nil && x.AgencyName != nil {
-		return *x.AgencyName
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency) GetIvansAccount() *UpdateAgencyRequest_Agency_IvansAccount {
-	if x != nil {
-		return x.IvansAccount
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency) GetPointsOfContact() []*UpdateAgencyRequest_Agency_PointOfContact {
-	if x != nil {
-		return x.PointsOfContact
-	}
-	return nil
-}
-
 func (x *UpdateAgencyRequest_Agency) GetRequestedAppointments() []string {
 	if x != nil {
 		return x.RequestedAppointments
@@ -6995,11 +6863,18 @@ func (x *UpdateAgencyRequest_Agency) GetRequestedAppointments() []string {
 	return nil
 }
 
-func (x *UpdateAgencyRequest_Agency) GetRootOrganizationId() string {
-	if x != nil && x.RootOrganizationId != nil {
-		return *x.RootOrganizationId
+func (x *UpdateAgencyRequest_Agency) GetNotes() string {
+	if x != nil && x.Notes != nil {
+		return *x.Notes
 	}
 	return ""
+}
+
+func (x *UpdateAgencyRequest_Agency) GetPhysicalAddress() *UpdateAgencyRequest_Agency_Address {
+	if x != nil {
+		return x.PhysicalAddress
+	}
+	return nil
 }
 
 // Address represents a physical location with standard address components.
@@ -7018,9 +6893,7 @@ type UpdateAgencyRequest_Agency_Address struct {
 	State *string `protobuf:"bytes,3,opt,name=state,proto3,oneof" json:"state,omitempty"`
 	// Zip code of the address.
 	// If provided, must be between 1 and 10 characters.
-	Zip *string `protobuf:"bytes,4,opt,name=zip,proto3,oneof" json:"zip,omitempty"`
-	// County of the address.
-	County        *string `protobuf:"bytes,5,opt,name=county,proto3,oneof" json:"county,omitempty"`
+	Zip           *string `protobuf:"bytes,4,opt,name=zip,proto3,oneof" json:"zip,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7083,264 +6956,6 @@ func (x *UpdateAgencyRequest_Agency_Address) GetZip() string {
 	return ""
 }
 
-func (x *UpdateAgencyRequest_Agency_Address) GetCounty() string {
-	if x != nil && x.County != nil {
-		return *x.County
-	}
-	return ""
-}
-
-// BusinessHours contains the business hours of the agency.
-type UpdateAgencyRequest_Agency_BusinessHours struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Timezone of the agency.
-	Timezone string `protobuf:"bytes,1,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	// Business hour entries.
-	BusinessHours []*UpdateAgencyRequest_Agency_BusinessHours_BusinessHour `protobuf:"bytes,2,rep,name=business_hours,json=businessHours,proto3" json:"business_hours,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours) Reset() {
-	*x = UpdateAgencyRequest_Agency_BusinessHours{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[97]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateAgencyRequest_Agency_BusinessHours) ProtoMessage() {}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[97]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateAgencyRequest_Agency_BusinessHours.ProtoReflect.Descriptor instead.
-func (*UpdateAgencyRequest_Agency_BusinessHours) Descriptor() ([]byte, []int) {
-	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 1}
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours) GetTimezone() string {
-	if x != nil {
-		return x.Timezone
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours) GetBusinessHours() []*UpdateAgencyRequest_Agency_BusinessHours_BusinessHour {
-	if x != nil {
-		return x.BusinessHours
-	}
-	return nil
-}
-
-// IvansAccount contains information for IVANS integration.
-// IVANS is a system for electronic communication between insurance agencies and carriers.
-// All fields are optional, allowing partial updates of IVANS information.
-// IVANS fields cannot be cleared - if provided, they must have valid values.
-type UpdateAgencyRequest_Agency_IvansAccount struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Account number for the IVANS service.
-	AccountNumber *string `protobuf:"bytes,1,opt,name=account_number,json=accountNumber,proto3,oneof" json:"account_number,omitempty"`
-	// Software used for IVANS communication.
-	AmsSoftware *string `protobuf:"bytes,2,opt,name=ams_software,json=amsSoftware,proto3,oneof" json:"ams_software,omitempty"`
-	// Version of the IVANS software.
-	AmsVersion *string `protobuf:"bytes,3,opt,name=ams_version,json=amsVersion,proto3,oneof" json:"ams_version,omitempty"`
-	// Mailbox number for the IVANS service.
-	MailboxNumber *string `protobuf:"bytes,4,opt,name=mailbox_number,json=mailboxNumber,proto3,oneof" json:"mailbox_number,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) Reset() {
-	*x = UpdateAgencyRequest_Agency_IvansAccount{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[98]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateAgencyRequest_Agency_IvansAccount) ProtoMessage() {}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[98]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateAgencyRequest_Agency_IvansAccount.ProtoReflect.Descriptor instead.
-func (*UpdateAgencyRequest_Agency_IvansAccount) Descriptor() ([]byte, []int) {
-	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 2}
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) GetAccountNumber() string {
-	if x != nil && x.AccountNumber != nil {
-		return *x.AccountNumber
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) GetAmsSoftware() string {
-	if x != nil && x.AmsSoftware != nil {
-		return *x.AmsSoftware
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) GetAmsVersion() string {
-	if x != nil && x.AmsVersion != nil {
-		return *x.AmsVersion
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency_IvansAccount) GetMailboxNumber() string {
-	if x != nil && x.MailboxNumber != nil {
-		return *x.MailboxNumber
-	}
-	return ""
-}
-
-// PointOfContact contains contact information for the agency. Each point of contact
-// consists of an email address with an associated role. Carriers will send specific
-// information to these email addresses based on their roles.
-type UpdateAgencyRequest_Agency_PointOfContact struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Email address of the point of contact.
-	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	// Role of the point of contact.
-	Role          UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole `protobuf:"varint,2,opt,name=role,proto3,enum=producerflow.producer.v1.UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole" json:"role,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateAgencyRequest_Agency_PointOfContact) Reset() {
-	*x = UpdateAgencyRequest_Agency_PointOfContact{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[99]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateAgencyRequest_Agency_PointOfContact) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateAgencyRequest_Agency_PointOfContact) ProtoMessage() {}
-
-func (x *UpdateAgencyRequest_Agency_PointOfContact) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[99]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateAgencyRequest_Agency_PointOfContact.ProtoReflect.Descriptor instead.
-func (*UpdateAgencyRequest_Agency_PointOfContact) Descriptor() ([]byte, []int) {
-	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 3}
-}
-
-func (x *UpdateAgencyRequest_Agency_PointOfContact) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *UpdateAgencyRequest_Agency_PointOfContact) GetRole() UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole {
-	if x != nil {
-		return x.Role
-	}
-	return UpdateAgencyRequest_Agency_PointOfContact_COMMUNICATION_ROLE_UNSPECIFIED
-}
-
-type UpdateAgencyRequest_Agency_BusinessHours_BusinessHour struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Days of the week when the agency is open.
-	WeekDays []dayofweek.DayOfWeek `protobuf:"varint,1,rep,packed,name=week_days,json=weekDays,proto3,enum=google.type.DayOfWeek" json:"week_days,omitempty"`
-	// Time when the agency opens.
-	OpeningTime *timeofday.TimeOfDay `protobuf:"bytes,2,opt,name=opening_time,json=openingTime,proto3" json:"opening_time,omitempty"`
-	// Time when the agency closes.
-	ClosingTime   *timeofday.TimeOfDay `protobuf:"bytes,3,opt,name=closing_time,json=closingTime,proto3" json:"closing_time,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) Reset() {
-	*x = UpdateAgencyRequest_Agency_BusinessHours_BusinessHour{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[100]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) ProtoMessage() {}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[100]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateAgencyRequest_Agency_BusinessHours_BusinessHour.ProtoReflect.Descriptor instead.
-func (*UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) Descriptor() ([]byte, []int) {
-	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 1, 0}
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) GetWeekDays() []dayofweek.DayOfWeek {
-	if x != nil {
-		return x.WeekDays
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) GetOpeningTime() *timeofday.TimeOfDay {
-	if x != nil {
-		return x.OpeningTime
-	}
-	return nil
-}
-
-func (x *UpdateAgencyRequest_Agency_BusinessHours_BusinessHour) GetClosingTime() *timeofday.TimeOfDay {
-	if x != nil {
-		return x.ClosingTime
-	}
-	return nil
-}
-
 // AgencyInfo contains contact and identification information for an agency.
 type Agency_AgencyInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -7384,7 +6999,7 @@ type Agency_AgencyInfo struct {
 
 func (x *Agency_AgencyInfo) Reset() {
 	*x = Agency_AgencyInfo{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[101]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7396,7 +7011,7 @@ func (x *Agency_AgencyInfo) String() string {
 func (*Agency_AgencyInfo) ProtoMessage() {}
 
 func (x *Agency_AgencyInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[101]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7507,7 +7122,7 @@ type Agency_Address struct {
 
 func (x *Agency_Address) Reset() {
 	*x = Agency_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[102]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7519,7 +7134,7 @@ func (x *Agency_Address) String() string {
 func (*Agency_Address) ProtoMessage() {}
 
 func (x *Agency_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[102]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7582,7 +7197,7 @@ type Agency_BankAccount struct {
 
 func (x *Agency_BankAccount) Reset() {
 	*x = Agency_BankAccount{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[103]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7594,7 +7209,7 @@ func (x *Agency_BankAccount) String() string {
 func (*Agency_BankAccount) ProtoMessage() {}
 
 func (x *Agency_BankAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[103]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7657,7 +7272,7 @@ type Agency_EOInfo struct {
 
 func (x *Agency_EOInfo) Reset() {
 	*x = Agency_EOInfo{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[104]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7669,7 +7284,7 @@ func (x *Agency_EOInfo) String() string {
 func (*Agency_EOInfo) ProtoMessage() {}
 
 func (x *Agency_EOInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[104]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7752,7 +7367,7 @@ type Agency_Principal struct {
 
 func (x *Agency_Principal) Reset() {
 	*x = Agency_Principal{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[105]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7764,7 +7379,7 @@ func (x *Agency_Principal) String() string {
 func (*Agency_Principal) ProtoMessage() {}
 
 func (x *Agency_Principal) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[105]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7855,7 +7470,7 @@ type Agency_IvansAccount struct {
 
 func (x *Agency_IvansAccount) Reset() {
 	*x = Agency_IvansAccount{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[106]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7867,7 +7482,7 @@ func (x *Agency_IvansAccount) String() string {
 func (*Agency_IvansAccount) ProtoMessage() {}
 
 func (x *Agency_IvansAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[106]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7924,7 +7539,7 @@ type Agency_BusinessHours struct {
 
 func (x *Agency_BusinessHours) Reset() {
 	*x = Agency_BusinessHours{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[107]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7936,7 +7551,7 @@ func (x *Agency_BusinessHours) String() string {
 func (*Agency_BusinessHours) ProtoMessage() {}
 
 func (x *Agency_BusinessHours) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[107]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7986,7 +7601,7 @@ type Agency_NIPR struct {
 
 func (x *Agency_NIPR) Reset() {
 	*x = Agency_NIPR{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[108]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7998,7 +7613,7 @@ func (x *Agency_NIPR) String() string {
 func (*Agency_NIPR) ProtoMessage() {}
 
 func (x *Agency_NIPR) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[108]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8064,7 +7679,7 @@ type Agency_BusinessHours_BusinessHour struct {
 
 func (x *Agency_BusinessHours_BusinessHour) Reset() {
 	*x = Agency_BusinessHours_BusinessHour{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[110]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8076,7 +7691,7 @@ func (x *Agency_BusinessHours_BusinessHour) String() string {
 func (*Agency_BusinessHours_BusinessHour) ProtoMessage() {}
 
 func (x *Agency_BusinessHours_BusinessHour) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[110]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8134,7 +7749,7 @@ type Agency_NIPR_Biographic struct {
 
 func (x *Agency_NIPR_Biographic) Reset() {
 	*x = Agency_NIPR_Biographic{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[111]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8146,7 +7761,7 @@ func (x *Agency_NIPR_Biographic) String() string {
 func (*Agency_NIPR_Biographic) ProtoMessage() {}
 
 func (x *Agency_NIPR_Biographic) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[111]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8231,7 +7846,7 @@ type Agency_NIPR_Address struct {
 
 func (x *Agency_NIPR_Address) Reset() {
 	*x = Agency_NIPR_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[112]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8243,7 +7858,7 @@ func (x *Agency_NIPR_Address) String() string {
 func (*Agency_NIPR_Address) ProtoMessage() {}
 
 func (x *Agency_NIPR_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[112]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8355,7 +7970,7 @@ type Agency_NIPR_License struct {
 
 func (x *Agency_NIPR_License) Reset() {
 	*x = Agency_NIPR_License{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[113]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8367,7 +7982,7 @@ func (x *Agency_NIPR_License) String() string {
 func (*Agency_NIPR_License) ProtoMessage() {}
 
 func (x *Agency_NIPR_License) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[113]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8480,7 +8095,7 @@ type Agency_NIPR_RegulatoryInfo struct {
 
 func (x *Agency_NIPR_RegulatoryInfo) Reset() {
 	*x = Agency_NIPR_RegulatoryInfo{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[114]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8492,7 +8107,7 @@ func (x *Agency_NIPR_RegulatoryInfo) String() string {
 func (*Agency_NIPR_RegulatoryInfo) ProtoMessage() {}
 
 func (x *Agency_NIPR_RegulatoryInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[114]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8546,7 +8161,7 @@ type Agency_NIPR_Appointment struct {
 
 func (x *Agency_NIPR_Appointment) Reset() {
 	*x = Agency_NIPR_Appointment{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[115]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8558,7 +8173,7 @@ func (x *Agency_NIPR_Appointment) String() string {
 func (*Agency_NIPR_Appointment) ProtoMessage() {}
 
 func (x *Agency_NIPR_Appointment) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[115]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8668,7 +8283,7 @@ type Agency_NIPR_License_LineOfAuthority struct {
 
 func (x *Agency_NIPR_License_LineOfAuthority) Reset() {
 	*x = Agency_NIPR_License_LineOfAuthority{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[116]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8680,7 +8295,7 @@ func (x *Agency_NIPR_License_LineOfAuthority) String() string {
 func (*Agency_NIPR_License_LineOfAuthority) ProtoMessage() {}
 
 func (x *Agency_NIPR_License_LineOfAuthority) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[116]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8746,7 +8361,7 @@ type Agency_NIPR_RegulatoryInfo_RegulatoryAction struct {
 
 func (x *Agency_NIPR_RegulatoryInfo_RegulatoryAction) Reset() {
 	*x = Agency_NIPR_RegulatoryInfo_RegulatoryAction{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[117]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8758,7 +8373,7 @@ func (x *Agency_NIPR_RegulatoryInfo_RegulatoryAction) String() string {
 func (*Agency_NIPR_RegulatoryInfo_RegulatoryAction) ProtoMessage() {}
 
 func (x *Agency_NIPR_RegulatoryInfo_RegulatoryAction) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[117]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8857,7 +8472,7 @@ type Producer_Agency struct {
 
 func (x *Producer_Agency) Reset() {
 	*x = Producer_Agency{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[118]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8869,7 +8484,7 @@ func (x *Producer_Agency) String() string {
 func (*Producer_Agency) ProtoMessage() {}
 
 func (x *Producer_Agency) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[118]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8918,7 +8533,7 @@ type Producer_NIPR struct {
 
 func (x *Producer_NIPR) Reset() {
 	*x = Producer_NIPR{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[119]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8930,7 +8545,7 @@ func (x *Producer_NIPR) String() string {
 func (*Producer_NIPR) ProtoMessage() {}
 
 func (x *Producer_NIPR) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[119]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8991,7 +8606,7 @@ type Producer_Address struct {
 
 func (x *Producer_Address) Reset() {
 	*x = Producer_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[120]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9003,7 +8618,7 @@ func (x *Producer_Address) String() string {
 func (*Producer_Address) ProtoMessage() {}
 
 func (x *Producer_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[120]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9075,7 +8690,7 @@ type Producer_NIPR_License struct {
 
 func (x *Producer_NIPR_License) Reset() {
 	*x = Producer_NIPR_License{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[122]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9087,7 +8702,7 @@ func (x *Producer_NIPR_License) String() string {
 func (*Producer_NIPR_License) ProtoMessage() {}
 
 func (x *Producer_NIPR_License) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[122]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9183,7 +8798,7 @@ type Producer_NIPR_Biographic struct {
 
 func (x *Producer_NIPR_Biographic) Reset() {
 	*x = Producer_NIPR_Biographic{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[123]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9195,7 +8810,7 @@ func (x *Producer_NIPR_Biographic) String() string {
 func (*Producer_NIPR_Biographic) ProtoMessage() {}
 
 func (x *Producer_NIPR_Biographic) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[123]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9277,7 +8892,7 @@ type Producer_NIPR_ProducerRegulatoryInfo struct {
 
 func (x *Producer_NIPR_ProducerRegulatoryInfo) Reset() {
 	*x = Producer_NIPR_ProducerRegulatoryInfo{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[124]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9289,7 +8904,7 @@ func (x *Producer_NIPR_ProducerRegulatoryInfo) String() string {
 func (*Producer_NIPR_ProducerRegulatoryInfo) ProtoMessage() {}
 
 func (x *Producer_NIPR_ProducerRegulatoryInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[124]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9357,7 +8972,7 @@ type Producer_NIPR_Appointment struct {
 
 func (x *Producer_NIPR_Appointment) Reset() {
 	*x = Producer_NIPR_Appointment{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[125]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9369,7 +8984,7 @@ func (x *Producer_NIPR_Appointment) String() string {
 func (*Producer_NIPR_Appointment) ProtoMessage() {}
 
 func (x *Producer_NIPR_Appointment) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[125]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9479,7 +9094,7 @@ type Producer_NIPR_License_LineOfAuthority struct {
 
 func (x *Producer_NIPR_License_LineOfAuthority) Reset() {
 	*x = Producer_NIPR_License_LineOfAuthority{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[126]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9491,7 +9106,7 @@ func (x *Producer_NIPR_License_LineOfAuthority) String() string {
 func (*Producer_NIPR_License_LineOfAuthority) ProtoMessage() {}
 
 func (x *Producer_NIPR_License_LineOfAuthority) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[126]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9558,7 +9173,7 @@ type Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction struct {
 
 func (x *Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) Reset() {
 	*x = Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[127]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9570,7 +9185,7 @@ func (x *Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) String() string 
 func (*Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) ProtoMessage() {}
 
 func (x *Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[127]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9677,7 +9292,7 @@ type NewProducer_Address struct {
 
 func (x *NewProducer_Address) Reset() {
 	*x = NewProducer_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[129]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9689,7 +9304,7 @@ func (x *NewProducer_Address) String() string {
 func (*NewProducer_Address) ProtoMessage() {}
 
 func (x *NewProducer_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[129]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9754,7 +9369,7 @@ type NewContact_Address struct {
 
 func (x *NewContact_Address) Reset() {
 	*x = NewContact_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[131]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9766,7 +9381,7 @@ func (x *NewContact_Address) String() string {
 func (*NewContact_Address) ProtoMessage() {}
 
 func (x *NewContact_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[131]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9828,7 +9443,7 @@ type Contact_Address struct {
 
 func (x *Contact_Address) Reset() {
 	*x = Contact_Address{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[132]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9840,7 +9455,7 @@ func (x *Contact_Address) String() string {
 func (*Contact_Address) ProtoMessage() {}
 
 func (x *Contact_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[132]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10107,83 +9722,36 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
 	"\x04_zip\"\x18\n" +
-	"\x16UpdateProducerResponse\"\x98\x15\n" +
+	"\x16UpdateProducerResponse\"\xc7\x06\n" +
 	"\x13UpdateAgencyRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12T\n" +
-	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\x83\x14\n" +
-	"\x06Agency\x12\x1d\n" +
-	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12/\n" +
-	"\x05phone\x18\x02 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12l\n" +
-	"\x10physical_address\x18\x03 \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x00R\x0fphysicalAddress\x88\x01\x01\x12j\n" +
-	"\x0fmailing_address\x18\x04 \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x01R\x0emailingAddress\x88\x01\x01\x12n\n" +
-	"\x11invoicing_address\x18\x05 \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x02R\x10invoicingAddress\x88\x01\x01\x12n\n" +
-	"\x0ebusiness_hours\x18\x06 \x01(\v2B.producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHoursH\x03R\rbusinessHours\x88\x01\x01\x123\n" +
-	"\x03fax\x18\a \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x04R\x03fax\x88\x01\x01\x12%\n" +
-	"\awebsite\x18\b \x01(\tB\x06\xbaH\x03\xd8\x01\x02H\x05R\awebsite\x88\x01\x01\x12-\n" +
-	"\vagency_name\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\n" +
-	"agencyName\x88\x01\x01\x12k\n" +
-	"\rivans_account\x18\n" +
-	" \x01(\v2A.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountH\aR\fivansAccount\x88\x01\x01\x12o\n" +
-	"\x11points_of_contact\x18\v \x03(\v2C.producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContactR\x0fpointsOfContact\x125\n" +
-	"\x16requested_appointments\x18\f \x03(\tR\x15requestedAppointments\x12B\n" +
-	"\x14root_organization_id\x18\r \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\xb0\x01\x01H\bR\x12rootOrganizationId\x88\x01\x01\x1a\xfa\x01\n" +
-	"\aAddress\x12'\n" +
-	"\x06street\x18\x01 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x00R\x06street\x88\x01\x01\x12#\n" +
-	"\x04city\x18\x02 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x01R\x04city\x88\x01\x01\x12&\n" +
-	"\x05state\x18\x03 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x98\x01\x02H\x02R\x05state\x88\x01\x01\x12#\n" +
-	"\x03zip\x18\x04 \x01(\tB\f\xbaH\t\xd8\x01\x02r\x04\x10\x01\x18\n" +
-	"H\x03R\x03zip\x88\x01\x01\x12#\n" +
-	"\x06county\x18\x05 \x01(\tB\x06\xbaH\x03\xd8\x01\x02H\x04R\x06county\x88\x01\x01B\t\n" +
+	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\xb2\x05\n" +
+	"\x06Agency\x12\"\n" +
+	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05email\x88\x01\x01\x124\n" +
+	"\x05phone\x18\x02 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x01R\x05phone\x88\x01\x01\x123\n" +
+	"\x03fax\x18\x03 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x02R\x03fax\x88\x01\x01\x12*\n" +
+	"\awebsite\x18\x04 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x88\x01\x01H\x03R\awebsite\x88\x01\x01\x12O\n" +
+	"\x16requested_appointments\x18\x05 \x03(\tB\x18\xbaH\x15\x92\x01\x12\x18\x01\"\x0er\f2\n" +
+	"^[A-Z]{2}$R\x15requestedAppointments\x12&\n" +
+	"\x05notes\x18\x06 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xf4\x03H\x04R\x05notes\x88\x01\x01\x12l\n" +
+	"\x10physical_address\x18\a \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x05R\x0fphysicalAddress\x88\x01\x01\x1a\xbe\x01\n" +
+	"\aAddress\x12$\n" +
+	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06street\x88\x01\x01\x12 \n" +
+	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04city\x88\x01\x01\x12#\n" +
+	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02H\x02R\x05state\x88\x01\x01\x12 \n" +
+	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
+	"H\x03R\x03zip\x88\x01\x01B\t\n" +
 	"\a_streetB\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
-	"\x04_zipB\t\n" +
-	"\a_county\x1a\x95\x03\n" +
-	"\rBusinessHours\x12#\n" +
-	"\btimezone\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\btimezone\x12\x83\x01\n" +
-	"\x0ebusiness_hours\x18\x02 \x03(\v2O.producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHourB\v\xbaH\b\xc8\x01\x01\x92\x01\x02\b\x01R\rbusinessHours\x1a\xd8\x01\n" +
-	"\fBusinessHour\x12B\n" +
-	"\tweek_days\x18\x01 \x03(\x0e2\x16.google.type.DayOfWeekB\r\xbaH\n" +
-	"\xc8\x01\x01\x92\x01\x04\b\x01\x10\aR\bweekDays\x12A\n" +
-	"\fopening_time\x18\x02 \x01(\v2\x16.google.type.TimeOfDayB\x06\xbaH\x03\xc8\x01\x01R\vopeningTime\x12A\n" +
-	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayB\x06\xbaH\x03\xc8\x01\x01R\vclosingTime\x1a\xab\x02\n" +
-	"\fIvansAccount\x126\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x00R\raccountNumber\x88\x01\x01\x122\n" +
-	"\fams_software\x18\x02 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x01R\vamsSoftware\x88\x01\x01\x120\n" +
-	"\vams_version\x18\x03 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x02R\n" +
-	"amsVersion\x88\x01\x01\x126\n" +
-	"\x0emailbox_number\x18\x04 \x01(\tB\n" +
-	"\xbaH\a\xd8\x01\x02r\x02\x10\x01H\x03R\rmailboxNumber\x88\x01\x01B\x11\n" +
-	"\x0f_account_numberB\x0f\n" +
-	"\r_ams_softwareB\x0e\n" +
-	"\f_ams_versionB\x11\n" +
-	"\x0f_mailbox_number\x1a\xa6\x03\n" +
-	"\x0ePointOfContact\x12\x1d\n" +
-	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12q\n" +
-	"\x04role\x18\x02 \x01(\x0e2U.producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact.CommunicationRoleB\x06\xbaH\x03\xc8\x01\x01R\x04role\"\x81\x02\n" +
-	"\x11CommunicationRole\x12\"\n" +
-	"\x1eCOMMUNICATION_ROLE_UNSPECIFIED\x10\x00\x12!\n" +
-	"\x1dCOMMUNICATION_ROLE_ACCOUNTING\x10\x01\x12 \n" +
-	"\x1cCOMMUNICATION_ROLE_LICENSING\x10\x02\x12 \n" +
-	"\x1cCOMMUNICATION_ROLE_REPORTING\x10\x03\x12\x1c\n" +
-	"\x18COMMUNICATION_ROLE_SALES\x10\x04\x12'\n" +
-	"#COMMUNICATION_ROLE_CUSTOMER_SERVICE\x10\x05\x12\x1a\n" +
-	"\x16COMMUNICATION_ROLE_ALL\x10\x06B\x13\n" +
-	"\x11_physical_addressB\x12\n" +
-	"\x10_mailing_addressB\x14\n" +
-	"\x12_invoicing_addressB\x11\n" +
-	"\x0f_business_hoursB\x06\n" +
+	"\x04_zipB\b\n" +
+	"\x06_emailB\b\n" +
+	"\x06_phoneB\x06\n" +
 	"\x04_faxB\n" +
 	"\n" +
-	"\b_websiteB\x0e\n" +
-	"\f_agency_nameB\x10\n" +
-	"\x0e_ivans_accountB\x17\n" +
-	"\x15_root_organization_id\"\x16\n" +
+	"\b_websiteB\b\n" +
+	"\x06_notesB\x13\n" +
+	"\x11_physical_address\"\x16\n" +
 	"\x14UpdateAgencyResponse\"S\n" +
 	"\x17ListNewProducersRequest\x12*\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x88\x01\x01B\f\n" +
@@ -10782,365 +10350,350 @@ func file_producerflow_producer_v1_producer_proto_rawDescGZIP() []byte {
 	return file_producerflow_producer_v1_producer_proto_rawDescData
 }
 
-var file_producerflow_producer_v1_producer_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_producerflow_producer_v1_producer_proto_msgTypes = make([]protoimpl.MessageInfo, 133)
+var file_producerflow_producer_v1_producer_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
+var file_producerflow_producer_v1_producer_proto_msgTypes = make([]protoimpl.MessageInfo, 129)
 var file_producerflow_producer_v1_producer_proto_goTypes = []any{
 	(EntityType)(0),    // 0: producerflow.producer.v1.EntityType
 	(AgencyType)(0),    // 1: producerflow.producer.v1.AgencyType
 	(NIPRSyncState)(0), // 2: producerflow.producer.v1.NIPRSyncState
-	(NewAgencyRequest_Agency_BankAccount_AccountType)(0),             // 3: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.AccountType
-	(NewAgencyRequest_Agency_PointOfContact_CommunicationRole)(0),    // 4: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.CommunicationRole
-	(UpdateAgencyRequest_Agency_PointOfContact_CommunicationRole)(0), // 5: producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact.CommunicationRole
-	(Agency_BankAccount_AccountType)(0),                              // 6: producerflow.producer.v1.Agency.BankAccount.AccountType
-	(Agency_NIPR_License_LicenseStatus)(0),                           // 7: producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
-	(Producer_NIPR_License_LicenseStatus)(0),                         // 8: producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
-	(*Pagination)(nil),                                               // 9: producerflow.producer.v1.Pagination
-	(*Address)(nil),                                                  // 10: producerflow.producer.v1.Address
-	(*CreateAgencyOnboardingURLRequest)(nil),                         // 11: producerflow.producer.v1.CreateAgencyOnboardingURLRequest
-	(*CreateAgencyOnboardingURLResponse)(nil),                        // 12: producerflow.producer.v1.CreateAgencyOnboardingURLResponse
-	(*CreateProducerOnboardingURLRequest)(nil),                       // 13: producerflow.producer.v1.CreateProducerOnboardingURLRequest
-	(*ProducerData)(nil),                                             // 14: producerflow.producer.v1.ProducerData
-	(*CreateProducerOnboardingURLResponse)(nil),                      // 15: producerflow.producer.v1.CreateProducerOnboardingURLResponse
-	(*NewAgencyRequest)(nil),                                         // 16: producerflow.producer.v1.NewAgencyRequest
-	(*NewAgencyResponse)(nil),                                        // 17: producerflow.producer.v1.NewAgencyResponse
-	(*GetProducerRequest)(nil),                                       // 18: producerflow.producer.v1.GetProducerRequest
-	(*GetProducerResponse)(nil),                                      // 19: producerflow.producer.v1.GetProducerResponse
-	(*GetAgencyAndProducersRequest)(nil),                             // 20: producerflow.producer.v1.GetAgencyAndProducersRequest
-	(*GetAgencyAndProducersResponse)(nil),                            // 21: producerflow.producer.v1.GetAgencyAndProducersResponse
-	(*GetAgencyFilesRequest)(nil),                                    // 22: producerflow.producer.v1.GetAgencyFilesRequest
-	(*GetAgencyFilesResponse)(nil),                                   // 23: producerflow.producer.v1.GetAgencyFilesResponse
-	(*UpdateProducerRequest)(nil),                                    // 24: producerflow.producer.v1.UpdateProducerRequest
-	(*UpdateProducerResponse)(nil),                                   // 25: producerflow.producer.v1.UpdateProducerResponse
-	(*UpdateAgencyRequest)(nil),                                      // 26: producerflow.producer.v1.UpdateAgencyRequest
-	(*UpdateAgencyResponse)(nil),                                     // 27: producerflow.producer.v1.UpdateAgencyResponse
-	(*ListNewProducersRequest)(nil),                                  // 28: producerflow.producer.v1.ListNewProducersRequest
-	(*ListNewProducersResponse)(nil),                                 // 29: producerflow.producer.v1.ListNewProducersResponse
-	(*Agency)(nil),                                                   // 30: producerflow.producer.v1.Agency
-	(*Producer)(nil),                                                 // 31: producerflow.producer.v1.Producer
-	(*NewProducer)(nil),                                              // 32: producerflow.producer.v1.NewProducer
-	(*NewProducerRequest)(nil),                                       // 33: producerflow.producer.v1.NewProducerRequest
-	(*NewProducerResponse)(nil),                                      // 34: producerflow.producer.v1.NewProducerResponse
-	(*NewProducersRequest)(nil),                                      // 35: producerflow.producer.v1.NewProducersRequest
-	(*NewProducersResponse)(nil),                                     // 36: producerflow.producer.v1.NewProducersResponse
-	(*NewContact)(nil),                                               // 37: producerflow.producer.v1.NewContact
-	(*NewContactRequest)(nil),                                        // 38: producerflow.producer.v1.NewContactRequest
-	(*NewContactResponse)(nil),                                       // 39: producerflow.producer.v1.NewContactResponse
-	(*NewContactsRequest)(nil),                                       // 40: producerflow.producer.v1.NewContactsRequest
-	(*NewContactsResponse)(nil),                                      // 41: producerflow.producer.v1.NewContactsResponse
-	(*Contact)(nil),                                                  // 42: producerflow.producer.v1.Contact
-	(*ListAgencyContactsRequest)(nil),                                // 43: producerflow.producer.v1.ListAgencyContactsRequest
-	(*ListAgencyContactsResponse)(nil),                               // 44: producerflow.producer.v1.ListAgencyContactsResponse
-	(*SetExternalIDRequest)(nil),                                     // 45: producerflow.producer.v1.SetExternalIDRequest
-	(*SetExternalIDResponse)(nil),                                    // 46: producerflow.producer.v1.SetExternalIDResponse
-	(*ValidateProducerNPNRequest)(nil),                               // 47: producerflow.producer.v1.ValidateProducerNPNRequest
-	(*ValidateProducerNPNResponse)(nil),                              // 48: producerflow.producer.v1.ValidateProducerNPNResponse
-	(*ValidateAgencyNPNRequest)(nil),                                 // 49: producerflow.producer.v1.ValidateAgencyNPNRequest
-	(*ValidateAgencyNPNResponse)(nil),                                // 50: producerflow.producer.v1.ValidateAgencyNPNResponse
-	(*LookupNPNByFEINRequest)(nil),                                   // 51: producerflow.producer.v1.LookupNPNByFEINRequest
-	(*LookupNPNByFEINResponse)(nil),                                  // 52: producerflow.producer.v1.LookupNPNByFEINResponse
-	(*ResyncAgencyRequest)(nil),                                      // 53: producerflow.producer.v1.ResyncAgencyRequest
-	(*ResyncAgencyResponse)(nil),                                     // 54: producerflow.producer.v1.ResyncAgencyResponse
-	(*ResyncProducerRequest)(nil),                                    // 55: producerflow.producer.v1.ResyncProducerRequest
-	(*ResyncProducerResponse)(nil),                                   // 56: producerflow.producer.v1.ResyncProducerResponse
-	(*SyncProducerWithNIPRRequest)(nil),                              // 57: producerflow.producer.v1.SyncProducerWithNIPRRequest
-	(*SyncProducerWithNIPRResponse)(nil),                             // 58: producerflow.producer.v1.SyncProducerWithNIPRResponse
-	(*SyncAgencyWithNIPRRequest)(nil),                                // 59: producerflow.producer.v1.SyncAgencyWithNIPRRequest
-	(*SyncAgencyWithNIPRResponse)(nil),                               // 60: producerflow.producer.v1.SyncAgencyWithNIPRResponse
-	(*StopSyncProducerWithNIPRRequest)(nil),                          // 61: producerflow.producer.v1.StopSyncProducerWithNIPRRequest
-	(*StopSyncProducerWithNIPRResponse)(nil),                         // 62: producerflow.producer.v1.StopSyncProducerWithNIPRResponse
-	(*StopSyncAgencyWithNIPRRequest)(nil),                            // 63: producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
-	(*StopSyncAgencyWithNIPRResponse)(nil),                           // 64: producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
-	(*AgencySummary)(nil),                                            // 65: producerflow.producer.v1.AgencySummary
-	(*ListAgenciesRequest)(nil),                                      // 66: producerflow.producer.v1.ListAgenciesRequest
-	(*ListAgenciesResponse)(nil),                                     // 67: producerflow.producer.v1.ListAgenciesResponse
-	(*ListOrganizationsRequest)(nil),                                 // 68: producerflow.producer.v1.ListOrganizationsRequest
-	(*Organization)(nil),                                             // 69: producerflow.producer.v1.Organization
-	(*ListOrganizationsResponse)(nil),                                // 70: producerflow.producer.v1.ListOrganizationsResponse
-	(*GetOrganizationRequest)(nil),                                   // 71: producerflow.producer.v1.GetOrganizationRequest
-	(*GetOrganizationResponse)(nil),                                  // 72: producerflow.producer.v1.GetOrganizationResponse
-	(*CreateProducerUploadURLRequest)(nil),                           // 73: producerflow.producer.v1.CreateProducerUploadURLRequest
-	(*CreateProducerUploadURLResponse)(nil),                          // 74: producerflow.producer.v1.CreateProducerUploadURLResponse
-	(*Location)(nil),                                                 // 75: producerflow.producer.v1.Location
-	(*AddAgencyLocationsRequest)(nil),                                // 76: producerflow.producer.v1.AddAgencyLocationsRequest
-	(*LocationInput)(nil),                                            // 77: producerflow.producer.v1.LocationInput
-	(*AddAgencyLocationsResponse)(nil),                               // 78: producerflow.producer.v1.AddAgencyLocationsResponse
-	(*RemoveAgencyLocationsRequest)(nil),                             // 79: producerflow.producer.v1.RemoveAgencyLocationsRequest
-	(*RemoveAgencyLocationsResponse)(nil),                            // 80: producerflow.producer.v1.RemoveAgencyLocationsResponse
-	(*ListAgencyLocationsRequest)(nil),                               // 81: producerflow.producer.v1.ListAgencyLocationsRequest
-	(*ListAgencyLocationsResponse)(nil),                              // 82: producerflow.producer.v1.ListAgencyLocationsResponse
-	(*UpdateAgencyLocationRequest)(nil),                              // 83: producerflow.producer.v1.UpdateAgencyLocationRequest
-	(*UpdateAgencyLocationResponse)(nil),                             // 84: producerflow.producer.v1.UpdateAgencyLocationResponse
-	(*AssignProducerToLocationsRequest)(nil),                         // 85: producerflow.producer.v1.AssignProducerToLocationsRequest
-	(*AssignProducerToLocationsResponse)(nil),                        // 86: producerflow.producer.v1.AssignProducerToLocationsResponse
-	(*UnassignProducerFromLocationsRequest)(nil),                     // 87: producerflow.producer.v1.UnassignProducerFromLocationsRequest
-	(*UnassignProducerFromLocationsResponse)(nil),                    // 88: producerflow.producer.v1.UnassignProducerFromLocationsResponse
-	(*CreateAgencyOnboardingURLRequest_Agency)(nil),                  // 89: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
-	(*CreateAgencyOnboardingURLRequest_Agency_Principal)(nil),        // 90: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
-	(*ProducerData_Address)(nil),                                     // 91: producerflow.producer.v1.ProducerData.Address
-	(*NewAgencyRequest_Agency)(nil),                                  // 92: producerflow.producer.v1.NewAgencyRequest.Agency
-	(*NewAgencyRequest_Agency_Principal)(nil),                        // 93: producerflow.producer.v1.NewAgencyRequest.Agency.Principal
-	(*NewAgencyRequest_Agency_BankAccount)(nil),                      // 94: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
-	(*NewAgencyRequest_Agency_EOInfo)(nil),                           // 95: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
-	(*NewAgencyRequest_Agency_BusinessHours)(nil),                    // 96: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
-	(*NewAgencyRequest_Agency_PointOfContact)(nil),                   // 97: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
-	nil, // 98: producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
-	(*NewAgencyRequest_Agency_BusinessHours_BusinessHour)(nil),    // 99: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
-	(*GetProducerRequest_ProducerIDLookup)(nil),                   // 100: producerflow.producer.v1.GetProducerRequest.ProducerIDLookup
-	(*GetProducerRequest_ProducerNPNLookup)(nil),                  // 101: producerflow.producer.v1.GetProducerRequest.ProducerNPNLookup
-	(*GetProducerRequest_EmailLookup)(nil),                        // 102: producerflow.producer.v1.GetProducerRequest.EmailLookup
-	(*UpdateProducerRequest_Producer)(nil),                        // 103: producerflow.producer.v1.UpdateProducerRequest.Producer
-	(*UpdateAgencyRequest_Agency)(nil),                            // 104: producerflow.producer.v1.UpdateAgencyRequest.Agency
-	(*UpdateAgencyRequest_Agency_Address)(nil),                    // 105: producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
-	(*UpdateAgencyRequest_Agency_BusinessHours)(nil),              // 106: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours
-	(*UpdateAgencyRequest_Agency_IvansAccount)(nil),               // 107: producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount
-	(*UpdateAgencyRequest_Agency_PointOfContact)(nil),             // 108: producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact
-	(*UpdateAgencyRequest_Agency_BusinessHours_BusinessHour)(nil), // 109: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHour
-	(*Agency_AgencyInfo)(nil),                                     // 110: producerflow.producer.v1.Agency.AgencyInfo
-	(*Agency_Address)(nil),                                        // 111: producerflow.producer.v1.Agency.Address
-	(*Agency_BankAccount)(nil),                                    // 112: producerflow.producer.v1.Agency.BankAccount
-	(*Agency_EOInfo)(nil),                                         // 113: producerflow.producer.v1.Agency.EOInfo
-	(*Agency_Principal)(nil),                                      // 114: producerflow.producer.v1.Agency.Principal
-	(*Agency_IvansAccount)(nil),                                   // 115: producerflow.producer.v1.Agency.IvansAccount
-	(*Agency_BusinessHours)(nil),                                  // 116: producerflow.producer.v1.Agency.BusinessHours
-	(*Agency_NIPR)(nil),                                           // 117: producerflow.producer.v1.Agency.NIPR
-	nil,                                                           // 118: producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
-	(*Agency_BusinessHours_BusinessHour)(nil),                     // 119: producerflow.producer.v1.Agency.BusinessHours.BusinessHour
-	(*Agency_NIPR_Biographic)(nil),                                // 120: producerflow.producer.v1.Agency.NIPR.Biographic
-	(*Agency_NIPR_Address)(nil),                                   // 121: producerflow.producer.v1.Agency.NIPR.Address
-	(*Agency_NIPR_License)(nil),                                   // 122: producerflow.producer.v1.Agency.NIPR.License
-	(*Agency_NIPR_RegulatoryInfo)(nil),                            // 123: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
-	(*Agency_NIPR_Appointment)(nil),                               // 124: producerflow.producer.v1.Agency.NIPR.Appointment
-	(*Agency_NIPR_License_LineOfAuthority)(nil),                   // 125: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
-	(*Agency_NIPR_RegulatoryInfo_RegulatoryAction)(nil),           // 126: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
-	(*Producer_Agency)(nil),                                       // 127: producerflow.producer.v1.Producer.Agency
-	(*Producer_NIPR)(nil),                                         // 128: producerflow.producer.v1.Producer.NIPR
-	(*Producer_Address)(nil),                                      // 129: producerflow.producer.v1.Producer.Address
-	nil,                                                           // 130: producerflow.producer.v1.Producer.MetadataQuestionsEntry
-	(*Producer_NIPR_License)(nil),                                 // 131: producerflow.producer.v1.Producer.NIPR.License
-	(*Producer_NIPR_Biographic)(nil),                              // 132: producerflow.producer.v1.Producer.NIPR.Biographic
-	(*Producer_NIPR_ProducerRegulatoryInfo)(nil),                  // 133: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
-	(*Producer_NIPR_Appointment)(nil),                             // 134: producerflow.producer.v1.Producer.NIPR.Appointment
-	(*Producer_NIPR_License_LineOfAuthority)(nil),                 // 135: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
-	(*Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction)(nil), // 136: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
-	nil,                           // 137: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
-	(*NewProducer_Address)(nil),   // 138: producerflow.producer.v1.NewProducer.Address
-	nil,                           // 139: producerflow.producer.v1.NewProducer.MetadataQuestionsEntry
-	(*NewContact_Address)(nil),    // 140: producerflow.producer.v1.NewContact.Address
-	(*Contact_Address)(nil),       // 141: producerflow.producer.v1.Contact.Address
-	(*timestamppb.Timestamp)(nil), // 142: google.protobuf.Timestamp
-	(dayofweek.DayOfWeek)(0),      // 143: google.type.DayOfWeek
-	(*timeofday.TimeOfDay)(nil),   // 144: google.type.TimeOfDay
+	(NewAgencyRequest_Agency_BankAccount_AccountType)(0),          // 3: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.AccountType
+	(NewAgencyRequest_Agency_PointOfContact_CommunicationRole)(0), // 4: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.CommunicationRole
+	(Agency_BankAccount_AccountType)(0),                           // 5: producerflow.producer.v1.Agency.BankAccount.AccountType
+	(Agency_NIPR_License_LicenseStatus)(0),                        // 6: producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
+	(Producer_NIPR_License_LicenseStatus)(0),                      // 7: producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
+	(*Pagination)(nil),                                            // 8: producerflow.producer.v1.Pagination
+	(*Address)(nil),                                               // 9: producerflow.producer.v1.Address
+	(*CreateAgencyOnboardingURLRequest)(nil),                      // 10: producerflow.producer.v1.CreateAgencyOnboardingURLRequest
+	(*CreateAgencyOnboardingURLResponse)(nil),                     // 11: producerflow.producer.v1.CreateAgencyOnboardingURLResponse
+	(*CreateProducerOnboardingURLRequest)(nil),                    // 12: producerflow.producer.v1.CreateProducerOnboardingURLRequest
+	(*ProducerData)(nil),                                          // 13: producerflow.producer.v1.ProducerData
+	(*CreateProducerOnboardingURLResponse)(nil),                   // 14: producerflow.producer.v1.CreateProducerOnboardingURLResponse
+	(*NewAgencyRequest)(nil),                                      // 15: producerflow.producer.v1.NewAgencyRequest
+	(*NewAgencyResponse)(nil),                                     // 16: producerflow.producer.v1.NewAgencyResponse
+	(*GetProducerRequest)(nil),                                    // 17: producerflow.producer.v1.GetProducerRequest
+	(*GetProducerResponse)(nil),                                   // 18: producerflow.producer.v1.GetProducerResponse
+	(*GetAgencyAndProducersRequest)(nil),                          // 19: producerflow.producer.v1.GetAgencyAndProducersRequest
+	(*GetAgencyAndProducersResponse)(nil),                         // 20: producerflow.producer.v1.GetAgencyAndProducersResponse
+	(*GetAgencyFilesRequest)(nil),                                 // 21: producerflow.producer.v1.GetAgencyFilesRequest
+	(*GetAgencyFilesResponse)(nil),                                // 22: producerflow.producer.v1.GetAgencyFilesResponse
+	(*UpdateProducerRequest)(nil),                                 // 23: producerflow.producer.v1.UpdateProducerRequest
+	(*UpdateProducerResponse)(nil),                                // 24: producerflow.producer.v1.UpdateProducerResponse
+	(*UpdateAgencyRequest)(nil),                                   // 25: producerflow.producer.v1.UpdateAgencyRequest
+	(*UpdateAgencyResponse)(nil),                                  // 26: producerflow.producer.v1.UpdateAgencyResponse
+	(*ListNewProducersRequest)(nil),                               // 27: producerflow.producer.v1.ListNewProducersRequest
+	(*ListNewProducersResponse)(nil),                              // 28: producerflow.producer.v1.ListNewProducersResponse
+	(*Agency)(nil),                                                // 29: producerflow.producer.v1.Agency
+	(*Producer)(nil),                                              // 30: producerflow.producer.v1.Producer
+	(*NewProducer)(nil),                                           // 31: producerflow.producer.v1.NewProducer
+	(*NewProducerRequest)(nil),                                    // 32: producerflow.producer.v1.NewProducerRequest
+	(*NewProducerResponse)(nil),                                   // 33: producerflow.producer.v1.NewProducerResponse
+	(*NewProducersRequest)(nil),                                   // 34: producerflow.producer.v1.NewProducersRequest
+	(*NewProducersResponse)(nil),                                  // 35: producerflow.producer.v1.NewProducersResponse
+	(*NewContact)(nil),                                            // 36: producerflow.producer.v1.NewContact
+	(*NewContactRequest)(nil),                                     // 37: producerflow.producer.v1.NewContactRequest
+	(*NewContactResponse)(nil),                                    // 38: producerflow.producer.v1.NewContactResponse
+	(*NewContactsRequest)(nil),                                    // 39: producerflow.producer.v1.NewContactsRequest
+	(*NewContactsResponse)(nil),                                   // 40: producerflow.producer.v1.NewContactsResponse
+	(*Contact)(nil),                                               // 41: producerflow.producer.v1.Contact
+	(*ListAgencyContactsRequest)(nil),                             // 42: producerflow.producer.v1.ListAgencyContactsRequest
+	(*ListAgencyContactsResponse)(nil),                            // 43: producerflow.producer.v1.ListAgencyContactsResponse
+	(*SetExternalIDRequest)(nil),                                  // 44: producerflow.producer.v1.SetExternalIDRequest
+	(*SetExternalIDResponse)(nil),                                 // 45: producerflow.producer.v1.SetExternalIDResponse
+	(*ValidateProducerNPNRequest)(nil),                            // 46: producerflow.producer.v1.ValidateProducerNPNRequest
+	(*ValidateProducerNPNResponse)(nil),                           // 47: producerflow.producer.v1.ValidateProducerNPNResponse
+	(*ValidateAgencyNPNRequest)(nil),                              // 48: producerflow.producer.v1.ValidateAgencyNPNRequest
+	(*ValidateAgencyNPNResponse)(nil),                             // 49: producerflow.producer.v1.ValidateAgencyNPNResponse
+	(*LookupNPNByFEINRequest)(nil),                                // 50: producerflow.producer.v1.LookupNPNByFEINRequest
+	(*LookupNPNByFEINResponse)(nil),                               // 51: producerflow.producer.v1.LookupNPNByFEINResponse
+	(*ResyncAgencyRequest)(nil),                                   // 52: producerflow.producer.v1.ResyncAgencyRequest
+	(*ResyncAgencyResponse)(nil),                                  // 53: producerflow.producer.v1.ResyncAgencyResponse
+	(*ResyncProducerRequest)(nil),                                 // 54: producerflow.producer.v1.ResyncProducerRequest
+	(*ResyncProducerResponse)(nil),                                // 55: producerflow.producer.v1.ResyncProducerResponse
+	(*SyncProducerWithNIPRRequest)(nil),                           // 56: producerflow.producer.v1.SyncProducerWithNIPRRequest
+	(*SyncProducerWithNIPRResponse)(nil),                          // 57: producerflow.producer.v1.SyncProducerWithNIPRResponse
+	(*SyncAgencyWithNIPRRequest)(nil),                             // 58: producerflow.producer.v1.SyncAgencyWithNIPRRequest
+	(*SyncAgencyWithNIPRResponse)(nil),                            // 59: producerflow.producer.v1.SyncAgencyWithNIPRResponse
+	(*StopSyncProducerWithNIPRRequest)(nil),                       // 60: producerflow.producer.v1.StopSyncProducerWithNIPRRequest
+	(*StopSyncProducerWithNIPRResponse)(nil),                      // 61: producerflow.producer.v1.StopSyncProducerWithNIPRResponse
+	(*StopSyncAgencyWithNIPRRequest)(nil),                         // 62: producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
+	(*StopSyncAgencyWithNIPRResponse)(nil),                        // 63: producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
+	(*AgencySummary)(nil),                                         // 64: producerflow.producer.v1.AgencySummary
+	(*ListAgenciesRequest)(nil),                                   // 65: producerflow.producer.v1.ListAgenciesRequest
+	(*ListAgenciesResponse)(nil),                                  // 66: producerflow.producer.v1.ListAgenciesResponse
+	(*ListOrganizationsRequest)(nil),                              // 67: producerflow.producer.v1.ListOrganizationsRequest
+	(*Organization)(nil),                                          // 68: producerflow.producer.v1.Organization
+	(*ListOrganizationsResponse)(nil),                             // 69: producerflow.producer.v1.ListOrganizationsResponse
+	(*GetOrganizationRequest)(nil),                                // 70: producerflow.producer.v1.GetOrganizationRequest
+	(*GetOrganizationResponse)(nil),                               // 71: producerflow.producer.v1.GetOrganizationResponse
+	(*CreateProducerUploadURLRequest)(nil),                        // 72: producerflow.producer.v1.CreateProducerUploadURLRequest
+	(*CreateProducerUploadURLResponse)(nil),                       // 73: producerflow.producer.v1.CreateProducerUploadURLResponse
+	(*Location)(nil),                                              // 74: producerflow.producer.v1.Location
+	(*AddAgencyLocationsRequest)(nil),                             // 75: producerflow.producer.v1.AddAgencyLocationsRequest
+	(*LocationInput)(nil),                                         // 76: producerflow.producer.v1.LocationInput
+	(*AddAgencyLocationsResponse)(nil),                            // 77: producerflow.producer.v1.AddAgencyLocationsResponse
+	(*RemoveAgencyLocationsRequest)(nil),                          // 78: producerflow.producer.v1.RemoveAgencyLocationsRequest
+	(*RemoveAgencyLocationsResponse)(nil),                         // 79: producerflow.producer.v1.RemoveAgencyLocationsResponse
+	(*ListAgencyLocationsRequest)(nil),                            // 80: producerflow.producer.v1.ListAgencyLocationsRequest
+	(*ListAgencyLocationsResponse)(nil),                           // 81: producerflow.producer.v1.ListAgencyLocationsResponse
+	(*UpdateAgencyLocationRequest)(nil),                           // 82: producerflow.producer.v1.UpdateAgencyLocationRequest
+	(*UpdateAgencyLocationResponse)(nil),                          // 83: producerflow.producer.v1.UpdateAgencyLocationResponse
+	(*AssignProducerToLocationsRequest)(nil),                      // 84: producerflow.producer.v1.AssignProducerToLocationsRequest
+	(*AssignProducerToLocationsResponse)(nil),                     // 85: producerflow.producer.v1.AssignProducerToLocationsResponse
+	(*UnassignProducerFromLocationsRequest)(nil),                  // 86: producerflow.producer.v1.UnassignProducerFromLocationsRequest
+	(*UnassignProducerFromLocationsResponse)(nil),                 // 87: producerflow.producer.v1.UnassignProducerFromLocationsResponse
+	(*CreateAgencyOnboardingURLRequest_Agency)(nil),               // 88: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
+	(*CreateAgencyOnboardingURLRequest_Agency_Principal)(nil),     // 89: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
+	(*ProducerData_Address)(nil),                                  // 90: producerflow.producer.v1.ProducerData.Address
+	(*NewAgencyRequest_Agency)(nil),                               // 91: producerflow.producer.v1.NewAgencyRequest.Agency
+	(*NewAgencyRequest_Agency_Principal)(nil),                     // 92: producerflow.producer.v1.NewAgencyRequest.Agency.Principal
+	(*NewAgencyRequest_Agency_BankAccount)(nil),                   // 93: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
+	(*NewAgencyRequest_Agency_EOInfo)(nil),                        // 94: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
+	(*NewAgencyRequest_Agency_BusinessHours)(nil),                 // 95: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
+	(*NewAgencyRequest_Agency_PointOfContact)(nil),                // 96: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
+	nil, // 97: producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
+	(*NewAgencyRequest_Agency_BusinessHours_BusinessHour)(nil),    // 98: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
+	(*GetProducerRequest_ProducerIDLookup)(nil),                   // 99: producerflow.producer.v1.GetProducerRequest.ProducerIDLookup
+	(*GetProducerRequest_ProducerNPNLookup)(nil),                  // 100: producerflow.producer.v1.GetProducerRequest.ProducerNPNLookup
+	(*GetProducerRequest_EmailLookup)(nil),                        // 101: producerflow.producer.v1.GetProducerRequest.EmailLookup
+	(*UpdateProducerRequest_Producer)(nil),                        // 102: producerflow.producer.v1.UpdateProducerRequest.Producer
+	(*UpdateAgencyRequest_Agency)(nil),                            // 103: producerflow.producer.v1.UpdateAgencyRequest.Agency
+	(*UpdateAgencyRequest_Agency_Address)(nil),                    // 104: producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
+	(*Agency_AgencyInfo)(nil),                                     // 105: producerflow.producer.v1.Agency.AgencyInfo
+	(*Agency_Address)(nil),                                        // 106: producerflow.producer.v1.Agency.Address
+	(*Agency_BankAccount)(nil),                                    // 107: producerflow.producer.v1.Agency.BankAccount
+	(*Agency_EOInfo)(nil),                                         // 108: producerflow.producer.v1.Agency.EOInfo
+	(*Agency_Principal)(nil),                                      // 109: producerflow.producer.v1.Agency.Principal
+	(*Agency_IvansAccount)(nil),                                   // 110: producerflow.producer.v1.Agency.IvansAccount
+	(*Agency_BusinessHours)(nil),                                  // 111: producerflow.producer.v1.Agency.BusinessHours
+	(*Agency_NIPR)(nil),                                           // 112: producerflow.producer.v1.Agency.NIPR
+	nil,                                                           // 113: producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
+	(*Agency_BusinessHours_BusinessHour)(nil),                     // 114: producerflow.producer.v1.Agency.BusinessHours.BusinessHour
+	(*Agency_NIPR_Biographic)(nil),                                // 115: producerflow.producer.v1.Agency.NIPR.Biographic
+	(*Agency_NIPR_Address)(nil),                                   // 116: producerflow.producer.v1.Agency.NIPR.Address
+	(*Agency_NIPR_License)(nil),                                   // 117: producerflow.producer.v1.Agency.NIPR.License
+	(*Agency_NIPR_RegulatoryInfo)(nil),                            // 118: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
+	(*Agency_NIPR_Appointment)(nil),                               // 119: producerflow.producer.v1.Agency.NIPR.Appointment
+	(*Agency_NIPR_License_LineOfAuthority)(nil),                   // 120: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
+	(*Agency_NIPR_RegulatoryInfo_RegulatoryAction)(nil),           // 121: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
+	(*Producer_Agency)(nil),                                       // 122: producerflow.producer.v1.Producer.Agency
+	(*Producer_NIPR)(nil),                                         // 123: producerflow.producer.v1.Producer.NIPR
+	(*Producer_Address)(nil),                                      // 124: producerflow.producer.v1.Producer.Address
+	nil,                                                           // 125: producerflow.producer.v1.Producer.MetadataQuestionsEntry
+	(*Producer_NIPR_License)(nil),                                 // 126: producerflow.producer.v1.Producer.NIPR.License
+	(*Producer_NIPR_Biographic)(nil),                              // 127: producerflow.producer.v1.Producer.NIPR.Biographic
+	(*Producer_NIPR_ProducerRegulatoryInfo)(nil),                  // 128: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
+	(*Producer_NIPR_Appointment)(nil),                             // 129: producerflow.producer.v1.Producer.NIPR.Appointment
+	(*Producer_NIPR_License_LineOfAuthority)(nil),                 // 130: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
+	(*Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction)(nil), // 131: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
+	nil,                           // 132: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
+	(*NewProducer_Address)(nil),   // 133: producerflow.producer.v1.NewProducer.Address
+	nil,                           // 134: producerflow.producer.v1.NewProducer.MetadataQuestionsEntry
+	(*NewContact_Address)(nil),    // 135: producerflow.producer.v1.NewContact.Address
+	(*Contact_Address)(nil),       // 136: producerflow.producer.v1.Contact.Address
+	(*timestamppb.Timestamp)(nil), // 137: google.protobuf.Timestamp
+	(dayofweek.DayOfWeek)(0),      // 138: google.type.DayOfWeek
+	(*timeofday.TimeOfDay)(nil),   // 139: google.type.TimeOfDay
 }
 var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
-	89,  // 0: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.agency:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
-	14,  // 1: producerflow.producer.v1.CreateProducerOnboardingURLRequest.producer_data:type_name -> producerflow.producer.v1.ProducerData
-	91,  // 2: producerflow.producer.v1.ProducerData.mailing_address:type_name -> producerflow.producer.v1.ProducerData.Address
-	92,  // 3: producerflow.producer.v1.NewAgencyRequest.agency:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency
-	100, // 4: producerflow.producer.v1.GetProducerRequest.producer_id_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.ProducerIDLookup
-	101, // 5: producerflow.producer.v1.GetProducerRequest.npn_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.ProducerNPNLookup
-	102, // 6: producerflow.producer.v1.GetProducerRequest.email_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.EmailLookup
-	31,  // 7: producerflow.producer.v1.GetProducerResponse.producer:type_name -> producerflow.producer.v1.Producer
-	30,  // 8: producerflow.producer.v1.GetAgencyAndProducersResponse.agency:type_name -> producerflow.producer.v1.Agency
-	31,  // 9: producerflow.producer.v1.GetAgencyAndProducersResponse.producers:type_name -> producerflow.producer.v1.Producer
-	103, // 10: producerflow.producer.v1.UpdateProducerRequest.producer:type_name -> producerflow.producer.v1.UpdateProducerRequest.Producer
-	104, // 11: producerflow.producer.v1.UpdateAgencyRequest.agency:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency
-	31,  // 12: producerflow.producer.v1.ListNewProducersResponse.new_producers:type_name -> producerflow.producer.v1.Producer
-	110, // 13: producerflow.producer.v1.Agency.agency_info:type_name -> producerflow.producer.v1.Agency.AgencyInfo
-	111, // 14: producerflow.producer.v1.Agency.physical_address:type_name -> producerflow.producer.v1.Agency.Address
-	111, // 15: producerflow.producer.v1.Agency.mailing_address:type_name -> producerflow.producer.v1.Agency.Address
-	111, // 16: producerflow.producer.v1.Agency.invoicing_address:type_name -> producerflow.producer.v1.Agency.Address
-	112, // 17: producerflow.producer.v1.Agency.bank_account:type_name -> producerflow.producer.v1.Agency.BankAccount
-	113, // 18: producerflow.producer.v1.Agency.eo_info:type_name -> producerflow.producer.v1.Agency.EOInfo
-	114, // 19: producerflow.producer.v1.Agency.principal:type_name -> producerflow.producer.v1.Agency.Principal
-	115, // 20: producerflow.producer.v1.Agency.ivans_account:type_name -> producerflow.producer.v1.Agency.IvansAccount
-	116, // 21: producerflow.producer.v1.Agency.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours
-	117, // 22: producerflow.producer.v1.Agency.nipr:type_name -> producerflow.producer.v1.Agency.NIPR
-	75,  // 23: producerflow.producer.v1.Agency.locations:type_name -> producerflow.producer.v1.Location
-	127, // 24: producerflow.producer.v1.Producer.agency:type_name -> producerflow.producer.v1.Producer.Agency
-	128, // 25: producerflow.producer.v1.Producer.nipr:type_name -> producerflow.producer.v1.Producer.NIPR
-	129, // 26: producerflow.producer.v1.Producer.address:type_name -> producerflow.producer.v1.Producer.Address
-	75,  // 27: producerflow.producer.v1.Producer.locations:type_name -> producerflow.producer.v1.Location
-	130, // 28: producerflow.producer.v1.Producer.metadata_questions:type_name -> producerflow.producer.v1.Producer.MetadataQuestionsEntry
-	138, // 29: producerflow.producer.v1.NewProducer.mailing_address:type_name -> producerflow.producer.v1.NewProducer.Address
-	139, // 30: producerflow.producer.v1.NewProducer.metadata_questions:type_name -> producerflow.producer.v1.NewProducer.MetadataQuestionsEntry
-	32,  // 31: producerflow.producer.v1.NewProducerRequest.producer:type_name -> producerflow.producer.v1.NewProducer
-	32,  // 32: producerflow.producer.v1.NewProducersRequest.producers:type_name -> producerflow.producer.v1.NewProducer
-	140, // 33: producerflow.producer.v1.NewContact.address:type_name -> producerflow.producer.v1.NewContact.Address
-	37,  // 34: producerflow.producer.v1.NewContactRequest.contact:type_name -> producerflow.producer.v1.NewContact
-	37,  // 35: producerflow.producer.v1.NewContactsRequest.contacts:type_name -> producerflow.producer.v1.NewContact
-	141, // 36: producerflow.producer.v1.Contact.address:type_name -> producerflow.producer.v1.Contact.Address
-	142, // 37: producerflow.producer.v1.Contact.created_at:type_name -> google.protobuf.Timestamp
-	42,  // 38: producerflow.producer.v1.ListAgencyContactsResponse.contacts:type_name -> producerflow.producer.v1.Contact
-	142, // 39: producerflow.producer.v1.AgencySummary.created_at:type_name -> google.protobuf.Timestamp
-	9,   // 40: producerflow.producer.v1.ListAgenciesRequest.pagination:type_name -> producerflow.producer.v1.Pagination
+	88,  // 0: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.agency:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
+	13,  // 1: producerflow.producer.v1.CreateProducerOnboardingURLRequest.producer_data:type_name -> producerflow.producer.v1.ProducerData
+	90,  // 2: producerflow.producer.v1.ProducerData.mailing_address:type_name -> producerflow.producer.v1.ProducerData.Address
+	91,  // 3: producerflow.producer.v1.NewAgencyRequest.agency:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency
+	99,  // 4: producerflow.producer.v1.GetProducerRequest.producer_id_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.ProducerIDLookup
+	100, // 5: producerflow.producer.v1.GetProducerRequest.npn_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.ProducerNPNLookup
+	101, // 6: producerflow.producer.v1.GetProducerRequest.email_lookup:type_name -> producerflow.producer.v1.GetProducerRequest.EmailLookup
+	30,  // 7: producerflow.producer.v1.GetProducerResponse.producer:type_name -> producerflow.producer.v1.Producer
+	29,  // 8: producerflow.producer.v1.GetAgencyAndProducersResponse.agency:type_name -> producerflow.producer.v1.Agency
+	30,  // 9: producerflow.producer.v1.GetAgencyAndProducersResponse.producers:type_name -> producerflow.producer.v1.Producer
+	102, // 10: producerflow.producer.v1.UpdateProducerRequest.producer:type_name -> producerflow.producer.v1.UpdateProducerRequest.Producer
+	103, // 11: producerflow.producer.v1.UpdateAgencyRequest.agency:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency
+	30,  // 12: producerflow.producer.v1.ListNewProducersResponse.new_producers:type_name -> producerflow.producer.v1.Producer
+	105, // 13: producerflow.producer.v1.Agency.agency_info:type_name -> producerflow.producer.v1.Agency.AgencyInfo
+	106, // 14: producerflow.producer.v1.Agency.physical_address:type_name -> producerflow.producer.v1.Agency.Address
+	106, // 15: producerflow.producer.v1.Agency.mailing_address:type_name -> producerflow.producer.v1.Agency.Address
+	106, // 16: producerflow.producer.v1.Agency.invoicing_address:type_name -> producerflow.producer.v1.Agency.Address
+	107, // 17: producerflow.producer.v1.Agency.bank_account:type_name -> producerflow.producer.v1.Agency.BankAccount
+	108, // 18: producerflow.producer.v1.Agency.eo_info:type_name -> producerflow.producer.v1.Agency.EOInfo
+	109, // 19: producerflow.producer.v1.Agency.principal:type_name -> producerflow.producer.v1.Agency.Principal
+	110, // 20: producerflow.producer.v1.Agency.ivans_account:type_name -> producerflow.producer.v1.Agency.IvansAccount
+	111, // 21: producerflow.producer.v1.Agency.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours
+	112, // 22: producerflow.producer.v1.Agency.nipr:type_name -> producerflow.producer.v1.Agency.NIPR
+	74,  // 23: producerflow.producer.v1.Agency.locations:type_name -> producerflow.producer.v1.Location
+	122, // 24: producerflow.producer.v1.Producer.agency:type_name -> producerflow.producer.v1.Producer.Agency
+	123, // 25: producerflow.producer.v1.Producer.nipr:type_name -> producerflow.producer.v1.Producer.NIPR
+	124, // 26: producerflow.producer.v1.Producer.address:type_name -> producerflow.producer.v1.Producer.Address
+	74,  // 27: producerflow.producer.v1.Producer.locations:type_name -> producerflow.producer.v1.Location
+	125, // 28: producerflow.producer.v1.Producer.metadata_questions:type_name -> producerflow.producer.v1.Producer.MetadataQuestionsEntry
+	133, // 29: producerflow.producer.v1.NewProducer.mailing_address:type_name -> producerflow.producer.v1.NewProducer.Address
+	134, // 30: producerflow.producer.v1.NewProducer.metadata_questions:type_name -> producerflow.producer.v1.NewProducer.MetadataQuestionsEntry
+	31,  // 31: producerflow.producer.v1.NewProducerRequest.producer:type_name -> producerflow.producer.v1.NewProducer
+	31,  // 32: producerflow.producer.v1.NewProducersRequest.producers:type_name -> producerflow.producer.v1.NewProducer
+	135, // 33: producerflow.producer.v1.NewContact.address:type_name -> producerflow.producer.v1.NewContact.Address
+	36,  // 34: producerflow.producer.v1.NewContactRequest.contact:type_name -> producerflow.producer.v1.NewContact
+	36,  // 35: producerflow.producer.v1.NewContactsRequest.contacts:type_name -> producerflow.producer.v1.NewContact
+	136, // 36: producerflow.producer.v1.Contact.address:type_name -> producerflow.producer.v1.Contact.Address
+	137, // 37: producerflow.producer.v1.Contact.created_at:type_name -> google.protobuf.Timestamp
+	41,  // 38: producerflow.producer.v1.ListAgencyContactsResponse.contacts:type_name -> producerflow.producer.v1.Contact
+	137, // 39: producerflow.producer.v1.AgencySummary.created_at:type_name -> google.protobuf.Timestamp
+	8,   // 40: producerflow.producer.v1.ListAgenciesRequest.pagination:type_name -> producerflow.producer.v1.Pagination
 	1,   // 41: producerflow.producer.v1.ListAgenciesRequest.agency_type:type_name -> producerflow.producer.v1.AgencyType
 	0,   // 42: producerflow.producer.v1.ListAgenciesRequest.entity_type:type_name -> producerflow.producer.v1.EntityType
 	2,   // 43: producerflow.producer.v1.ListAgenciesRequest.nipr_sync_statuses:type_name -> producerflow.producer.v1.NIPRSyncState
-	65,  // 44: producerflow.producer.v1.ListAgenciesResponse.agencies:type_name -> producerflow.producer.v1.AgencySummary
-	9,   // 45: producerflow.producer.v1.ListOrganizationsRequest.pagination:type_name -> producerflow.producer.v1.Pagination
-	69,  // 46: producerflow.producer.v1.ListOrganizationsResponse.organizations:type_name -> producerflow.producer.v1.Organization
-	69,  // 47: producerflow.producer.v1.GetOrganizationResponse.organization:type_name -> producerflow.producer.v1.Organization
-	10,  // 48: producerflow.producer.v1.Location.address:type_name -> producerflow.producer.v1.Address
-	77,  // 49: producerflow.producer.v1.AddAgencyLocationsRequest.locations:type_name -> producerflow.producer.v1.LocationInput
-	10,  // 50: producerflow.producer.v1.LocationInput.address:type_name -> producerflow.producer.v1.Address
-	75,  // 51: producerflow.producer.v1.ListAgencyLocationsResponse.locations:type_name -> producerflow.producer.v1.Location
-	10,  // 52: producerflow.producer.v1.UpdateAgencyLocationRequest.address:type_name -> producerflow.producer.v1.Address
-	75,  // 53: producerflow.producer.v1.UpdateAgencyLocationResponse.location:type_name -> producerflow.producer.v1.Location
+	64,  // 44: producerflow.producer.v1.ListAgenciesResponse.agencies:type_name -> producerflow.producer.v1.AgencySummary
+	8,   // 45: producerflow.producer.v1.ListOrganizationsRequest.pagination:type_name -> producerflow.producer.v1.Pagination
+	68,  // 46: producerflow.producer.v1.ListOrganizationsResponse.organizations:type_name -> producerflow.producer.v1.Organization
+	68,  // 47: producerflow.producer.v1.GetOrganizationResponse.organization:type_name -> producerflow.producer.v1.Organization
+	9,   // 48: producerflow.producer.v1.Location.address:type_name -> producerflow.producer.v1.Address
+	76,  // 49: producerflow.producer.v1.AddAgencyLocationsRequest.locations:type_name -> producerflow.producer.v1.LocationInput
+	9,   // 50: producerflow.producer.v1.LocationInput.address:type_name -> producerflow.producer.v1.Address
+	74,  // 51: producerflow.producer.v1.ListAgencyLocationsResponse.locations:type_name -> producerflow.producer.v1.Location
+	9,   // 52: producerflow.producer.v1.UpdateAgencyLocationRequest.address:type_name -> producerflow.producer.v1.Address
+	74,  // 53: producerflow.producer.v1.UpdateAgencyLocationResponse.location:type_name -> producerflow.producer.v1.Location
 	0,   // 54: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
-	10,  // 55: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
-	10,  // 56: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
-	10,  // 57: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
-	90,  // 58: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.principal:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
-	10,  // 59: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.address:type_name -> producerflow.producer.v1.Address
-	93,  // 60: producerflow.producer.v1.NewAgencyRequest.Agency.principal:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal
-	94,  // 61: producerflow.producer.v1.NewAgencyRequest.Agency.bank_account:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
-	95,  // 62: producerflow.producer.v1.NewAgencyRequest.Agency.eo_info:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
-	96,  // 63: producerflow.producer.v1.NewAgencyRequest.Agency.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
-	32,  // 64: producerflow.producer.v1.NewAgencyRequest.Agency.producers:type_name -> producerflow.producer.v1.NewProducer
-	97,  // 65: producerflow.producer.v1.NewAgencyRequest.Agency.points_of_contact:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
+	9,   // 55: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
+	9,   // 56: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
+	9,   // 57: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
+	89,  // 58: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.principal:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
+	9,   // 59: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.address:type_name -> producerflow.producer.v1.Address
+	92,  // 60: producerflow.producer.v1.NewAgencyRequest.Agency.principal:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal
+	93,  // 61: producerflow.producer.v1.NewAgencyRequest.Agency.bank_account:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
+	94,  // 62: producerflow.producer.v1.NewAgencyRequest.Agency.eo_info:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
+	95,  // 63: producerflow.producer.v1.NewAgencyRequest.Agency.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
+	31,  // 64: producerflow.producer.v1.NewAgencyRequest.Agency.producers:type_name -> producerflow.producer.v1.NewProducer
+	96,  // 65: producerflow.producer.v1.NewAgencyRequest.Agency.points_of_contact:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
 	0,   // 66: producerflow.producer.v1.NewAgencyRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
-	10,  // 67: producerflow.producer.v1.NewAgencyRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
-	10,  // 68: producerflow.producer.v1.NewAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
-	10,  // 69: producerflow.producer.v1.NewAgencyRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
-	77,  // 70: producerflow.producer.v1.NewAgencyRequest.Agency.locations:type_name -> producerflow.producer.v1.LocationInput
-	98,  // 71: producerflow.producer.v1.NewAgencyRequest.Agency.metadata_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
+	9,   // 67: producerflow.producer.v1.NewAgencyRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
+	9,   // 68: producerflow.producer.v1.NewAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
+	9,   // 69: producerflow.producer.v1.NewAgencyRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
+	76,  // 70: producerflow.producer.v1.NewAgencyRequest.Agency.locations:type_name -> producerflow.producer.v1.LocationInput
+	97,  // 71: producerflow.producer.v1.NewAgencyRequest.Agency.metadata_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
 	3,   // 72: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.AccountType
-	142, // 73: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
-	142, // 74: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
-	99,  // 75: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
+	137, // 73: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
+	137, // 74: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
+	98,  // 75: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
 	4,   // 76: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.role:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.CommunicationRole
-	143, // 77: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
-	144, // 78: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
-	144, // 79: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
-	105, // 80: producerflow.producer.v1.UpdateAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
-	105, // 81: producerflow.producer.v1.UpdateAgencyRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
-	105, // 82: producerflow.producer.v1.UpdateAgencyRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
-	106, // 83: producerflow.producer.v1.UpdateAgencyRequest.Agency.business_hours:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours
-	107, // 84: producerflow.producer.v1.UpdateAgencyRequest.Agency.ivans_account:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount
-	108, // 85: producerflow.producer.v1.UpdateAgencyRequest.Agency.points_of_contact:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact
-	109, // 86: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHour
-	5,   // 87: producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact.role:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.PointOfContact.CommunicationRole
-	143, // 88: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
-	144, // 89: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
-	144, // 90: producerflow.producer.v1.UpdateAgencyRequest.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
-	118, // 91: producerflow.producer.v1.Agency.AgencyInfo.metadata_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
-	6,   // 92: producerflow.producer.v1.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.Agency.BankAccount.AccountType
-	142, // 93: producerflow.producer.v1.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
-	142, // 94: producerflow.producer.v1.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
-	111, // 95: producerflow.producer.v1.Agency.Principal.address:type_name -> producerflow.producer.v1.Agency.Address
-	119, // 96: producerflow.producer.v1.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours.BusinessHour
-	120, // 97: producerflow.producer.v1.Agency.NIPR.biographic:type_name -> producerflow.producer.v1.Agency.NIPR.Biographic
-	121, // 98: producerflow.producer.v1.Agency.NIPR.addresses:type_name -> producerflow.producer.v1.Agency.NIPR.Address
-	122, // 99: producerflow.producer.v1.Agency.NIPR.licenses:type_name -> producerflow.producer.v1.Agency.NIPR.License
-	123, // 100: producerflow.producer.v1.Agency.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
-	124, // 101: producerflow.producer.v1.Agency.NIPR.appointments:type_name -> producerflow.producer.v1.Agency.NIPR.Appointment
-	143, // 102: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
-	144, // 103: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
-	144, // 104: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
-	142, // 105: producerflow.producer.v1.Agency.NIPR.Biographic.updated_at:type_name -> google.protobuf.Timestamp
-	142, // 106: producerflow.producer.v1.Agency.NIPR.Address.date_updated:type_name -> google.protobuf.Timestamp
-	142, // 107: producerflow.producer.v1.Agency.NIPR.Address.updated_at:type_name -> google.protobuf.Timestamp
-	7,   // 108: producerflow.producer.v1.Agency.NIPR.License.status:type_name -> producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
-	142, // 109: producerflow.producer.v1.Agency.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
-	142, // 110: producerflow.producer.v1.Agency.NIPR.License.issue_date:type_name -> google.protobuf.Timestamp
-	142, // 111: producerflow.producer.v1.Agency.NIPR.License.update_date:type_name -> google.protobuf.Timestamp
-	142, // 112: producerflow.producer.v1.Agency.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
-	125, // 113: producerflow.producer.v1.Agency.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
-	126, // 114: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.regulatory_actions:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
-	142, // 115: producerflow.producer.v1.Agency.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
-	142, // 116: producerflow.producer.v1.Agency.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
-	142, // 117: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
-	142, // 118: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
-	142, // 119: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
-	142, // 120: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
-	131, // 121: producerflow.producer.v1.Producer.NIPR.licenses:type_name -> producerflow.producer.v1.Producer.NIPR.License
-	132, // 122: producerflow.producer.v1.Producer.NIPR.biographic:type_name -> producerflow.producer.v1.Producer.NIPR.Biographic
-	133, // 123: producerflow.producer.v1.Producer.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
-	134, // 124: producerflow.producer.v1.Producer.NIPR.appointments:type_name -> producerflow.producer.v1.Producer.NIPR.Appointment
-	8,   // 125: producerflow.producer.v1.Producer.NIPR.License.status:type_name -> producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
-	142, // 126: producerflow.producer.v1.Producer.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
-	142, // 127: producerflow.producer.v1.Producer.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
-	135, // 128: producerflow.producer.v1.Producer.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
-	142, // 129: producerflow.producer.v1.Producer.NIPR.Biographic.date_of_birth:type_name -> google.protobuf.Timestamp
-	137, // 130: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.regulatory_actions_by_state:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
-	142, // 131: producerflow.producer.v1.Producer.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
-	142, // 132: producerflow.producer.v1.Producer.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
-	142, // 133: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
-	142, // 134: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
-	142, // 135: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
-	142, // 136: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
-	136, // 137: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry.value:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
-	11,  // 138: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:input_type -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest
-	13,  // 139: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:input_type -> producerflow.producer.v1.CreateProducerOnboardingURLRequest
-	16,  // 140: producerflow.producer.v1.ProducerService.NewAgency:input_type -> producerflow.producer.v1.NewAgencyRequest
-	66,  // 141: producerflow.producer.v1.ProducerService.ListAgencies:input_type -> producerflow.producer.v1.ListAgenciesRequest
-	68,  // 142: producerflow.producer.v1.ProducerService.ListOrganizations:input_type -> producerflow.producer.v1.ListOrganizationsRequest
-	71,  // 143: producerflow.producer.v1.ProducerService.GetOrganization:input_type -> producerflow.producer.v1.GetOrganizationRequest
-	33,  // 144: producerflow.producer.v1.ProducerService.NewProducer:input_type -> producerflow.producer.v1.NewProducerRequest
-	35,  // 145: producerflow.producer.v1.ProducerService.NewProducers:input_type -> producerflow.producer.v1.NewProducersRequest
-	20,  // 146: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:input_type -> producerflow.producer.v1.GetAgencyAndProducersRequest
-	18,  // 147: producerflow.producer.v1.ProducerService.GetProducer:input_type -> producerflow.producer.v1.GetProducerRequest
-	22,  // 148: producerflow.producer.v1.ProducerService.GetAgencyFiles:input_type -> producerflow.producer.v1.GetAgencyFilesRequest
-	24,  // 149: producerflow.producer.v1.ProducerService.UpdateProducer:input_type -> producerflow.producer.v1.UpdateProducerRequest
-	26,  // 150: producerflow.producer.v1.ProducerService.UpdateAgency:input_type -> producerflow.producer.v1.UpdateAgencyRequest
-	38,  // 151: producerflow.producer.v1.ProducerService.NewContact:input_type -> producerflow.producer.v1.NewContactRequest
-	40,  // 152: producerflow.producer.v1.ProducerService.NewContacts:input_type -> producerflow.producer.v1.NewContactsRequest
-	43,  // 153: producerflow.producer.v1.ProducerService.ListAgencyContacts:input_type -> producerflow.producer.v1.ListAgencyContactsRequest
-	45,  // 154: producerflow.producer.v1.ProducerService.SetExternalID:input_type -> producerflow.producer.v1.SetExternalIDRequest
-	47,  // 155: producerflow.producer.v1.ProducerService.ValidateProducerNPN:input_type -> producerflow.producer.v1.ValidateProducerNPNRequest
-	49,  // 156: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:input_type -> producerflow.producer.v1.ValidateAgencyNPNRequest
-	51,  // 157: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:input_type -> producerflow.producer.v1.LookupNPNByFEINRequest
-	55,  // 158: producerflow.producer.v1.ProducerService.ResyncProducer:input_type -> producerflow.producer.v1.ResyncProducerRequest
-	53,  // 159: producerflow.producer.v1.ProducerService.ResyncAgency:input_type -> producerflow.producer.v1.ResyncAgencyRequest
-	57,  // 160: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:input_type -> producerflow.producer.v1.SyncProducerWithNIPRRequest
-	59,  // 161: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:input_type -> producerflow.producer.v1.SyncAgencyWithNIPRRequest
-	61,  // 162: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:input_type -> producerflow.producer.v1.StopSyncProducerWithNIPRRequest
-	63,  // 163: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:input_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
-	73,  // 164: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:input_type -> producerflow.producer.v1.CreateProducerUploadURLRequest
-	76,  // 165: producerflow.producer.v1.ProducerService.AddAgencyLocations:input_type -> producerflow.producer.v1.AddAgencyLocationsRequest
-	79,  // 166: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:input_type -> producerflow.producer.v1.RemoveAgencyLocationsRequest
-	81,  // 167: producerflow.producer.v1.ProducerService.ListAgencyLocations:input_type -> producerflow.producer.v1.ListAgencyLocationsRequest
-	85,  // 168: producerflow.producer.v1.ProducerService.AssignProducerToLocations:input_type -> producerflow.producer.v1.AssignProducerToLocationsRequest
-	87,  // 169: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:input_type -> producerflow.producer.v1.UnassignProducerFromLocationsRequest
-	83,  // 170: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:input_type -> producerflow.producer.v1.UpdateAgencyLocationRequest
-	12,  // 171: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:output_type -> producerflow.producer.v1.CreateAgencyOnboardingURLResponse
-	15,  // 172: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:output_type -> producerflow.producer.v1.CreateProducerOnboardingURLResponse
-	17,  // 173: producerflow.producer.v1.ProducerService.NewAgency:output_type -> producerflow.producer.v1.NewAgencyResponse
-	67,  // 174: producerflow.producer.v1.ProducerService.ListAgencies:output_type -> producerflow.producer.v1.ListAgenciesResponse
-	70,  // 175: producerflow.producer.v1.ProducerService.ListOrganizations:output_type -> producerflow.producer.v1.ListOrganizationsResponse
-	72,  // 176: producerflow.producer.v1.ProducerService.GetOrganization:output_type -> producerflow.producer.v1.GetOrganizationResponse
-	34,  // 177: producerflow.producer.v1.ProducerService.NewProducer:output_type -> producerflow.producer.v1.NewProducerResponse
-	36,  // 178: producerflow.producer.v1.ProducerService.NewProducers:output_type -> producerflow.producer.v1.NewProducersResponse
-	21,  // 179: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:output_type -> producerflow.producer.v1.GetAgencyAndProducersResponse
-	19,  // 180: producerflow.producer.v1.ProducerService.GetProducer:output_type -> producerflow.producer.v1.GetProducerResponse
-	23,  // 181: producerflow.producer.v1.ProducerService.GetAgencyFiles:output_type -> producerflow.producer.v1.GetAgencyFilesResponse
-	25,  // 182: producerflow.producer.v1.ProducerService.UpdateProducer:output_type -> producerflow.producer.v1.UpdateProducerResponse
-	27,  // 183: producerflow.producer.v1.ProducerService.UpdateAgency:output_type -> producerflow.producer.v1.UpdateAgencyResponse
-	39,  // 184: producerflow.producer.v1.ProducerService.NewContact:output_type -> producerflow.producer.v1.NewContactResponse
-	41,  // 185: producerflow.producer.v1.ProducerService.NewContacts:output_type -> producerflow.producer.v1.NewContactsResponse
-	44,  // 186: producerflow.producer.v1.ProducerService.ListAgencyContacts:output_type -> producerflow.producer.v1.ListAgencyContactsResponse
-	46,  // 187: producerflow.producer.v1.ProducerService.SetExternalID:output_type -> producerflow.producer.v1.SetExternalIDResponse
-	48,  // 188: producerflow.producer.v1.ProducerService.ValidateProducerNPN:output_type -> producerflow.producer.v1.ValidateProducerNPNResponse
-	50,  // 189: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:output_type -> producerflow.producer.v1.ValidateAgencyNPNResponse
-	52,  // 190: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:output_type -> producerflow.producer.v1.LookupNPNByFEINResponse
-	56,  // 191: producerflow.producer.v1.ProducerService.ResyncProducer:output_type -> producerflow.producer.v1.ResyncProducerResponse
-	54,  // 192: producerflow.producer.v1.ProducerService.ResyncAgency:output_type -> producerflow.producer.v1.ResyncAgencyResponse
-	58,  // 193: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:output_type -> producerflow.producer.v1.SyncProducerWithNIPRResponse
-	60,  // 194: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:output_type -> producerflow.producer.v1.SyncAgencyWithNIPRResponse
-	62,  // 195: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:output_type -> producerflow.producer.v1.StopSyncProducerWithNIPRResponse
-	64,  // 196: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:output_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
-	74,  // 197: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:output_type -> producerflow.producer.v1.CreateProducerUploadURLResponse
-	78,  // 198: producerflow.producer.v1.ProducerService.AddAgencyLocations:output_type -> producerflow.producer.v1.AddAgencyLocationsResponse
-	80,  // 199: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:output_type -> producerflow.producer.v1.RemoveAgencyLocationsResponse
-	82,  // 200: producerflow.producer.v1.ProducerService.ListAgencyLocations:output_type -> producerflow.producer.v1.ListAgencyLocationsResponse
-	86,  // 201: producerflow.producer.v1.ProducerService.AssignProducerToLocations:output_type -> producerflow.producer.v1.AssignProducerToLocationsResponse
-	88,  // 202: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:output_type -> producerflow.producer.v1.UnassignProducerFromLocationsResponse
-	84,  // 203: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:output_type -> producerflow.producer.v1.UpdateAgencyLocationResponse
-	171, // [171:204] is the sub-list for method output_type
-	138, // [138:171] is the sub-list for method input_type
-	138, // [138:138] is the sub-list for extension type_name
-	138, // [138:138] is the sub-list for extension extendee
-	0,   // [0:138] is the sub-list for field type_name
+	138, // 77: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
+	139, // 78: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
+	139, // 79: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
+	104, // 80: producerflow.producer.v1.UpdateAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
+	113, // 81: producerflow.producer.v1.Agency.AgencyInfo.metadata_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
+	5,   // 82: producerflow.producer.v1.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.Agency.BankAccount.AccountType
+	137, // 83: producerflow.producer.v1.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
+	137, // 84: producerflow.producer.v1.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
+	106, // 85: producerflow.producer.v1.Agency.Principal.address:type_name -> producerflow.producer.v1.Agency.Address
+	114, // 86: producerflow.producer.v1.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours.BusinessHour
+	115, // 87: producerflow.producer.v1.Agency.NIPR.biographic:type_name -> producerflow.producer.v1.Agency.NIPR.Biographic
+	116, // 88: producerflow.producer.v1.Agency.NIPR.addresses:type_name -> producerflow.producer.v1.Agency.NIPR.Address
+	117, // 89: producerflow.producer.v1.Agency.NIPR.licenses:type_name -> producerflow.producer.v1.Agency.NIPR.License
+	118, // 90: producerflow.producer.v1.Agency.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
+	119, // 91: producerflow.producer.v1.Agency.NIPR.appointments:type_name -> producerflow.producer.v1.Agency.NIPR.Appointment
+	138, // 92: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
+	139, // 93: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
+	139, // 94: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
+	137, // 95: producerflow.producer.v1.Agency.NIPR.Biographic.updated_at:type_name -> google.protobuf.Timestamp
+	137, // 96: producerflow.producer.v1.Agency.NIPR.Address.date_updated:type_name -> google.protobuf.Timestamp
+	137, // 97: producerflow.producer.v1.Agency.NIPR.Address.updated_at:type_name -> google.protobuf.Timestamp
+	6,   // 98: producerflow.producer.v1.Agency.NIPR.License.status:type_name -> producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
+	137, // 99: producerflow.producer.v1.Agency.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
+	137, // 100: producerflow.producer.v1.Agency.NIPR.License.issue_date:type_name -> google.protobuf.Timestamp
+	137, // 101: producerflow.producer.v1.Agency.NIPR.License.update_date:type_name -> google.protobuf.Timestamp
+	137, // 102: producerflow.producer.v1.Agency.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
+	120, // 103: producerflow.producer.v1.Agency.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
+	121, // 104: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.regulatory_actions:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
+	137, // 105: producerflow.producer.v1.Agency.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
+	137, // 106: producerflow.producer.v1.Agency.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
+	137, // 107: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
+	137, // 108: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
+	137, // 109: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
+	137, // 110: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
+	126, // 111: producerflow.producer.v1.Producer.NIPR.licenses:type_name -> producerflow.producer.v1.Producer.NIPR.License
+	127, // 112: producerflow.producer.v1.Producer.NIPR.biographic:type_name -> producerflow.producer.v1.Producer.NIPR.Biographic
+	128, // 113: producerflow.producer.v1.Producer.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
+	129, // 114: producerflow.producer.v1.Producer.NIPR.appointments:type_name -> producerflow.producer.v1.Producer.NIPR.Appointment
+	7,   // 115: producerflow.producer.v1.Producer.NIPR.License.status:type_name -> producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
+	137, // 116: producerflow.producer.v1.Producer.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
+	137, // 117: producerflow.producer.v1.Producer.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
+	130, // 118: producerflow.producer.v1.Producer.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
+	137, // 119: producerflow.producer.v1.Producer.NIPR.Biographic.date_of_birth:type_name -> google.protobuf.Timestamp
+	132, // 120: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.regulatory_actions_by_state:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
+	137, // 121: producerflow.producer.v1.Producer.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
+	137, // 122: producerflow.producer.v1.Producer.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
+	137, // 123: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
+	137, // 124: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
+	137, // 125: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
+	137, // 126: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
+	131, // 127: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry.value:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
+	10,  // 128: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:input_type -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest
+	12,  // 129: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:input_type -> producerflow.producer.v1.CreateProducerOnboardingURLRequest
+	15,  // 130: producerflow.producer.v1.ProducerService.NewAgency:input_type -> producerflow.producer.v1.NewAgencyRequest
+	65,  // 131: producerflow.producer.v1.ProducerService.ListAgencies:input_type -> producerflow.producer.v1.ListAgenciesRequest
+	67,  // 132: producerflow.producer.v1.ProducerService.ListOrganizations:input_type -> producerflow.producer.v1.ListOrganizationsRequest
+	70,  // 133: producerflow.producer.v1.ProducerService.GetOrganization:input_type -> producerflow.producer.v1.GetOrganizationRequest
+	32,  // 134: producerflow.producer.v1.ProducerService.NewProducer:input_type -> producerflow.producer.v1.NewProducerRequest
+	34,  // 135: producerflow.producer.v1.ProducerService.NewProducers:input_type -> producerflow.producer.v1.NewProducersRequest
+	19,  // 136: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:input_type -> producerflow.producer.v1.GetAgencyAndProducersRequest
+	17,  // 137: producerflow.producer.v1.ProducerService.GetProducer:input_type -> producerflow.producer.v1.GetProducerRequest
+	21,  // 138: producerflow.producer.v1.ProducerService.GetAgencyFiles:input_type -> producerflow.producer.v1.GetAgencyFilesRequest
+	23,  // 139: producerflow.producer.v1.ProducerService.UpdateProducer:input_type -> producerflow.producer.v1.UpdateProducerRequest
+	25,  // 140: producerflow.producer.v1.ProducerService.UpdateAgency:input_type -> producerflow.producer.v1.UpdateAgencyRequest
+	37,  // 141: producerflow.producer.v1.ProducerService.NewContact:input_type -> producerflow.producer.v1.NewContactRequest
+	39,  // 142: producerflow.producer.v1.ProducerService.NewContacts:input_type -> producerflow.producer.v1.NewContactsRequest
+	42,  // 143: producerflow.producer.v1.ProducerService.ListAgencyContacts:input_type -> producerflow.producer.v1.ListAgencyContactsRequest
+	44,  // 144: producerflow.producer.v1.ProducerService.SetExternalID:input_type -> producerflow.producer.v1.SetExternalIDRequest
+	46,  // 145: producerflow.producer.v1.ProducerService.ValidateProducerNPN:input_type -> producerflow.producer.v1.ValidateProducerNPNRequest
+	48,  // 146: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:input_type -> producerflow.producer.v1.ValidateAgencyNPNRequest
+	50,  // 147: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:input_type -> producerflow.producer.v1.LookupNPNByFEINRequest
+	54,  // 148: producerflow.producer.v1.ProducerService.ResyncProducer:input_type -> producerflow.producer.v1.ResyncProducerRequest
+	52,  // 149: producerflow.producer.v1.ProducerService.ResyncAgency:input_type -> producerflow.producer.v1.ResyncAgencyRequest
+	56,  // 150: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:input_type -> producerflow.producer.v1.SyncProducerWithNIPRRequest
+	58,  // 151: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:input_type -> producerflow.producer.v1.SyncAgencyWithNIPRRequest
+	60,  // 152: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:input_type -> producerflow.producer.v1.StopSyncProducerWithNIPRRequest
+	62,  // 153: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:input_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
+	72,  // 154: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:input_type -> producerflow.producer.v1.CreateProducerUploadURLRequest
+	75,  // 155: producerflow.producer.v1.ProducerService.AddAgencyLocations:input_type -> producerflow.producer.v1.AddAgencyLocationsRequest
+	78,  // 156: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:input_type -> producerflow.producer.v1.RemoveAgencyLocationsRequest
+	80,  // 157: producerflow.producer.v1.ProducerService.ListAgencyLocations:input_type -> producerflow.producer.v1.ListAgencyLocationsRequest
+	84,  // 158: producerflow.producer.v1.ProducerService.AssignProducerToLocations:input_type -> producerflow.producer.v1.AssignProducerToLocationsRequest
+	86,  // 159: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:input_type -> producerflow.producer.v1.UnassignProducerFromLocationsRequest
+	82,  // 160: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:input_type -> producerflow.producer.v1.UpdateAgencyLocationRequest
+	11,  // 161: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:output_type -> producerflow.producer.v1.CreateAgencyOnboardingURLResponse
+	14,  // 162: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:output_type -> producerflow.producer.v1.CreateProducerOnboardingURLResponse
+	16,  // 163: producerflow.producer.v1.ProducerService.NewAgency:output_type -> producerflow.producer.v1.NewAgencyResponse
+	66,  // 164: producerflow.producer.v1.ProducerService.ListAgencies:output_type -> producerflow.producer.v1.ListAgenciesResponse
+	69,  // 165: producerflow.producer.v1.ProducerService.ListOrganizations:output_type -> producerflow.producer.v1.ListOrganizationsResponse
+	71,  // 166: producerflow.producer.v1.ProducerService.GetOrganization:output_type -> producerflow.producer.v1.GetOrganizationResponse
+	33,  // 167: producerflow.producer.v1.ProducerService.NewProducer:output_type -> producerflow.producer.v1.NewProducerResponse
+	35,  // 168: producerflow.producer.v1.ProducerService.NewProducers:output_type -> producerflow.producer.v1.NewProducersResponse
+	20,  // 169: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:output_type -> producerflow.producer.v1.GetAgencyAndProducersResponse
+	18,  // 170: producerflow.producer.v1.ProducerService.GetProducer:output_type -> producerflow.producer.v1.GetProducerResponse
+	22,  // 171: producerflow.producer.v1.ProducerService.GetAgencyFiles:output_type -> producerflow.producer.v1.GetAgencyFilesResponse
+	24,  // 172: producerflow.producer.v1.ProducerService.UpdateProducer:output_type -> producerflow.producer.v1.UpdateProducerResponse
+	26,  // 173: producerflow.producer.v1.ProducerService.UpdateAgency:output_type -> producerflow.producer.v1.UpdateAgencyResponse
+	38,  // 174: producerflow.producer.v1.ProducerService.NewContact:output_type -> producerflow.producer.v1.NewContactResponse
+	40,  // 175: producerflow.producer.v1.ProducerService.NewContacts:output_type -> producerflow.producer.v1.NewContactsResponse
+	43,  // 176: producerflow.producer.v1.ProducerService.ListAgencyContacts:output_type -> producerflow.producer.v1.ListAgencyContactsResponse
+	45,  // 177: producerflow.producer.v1.ProducerService.SetExternalID:output_type -> producerflow.producer.v1.SetExternalIDResponse
+	47,  // 178: producerflow.producer.v1.ProducerService.ValidateProducerNPN:output_type -> producerflow.producer.v1.ValidateProducerNPNResponse
+	49,  // 179: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:output_type -> producerflow.producer.v1.ValidateAgencyNPNResponse
+	51,  // 180: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:output_type -> producerflow.producer.v1.LookupNPNByFEINResponse
+	55,  // 181: producerflow.producer.v1.ProducerService.ResyncProducer:output_type -> producerflow.producer.v1.ResyncProducerResponse
+	53,  // 182: producerflow.producer.v1.ProducerService.ResyncAgency:output_type -> producerflow.producer.v1.ResyncAgencyResponse
+	57,  // 183: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:output_type -> producerflow.producer.v1.SyncProducerWithNIPRResponse
+	59,  // 184: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:output_type -> producerflow.producer.v1.SyncAgencyWithNIPRResponse
+	61,  // 185: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:output_type -> producerflow.producer.v1.StopSyncProducerWithNIPRResponse
+	63,  // 186: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:output_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
+	73,  // 187: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:output_type -> producerflow.producer.v1.CreateProducerUploadURLResponse
+	77,  // 188: producerflow.producer.v1.ProducerService.AddAgencyLocations:output_type -> producerflow.producer.v1.AddAgencyLocationsResponse
+	79,  // 189: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:output_type -> producerflow.producer.v1.RemoveAgencyLocationsResponse
+	81,  // 190: producerflow.producer.v1.ProducerService.ListAgencyLocations:output_type -> producerflow.producer.v1.ListAgencyLocationsResponse
+	85,  // 191: producerflow.producer.v1.ProducerService.AssignProducerToLocations:output_type -> producerflow.producer.v1.AssignProducerToLocationsResponse
+	87,  // 192: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:output_type -> producerflow.producer.v1.UnassignProducerFromLocationsResponse
+	83,  // 193: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:output_type -> producerflow.producer.v1.UpdateAgencyLocationResponse
+	161, // [161:194] is the sub-list for method output_type
+	128, // [128:161] is the sub-list for method input_type
+	128, // [128:128] is the sub-list for extension type_name
+	128, // [128:128] is the sub-list for extension extendee
+	0,   // [0:128] is the sub-list for field type_name
 }
 
 func init() { file_producerflow_producer_v1_producer_proto_init() }
@@ -11174,14 +10727,13 @@ func file_producerflow_producer_v1_producer_proto_init() {
 	file_producerflow_producer_v1_producer_proto_msgTypes[94].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[95].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[96].OneofWrappers = []any{}
-	file_producerflow_producer_v1_producer_proto_msgTypes[98].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_producerflow_producer_v1_producer_proto_rawDesc), len(file_producerflow_producer_v1_producer_proto_rawDesc)),
-			NumEnums:      9,
-			NumMessages:   133,
+			NumEnums:      8,
+			NumMessages:   129,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

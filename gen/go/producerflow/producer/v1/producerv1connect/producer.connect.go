@@ -184,8 +184,8 @@ type ProducerServiceClient interface {
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
 	// UpdateAgency updates information for an existing agency.
-	// Supports updating contact details, addresses, business hours, IVANS information,
-	// points of contact, and requested appointments.
+	// Supports updating contact details (email, phone, fax), website, physical address,
+	// requested appointments, and notes.
 	// Information from NIPR and other third-party sources cannot be updated.
 	// All fields are optional - only provide the fields you want to update.
 	// Validates email uniqueness if the email is changed.
@@ -715,8 +715,8 @@ type ProducerServiceHandler interface {
 	// Validates email uniqueness if the email is changed.
 	UpdateProducer(context.Context, *connect.Request[v1.UpdateProducerRequest]) (*connect.Response[v1.UpdateProducerResponse], error)
 	// UpdateAgency updates information for an existing agency.
-	// Supports updating contact details, addresses, business hours, IVANS information,
-	// points of contact, and requested appointments.
+	// Supports updating contact details (email, phone, fax), website, physical address,
+	// requested appointments, and notes.
 	// Information from NIPR and other third-party sources cannot be updated.
 	// All fields are optional - only provide the fields you want to update.
 	// Validates email uniqueness if the email is changed.

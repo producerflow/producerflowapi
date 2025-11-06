@@ -157,10 +157,6 @@
     - [UpdateAgencyRequest](#producerflow-producer-v1-UpdateAgencyRequest)
     - [UpdateAgencyRequest.Agency](#producerflow-producer-v1-UpdateAgencyRequest-Agency)
     - [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address)
-    - [UpdateAgencyRequest.Agency.BusinessHours](#producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours)
-    - [UpdateAgencyRequest.Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours-BusinessHour)
-    - [UpdateAgencyRequest.Agency.IvansAccount](#producerflow-producer-v1-UpdateAgencyRequest-Agency-IvansAccount)
-    - [UpdateAgencyRequest.Agency.PointOfContact](#producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact)
     - [UpdateAgencyResponse](#producerflow-producer-v1-UpdateAgencyResponse)
     - [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest)
     - [UpdateProducerRequest.Producer](#producerflow-producer-v1-UpdateProducerRequest-Producer)
@@ -178,7 +174,6 @@
     - [NewAgencyRequest.Agency.BankAccount.AccountType](#producerflow-producer-v1-NewAgencyRequest-Agency-BankAccount-AccountType)
     - [NewAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact-CommunicationRole)
     - [Producer.NIPR.License.LicenseStatus](#producerflow-producer-v1-Producer-NIPR-License-LicenseStatus)
-    - [UpdateAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact-CommunicationRole)
   
     - [ProducerService](#producerflow-producer-v1-ProducerService)
   
@@ -2813,19 +2808,13 @@ All fields are optional, allowing partial updates.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| email | [string](#string) |  | Email address of the agency. Required and must be a valid email format. |
-| phone | [string](#string) |  | Phone number of the agency. Required and must be a valid phone number format. |
-| physical_address | [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address) | optional | Physical address of the agency. |
-| mailing_address | [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address) | optional | Mailing address of the agency. |
-| invoicing_address | [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address) | optional | Invoicing address of the agency. |
-| business_hours | [UpdateAgencyRequest.Agency.BusinessHours](#producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours) | optional | Business hours of the agency. |
+| email | [string](#string) | optional | Email address of the agency. |
+| phone | [string](#string) | optional | Phone number of the agency. |
 | fax | [string](#string) | optional | Fax number of the agency. |
 | website | [string](#string) | optional | Website URL of the agency. |
-| agency_name | [string](#string) | optional | Official name of the agency. If provided, must be non-empty. Cannot be cleared (agency must have a name). |
-| ivans_account | [UpdateAgencyRequest.Agency.IvansAccount](#producerflow-producer-v1-UpdateAgencyRequest-Agency-IvansAccount) | optional | IVANS account information for electronic carrier communication. |
-| points_of_contact | [UpdateAgencyRequest.Agency.PointOfContact](#producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact) | repeated | Points of contact for the agency. |
-| requested_appointments | [string](#string) | repeated | List of requested appointments for the agency (state codes). |
-| root_organization_id | [string](#string) | optional | Root organization ID that the agency belongs to. |
+| requested_appointments | [string](#string) | repeated | List of requested appointments for the agency (state codes). The list contains a list of two-lettercd country codes where the appointments are requested. The only valid values are the U.S country codes. |
+| notes | [string](#string) | optional |  |
+| physical_address | [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address) | optional | Physical address of the agency. |
 
 
 
@@ -2846,79 +2835,6 @@ Address fields cannot be cleared - if provided, they must have valid values.
 | city | [string](#string) | optional | City of the address. If provided, must be non-empty. |
 | state | [string](#string) | optional | State of the address. If provided, must be exactly 2 characters (state code). |
 | zip | [string](#string) | optional | Zip code of the address. If provided, must be between 1 and 10 characters. |
-| county | [string](#string) | optional | County of the address. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours"></a>
-
-### UpdateAgencyRequest.Agency.BusinessHours
-BusinessHours contains the business hours of the agency.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| timezone | [string](#string) |  | Timezone of the agency. |
-| business_hours | [UpdateAgencyRequest.Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours-BusinessHour) | repeated | Business hour entries. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-BusinessHours-BusinessHour"></a>
-
-### UpdateAgencyRequest.Agency.BusinessHours.BusinessHour
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| week_days | [google.type.DayOfWeek](#google-type-DayOfWeek) | repeated | Days of the week when the agency is open. |
-| opening_time | [google.type.TimeOfDay](#google-type-TimeOfDay) |  | Time when the agency opens. |
-| closing_time | [google.type.TimeOfDay](#google-type-TimeOfDay) |  | Time when the agency closes. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-IvansAccount"></a>
-
-### UpdateAgencyRequest.Agency.IvansAccount
-IvansAccount contains information for IVANS integration.
-IVANS is a system for electronic communication between insurance agencies and carriers.
-All fields are optional, allowing partial updates of IVANS information.
-IVANS fields cannot be cleared - if provided, they must have valid values.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| account_number | [string](#string) | optional | Account number for the IVANS service. |
-| ams_software | [string](#string) | optional | Software used for IVANS communication. |
-| ams_version | [string](#string) | optional | Version of the IVANS software. |
-| mailbox_number | [string](#string) | optional | Mailbox number for the IVANS service. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact"></a>
-
-### UpdateAgencyRequest.Agency.PointOfContact
-PointOfContact contains contact information for the agency. Each point of contact
-consists of an email address with an associated role. Carriers will send specific
-information to these email addresses based on their roles.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| email | [string](#string) |  | Email address of the point of contact. |
-| role | [UpdateAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact-CommunicationRole) |  | Role of the point of contact. |
 
 
 
@@ -3163,23 +3079,6 @@ LicenseStatus defines the possible statuses of an insurance license.
 | LICENSE_STATUS_NOT_ACTIVE | 3 | The license exists but is not in an active state. This could be due to suspension, revocation, or other reasons. |
 
 
-
-<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-PointOfContact-CommunicationRole"></a>
-
-### UpdateAgencyRequest.Agency.PointOfContact.CommunicationRole
-
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| COMMUNICATION_ROLE_UNSPECIFIED | 0 | Default unspecified value. Avoid using this. |
-| COMMUNICATION_ROLE_ACCOUNTING | 1 | Accounting role |
-| COMMUNICATION_ROLE_LICENSING | 2 | Licensing role |
-| COMMUNICATION_ROLE_REPORTING | 3 | Reporting role |
-| COMMUNICATION_ROLE_SALES | 4 | Sales role |
-| COMMUNICATION_ROLE_CUSTOMER_SERVICE | 5 | Customer service role |
-| COMMUNICATION_ROLE_ALL | 6 | All roles |
-
-
  
 
  
@@ -3212,7 +3111,7 @@ RPCs for starting the onboarding agency process.
 | GetProducer | [GetProducerRequest](#producerflow-producer-v1-GetProducerRequest) | [GetProducerResponse](#producerflow-producer-v1-GetProducerResponse) | GetProducer retrieves detailed information about a specific producer. The producer can be found by ID, NPN, or email. Returns the producer&#39;s information, including NIPR data and agency association. |
 | GetAgencyFiles | [GetAgencyFilesRequest](#producerflow-producer-v1-GetAgencyFilesRequest) | [GetAgencyFilesResponse](#producerflow-producer-v1-GetAgencyFilesResponse) | GetAgencyFiles returns URLs for accessing files associated with an agency, such as contracts. |
 | UpdateProducer | [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest) | [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse) | UpdateProducer updates information for an existing producer. Supports updating contact details, background check responses, employment history, and non-uniform licensing questions. Information from NIPR and other third-party sources cannot be updated. Validates email uniqueness if the email is changed. |
-| UpdateAgency | [UpdateAgencyRequest](#producerflow-producer-v1-UpdateAgencyRequest) | [UpdateAgencyResponse](#producerflow-producer-v1-UpdateAgencyResponse) | UpdateAgency updates information for an existing agency. Supports updating contact details, addresses, business hours, IVANS information, points of contact, and requested appointments. Information from NIPR and other third-party sources cannot be updated. All fields are optional - only provide the fields you want to update. Validates email uniqueness if the email is changed. |
+| UpdateAgency | [UpdateAgencyRequest](#producerflow-producer-v1-UpdateAgencyRequest) | [UpdateAgencyResponse](#producerflow-producer-v1-UpdateAgencyResponse) | UpdateAgency updates information for an existing agency. Supports updating contact details (email, phone, fax), website, physical address, requested appointments, and notes. Information from NIPR and other third-party sources cannot be updated. All fields are optional - only provide the fields you want to update. Validates email uniqueness if the email is changed. |
 | NewContact | [NewContactRequest](#producerflow-producer-v1-NewContactRequest) | [NewContactResponse](#producerflow-producer-v1-NewContactResponse) | NewContact creates a new contact associated with an agency. Contacts represent non-producer individuals linked to the agency. Returns the ID of the created contact. |
 | NewContacts | [NewContactsRequest](#producerflow-producer-v1-NewContactsRequest) | [NewContactsResponse](#producerflow-producer-v1-NewContactsResponse) | NewContacts creates multiple contacts in a single request. Each contact is associated with the specified agency. Returns the IDs of all created contacts. |
 | ListAgencyContacts | [ListAgencyContactsRequest](#producerflow-producer-v1-ListAgencyContactsRequest) | [ListAgencyContactsResponse](#producerflow-producer-v1-ListAgencyContactsResponse) | ListAgencyContacts retrieves all contacts associated with an agency. Returns a list of contacts with their full details. |
