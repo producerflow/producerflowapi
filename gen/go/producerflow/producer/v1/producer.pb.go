@@ -10300,42 +10300,42 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x16NIPR_SYNC_STATE_ACTIVE\x10\x01\x12\x1b\n" +
 	"\x17NIPR_SYNC_STATE_FAILING\x10\x02\x12\x1b\n" +
 	"\x17NIPR_SYNC_STATE_PENDING\x10\x03\x12\x1c\n" +
-	"\x18NIPR_SYNC_STATE_DISABLED\x10\x042\xf1 \n" +
-	"\x0fProducerService\x12\x94\x01\n" +
-	"\x19CreateAgencyOnboardingURL\x12:.producerflow.producer.v1.CreateAgencyOnboardingURLRequest\x1a;.producerflow.producer.v1.CreateAgencyOnboardingURLResponse\x12\x9a\x01\n" +
-	"\x1bCreateProducerOnboardingURL\x12<.producerflow.producer.v1.CreateProducerOnboardingURLRequest\x1a=.producerflow.producer.v1.CreateProducerOnboardingURLResponse\x12d\n" +
-	"\tNewAgency\x12*.producerflow.producer.v1.NewAgencyRequest\x1a+.producerflow.producer.v1.NewAgencyResponse\x12m\n" +
+	"\x18NIPR_SYNC_STATE_DISABLED\x10\x042\x9f!\n" +
+	"\x0fProducerService\x12\x96\x01\n" +
+	"\x19CreateAgencyOnboardingURL\x12:.producerflow.producer.v1.CreateAgencyOnboardingURLRequest\x1a;.producerflow.producer.v1.CreateAgencyOnboardingURLResponse\"\x00\x12\x9c\x01\n" +
+	"\x1bCreateProducerOnboardingURL\x12<.producerflow.producer.v1.CreateProducerOnboardingURLRequest\x1a=.producerflow.producer.v1.CreateProducerOnboardingURLResponse\"\x00\x12f\n" +
+	"\tNewAgency\x12*.producerflow.producer.v1.NewAgencyRequest\x1a+.producerflow.producer.v1.NewAgencyResponse\"\x00\x12m\n" +
 	"\fListAgencies\x12-.producerflow.producer.v1.ListAgenciesRequest\x1a..producerflow.producer.v1.ListAgenciesResponse\x12|\n" +
 	"\x11ListOrganizations\x122.producerflow.producer.v1.ListOrganizationsRequest\x1a3.producerflow.producer.v1.ListOrganizationsResponse\x12v\n" +
-	"\x0fGetOrganization\x120.producerflow.producer.v1.GetOrganizationRequest\x1a1.producerflow.producer.v1.GetOrganizationResponse\x12j\n" +
-	"\vNewProducer\x12,.producerflow.producer.v1.NewProducerRequest\x1a-.producerflow.producer.v1.NewProducerResponse\x12m\n" +
-	"\fNewProducers\x12-.producerflow.producer.v1.NewProducersRequest\x1a..producerflow.producer.v1.NewProducersResponse\x12\x88\x01\n" +
+	"\x0fGetOrganization\x120.producerflow.producer.v1.GetOrganizationRequest\x1a1.producerflow.producer.v1.GetOrganizationResponse\x12l\n" +
+	"\vNewProducer\x12,.producerflow.producer.v1.NewProducerRequest\x1a-.producerflow.producer.v1.NewProducerResponse\"\x00\x12o\n" +
+	"\fNewProducers\x12-.producerflow.producer.v1.NewProducersRequest\x1a..producerflow.producer.v1.NewProducersResponse\"\x00\x12\x88\x01\n" +
 	"\x15GetAgencyAndProducers\x126.producerflow.producer.v1.GetAgencyAndProducersRequest\x1a7.producerflow.producer.v1.GetAgencyAndProducersResponse\x12j\n" +
 	"\vGetProducer\x12,.producerflow.producer.v1.GetProducerRequest\x1a-.producerflow.producer.v1.GetProducerResponse\x12s\n" +
-	"\x0eGetAgencyFiles\x12/.producerflow.producer.v1.GetAgencyFilesRequest\x1a0.producerflow.producer.v1.GetAgencyFilesResponse\x12s\n" +
-	"\x0eUpdateProducer\x12/.producerflow.producer.v1.UpdateProducerRequest\x1a0.producerflow.producer.v1.UpdateProducerResponse\x12m\n" +
-	"\fUpdateAgency\x12-.producerflow.producer.v1.UpdateAgencyRequest\x1a..producerflow.producer.v1.UpdateAgencyResponse\x12g\n" +
+	"\x0eGetAgencyFiles\x12/.producerflow.producer.v1.GetAgencyFilesRequest\x1a0.producerflow.producer.v1.GetAgencyFilesResponse\x12u\n" +
+	"\x0eUpdateProducer\x12/.producerflow.producer.v1.UpdateProducerRequest\x1a0.producerflow.producer.v1.UpdateProducerResponse\"\x00\x12o\n" +
+	"\fUpdateAgency\x12-.producerflow.producer.v1.UpdateAgencyRequest\x1a..producerflow.producer.v1.UpdateAgencyResponse\"\x00\x12i\n" +
 	"\n" +
-	"NewContact\x12+.producerflow.producer.v1.NewContactRequest\x1a,.producerflow.producer.v1.NewContactResponse\x12j\n" +
-	"\vNewContacts\x12,.producerflow.producer.v1.NewContactsRequest\x1a-.producerflow.producer.v1.NewContactsResponse\x12\x7f\n" +
-	"\x12ListAgencyContacts\x123.producerflow.producer.v1.ListAgencyContactsRequest\x1a4.producerflow.producer.v1.ListAgencyContactsResponse\x12p\n" +
-	"\rSetExternalID\x12..producerflow.producer.v1.SetExternalIDRequest\x1a/.producerflow.producer.v1.SetExternalIDResponse\x12\x82\x01\n" +
+	"NewContact\x12+.producerflow.producer.v1.NewContactRequest\x1a,.producerflow.producer.v1.NewContactResponse\"\x00\x12l\n" +
+	"\vNewContacts\x12,.producerflow.producer.v1.NewContactsRequest\x1a-.producerflow.producer.v1.NewContactsResponse\"\x00\x12\x7f\n" +
+	"\x12ListAgencyContacts\x123.producerflow.producer.v1.ListAgencyContactsRequest\x1a4.producerflow.producer.v1.ListAgencyContactsResponse\x12r\n" +
+	"\rSetExternalID\x12..producerflow.producer.v1.SetExternalIDRequest\x1a/.producerflow.producer.v1.SetExternalIDResponse\"\x00\x12\x82\x01\n" +
 	"\x13ValidateProducerNPN\x124.producerflow.producer.v1.ValidateProducerNPNRequest\x1a5.producerflow.producer.v1.ValidateProducerNPNResponse\x12|\n" +
 	"\x11ValidateAgencyNPN\x122.producerflow.producer.v1.ValidateAgencyNPNRequest\x1a3.producerflow.producer.v1.ValidateAgencyNPNResponse\x12v\n" +
-	"\x0fLookupNPNByFEIN\x120.producerflow.producer.v1.LookupNPNByFEINRequest\x1a1.producerflow.producer.v1.LookupNPNByFEINResponse\x12s\n" +
-	"\x0eResyncProducer\x12/.producerflow.producer.v1.ResyncProducerRequest\x1a0.producerflow.producer.v1.ResyncProducerResponse\x12m\n" +
-	"\fResyncAgency\x12-.producerflow.producer.v1.ResyncAgencyRequest\x1a..producerflow.producer.v1.ResyncAgencyResponse\x12\x85\x01\n" +
-	"\x14SyncProducerWithNIPR\x125.producerflow.producer.v1.SyncProducerWithNIPRRequest\x1a6.producerflow.producer.v1.SyncProducerWithNIPRResponse\x12\x7f\n" +
-	"\x12SyncAgencyWithNIPR\x123.producerflow.producer.v1.SyncAgencyWithNIPRRequest\x1a4.producerflow.producer.v1.SyncAgencyWithNIPRResponse\x12\x91\x01\n" +
-	"\x18StopSyncProducerWithNIPR\x129.producerflow.producer.v1.StopSyncProducerWithNIPRRequest\x1a:.producerflow.producer.v1.StopSyncProducerWithNIPRResponse\x12\x8b\x01\n" +
-	"\x16StopSyncAgencyWithNIPR\x127.producerflow.producer.v1.StopSyncAgencyWithNIPRRequest\x1a8.producerflow.producer.v1.StopSyncAgencyWithNIPRResponse\x12\x8e\x01\n" +
-	"\x17CreateProducerUploadURL\x128.producerflow.producer.v1.CreateProducerUploadURLRequest\x1a9.producerflow.producer.v1.CreateProducerUploadURLResponse\x12\x7f\n" +
-	"\x12AddAgencyLocations\x123.producerflow.producer.v1.AddAgencyLocationsRequest\x1a4.producerflow.producer.v1.AddAgencyLocationsResponse\x12\x88\x01\n" +
-	"\x15RemoveAgencyLocations\x126.producerflow.producer.v1.RemoveAgencyLocationsRequest\x1a7.producerflow.producer.v1.RemoveAgencyLocationsResponse\x12\x82\x01\n" +
-	"\x13ListAgencyLocations\x124.producerflow.producer.v1.ListAgencyLocationsRequest\x1a5.producerflow.producer.v1.ListAgencyLocationsResponse\x12\x94\x01\n" +
-	"\x19AssignProducerToLocations\x12:.producerflow.producer.v1.AssignProducerToLocationsRequest\x1a;.producerflow.producer.v1.AssignProducerToLocationsResponse\x12\xa0\x01\n" +
-	"\x1dUnassignProducerFromLocations\x12>.producerflow.producer.v1.UnassignProducerFromLocationsRequest\x1a?.producerflow.producer.v1.UnassignProducerFromLocationsResponse\x12\x85\x01\n" +
-	"\x14UpdateAgencyLocation\x125.producerflow.producer.v1.UpdateAgencyLocationRequest\x1a6.producerflow.producer.v1.UpdateAgencyLocationResponseB\x83\x02\n" +
+	"\x0fLookupNPNByFEIN\x120.producerflow.producer.v1.LookupNPNByFEINRequest\x1a1.producerflow.producer.v1.LookupNPNByFEINResponse\x12u\n" +
+	"\x0eResyncProducer\x12/.producerflow.producer.v1.ResyncProducerRequest\x1a0.producerflow.producer.v1.ResyncProducerResponse\"\x00\x12o\n" +
+	"\fResyncAgency\x12-.producerflow.producer.v1.ResyncAgencyRequest\x1a..producerflow.producer.v1.ResyncAgencyResponse\"\x00\x12\x87\x01\n" +
+	"\x14SyncProducerWithNIPR\x125.producerflow.producer.v1.SyncProducerWithNIPRRequest\x1a6.producerflow.producer.v1.SyncProducerWithNIPRResponse\"\x00\x12\x81\x01\n" +
+	"\x12SyncAgencyWithNIPR\x123.producerflow.producer.v1.SyncAgencyWithNIPRRequest\x1a4.producerflow.producer.v1.SyncAgencyWithNIPRResponse\"\x00\x12\x93\x01\n" +
+	"\x18StopSyncProducerWithNIPR\x129.producerflow.producer.v1.StopSyncProducerWithNIPRRequest\x1a:.producerflow.producer.v1.StopSyncProducerWithNIPRResponse\"\x00\x12\x8d\x01\n" +
+	"\x16StopSyncAgencyWithNIPR\x127.producerflow.producer.v1.StopSyncAgencyWithNIPRRequest\x1a8.producerflow.producer.v1.StopSyncAgencyWithNIPRResponse\"\x00\x12\x90\x01\n" +
+	"\x17CreateProducerUploadURL\x128.producerflow.producer.v1.CreateProducerUploadURLRequest\x1a9.producerflow.producer.v1.CreateProducerUploadURLResponse\"\x00\x12\x81\x01\n" +
+	"\x12AddAgencyLocations\x123.producerflow.producer.v1.AddAgencyLocationsRequest\x1a4.producerflow.producer.v1.AddAgencyLocationsResponse\"\x00\x12\x8a\x01\n" +
+	"\x15RemoveAgencyLocations\x126.producerflow.producer.v1.RemoveAgencyLocationsRequest\x1a7.producerflow.producer.v1.RemoveAgencyLocationsResponse\"\x00\x12\x82\x01\n" +
+	"\x13ListAgencyLocations\x124.producerflow.producer.v1.ListAgencyLocationsRequest\x1a5.producerflow.producer.v1.ListAgencyLocationsResponse\x12\x96\x01\n" +
+	"\x19AssignProducerToLocations\x12:.producerflow.producer.v1.AssignProducerToLocationsRequest\x1a;.producerflow.producer.v1.AssignProducerToLocationsResponse\"\x00\x12\xa2\x01\n" +
+	"\x1dUnassignProducerFromLocations\x12>.producerflow.producer.v1.UnassignProducerFromLocationsRequest\x1a?.producerflow.producer.v1.UnassignProducerFromLocationsResponse\"\x00\x12\x87\x01\n" +
+	"\x14UpdateAgencyLocation\x125.producerflow.producer.v1.UpdateAgencyLocationRequest\x1a6.producerflow.producer.v1.UpdateAgencyLocationResponse\"\x00B\x83\x02\n" +
 	"\x1ccom.producerflow.producer.v1B\rProducerProtoP\x01ZRgithub.com/producerflow/producerflowapi/gen/go/producerflow/producer/v1;producerv1\xa2\x02\x03PPX\xaa\x02\x18Producerflow.Producer.V1\xca\x02\x18Producerflow\\Producer\\V1\xe2\x02$Producerflow\\Producer\\V1\\GPBMetadata\xea\x02\x1aProducerflow::Producer::V1b\x06proto3"
 
 var (

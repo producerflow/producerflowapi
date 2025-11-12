@@ -212,6 +212,15 @@ const (
 	AppointmentType_APPOINTMENT_TYPE_REGISTRY     AppointmentType = 1
 	AppointmentType_APPOINTMENT_TYPE_UP_FRONT     AppointmentType = 2
 	AppointmentType_APPOINTMENT_TYPE_JUST_IN_TIME AppointmentType = 3
+	// Synthetic appointments are programmatically created for individual
+	// producers in states where only agency-level appointments are permitted
+	// (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
+	// an agency appointment is approved and inherit properties from the parent
+	// agency appointment. The parent_appointment_id field links to the parent
+	// agency appointment. Synthetic appointments do not require separate
+	// regulatory approval and are terminated when the parent appointment is
+	// terminated.
+	AppointmentType_APPOINTMENT_TYPE_SYNTHETIC AppointmentType = 4
 )
 
 // Enum value maps for AppointmentType.
@@ -221,12 +230,14 @@ var (
 		1: "APPOINTMENT_TYPE_REGISTRY",
 		2: "APPOINTMENT_TYPE_UP_FRONT",
 		3: "APPOINTMENT_TYPE_JUST_IN_TIME",
+		4: "APPOINTMENT_TYPE_SYNTHETIC",
 	}
 	AppointmentType_value = map[string]int32{
 		"APPOINTMENT_TYPE_UNSPECIFIED":  0,
 		"APPOINTMENT_TYPE_REGISTRY":     1,
 		"APPOINTMENT_TYPE_UP_FRONT":     2,
 		"APPOINTMENT_TYPE_JUST_IN_TIME": 3,
+		"APPOINTMENT_TYPE_SYNTHETIC":    4,
 	}
 )
 
@@ -1394,9 +1405,12 @@ type Appointment struct {
 	// and any risk factors that may affect the appointment.
 	OperationalStatus *AppointmentOperationalStatus `protobuf:"bytes,13,opt,name=operational_status,json=operationalStatus,proto3" json:"operational_status,omitempty"`
 	// The NAIC cocode of the carrier.
-	Cocode        string `protobuf:"bytes,14,opt,name=cocode,proto3" json:"cocode,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Cocode string `protobuf:"bytes,14,opt,name=cocode,proto3" json:"cocode,omitempty"`
+	// The id of the parent appointment, if this is a synthetic appointment.
+	// It should be empty for non-synthetic appointments.
+	ParentAppointmentId string `protobuf:"bytes,15,opt,name=parent_appointment_id,json=parentAppointmentId,proto3" json:"parent_appointment_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Appointment) Reset() {
@@ -1523,6 +1537,13 @@ func (x *Appointment) GetOperationalStatus() *AppointmentOperationalStatus {
 func (x *Appointment) GetCocode() string {
 	if x != nil {
 		return x.Cocode
+	}
+	return ""
+}
+
+func (x *Appointment) GetParentAppointmentId() string {
+	if x != nil {
+		return x.ParentAppointmentId
 	}
 	return ""
 }
@@ -1816,7 +1837,7 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x1cAppointmentOperationalStatus\x12F\n" +
 	"\x06status\x18\x01 \x01(\x0e2..producerflow.appointment.v1.OperationalStatusR\x06status\x12J\n" +
 	"\frisk_reasons\x18\x02 \x03(\x0e2'.producerflow.appointment.v1.RiskReasonR\vriskReasons\x12=\n" +
-	"\flast_updated\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xa7\x06\n" +
+	"\flast_updated\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xdb\x06\n" +
 	"\vAppointment\x12%\n" +
 	"\x0eappointment_id\x18\x01 \x01(\tR\rappointmentId\x12>\n" +
 	"\alicense\x18\x02 \x01(\v2$.producerflow.appointment.v1.LicenseR\alicense\x12\x12\n" +
@@ -1834,7 +1855,8 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12h\n" +
 	"\x12operational_status\x18\r \x01(\v29.producerflow.appointment.v1.AppointmentOperationalStatusR\x11operationalStatus\x12\x16\n" +
-	"\x06cocode\x18\x0e \x01(\tR\x06cocodeB\x0e\n" +
+	"\x06cocode\x18\x0e \x01(\tR\x06cocode\x122\n" +
+	"\x15parent_appointment_id\x18\x0f \x01(\tR\x13parentAppointmentIdB\x0e\n" +
 	"\f_producer_idB\x13\n" +
 	"\x11_termination_date\"\xbc\x02\n" +
 	"\aLicense\x12'\n" +
@@ -1871,12 +1893,13 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x1cPROCESSING_STATUS_TERMINATED\x10\x03\x12\x1e\n" +
 	"\x1aPROCESSING_STATUS_REJECTED\x10\x04\x12%\n" +
 	"!PROCESSING_STATUS_MISSING_LICENSE\x10\x05\x12+\n" +
-	"'PROCESSING_STATUS_TERMINATION_REQUESTED\x10\x06*\x94\x01\n" +
+	"'PROCESSING_STATUS_TERMINATION_REQUESTED\x10\x06*\xb4\x01\n" +
 	"\x0fAppointmentType\x12 \n" +
 	"\x1cAPPOINTMENT_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19APPOINTMENT_TYPE_REGISTRY\x10\x01\x12\x1d\n" +
 	"\x19APPOINTMENT_TYPE_UP_FRONT\x10\x02\x12!\n" +
-	"\x1dAPPOINTMENT_TYPE_JUST_IN_TIME\x10\x03*\xc1\x05\n" +
+	"\x1dAPPOINTMENT_TYPE_JUST_IN_TIME\x10\x03\x12\x1e\n" +
+	"\x1aAPPOINTMENT_TYPE_SYNTHETIC\x10\x04*\xc1\x05\n" +
 	"\x11TerminationReason\x12\"\n" +
 	"\x1eTERMINATION_REASON_UNSPECIFIED\x10\x00\x12,\n" +
 	"(TERMINATION_REASON_VOLUNTARY_TERMINATION\x10\x01\x12,\n" +
@@ -1894,16 +1917,16 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"!TERMINATION_REASON_COMPANY_MERGER\x10\f\x12\x1e\n" +
 	"\x1aTERMINATION_REASON_REVOKED\x10\r\x12/\n" +
 	"+TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE\x10\x0e\x120\n" +
-	",TERMINATION_REASON_REQUEST_REGULATORY_REVIEW\x10\x0f2\xec\t\n" +
+	",TERMINATION_REASON_REQUEST_REGULATORY_REVIEW\x10\x0f2\xf0\t\n" +
 	"\x12AppointmentService\x12y\n" +
 	"\x0eGetAppointment\x122.producerflow.appointment.v1.GetAppointmentRequest\x1a3.producerflow.appointment.v1.GetAppointmentResponse\x12\x85\x01\n" +
 	"\x12GetAppointmentFees\x126.producerflow.appointment.v1.GetAppointmentFeesRequest\x1a7.producerflow.appointment.v1.GetAppointmentFeesResponse\x12\x91\x01\n" +
 	"\x16GetAppointableCarriers\x12:.producerflow.appointment.v1.GetAppointableCarriersRequest\x1a;.producerflow.appointment.v1.GetAppointableCarriersResponse\x12\x85\x01\n" +
 	"\x12GetTerminationFees\x126.producerflow.appointment.v1.GetTerminationFeesRequest\x1a7.producerflow.appointment.v1.GetTerminationFeesResponse\x12\x7f\n" +
 	"\x10ListAppointments\x124.producerflow.appointment.v1.ListAppointmentsRequest\x1a5.producerflow.appointment.v1.ListAppointmentsResponse\x12\x8b\x01\n" +
-	"\x14ListEligibleLicenses\x128.producerflow.appointment.v1.ListEligibleLicensesRequest\x1a9.producerflow.appointment.v1.ListEligibleLicensesResponse\x12\x85\x01\n" +
-	"\x12RequestAppointment\x126.producerflow.appointment.v1.RequestAppointmentRequest\x1a7.producerflow.appointment.v1.RequestAppointmentResponse\x12\x8b\x01\n" +
-	"\x14TerminateAppointment\x128.producerflow.appointment.v1.TerminateAppointmentRequest\x1a9.producerflow.appointment.v1.TerminateAppointmentResponse\x12\x91\x01\n" +
+	"\x14ListEligibleLicenses\x128.producerflow.appointment.v1.ListEligibleLicensesRequest\x1a9.producerflow.appointment.v1.ListEligibleLicensesResponse\x12\x87\x01\n" +
+	"\x12RequestAppointment\x126.producerflow.appointment.v1.RequestAppointmentRequest\x1a7.producerflow.appointment.v1.RequestAppointmentResponse\"\x00\x12\x8d\x01\n" +
+	"\x14TerminateAppointment\x128.producerflow.appointment.v1.TerminateAppointmentRequest\x1a9.producerflow.appointment.v1.TerminateAppointmentResponse\"\x00\x12\x91\x01\n" +
 	"\x16ListTerminationReasons\x12:.producerflow.appointment.v1.ListTerminationReasonsRequest\x1a;.producerflow.appointment.v1.ListTerminationReasonsResponseB\x9b\x02\n" +
 	"\x1fcom.producerflow.appointment.v1B\x10AppointmentProtoP\x01ZXgithub.com/producerflow/producerflowapi/gen/go/producerflow/appointment/v1;appointmentv1\xa2\x02\x03PAX\xaa\x02\x1bProducerflow.Appointment.V1\xca\x02\x1bProducerflow\\Appointment\\V1\xe2\x02'Producerflow\\Appointment\\V1\\GPBMetadata\xea\x02\x1dProducerflow::Appointment::V1b\x06proto3"
 

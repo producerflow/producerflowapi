@@ -210,6 +210,7 @@ Represents an appointment for a license.
 | updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the last update to the appointment. |
 | operational_status | [AppointmentOperationalStatus](#producerflow-appointment-v1-AppointmentOperationalStatus) |  | Operational status information for the appointment. This field provides insight into the current operational health and any risk factors that may affect the appointment. |
 | cocode | [string](#string) |  | The NAIC cocode of the carrier. |
+| parent_appointment_id | [string](#string) |  | The id of the parent appointment, if this is a synthetic appointment. It should be empty for non-synthetic appointments. |
 
 
 
@@ -562,6 +563,7 @@ Type of appointment.
 | APPOINTMENT_TYPE_REGISTRY | 1 |  |
 | APPOINTMENT_TYPE_UP_FRONT | 2 |  |
 | APPOINTMENT_TYPE_JUST_IN_TIME | 3 |  |
+| APPOINTMENT_TYPE_SYNTHETIC | 4 | Synthetic appointments are programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated. |
 
 
 
