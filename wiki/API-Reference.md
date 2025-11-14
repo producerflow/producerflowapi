@@ -42,6 +42,7 @@
     - [Agency](#producerflow-producer-v1-Agency)
     - [Agency.Address](#producerflow-producer-v1-Agency-Address)
     - [Agency.AgencyInfo](#producerflow-producer-v1-Agency-AgencyInfo)
+    - [Agency.AgencyInfo.ExternalMetadataEntry](#producerflow-producer-v1-Agency-AgencyInfo-ExternalMetadataEntry)
     - [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry)
     - [Agency.BankAccount](#producerflow-producer-v1-Agency-BankAccount)
     - [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours)
@@ -123,6 +124,7 @@
     - [Producer](#producerflow-producer-v1-Producer)
     - [Producer.Address](#producerflow-producer-v1-Producer-Address)
     - [Producer.Agency](#producerflow-producer-v1-Producer-Agency)
+    - [Producer.ExternalMetadataEntry](#producerflow-producer-v1-Producer-ExternalMetadataEntry)
     - [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry)
     - [Producer.NIPR](#producerflow-producer-v1-Producer-NIPR)
     - [Producer.NIPR.Appointment](#producerflow-producer-v1-Producer-NIPR-Appointment)
@@ -794,6 +796,23 @@ AgencyInfo contains contact and identification information for an agency.
 | npn | [string](#string) |  | National Producer Number (NPN) of the agency. This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC). |
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the agency is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
 | metadata_questions | [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. This field stores tenant-specific questions that were collected during agency onboarding. The map key is the question identifier/text, and the value is the answer provided. |
+| external_metadata | [Agency.AgencyInfo.ExternalMetadataEntry](#producerflow-producer-v1-Agency-AgencyInfo-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-AgencyInfo-ExternalMetadataEntry"></a>
+
+### Agency.AgencyInfo.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -2241,6 +2260,7 @@ Internal ID of the producer.
 | address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
 | locations | [Location](#producerflow-producer-v1-Location) | repeated | Locations assigned to this producer. |
 | metadata_questions | [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. This field stores tenant-specific questions that need to be asked during producer onboarding. The map key is the question identifier/text, and the value is the answer provided. |
+| external_metadata | [Producer.ExternalMetadataEntry](#producerflow-producer-v1-Producer-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
 
 
 
@@ -2275,6 +2295,22 @@ Agency contains basic information about the agency this producer is associated w
 | ----- | ---- | ----- | ----------- |
 | agency_id | [string](#string) |  | Unique identifier for the associated agency. |
 | name | [string](#string) |  | Name of the associated agency. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Producer-ExternalMetadataEntry"></a>
+
+### Producer.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
