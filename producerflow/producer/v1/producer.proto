@@ -720,6 +720,22 @@ message UpdateProducerRequest {
     // ZIP code of the producer's address.
     // If provided, must be at least 5 characters.
     optional string zip = 9 [(buf.validate.field).string.min_len = 5];
+
+    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
+    // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
+    // Common use cases include:
+    // - Storing references to external system states or categories
+    // - Adding custom tags or classifications
+    // - Maintaining tenant-specific business attributes
+    // - Storing computed values or derived data
+    // The map key is the metadata field name, and the value is the associated data.
+    //
+    // Update behavior:
+    // - If not provided (null): existing metadata is preserved unchanged
+    // - If provided as empty map {}: existing metadata is cleared
+    // - If provided with values: existing metadata is completely replaced with the new values
+    map<string, string> external_metadata = 11;
   }
 
   // The ID of the producer to update.
@@ -800,6 +816,22 @@ message UpdateAgencyRequest {
 
     // Physical address of the agency.
     optional Address physical_address = 7;
+
+    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
+    // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
+    // Common use cases include:
+    // - Storing references to external system states or categories
+    // - Adding custom tags or classifications
+    // - Maintaining tenant-specific business attributes
+    // - Storing computed values or derived data
+    // The map key is the metadata field name, and the value is the associated data.
+    //
+    // Update behavior:
+    // - If not provided (null): existing metadata is preserved unchanged
+    // - If provided as empty map {}: existing metadata is cleared
+    // - If provided with values: existing metadata is completely replaced with the new values
+    map<string, string> external_metadata = 8;
   }
 
   // The agency information to update.
