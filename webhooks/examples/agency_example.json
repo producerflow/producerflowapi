@@ -115,6 +115,11 @@
     "name": "Agentero Insurance Organization",
     "external_id": "ext_org_456"
   },
+  "tenant_additional_questions": {
+    "preferred_contact_method": "Email",
+    "years_in_business": "15",
+    "number_of_agents": "25"
+  },
   "locations": [
     {
       "location_id": "loc_123456",

@@ -98,6 +98,11 @@
     "name": "ProducerFlow Organization",
     "external_id": "ext_org_789"
   },
+  "tenant_additional_questions": {
+    "previous_carrier_experience": "Yes",
+    "has_e_and_o_coverage": "true",
+    "specializes_in": "Commercial Insurance"
+  },
   "assigned_locations": [
     {
       "location_id": "loc_456789",

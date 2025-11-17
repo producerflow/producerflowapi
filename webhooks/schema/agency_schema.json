@@ -204,7 +204,14 @@
     },
     "metadata_questions": {
       "type": "string",
-      "description": "Custom metadata questions and answers in JSON string format"
+      "description": "Deprecated: Use tenant_additional_questions instead. Custom metadata questions and answers in JSON string format. This field will be removed in a future release."
+    },
+    "tenant_additional_questions": {
+      "type": "object",
+      "description": "Custom additional questions and answers as key-value pairs collected during agency onboarding",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "locations": {
       "type": "array",
