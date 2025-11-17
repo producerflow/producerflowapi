@@ -159,9 +159,11 @@
     - [UpdateAgencyRequest](#producerflow-producer-v1-UpdateAgencyRequest)
     - [UpdateAgencyRequest.Agency](#producerflow-producer-v1-UpdateAgencyRequest-Agency)
     - [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address)
+    - [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#producerflow-producer-v1-UpdateAgencyRequest-Agency-ExternalMetadataEntry)
     - [UpdateAgencyResponse](#producerflow-producer-v1-UpdateAgencyResponse)
     - [UpdateProducerRequest](#producerflow-producer-v1-UpdateProducerRequest)
     - [UpdateProducerRequest.Producer](#producerflow-producer-v1-UpdateProducerRequest-Producer)
+    - [UpdateProducerRequest.Producer.ExternalMetadataEntry](#producerflow-producer-v1-UpdateProducerRequest-Producer-ExternalMetadataEntry)
     - [UpdateProducerResponse](#producerflow-producer-v1-UpdateProducerResponse)
     - [ValidateAgencyNPNRequest](#producerflow-producer-v1-ValidateAgencyNPNRequest)
     - [ValidateAgencyNPNResponse](#producerflow-producer-v1-ValidateAgencyNPNResponse)
@@ -2853,6 +2855,9 @@ All fields are optional, allowing partial updates.
 | requested_appointments | [string](#string) | repeated | List of requested appointments for the agency (state codes). The list contains a list of two-lettercd country codes where the appointments are requested. The only valid values are the U.S country codes. |
 | notes | [string](#string) | optional |  |
 | physical_address | [UpdateAgencyRequest.Agency.Address](#producerflow-producer-v1-UpdateAgencyRequest-Agency-Address) | optional | Physical address of the agency. |
+| external_metadata | [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#producerflow-producer-v1-UpdateAgencyRequest-Agency-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.
+
+Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
 
 
 
@@ -2873,6 +2878,22 @@ Address fields cannot be cleared - if provided, they must have valid values.
 | city | [string](#string) | optional | City of the address. If provided, must be non-empty. |
 | state | [string](#string) | optional | State of the address. If provided, must be exactly 2 characters (state code). |
 | zip | [string](#string) | optional | Zip code of the address. If provided, must be between 1 and 10 characters. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-UpdateAgencyRequest-Agency-ExternalMetadataEntry"></a>
+
+### UpdateAgencyRequest.Agency.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -2926,6 +2947,25 @@ All fields are optional, allowing partial updates.
 | city | [string](#string) | optional | City of the producer. If provided, must be non-empty. |
 | state | [string](#string) | optional | State of the producer. If provided, must be a valid 2-letter US state code. |
 | zip | [string](#string) | optional | ZIP code of the producer&#39;s address. If provided, must be at least 5 characters. |
+| external_metadata | [UpdateProducerRequest.Producer.ExternalMetadataEntry](#producerflow-producer-v1-UpdateProducerRequest-Producer-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.
+
+Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-UpdateProducerRequest-Producer-ExternalMetadataEntry"></a>
+
+### UpdateProducerRequest.Producer.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
