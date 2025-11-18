@@ -403,6 +403,10 @@ message NewAgencyRequest {
       // If set to false, the principal's NPN will not be validated against NIPR and the
       // principal will not be synced with NIPR. Defaults to true if not specified.
       optional bool sync_with_nipr = 7;
+      // tenant_additional_questions contains tenant-specific custom questions configured by
+      // Producerflow and their corresponding responses. Keys are question identifiers or text,
+      // values are the answers provided.
+      map<string, string> tenant_additional_questions = 8;
     }
 
     // Information about the agency's principal.
@@ -545,7 +549,12 @@ message NewAgencyRequest {
     repeated LocationInput locations = 20 [(buf.validate.field).repeated.max_items = 100];
     // MetadataQuestions contains custom metadata questions and answers for the agency.
     // The map key is the question identifier/text, and the value is the answer provided.
+    // This field is deprecated and will be removed in a future release.
     map<string, string> metadata_questions = 21;
+    // tenant_additional_questions contains tenant-specific custom questions configured by
+    // Producerflow and their corresponding responses. Keys are question identifiers or text,
+    // values are the answers provided.
+    map<string, string> tenant_additional_questions = 22;
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -906,6 +915,7 @@ message Agency {
     // MetadataQuestions contains custom metadata questions and answers for the agency.
     // This field stores tenant-specific questions that were collected during agency onboarding.
     // The map key is the question identifier/text, and the value is the answer provided.
+    // This field is deprecated and will be removed in a future release.
     map<string, string> metadata_questions = 11;
 
     // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
@@ -918,6 +928,11 @@ message Agency {
     // - Storing computed values or derived data
     // The map key is the metadata field name, and the value is the associated data.
     map<string, string> external_metadata = 12;
+
+    // tenant_additional_questions contains tenant-specific custom questions configured by
+    // Producerflow and their corresponding responses. Keys are question identifiers or text,
+    // values are the answers provided.
+    map<string, string> tenant_additional_questions = 13;
   }
 
   // AgencyInfo type field named agency_info
@@ -1537,6 +1552,7 @@ message Producer {
   // MetadataQuestions contains custom metadata questions and answers for the producer.
   // This field stores tenant-specific questions that need to be asked during producer onboarding.
   // The map key is the question identifier/text, and the value is the answer provided.
+  // This field is deprecated and will be removed in a future release.
   map<string, string> metadata_questions = 40;
 
   // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
@@ -1549,6 +1565,11 @@ message Producer {
   // - Storing computed values or derived data
   // The map key is the metadata field name, and the value is the associated data.
   map<string, string> external_metadata = 41;
+
+  // tenant_additional_questions contains tenant-specific custom questions configured by
+  // Producerflow and their corresponding responses. Keys are question identifiers or text,
+  // values are the answers provided.
+  map<string, string> tenant_additional_questions = 42;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -1623,7 +1644,13 @@ message NewProducer {
 
   // MetadataQuestions contains custom metadata questions and answers for the producer.
   // The map key is the question identifier/text, and the value is the answer provided.
+  // This field is deprecated and will be removed in a future release.
   map<string, string> metadata_questions = 11;
+
+  // tenant_additional_questions contains tenant-specific custom questions configured by
+  // Producerflow and their corresponding responses. Keys are question identifiers or text,
+  // values are the answers provided.
+  map<string, string> tenant_additional_questions = 12;
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
