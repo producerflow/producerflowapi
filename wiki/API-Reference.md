@@ -732,6 +732,7 @@ Used for mailing, physical, and invoicing addresses throughout the API.
 | state | [string](#string) |  | State of the address |
 | zip | [string](#string) |  | Zip code of the address |
 | county | [string](#string) |  | County of the address |
+| street_line_2 | [string](#string) | optional | Optional second line of street address (apt, suite, unit, etc.) |
 
 
 
