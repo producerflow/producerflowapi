@@ -44,6 +44,7 @@
     - [Agency.AgencyInfo](#producerflow-producer-v1-Agency-AgencyInfo)
     - [Agency.AgencyInfo.ExternalMetadataEntry](#producerflow-producer-v1-Agency-AgencyInfo-ExternalMetadataEntry)
     - [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry)
+    - [Agency.AgencyInfo.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-TenantAdditionalQuestionsEntry)
     - [Agency.BankAccount](#producerflow-producer-v1-Agency-BankAccount)
     - [Agency.BusinessHours](#producerflow-producer-v1-Agency-BusinessHours)
     - [Agency.BusinessHours.BusinessHour](#producerflow-producer-v1-Agency-BusinessHours-BusinessHour)
@@ -105,6 +106,8 @@
     - [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry)
     - [NewAgencyRequest.Agency.PointOfContact](#producerflow-producer-v1-NewAgencyRequest-Agency-PointOfContact)
     - [NewAgencyRequest.Agency.Principal](#producerflow-producer-v1-NewAgencyRequest-Agency-Principal)
+    - [NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-Principal-TenantAdditionalQuestionsEntry)
+    - [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-TenantAdditionalQuestionsEntry)
     - [NewAgencyResponse](#producerflow-producer-v1-NewAgencyResponse)
     - [NewContact](#producerflow-producer-v1-NewContact)
     - [NewContact.Address](#producerflow-producer-v1-NewContact-Address)
@@ -115,6 +118,7 @@
     - [NewProducer](#producerflow-producer-v1-NewProducer)
     - [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address)
     - [NewProducer.MetadataQuestionsEntry](#producerflow-producer-v1-NewProducer-MetadataQuestionsEntry)
+    - [NewProducer.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewProducer-TenantAdditionalQuestionsEntry)
     - [NewProducerRequest](#producerflow-producer-v1-NewProducerRequest)
     - [NewProducerResponse](#producerflow-producer-v1-NewProducerResponse)
     - [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest)
@@ -134,6 +138,7 @@
     - [Producer.NIPR.ProducerRegulatoryInfo](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo)
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryAction)
     - [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryActionsByStateEntry)
+    - [Producer.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-Producer-TenantAdditionalQuestionsEntry)
     - [ProducerData](#producerflow-producer-v1-ProducerData)
     - [ProducerData.Address](#producerflow-producer-v1-ProducerData-Address)
     - [RemoveAgencyLocationsRequest](#producerflow-producer-v1-RemoveAgencyLocationsRequest)
@@ -797,8 +802,9 @@ AgencyInfo contains contact and identification information for an agency.
 | website | [string](#string) |  | Website URL for the agency, if available. |
 | npn | [string](#string) |  | National Producer Number (NPN) of the agency. This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC). |
 | pdb_alerts_sync_enabled | [bool](#bool) |  | Indicates whether the agency is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
-| metadata_questions | [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. This field stores tenant-specific questions that were collected during agency onboarding. The map key is the question identifier/text, and the value is the answer provided. |
+| metadata_questions | [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. This field stores tenant-specific questions that were collected during agency onboarding. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
 | external_metadata | [Agency.AgencyInfo.ExternalMetadataEntry](#producerflow-producer-v1-Agency-AgencyInfo-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
+| tenant_additional_questions | [Agency.AgencyInfo.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-Agency-AgencyInfo-TenantAdditionalQuestionsEntry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 
 
 
@@ -824,6 +830,22 @@ AgencyInfo contains contact and identification information for an agency.
 <a name="producerflow-producer-v1-Agency-AgencyInfo-MetadataQuestionsEntry"></a>
 
 ### Agency.AgencyInfo.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Agency-AgencyInfo-TenantAdditionalQuestionsEntry"></a>
+
+### Agency.AgencyInfo.TenantAdditionalQuestionsEntry
 
 
 
@@ -1816,7 +1838,8 @@ Agency contains all information about the agency to be created
 | invoicing_address | [Address](#producerflow-producer-v1-Address) |  | InvoicingAddress represents the invoicing address of the agency. |
 | tenant_agency_id | [string](#string) |  | TenantAgencyID represents the ID of the agency in the tenant. This is used to link the agency to the tenant. |
 | locations | [LocationInput](#producerflow-producer-v1-LocationInput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
-| metadata_questions | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. The map key is the question identifier/text, and the value is the answer provided. |
+| metadata_questions | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
+| tenant_additional_questions | [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-TenantAdditionalQuestionsEntry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 
 
 
@@ -1948,6 +1971,39 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | npn | [string](#string) |  | The National Producer Number (NPN) of the principal. |
 | tenant_id | [string](#string) |  | Optional. External identifier for the principal in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don&#39;t need to track a reference to your internal system. This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., &#34;USR-12345&#34;, &#34;uuid&#34;). Validation: Maximum length of 255 characters. |
 | sync_with_nipr | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal&#39;s NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
+| tenant_additional_questions | [NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-Principal-TenantAdditionalQuestionsEntry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-NewAgencyRequest-Agency-Principal-TenantAdditionalQuestionsEntry"></a>
+
+### NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-NewAgencyRequest-Agency-TenantAdditionalQuestionsEntry"></a>
+
+### NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -2094,7 +2150,8 @@ NewProducer represents the data needed to create a new producer in the system.
 | mailing_address | [NewProducer.Address](#producerflow-producer-v1-NewProducer-Address) |  | Mailing address of the producer. This is where correspondence will be sent. |
 | tenant_id | [string](#string) |  | Optional. External identifier for the producer in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don&#39;t need to track a reference to your internal system. This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., &#34;PROD-12345&#34;, &#34;uuid&#34;). Validation: Maximum length of 255 characters. |
 | location_ids | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation. All locations must exist and belong to the specified agency. |
-| metadata_questions | [NewProducer.MetadataQuestionsEntry](#producerflow-producer-v1-NewProducer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. The map key is the question identifier/text, and the value is the answer provided. |
+| metadata_questions | [NewProducer.MetadataQuestionsEntry](#producerflow-producer-v1-NewProducer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
+| tenant_additional_questions | [NewProducer.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewProducer-TenantAdditionalQuestionsEntry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 
 
 
@@ -2122,6 +2179,22 @@ Address represents a mailing address for the producer.
 <a name="producerflow-producer-v1-NewProducer-MetadataQuestionsEntry"></a>
 
 ### NewProducer.MetadataQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-NewProducer-TenantAdditionalQuestionsEntry"></a>
+
+### NewProducer.TenantAdditionalQuestionsEntry
 
 
 
@@ -2261,8 +2334,9 @@ Internal ID of the producer.
 | requested_appointments | [string](#string) | repeated | The list of requested appointments for the producer. |
 | address | [Producer.Address](#producerflow-producer-v1-Producer-Address) |  | Address of the producer. |
 | locations | [Location](#producerflow-producer-v1-Location) | repeated | Locations assigned to this producer. |
-| metadata_questions | [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. This field stores tenant-specific questions that need to be asked during producer onboarding. The map key is the question identifier/text, and the value is the answer provided. |
+| metadata_questions | [Producer.MetadataQuestionsEntry](#producerflow-producer-v1-Producer-MetadataQuestionsEntry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer. This field stores tenant-specific questions that need to be asked during producer onboarding. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
 | external_metadata | [Producer.ExternalMetadataEntry](#producerflow-producer-v1-Producer-ExternalMetadataEntry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow&#39;s data model. This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant&#39;s systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
+| tenant_additional_questions | [Producer.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-Producer-TenantAdditionalQuestionsEntry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 
 
 
@@ -2491,6 +2565,22 @@ RegulatoryAction represents a regulatory action taken against a producer.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerflow-producer-v1-Producer-NIPR-ProducerRegulatoryInfo-RegulatoryAction) |  |  |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-Producer-TenantAdditionalQuestionsEntry"></a>
+
+### Producer.TenantAdditionalQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
