@@ -561,8 +561,8 @@ type Address struct {
 	Zip string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
 	// County of the address
 	County string `protobuf:"bytes,5,opt,name=county,proto3" json:"county,omitempty"`
-	// Optional second line of street address (apt, suite, unit, etc.)
-	StreetLine_2  *string `protobuf:"bytes,6,opt,name=street_line_2,json=streetLine2,proto3,oneof" json:"street_line_2,omitempty"`
+	// Optional second line of address (apt, suite, unit, etc.)
+	AddressLine_2 *string `protobuf:"bytes,6,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -632,9 +632,9 @@ func (x *Address) GetCounty() string {
 	return ""
 }
 
-func (x *Address) GetStreetLine_2() string {
-	if x != nil && x.StreetLine_2 != nil {
-		return *x.StreetLine_2
+func (x *Address) GetAddressLine_2() string {
+	if x != nil && x.AddressLine_2 != nil {
+		return *x.AddressLine_2
 	}
 	return ""
 }
@@ -9654,16 +9654,16 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"Pagination\x12%\n" +
 	"\tpage_size\x18\x01 \x01(\x05B\b\xbaH\x05\x1a\x03\x18\xc8\x01R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xd7\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xda\x01\n" +
 	"\aAddress\x12\x1f\n" +
 	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12\x1b\n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"R\x03zip\x12\x16\n" +
-	"\x06county\x18\x05 \x01(\tR\x06county\x12'\n" +
-	"\rstreet_line_2\x18\x06 \x01(\tH\x00R\vstreetLine2\x88\x01\x01B\x10\n" +
-	"\x0e_street_line_2\"\xd9\b\n" +
+	"\x06county\x18\x05 \x01(\tR\x06county\x12)\n" +
+	"\x0eaddress_line_2\x18\x06 \x01(\tH\x00R\faddressLine2\x88\x01\x01B\x11\n" +
+	"\x0f_address_line_2\"\xd9\b\n" +
 	" CreateAgencyOnboardingURLRequest\x12Y\n" +
 	"\x06agency\x18\x01 \x01(\v2A.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.AgencyR\x06agency\x1a\xd9\a\n" +
 	"\x06Agency\x12\x12\n" +
