@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2025-11-19
+
+### Added
+
+#### ProducerService
+
+- **External Metadata Support** - New capability to store custom tenant-specific metadata on agencies and producers
+  - `external_metadata` field added to `Agency`, `Producer`, `UpdateAgencyRequest`, and `UpdateProducerRequest` messages
+  - Supports storing references to external system states, custom tags, classifications, and derived data
+
+- **Enhanced Custom Questions** - New standardized field for tenant-specific custom questions
+  - `tenant_additional_questions` field added to `Agency`, `Producer`, `NewAgency`, and `NewProducer` messages
+  - Provides consistent key-value pair format for storing custom onboarding questions and responses
+
+- **Address Enhancement** - Added support for multi-line street addresses
+  - `street_line_2` optional field added to `Address` message for apartments, suites, units, etc.
+
+#### Webhook System
+
+- **Enhanced Webhook Payloads** - Agency and producer webhooks now include additional custom metadata
+  - `tenant_additional_questions` field added to agency and producer webhook payloads
+  - `external_metadata` field included in webhook payloads for both agencies and producers
+
+### Deprecated
+
+- **Legacy Metadata Questions** - `metadata_questions` field deprecated in favor of `tenant_additional_questions`
+  - Affects `Agency`, `Producer`, `NewAgency`, and `NewProducer` messages
+  - `tenant_additional_questions` provides better structure and consistency
+  - `metadata_questions` will be removed in a future release
+
+---
+
 ## [1.0.1] - 2025-11-12
 
 ### Added
