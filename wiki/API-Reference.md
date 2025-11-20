@@ -63,7 +63,6 @@
     - [AssignProducerToLocationsRequest](#producerflow-producer-v1-AssignProducerToLocationsRequest)
     - [AssignProducerToLocationsResponse](#producerflow-producer-v1-AssignProducerToLocationsResponse)
     - [Contact](#producerflow-producer-v1-Contact)
-    - [Contact.Address](#producerflow-producer-v1-Contact-Address)
     - [CreateAgencyOnboardingURLRequest](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest)
     - [CreateAgencyOnboardingURLRequest.Agency](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency)
     - [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency-Principal)
@@ -110,7 +109,6 @@
     - [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#producerflow-producer-v1-NewAgencyRequest-Agency-TenantAdditionalQuestionsEntry)
     - [NewAgencyResponse](#producerflow-producer-v1-NewAgencyResponse)
     - [NewContact](#producerflow-producer-v1-NewContact)
-    - [NewContact.Address](#producerflow-producer-v1-NewContact-Address)
     - [NewContactRequest](#producerflow-producer-v1-NewContactRequest)
     - [NewContactResponse](#producerflow-producer-v1-NewContactResponse)
     - [NewContactsRequest](#producerflow-producer-v1-NewContactsRequest)
@@ -1216,28 +1214,9 @@ Contacts are non-producer individuals linked to the agency.
 | email | [string](#string) |  | Email address of the contact. Must be unique within the tenant. |
 | phone | [string](#string) |  | Phone number of the contact. |
 | role | [string](#string) |  | Role or position of the contact within the agency. |
-| address | [Contact.Address](#producerflow-producer-v1-Contact-Address) |  |  |
+| address | [Address](#producerflow-producer-v1-Address) |  | Mailing address of the contact. |
 | npn | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | When the contact was created. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-Contact-Address"></a>
-
-### Contact.Address
-Mailing address of the contact.
-Address represents a mailing address for the contact.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| street | [string](#string) |  | Street address of the contact. |
-| city | [string](#string) |  | City of the contact. |
-| state | [string](#string) |  | State of the contact. |
-| zip | [string](#string) |  | Zip code of the contact. |
 
 
 
@@ -2043,28 +2022,10 @@ Contacts represent non-producer individuals associated with an agency.
 | middle_name | [string](#string) |  | Middle name of the contact. Optional. |
 | email | [string](#string) |  | Email address of the contact. Required and must be a valid email format. Must be unique within the tenant. |
 | phone | [string](#string) |  | Phone number of the contact. Optional if default value, but if provided must match the pattern of a valid phone number. |
-| address | [NewContact.Address](#producerflow-producer-v1-NewContact-Address) |  | Mailing address of the contact. |
+| address | [Address](#producerflow-producer-v1-Address) |  | Mailing address of the contact. |
 | role | [string](#string) |  | Role or position of the contact within the agency. Required and must be non-empty. |
 | tenant_id | [string](#string) |  | Optional. External identifier for the contact in the tenant&#39;s system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant&#39;s system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don&#39;t need to track a reference to your internal system. This is independent of ProducerFlow&#39;s internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., &#34;CONT-12345&#34;, &#34;uuid&#34;). Validation: Maximum length of 255 characters |
 | npn | [string](#string) | optional | National Producer Number (NPN) of the contact. |
-
-
-
-
-
-
-<a name="producerflow-producer-v1-NewContact-Address"></a>
-
-### NewContact.Address
-Address represents a mailing address for the contact.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| street | [string](#string) |  | Street address of the contact. Required and must be non-empty. |
-| city | [string](#string) |  | City of the contact. Required and must be non-empty. |
-| state | [string](#string) |  | State of the contact&#39;s address. Required and must be exactly 2 characters (state code). |
-| zip | [string](#string) |  | Zip code of the contact&#39;s address. Required and must be between 1 and 10 characters. |
 
 
 
