@@ -7010,7 +7010,10 @@ type UpdateAgencyRequest_Agency_Address struct {
 	State *string `protobuf:"bytes,3,opt,name=state,proto3,oneof" json:"state,omitempty"`
 	// Zip code of the address.
 	// If provided, must be between 1 and 10 characters.
-	Zip           *string `protobuf:"bytes,4,opt,name=zip,proto3,oneof" json:"zip,omitempty"`
+	Zip *string `protobuf:"bytes,4,opt,name=zip,proto3,oneof" json:"zip,omitempty"`
+	// Additional address line (e.g., apartment, suite, floor number).
+	// If provided, must be non-empty.
+	AddressLine_2 *string `protobuf:"bytes,5,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7069,6 +7072,13 @@ func (x *UpdateAgencyRequest_Agency_Address) GetState() string {
 func (x *UpdateAgencyRequest_Agency_Address) GetZip() string {
 	if x != nil && x.Zip != nil {
 		return *x.Zip
+	}
+	return ""
+}
+
+func (x *UpdateAgencyRequest_Agency_Address) GetAddressLine_2() string {
+	if x != nil && x.AddressLine_2 != nil {
+		return *x.AddressLine_2
 	}
 	return ""
 }
@@ -9882,10 +9892,10 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
 	"\x04_zip\"\x18\n" +
-	"\x16UpdateProducerResponse\"\x85\b\n" +
+	"\x16UpdateProducerResponse\"\xcc\b\n" +
 	"\x13UpdateAgencyRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12T\n" +
-	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\xf0\x06\n" +
+	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\xb7\a\n" +
 	"\x06Agency\x12\"\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05email\x88\x01\x01\x124\n" +
 	"\x05phone\x18\x02 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x01R\x05phone\x88\x01\x01\x123\n" +
@@ -9895,17 +9905,19 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"^[A-Z]{2}$R\x15requestedAppointments\x12&\n" +
 	"\x05notes\x18\x06 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xf4\x03H\x04R\x05notes\x88\x01\x01\x12l\n" +
 	"\x10physical_address\x18\a \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x05R\x0fphysicalAddress\x88\x01\x01\x12w\n" +
-	"\x11external_metadata\x18\b \x03(\v2J.producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntryR\x10externalMetadata\x1a\xbe\x01\n" +
+	"\x11external_metadata\x18\b \x03(\v2J.producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntryR\x10externalMetadata\x1a\x85\x02\n" +
 	"\aAddress\x12$\n" +
 	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06street\x88\x01\x01\x12 \n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04city\x88\x01\x01\x12#\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02H\x02R\x05state\x88\x01\x01\x12 \n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
-	"H\x03R\x03zip\x88\x01\x01B\t\n" +
+	"H\x03R\x03zip\x88\x01\x01\x122\n" +
+	"\x0eaddress_line_2\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\faddressLine2\x88\x01\x01B\t\n" +
 	"\a_streetB\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
-	"\x04_zip\x1aC\n" +
+	"\x04_zipB\x11\n" +
+	"\x0f_address_line_2\x1aC\n" +
 	"\x15ExternalMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +

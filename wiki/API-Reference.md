@@ -2969,6 +2969,7 @@ Address fields cannot be cleared - if provided, they must have valid values.
 | city | [string](#string) | optional | City of the address. If provided, must be non-empty. |
 | state | [string](#string) | optional | State of the address. If provided, must be exactly 2 characters (state code). |
 | zip | [string](#string) | optional | Zip code of the address. If provided, must be between 1 and 10 characters. |
+| address_line_2 | [string](#string) | optional | Additional address line (e.g., apartment, suite, floor number). If provided, must be non-empty. |
 
 
 
