@@ -231,7 +231,7 @@ message Address {
   // County of the address
   string county = 5;
   // Optional second line of address (apt, suite, unit, etc.)
-  optional string address_line_2 = 6;
+  optional string address_line_2 = 6 [(buf.validate.field).string.min_len = 1];
 }
 
 // CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.
@@ -342,6 +342,7 @@ message ProducerData {
     string state = 3;
     string zip = 4;
     string country = 5;
+    optional string address_line_2 = 6 [(buf.validate.field).string.min_len = 1];
   }
 }
 
@@ -719,6 +720,10 @@ message UpdateProducerRequest {
     // Street address of the producer.
     // If provided, must be non-empty.
     optional string street = 6 [(buf.validate.field).string.min_len = 1];
+
+    // Second line of the address (apartment, suite, unit, etc.).
+    // If provided, must be non-empty.
+    optional string address_line_2 = 13 [(buf.validate.field).string.min_len = 1];
 
     // City of the producer.
     // If provided, must be non-empty.
@@ -1546,6 +1551,9 @@ message Producer {
 
     // Zip code of the producer.
     string zip = 4;
+
+    // Optional second line of address (apt, suite, unit, etc.)
+    optional string address_line_2 = 13 [(buf.validate.field).string.min_len = 1];
   }
 
   // Address of the producer.
@@ -1626,6 +1634,9 @@ message NewProducer {
       (buf.validate.field).string.min_len = 1,
       (buf.validate.field).string.max_len = 10
     ];
+
+    // Optional second line of address (apt, suite, unit, etc.)
+    optional string address_line_2 = 5 [(buf.validate.field).string.min_len = 1];
   }
 
   // Mailing address of the producer.
