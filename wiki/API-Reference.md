@@ -2132,6 +2132,7 @@ Address represents a mailing address for the producer.
 | city | [string](#string) |  | City of the producer. Required and must be non-empty. |
 | state | [string](#string) |  | State of the producer. Required and must be a 2-letter state code. |
 | zip | [string](#string) |  | Zip code of the producer. Required and must be between 1 and 10 characters. |
+| address_line_2 | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 
 
@@ -2317,6 +2318,7 @@ Address represents a mailing address for the producer.
 | city | [string](#string) |  | City of the producer. |
 | state | [string](#string) |  | State of the producer. |
 | zip | [string](#string) |  | Zip code of the producer. |
+| address_line_2 | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 
 
@@ -2583,6 +2585,7 @@ RegulatoryAction represents a regulatory action taken against a producer.
 | state | [string](#string) |  |  |
 | zip | [string](#string) |  |  |
 | country | [string](#string) |  |  |
+| address_line_2 | [string](#string) | optional |  |
 
 
 
@@ -2997,6 +3000,7 @@ All fields are optional, allowing partial updates.
 | npn | [string](#string) | optional | **Deprecated.** National Producer Number (NPN) of the producer. If provided, must be non-empty. Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version. |
 | phone | [string](#string) | optional | Phone number of the producer. If provided, must be a valid phone number format. |
 | street | [string](#string) | optional | Street address of the producer. If provided, must be non-empty. |
+| address_line_2 | [string](#string) | optional | Second line of the address (apartment, suite, unit, etc.). If provided, must be non-empty. |
 | city | [string](#string) | optional | City of the producer. If provided, must be non-empty. |
 | state | [string](#string) | optional | State of the producer. If provided, must be a valid 2-letter US state code. |
 | zip | [string](#string) | optional | ZIP code of the producer&#39;s address. If provided, must be at least 5 characters. |
