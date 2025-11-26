@@ -67,6 +67,8 @@
     - [CreateAgencyOnboardingURLRequest.Agency](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency)
     - [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflow-producer-v1-CreateAgencyOnboardingURLRequest-Agency-Principal)
     - [CreateAgencyOnboardingURLResponse](#producerflow-producer-v1-CreateAgencyOnboardingURLResponse)
+    - [CreateOrganizationRequest](#producerflow-producer-v1-CreateOrganizationRequest)
+    - [CreateOrganizationResponse](#producerflow-producer-v1-CreateOrganizationResponse)
     - [CreateProducerOnboardingURLRequest](#producerflow-producer-v1-CreateProducerOnboardingURLRequest)
     - [CreateProducerOnboardingURLResponse](#producerflow-producer-v1-CreateProducerOnboardingURLResponse)
     - [CreateProducerUploadURLRequest](#producerflow-producer-v1-CreateProducerUploadURLRequest)
@@ -1300,6 +1302,38 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | url | [string](#string) |  | URL that can be shared with the agency for self-onboarding |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-CreateOrganizationRequest"></a>
+
+### CreateOrganizationRequest
+CreateOrganizationRequest contains the information needed to create a new organization.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. The display name of the organization. Must be unique within the tenant. |
+| external_id | [string](#string) |  | Optional. The external identifier for the organization. This is the identifier used by the tenant&#39;s system to identify the organization. |
+| email | [string](#string) |  | Optional. The contact email address for the organization. |
+
+
+
+
+
+
+<a name="producerflow-producer-v1-CreateOrganizationResponse"></a>
+
+### CreateOrganizationResponse
+CreateOrganizationResponse contains the result of creating a new organization.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | The unique identifier of the newly created organization. |
 
 
 
@@ -3240,6 +3274,7 @@ RPCs for starting the onboarding agency process.
 | ListAgencies | [ListAgenciesRequest](#producerflow-producer-v1-ListAgenciesRequest) | [ListAgenciesResponse](#producerflow-producer-v1-ListAgenciesResponse) | ListAgencies returns a list of agencies associated with the tenant. Supports optional filtering by organization ID and search queries. |
 | ListOrganizations | [ListOrganizationsRequest](#producerflow-producer-v1-ListOrganizationsRequest) | [ListOrganizationsResponse](#producerflow-producer-v1-ListOrganizationsResponse) | ListOrganizations returns a list of organizations associated with the tenant. Organizations represent logical groupings or hierarchical structures within a tenant that can be used to organize agencies and producers. |
 | GetOrganization | [GetOrganizationRequest](#producerflow-producer-v1-GetOrganizationRequest) | [GetOrganizationResponse](#producerflow-producer-v1-GetOrganizationResponse) | GetOrganization retrieves details of a specific organization by ID. Returns the organization&#39;s information including name and external ID. |
+| CreateOrganization | [CreateOrganizationRequest](#producerflow-producer-v1-CreateOrganizationRequest) | [CreateOrganizationResponse](#producerflow-producer-v1-CreateOrganizationResponse) | CreateOrganization creates a new organization for the authenticated tenant. The organization name must be unique within the tenant. Returns the ID of the newly created organization. |
 | NewProducer | [NewProducerRequest](#producerflow-producer-v1-NewProducerRequest) | [NewProducerResponse](#producerflow-producer-v1-NewProducerResponse) | NewProducer creates a new producer and associates them with an existing agency. It validates the producer&#39;s information and checks that the email is unique. Returns the ID of the created producer. |
 | NewProducers | [NewProducersRequest](#producerflow-producer-v1-NewProducersRequest) | [NewProducersResponse](#producerflow-producer-v1-NewProducersResponse) | NewProducers creates multiple producers and associates them with the specified agency. It performs the same validations as NewProducer for each entry. Returns the IDs of all created producers. |
 | GetAgencyAndProducers | [GetAgencyAndProducersRequest](#producerflow-producer-v1-GetAgencyAndProducersRequest) | [GetAgencyAndProducersResponse](#producerflow-producer-v1-GetAgencyAndProducersResponse) | GetAgencyAndProducers retrieves details for an agency and all associated producers. Returns the agency information and a list of producers. |
