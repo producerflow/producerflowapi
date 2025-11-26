@@ -1,0 +1,59 @@
+name: Unpublish NPM Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to unpublish (e.g., 1.0.0)'
+        required: true
+        type: string
+      confirm:
+        description: 'Type "unpublish" to confirm'
+        required: true
+        type: string
+
+env:
+  NODE_VERSION: 24
+
+jobs:
+  unpublish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "unpublish" ]; then
+            echo "Error: Confirmation must be exactly 'unpublish'"
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Navigate to package directory
+        run: cd gen/ts
+
+      - name: Verify package name and version
+        working-directory: gen/ts
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          VERSION="${{ github.event.inputs.version }}"
+          echo "Package: $PACKAGE_NAME"
+          echo "Version to unpublish: $VERSION"
+          echo "⚠️  WARNING: This will permanently remove version $VERSION of $PACKAGE_NAME from npm"
+
+      - name: Unpublish version from npm
+        working-directory: gen/ts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm unpublish "${{ github.event.inputs.version }}" --force
+          echo "✅ Successfully unpublished version ${{ github.event.inputs.version }}"
+
