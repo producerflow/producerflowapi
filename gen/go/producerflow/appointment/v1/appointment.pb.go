@@ -268,7 +268,13 @@ func (AppointmentType) EnumDescriptor() ([]byte, []int) {
 	return file_producerflow_appointment_v1_appointment_proto_rawDescGZIP(), []int{3}
 }
 
-// TerminationReason represents the reason for the termination of an appointment. These reasons correspond to NIPR's valid termination codes and vary by state. Use ListTerminationReasons to get the valid reasons for a specific state before terminating an appointment. Reference: https://pdb.nipr.com/Gateway/ValidTerms
+// TerminationReason represents the reason for the termination of an appointment.
+//
+// These reasons correspond to NIPR's valid termination codes and vary by
+// state. Use ListTerminationReasons to get the valid reasons for a specific
+// state before terminating an appointment.
+//
+// Reference: https://pdb.nipr.com/Gateway/ValidTerms
 type TerminationReason int32
 
 const (
@@ -417,8 +423,11 @@ type RequestAppointmentResponse struct {
 	// The ID of the created appointment.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
 	// Processing status of the appointment request.
-	// For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected
-	// For registry states or non-NIPR carriers: APPOINTED if successful
+	//
+	// For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
+	// rejected.
+	//
+	// For registry states or non-NIPR carriers: APPOINTED if successful.
 	ProcessingStatus ProcessingStatus `protobuf:"varint,2,opt,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
 	// If the appointment was rejected or ineligible, these reasons explain why.
 	// Only populated when processing_status is REJECTED.
@@ -722,9 +731,9 @@ type TerminateAppointmentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the appointment to terminate.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
-	// Reason for termination. This must be a valid termination reason
-	// for the state where the license is issued. Call ListTerminationReasons
-	// first to get the list of valid reasons for the specific state.
+	// Reason for termination. This must be a valid termination reason for the
+	// state where the license is issued. Call ListTerminationReasons first to
+	// get the list of valid reasons for the specific state.
 	Reason        TerminationReason `protobuf:"varint,2,opt,name=reason,proto3,enum=producerflow.appointment.v1.TerminationReason" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -776,7 +785,18 @@ func (x *TerminateAppointmentRequest) GetReason() TerminationReason {
 
 type TerminateAppointmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Indicates whether the termination request was successfully processed. For NIPR-integrated carriers: Indicates whether the termination request was successfully submitted to NIPR. This does not indicate that the appointment has been terminated, only that the request has been accepted for processing. The actual termination will be processed asynchronously by NIPR, and you will be notified via webhook when the process completes. For registry states or non-NIPR carriers: Indicates whether the termination was successfully completed immediately.
+	// Indicates whether the termination request was successfully processed.
+	//
+	// For NIPR-integrated carriers:
+	//   - Indicates whether the termination request was successfully submitted to
+	//     NIPR.
+	//   - This does not indicate that the appointment has been terminated, only
+	//     that the request has been accepted for processing.
+	//   - The actual termination will be processed asynchronously by NIPR, and
+	//     you will be notified via webhook when the process completes.
+	//
+	// For registry states or non-NIPR carriers:
+	// - Indicates whether the termination was successfully completed immediately.
 	Success       bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1131,6 +1151,7 @@ func (x *GetTerminationFeesResponse) GetFeeInCents() int64 {
 	return 0
 }
 
+// Request to retrieve carriers that are available to be appointed.
 type GetAppointableCarriersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1167,6 +1188,7 @@ func (*GetAppointableCarriersRequest) Descriptor() ([]byte, []int) {
 	return file_producerflow_appointment_v1_appointment_proto_rawDescGZIP(), []int{14}
 }
 
+// Response containing carriers that are available to be appointed.
 type GetAppointableCarriersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The list of carriers that are available to be appointed.
@@ -1221,13 +1243,13 @@ type Carrier struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The NPN of the carrier.
 	Npn string `protobuf:"bytes,3,opt,name=npn,proto3" json:"npn,omitempty"`
-	// The state of the carrier.
+	// The FEIN of the carrier.
 	Fein string `protobuf:"bytes,4,opt,name=fein,proto3" json:"fein,omitempty"`
 	// The NAIC cocode of the carrier.
 	Cocode string `protobuf:"bytes,5,opt,name=cocode,proto3" json:"cocode,omitempty"`
-	// Indicates whether this carrier has NIPR integration enabled.
-	// Capacity carriers (carriers without NIPR integration) process appointments and terminations
-	// automatically without going through NIPR.
+	// Indicates whether this carrier has NIPR integration enabled. Capacity
+	// carriers (carriers without NIPR integration) process appointments and
+	// terminations automatically without going through NIPR.
 	HasNiprIntegration bool `protobuf:"varint,6,opt,name=has_nipr_integration,json=hasNiprIntegration,proto3" json:"has_nipr_integration,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -1312,11 +1334,11 @@ type AppointmentOperationalStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The current operational status of the appointment.
 	Status OperationalStatus `protobuf:"varint,1,opt,name=status,proto3,enum=producerflow.appointment.v1.OperationalStatus" json:"status,omitempty"`
-	// Specific reason(s) why the appointment is at risk, if applicable.
-	// This field is only populated when status is AT_RISK.
+	// Specific reason(s) why the appointment is at risk, if applicable. This
+	// field is only populated when status is AT_RISK.
 	RiskReasons []RiskReason `protobuf:"varint,2,rep,packed,name=risk_reasons,json=riskReasons,proto3,enum=producerflow.appointment.v1.RiskReason" json:"risk_reasons,omitempty"`
-	// Timestamp when the operational status was last updated.
-	// This helps track when status changes occurred.
+	// Timestamp when the operational status was last updated. This helps track
+	// when status changes occurred.
 	LastUpdated   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1384,7 +1406,7 @@ type Appointment struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// The id of the agency that is appointed.
 	AgencyId string `protobuf:"bytes,4,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
-	// The id of the producer that is appointed, if any.
+	// Optional. The id of the producer that is appointed, if any.
 	ProducerId *string `protobuf:"bytes,5,opt,name=producer_id,json=producerId,proto3,oneof" json:"producer_id,omitempty"`
 	// The name of the carrier to which the license is appointed.
 	Carrier string `protobuf:"bytes,6,opt,name=carrier,proto3" json:"carrier,omitempty"`
@@ -1392,22 +1414,22 @@ type Appointment struct {
 	AppointmentType AppointmentType `protobuf:"varint,7,opt,name=appointment_type,json=appointmentType,proto3,enum=producerflow.appointment.v1.AppointmentType" json:"appointment_type,omitempty"`
 	// Processing status of the appointment (e.g., in progress, appointed).
 	ProcessingStatus ProcessingStatus `protobuf:"varint,8,opt,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
-	// Optional comments or notes related to the appointment.
+	// Optional. Comments or notes related to the appointment.
 	Comments string `protobuf:"bytes,9,opt,name=comments,proto3" json:"comments,omitempty"`
-	// Timestamp of the last update to the appointment.
+	// Timestamp of when the appointment becomes effective.
 	EffectiveDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=effective_date,json=effectiveDate,proto3" json:"effective_date,omitempty"`
-	// Timestamp of the termination of the appointment.
+	// Optional. Timestamp of the termination of the appointment.
 	TerminationDate *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=termination_date,json=terminationDate,proto3,oneof" json:"termination_date,omitempty"`
 	// Timestamp of the last update to the appointment.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Operational status information for the appointment.
-	// This field provides insight into the current operational health
-	// and any risk factors that may affect the appointment.
+	// Operational status information for the appointment. This field provides
+	// insight into the current operational health and any risk factors that may
+	// affect the appointment.
 	OperationalStatus *AppointmentOperationalStatus `protobuf:"bytes,13,opt,name=operational_status,json=operationalStatus,proto3" json:"operational_status,omitempty"`
 	// The NAIC cocode of the carrier.
 	Cocode string `protobuf:"bytes,14,opt,name=cocode,proto3" json:"cocode,omitempty"`
-	// The id of the parent appointment, if this is a synthetic appointment.
-	// It should be empty for non-synthetic appointments.
+	// Optional. The id of the parent appointment, if this is a synthetic
+	// appointment. It should be empty for non-synthetic appointments.
 	ParentAppointmentId string `protobuf:"bytes,15,opt,name=parent_appointment_id,json=parentAppointmentId,proto3" json:"parent_appointment_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1565,8 +1587,9 @@ type License struct {
 	State string `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
 	// The license class.
 	LicenseClass string `protobuf:"bytes,6,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
-	// Indicates whether this license is in a registry state.
-	// Licenses in registry states and capacity carriers are processed automatically without going through NIPR.
+	// Indicates whether this license is in a registry state. Licenses in
+	// registry states and capacity carriers are processed automatically without
+	// going through NIPR.
 	IsRegistryState bool `protobuf:"varint,7,opt,name=is_registry_state,json=isRegistryState,proto3" json:"is_registry_state,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1680,9 +1703,9 @@ func (*License_AgencyId) isLicense_LicenseOwner() {}
 
 type ListTerminationReasonsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. The two-letter state code of the license for which you want to retrieve
-	// valid termination reasons. Different states may have different sets of valid
-	// termination reasons accepted by NIPR.
+	// Required. The two-letter state code of the license for which you want to
+	// retrieve valid termination reasons. Different states may have different
+	// sets of valid termination reasons accepted by NIPR.
 	State         string `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1727,9 +1750,9 @@ func (x *ListTerminationReasonsRequest) GetState() string {
 
 type ListTerminationReasonsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The list of valid termination reasons for the specified state.
-	// These reasons can be used when calling TerminateAppointment for licenses
-	// issued in this state.
+	// The list of valid termination reasons for the specified state. These
+	// reasons can be used when calling TerminateAppointment for licenses issued
+	// in this state.
 	TerminationReasons []TerminationReason `protobuf:"varint,1,rep,packed,name=termination_reasons,json=terminationReasons,proto3,enum=producerflow.appointment.v1.TerminationReason" json:"termination_reasons,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache

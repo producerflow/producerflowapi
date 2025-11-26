@@ -4,98 +4,98 @@
 
 
 
-- [AppointmentService](#producerflowappointmentv1appointmentservice)
+- [AppointmentService](#appointmentservice)
 
-  - [GetAppointment](#producerflowappointmentv1appointmentservice-getappointment)
+  - [GetAppointment](#getappointment)
 
-  - [GetAppointmentFees](#producerflowappointmentv1appointmentservice-getappointmentfees)
+  - [GetAppointmentFees](#getappointmentfees)
 
-  - [GetAppointableCarriers](#producerflowappointmentv1appointmentservice-getappointablecarriers)
+  - [GetAppointableCarriers](#getappointablecarriers)
 
-  - [GetTerminationFees](#producerflowappointmentv1appointmentservice-getterminationfees)
+  - [GetTerminationFees](#getterminationfees)
 
-  - [ListAppointments](#producerflowappointmentv1appointmentservice-listappointments)
+  - [ListAppointments](#listappointments)
 
-  - [ListEligibleLicenses](#producerflowappointmentv1appointmentservice-listeligiblelicenses)
+  - [ListEligibleLicenses](#listeligiblelicenses)
 
-  - [RequestAppointment](#producerflowappointmentv1appointmentservice-requestappointment)
+  - [RequestAppointment](#requestappointment)
 
-  - [TerminateAppointment](#producerflowappointmentv1appointmentservice-terminateappointment)
+  - [TerminateAppointment](#terminateappointment)
 
-  - [ListTerminationReasons](#producerflowappointmentv1appointmentservice-listterminationreasons)
-
-
+  - [ListTerminationReasons](#listterminationreasons)
 
 
-- [ProducerService](#producerflowproducerv1producerservice)
 
-  - [CreateAgencyOnboardingURL](#producerflowproducerv1producerservice-createagencyonboardingurl)
 
-  - [CreateProducerOnboardingURL](#producerflowproducerv1producerservice-createproduceronboardingurl)
+- [ProducerService](#producerservice)
 
-  - [NewAgency](#producerflowproducerv1producerservice-newagency)
+  - [CreateAgencyOnboardingURL](#createagencyonboardingurl)
 
-  - [ListAgencies](#producerflowproducerv1producerservice-listagencies)
+  - [CreateProducerOnboardingURL](#createproduceronboardingurl)
 
-  - [ListOrganizations](#producerflowproducerv1producerservice-listorganizations)
+  - [NewAgency](#newagency)
 
-  - [GetOrganization](#producerflowproducerv1producerservice-getorganization)
+  - [ListAgencies](#listagencies)
 
-  - [CreateOrganization](#producerflowproducerv1producerservice-createorganization)
+  - [ListOrganizations](#listorganizations)
 
-  - [NewProducer](#producerflowproducerv1producerservice-newproducer)
+  - [GetOrganization](#getorganization)
 
-  - [NewProducers](#producerflowproducerv1producerservice-newproducers)
+  - [CreateOrganization](#createorganization)
 
-  - [GetAgencyAndProducers](#producerflowproducerv1producerservice-getagencyandproducers)
+  - [NewProducer](#newproducer)
 
-  - [GetProducer](#producerflowproducerv1producerservice-getproducer)
+  - [NewProducers](#newproducers)
 
-  - [GetAgencyFiles](#producerflowproducerv1producerservice-getagencyfiles)
+  - [GetAgencyAndProducers](#getagencyandproducers)
 
-  - [UpdateProducer](#producerflowproducerv1producerservice-updateproducer)
+  - [GetProducer](#getproducer)
 
-  - [UpdateAgency](#producerflowproducerv1producerservice-updateagency)
+  - [GetAgencyFiles](#getagencyfiles)
 
-  - [NewContact](#producerflowproducerv1producerservice-newcontact)
+  - [UpdateProducer](#updateproducer)
 
-  - [NewContacts](#producerflowproducerv1producerservice-newcontacts)
+  - [UpdateAgency](#updateagency)
 
-  - [ListAgencyContacts](#producerflowproducerv1producerservice-listagencycontacts)
+  - [NewContact](#newcontact)
 
-  - [SetExternalID](#producerflowproducerv1producerservice-setexternalid)
+  - [NewContacts](#newcontacts)
 
-  - [ValidateProducerNPN](#producerflowproducerv1producerservice-validateproducernpn)
+  - [ListAgencyContacts](#listagencycontacts)
 
-  - [ValidateAgencyNPN](#producerflowproducerv1producerservice-validateagencynpn)
+  - [SetExternalID](#setexternalid)
 
-  - [LookupNPNByFEIN](#producerflowproducerv1producerservice-lookupnpnbyfein)
+  - [ValidateProducerNPN](#validateproducernpn)
 
-  - [ResyncProducer](#producerflowproducerv1producerservice-resyncproducer)
+  - [ValidateAgencyNPN](#validateagencynpn)
 
-  - [ResyncAgency](#producerflowproducerv1producerservice-resyncagency)
+  - [LookupNPNByFEIN](#lookupnpnbyfein)
 
-  - [SyncProducerWithNIPR](#producerflowproducerv1producerservice-syncproducerwithnipr)
+  - [ResyncProducer](#resyncproducer)
 
-  - [SyncAgencyWithNIPR](#producerflowproducerv1producerservice-syncagencywithnipr)
+  - [ResyncAgency](#resyncagency)
 
-  - [StopSyncProducerWithNIPR](#producerflowproducerv1producerservice-stopsyncproducerwithnipr)
+  - [SyncProducerWithNIPR](#syncproducerwithnipr)
 
-  - [StopSyncAgencyWithNIPR](#producerflowproducerv1producerservice-stopsyncagencywithnipr)
+  - [SyncAgencyWithNIPR](#syncagencywithnipr)
 
-  - [CreateProducerUploadURL](#producerflowproducerv1producerservice-createproduceruploadurl)
+  - [StopSyncProducerWithNIPR](#stopsyncproducerwithnipr)
 
-  - [AddAgencyLocations](#producerflowproducerv1producerservice-addagencylocations)
+  - [StopSyncAgencyWithNIPR](#stopsyncagencywithnipr)
 
-  - [RemoveAgencyLocations](#producerflowproducerv1producerservice-removeagencylocations)
+  - [CreateProducerUploadURL](#createproduceruploadurl)
 
-  - [ListAgencyLocations](#producerflowproducerv1producerservice-listagencylocations)
+  - [AddAgencyLocations](#addagencylocations)
 
-  - [AssignProducerToLocations](#producerflowproducerv1producerservice-assignproducertolocations)
+  - [RemoveAgencyLocations](#removeagencylocations)
 
-  - [UnassignProducerFromLocations](#producerflowproducerv1producerservice-unassignproducerfromlocations)
+  - [ListAgencyLocations](#listagencylocations)
 
-  - [UpdateAgencyLocation](#producerflowproducerv1producerservice-updateagencylocation)
+  - [AssignProducerToLocations](#assignproducertolocations)
+
+  - [UnassignProducerFromLocations](#unassignproducerfromlocations)
+
+  - [UpdateAgencyLocation](#updateagencylocation)
 
 
 
@@ -106,19 +106,34 @@
 
 
 
-
 ## AppointmentService
 
-[Back to Top](#producerflow-api-documentation)
+AppointmentService manages license appointments through NIPR.
 
-AppointmentService manages license appointments through NIPR. The appointment flow in NIPR is as follows: 1. A new appointment (or termination) is requested for a license number. 2. Some time later, NIPR processes the request and returns the final result. Since NIPR does not return results immediately, RequestAppointment and TerminateAppointment RPCs will return a processing status of IN_PROGRESS if the request is accepted by NIPR. When the appointment is finally processed by NIPR, ProducerFlow will notify via a webhook of the final result. Also, any call from this point on to ListAppointments or GetAppointment will also return the final result. IMPORTANT: Appointments in registry states or with capacity carriers (carriers that do not have NIPR integration) are processed automatically without going through NIPR. In these cases: RequestAppointment will immediately return APPOINTED status. TerminateAppointment will immediately return TERMINATED status. Any call to this service must be authenticated using an API key in the request headers. The API key can be found in the ProducerFlow API key section of the ProducerFlow UI and it identifies the tenant that is making the request.
+The appointment flow in NIPR is as follows:
+1. A new appointment (or termination) is requested for a license number.
+2. Some time later, NIPR processes the request and returns the final result.
 
-Available endpoints:
-  UAT (User Acceptance Testing): https://api.uat.producerflow.com
-  Production: https://api.producerflow.com
+Since NIPR does not return results immediately, RequestAppointment and
+TerminateAppointment RPCs will return a processing status of IN_PROGRESS if
+the request is accepted by NIPR. When the appointment is finally processed by
+NIPR, ProducerFlow will notify via a webhook of the final result. Also, any
+call from this point on to ListAppointments or GetAppointment will also
+return the final result.
+
+IMPORTANT: Appointments in registry states or with capacity carriers
+(carriers that do not have NIPR integration) are processed automatically
+without going through NIPR. In these cases:
+- RequestAppointment will immediately return APPOINTED status.
+- TerminateAppointment will immediately return TERMINATED status.
+
+Any call to this service must be authenticated using an API key in the
+request headers. The API key can be found in the ProducerFlow API key
+section of the ProducerFlow UI and it identifies the tenant that is making
+the request.
 
 
-### GetAppointment {#producerflowappointmentv1appointmentservice-getappointment}
+### GetAppointment
 
 
 
@@ -148,7 +163,7 @@ Request to retrieve an appointment by ID.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
+| `appointment_id` | string |  | Required. The ID of the appointment to retrieve. |
 
 
 
@@ -208,7 +223,7 @@ Request to retrieve an appointment by ID.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment` | [Appointment](#producerflowappointmentv1appointment) |  | The appointment details. |
+| `appointment` | Appointment |  | The appointment details. |
 
 
 
@@ -243,7 +258,7 @@ Request to retrieve an appointment by ID.
 ---
 
 
-### GetAppointmentFees {#producerflowappointmentv1appointmentservice-getappointmentfees}
+### GetAppointmentFees
 
 
 
@@ -270,7 +285,7 @@ Request to get appointment fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
+| `license_id` | string |  | Required. The ID of the license to get the appointment fee for. |
 
 
 
@@ -330,7 +345,7 @@ Request to get appointment fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
+| `fee_in_cents` | int64 |  | Total fee for the appointment in cents. |
 
 
 
@@ -369,7 +384,7 @@ Request to get appointment fees.
 ---
 
 
-### GetAppointableCarriers {#producerflowappointmentv1appointmentservice-getappointablecarriers}
+### GetAppointableCarriers
 
 
 
@@ -385,7 +400,7 @@ Retrieves the carriers that are available to appoint licenses for the tenant.
 
 
 
-
+Request to retrieve carriers that are available to be appointed.
 
 
 *This message has no fields.*
@@ -441,13 +456,13 @@ Retrieves the carriers that are available to appoint licenses for the tenant.
 
 
 
-
+Response containing carriers that are available to be appointed.
 
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `carriers` | [Carrier](#producerflowappointmentv1carrier) | repeated | The list of carriers that are available to be appointed. |
+| `carriers` | Carrier | repeated | The list of carriers that are available to be appointed. |
 
 
 
@@ -490,7 +505,7 @@ Retrieves the carriers that are available to appoint licenses for the tenant.
 ---
 
 
-### GetTerminationFees {#producerflowappointmentv1appointmentservice-getterminationfees}
+### GetTerminationFees
 
 
 
@@ -525,7 +540,7 @@ Request to get termination fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
+| `license_id` | string |  | Required. The ID of the license to get the termination fee for. |
 
 
 
@@ -585,7 +600,7 @@ Request to get termination fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
+| `fee_in_cents` | int64 |  | Total fee for the termination in cents. |
 
 
 
@@ -616,7 +631,7 @@ Request to get termination fees.
 ---
 
 
-### ListAppointments {#producerflowappointmentv1appointmentservice-listappointments}
+### ListAppointments
 
 
 
@@ -656,11 +671,11 @@ Request to list appointments, optionally filtered by processing status.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `processing_status` | [ProcessingStatus](#producerflowappointmentv1processingstatus) | repeated | Optional. Filter results by processing status. |
+| `processing_status` | ProcessingStatus | repeated | Optional. Filter results by processing status. |
 
-| `producer_id` | [string](#string) |  |  |
+| `producer_id` | string |  |  |
 
-| `agency_id` | [string](#string) |  |  |
+| `agency_id` | string |  |  |
 
 
 
@@ -720,9 +735,9 @@ Request to list appointments, optionally filtered by processing status.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointments` | [Appointment](#producerflowappointmentv1appointment) | repeated | List of appointments. |
+| `appointments` | Appointment | repeated | List of appointments. |
 
-| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. |
+| `next_page_token` | string |  | Token for fetching the next page of results. |
 
 
 
@@ -747,7 +762,7 @@ Request to list appointments, optionally filtered by processing status.
 ---
 
 
-### ListEligibleLicenses {#producerflowappointmentv1appointmentservice-listeligiblelicenses}
+### ListEligibleLicenses
 
 
 
@@ -791,9 +806,9 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  |  |
+| `producer_id` | string |  |  |
 
-| `agency_id` | [string](#string) |  |  |
+| `agency_id` | string |  |  |
 
 
 
@@ -853,7 +868,7 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `licenses` | [License](#producerflowappointmentv1license) | repeated | List of licenses that are eligible to be appointed. |
+| `licenses` | License | repeated | List of licenses that are eligible to be appointed. |
 
 
 
@@ -874,11 +889,31 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 ---
 
 
-### RequestAppointment {#producerflowappointmentv1appointmentservice-requestappointment}
+### RequestAppointment
 
 
 
-Requests a new appointment for a license that is eligible to be appointed. The simpler way to do this is to call ListEligibleLicenses to get a list of licenses that are eligible to be appointed. Then, call RequestAppointment for the licenses in the list that you want to appoint. Processing behavior varies based on the license state and carrier NIPR integration: For NIPR-integrated carriers in non-registry states: If the request is accepted by NIPR, the appointment will have IN_PROGRESS processing status. If rejected, it will have REJECTED status and reasons will be provided in not_eligible_reasons. Final result will be delivered via webhook when NIPR completes processing. For registry states or capacity carriers (carriers without NIPR integration): The appointment is processed automatically and immediately. Returns APPOINTED status immediately upon successful processing.
+Requests a new appointment for a license that is eligible to be appointed.
+
+The simpler way to do this is to call ListEligibleLicenses to get a list of
+licenses that are eligible to be appointed. Then, call RequestAppointment
+for the licenses in the list that you want to appoint.
+
+Processing behavior varies based on the license state and carrier NIPR
+integration:
+
+For NIPR-integrated carriers in non-registry states:
+- If the request is accepted by NIPR, the appointment will have
+  IN_PROGRESS processing status.
+- If rejected, it will have REJECTED status and reasons will be provided
+  in not_eligible_reasons.
+- Final result will be delivered via webhook when NIPR completes
+  processing.
+
+For registry states or capacity carriers (carriers without NIPR
+integration):
+- The appointment is processed automatically and immediately.
+- Returns APPOINTED status immediately upon successful processing.
 
 #### Request: `RequestAppointmentRequest`
 
@@ -926,9 +961,9 @@ Request to create a new appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
+| `license_id` | string |  | Required. The ID of the license to appoint. |
 
-| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
+| `carrier_id` | string |  | Required. The ID of the carrier to appoint the license with. |
 
 
 
@@ -988,13 +1023,16 @@ Request to create a new appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
+| `appointment_id` | string |  | The ID of the created appointment. |
 
-| `processing_status` | [ProcessingStatus](#producerflowappointmentv1processingstatus) |  | Processing status of the appointment request.
-For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected
-For registry states or non-NIPR carriers: APPOINTED if successful |
+| `processing_status` | ProcessingStatus |  | Processing status of the appointment request.
 
-| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why.
+For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
+rejected.
+
+For registry states or non-NIPR carriers: APPOINTED if successful. |
+
+| `not_eligible_reasons` | string | repeated | If the appointment was rejected or ineligible, these reasons explain why.
 Only populated when processing_status is REJECTED. |
 
 
@@ -1008,11 +1046,42 @@ Only populated when processing_status is REJECTED. |
 ---
 
 
-### TerminateAppointment {#producerflowappointmentv1appointmentservice-terminateappointment}
+### TerminateAppointment
 
 
 
-Terminates an existing appointment, permanently ending the relationship between the license holder and the carrier. Before calling this method, you must: 1. Ensure the appointment exists and is in APPOINTED status. 2. Call ListTerminationReasons to get valid termination reasons for the license's state. 3. Select an appropriate termination reason from the state-specific list. Processing behavior varies based on the license state and carrier NIPR integration: For NIPR-integrated carriers in non-registry states: The request is submitted to NIPR for processing. Once NIPR completes processing, the status becomes TERMINATED. If rejected by NIPR, the appointment remains in its current status. You will receive webhook notifications when the termination is processed by NIPR. For registry states or capacity carriers (carriers without NIPR integration): The termination is processed automatically and immediately. Returns TERMINATED status immediately upon successful processing. Important considerations: Termination is permanent and cannot be undone. Termination reasons must be valid for the specific state where the license is issued. Some terminations may incur fees (check GetTerminationFees first). The response indicates whether the termination request was successfully submitted, not whether the actual termination was completed (since NIPR processes asynchronously).
+Terminates an existing appointment, permanently ending the relationship
+between the license holder and the carrier.
+
+Before calling this method, you must:
+1. Ensure the appointment exists and is in APPOINTED status.
+2. Call ListTerminationReasons to get valid termination reasons for the
+   license's state.
+3. Select an appropriate termination reason from the state-specific list.
+
+Processing behavior varies based on the license state and carrier NIPR
+integration:
+
+For NIPR-integrated carriers in non-registry states:
+- The request is submitted to NIPR for processing.
+- Once NIPR completes processing, the status becomes TERMINATED.
+- If rejected by NIPR, the appointment remains in its current status.
+- You will receive webhook notifications when the termination is processed
+  by NIPR.
+
+For registry states or capacity carriers (carriers without NIPR
+integration):
+- The termination is processed automatically and immediately.
+- Returns TERMINATED status immediately upon successful processing.
+
+Important considerations:
+- Termination is permanent and cannot be undone.
+- Termination reasons must be valid for the specific state where the
+  license is issued.
+- Some terminations may incur fees (check GetTerminationFees first).
+- The response indicates whether the termination request was successfully
+  submitted, not whether the actual termination was completed (since NIPR
+  processes asynchronously).
 
 #### Request: `TerminateAppointmentRequest`
 
@@ -1064,11 +1133,11 @@ Request to terminate an appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
+| `appointment_id` | string |  | ID of the appointment to terminate. |
 
-| `reason` | [TerminationReason](#producerflowappointmentv1terminationreason) |  | Reason for termination. This must be a valid termination reason
-for the state where the license is issued. Call ListTerminationReasons
-first to get the list of valid reasons for the specific state. |
+| `reason` | TerminationReason |  | Reason for termination. This must be a valid termination reason for the
+state where the license is issued. Call ListTerminationReasons first to
+get the list of valid reasons for the specific state. |
 
 
 
@@ -1128,7 +1197,18 @@ first to get the list of valid reasons for the specific state. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed. For NIPR-integrated carriers: Indicates whether the termination request was successfully submitted to NIPR. This does not indicate that the appointment has been terminated, only that the request has been accepted for processing. The actual termination will be processed asynchronously by NIPR, and you will be notified via webhook when the process completes. For registry states or non-NIPR carriers: Indicates whether the termination was successfully completed immediately. |
+| `success` | bool |  | Indicates whether the termination request was successfully processed.
+
+For NIPR-integrated carriers:
+- Indicates whether the termination request was successfully submitted to
+  NIPR.
+- This does not indicate that the appointment has been terminated, only
+  that the request has been accepted for processing.
+- The actual termination will be processed asynchronously by NIPR, and
+  you will be notified via webhook when the process completes.
+
+For registry states or non-NIPR carriers:
+- Indicates whether the termination was successfully completed immediately. |
 
 
 
@@ -1137,11 +1217,22 @@ first to get the list of valid reasons for the specific state. |
 ---
 
 
-### ListTerminationReasons {#producerflowappointmentv1appointmentservice-listterminationreasons}
+### ListTerminationReasons
 
 
 
-Lists the valid termination reasons for appointments in a specific state. When terminating an appointment, you must provide a valid termination reason that is accepted by NIPR for the state where the license is issued. Termination reasons vary by state, so you should call this method first to retrieve the list of valid reasons before calling TerminateAppointment. The termination reasons returned are based on NIPR's valid termination codes for the specified state. Each reason corresponds to a specific business scenario for why an appointment might be terminated (e.g., voluntary termination, inadequate production, company merger, etc.).
+Lists the valid termination reasons for appointments in a specific state.
+
+When terminating an appointment, you must provide a valid termination
+reason that is accepted by NIPR for the state where the license is
+issued. Termination reasons vary by state, so you should call this method
+first to retrieve the list of valid reasons before calling
+TerminateAppointment.
+
+The termination reasons returned are based on NIPR's valid termination
+codes for the specified state. Each reason corresponds to a specific
+business scenario for why an appointment might be terminated (e.g.,
+voluntary termination, inadequate production, company merger, etc.).
 
 #### Request: `ListTerminationReasonsRequest`
 
@@ -1185,9 +1276,9 @@ Lists the valid termination reasons for appointments in a specific state. When t
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve
-valid termination reasons. Different states may have different sets of valid
-termination reasons accepted by NIPR. |
+| `state` | string |  | Required. The two-letter state code of the license for which you want to
+retrieve valid termination reasons. Different states may have different
+sets of valid termination reasons accepted by NIPR. |
 
 
 
@@ -1247,9 +1338,9 @@ termination reasons accepted by NIPR. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `termination_reasons` | [TerminationReason](#producerflowappointmentv1terminationreason) | repeated | The list of valid termination reasons for the specified state.
-These reasons can be used when calling TerminateAppointment for licenses
-issued in this state. |
+| `termination_reasons` | TerminationReason | repeated | The list of valid termination reasons for the specified state. These
+reasons can be used when calling TerminateAppointment for licenses issued
+in this state. |
 
 
 
@@ -1271,8 +1362,6 @@ issued in this state. |
 
 ## ProducerService
 
-[Back to Top](#producerflow-api-documentation)
-
 ProducerService provides a comprehensive API for managing insurance producers
 and agencies, including onboarding, data synchronization, and integration with
 external systems like NIPR for license verification.
@@ -1284,7 +1373,7 @@ Available endpoints:
 RPCs for starting the onboarding agency process.
 
 
-### CreateAgencyOnboardingURL {#producerflowproducerv1producerservice-createagencyonboardingurl}
+### CreateAgencyOnboardingURL
 
 
 
@@ -1359,7 +1448,7 @@ CreateAgencyOnboardingURLRequest contains information needed to generate an agen
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [CreateAgencyOnboardingURLRequest.Agency](#producerflowproducerv1createagencyonboardingurlrequestagency) |  |  |
+| `agency` | CreateAgencyOnboardingURLRequest.Agency |  |  |
 
 
 
@@ -1655,7 +1744,7 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `url` | [string](#string) |  | URL that can be shared with the agency for self-onboarding |
+| `url` | string |  | URL that can be shared with the agency for self-onboarding |
 
 
 
@@ -1878,7 +1967,7 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 ---
 
 
-### CreateProducerOnboardingURL {#producerflowproducerv1producerservice-createproduceronboardingurl}
+### CreateProducerOnboardingURL
 
 
 
@@ -1963,9 +2052,9 @@ pre-populated if provided, reducing friction in the onboarding process.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Agency ID for which the producer will be onboarded |
+| `agency_id` | string |  | Agency ID for which the producer will be onboarded |
 
-| `producer_data` | [ProducerData](#producerflowproducerv1producerdata) |  | Optional producer data to pre-fill in the onboarding form |
+| `producer_data` | ProducerData |  | Optional producer data to pre-fill in the onboarding form |
 
 
 
@@ -2257,7 +2346,7 @@ pre-populated if provided, reducing friction in the onboarding process.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `onboarding_url` | [string](#string) |  | The secure onboarding URL that can be shared with the producer |
+| `onboarding_url` | string |  | The secure onboarding URL that can be shared with the producer |
 
 
 
@@ -2472,7 +2561,7 @@ pre-populated if provided, reducing friction in the onboarding process.
 ---
 
 
-### NewAgency {#producerflowproducerv1producerservice-newagency}
+### NewAgency
 
 
 
@@ -2612,9 +2701,9 @@ NewAgencyRequest contains complete information for creating a new agency
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [NewAgencyRequest.Agency](#producerflowproducerv1newagencyrequestagency) |  |  |
+| `agency` | NewAgencyRequest.Agency |  |  |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -2928,13 +3017,13 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Unique identifier for the created agency |
+| `agency_id` | string |  | Unique identifier for the created agency |
 
-| `producer_ids` | [string](#string) | repeated | List of unique identifiers for any producers created with the agency |
+| `producer_ids` | string | repeated | List of unique identifiers for any producers created with the agency |
 
-| `principal_id` | [string](#string) |  | Unique identifier for the principal producer |
+| `principal_id` | string |  | Unique identifier for the principal producer |
 
-| `location_ids` | [string](#string) | repeated | IDs of the locations created for the agency (if any were provided in the request) |
+| `location_ids` | string | repeated | IDs of the locations created for the agency (if any were provided in the request) |
 
 
 
@@ -3071,7 +3160,7 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 ---
 
 
-### ListAgencies {#producerflowproducerv1producerservice-listagencies}
+### ListAgencies
 
 
 
@@ -3185,22 +3274,22 @@ Supports optional filtering and pagination parameters.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) | optional | Optional. Filter agencies by organization ID.
+| `organization_id` | string | optional | Optional. Filter agencies by organization ID.
 If provided, only agencies belonging to this organization will be returned. |
 
-| `search_query` | [string](#string) | optional | Optional. Search query to filter agencies by name, NPN, or email.
+| `search_query` | string | optional | Optional. Search query to filter agencies by name, NPN, or email.
 If provided, only agencies matching the search query will be returned. |
 
-| `pagination` | [Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters.
+| `pagination` | Pagination |  | Optional. Pagination parameters.
 If not provided, defaults to page_size=50. |
 
-| `agency_type` | [AgencyType](#producerflowproducerv1agencytype) | optional | Optional. Filter by agency type (internal vs external).
+| `agency_type` | AgencyType | optional | Optional. Filter by agency type (internal vs external).
 If not provided, returns all agencies regardless of type. |
 
-| `entity_type` | [EntityType](#producerflowproducerv1entitytype) | optional | Optional. Filter by entity type (sole proprietor vs agency).
+| `entity_type` | EntityType | optional | Optional. Filter by entity type (sole proprietor vs agency).
 If not provided, returns all agencies regardless of entity type. |
 
-| `nipr_sync_statuses` | [NIPRSyncState](#producerflowproducerv1niprsyncstate) | repeated | Optional. Filter by NIPR sync status.
+| `nipr_sync_statuses` | NIPRSyncState | repeated | Optional. Filter by NIPR sync status.
 If not provided, returns all agencies regardless of sync status. |
 
 
@@ -3493,13 +3582,13 @@ ListAgenciesResponse contains the list of agencies matching the filter criteria.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agencies` | [AgencySummary](#producerflowproducerv1agencysummary) | repeated | List of agency summaries matching the filter criteria.
+| `agencies` | AgencySummary | repeated | List of agency summaries matching the filter criteria.
 The agencies are ordered by creation date, most recent first. |
 
-| `next_page_token` | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page.
+| `next_page_token` | string |  | A token that can be sent as `page_token` to retrieve the next page.
 If this field is omitted, there are no subsequent pages. |
 
-| `total_count` | [int32](#int32) |  | Total number of agencies matching the filter criteria. |
+| `total_count` | int32 |  | Total number of agencies matching the filter criteria. |
 
 
 
@@ -3684,7 +3773,7 @@ If this field is omitted, there are no subsequent pages. |
 ---
 
 
-### ListOrganizations {#producerflowproducerv1producerservice-listorganizations}
+### ListOrganizations
 
 
 
@@ -3816,7 +3905,7 @@ the authenticated tenant has access to.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `pagination` | [Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters.
+| `pagination` | Pagination |  | Optional. Pagination parameters.
 If not provided, defaults to page_size=50. |
 
 
@@ -4111,15 +4200,15 @@ the organizations list will be empty.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organizations` | [Organization](#producerflowproducerv1organization) | repeated | List of organizations associated with the tenant.
+| `organizations` | Organization | repeated | List of organizations associated with the tenant.
 Each organization includes its unique identifier and display name.
 The list may be empty if no organizations are associated with the tenant.
 Organizations are ordered alphabetically by name. |
 
-| `next_page_token` | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page.
+| `next_page_token` | string |  | A token that can be sent as `page_token` to retrieve the next page.
 If this field is omitted, there are no subsequent pages. |
 
-| `total_count` | [int32](#int32) |  | Total number of organizations matching the filter criteria. |
+| `total_count` | int32 |  | Total number of organizations matching the filter criteria. |
 
 
 
@@ -4288,7 +4377,7 @@ If this field is omitted, there are no subsequent pages. |
 ---
 
 
-### GetOrganization {#producerflowproducerv1producerservice-getorganization}
+### GetOrganization
 
 
 
@@ -4387,7 +4476,7 @@ GetOrganizationRequest specifies which organization to retrieve.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) |  | Unique identifier of the organization to retrieve.
+| `organization_id` | string |  | Unique identifier of the organization to retrieve.
 Must be a valid UUID. |
 
 
@@ -4680,7 +4769,7 @@ GetOrganizationResponse contains the details of the requested organization.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization` | [Organization](#producerflowproducerv1organization) |  | The requested organization. |
+| `organization` | Organization |  | The requested organization. |
 
 
 
@@ -4879,7 +4968,7 @@ GetOrganizationResponse contains the details of the requested organization.
 ---
 
 
-### CreateOrganization {#producerflowproducerv1producerservice-createorganization}
+### CreateOrganization
 
 
 
@@ -4959,13 +5048,13 @@ CreateOrganizationRequest contains the information needed to create a new organi
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `name` | [string](#string) |  | Required. The display name of the organization.
+| `name` | string |  | Required. The display name of the organization.
 Must be unique within the tenant. |
 
-| `external_id` | [string](#string) |  | Optional. The external identifier for the organization.
+| `external_id` | string |  | Optional. The external identifier for the organization.
 This is the identifier used by the tenant's system to identify the organization. |
 
-| `email` | [string](#string) |  | Optional. The contact email address for the organization. |
+| `email` | string |  | Optional. The contact email address for the organization. |
 
 
 
@@ -5257,7 +5346,7 @@ CreateOrganizationResponse contains the result of creating a new organization.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) |  | The unique identifier of the newly created organization. |
+| `organization_id` | string |  | The unique identifier of the newly created organization. |
 
 
 
@@ -5476,7 +5565,7 @@ CreateOrganizationResponse contains the result of creating a new organization.
 ---
 
 
-### NewProducer {#producerflowproducerv1producerservice-newproducer}
+### NewProducer
 
 
 
@@ -5661,13 +5750,13 @@ This will trigger a call to the NIPR API to retrieve license information of the 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the producer with.
+| `agency_id` | string |  | The UUID of the agency to associate the producer with.
 Must be a valid UUID format. |
 
-| `producer` | [NewProducer](#producerflowproducerv1newproducer) |  | Information about the producer to create.
+| `producer` | NewProducer |  | Information about the producer to create.
 This field is required. |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -5961,7 +6050,7 @@ NewProducerResponse contains the ID of the created producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the created producer.
+| `producer_id` | string |  | The UUID of the created producer.
 Must be a valid UUID format. |
 
 
@@ -6077,7 +6166,7 @@ Must be a valid UUID format. |
 ---
 
 
-### NewProducers {#producerflowproducerv1producerservice-newproducers}
+### NewProducers
 
 
 
@@ -6266,13 +6355,13 @@ All producers will be associated with the specified agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the producers with.
+| `agency_id` | string |  | The UUID of the agency to associate the producers with.
 Must be a valid UUID format. |
 
-| `producers` | [NewProducer](#producerflowproducerv1newproducer) | repeated | List of producers to create.
+| `producers` | NewProducer | repeated | List of producers to create.
 This field is required and must contain at least one producer. |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -6566,7 +6655,7 @@ NewProducersResponse contains the IDs of all created producers.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_ids` | [string](#string) | repeated | List of UUIDs for the newly created producers.
+| `producer_ids` | string | repeated | List of UUIDs for the newly created producers.
 The order matches the order of producers in the request. |
 
 
@@ -6678,7 +6767,7 @@ The order matches the order of producers in the request. |
 ---
 
 
-### GetAgencyAndProducers {#producerflowproducerv1producerservice-getagencyandproducers}
+### GetAgencyAndProducers
 
 
 
@@ -6769,7 +6858,7 @@ GetAgencyAndProducersRequest requests information about an agency and all associ
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve information for.
+| `agency_id` | string |  | The UUID of the agency to retrieve information for.
 Must be a valid UUID format. |
 
 
@@ -7062,9 +7151,9 @@ GetAgencyAndProducersResponse contains the agency information and all associated
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [Agency](#producerflowproducerv1agency) |  | Complete agency information including contact details, principal, and bank account. |
+| `agency` | Agency |  | Complete agency information including contact details, principal, and bank account. |
 
-| `producers` | [Producer](#producerflowproducerv1producer) | repeated | List of all producers associated with the specified agency. |
+| `producers` | Producer | repeated | List of all producers associated with the specified agency. |
 
 
 
@@ -7271,7 +7360,7 @@ GetAgencyAndProducersResponse contains the agency information and all associated
 ---
 
 
-### GetProducer {#producerflowproducerv1producerservice-getproducer}
+### GetProducer
 
 
 
@@ -7376,11 +7465,11 @@ possible lookup methods: by ID, by NPN, or by email address.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id_lookup` | [GetProducerRequest.ProducerIDLookup](#producerflowproducerv1getproducerrequestproduceridlookup) |  | Look up producer by ID. |
+| `producer_id_lookup` | GetProducerRequest.ProducerIDLookup |  | Look up producer by ID. |
 
-| `npn_lookup` | [GetProducerRequest.ProducerNPNLookup](#producerflowproducerv1getproducerrequestproducernpnlookup) |  | Look up producer by NPN. |
+| `npn_lookup` | GetProducerRequest.ProducerNPNLookup |  | Look up producer by NPN. |
 
-| `email_lookup` | [GetProducerRequest.EmailLookup](#producerflowproducerv1getproducerrequestemaillookup) |  | Look up producer by email. |
+| `email_lookup` | GetProducerRequest.EmailLookup |  | Look up producer by email. |
 
 
 
@@ -7678,7 +7767,7 @@ GetProducerResponse contains the producer information retrieved by the GetProduc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer` | [Producer](#producerflowproducerv1producer) |  | The complete producer information including personal details, agency association,
+| `producer` | Producer |  | The complete producer information including personal details, agency association,
 and NIPR data. |
 
 
@@ -7868,7 +7957,7 @@ and NIPR data. |
 ---
 
 
-### GetAgencyFiles {#producerflowproducerv1producerservice-getagencyfiles}
+### GetAgencyFiles
 
 
 
@@ -7962,7 +8051,7 @@ GetAgencyFilesRequest requests URLs for files associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve files for.
+| `agency_id` | string |  | The UUID of the agency to retrieve files for.
 Must be a valid UUID format. |
 
 
@@ -8255,21 +8344,21 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `eo_doc_url` | [string](#string) |  | URL of the Errors & Omissions (E&O) insurance document. |
+| `eo_doc_url` | string |  | URL of the Errors & Omissions (E&O) insurance document. |
 
-| `voided_check_doc_url` | [string](#string) |  | URL of the bank voided check document.
+| `voided_check_doc_url` | string |  | URL of the bank voided check document.
 It's used to safely share bank account information for
 electronic transfers. |
 
-| `w9_doc_url` | [string](#string) |  | URL of the W9 form document.
+| `w9_doc_url` | string |  | URL of the W9 form document.
 It's a U.S. internal revenue service form, an identification
 document used in the onboarding process for tax reporting purposes. |
 
-| `license_doc_url` | [string](#string) |  | URL of the license document.
+| `license_doc_url` | string |  | URL of the license document.
 An identification document that shows that the agency
 is licensed to carry out its operations in the relevant jurisdictions. |
 
-| `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document.
+| `broker_bond_doc_url` | string |  | URL of the broker bond document.
 It's a surety bond that a broker needs to operate legally,
 providing financial security for clients. |
 
@@ -8474,7 +8563,7 @@ providing financial security for clients. |
 ---
 
 
-### UpdateProducer {#producerflowproducerv1producerservice-updateproducer}
+### UpdateProducer
 
 
 
@@ -8756,10 +8845,10 @@ Information from NIPR and other third-party sources cannot be updated directly.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The ID of the producer to update.
+| `producer_id` | string |  | The ID of the producer to update.
 Must be a valid UUID format. |
 
-| `producer` | [UpdateProducerRequest.Producer](#producerflowproducerv1updateproducerrequestproducer) |  | The producer information to update.
+| `producer` | UpdateProducerRequest.Producer |  | The producer information to update.
 The field is required. |
 
 
@@ -9069,7 +9158,7 @@ UpdateProducerResponse is the empty response returned after successfully updatin
 ---
 
 
-### UpdateAgency {#producerflowproducerv1producerservice-updateagency}
+### UpdateAgency
 
 
 
@@ -9343,10 +9432,10 @@ All fields are optional, allowing partial updates.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The ID of the agency to update.
+| `agency_id` | string |  | The ID of the agency to update.
 Must be a valid UUID format. |
 
-| `agency` | [UpdateAgencyRequest.Agency](#producerflowproducerv1updateagencyrequestagency) |  | The agency information to update. |
+| `agency` | UpdateAgencyRequest.Agency |  | The agency information to update. |
 
 
 
@@ -9665,7 +9754,7 @@ UpdateAgencyResponse is the empty response returned after successfully updating 
 ---
 
 
-### NewContact {#producerflowproducerv1producerservice-newcontact}
+### NewContact
 
 
 
@@ -9833,10 +9922,10 @@ NewContactRequest is used to create a new contact and associate it with an agenc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the contact with.
+| `agency_id` | string |  | The UUID of the agency to associate the contact with.
 Must be a valid UUID format. |
 
-| `contact` | [NewContact](#producerflowproducerv1newcontact) |  | Information about the contact to create. |
+| `contact` | NewContact |  | Information about the contact to create. |
 
 
 
@@ -10128,7 +10217,7 @@ NewContactResponse contains the ID of the created contact.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contact_id` | [string](#string) |  | The UUID of the created contact.
+| `contact_id` | string |  | The UUID of the created contact.
 Must be a valid UUID format. |
 
 
@@ -10260,7 +10349,7 @@ Must be a valid UUID format. |
 ---
 
 
-### NewContacts {#producerflowproducerv1producerservice-newcontacts}
+### NewContacts
 
 
 
@@ -10433,10 +10522,10 @@ All contacts will be associated with the specified agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the contacts with.
+| `agency_id` | string |  | The UUID of the agency to associate the contacts with.
 Must be a valid UUID format. |
 
-| `contacts` | [NewContact](#producerflowproducerv1newcontact) | repeated | List of contacts to create.
+| `contacts` | NewContact | repeated | List of contacts to create.
 This field is required and must contain at least one contact. |
 
 
@@ -10729,7 +10818,7 @@ NewContactsResponse contains the IDs of all created contacts.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contact_ids` | [string](#string) | repeated | List of UUIDs for the newly created contacts.
+| `contact_ids` | string | repeated | List of UUIDs for the newly created contacts.
 The order matches the order of contacts in the request. |
 
 
@@ -10857,7 +10946,7 @@ The order matches the order of contacts in the request. |
 ---
 
 
-### ListAgencyContacts {#producerflowproducerv1producerservice-listagencycontacts}
+### ListAgencyContacts
 
 
 
@@ -10974,7 +11063,7 @@ ListAgencyContactsRequest requests all contacts associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve contacts for.
+| `agency_id` | string |  | The UUID of the agency to retrieve contacts for.
 Must be a valid UUID format. |
 
 
@@ -11267,7 +11356,7 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contacts` | [Contact](#producerflowproducerv1contact) | repeated | List of all contacts associated with the specified agency. |
+| `contacts` | Contact | repeated | List of all contacts associated with the specified agency. |
 
 
 
@@ -11448,7 +11537,7 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 ---
 
 
-### SetExternalID {#producerflowproducerv1producerservice-setexternalid}
+### SetExternalID
 
 
 
@@ -11690,15 +11779,15 @@ Only one entity type can be specified.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to set an external ID for. |
+| `producer_id` | string |  | The UUID of the producer to set an external ID for. |
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to set an external ID for. |
+| `agency_id` | string |  | The UUID of the agency to set an external ID for. |
 
-| `contact_id` | [string](#string) |  | The UUID of the contact to set an external ID for. |
+| `contact_id` | string |  | The UUID of the contact to set an external ID for. |
 
-| `organization_id` | [string](#string) |  | The UUID of the organization to set an external ID for. |
+| `organization_id` | string |  | The UUID of the organization to set an external ID for. |
 
-| `tenant_id` | [string](#string) |  | External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters |
+| `tenant_id` | string |  | External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters |
 
 
 
@@ -12045,7 +12134,7 @@ SetExternalIDResponse is the empty response returned after successfully setting 
 ---
 
 
-### ValidateProducerNPN {#producerflowproducerv1producerservice-validateproducernpn}
+### ValidateProducerNPN
 
 
 
@@ -12335,10 +12424,10 @@ ValidateProducerNPNRequest is used to validate a producer's National Producer Nu
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate.
+| `npn` | string |  | The National Producer Number (NPN) to validate.
 Required and must be non-empty. |
 
-| `name` | [string](#string) | optional | Optional name of the producer to validate.
+| `name` | string | optional | Optional name of the producer to validate.
 If provided, the NPN will be validated against this name. |
 
 
@@ -12631,7 +12720,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid.
+| `valid` | bool |  | Indicates whether the NPN is valid.
 True if the NPN exists and is valid, false otherwise. |
 
 
@@ -12641,7 +12730,7 @@ True if the NPN exists and is valid, false otherwise. |
 ---
 
 
-### ValidateAgencyNPN {#producerflowproducerv1producerservice-validateagencynpn}
+### ValidateAgencyNPN
 
 
 
@@ -12927,7 +13016,7 @@ ValidateAgencyNPNRequest is used to validate an agency's National Producer Numbe
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate.
+| `npn` | string |  | The National Producer Number (NPN) to validate.
 Required and must be non-empty. |
 
 
@@ -13220,7 +13309,7 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid.
+| `valid` | bool |  | Indicates whether the NPN is valid.
 True if the NPN exists and is valid, false otherwise. |
 
 
@@ -13234,7 +13323,7 @@ True if the NPN exists and is valid, false otherwise. |
 ---
 
 
-### LookupNPNByFEIN {#producerflowproducerv1producerservice-lookupnpnbyfein}
+### LookupNPNByFEIN
 
 
 
@@ -13372,7 +13461,7 @@ LookupNPNByFEINRequest is used to look up a producer's National Producer Number 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up.
+| `fein` | string |  | The Federal Employer Identification Number (FEIN) to look up.
 Required and must be exactly 9 characters. |
 
 
@@ -13665,7 +13754,7 @@ LookupNPNByFEINResponse contains the National Producer Number (NPN) for the prod
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) for the producer. |
+| `npn` | string |  | The National Producer Number (NPN) for the producer. |
 
 
 
@@ -13826,7 +13915,7 @@ LookupNPNByFEINResponse contains the National Producer Number (NPN) for the prod
 ---
 
 
-### ResyncProducer {#producerflowproducerv1producerservice-resyncproducer}
+### ResyncProducer
 
 
 
@@ -14060,7 +14149,7 @@ ResyncProducerRequest is used to trigger a manual resynchronization of producer 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to resynchronize.
+| `producer_id` | string |  | The UUID of the producer to resynchronize.
 Must be a valid UUID format. |
 
 
@@ -14412,7 +14501,7 @@ ResyncProducerResponse is the empty response returned after successfully trigger
 ---
 
 
-### ResyncAgency {#producerflowproducerv1producerservice-resyncagency}
+### ResyncAgency
 
 
 
@@ -14643,7 +14732,7 @@ This will re-fetch all data from the NIPR API for the agency and all associated 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to resynchronize.
+| `agency_id` | string |  | The UUID of the agency to resynchronize.
 Must be a valid UUID format. |
 
 
@@ -14999,7 +15088,7 @@ ResyncAgencyResponse is the empty response returned after successfully triggerin
 ---
 
 
-### SyncProducerWithNIPR {#producerflowproducerv1producerservice-syncproducerwithnipr}
+### SyncProducerWithNIPR
 
 
 
@@ -15253,7 +15342,7 @@ SyncProducerWithNIPRRequest is used to synchronize a producer's data with the NI
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to synchronize.
+| `producer_id` | string |  | The UUID of the producer to synchronize.
 Must be a valid UUID format. |
 
 
@@ -15585,7 +15674,7 @@ SyncProducerWithNIPRResponse is the empty response returned after successfully s
 ---
 
 
-### SyncAgencyWithNIPR {#producerflowproducerv1producerservice-syncagencywithnipr}
+### SyncAgencyWithNIPR
 
 
 
@@ -15835,10 +15924,10 @@ SyncAgencyWithNIPRRequest is used to synchronize an agency's data with the NIPR 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to synchronize.
+| `agency_id` | string |  | The UUID of the agency to synchronize.
 Must be a valid UUID format. |
 
-| `sync_all_producers` | [bool](#bool) |  | If true, all producers associated with the agency will be synchronized.
+| `sync_all_producers` | bool |  | If true, all producers associated with the agency will be synchronized.
 If false, only the agency will be synchronized. |
 
 
@@ -16174,7 +16263,7 @@ SyncAgencyWithNIPRResponse is the empty response returned after successfully syn
 ---
 
 
-### StopSyncProducerWithNIPR {#producerflowproducerv1producerservice-stopsyncproducerwithnipr}
+### StopSyncProducerWithNIPR
 
 
 
@@ -16421,7 +16510,7 @@ StopSyncProducerWithNIPRRequest is used to stop synchronizing a producer's data 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to stop synchronizing.
+| `producer_id` | string |  | The UUID of the producer to stop synchronizing.
 Must be a valid UUID format. |
 
 
@@ -16761,7 +16850,7 @@ StopSyncProducerWithNIPRResponse is the empty response returned after successful
 ---
 
 
-### StopSyncAgencyWithNIPR {#producerflowproducerv1producerservice-stopsyncagencywithnipr}
+### StopSyncAgencyWithNIPR
 
 
 
@@ -17004,10 +17093,10 @@ StopSyncAgencyWithNIPRRequest is used to stop synchronizing an agency's data wit
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to stop synchronizing.
+| `agency_id` | string |  | The UUID of the agency to stop synchronizing.
 Must be a valid UUID format. |
 
-| `stop_all_producers` | [bool](#bool) |  | If true, all producers associated with the agency will be stopped from synchronizing.
+| `stop_all_producers` | bool |  | If true, all producers associated with the agency will be stopped from synchronizing.
 If false, only the agency will be stopped from synchronizing. |
 
 
@@ -17351,7 +17440,7 @@ StopSyncAgencyWithNIPRResponse is the empty response returned after successfully
 ---
 
 
-### CreateProducerUploadURL {#producerflowproducerv1producerservice-createproduceruploadurl}
+### CreateProducerUploadURL
 
 
 
@@ -17438,7 +17527,7 @@ a producer upload URL. This includes the agency NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_npn` | [string](#string) |  | The National Producer Number (NPN) of the agency.
+| `agency_npn` | string |  | The National Producer Number (NPN) of the agency.
 Required and must be a valid NPN format (numeric string between 2-10 digits). |
 
 
@@ -17731,7 +17820,7 @@ CreateProducerUploadURLResponse contains the generated URL for producer uploads
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `url` | [string](#string) |  | URL that can be shared with the agency for producer uploads.
+| `url` | string |  | URL that can be shared with the agency for producer uploads.
 The URL is time-limited and includes necessary security tokens. |
 
 
@@ -17943,7 +18032,7 @@ The URL is time-limited and includes necessary security tokens. |
 ---
 
 
-### AddAgencyLocations {#producerflowproducerv1producerservice-addagencylocations}
+### AddAgencyLocations
 
 
 
@@ -17959,9 +18048,9 @@ AddAgencyLocationsRequest adds new locations to an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to add locations to. |
+| `agency_id` | string |  | Required. Agency ID to add locations to. |
 
-| `locations` | [LocationInput](#producerflowproducerv1locationinput) | repeated | Required. List of locations to add. |
+| `locations` | LocationInput | repeated | Required. List of locations to add. |
 
 
 
@@ -18253,7 +18342,7 @@ AddAgencyLocationsResponse contains the results of adding locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `location_ids` | [string](#string) | repeated | IDs of successfully created locations, in the same order as the input. |
+| `location_ids` | string | repeated | IDs of successfully created locations, in the same order as the input. |
 
 
 
@@ -18534,7 +18623,7 @@ AddAgencyLocationsResponse contains the results of adding locations.
 ---
 
 
-### RemoveAgencyLocations {#producerflowproducerv1producerservice-removeagencylocations}
+### RemoveAgencyLocations
 
 
 
@@ -18760,9 +18849,9 @@ RemoveAgencyLocationsRequest removes locations from an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to remove locations from. |
+| `agency_id` | string |  | Required. Agency ID to remove locations from. |
 
-| `location_ids` | [string](#string) | repeated | Required. IDs of locations to remove. |
+| `location_ids` | string | repeated | Required. IDs of locations to remove. |
 
 
 
@@ -19054,7 +19143,7 @@ RemoveAgencyLocationsResponse contains the results of removing locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `removed_location_ids` | [string](#string) | repeated | IDs of successfully removed locations. |
+| `removed_location_ids` | string | repeated | IDs of successfully removed locations. |
 
 
 
@@ -19125,7 +19214,7 @@ RemoveAgencyLocationsResponse contains the results of removing locations.
 ---
 
 
-### ListAgencyLocations {#producerflowproducerv1producerservice-listagencylocations}
+### ListAgencyLocations
 
 
 
@@ -19245,7 +19334,7 @@ ListAgencyLocationsRequest retrieves all locations for an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to list locations for. |
+| `agency_id` | string |  | Required. Agency ID to list locations for. |
 
 
 
@@ -19537,7 +19626,7 @@ ListAgencyLocationsResponse contains the list of agency locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `locations` | [Location](#producerflowproducerv1location) | repeated | List of all locations associated with the agency. |
+| `locations` | Location | repeated | List of all locations associated with the agency. |
 
 
 
@@ -19714,7 +19803,7 @@ ListAgencyLocationsResponse contains the list of agency locations.
 ---
 
 
-### AssignProducerToLocations {#producerflowproducerv1producerservice-assignproducertolocations}
+### AssignProducerToLocations
 
 
 
@@ -19778,9 +19867,9 @@ AssignProducerToLocationsRequest assigns locations to a producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | Required. Producer ID to assign locations to. |
+| `producer_id` | string |  | Required. Producer ID to assign locations to. |
 
-| `location_ids` | [string](#string) | repeated | Required. Location IDs to assign (1-100 items).
+| `location_ids` | string | repeated | Required. Location IDs to assign (1-100 items).
 These locations must belong to the same agency as the producer. |
 
 
@@ -20073,7 +20162,7 @@ AssignProducerToLocationsResponse contains the assigned location IDs.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `assigned_location_ids` | [string](#string) | repeated | IDs of successfully assigned locations. |
+| `assigned_location_ids` | string | repeated | IDs of successfully assigned locations. |
 
 
 
@@ -20306,7 +20395,7 @@ AssignProducerToLocationsResponse contains the assigned location IDs.
 ---
 
 
-### UnassignProducerFromLocations {#producerflowproducerv1producerservice-unassignproducerfromlocations}
+### UnassignProducerFromLocations
 
 
 
@@ -20564,9 +20653,9 @@ UnassignProducerFromLocationsRequest removes location assignments from a produce
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | Required. Producer ID to unassign locations from. |
+| `producer_id` | string |  | Required. Producer ID to unassign locations from. |
 
-| `location_ids` | [string](#string) | repeated | Required. Location IDs to unassign (1-100 items). |
+| `location_ids` | string | repeated | Required. Location IDs to unassign (1-100 items). |
 
 
 
@@ -20858,7 +20947,7 @@ UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `unassigned_location_ids` | [string](#string) | repeated | IDs of successfully unassigned locations. |
+| `unassigned_location_ids` | string | repeated | IDs of successfully unassigned locations. |
 
 
 
@@ -20897,7 +20986,7 @@ UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 ---
 
 
-### UpdateAgencyLocation {#producerflowproducerv1producerservice-updateagencylocation}
+### UpdateAgencyLocation
 
 
 
@@ -21159,19 +21248,19 @@ UpdateAgencyLocationRequest updates an existing agency location.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID that owns the location. |
+| `agency_id` | string |  | Required. Agency ID that owns the location. |
 
-| `location_id` | [string](#string) |  | Required. Location ID to update. |
+| `location_id` | string |  | Required. Location ID to update. |
 
-| `name` | [string](#string) | optional | Optional. New name for the location. Must be unique within the agency. |
+| `name` | string | optional | Optional. New name for the location. Must be unique within the agency. |
 
-| `address` | [Address](#producerflowproducerv1address) | optional | Optional. New address for the location. |
+| `address` | Address | optional | Optional. New address for the location. |
 
-| `phone` | [string](#string) | optional | Optional. New phone number. Must be in E.164 format. |
+| `phone` | string | optional | Optional. New phone number. Must be in E.164 format. |
 
-| `email` | [string](#string) | optional | Optional. New email address. |
+| `email` | string | optional | Optional. New email address. |
 
-| `is_primary` | [bool](#bool) | optional | Optional. Whether this should be the primary location. |
+| `is_primary` | bool | optional | Optional. Whether this should be the primary location. |
 
 
 
@@ -21463,7 +21552,7 @@ UpdateAgencyLocationResponse contains the updated location details.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `location` | [Location](#producerflowproducerv1location) |  | The updated location with all current values. |
+| `location` | Location |  | The updated location with all current values. |
 
 
 
@@ -21507,12 +21596,11 @@ These types are used across multiple API methods.
 
 
 
-### producerflow/appointment/v1/appointment.proto - Types
+### producerflow/appointment/v1/appointment.proto
 
 
 
-
-#### Appointment {#producerflowappointmentv1appointment}
+#### Appointment
 
 Represents an appointment for a license.
 
@@ -21520,40 +21608,38 @@ Represents an appointment for a license.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | Unique identifier for the appointment. |
+| `appointment_id` | string |  | Unique identifier for the appointment. |
 
-| `license` | [License](#producerflowappointmentv1license) |  | Information about the license being appointed. |
+| `license` | License |  | Information about the license being appointed. |
 
-| `name` | [string](#string) |  | The license number of the license being appointed. |
+| `name` | string |  | The license number of the license being appointed. |
 
-| `agency_id` | [string](#string) |  | The id of the agency that is appointed. |
+| `agency_id` | string |  | The id of the agency that is appointed. |
 
-| `producer_id` | [string](#string) | optional | The id of the producer that is appointed, if any. |
+| `producer_id` | string | optional | Optional. The id of the producer that is appointed, if any. |
 
-| `carrier` | [string](#string) |  | The name of the carrier to which the license is appointed. |
+| `carrier` | string |  | The name of the carrier to which the license is appointed. |
 
-| `appointment_type` | [AppointmentType](#producerflowappointmentv1appointmenttype) |  | Type of appointment (e.g., up-front, registry). |
+| `appointment_type` | AppointmentType |  | Type of appointment (e.g., up-front, registry). |
 
-| `processing_status` | [ProcessingStatus](#producerflowappointmentv1processingstatus) |  | Processing status of the appointment (e.g., in progress, appointed). |
+| `processing_status` | ProcessingStatus |  | Processing status of the appointment (e.g., in progress, appointed). |
 
-| `comments` | [string](#string) |  | Optional comments or notes related to the appointment. |
+| `comments` | string |  | Optional. Comments or notes related to the appointment. |
 
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to the appointment. |
+| `effective_date` | google.protobuf.Timestamp |  | Timestamp of when the appointment becomes effective. |
 
-| `termination_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) | optional | Timestamp of the termination of the appointment. |
+| `termination_date` | google.protobuf.Timestamp | optional | Optional. Timestamp of the termination of the appointment. |
 
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to the appointment. |
+| `updated_at` | google.protobuf.Timestamp |  | Timestamp of the last update to the appointment. |
 
-| `operational_status` | [AppointmentOperationalStatus](#producerflowappointmentv1appointmentoperationalstatus) |  | Operational status information for the appointment.
-This field provides insight into the current operational health
-and any risk factors that may affect the appointment. |
+| `operational_status` | AppointmentOperationalStatus |  | Operational status information for the appointment. This field provides
+insight into the current operational health and any risk factors that may
+affect the appointment. |
 
-| `cocode` | [string](#string) |  | The NAIC cocode of the carrier. |
+| `cocode` | string |  | The NAIC cocode of the carrier. |
 
-| `parent_appointment_id` | [string](#string) |  | The id of the parent appointment, if this is a synthetic appointment.
-It should be empty for non-synthetic appointments. |
-
-
+| `parent_appointment_id` | string |  | Optional. The id of the parent appointment, if this is a synthetic
+appointment. It should be empty for non-synthetic appointments. |
 
 
 
@@ -21561,7 +21647,8 @@ It should be empty for non-synthetic appointments. |
 
 
 
-#### AppointmentOperationalStatus {#producerflowappointmentv1appointmentoperationalstatus}
+
+#### AppointmentOperationalStatus
 
 AppointmentOperationalStatus contains operational status information for an appointment.
 This message provides detailed information about the current operational state
@@ -21571,15 +21658,13 @@ and any risk factors that may affect the appointment's continued validity.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `status` | [OperationalStatus](#producerflowappointmentv1operationalstatus) |  | The current operational status of the appointment. |
+| `status` | OperationalStatus |  | The current operational status of the appointment. |
 
-| `risk_reasons` | [RiskReason](#producerflowappointmentv1riskreason) | repeated | Specific reason(s) why the appointment is at risk, if applicable.
-This field is only populated when status is AT_RISK. |
+| `risk_reasons` | RiskReason | repeated | Specific reason(s) why the appointment is at risk, if applicable. This
+field is only populated when status is AT_RISK. |
 
-| `last_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the operational status was last updated.
-This helps track when status changes occurred. |
-
-
+| `last_updated` | google.protobuf.Timestamp |  | Timestamp when the operational status was last updated. This helps track
+when status changes occurred. |
 
 
 
@@ -21587,7 +21672,8 @@ This helps track when status changes occurred. |
 
 
 
-#### Carrier {#producerflowappointmentv1carrier}
+
+#### Carrier
 
 Represents a carrier that is available to be appointed.
 
@@ -21595,29 +21681,19 @@ Represents a carrier that is available to be appointed.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `carrier_id` | [string](#string) |  | The ID of the carrier. |
+| `carrier_id` | string |  | The ID of the carrier. |
 
-| `name` | [string](#string) |  | The name of the carrier. |
+| `name` | string |  | The name of the carrier. |
 
-| `npn` | [string](#string) |  | The NPN of the carrier. |
+| `npn` | string |  | The NPN of the carrier. |
 
-| `fein` | [string](#string) |  | The state of the carrier. |
+| `fein` | string |  | The FEIN of the carrier. |
 
-| `cocode` | [string](#string) |  | The NAIC cocode of the carrier. |
+| `cocode` | string |  | The NAIC cocode of the carrier. |
 
-| `has_nipr_integration` | [bool](#bool) |  | Indicates whether this carrier has NIPR integration enabled.
-Capacity carriers (carriers without NIPR integration) process appointments and terminations
-automatically without going through NIPR. |
-
-
-
-
-
-
-
-
-
-#### GetAppointableCarriersRequest {#producerflowappointmentv1getappointablecarriersrequest}
+| `has_nipr_integration` | bool |  | Indicates whether this carrier has NIPR integration enabled. Capacity
+carriers (carriers without NIPR integration) process appointments and
+terminations automatically without going through NIPR. |
 
 
 
@@ -21626,18 +21702,26 @@ automatically without going through NIPR. |
 
 
 
+#### GetAppointableCarriersRequest
+
+Request to retrieve carriers that are available to be appointed.
 
 
 
-#### GetAppointableCarriersResponse {#producerflowappointmentv1getappointablecarriersresponse}
 
 
+
+
+
+#### GetAppointableCarriersResponse
+
+Response containing carriers that are available to be appointed.
 
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `carriers` | [Carrier](#producerflowappointmentv1carrier) | repeated | The list of carriers that are available to be appointed. |
+| `carriers` | Carrier | repeated | The list of carriers that are available to be appointed. |
 
 
 
@@ -21646,8 +21730,7 @@ automatically without going through NIPR. |
 
 
 
-
-#### GetAppointmentFeesRequest {#producerflowappointmentv1getappointmentfeesrequest}
+#### GetAppointmentFeesRequest
 
 Request to get appointment fees.
 
@@ -21655,7 +21738,7 @@ Request to get appointment fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
+| `license_id` | string |  | Required. The ID of the license to get the appointment fee for. |
 
 
 
@@ -21664,8 +21747,7 @@ Request to get appointment fees.
 
 
 
-
-#### GetAppointmentFeesResponse {#producerflowappointmentv1getappointmentfeesresponse}
+#### GetAppointmentFeesResponse
 
 
 
@@ -21673,7 +21755,7 @@ Request to get appointment fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
+| `fee_in_cents` | int64 |  | Total fee for the appointment in cents. |
 
 
 
@@ -21682,8 +21764,7 @@ Request to get appointment fees.
 
 
 
-
-#### GetAppointmentRequest {#producerflowappointmentv1getappointmentrequest}
+#### GetAppointmentRequest
 
 Request to retrieve an appointment by ID.
 
@@ -21691,7 +21772,7 @@ Request to retrieve an appointment by ID.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
+| `appointment_id` | string |  | Required. The ID of the appointment to retrieve. |
 
 
 
@@ -21700,8 +21781,7 @@ Request to retrieve an appointment by ID.
 
 
 
-
-#### GetAppointmentResponse {#producerflowappointmentv1getappointmentresponse}
+#### GetAppointmentResponse
 
 
 
@@ -21709,7 +21789,7 @@ Request to retrieve an appointment by ID.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment` | [Appointment](#producerflowappointmentv1appointment) |  | The appointment details. |
+| `appointment` | Appointment |  | The appointment details. |
 
 
 
@@ -21718,8 +21798,7 @@ Request to retrieve an appointment by ID.
 
 
 
-
-#### GetTerminationFeesRequest {#producerflowappointmentv1getterminationfeesrequest}
+#### GetTerminationFeesRequest
 
 Request to get termination fees.
 
@@ -21727,7 +21806,7 @@ Request to get termination fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
+| `license_id` | string |  | Required. The ID of the license to get the termination fee for. |
 
 
 
@@ -21736,26 +21815,7 @@ Request to get termination fees.
 
 
 
-
-#### GetTerminationFeesResponse {#producerflowappointmentv1getterminationfeesresponse}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
-
-
-
-
-
-
-
-
-
-#### License {#producerflowappointmentv1license}
+#### GetTerminationFeesResponse
 
 
 
@@ -21763,20 +21823,7 @@ Request to get termination fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | The ID of the license. |
-
-| `license_number` | [string](#string) |  | The license number. |
-
-| `producer_id` | [string](#string) |  |  |
-
-| `agency_id` | [string](#string) |  |  |
-
-| `state` | [string](#string) |  | The two-letter state code of the license. |
-
-| `license_class` | [string](#string) |  | The license class. |
-
-| `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state.
-Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
+| `fee_in_cents` | int64 |  | Total fee for the termination in cents. |
 
 
 
@@ -21785,8 +21832,38 @@ Licenses in registry states and capacity carriers are processed automatically wi
 
 
 
+#### License
 
-#### ListAppointmentsRequest {#producerflowappointmentv1listappointmentsrequest}
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `license_id` | string |  | The ID of the license. |
+
+| `license_number` | string |  | The license number. |
+
+| `producer_id` | string |  |  |
+
+| `agency_id` | string |  |  |
+
+| `state` | string |  | The two-letter state code of the license. |
+
+| `license_class` | string |  | The license class. |
+
+| `is_registry_state` | bool |  | Indicates whether this license is in a registry state. Licenses in
+registry states and capacity carriers are processed automatically without
+going through NIPR. |
+
+
+
+
+
+
+
+
+#### ListAppointmentsRequest
 
 Request to list appointments, optionally filtered by processing status.
 
@@ -21794,13 +21871,11 @@ Request to list appointments, optionally filtered by processing status.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `processing_status` | [ProcessingStatus](#producerflowappointmentv1processingstatus) | repeated | Optional. Filter results by processing status. |
+| `processing_status` | ProcessingStatus | repeated | Optional. Filter results by processing status. |
 
-| `producer_id` | [string](#string) |  |  |
+| `producer_id` | string |  |  |
 
-| `agency_id` | [string](#string) |  |  |
-
-
+| `agency_id` | string |  |  |
 
 
 
@@ -21808,7 +21883,8 @@ Request to list appointments, optionally filtered by processing status.
 
 
 
-#### ListAppointmentsResponse {#producerflowappointmentv1listappointmentsresponse}
+
+#### ListAppointmentsResponse
 
 
 
@@ -21816,11 +21892,9 @@ Request to list appointments, optionally filtered by processing status.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointments` | [Appointment](#producerflowappointmentv1appointment) | repeated | List of appointments. |
+| `appointments` | Appointment | repeated | List of appointments. |
 
-| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. |
-
-
+| `next_page_token` | string |  | Token for fetching the next page of results. |
 
 
 
@@ -21828,7 +21902,8 @@ Request to list appointments, optionally filtered by processing status.
 
 
 
-#### ListEligibleLicensesRequest {#producerflowappointmentv1listeligiblelicensesrequest}
+
+#### ListEligibleLicensesRequest
 
 Request to retrieve a list of licenses that are eligible to be appointed.
 
@@ -21836,27 +21911,9 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  |  |
+| `producer_id` | string |  |  |
 
-| `agency_id` | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-#### ListEligibleLicensesResponse {#producerflowappointmentv1listeligiblelicensesresponse}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `licenses` | [License](#producerflowappointmentv1license) | repeated | List of licenses that are eligible to be appointed. |
+| `agency_id` | string |  |  |
 
 
 
@@ -21865,8 +21922,7 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 
 
 
-
-#### ListTerminationReasonsRequest {#producerflowappointmentv1listterminationreasonsrequest}
+#### ListEligibleLicensesResponse
 
 
 
@@ -21874,9 +21930,7 @@ Request to retrieve a list of licenses that are eligible to be appointed.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve
-valid termination reasons. Different states may have different sets of valid
-termination reasons accepted by NIPR. |
+| `licenses` | License | repeated | List of licenses that are eligible to be appointed. |
 
 
 
@@ -21885,8 +21939,7 @@ termination reasons accepted by NIPR. |
 
 
 
-
-#### ListTerminationReasonsResponse {#producerflowappointmentv1listterminationreasonsresponse}
+#### ListTerminationReasonsRequest
 
 
 
@@ -21894,9 +21947,9 @@ termination reasons accepted by NIPR. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `termination_reasons` | [TerminationReason](#producerflowappointmentv1terminationreason) | repeated | The list of valid termination reasons for the specified state.
-These reasons can be used when calling TerminateAppointment for licenses
-issued in this state. |
+| `state` | string |  | Required. The two-letter state code of the license for which you want to
+retrieve valid termination reasons. Different states may have different
+sets of valid termination reasons accepted by NIPR. |
 
 
 
@@ -21905,8 +21958,26 @@ issued in this state. |
 
 
 
+#### ListTerminationReasonsResponse
 
-#### RequestAppointmentRequest {#producerflowappointmentv1requestappointmentrequest}
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `termination_reasons` | TerminationReason | repeated | The list of valid termination reasons for the specified state. These
+reasons can be used when calling TerminateAppointment for licenses issued
+in this state. |
+
+
+
+
+
+
+
+
+#### RequestAppointmentRequest
 
 Request to create a new appointment.
 
@@ -21914,11 +21985,9 @@ Request to create a new appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
+| `license_id` | string |  | Required. The ID of the license to appoint. |
 
-| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
-
-
+| `carrier_id` | string |  | Required. The ID of the carrier to appoint the license with. |
 
 
 
@@ -21926,7 +21995,8 @@ Request to create a new appointment.
 
 
 
-#### RequestAppointmentResponse {#producerflowappointmentv1requestappointmentresponse}
+
+#### RequestAppointmentResponse
 
 
 
@@ -21934,13 +22004,16 @@ Request to create a new appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
+| `appointment_id` | string |  | The ID of the created appointment. |
 
-| `processing_status` | [ProcessingStatus](#producerflowappointmentv1processingstatus) |  | Processing status of the appointment request.
-For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected
-For registry states or non-NIPR carriers: APPOINTED if successful |
+| `processing_status` | ProcessingStatus |  | Processing status of the appointment request.
 
-| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why.
+For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
+rejected.
+
+For registry states or non-NIPR carriers: APPOINTED if successful. |
+
+| `not_eligible_reasons` | string | repeated | If the appointment was rejected or ineligible, these reasons explain why.
 Only populated when processing_status is REJECTED. |
 
 
@@ -21950,8 +22023,7 @@ Only populated when processing_status is REJECTED. |
 
 
 
-
-#### TerminateAppointmentRequest {#producerflowappointmentv1terminateappointmentrequest}
+#### TerminateAppointmentRequest
 
 Request to terminate an appointment.
 
@@ -21959,13 +22031,11 @@ Request to terminate an appointment.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
+| `appointment_id` | string |  | ID of the appointment to terminate. |
 
-| `reason` | [TerminationReason](#producerflowappointmentv1terminationreason) |  | Reason for termination. This must be a valid termination reason
-for the state where the license is issued. Call ListTerminationReasons
-first to get the list of valid reasons for the specific state. |
-
-
+| `reason` | TerminationReason |  | Reason for termination. This must be a valid termination reason for the
+state where the license is issued. Call ListTerminationReasons first to
+get the list of valid reasons for the specific state. |
 
 
 
@@ -21973,7 +22043,8 @@ first to get the list of valid reasons for the specific state. |
 
 
 
-#### TerminateAppointmentResponse {#producerflowappointmentv1terminateappointmentresponse}
+
+#### TerminateAppointmentResponse
 
 
 
@@ -21981,7 +22052,18 @@ first to get the list of valid reasons for the specific state. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed. For NIPR-integrated carriers: Indicates whether the termination request was successfully submitted to NIPR. This does not indicate that the appointment has been terminated, only that the request has been accepted for processing. The actual termination will be processed asynchronously by NIPR, and you will be notified via webhook when the process completes. For registry states or non-NIPR carriers: Indicates whether the termination was successfully completed immediately. |
+| `success` | bool |  | Indicates whether the termination request was successfully processed.
+
+For NIPR-integrated carriers:
+- Indicates whether the termination request was successfully submitted to
+  NIPR.
+- This does not indicate that the appointment has been terminated, only
+  that the request has been accepted for processing.
+- The actual termination will be processed asynchronously by NIPR, and
+  you will be notified via webhook when the process completes.
+
+For registry states or non-NIPR carriers:
+- Indicates whether the termination was successfully completed immediately. |
 
 
 
@@ -21992,12 +22074,11 @@ first to get the list of valid reasons for the specific state. |
 
 
 
-### producerflow/producer/v1/producer.proto - Types
+### producerflow/producer/v1/producer.proto
 
 
 
-
-#### AddAgencyLocationsRequest {#producerflowproducerv1addagencylocationsrequest}
+#### AddAgencyLocationsRequest
 
 AddAgencyLocationsRequest adds new locations to an agency.
 
@@ -22005,11 +22086,9 @@ AddAgencyLocationsRequest adds new locations to an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to add locations to. |
+| `agency_id` | string |  | Required. Agency ID to add locations to. |
 
-| `locations` | [LocationInput](#producerflowproducerv1locationinput) | repeated | Required. List of locations to add. |
-
-
+| `locations` | LocationInput | repeated | Required. List of locations to add. |
 
 
 
@@ -22017,7 +22096,8 @@ AddAgencyLocationsRequest adds new locations to an agency.
 
 
 
-#### AddAgencyLocationsResponse {#producerflowproducerv1addagencylocationsresponse}
+
+#### AddAgencyLocationsResponse
 
 AddAgencyLocationsResponse contains the results of adding locations.
 
@@ -22025,7 +22105,7 @@ AddAgencyLocationsResponse contains the results of adding locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `location_ids` | [string](#string) | repeated | IDs of successfully created locations, in the same order as the input. |
+| `location_ids` | string | repeated | IDs of successfully created locations, in the same order as the input. |
 
 
 
@@ -22034,8 +22114,7 @@ AddAgencyLocationsResponse contains the results of adding locations.
 
 
 
-
-#### Address {#producerflowproducerv1address}
+#### Address
 
 Address represents a physical location with standard address components.
 Used for mailing, physical, and invoicing addresses throughout the API.
@@ -22044,19 +22123,17 @@ Used for mailing, physical, and invoicing addresses throughout the API.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) |  | Street address including house/building number and street name |
+| `street` | string |  | Street address including house/building number and street name |
 
-| `city` | [string](#string) |  | City of the address |
+| `city` | string |  | City of the address |
 
-| `state` | [string](#string) |  | State of the address |
+| `state` | string |  | State of the address |
 
-| `zip` | [string](#string) |  | Zip code of the address |
+| `zip` | string |  | Zip code of the address |
 
-| `county` | [string](#string) |  | County of the address |
+| `county` | string |  | County of the address |
 
-| `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
-
-
+| `address_line_2` | string | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 
 
@@ -22064,7 +22141,8 @@ Used for mailing, physical, and invoicing addresses throughout the API.
 
 
 
-#### Agency {#producerflowproducerv1agency}
+
+#### Agency
 
 Agency represents a complete agency entity with all associated information.
 
@@ -22072,36 +22150,36 @@ Agency represents a complete agency entity with all associated information.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Unique identifier for the agency. |
+| `agency_id` | string |  | Unique identifier for the agency. |
 
-| `agency_info` | [Agency.AgencyInfo](#producerflowproducerv1agencyagencyinfo) |  | AgencyInfo type field named agency_info |
+| `agency_info` | Agency.AgencyInfo |  | AgencyInfo type field named agency_info |
 
-| `physical_address` | [Agency.Address](#producerflowproducerv1agencyaddress) |  | Physical address of the agency. |
+| `physical_address` | Agency.Address |  | Physical address of the agency. |
 
-| `mailing_address` | [Agency.Address](#producerflowproducerv1agencyaddress) |  | Mailing address of the agency. |
+| `mailing_address` | Agency.Address |  | Mailing address of the agency. |
 
-| `invoicing_address` | [Agency.Address](#producerflowproducerv1agencyaddress) |  | Invoicing address of the agency. |
+| `invoicing_address` | Agency.Address |  | Invoicing address of the agency. |
 
-| `bank_account` | [Agency.BankAccount](#producerflowproducerv1agencybankaccount) |  | Banking information for commission payments.
+| `bank_account` | Agency.BankAccount |  | Banking information for commission payments.
 Used for electronic transfers of commissions and other payments. |
 
-| `eo_info` | [Agency.EOInfo](#producerflowproducerv1agencyeoinfo) |  |  |
+| `eo_info` | Agency.EOInfo |  |  |
 
-| `principal` | [Agency.Principal](#producerflowproducerv1agencyprincipal) |  | Information about the agency's principal.
+| `principal` | Agency.Principal |  | Information about the agency's principal.
 This is a required field as each agency must have a principal. |
 
-| `ivans_account` | [Agency.IvansAccount](#producerflowproducerv1agencyivansaccount) |  | IVANS account information for electronic carrier communication.
+| `ivans_account` | Agency.IvansAccount |  | IVANS account information for electronic carrier communication.
 This is optional and only used if the agency uses IVANS. |
 
-| `requested_appointments` | [string](#string) | repeated | The list of requested appointments for the agency. |
+| `requested_appointments` | string | repeated | The list of requested appointments for the agency. |
 
-| `business_hours` | [Agency.BusinessHours](#producerflowproducerv1agencybusinesshours) |  | Operating hours of the agency. |
+| `business_hours` | Agency.BusinessHours |  | Operating hours of the agency. |
 
-| `nipr` | [Agency.NIPR](#producerflowproducerv1agencynipr) |  | Data synchronized from the NIPR service.
+| `nipr` | Agency.NIPR |  | Data synchronized from the NIPR service.
 Contains basic information, addresses, licenses, regulatory actions,
 and carrier appointments. |
 
-| `locations` | [Location](#producerflowproducerv1location) | repeated | Locations associated with the agency. |
+| `locations` | Location | repeated | Locations associated with the agency. |
 
 
 
@@ -22110,8 +22188,7 @@ and carrier appointments. |
 
 
 
-
-#### Agency.Address {#producerflowproducerv1agencyaddress}
+#### Agency.Address
 
 Address is a data structure that represents a physical or mailing
 location.
@@ -22120,15 +22197,13 @@ location.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) |  | Street name and number of the location. |
+| `street` | string |  | Street name and number of the location. |
 
-| `city` | [string](#string) |  | City where the location resides. |
+| `city` | string |  | City where the location resides. |
 
-| `state` | [string](#string) |  | State/Province where the location resides. |
+| `state` | string |  | State/Province where the location resides. |
 
-| `zip` | [string](#string) |  | ZIP/Postal code of the location. |
-
-
+| `zip` | string |  | ZIP/Postal code of the location. |
 
 
 
@@ -22136,7 +22211,8 @@ location.
 
 
 
-#### Agency.AgencyInfo {#producerflowproducerv1agencyagencyinfo}
+
+#### Agency.AgencyInfo
 
 AgencyInfo contains contact and identification information for an agency.
 
@@ -22144,42 +22220,42 @@ AgencyInfo contains contact and identification information for an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `onboarding_id` | [string](#string) |  | The unique identifier for the onboarding process.
+| `onboarding_id` | string |  | The unique identifier for the onboarding process.
 Used to track the agency through the onboarding flow. |
 
-| `root_organization_id` | [string](#string) |  | The organization ID represents the ID of the root organization that the agency belongs to.
+| `root_organization_id` | string |  | The organization ID represents the ID of the root organization that the agency belongs to.
 An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
 We currently don't support multiple levels of organizations or agencies.
 Agencies are not always part of an organization, so this field is optional. |
 
-| `agency_name` | [string](#string) |  | The official name of the agency.
+| `agency_name` | string |  | The official name of the agency.
 This is typically the legal name of the entity. |
 
-| `agency_fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the agency.
+| `agency_fein` | string |  | Federal Employer Identification Number (FEIN) of the agency.
 This is a unique nine-digit number assigned by the Internal
 Revenue Service (IRS) to businesses operating in the United States. |
 
-| `email` | [string](#string) |  | Primary email address for the agency.
+| `email` | string |  | Primary email address for the agency.
 Used for communication and must be unique. |
 
-| `phone` | [string](#string) |  | Phone number for the agency. |
+| `phone` | string |  | Phone number for the agency. |
 
-| `fax` | [string](#string) |  | Fax number for the agency. |
+| `fax` | string |  | Fax number for the agency. |
 
-| `website` | [string](#string) |  | Website URL for the agency, if available. |
+| `website` | string |  | Website URL for the agency, if available. |
 
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency.
+| `npn` | string |  | National Producer Number (NPN) of the agency.
 This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC). |
 
-| `pdb_alerts_sync_enabled` | [bool](#bool) |  | Indicates whether the agency is enabled to be synchronized with NIPR API.
+| `pdb_alerts_sync_enabled` | bool |  | Indicates whether the agency is enabled to be synchronized with NIPR API.
 When true, the system will regularly check for updates from NIPR. |
 
-| `metadata_questions` | [Agency.AgencyInfo.MetadataQuestionsEntry](#producerflowproducerv1agencyagencyinfometadataquestionsentry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency.
+| `metadata_questions` | Agency.AgencyInfo.MetadataQuestionsEntry | repeated | MetadataQuestions contains custom metadata questions and answers for the agency.
 This field stores tenant-specific questions that were collected during agency onboarding.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. |
 
-| `external_metadata` | [Agency.AgencyInfo.ExternalMetadataEntry](#producerflowproducerv1agencyagencyinfoexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+| `external_metadata` | Agency.AgencyInfo.ExternalMetadataEntry | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
 reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
 Common use cases include:
@@ -22189,7 +22265,7 @@ Common use cases include:
 - Storing computed values or derived data
 The map key is the metadata field name, and the value is the associated data. |
 
-| `tenant_additional_questions` | [Agency.AgencyInfo.TenantAdditionalQuestionsEntry](#producerflowproducerv1agencyagencyinfotenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
+| `tenant_additional_questions` | Agency.AgencyInfo.TenantAdditionalQuestionsEntry | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. |
 
@@ -22200,28 +22276,7 @@ values are the answers provided. |
 
 
 
-
-#### Agency.AgencyInfo.ExternalMetadataEntry {#producerflowproducerv1agencyagencyinfoexternalmetadataentry}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `key` | [string](#string) |  |  |
-
-| `value` | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-#### Agency.AgencyInfo.MetadataQuestionsEntry {#producerflowproducerv1agencyagencyinfometadataquestionsentry}
+#### Agency.AgencyInfo.ExternalMetadataEntry
 
 
 
@@ -22229,11 +22284,9 @@ values are the answers provided. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -22241,7 +22294,8 @@ values are the answers provided. |
 
 
 
-#### Agency.AgencyInfo.TenantAdditionalQuestionsEntry {#producerflowproducerv1agencyagencyinfotenantadditionalquestionsentry}
+
+#### Agency.AgencyInfo.MetadataQuestionsEntry
 
 
 
@@ -22249,11 +22303,9 @@ values are the answers provided. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -22261,7 +22313,27 @@ values are the answers provided. |
 
 
 
-#### Agency.BankAccount {#producerflowproducerv1agencybankaccount}
+
+#### Agency.AgencyInfo.TenantAdditionalQuestionsEntry
+
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `key` | string |  |  |
+
+| `value` | string |  |  |
+
+
+
+
+
+
+
+
+#### Agency.BankAccount
 
 BankAccount contains information about a bank account for commission payments.
 
@@ -22269,15 +22341,15 @@ BankAccount contains information about a bank account for commission payments.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `account_number` | [string](#string) |  | Account number for the bank account. |
+| `account_number` | string |  | Account number for the bank account. |
 
-| `routing_number` | [string](#string) |  | Routing number for the bank.
+| `routing_number` | string |  | Routing number for the bank.
 This is a nine-digit code identifying the financial institution. |
 
-| `account_type` | [Agency.BankAccount.AccountType](#producerflowproducerv1agencybankaccountaccounttype) |  | Type of account (checking or savings).
+| `account_type` | Agency.BankAccount.AccountType |  | Type of account (checking or savings).
 Indicates how the account should be treated for electronic transfers. |
 
-| `account_holder_name` | [string](#string) |  | Name of the account holder as it appears on bank records. |
+| `account_holder_name` | string |  | Name of the account holder as it appears on bank records. |
 
 
 
@@ -22286,8 +22358,7 @@ Indicates how the account should be treated for electronic transfers. |
 
 
 
-
-#### Agency.BusinessHours {#producerflowproducerv1agencybusinesshours}
+#### Agency.BusinessHours
 
 BusinessHours contains the operating hours of the agency.
 
@@ -22295,11 +22366,9 @@ BusinessHours contains the operating hours of the agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `timezone` | [string](#string) |  | Timezone of the agency. |
+| `timezone` | string |  | Timezone of the agency. |
 
-| `business_hours` | [Agency.BusinessHours.BusinessHour](#producerflowproducerv1agencybusinesshoursbusinesshour) | repeated | List of business hour entries. |
-
-
+| `business_hours` | Agency.BusinessHours.BusinessHour | repeated | List of business hour entries. |
 
 
 
@@ -22307,7 +22376,8 @@ BusinessHours contains the operating hours of the agency.
 
 
 
-#### Agency.BusinessHours.BusinessHour {#producerflowproducerv1agencybusinesshoursbusinesshour}
+
+#### Agency.BusinessHours.BusinessHour
 
 BusinessHour represents operating hours for specific days.
 
@@ -22315,13 +22385,11 @@ BusinessHour represents operating hours for specific days.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `week_days` | [google.type.DayOfWeek](#googletypedayofweek) | repeated | Days of the week when the agency is open. |
+| `week_days` | google.type.DayOfWeek | repeated | Days of the week when the agency is open. |
 
-| `opening_time` | [google.type.TimeOfDay](#googletypetimeofday) |  | Time when the agency opens. |
+| `opening_time` | google.type.TimeOfDay |  | Time when the agency opens. |
 
-| `closing_time` | [google.type.TimeOfDay](#googletypetimeofday) |  | Time when the agency closes. |
-
-
+| `closing_time` | google.type.TimeOfDay |  | Time when the agency closes. |
 
 
 
@@ -22329,7 +22397,8 @@ BusinessHour represents operating hours for specific days.
 
 
 
-#### Agency.EOInfo {#producerflowproducerv1agencyeoinfo}
+
+#### Agency.EOInfo
 
 EOInfo contains Errors & Omissions insurance information
 
@@ -22337,17 +22406,15 @@ EOInfo contains Errors & Omissions insurance information
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `carrier` | [string](#string) |  | Insurance carrier providing the E&O coverage |
+| `carrier` | string |  | Insurance carrier providing the E&O coverage |
 
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will expire |
+| `expiration_date` | google.protobuf.Timestamp |  | Date when the E&O coverage will expire |
 
-| `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit) |
+| `coverage_amount` | string |  | Amount of coverage provided by the E&O policy (aggregate limit) |
 
-| `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy |
+| `per_occurrence` | string |  | Per occurrence limit for the E&O policy |
 
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Effective date of the E&O policy |
-
-
+| `effective_date` | google.protobuf.Timestamp |  | Effective date of the E&O policy |
 
 
 
@@ -22355,7 +22422,8 @@ EOInfo contains Errors & Omissions insurance information
 
 
 
-#### Agency.IvansAccount {#producerflowproducerv1agencyivansaccount}
+
+#### Agency.IvansAccount
 
 IvansAccount contains information for IVANS integration.
 IVANS is a system for electronic communication between insurance agencies and carriers.
@@ -22364,13 +22432,13 @@ IVANS is a system for electronic communication between insurance agencies and ca
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `account_number` | [string](#string) |  | Account number for the IVANS service. |
+| `account_number` | string |  | Account number for the IVANS service. |
 
-| `ams_software` | [string](#string) |  | Software used for IVANS communication. |
+| `ams_software` | string |  | Software used for IVANS communication. |
 
-| `ams_version` | [string](#string) |  | Version of the IVANS software. |
+| `ams_version` | string |  | Version of the IVANS software. |
 
-| `mailbox_number` | [string](#string) |  | Mailbox number for the IVANS service.
+| `mailbox_number` | string |  | Mailbox number for the IVANS service.
 Used for routing electronic messages. |
 
 
@@ -22380,8 +22448,7 @@ Used for routing electronic messages. |
 
 
 
-
-#### Agency.NIPR {#producerflowproducerv1agencynipr}
+#### Agency.NIPR
 
 NIPR contains data synchronized from the National Insurance Producer Registry.
 
@@ -22389,15 +22456,15 @@ NIPR contains data synchronized from the National Insurance Producer Registry.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `biographic` | [Agency.NIPR.Biographic](#producerflowproducerv1agencyniprbiographic) |  | Biographic information from NIPR |
+| `biographic` | Agency.NIPR.Biographic |  | Biographic information from NIPR |
 
-| `addresses` | [Agency.NIPR.Address](#producerflowproducerv1agencynipraddress) | repeated | List of addresses from NIPR. |
+| `addresses` | Agency.NIPR.Address | repeated | List of addresses from NIPR. |
 
-| `licenses` | [Agency.NIPR.License](#producerflowproducerv1agencyniprlicense) | repeated | List of all licenses held across different states. |
+| `licenses` | Agency.NIPR.License | repeated | List of all licenses held across different states. |
 
-| `regulatory_info` | [Agency.NIPR.RegulatoryInfo](#producerflowproducerv1agencyniprregulatoryinfo) |  | Regulatory information from NIPR |
+| `regulatory_info` | Agency.NIPR.RegulatoryInfo |  | Regulatory information from NIPR |
 
-| `appointments` | [Agency.NIPR.Appointment](#producerflowproducerv1agencyniprappointment) | repeated | List of carrier appointments held in NIPR.
+| `appointments` | Agency.NIPR.Appointment | repeated | List of carrier appointments held in NIPR.
 These represent relationships with insurance carriers. |
 
 
@@ -22407,8 +22474,7 @@ These represent relationships with insurance carriers. |
 
 
 
-
-#### Agency.NIPR.Address {#producerflowproducerv1agencynipraddress}
+#### Agency.NIPR.Address
 
 Address represents address information from NIPR.
 
@@ -22416,25 +22482,23 @@ Address represents address information from NIPR.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `address_type` | [string](#string) |  | Type of address (Residence, Business, Mailing). |
+| `address_type` | string |  | Type of address (Residence, Business, Mailing). |
 
-| `state` | [string](#string) |  | License state: state of the license for which the address is registered in NIPR. |
+| `state` | string |  | License state: state of the license for which the address is registered in NIPR. |
 
-| `address_state` | [string](#string) |  | Address state: state of the actual address registered in NIPR. |
+| `address_state` | string |  | Address state: state of the actual address registered in NIPR. |
 
-| `street` | [string](#string) |  | Street address. |
+| `street` | string |  | Street address. |
 
-| `zip_code` | [string](#string) |  | ZIP code of the address. |
+| `zip_code` | string |  | ZIP code of the address. |
 
-| `city` | [string](#string) |  | City of the address. |
+| `city` | string |  | City of the address. |
 
-| `country` | [string](#string) |  | Country of the address. |
+| `country` | string |  | Country of the address. |
 
-| `date_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the address was last updated. |
+| `date_updated` | google.protobuf.Timestamp |  | Date when the address was last updated. |
 
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this address information was updated from NIPR. |
-
-
+| `updated_at` | google.protobuf.Timestamp |  | The last time this address information was updated from NIPR. |
 
 
 
@@ -22442,7 +22506,8 @@ Address represents address information from NIPR.
 
 
 
-#### Agency.NIPR.Appointment {#producerflowproducerv1agencyniprappointment}
+
+#### Agency.NIPR.Appointment
 
 Appointment represents a relationship with an insurance carrier.
 
@@ -22450,30 +22515,28 @@ Appointment represents a relationship with an insurance carrier.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `branch_id` | [string](#string) |  |  |
+| `branch_id` | string |  |  |
 
-| `company_name` | [string](#string) |  | Name of the insurance company for this appointment. |
+| `company_name` | string |  | Name of the insurance company for this appointment. |
 
-| `fein` | [string](#string) |  | Federal Employer Identification Number of the carrier. |
+| `fein` | string |  | Federal Employer Identification Number of the carrier. |
 
-| `co_code` | [string](#string) |  | Company code for the insurance carrier. |
+| `co_code` | string |  | Company code for the insurance carrier. |
 
-| `line_of_authority` | [string](#string) |  | Line of authority for this appointment (e.g., Life, Property, Casualty).
+| `line_of_authority` | string |  | Line of authority for this appointment (e.g., Life, Property, Casualty).
 Indicates what types of insurance can be sold. |
 
-| `loa_code` | [string](#string) |  | Code for the line of authority for this appointment. |
+| `loa_code` | string |  | Code for the line of authority for this appointment. |
 
-| `status` | [string](#string) |  | Current status of the appointment (e.g., Active, Terminated). |
+| `status` | string |  | Current status of the appointment (e.g., Active, Terminated). |
 
-| `termination_reason` | [string](#string) |  | Reason for termination if the appointment has been terminated. |
+| `termination_reason` | string |  | Reason for termination if the appointment has been terminated. |
 
-| `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date associated with the current status or reason. |
+| `status_reason_date` | google.protobuf.Timestamp |  | Date associated with the current status or reason. |
 
-| `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. |
+| `appointment_renewal_date` | google.protobuf.Timestamp |  | Date when the appointment will renew. |
 
-| `agency_affiliations` | [string](#string) |  | Additional affiliations or roles with the agency. |
-
-
+| `agency_affiliations` | string |  | Additional affiliations or roles with the agency. |
 
 
 
@@ -22481,7 +22544,8 @@ Indicates what types of insurance can be sold. |
 
 
 
-#### Agency.NIPR.Biographic {#producerflowproducerv1agencyniprbiographic}
+
+#### Agency.NIPR.Biographic
 
 Biographic contains basic information from NIPR.
 
@@ -22489,19 +22553,17 @@ Biographic contains basic information from NIPR.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `company_name` | [string](#string) |  | Company name as recorded in NIPR. |
+| `company_name` | string |  | Company name as recorded in NIPR. |
 
-| `fein` | [string](#string) |  | Federal Employer Identification Number. |
+| `fein` | string |  | Federal Employer Identification Number. |
 
-| `npn` | [string](#string) |  | National Producer Number. |
+| `npn` | string |  | National Producer Number. |
 
-| `business_email` | [string](#string) |  | Business email address. |
+| `business_email` | string |  | Business email address. |
 
-| `business_phone` | [string](#string) |  | Business phone number. |
+| `business_phone` | string |  | Business phone number. |
 
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this biographic information was updated from NIPR. |
-
-
+| `updated_at` | google.protobuf.Timestamp |  | The last time this biographic information was updated from NIPR. |
 
 
 
@@ -22509,7 +22571,8 @@ Biographic contains basic information from NIPR.
 
 
 
-#### Agency.NIPR.License {#producerflowproducerv1agencyniprlicense}
+
+#### Agency.NIPR.License
 
 License contains information about an insurance license.
 
@@ -22517,31 +22580,29 @@ License contains information about an insurance license.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_number` | [string](#string) |  | The license number assigned by the state regulatory authority. |
+| `license_number` | string |  | The license number assigned by the state regulatory authority. |
 
-| `license_state` | [string](#string) |  | The state that issued the license. |
+| `license_state` | string |  | The state that issued the license. |
 
-| `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. |
+| `residency_status` | string |  | Indicates whether this is a resident or non-resident license. |
 
-| `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
+| `active` | bool |  | Indicates whether the license is currently active. |
 
-| `status` | [Agency.NIPR.License.LicenseStatus](#producerflowproducerv1agencyniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
+| `status` | Agency.NIPR.License.LicenseStatus |  | The current status of the license (valid, expired, etc.). |
 
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license will expire if not renewed. |
+| `expiration_date` | google.protobuf.Timestamp |  | The date when the license will expire if not renewed. |
 
-| `license_class` | [string](#string) |  | License class description. |
+| `license_class` | string |  | License class description. |
 
-| `license_class_code` | [int32](#int32) |  | License class code. |
+| `license_class_code` | int32 |  | License class code. |
 
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license was originally issued. |
+| `issue_date` | google.protobuf.Timestamp |  | The date when the license was originally issued. |
 
-| `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license was last updated. |
+| `update_date` | google.protobuf.Timestamp |  | The date when the license was last updated. |
 
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
+| `updated_at` | google.protobuf.Timestamp |  | The last time this license information was updated from NIPR. |
 
-| `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#producerflowproducerv1agencyniprlicenselineofauthority) | repeated | Lines of Authority associated with this license. |
-
-
+| `lines_of_authority` | Agency.NIPR.License.LineOfAuthority | repeated | Lines of Authority associated with this license. |
 
 
 
@@ -22549,7 +22610,8 @@ License contains information about an insurance license.
 
 
 
-#### Agency.NIPR.License.LineOfAuthority {#producerflowproducerv1agencyniprlicenselineofauthority}
+
+#### Agency.NIPR.License.LineOfAuthority
 
 LineOfAuthority represents a specific type of insurance coverage
 that is authorized under this license.
@@ -22558,14 +22620,12 @@ that is authorized under this license.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `loa` | [string](#string) |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
+| `loa` | string |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
 This is typically an uppercase string that describes the insurance type. |
 
-| `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. |
+| `active` | bool |  | Whether this Line of Authority is currently active. |
 
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when this Line of Authority was issued. |
-
-
+| `issue_date` | google.protobuf.Timestamp |  | The date when this Line of Authority was issued. |
 
 
 
@@ -22573,7 +22633,8 @@ This is typically an uppercase string that describes the insurance type. |
 
 
 
-#### Agency.NIPR.RegulatoryInfo {#producerflowproducerv1agencyniprregulatoryinfo}
+
+#### Agency.NIPR.RegulatoryInfo
 
 RegulatoryInfo contains regulatory information,
 including any regulatory actions.
@@ -22582,7 +22643,7 @@ including any regulatory actions.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `regulatory_actions` | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#producerflowproducerv1agencyniprregulatoryinforegulatoryaction) | repeated | List of regulatory actions across different states.
+| `regulatory_actions` | Agency.NIPR.RegulatoryInfo.RegulatoryAction | repeated | List of regulatory actions across different states.
 Each regulatory action includes the state code where it applies. |
 
 
@@ -22592,8 +22653,7 @@ Each regulatory action includes the state code where it applies. |
 
 
 
-
-#### Agency.NIPR.RegulatoryInfo.RegulatoryAction {#producerflowproducerv1agencyniprregulatoryinforegulatoryaction}
+#### Agency.NIPR.RegulatoryInfo.RegulatoryAction
 
 RegulatoryAction represents a regulatory action.
 
@@ -22601,27 +22661,25 @@ RegulatoryAction represents a regulatory action.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `action_id` | [string](#string) |  | Unique identifier for the regulatory action. |
+| `action_id` | string |  | Unique identifier for the regulatory action. |
 
-| `state_code` | [string](#string) |  | The state code where this regulatory action applies. |
+| `state_code` | string |  | The state code where this regulatory action applies. |
 
-| `reason_for_action` | [string](#string) |  | The reason why the regulatory action was taken. |
+| `reason_for_action` | string |  | The reason why the regulatory action was taken. |
 
-| `disposition` | [string](#string) |  | The outcome or resolution of the regulatory action. |
+| `disposition` | string |  | The outcome or resolution of the regulatory action. |
 
-| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was taken. |
+| `date_of_action` | google.protobuf.Timestamp |  | The date when the regulatory action was taken. |
 
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action became effective. |
+| `effective_date` | google.protobuf.Timestamp |  | The date when the regulatory action became effective. |
 
-| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the entity entered into the regulatory action. |
+| `enter_date` | google.protobuf.Timestamp |  | The date when the entity entered into the regulatory action. |
 
-| `file_ref` | [string](#string) |  | Reference number for the regulatory action file. |
+| `file_ref` | string |  | Reference number for the regulatory action file. |
 
-| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties associated with the regulatory action. |
+| `penalty_fine_forfeiture` | string |  | Any financial penalties associated with the regulatory action. |
 
-| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. |
-
-
+| `length_of_order` | string |  | Duration of any orders associated with the regulatory action. |
 
 
 
@@ -22629,7 +22687,8 @@ RegulatoryAction represents a regulatory action.
 
 
 
-#### Agency.Principal {#producerflowproducerv1agencyprincipal}
+
+#### Agency.Principal
 
 Principal is a data structure that represents the principal of a agency.
 A principal is the person or entity that is responsible for the day-to-day operations of the agency.
@@ -22639,25 +22698,25 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `id` | [string](#string) |  | Unique identifier for the principal (as a producer). |
+| `id` | string |  | Unique identifier for the principal (as a producer). |
 
-| `first_name` | [string](#string) |  | First name of the principal. |
+| `first_name` | string |  | First name of the principal. |
 
-| `last_name` | [string](#string) |  | Last name of the principal. |
+| `last_name` | string |  | Last name of the principal. |
 
-| `middle_name` | [string](#string) |  | Middle name of the principal. |
+| `middle_name` | string |  | Middle name of the principal. |
 
-| `email` | [string](#string) |  | Email address of the principal.
+| `email` | string |  | Email address of the principal.
 Must be unique and is used for communication. |
 
-| `npn` | [string](#string) |  | The NPN of the principal. This is used to
+| `npn` | string |  | The NPN of the principal. This is used to
 retrieve the license information
 of the principal from the NIPR API. |
 
-| `phone` | [string](#string) |  | Phone number of the principal.
+| `phone` | string |  | Phone number of the principal.
 Used for communication. |
 
-| `address` | [Agency.Address](#producerflowproducerv1agencyaddress) |  | Address of the principal.
+| `address` | Agency.Address |  | Address of the principal.
 This may differ from the agency address. |
 
 
@@ -22667,8 +22726,7 @@ This may differ from the agency address. |
 
 
 
-
-#### AgencySummary {#producerflowproducerv1agencysummary}
+#### AgencySummary
 
 AgencySummary contains a lightweight summary of an agency for list views.
 This message contains only the essential fields needed for displaying agencies in a list.
@@ -22677,27 +22735,25 @@ This message contains only the essential fields needed for displaying agencies i
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Unique identifier for the agency. |
+| `agency_id` | string |  | Unique identifier for the agency. |
 
-| `name` | [string](#string) |  | Agency name. |
+| `name` | string |  | Agency name. |
 
-| `email` | [string](#string) |  | Agency email address. |
+| `email` | string |  | Agency email address. |
 
-| `phone` | [string](#string) |  | Agency phone number. |
+| `phone` | string |  | Agency phone number. |
 
-| `npn` | [string](#string) |  | Agency NPN (National Producer Number). |
+| `npn` | string |  | Agency NPN (National Producer Number). |
 
-| `fein` | [string](#string) |  | Agency FEIN (Federal Employer Identification Number). |
+| `fein` | string |  | Agency FEIN (Federal Employer Identification Number). |
 
-| `organization_id` | [string](#string) | optional | Organization ID that the agency belongs to. |
+| `organization_id` | string | optional | Organization ID that the agency belongs to. |
 
-| `is_tenant_agency` | [bool](#bool) |  | Whether this is an internal tenant agency. |
+| `is_tenant_agency` | bool |  | Whether this is an internal tenant agency. |
 
-| `is_sole_proprietor` | [bool](#bool) |  | Whether this is a sole proprietor. |
+| `is_sole_proprietor` | bool |  | Whether this is a sole proprietor. |
 
-| `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the agency was created. |
-
-
+| `created_at` | google.protobuf.Timestamp |  | When the agency was created. |
 
 
 
@@ -22705,7 +22761,8 @@ This message contains only the essential fields needed for displaying agencies i
 
 
 
-#### AssignProducerToLocationsRequest {#producerflowproducerv1assignproducertolocationsrequest}
+
+#### AssignProducerToLocationsRequest
 
 AssignProducerToLocationsRequest assigns locations to a producer.
 
@@ -22713,9 +22770,9 @@ AssignProducerToLocationsRequest assigns locations to a producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | Required. Producer ID to assign locations to. |
+| `producer_id` | string |  | Required. Producer ID to assign locations to. |
 
-| `location_ids` | [string](#string) | repeated | Required. Location IDs to assign (1-100 items).
+| `location_ids` | string | repeated | Required. Location IDs to assign (1-100 items).
 These locations must belong to the same agency as the producer. |
 
 
@@ -22725,8 +22782,7 @@ These locations must belong to the same agency as the producer. |
 
 
 
-
-#### AssignProducerToLocationsResponse {#producerflowproducerv1assignproducertolocationsresponse}
+#### AssignProducerToLocationsResponse
 
 AssignProducerToLocationsResponse contains the assigned location IDs.
 
@@ -22734,7 +22790,7 @@ AssignProducerToLocationsResponse contains the assigned location IDs.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `assigned_location_ids` | [string](#string) | repeated | IDs of successfully assigned locations. |
+| `assigned_location_ids` | string | repeated | IDs of successfully assigned locations. |
 
 
 
@@ -22743,8 +22799,7 @@ AssignProducerToLocationsResponse contains the assigned location IDs.
 
 
 
-
-#### Contact {#producerflowproducerv1contact}
+#### Contact
 
 Contact represents a contact associated with an agency.
 Contacts are non-producer individuals linked to the agency.
@@ -22753,28 +22808,26 @@ Contacts are non-producer individuals linked to the agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `id` | [string](#string) |  | Unique identifier for the contact. |
+| `id` | string |  | Unique identifier for the contact. |
 
-| `first_name` | [string](#string) |  | First name of the contact. |
+| `first_name` | string |  | First name of the contact. |
 
-| `middle_name` | [string](#string) |  | Middle name of the contact. |
+| `middle_name` | string |  | Middle name of the contact. |
 
-| `last_name` | [string](#string) |  | Last name of the contact. |
+| `last_name` | string |  | Last name of the contact. |
 
-| `email` | [string](#string) |  | Email address of the contact.
+| `email` | string |  | Email address of the contact.
 Must be unique within the tenant. |
 
-| `phone` | [string](#string) |  | Phone number of the contact. |
+| `phone` | string |  | Phone number of the contact. |
 
-| `role` | [string](#string) |  | Role or position of the contact within the agency. |
+| `role` | string |  | Role or position of the contact within the agency. |
 
-| `address` | [Address](#producerflowproducerv1address) |  | Mailing address of the contact. |
+| `address` | Address |  | Mailing address of the contact. |
 
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
+| `npn` | string |  | National Producer Number (NPN) of the contact, if applicable. |
 
-| `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
-
-
+| `created_at` | google.protobuf.Timestamp |  | When the contact was created. |
 
 
 
@@ -22782,7 +22835,8 @@ Must be unique within the tenant. |
 
 
 
-#### CreateAgencyOnboardingURLRequest {#producerflowproducerv1createagencyonboardingurlrequest}
+
+#### CreateAgencyOnboardingURLRequest
 
 CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.
 
@@ -22790,7 +22844,7 @@ CreateAgencyOnboardingURLRequest contains information needed to generate an agen
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [CreateAgencyOnboardingURLRequest.Agency](#producerflowproducerv1createagencyonboardingurlrequestagency) |  |  |
+| `agency` | CreateAgencyOnboardingURLRequest.Agency |  |  |
 
 
 
@@ -22799,8 +22853,7 @@ CreateAgencyOnboardingURLRequest contains information needed to generate an agen
 
 
 
-
-#### CreateAgencyOnboardingURLRequest.Agency {#producerflowproducerv1createagencyonboardingurlrequestagency}
+#### CreateAgencyOnboardingURLRequest.Agency
 
 Agency contains the information about the agency to be onboarded.
 All fields within the Agency message are also optional.
@@ -22809,37 +22862,37 @@ All fields within the Agency message are also optional.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `name` | [string](#string) |  | Name of the agency |
+| `name` | string |  | Name of the agency |
 
-| `entity_type` | [EntityType](#producerflowproducerv1entitytype) |  | Entity type of the agency: Sole Proprietor, Agency or Ask during onboarding |
+| `entity_type` | EntityType |  | Entity type of the agency: Sole Proprietor, Agency or Ask during onboarding |
 
-| `tenant_agency_id` | [string](#string) |  | Tenant agency id is a unique identifier for the agency used by the tenant
+| `tenant_agency_id` | string |  | Tenant agency id is a unique identifier for the agency used by the tenant
 this is used to identify the agency in the tenant system not in the producerflow system |
 
-| `docusign_template_id` | [string](#string) |  | DocuSign template id is the id of the docusign template used to send the contract to the agency |
+| `docusign_template_id` | string |  | DocuSign template id is the id of the docusign template used to send the contract to the agency |
 
-| `fein` | [string](#string) |  | FEIN (Federal Employer Identification Number) of the agency |
+| `fein` | string |  | FEIN (Federal Employer Identification Number) of the agency |
 
-| `email` | [string](#string) |  | Email of the agency |
+| `email` | string |  | Email of the agency |
 
-| `phone` | [string](#string) |  | Phone of the agency |
+| `phone` | string |  | Phone of the agency |
 
-| `fax` | [string](#string) |  | Fax of the agency |
+| `fax` | string |  | Fax of the agency |
 
-| `website` | [string](#string) |  | Website of the agency |
+| `website` | string |  | Website of the agency |
 
-| `npn` | [string](#string) |  | NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored |
+| `npn` | string |  | NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored |
 
-| `mailing_address` | [Address](#producerflowproducerv1address) |  | Mailing address of the agency |
+| `mailing_address` | Address |  | Mailing address of the agency |
 
-| `physical_address` | [Address](#producerflowproducerv1address) |  | Physical address of the agency |
+| `physical_address` | Address |  | Physical address of the agency |
 
-| `invoicing_address` | [Address](#producerflowproducerv1address) |  | Invoicing address of the agency |
+| `invoicing_address` | Address |  | Invoicing address of the agency |
 
-| `organization_id` | [string](#string) |  | Organization ID of the agency.
+| `organization_id` | string |  | Organization ID of the agency.
 To get valid organization IDs, use the ListOrganizations RPC. |
 
-| `principal` | [CreateAgencyOnboardingURLRequest.Agency.Principal](#producerflowproducerv1createagencyonboardingurlrequestagencyprincipal) |  |  |
+| `principal` | CreateAgencyOnboardingURLRequest.Agency.Principal |  |  |
 
 
 
@@ -22848,8 +22901,7 @@ To get valid organization IDs, use the ListOrganizations RPC. |
 
 
 
-
-#### CreateAgencyOnboardingURLRequest.Agency.Principal {#producerflowproducerv1createagencyonboardingurlrequestagencyprincipal}
+#### CreateAgencyOnboardingURLRequest.Agency.Principal
 
 Principal is the person responsible for the agency.
 All fields within the Principal message are also optional.
@@ -22858,23 +22910,21 @@ All fields within the Principal message are also optional.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `tenant_id` | [string](#string) |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
+| `tenant_id` | string |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
 
-| `first_name` | [string](#string) |  | First name of the principal |
+| `first_name` | string |  | First name of the principal |
 
-| `last_name` | [string](#string) |  | Last name of the principal |
+| `last_name` | string |  | Last name of the principal |
 
-| `middle_name` | [string](#string) |  | Middle name of the principal |
+| `middle_name` | string |  | Middle name of the principal |
 
-| `email` | [string](#string) |  | Email of the principal |
+| `email` | string |  | Email of the principal |
 
-| `phone` | [string](#string) |  | Phone of the principal |
+| `phone` | string |  | Phone of the principal |
 
-| `npn` | [string](#string) |  | NPN of the principal |
+| `npn` | string |  | NPN of the principal |
 
-| `address` | [Address](#producerflowproducerv1address) |  | Address of the principal |
-
-
+| `address` | Address |  | Address of the principal |
 
 
 
@@ -22882,7 +22932,8 @@ All fields within the Principal message are also optional.
 
 
 
-#### CreateAgencyOnboardingURLResponse {#producerflowproducerv1createagencyonboardingurlresponse}
+
+#### CreateAgencyOnboardingURLResponse
 
 CreateAgencyOnboardingURLResponse contains the generated URL for agency onboarding
 
@@ -22890,7 +22941,7 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `url` | [string](#string) |  | URL that can be shared with the agency for self-onboarding |
+| `url` | string |  | URL that can be shared with the agency for self-onboarding |
 
 
 
@@ -22899,8 +22950,7 @@ CreateAgencyOnboardingURLResponse contains the generated URL for agency onboardi
 
 
 
-
-#### CreateOrganizationRequest {#producerflowproducerv1createorganizationrequest}
+#### CreateOrganizationRequest
 
 CreateOrganizationRequest contains the information needed to create a new organization.
 
@@ -22908,13 +22958,13 @@ CreateOrganizationRequest contains the information needed to create a new organi
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `name` | [string](#string) |  | Required. The display name of the organization.
+| `name` | string |  | Required. The display name of the organization.
 Must be unique within the tenant. |
 
-| `external_id` | [string](#string) |  | Optional. The external identifier for the organization.
+| `external_id` | string |  | Optional. The external identifier for the organization.
 This is the identifier used by the tenant's system to identify the organization. |
 
-| `email` | [string](#string) |  | Optional. The contact email address for the organization. |
+| `email` | string |  | Optional. The contact email address for the organization. |
 
 
 
@@ -22923,8 +22973,7 @@ This is the identifier used by the tenant's system to identify the organization.
 
 
 
-
-#### CreateOrganizationResponse {#producerflowproducerv1createorganizationresponse}
+#### CreateOrganizationResponse
 
 CreateOrganizationResponse contains the result of creating a new organization.
 
@@ -22932,7 +22981,7 @@ CreateOrganizationResponse contains the result of creating a new organization.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) |  | The unique identifier of the newly created organization. |
+| `organization_id` | string |  | The unique identifier of the newly created organization. |
 
 
 
@@ -22941,28 +22990,7 @@ CreateOrganizationResponse contains the result of creating a new organization.
 
 
 
-
-#### CreateProducerOnboardingURLRequest {#producerflowproducerv1createproduceronboardingurlrequest}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `agency_id` | [string](#string) |  | Agency ID for which the producer will be onboarded |
-
-| `producer_data` | [ProducerData](#producerflowproducerv1producerdata) |  | Optional producer data to pre-fill in the onboarding form |
-
-
-
-
-
-
-
-
-
-#### CreateProducerOnboardingURLResponse {#producerflowproducerv1createproduceronboardingurlresponse}
+#### CreateProducerOnboardingURLRequest
 
 
 
@@ -22970,7 +22998,9 @@ CreateOrganizationResponse contains the result of creating a new organization.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `onboarding_url` | [string](#string) |  | The secure onboarding URL that can be shared with the producer |
+| `agency_id` | string |  | Agency ID for which the producer will be onboarded |
+
+| `producer_data` | ProducerData |  | Optional producer data to pre-fill in the onboarding form |
 
 
 
@@ -22979,8 +23009,24 @@ CreateOrganizationResponse contains the result of creating a new organization.
 
 
 
+#### CreateProducerOnboardingURLResponse
 
-#### CreateProducerUploadURLRequest {#producerflowproducerv1createproduceruploadurlrequest}
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `onboarding_url` | string |  | The secure onboarding URL that can be shared with the producer |
+
+
+
+
+
+
+
+
+#### CreateProducerUploadURLRequest
 
 CreateProducerUploadURLRequest contains information needed to generate
 a producer upload URL. This includes the agency NPN.
@@ -22989,7 +23035,7 @@ a producer upload URL. This includes the agency NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_npn` | [string](#string) |  | The National Producer Number (NPN) of the agency.
+| `agency_npn` | string |  | The National Producer Number (NPN) of the agency.
 Required and must be a valid NPN format (numeric string between 2-10 digits). |
 
 
@@ -22999,8 +23045,7 @@ Required and must be a valid NPN format (numeric string between 2-10 digits). |
 
 
 
-
-#### CreateProducerUploadURLResponse {#producerflowproducerv1createproduceruploadurlresponse}
+#### CreateProducerUploadURLResponse
 
 CreateProducerUploadURLResponse contains the generated URL for producer uploads
 
@@ -23008,7 +23053,7 @@ CreateProducerUploadURLResponse contains the generated URL for producer uploads
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `url` | [string](#string) |  | URL that can be shared with the agency for producer uploads.
+| `url` | string |  | URL that can be shared with the agency for producer uploads.
 The URL is time-limited and includes necessary security tokens. |
 
 
@@ -23018,8 +23063,7 @@ The URL is time-limited and includes necessary security tokens. |
 
 
 
-
-#### GetAgencyAndProducersRequest {#producerflowproducerv1getagencyandproducersrequest}
+#### GetAgencyAndProducersRequest
 
 GetAgencyAndProducersRequest requests information about an agency and all associated producers.
 
@@ -23027,7 +23071,7 @@ GetAgencyAndProducersRequest requests information about an agency and all associ
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve information for.
+| `agency_id` | string |  | The UUID of the agency to retrieve information for.
 Must be a valid UUID format. |
 
 
@@ -23037,8 +23081,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### GetAgencyAndProducersResponse {#producerflowproducerv1getagencyandproducersresponse}
+#### GetAgencyAndProducersResponse
 
 GetAgencyAndProducersResponse contains the agency information and all associated producers.
 
@@ -23046,11 +23089,9 @@ GetAgencyAndProducersResponse contains the agency information and all associated
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [Agency](#producerflowproducerv1agency) |  | Complete agency information including contact details, principal, and bank account. |
+| `agency` | Agency |  | Complete agency information including contact details, principal, and bank account. |
 
-| `producers` | [Producer](#producerflowproducerv1producer) | repeated | List of all producers associated with the specified agency. |
-
-
+| `producers` | Producer | repeated | List of all producers associated with the specified agency. |
 
 
 
@@ -23058,7 +23099,8 @@ GetAgencyAndProducersResponse contains the agency information and all associated
 
 
 
-#### GetAgencyFilesRequest {#producerflowproducerv1getagencyfilesrequest}
+
+#### GetAgencyFilesRequest
 
 GetAgencyFilesRequest requests URLs for files associated with an agency.
 
@@ -23066,7 +23108,7 @@ GetAgencyFilesRequest requests URLs for files associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve files for.
+| `agency_id` | string |  | The UUID of the agency to retrieve files for.
 Must be a valid UUID format. |
 
 
@@ -23076,8 +23118,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### GetAgencyFilesResponse {#producerflowproducerv1getagencyfilesresponse}
+#### GetAgencyFilesResponse
 
 GetAgencyFilesResponse contains URLs for various documents associated with an agency.
 
@@ -23085,21 +23126,21 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `eo_doc_url` | [string](#string) |  | URL of the Errors & Omissions (E&O) insurance document. |
+| `eo_doc_url` | string |  | URL of the Errors & Omissions (E&O) insurance document. |
 
-| `voided_check_doc_url` | [string](#string) |  | URL of the bank voided check document.
+| `voided_check_doc_url` | string |  | URL of the bank voided check document.
 It's used to safely share bank account information for
 electronic transfers. |
 
-| `w9_doc_url` | [string](#string) |  | URL of the W9 form document.
+| `w9_doc_url` | string |  | URL of the W9 form document.
 It's a U.S. internal revenue service form, an identification
 document used in the onboarding process for tax reporting purposes. |
 
-| `license_doc_url` | [string](#string) |  | URL of the license document.
+| `license_doc_url` | string |  | URL of the license document.
 An identification document that shows that the agency
 is licensed to carry out its operations in the relevant jurisdictions. |
 
-| `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document.
+| `broker_bond_doc_url` | string |  | URL of the broker bond document.
 It's a surety bond that a broker needs to operate legally,
 providing financial security for clients. |
 
@@ -23110,8 +23151,7 @@ providing financial security for clients. |
 
 
 
-
-#### GetOrganizationRequest {#producerflowproducerv1getorganizationrequest}
+#### GetOrganizationRequest
 
 GetOrganizationRequest specifies which organization to retrieve.
 
@@ -23119,7 +23159,7 @@ GetOrganizationRequest specifies which organization to retrieve.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) |  | Unique identifier of the organization to retrieve.
+| `organization_id` | string |  | Unique identifier of the organization to retrieve.
 Must be a valid UUID. |
 
 
@@ -23129,8 +23169,7 @@ Must be a valid UUID. |
 
 
 
-
-#### GetOrganizationResponse {#producerflowproducerv1getorganizationresponse}
+#### GetOrganizationResponse
 
 GetOrganizationResponse contains the details of the requested organization.
 
@@ -23138,7 +23177,7 @@ GetOrganizationResponse contains the details of the requested organization.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization` | [Organization](#producerflowproducerv1organization) |  | The requested organization. |
+| `organization` | Organization |  | The requested organization. |
 
 
 
@@ -23147,8 +23186,7 @@ GetOrganizationResponse contains the details of the requested organization.
 
 
 
-
-#### GetProducerRequest {#producerflowproducerv1getproducerrequest}
+#### GetProducerRequest
 
 GetProducerRequest allows retrieving producer information through one of three
 possible lookup methods: by ID, by NPN, or by email address.
@@ -23157,13 +23195,11 @@ possible lookup methods: by ID, by NPN, or by email address.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id_lookup` | [GetProducerRequest.ProducerIDLookup](#producerflowproducerv1getproducerrequestproduceridlookup) |  | Look up producer by ID. |
+| `producer_id_lookup` | GetProducerRequest.ProducerIDLookup |  | Look up producer by ID. |
 
-| `npn_lookup` | [GetProducerRequest.ProducerNPNLookup](#producerflowproducerv1getproducerrequestproducernpnlookup) |  | Look up producer by NPN. |
+| `npn_lookup` | GetProducerRequest.ProducerNPNLookup |  | Look up producer by NPN. |
 
-| `email_lookup` | [GetProducerRequest.EmailLookup](#producerflowproducerv1getproducerrequestemaillookup) |  | Look up producer by email. |
-
-
+| `email_lookup` | GetProducerRequest.EmailLookup |  | Look up producer by email. |
 
 
 
@@ -23171,7 +23207,8 @@ possible lookup methods: by ID, by NPN, or by email address.
 
 
 
-#### GetProducerRequest.EmailLookup {#producerflowproducerv1getproducerrequestemaillookup}
+
+#### GetProducerRequest.EmailLookup
 
 EmailLookup allows looking up a producer by their email address.
 
@@ -23179,7 +23216,7 @@ EmailLookup allows looking up a producer by their email address.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `email` | [string](#string) |  | The email address of the producer to retrieve.
+| `email` | string |  | The email address of the producer to retrieve.
 Must be a valid email format. |
 
 
@@ -23189,8 +23226,7 @@ Must be a valid email format. |
 
 
 
-
-#### GetProducerRequest.ProducerIDLookup {#producerflowproducerv1getproducerrequestproduceridlookup}
+#### GetProducerRequest.ProducerIDLookup
 
 ProducerIDLookup allows looking up a producer by their unique identifier.
 
@@ -23198,7 +23234,7 @@ ProducerIDLookup allows looking up a producer by their unique identifier.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to retrieve.
+| `producer_id` | string |  | The UUID of the producer to retrieve.
 Must be a valid UUID format. |
 
 
@@ -23208,8 +23244,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### GetProducerRequest.ProducerNPNLookup {#producerflowproducerv1getproducerrequestproducernpnlookup}
+#### GetProducerRequest.ProducerNPNLookup
 
 ProducerNPNLookup allows looking up a producer by their National Producer Number (NPN).
 
@@ -23217,7 +23252,7 @@ ProducerNPNLookup allows looking up a producer by their National Producer Number
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_npn` | [string](#string) |  | The National Producer Number (NPN) of the producer to retrieve.
+| `producer_npn` | string |  | The National Producer Number (NPN) of the producer to retrieve.
 Must be a non-empty string. |
 
 
@@ -23227,8 +23262,7 @@ Must be a non-empty string. |
 
 
 
-
-#### GetProducerResponse {#producerflowproducerv1getproducerresponse}
+#### GetProducerResponse
 
 GetProducerResponse contains the producer information retrieved by the GetProducer RPC.
 
@@ -23236,7 +23270,7 @@ GetProducerResponse contains the producer information retrieved by the GetProduc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer` | [Producer](#producerflowproducerv1producer) |  | The complete producer information including personal details, agency association,
+| `producer` | Producer |  | The complete producer information including personal details, agency association,
 and NIPR data. |
 
 
@@ -23246,8 +23280,7 @@ and NIPR data. |
 
 
 
-
-#### ListAgenciesRequest {#producerflowproducerv1listagenciesrequest}
+#### ListAgenciesRequest
 
 ListAgenciesRequest requests a list of agencies associated with the tenant.
 Supports optional filtering and pagination parameters.
@@ -23256,22 +23289,22 @@ Supports optional filtering and pagination parameters.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organization_id` | [string](#string) | optional | Optional. Filter agencies by organization ID.
+| `organization_id` | string | optional | Optional. Filter agencies by organization ID.
 If provided, only agencies belonging to this organization will be returned. |
 
-| `search_query` | [string](#string) | optional | Optional. Search query to filter agencies by name, NPN, or email.
+| `search_query` | string | optional | Optional. Search query to filter agencies by name, NPN, or email.
 If provided, only agencies matching the search query will be returned. |
 
-| `pagination` | [Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters.
+| `pagination` | Pagination |  | Optional. Pagination parameters.
 If not provided, defaults to page_size=50. |
 
-| `agency_type` | [AgencyType](#producerflowproducerv1agencytype) | optional | Optional. Filter by agency type (internal vs external).
+| `agency_type` | AgencyType | optional | Optional. Filter by agency type (internal vs external).
 If not provided, returns all agencies regardless of type. |
 
-| `entity_type` | [EntityType](#producerflowproducerv1entitytype) | optional | Optional. Filter by entity type (sole proprietor vs agency).
+| `entity_type` | EntityType | optional | Optional. Filter by entity type (sole proprietor vs agency).
 If not provided, returns all agencies regardless of entity type. |
 
-| `nipr_sync_statuses` | [NIPRSyncState](#producerflowproducerv1niprsyncstate) | repeated | Optional. Filter by NIPR sync status.
+| `nipr_sync_statuses` | NIPRSyncState | repeated | Optional. Filter by NIPR sync status.
 If not provided, returns all agencies regardless of sync status. |
 
 
@@ -23281,8 +23314,7 @@ If not provided, returns all agencies regardless of sync status. |
 
 
 
-
-#### ListAgenciesResponse {#producerflowproducerv1listagenciesresponse}
+#### ListAgenciesResponse
 
 ListAgenciesResponse contains the list of agencies matching the filter criteria.
 
@@ -23290,13 +23322,13 @@ ListAgenciesResponse contains the list of agencies matching the filter criteria.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agencies` | [AgencySummary](#producerflowproducerv1agencysummary) | repeated | List of agency summaries matching the filter criteria.
+| `agencies` | AgencySummary | repeated | List of agency summaries matching the filter criteria.
 The agencies are ordered by creation date, most recent first. |
 
-| `next_page_token` | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page.
+| `next_page_token` | string |  | A token that can be sent as `page_token` to retrieve the next page.
 If this field is omitted, there are no subsequent pages. |
 
-| `total_count` | [int32](#int32) |  | Total number of agencies matching the filter criteria. |
+| `total_count` | int32 |  | Total number of agencies matching the filter criteria. |
 
 
 
@@ -23305,8 +23337,7 @@ If this field is omitted, there are no subsequent pages. |
 
 
 
-
-#### ListAgencyContactsRequest {#producerflowproducerv1listagencycontactsrequest}
+#### ListAgencyContactsRequest
 
 ListAgencyContactsRequest requests all contacts associated with an agency.
 
@@ -23314,7 +23345,7 @@ ListAgencyContactsRequest requests all contacts associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve contacts for.
+| `agency_id` | string |  | The UUID of the agency to retrieve contacts for.
 Must be a valid UUID format. |
 
 
@@ -23324,8 +23355,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### ListAgencyContactsResponse {#producerflowproducerv1listagencycontactsresponse}
+#### ListAgencyContactsResponse
 
 ListAgencyContactsResponse contains all contacts associated with an agency.
 
@@ -23333,7 +23363,7 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contacts` | [Contact](#producerflowproducerv1contact) | repeated | List of all contacts associated with the specified agency. |
+| `contacts` | Contact | repeated | List of all contacts associated with the specified agency. |
 
 
 
@@ -23342,8 +23372,7 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 
 
 
-
-#### ListAgencyLocationsRequest {#producerflowproducerv1listagencylocationsrequest}
+#### ListAgencyLocationsRequest
 
 ListAgencyLocationsRequest retrieves all locations for an agency.
 
@@ -23351,7 +23380,7 @@ ListAgencyLocationsRequest retrieves all locations for an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to list locations for. |
+| `agency_id` | string |  | Required. Agency ID to list locations for. |
 
 
 
@@ -23360,8 +23389,7 @@ ListAgencyLocationsRequest retrieves all locations for an agency.
 
 
 
-
-#### ListAgencyLocationsResponse {#producerflowproducerv1listagencylocationsresponse}
+#### ListAgencyLocationsResponse
 
 ListAgencyLocationsResponse contains the list of agency locations.
 
@@ -23369,7 +23397,7 @@ ListAgencyLocationsResponse contains the list of agency locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `locations` | [Location](#producerflowproducerv1location) | repeated | List of all locations associated with the agency. |
+| `locations` | Location | repeated | List of all locations associated with the agency. |
 
 
 
@@ -23378,8 +23406,7 @@ ListAgencyLocationsResponse contains the list of agency locations.
 
 
 
-
-#### ListNewProducersRequest {#producerflowproducerv1listnewproducersrequest}
+#### ListNewProducersRequest
 
 ListNewProducersRequest requests a list of new producers, optionally filtered by agency.
 
@@ -23387,7 +23414,7 @@ ListNewProducersRequest requests a list of new producers, optionally filtered by
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) | optional | Optional agency ID to filter producers by.
+| `agency_id` | string | optional | Optional agency ID to filter producers by.
 If provided, only producers belonging to this agency will be returned.
 If not provided, producers from all agencies will be returned. |
 
@@ -23398,8 +23425,7 @@ If not provided, producers from all agencies will be returned. |
 
 
 
-
-#### ListNewProducersResponse {#producerflowproducerv1listnewproducersresponse}
+#### ListNewProducersResponse
 
 ListNewProducersResponse contains a list of new producers that match the filter criteria.
 
@@ -23407,7 +23433,7 @@ ListNewProducersResponse contains a list of new producers that match the filter 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `new_producers` | [Producer](#producerflowproducerv1producer) | repeated | List of new producers matching the filter criteria.
+| `new_producers` | Producer | repeated | List of new producers matching the filter criteria.
 These are producers typically in the NEW or pending onboarding state. |
 
 
@@ -23417,8 +23443,7 @@ These are producers typically in the NEW or pending onboarding state. |
 
 
 
-
-#### ListOrganizationsRequest {#producerflowproducerv1listorganizationsrequest}
+#### ListOrganizationsRequest
 
 ListOrganizationsRequest requests a list of all organizations associated with the tenant.
 This request requires no parameters  and will return all organizations that
@@ -23428,7 +23453,7 @@ the authenticated tenant has access to.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `pagination` | [Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters.
+| `pagination` | Pagination |  | Optional. Pagination parameters.
 If not provided, defaults to page_size=50. |
 
 
@@ -23438,8 +23463,7 @@ If not provided, defaults to page_size=50. |
 
 
 
-
-#### ListOrganizationsResponse {#producerflowproducerv1listorganizationsresponse}
+#### ListOrganizationsResponse
 
 ListOrganizationsResponse contains the list of organizations associated with the tenant.
 The organizations are returned ordered by name. If the tenant has no organizations,
@@ -23449,15 +23473,15 @@ the organizations list will be empty.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `organizations` | [Organization](#producerflowproducerv1organization) | repeated | List of organizations associated with the tenant.
+| `organizations` | Organization | repeated | List of organizations associated with the tenant.
 Each organization includes its unique identifier and display name.
 The list may be empty if no organizations are associated with the tenant.
 Organizations are ordered alphabetically by name. |
 
-| `next_page_token` | [string](#string) |  | A token that can be sent as `page_token` to retrieve the next page.
+| `next_page_token` | string |  | A token that can be sent as `page_token` to retrieve the next page.
 If this field is omitted, there are no subsequent pages. |
 
-| `total_count` | [int32](#int32) |  | Total number of organizations matching the filter criteria. |
+| `total_count` | int32 |  | Total number of organizations matching the filter criteria. |
 
 
 
@@ -23466,8 +23490,7 @@ If this field is omitted, there are no subsequent pages. |
 
 
 
-
-#### Location {#producerflowproducerv1location}
+#### Location
 
 Location represents a physical or virtual location where an agency operates.
 Each location includes address information and optional contact details.
@@ -23476,19 +23499,17 @@ Each location includes address information and optional contact details.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `id` | [string](#string) |  | Unique identifier for the location. |
+| `id` | string |  | Unique identifier for the location. |
 
-| `name` | [string](#string) |  | Required. Name of the location. Must be unique within the agency. |
+| `name` | string |  | Required. Name of the location. Must be unique within the agency. |
 
-| `address` | [Address](#producerflowproducerv1address) |  | Required. Physical address of the location. |
+| `address` | Address |  | Required. Physical address of the location. |
 
-| `phone` | [string](#string) |  | Required. Phone number for the location. |
+| `phone` | string |  | Required. Phone number for the location. |
 
-| `email` | [string](#string) |  | Required. Email address for the location. |
+| `email` | string |  | Required. Email address for the location. |
 
-| `is_primary` | [bool](#bool) |  | Whether this is the primary location for the agency. |
-
-
+| `is_primary` | bool |  | Whether this is the primary location for the agency. |
 
 
 
@@ -23496,7 +23517,8 @@ Each location includes address information and optional contact details.
 
 
 
-#### LocationInput {#producerflowproducerv1locationinput}
+
+#### LocationInput
 
 LocationInput represents the input data for creating a new location.
 
@@ -23504,17 +23526,15 @@ LocationInput represents the input data for creating a new location.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `name` | [string](#string) |  | Required. Name of the location. Must be unique within the agency. |
+| `name` | string |  | Required. Name of the location. Must be unique within the agency. |
 
-| `address` | [Address](#producerflowproducerv1address) |  | Required. Physical address of the location. |
+| `address` | Address |  | Required. Physical address of the location. |
 
-| `phone` | [string](#string) |  | Required. Phone number for the location. |
+| `phone` | string |  | Required. Phone number for the location. |
 
-| `email` | [string](#string) |  | Required. Email address for the location. |
+| `email` | string |  | Required. Email address for the location. |
 
-| `is_primary` | [bool](#bool) |  | Whether this should be marked as the primary location. |
-
-
+| `is_primary` | bool |  | Whether this should be marked as the primary location. |
 
 
 
@@ -23522,7 +23542,8 @@ LocationInput represents the input data for creating a new location.
 
 
 
-#### LookupNPNByFEINRequest {#producerflowproducerv1lookupnpnbyfeinrequest}
+
+#### LookupNPNByFEINRequest
 
 LookupNPNByFEINRequest is used to look up a producer's National Producer Number by their Federal Employer Identification Number (FEIN).
 
@@ -23530,7 +23551,7 @@ LookupNPNByFEINRequest is used to look up a producer's National Producer Number 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up.
+| `fein` | string |  | The Federal Employer Identification Number (FEIN) to look up.
 Required and must be exactly 9 characters. |
 
 
@@ -23540,8 +23561,7 @@ Required and must be exactly 9 characters. |
 
 
 
-
-#### LookupNPNByFEINResponse {#producerflowproducerv1lookupnpnbyfeinresponse}
+#### LookupNPNByFEINResponse
 
 LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
 
@@ -23549,7 +23569,7 @@ LookupNPNByFEINResponse contains the National Producer Number (NPN) for the prod
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) for the producer. |
+| `npn` | string |  | The National Producer Number (NPN) for the producer. |
 
 
 
@@ -23558,8 +23578,7 @@ LookupNPNByFEINResponse contains the National Producer Number (NPN) for the prod
 
 
 
-
-#### NewAgencyRequest {#producerflowproducerv1newagencyrequest}
+#### NewAgencyRequest
 
 NewAgencyRequest contains complete information for creating a new agency
 
@@ -23567,9 +23586,9 @@ NewAgencyRequest contains complete information for creating a new agency
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency` | [NewAgencyRequest.Agency](#producerflowproducerv1newagencyrequestagency) |  |  |
+| `agency` | NewAgencyRequest.Agency |  |  |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -23580,8 +23599,7 @@ If specified, this value takes precedence over the tenant's default behavior. |
 
 
 
-
-#### NewAgencyRequest.Agency {#producerflowproducerv1newagencyrequestagency}
+#### NewAgencyRequest.Agency
 
 Agency contains all information about the agency to be created
 
@@ -23589,59 +23607,59 @@ Agency contains all information about the agency to be created
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `name` | [string](#string) |  | The name of the agency. |
+| `name` | string |  | The name of the agency. |
 
-| `email` | [string](#string) |  | The email address of the agency. |
+| `email` | string |  | The email address of the agency. |
 
-| `npn` | [string](#string) |  | National Producer Number for the agency
+| `npn` | string |  | National Producer Number for the agency
 Required for ENTITY_TYPE_AGENCY if FEIN is not provided
 Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR |
 
-| `phone` | [string](#string) |  | The phone number of the agency. |
+| `phone` | string |  | The phone number of the agency. |
 
-| `website` | [string](#string) |  | The website of the agency. |
+| `website` | string |  | The website of the agency. |
 
-| `principal` | [NewAgencyRequest.Agency.Principal](#producerflowproducerv1newagencyrequestagencyprincipal) |  | Information about the agency's principal.
+| `principal` | NewAgencyRequest.Agency.Principal |  | Information about the agency's principal.
 This is a required field as each agency must have a principal. |
 
-| `bank_account` | [NewAgencyRequest.Agency.BankAccount](#producerflowproducerv1newagencyrequestagencybankaccount) |  |  |
+| `bank_account` | NewAgencyRequest.Agency.BankAccount |  |  |
 
-| `eo_info` | [NewAgencyRequest.Agency.EOInfo](#producerflowproducerv1newagencyrequestagencyeoinfo) |  |  |
+| `eo_info` | NewAgencyRequest.Agency.EOInfo |  |  |
 
-| `business_hours` | [NewAgencyRequest.Agency.BusinessHours](#producerflowproducerv1newagencyrequestagencybusinesshours) |  |  |
+| `business_hours` | NewAgencyRequest.Agency.BusinessHours |  |  |
 
-| `producers` | [NewProducer](#producerflowproducerv1newproducer) | repeated | List of producers associated with the agency |
+| `producers` | NewProducer | repeated | List of producers associated with the agency |
 
-| `points_of_contact` | [NewAgencyRequest.Agency.PointOfContact](#producerflowproducerv1newagencyrequestagencypointofcontact) | repeated |  |
+| `points_of_contact` | NewAgencyRequest.Agency.PointOfContact | repeated |  |
 
-| `root_organization_id` | [string](#string) | optional | RootOrganizationID represents the ID of the root organization that the agency belongs to.
+| `root_organization_id` | string | optional | RootOrganizationID represents the ID of the root organization that the agency belongs to.
 An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
 We currently don't support multiple levels of organizations or agencies.
 Agencies are not always part of an organization, so this field is optional.
 To get valid organization IDs, use the ListOrganizations RPC. |
 
-| `entity_type` | [EntityType](#producerflowproducerv1entitytype) |  | EntityType represents the type of business entity for an agency. |
+| `entity_type` | EntityType |  | EntityType represents the type of business entity for an agency. |
 
-| `fein` | [string](#string) | optional | FEIN represents the Federal Employer Identification Number of the agency.
+| `fein` | string | optional | FEIN represents the Federal Employer Identification Number of the agency.
 Required for ENTITY_TYPE_AGENCY
 Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR |
 
-| `mailing_address` | [Address](#producerflowproducerv1address) |  | MailingAddress represents the mailing address of the agency. |
+| `mailing_address` | Address |  | MailingAddress represents the mailing address of the agency. |
 
-| `physical_address` | [Address](#producerflowproducerv1address) |  | PhysicalAddress represents the physical address of the agency. |
+| `physical_address` | Address |  | PhysicalAddress represents the physical address of the agency. |
 
-| `invoicing_address` | [Address](#producerflowproducerv1address) |  | InvoicingAddress represents the invoicing address of the agency. |
+| `invoicing_address` | Address |  | InvoicingAddress represents the invoicing address of the agency. |
 
-| `tenant_agency_id` | [string](#string) |  | TenantAgencyID represents the ID of the agency in the tenant.
+| `tenant_agency_id` | string |  | TenantAgencyID represents the ID of the agency in the tenant.
 This is used to link the agency to the tenant. |
 
-| `locations` | [LocationInput](#producerflowproducerv1locationinput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
+| `locations` | LocationInput | repeated | Optional field that allows specifying multiple locations during agency creation. |
 
-| `metadata_questions` | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#producerflowproducerv1newagencyrequestagencymetadataquestionsentry) | repeated | MetadataQuestions contains custom metadata questions and answers for the agency.
+| `metadata_questions` | NewAgencyRequest.Agency.MetadataQuestionsEntry | repeated | MetadataQuestions contains custom metadata questions and answers for the agency.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. |
 
-| `tenant_additional_questions` | [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#producerflowproducerv1newagencyrequestagencytenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
+| `tenant_additional_questions` | NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. |
 
@@ -23652,8 +23670,7 @@ values are the answers provided. |
 
 
 
-
-#### NewAgencyRequest.Agency.BankAccount {#producerflowproducerv1newagencyrequestagencybankaccount}
+#### NewAgencyRequest.Agency.BankAccount
 
 BankAccount contains banking information for commission payments
 This is used to store the bank account information for the agency
@@ -23662,15 +23679,13 @@ This is used to store the bank account information for the agency
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `account_number` | [string](#string) |  |  |
+| `account_number` | string |  |  |
 
-| `routing_number` | [string](#string) |  | Routing number for the bank account |
+| `routing_number` | string |  | Routing number for the bank account |
 
-| `account_type` | [NewAgencyRequest.Agency.BankAccount.AccountType](#producerflowproducerv1newagencyrequestagencybankaccountaccounttype) |  | Type of account (checking or savings) |
+| `account_type` | NewAgencyRequest.Agency.BankAccount.AccountType |  | Type of account (checking or savings) |
 
-| `account_holder_name` | [string](#string) |  | Name of the account holder |
-
-
+| `account_holder_name` | string |  | Name of the account holder |
 
 
 
@@ -23678,7 +23693,8 @@ This is used to store the bank account information for the agency
 
 
 
-#### NewAgencyRequest.Agency.BusinessHours {#producerflowproducerv1newagencyrequestagencybusinesshours}
+
+#### NewAgencyRequest.Agency.BusinessHours
 
 BusinessHours contains the business hours of the agency
 
@@ -23686,11 +23702,9 @@ BusinessHours contains the business hours of the agency
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `timezone` | [string](#string) |  | Timezone of the agency |
+| `timezone` | string |  | Timezone of the agency |
 
-| `business_hours` | [NewAgencyRequest.Agency.BusinessHours.BusinessHour](#producerflowproducerv1newagencyrequestagencybusinesshoursbusinesshour) | repeated |  |
-
-
+| `business_hours` | NewAgencyRequest.Agency.BusinessHours.BusinessHour | repeated |  |
 
 
 
@@ -23698,7 +23712,8 @@ BusinessHours contains the business hours of the agency
 
 
 
-#### NewAgencyRequest.Agency.BusinessHours.BusinessHour {#producerflowproducerv1newagencyrequestagencybusinesshoursbusinesshour}
+
+#### NewAgencyRequest.Agency.BusinessHours.BusinessHour
 
 
 
@@ -23706,13 +23721,11 @@ BusinessHours contains the business hours of the agency
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `week_days` | [google.type.DayOfWeek](#googletypedayofweek) | repeated | Days of the week when the agency is open |
+| `week_days` | google.type.DayOfWeek | repeated | Days of the week when the agency is open |
 
-| `opening_time` | [google.type.TimeOfDay](#googletypetimeofday) |  | Time when the agency opens |
+| `opening_time` | google.type.TimeOfDay |  | Time when the agency opens |
 
-| `closing_time` | [google.type.TimeOfDay](#googletypetimeofday) |  | Time when the agency closes |
-
-
+| `closing_time` | google.type.TimeOfDay |  | Time when the agency closes |
 
 
 
@@ -23720,7 +23733,8 @@ BusinessHours contains the business hours of the agency
 
 
 
-#### NewAgencyRequest.Agency.EOInfo {#producerflowproducerv1newagencyrequestagencyeoinfo}
+
+#### NewAgencyRequest.Agency.EOInfo
 
 EOInfo contains Errors & Omissions insurance information
 
@@ -23728,17 +23742,15 @@ EOInfo contains Errors & Omissions insurance information
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `carrier` | [string](#string) |  | Insurance carrier providing the E&O coverage |
+| `carrier` | string |  | Insurance carrier providing the E&O coverage |
 
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will expire |
+| `expiration_date` | google.protobuf.Timestamp |  | Date when the E&O coverage will expire |
 
-| `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit) |
+| `coverage_amount` | string |  | Amount of coverage provided by the E&O policy (aggregate limit) |
 
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will become effective |
+| `effective_date` | google.protobuf.Timestamp |  | Date when the E&O coverage will become effective |
 
-| `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy |
-
-
+| `per_occurrence` | string |  | Per occurrence limit for the E&O policy |
 
 
 
@@ -23746,7 +23758,8 @@ EOInfo contains Errors & Omissions insurance information
 
 
 
-#### NewAgencyRequest.Agency.MetadataQuestionsEntry {#producerflowproducerv1newagencyrequestagencymetadataquestionsentry}
+
+#### NewAgencyRequest.Agency.MetadataQuestionsEntry
 
 
 
@@ -23754,11 +23767,9 @@ EOInfo contains Errors & Omissions insurance information
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -23766,7 +23777,8 @@ EOInfo contains Errors & Omissions insurance information
 
 
 
-#### NewAgencyRequest.Agency.PointOfContact {#producerflowproducerv1newagencyrequestagencypointofcontact}
+
+#### NewAgencyRequest.Agency.PointOfContact
 
 PointOfContact contains contact information for the agency. Each point of contact
 consists of an email address with an associated role. Carriers will send specific
@@ -23778,11 +23790,9 @@ the carrier will be sent to that email address.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `email` | [string](#string) |  | Email address of the point of contact |
+| `email` | string |  | Email address of the point of contact |
 
-| `role` | [NewAgencyRequest.Agency.PointOfContact.CommunicationRole](#producerflowproducerv1newagencyrequestagencypointofcontactcommunicationrole) |  | Role of the point of contact |
-
-
+| `role` | NewAgencyRequest.Agency.PointOfContact.CommunicationRole |  | Role of the point of contact |
 
 
 
@@ -23790,7 +23800,8 @@ the carrier will be sent to that email address.
 
 
 
-#### NewAgencyRequest.Agency.Principal {#producerflowproducerv1newagencyrequestagencyprincipal}
+
+#### NewAgencyRequest.Agency.Principal
 
 Principal is a data structure that represents the principal of a agency.
 A principal is the person or entity that is responsible for the day-to-day operations of the agency.
@@ -23800,28 +23811,30 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `first_name` | [string](#string) |  | The first name of the principal. |
+| `first_name` | string |  | The first name of the principal. |
 
-| `last_name` | [string](#string) |  | The last name of the principal. |
+| `last_name` | string |  | The last name of the principal. |
 
-| `middle_name` | [string](#string) |  | The middle name of the principal. |
+| `middle_name` | string |  | The middle name of the principal. |
 
-| `email` | [string](#string) |  | The email address of the principal. |
+| `email` | string |  | The email address of the principal. |
 
-| `phone` | [string](#string) |  | The phone number of the principal. |
+| `phone` | string |  | The phone number of the principal. |
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) of the principal. |
+| `npn` | string |  | The National Producer Number (NPN) of the principal. |
 
-| `tenant_id` | [string](#string) |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
+| `tenant_id` | string |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR.
+| `sync_with_nipr` | bool | optional | Optional. Controls whether the principal should be validated and synced with NIPR.
 If set to false, the principal's NPN will not be validated against NIPR and the
 principal will not be synced with NIPR. Defaults to true if not specified. |
 
-| `tenant_additional_questions` | [NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry](#producerflowproducerv1newagencyrequestagencyprincipaltenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
+| `tenant_additional_questions` | NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. |
 
+| `mailing_address` | Address |  | The mailing address of the principal.
+This is where correspondence for the principal will be sent. |
 
 
 
@@ -23830,27 +23843,7 @@ values are the answers provided. |
 
 
 
-#### NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry {#producerflowproducerv1newagencyrequestagencyprincipaltenantadditionalquestionsentry}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `key` | [string](#string) |  |  |
-
-| `value` | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-#### NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry {#producerflowproducerv1newagencyrequestagencytenantadditionalquestionsentry}
+#### NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry
 
 
 
@@ -23858,11 +23851,9 @@ values are the answers provided. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -23870,7 +23861,27 @@ values are the answers provided. |
 
 
 
-#### NewAgencyResponse {#producerflowproducerv1newagencyresponse}
+
+#### NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry
+
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `key` | string |  |  |
+
+| `value` | string |  |  |
+
+
+
+
+
+
+
+
+#### NewAgencyResponse
 
 NewAgencyResponse contains the IDs of created resources after a successful agency creation
 
@@ -23878,15 +23889,13 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Unique identifier for the created agency |
+| `agency_id` | string |  | Unique identifier for the created agency |
 
-| `producer_ids` | [string](#string) | repeated | List of unique identifiers for any producers created with the agency |
+| `producer_ids` | string | repeated | List of unique identifiers for any producers created with the agency |
 
-| `principal_id` | [string](#string) |  | Unique identifier for the principal producer |
+| `principal_id` | string |  | Unique identifier for the principal producer |
 
-| `location_ids` | [string](#string) | repeated | IDs of the locations created for the agency (if any were provided in the request) |
-
-
+| `location_ids` | string | repeated | IDs of the locations created for the agency (if any were provided in the request) |
 
 
 
@@ -23894,7 +23903,8 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 
 
 
-#### NewContact {#producerflowproducerv1newcontact}
+
+#### NewContact
 
 NewContact represents the data needed to create a new contact in the system.
 Contacts represent non-producer individuals associated with an agency.
@@ -23903,32 +23913,30 @@ Contacts represent non-producer individuals associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `first_name` | [string](#string) |  | First name of the contact.
+| `first_name` | string |  | First name of the contact.
 Required and must be non-empty. |
 
-| `last_name` | [string](#string) |  | Last name of the contact.
+| `last_name` | string |  | Last name of the contact.
 Required and must be non-empty. |
 
-| `middle_name` | [string](#string) |  | Middle name of the contact.
+| `middle_name` | string |  | Middle name of the contact.
 Optional. |
 
-| `email` | [string](#string) |  | Email address of the contact.
+| `email` | string |  | Email address of the contact.
 Required and must be a valid email format.
 Must be unique within the tenant. |
 
-| `phone` | [string](#string) |  | Phone number of the contact.
+| `phone` | string |  | Phone number of the contact.
 Optional if default value, but if provided must match the pattern of a valid phone number. |
 
-| `address` | [Address](#producerflowproducerv1address) |  | Mailing address of the contact. |
+| `address` | Address |  | Mailing address of the contact. |
 
-| `role` | [string](#string) |  | Role or position of the contact within the agency.
+| `role` | string |  | Role or position of the contact within the agency.
 Required and must be non-empty. |
 
-| `tenant_id` | [string](#string) |  | Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters |
+| `tenant_id` | string |  | Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters |
 
-| `npn` | [string](#string) | optional | National Producer Number (NPN) of the contact. |
-
-
+| `npn` | string | optional | National Producer Number (NPN) of the contact. |
 
 
 
@@ -23936,7 +23944,8 @@ Required and must be non-empty. |
 
 
 
-#### NewContactRequest {#producerflowproducerv1newcontactrequest}
+
+#### NewContactRequest
 
 NewContactRequest is used to create a new contact and associate it with an agency.
 
@@ -23944,10 +23953,10 @@ NewContactRequest is used to create a new contact and associate it with an agenc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the contact with.
+| `agency_id` | string |  | The UUID of the agency to associate the contact with.
 Must be a valid UUID format. |
 
-| `contact` | [NewContact](#producerflowproducerv1newcontact) |  | Information about the contact to create. |
+| `contact` | NewContact |  | Information about the contact to create. |
 
 
 
@@ -23956,8 +23965,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### NewContactResponse {#producerflowproducerv1newcontactresponse}
+#### NewContactResponse
 
 NewContactResponse contains the ID of the created contact.
 
@@ -23965,7 +23973,7 @@ NewContactResponse contains the ID of the created contact.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contact_id` | [string](#string) |  | The UUID of the created contact.
+| `contact_id` | string |  | The UUID of the created contact.
 Must be a valid UUID format. |
 
 
@@ -23975,8 +23983,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### NewContactsRequest {#producerflowproducerv1newcontactsrequest}
+#### NewContactsRequest
 
 NewContactsRequest is used to create multiple contacts in a single request.
 All contacts will be associated with the specified agency.
@@ -23985,10 +23992,10 @@ All contacts will be associated with the specified agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the contacts with.
+| `agency_id` | string |  | The UUID of the agency to associate the contacts with.
 Must be a valid UUID format. |
 
-| `contacts` | [NewContact](#producerflowproducerv1newcontact) | repeated | List of contacts to create.
+| `contacts` | NewContact | repeated | List of contacts to create.
 This field is required and must contain at least one contact. |
 
 
@@ -23998,8 +24005,7 @@ This field is required and must contain at least one contact. |
 
 
 
-
-#### NewContactsResponse {#producerflowproducerv1newcontactsresponse}
+#### NewContactsResponse
 
 NewContactsResponse contains the IDs of all created contacts.
 
@@ -24007,7 +24013,7 @@ NewContactsResponse contains the IDs of all created contacts.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `contact_ids` | [string](#string) | repeated | List of UUIDs for the newly created contacts.
+| `contact_ids` | string | repeated | List of UUIDs for the newly created contacts.
 The order matches the order of contacts in the request. |
 
 
@@ -24017,8 +24023,7 @@ The order matches the order of contacts in the request. |
 
 
 
-
-#### NewProducer {#producerflowproducerv1newproducer}
+#### NewProducer
 
 NewProducer represents the data needed to create a new producer in the system.
 
@@ -24026,37 +24031,37 @@ NewProducer represents the data needed to create a new producer in the system.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `first_name` | [string](#string) |  | First name of the producer.
+| `first_name` | string |  | First name of the producer.
 Required and must be non-empty. |
 
-| `last_name` | [string](#string) |  | Last name of the producer.
+| `last_name` | string |  | Last name of the producer.
 Required and must be non-empty. |
 
-| `middle_name` | [string](#string) |  | Middle name of the producer.
+| `middle_name` | string |  | Middle name of the producer.
 Optional. |
 
-| `email` | [string](#string) |  | Email address of the producer.
+| `email` | string |  | Email address of the producer.
 Required and must be a valid email format.
 Must be unique within the tenant. |
 
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the producer. |
+| `npn` | string |  | National Producer Number (NPN) of the producer. |
 
-| `phone` | [string](#string) |  | Phone number of the producer.
+| `phone` | string |  | Phone number of the producer.
 Optional if default value, but if provided must match the pattern of a valid phone number. |
 
-| `mailing_address` | [NewProducer.Address](#producerflowproducerv1newproduceraddress) |  | Mailing address of the producer.
+| `mailing_address` | NewProducer.Address |  | Mailing address of the producer.
 This is where correspondence will be sent. |
 
-| `tenant_id` | [string](#string) |  | Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters. |
+| `tenant_id` | string |  | Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters. |
 
-| `location_ids` | [string](#string) | repeated | Optional list of location IDs to assign to the producer during creation.
+| `location_ids` | string | repeated | Optional list of location IDs to assign to the producer during creation.
 All locations must exist and belong to the specified agency. |
 
-| `metadata_questions` | [NewProducer.MetadataQuestionsEntry](#producerflowproducerv1newproducermetadataquestionsentry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer.
+| `metadata_questions` | NewProducer.MetadataQuestionsEntry | repeated | MetadataQuestions contains custom metadata questions and answers for the producer.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. |
 
-| `tenant_additional_questions` | [NewProducer.TenantAdditionalQuestionsEntry](#producerflowproducerv1newproducertenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
+| `tenant_additional_questions` | NewProducer.TenantAdditionalQuestionsEntry | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. |
 
@@ -24067,8 +24072,7 @@ values are the answers provided. |
 
 
 
-
-#### NewProducer.Address {#producerflowproducerv1newproduceraddress}
+#### NewProducer.Address
 
 Address represents a mailing address for the producer.
 
@@ -24076,19 +24080,19 @@ Address represents a mailing address for the producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) |  | Street address of the producer.
+| `street` | string |  | Street address of the producer.
 Required and must be non-empty. |
 
-| `city` | [string](#string) |  | City of the producer.
+| `city` | string |  | City of the producer.
 Required and must be non-empty. |
 
-| `state` | [string](#string) |  | State of the producer.
+| `state` | string |  | State of the producer.
 Required and must be a 2-letter state code. |
 
-| `zip` | [string](#string) |  | Zip code of the producer.
+| `zip` | string |  | Zip code of the producer.
 Required and must be between 1 and 10 characters. |
 
-| `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
+| `address_line_2` | string | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 
 
@@ -24097,28 +24101,7 @@ Required and must be between 1 and 10 characters. |
 
 
 
-
-#### NewProducer.MetadataQuestionsEntry {#producerflowproducerv1newproducermetadataquestionsentry}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `key` | [string](#string) |  |  |
-
-| `value` | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-#### NewProducer.TenantAdditionalQuestionsEntry {#producerflowproducerv1newproducertenantadditionalquestionsentry}
+#### NewProducer.MetadataQuestionsEntry
 
 
 
@@ -24126,11 +24109,9 @@ Required and must be between 1 and 10 characters. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -24138,7 +24119,27 @@ Required and must be between 1 and 10 characters. |
 
 
 
-#### NewProducerRequest {#producerflowproducerv1newproducerrequest}
+
+#### NewProducer.TenantAdditionalQuestionsEntry
+
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `key` | string |  |  |
+
+| `value` | string |  |  |
+
+
+
+
+
+
+
+
+#### NewProducerRequest
 
 NewProducerRequest is used to create a new producer and associate it with an agency.
 This will trigger a call to the NIPR API to retrieve license information of the producer.
@@ -24147,13 +24148,13 @@ This will trigger a call to the NIPR API to retrieve license information of the 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the producer with.
+| `agency_id` | string |  | The UUID of the agency to associate the producer with.
 Must be a valid UUID format. |
 
-| `producer` | [NewProducer](#producerflowproducerv1newproducer) |  | Information about the producer to create.
+| `producer` | NewProducer |  | Information about the producer to create.
 This field is required. |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -24164,8 +24165,7 @@ If specified, this value takes precedence over the tenant's default behavior. |
 
 
 
-
-#### NewProducerResponse {#producerflowproducerv1newproducerresponse}
+#### NewProducerResponse
 
 NewProducerResponse contains the ID of the created producer.
 
@@ -24173,7 +24173,7 @@ NewProducerResponse contains the ID of the created producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the created producer.
+| `producer_id` | string |  | The UUID of the created producer.
 Must be a valid UUID format. |
 
 
@@ -24183,8 +24183,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### NewProducersRequest {#producerflowproducerv1newproducersrequest}
+#### NewProducersRequest
 
 NewProducersRequest is used to create multiple producers in a single request.
 All producers will be associated with the specified agency.
@@ -24193,13 +24192,13 @@ All producers will be associated with the specified agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to associate the producers with.
+| `agency_id` | string |  | The UUID of the agency to associate the producers with.
 Must be a valid UUID format. |
 
-| `producers` | [NewProducer](#producerflowproducerv1newproducer) | repeated | List of producers to create.
+| `producers` | NewProducer | repeated | List of producers to create.
 This field is required and must contain at least one producer. |
 
-| `sync_with_nipr` | [bool](#bool) | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
+| `sync_with_nipr` | bool | optional | Optional. Overrides the tenant's default NIPR sync setting during onboarding.
 Most tenants have this enabled by default, so it usually doesn't need to be set.
 If specified, this value takes precedence over the tenant's default behavior. |
 
@@ -24210,8 +24209,7 @@ If specified, this value takes precedence over the tenant's default behavior. |
 
 
 
-
-#### NewProducersResponse {#producerflowproducerv1newproducersresponse}
+#### NewProducersResponse
 
 NewProducersResponse contains the IDs of all created producers.
 
@@ -24219,7 +24217,7 @@ NewProducersResponse contains the IDs of all created producers.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_ids` | [string](#string) | repeated | List of UUIDs for the newly created producers.
+| `producer_ids` | string | repeated | List of UUIDs for the newly created producers.
 The order matches the order of producers in the request. |
 
 
@@ -24229,8 +24227,7 @@ The order matches the order of producers in the request. |
 
 
 
-
-#### Organization {#producerflowproducerv1organization}
+#### Organization
 
 Organization represents a logical grouping or hierarchical structure within a tenant.
 Organizations can be used to organize agencies into meaningful groups
@@ -24240,16 +24237,16 @@ such as agency networks, aggregators, or other business hierarchies.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `id` | [string](#string) |  | Unique identifier for the organization.
+| `id` | string |  | Unique identifier for the organization.
 This is a UUID that can be used to reference the organization in other API calls. |
 
-| `name` | [string](#string) |  | Display name of the organization.
+| `name` | string |  | Display name of the organization.
 This is the human-readable name that identifies the organization to users. |
 
-| `external_id` | [string](#string) |  | External identifier for the organization.
+| `external_id` | string |  | External identifier for the organization.
 This is the identifier used by the tenant's system to identify the organization. |
 
-| `email` | [string](#string) |  | Contact email address for the organization. |
+| `email` | string |  | Contact email address for the organization. |
 
 
 
@@ -24258,8 +24255,7 @@ This is the identifier used by the tenant's system to identify the organization.
 
 
 
-
-#### Pagination {#producerflowproducerv1pagination}
+#### Pagination
 
 Pagination provides page token and page size for paginating list results.
 
@@ -24267,11 +24263,11 @@ Pagination provides page token and page size for paginating list results.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `page_size` | [int32](#int32) |  | The maximum number of items to return. The service may return fewer than this value.
+| `page_size` | int32 |  | The maximum number of items to return. The service may return fewer than this value.
 If unspecified, at most 50 items will be returned.
 The maximum value is 200; values above 200 will be rejected. |
 
-| `page_token` | [string](#string) |  | A page token, received from a previous list call.
+| `page_token` | string |  | A page token, received from a previous list call.
 Provide this to retrieve the subsequent page.
 When paginating, all other parameters must match the call that provided the page token. |
 
@@ -24282,8 +24278,7 @@ When paginating, all other parameters must match the call that provided the page
 
 
 
-
-#### Producer {#producerflowproducerv1producer}
+#### Producer
 
 Producer represents a producer that has been onboarded.
 
@@ -24293,48 +24288,48 @@ Internal ID of the producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `id` | [string](#string) |  |  |
+| `id` | string |  |  |
 
-| `first_name` | [string](#string) |  | First name of the producer. |
+| `first_name` | string |  | First name of the producer. |
 
-| `middle_name` | [string](#string) |  | Middle name of the producer. |
+| `middle_name` | string |  | Middle name of the producer. |
 
-| `last_name` | [string](#string) |  | Last name of the producer. |
+| `last_name` | string |  | Last name of the producer. |
 
-| `email` | [string](#string) |  | The email address of the producer.
+| `email` | string |  | The email address of the producer.
 Used for communication and must be unique within the tenant.
 Must be a valid email format. |
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) of the producer.
+| `npn` | string |  | The National Producer Number (NPN) of the producer.
 This is used to retrieve license information from the NIPR API.
 Must be non-empty. |
 
-| `phone` | [string](#string) |  | Phone number of the producer. |
+| `phone` | string |  | Phone number of the producer. |
 
-| `pdb_alerts_sync_enabled` | [bool](#bool) |  | Indicates whether the producer is enabled to be synchronized with NIPR API.
+| `pdb_alerts_sync_enabled` | bool |  | Indicates whether the producer is enabled to be synchronized with NIPR API.
 When true, the system will regularly check for updates from NIPR. |
 
-| `agency` | [Producer.Agency](#producerflowproducerv1produceragency) |  | Basic information about the agency this producer is associated with. |
+| `agency` | Producer.Agency |  | Basic information about the agency this producer is associated with. |
 
-| `nipr` | [Producer.NIPR](#producerflowproducerv1producernipr) |  | Data synchronized from the NIPR service.
+| `nipr` | Producer.NIPR |  | Data synchronized from the NIPR service.
 Contains license information, biographic data, regulatory actions,
 and carrier appointments. |
 
-| `is_principal` | [bool](#bool) |  | Indicates whether this producer is the principal of an agency.
+| `is_principal` | bool |  | Indicates whether this producer is the principal of an agency.
 A principal producer has additional responsibilities and permissions. |
 
-| `requested_appointments` | [string](#string) | repeated | The list of requested appointments for the producer. |
+| `requested_appointments` | string | repeated | The list of requested appointments for the producer. |
 
-| `address` | [Producer.Address](#producerflowproducerv1produceraddress) |  | Address of the producer. |
+| `address` | Producer.Address |  | Address of the producer. |
 
-| `locations` | [Location](#producerflowproducerv1location) | repeated | Locations assigned to this producer. |
+| `locations` | Location | repeated | Locations assigned to this producer. |
 
-| `metadata_questions` | [Producer.MetadataQuestionsEntry](#producerflowproducerv1producermetadataquestionsentry) | repeated | MetadataQuestions contains custom metadata questions and answers for the producer.
+| `metadata_questions` | Producer.MetadataQuestionsEntry | repeated | MetadataQuestions contains custom metadata questions and answers for the producer.
 This field stores tenant-specific questions that need to be asked during producer onboarding.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. |
 
-| `external_metadata` | [Producer.ExternalMetadataEntry](#producerflowproducerv1producerexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+| `external_metadata` | Producer.ExternalMetadataEntry | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
 reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
 Common use cases include:
@@ -24344,7 +24339,7 @@ Common use cases include:
 - Storing computed values or derived data
 The map key is the metadata field name, and the value is the associated data. |
 
-| `tenant_additional_questions` | [Producer.TenantAdditionalQuestionsEntry](#producerflowproducerv1producertenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
+| `tenant_additional_questions` | Producer.TenantAdditionalQuestionsEntry | repeated | tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. |
 
@@ -24355,8 +24350,7 @@ values are the answers provided. |
 
 
 
-
-#### Producer.Address {#producerflowproducerv1produceraddress}
+#### Producer.Address
 
 Address represents a mailing address for the producer.
 
@@ -24364,17 +24358,15 @@ Address represents a mailing address for the producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) |  | Street address of the producer. |
+| `street` | string |  | Street address of the producer. |
 
-| `city` | [string](#string) |  | City of the producer. |
+| `city` | string |  | City of the producer. |
 
-| `state` | [string](#string) |  | State of the producer. |
+| `state` | string |  | State of the producer. |
 
-| `zip` | [string](#string) |  | Zip code of the producer. |
+| `zip` | string |  | Zip code of the producer. |
 
-| `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
-
-
+| `address_line_2` | string | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 
 
@@ -24382,7 +24374,8 @@ Address represents a mailing address for the producer.
 
 
 
-#### Producer.Agency {#producerflowproducerv1produceragency}
+
+#### Producer.Agency
 
 Agency contains basic information about the agency this producer is associated with.
 
@@ -24390,29 +24383,9 @@ Agency contains basic information about the agency this producer is associated w
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Unique identifier for the associated agency. |
+| `agency_id` | string |  | Unique identifier for the associated agency. |
 
-| `name` | [string](#string) |  | Name of the associated agency. |
-
-
-
-
-
-
-
-
-
-#### Producer.ExternalMetadataEntry {#producerflowproducerv1producerexternalmetadataentry}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `key` | [string](#string) |  |  |
-
-| `value` | [string](#string) |  |  |
+| `name` | string |  | Name of the associated agency. |
 
 
 
@@ -24421,8 +24394,7 @@ Agency contains basic information about the agency this producer is associated w
 
 
 
-
-#### Producer.MetadataQuestionsEntry {#producerflowproducerv1producermetadataquestionsentry}
+#### Producer.ExternalMetadataEntry
 
 
 
@@ -24430,11 +24402,9 @@ Agency contains basic information about the agency this producer is associated w
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -24442,7 +24412,27 @@ Agency contains basic information about the agency this producer is associated w
 
 
 
-#### Producer.NIPR {#producerflowproducerv1producernipr}
+
+#### Producer.MetadataQuestionsEntry
+
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `key` | string |  |  |
+
+| `value` | string |  |  |
+
+
+
+
+
+
+
+
+#### Producer.NIPR
 
 NIPR contains data synchronized from the National Insurance Producer Registry.
 
@@ -24450,13 +24440,13 @@ NIPR contains data synchronized from the National Insurance Producer Registry.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `licenses` | [Producer.NIPR.License](#producerflowproducerv1producerniprlicense) | repeated | List of all licenses held by the producer across different states. |
+| `licenses` | Producer.NIPR.License | repeated | List of all licenses held by the producer across different states. |
 
-| `biographic` | [Producer.NIPR.Biographic](#producerflowproducerv1producerniprbiographic) |  | Biographic information of the producer from NIPR |
+| `biographic` | Producer.NIPR.Biographic |  | Biographic information of the producer from NIPR |
 
-| `regulatory_info` | [Producer.NIPR.ProducerRegulatoryInfo](#producerflowproducerv1producerniprproducerregulatoryinfo) |  | Producer's regulatory information from NIPR |
+| `regulatory_info` | Producer.NIPR.ProducerRegulatoryInfo |  | Producer's regulatory information from NIPR |
 
-| `appointments` | [Producer.NIPR.Appointment](#producerflowproducerv1producerniprappointment) | repeated | List of carrier appointments held by the producer in NIPR.
+| `appointments` | Producer.NIPR.Appointment | repeated | List of carrier appointments held by the producer in NIPR.
 These represent relationships with insurance carriers that allow
 the producer to sell their products. |
 
@@ -24467,8 +24457,7 @@ the producer to sell their products. |
 
 
 
-
-#### Producer.NIPR.Appointment {#producerflowproducerv1producerniprappointment}
+#### Producer.NIPR.Appointment
 
 Appointment represents a relationship between a producer and an insurance carrier.
 
@@ -24476,30 +24465,28 @@ Appointment represents a relationship between a producer and an insurance carrie
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `branch_id` | [string](#string) |  |  |
+| `branch_id` | string |  |  |
 
-| `company_name` | [string](#string) |  | Name of the insurance company for this appointment. |
+| `company_name` | string |  | Name of the insurance company for this appointment. |
 
-| `fein` | [string](#string) |  | Federal Employer Identification Number of the producer's company. |
+| `fein` | string |  | Federal Employer Identification Number of the producer's company. |
 
-| `co_code` | [string](#string) |  | Company code for the insurance carrier. |
+| `co_code` | string |  | Company code for the insurance carrier. |
 
-| `line_of_authority` | [string](#string) |  | Line of authority for this appointment (e.g., Life, Property, Casualty).
+| `line_of_authority` | string |  | Line of authority for this appointment (e.g., Life, Property, Casualty).
 Indicates what types of insurance the producer can sell. |
 
-| `loa_code` | [string](#string) |  | Code for the line of authority for this appointment. |
+| `loa_code` | string |  | Code for the line of authority for this appointment. |
 
-| `status` | [string](#string) |  | Current status of the appointment (e.g., Active, Terminated). |
+| `status` | string |  | Current status of the appointment (e.g., Active, Terminated). |
 
-| `termination_reason` | [string](#string) |  | Reason for termination if the appointment has been terminated. |
+| `termination_reason` | string |  | Reason for termination if the appointment has been terminated. |
 
-| `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date associated with the current status or reason. |
+| `status_reason_date` | google.protobuf.Timestamp |  | Date associated with the current status or reason. |
 
-| `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. |
+| `appointment_renewal_date` | google.protobuf.Timestamp |  | Date when the appointment will renew. |
 
-| `agency_affiliations` | [string](#string) |  | Additional affiliations or roles the producer has with the agency. |
-
-
+| `agency_affiliations` | string |  | Additional affiliations or roles the producer has with the agency. |
 
 
 
@@ -24507,7 +24494,8 @@ Indicates what types of insurance the producer can sell. |
 
 
 
-#### Producer.NIPR.Biographic {#producerflowproducerv1producerniprbiographic}
+
+#### Producer.NIPR.Biographic
 
 Biographic contains personal and identifying information about the producer.
 
@@ -24515,19 +24503,19 @@ Biographic contains personal and identifying information about the producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `last_name` | [string](#string) |  | Last name of the producer as recorded in NIPR. |
+| `last_name` | string |  | Last name of the producer as recorded in NIPR. |
 
-| `first_name` | [string](#string) |  | First name of the producer as recorded in NIPR. |
+| `first_name` | string |  | First name of the producer as recorded in NIPR. |
 
-| `middle_name` | [string](#string) |  | Middle name of the producer as recorded in NIPR. |
+| `middle_name` | string |  | Middle name of the producer as recorded in NIPR. |
 
-| `date_of_birth` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date of birth of the producer. |
+| `date_of_birth` | google.protobuf.Timestamp |  | Date of birth of the producer. |
 
-| `fein` | [string](#string) |  | Federal Employer Identification Number if the producer is a business entity. |
+| `fein` | string |  | Federal Employer Identification Number if the producer is a business entity. |
 
-| `company_name` | [string](#string) |  | Company name if the producer is a business entity. |
+| `company_name` | string |  | Company name if the producer is a business entity. |
 
-| `state_domicile` | [string](#string) |  | State of domicile (resident state) for the producer.
+| `state_domicile` | string |  | State of domicile (resident state) for the producer.
 This is the state where the producer is primarily located. |
 
 
@@ -24537,8 +24525,7 @@ This is the state where the producer is primarily located. |
 
 
 
-
-#### Producer.NIPR.License {#producerflowproducerv1producerniprlicense}
+#### Producer.NIPR.License
 
 License contains information about a producer's insurance license.
 
@@ -24546,23 +24533,23 @@ License contains information about a producer's insurance license.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `license_number` | [string](#string) |  | The license number assigned by the state regulatory authority. |
+| `license_number` | string |  | The license number assigned by the state regulatory authority. |
 
-| `license_state` | [string](#string) |  | The state that issued the license.
+| `license_state` | string |  | The state that issued the license.
 Typically a two-letter state code. |
 
-| `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license.
+| `residency_status` | string |  | Indicates whether this is a resident or non-resident license.
 Values are typically "Resident" or "Non-Resident". |
 
-| `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
+| `active` | bool |  | Indicates whether the license is currently active. |
 
-| `status` | [Producer.NIPR.License.LicenseStatus](#producerflowproducerv1producerniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
+| `status` | Producer.NIPR.License.LicenseStatus |  | The current status of the license (valid, expired, etc.). |
 
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license will expire if not renewed. |
+| `expiration_date` | google.protobuf.Timestamp |  | The date when the license will expire if not renewed. |
 
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
+| `updated_at` | google.protobuf.Timestamp |  | The last time this license information was updated from NIPR. |
 
-| `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerflowproducerv1producerniprlicenselineofauthority) | repeated | Lines of Authority associated with this license.
+| `lines_of_authority` | Producer.NIPR.License.LineOfAuthority | repeated | Lines of Authority associated with this license.
 These define what types of insurance the producer can sell in this state. |
 
 
@@ -24572,8 +24559,7 @@ These define what types of insurance the producer can sell in this state. |
 
 
 
-
-#### Producer.NIPR.License.LineOfAuthority {#producerflowproducerv1producerniprlicenselineofauthority}
+#### Producer.NIPR.License.LineOfAuthority
 
 LineOfAuthority represents a specific type of insurance coverage
 that a producer is authorized to sell under this license.
@@ -24582,14 +24568,12 @@ that a producer is authorized to sell under this license.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `loa` | [string](#string) |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
+| `loa` | string |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
 This is typically an uppercase string that describes the insurance type. |
 
-| `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. |
+| `active` | bool |  | Whether this Line of Authority is currently active. |
 
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when this Line of Authority was issued. |
-
-
+| `issue_date` | google.protobuf.Timestamp |  | The date when this Line of Authority was issued. |
 
 
 
@@ -24597,7 +24581,8 @@ This is typically an uppercase string that describes the insurance type. |
 
 
 
-#### Producer.NIPR.ProducerRegulatoryInfo {#producerflowproducerv1producerniprproducerregulatoryinfo}
+
+#### Producer.NIPR.ProducerRegulatoryInfo
 
 ProducerRegulatoryInfo contains regulatory information about a producer,
 including any regulatory actions taken against them.
@@ -24606,14 +24591,12 @@ including any regulatory actions taken against them.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `regulatory_actions_by_state` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerflowproducerv1producerniprproducerregulatoryinforegulatoryactionsbystateentry) | repeated | Map of regulatory actions by state.
+| `regulatory_actions_by_state` | Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry | repeated | Map of regulatory actions by state.
 The key is the state code, and the value is the regulatory action. |
 
-| `clearance_certification_info` | [string](#string) |  | Clearance certification information for the producer. |
+| `clearance_certification_info` | string |  | Clearance certification information for the producer. |
 
-| `nasd_exam_details` | [string](#string) |  | Details about NASD/FINRA examinations taken by the producer. |
-
-
+| `nasd_exam_details` | string |  | Details about NASD/FINRA examinations taken by the producer. |
 
 
 
@@ -24621,7 +24604,8 @@ The key is the state code, and the value is the regulatory action. |
 
 
 
-#### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction {#producerflowproducerv1producerniprproducerregulatoryinforegulatoryaction}
+
+#### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
 
 RegulatoryAction represents a regulatory action taken against a producer.
 
@@ -24629,46 +24613,26 @@ RegulatoryAction represents a regulatory action taken against a producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `action_id` | [string](#string) |  | Unique identifier for the regulatory action. |
+| `action_id` | string |  | Unique identifier for the regulatory action. |
 
-| `origin_of_action` | [string](#string) |  | The regulatory body that originated the action.
+| `origin_of_action` | string |  | The regulatory body that originated the action.
 Typically a state insurance department or FINRA. |
 
-| `reason_for_action` | [string](#string) |  | The reason why the regulatory action was taken. |
+| `reason_for_action` | string |  | The reason why the regulatory action was taken. |
 
-| `disposition` | [string](#string) |  | The outcome or resolution of the regulatory action. |
+| `disposition` | string |  | The outcome or resolution of the regulatory action. |
 
-| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was taken. |
+| `date_of_action` | google.protobuf.Timestamp |  | The date when the regulatory action was taken. |
 
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action became effective. |
+| `effective_date` | google.protobuf.Timestamp |  | The date when the regulatory action became effective. |
 
-| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the producer entered into the regulatory action. |
+| `enter_date` | google.protobuf.Timestamp |  | The date when the producer entered into the regulatory action. |
 
-| `file_ref` | [string](#string) |  | Reference number for the regulatory action file. |
+| `file_ref` | string |  | Reference number for the regulatory action file. |
 
-| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties associated with the regulatory action. |
+| `penalty_fine_forfeiture` | string |  | Any financial penalties associated with the regulatory action. |
 
-| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. |
-
-
-
-
-
-
-
-
-
-#### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry {#producerflowproducerv1producerniprproducerregulatoryinforegulatoryactionsbystateentry}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `key` | [string](#string) |  |  |
-
-| `value` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerflowproducerv1producerniprproducerregulatoryinforegulatoryaction) |  |  |
+| `length_of_order` | string |  | Duration of any orders associated with the regulatory action. |
 
 
 
@@ -24677,8 +24641,7 @@ Typically a state insurance department or FINRA. |
 
 
 
-
-#### Producer.TenantAdditionalQuestionsEntry {#producerflowproducerv1producertenantadditionalquestionsentry}
+#### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
 
 
 
@@ -24686,39 +24649,9 @@ Typically a state insurance department or FINRA. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
-
-
-
-
-
-
-
-#### ProducerData {#producerflowproducerv1producerdata}
-
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-
-| `npn` | [string](#string) | optional |  |
-
-| `first_name` | [string](#string) | optional | First name of the producer |
-
-| `last_name` | [string](#string) | optional | Last name of the producer |
-
-| `middle_name` | [string](#string) | optional | Middle name of the producer |
-
-| `email` | [string](#string) | optional | Email address of the producer |
-
-| `phone` | [string](#string) | optional | Phone number of the producer |
-
-| `mailing_address` | [ProducerData.Address](#producerflowproducerv1producerdataaddress) |  | Mailing address of the producer |
+| `value` | Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction |  |  |
 
 
 
@@ -24727,8 +24660,7 @@ Typically a state insurance department or FINRA. |
 
 
 
-
-#### ProducerData.Address {#producerflowproducerv1producerdataaddress}
+#### Producer.TenantAdditionalQuestionsEntry
 
 
 
@@ -24736,17 +24668,9 @@ Typically a state insurance department or FINRA. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `city` | [string](#string) |  |  |
-
-| `state` | [string](#string) |  |  |
-
-| `zip` | [string](#string) |  |  |
-
-| `country` | [string](#string) |  |  |
-
-| `address_line_2` | [string](#string) | optional |  |
+| `value` | string |  |  |
 
 
 
@@ -24755,8 +24679,63 @@ Typically a state insurance department or FINRA. |
 
 
 
+#### ProducerData
 
-#### RemoveAgencyLocationsRequest {#producerflowproducerv1removeagencylocationsrequest}
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `npn` | string | optional |  |
+
+| `first_name` | string | optional | First name of the producer |
+
+| `last_name` | string | optional | Last name of the producer |
+
+| `middle_name` | string | optional | Middle name of the producer |
+
+| `email` | string | optional | Email address of the producer |
+
+| `phone` | string | optional | Phone number of the producer |
+
+| `mailing_address` | ProducerData.Address |  | Mailing address of the producer |
+
+
+
+
+
+
+
+
+#### ProducerData.Address
+
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+
+| `street` | string |  |  |
+
+| `city` | string |  |  |
+
+| `state` | string |  |  |
+
+| `zip` | string |  |  |
+
+| `country` | string |  |  |
+
+| `address_line_2` | string | optional |  |
+
+
+
+
+
+
+
+
+#### RemoveAgencyLocationsRequest
 
 RemoveAgencyLocationsRequest removes locations from an agency.
 
@@ -24764,11 +24743,9 @@ RemoveAgencyLocationsRequest removes locations from an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID to remove locations from. |
+| `agency_id` | string |  | Required. Agency ID to remove locations from. |
 
-| `location_ids` | [string](#string) | repeated | Required. IDs of locations to remove. |
-
-
+| `location_ids` | string | repeated | Required. IDs of locations to remove. |
 
 
 
@@ -24776,7 +24753,8 @@ RemoveAgencyLocationsRequest removes locations from an agency.
 
 
 
-#### RemoveAgencyLocationsResponse {#producerflowproducerv1removeagencylocationsresponse}
+
+#### RemoveAgencyLocationsResponse
 
 RemoveAgencyLocationsResponse contains the results of removing locations.
 
@@ -24784,7 +24762,7 @@ RemoveAgencyLocationsResponse contains the results of removing locations.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `removed_location_ids` | [string](#string) | repeated | IDs of successfully removed locations. |
+| `removed_location_ids` | string | repeated | IDs of successfully removed locations. |
 
 
 
@@ -24793,8 +24771,7 @@ RemoveAgencyLocationsResponse contains the results of removing locations.
 
 
 
-
-#### ResyncAgencyRequest {#producerflowproducerv1resyncagencyrequest}
+#### ResyncAgencyRequest
 
 ResyncAgencyRequest is used to trigger a manual resynchronization of agency data.
 This will re-fetch all data from the NIPR API for the agency and all associated producers.
@@ -24803,7 +24780,7 @@ This will re-fetch all data from the NIPR API for the agency and all associated 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to resynchronize.
+| `agency_id` | string |  | The UUID of the agency to resynchronize.
 Must be a valid UUID format. |
 
 
@@ -24813,8 +24790,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### ResyncAgencyResponse {#producerflowproducerv1resyncagencyresponse}
+#### ResyncAgencyResponse
 
 ResyncAgencyResponse is the empty response returned after successfully triggering a resynchronization.
 
@@ -24825,8 +24801,7 @@ ResyncAgencyResponse is the empty response returned after successfully triggerin
 
 
 
-
-#### ResyncProducerRequest {#producerflowproducerv1resyncproducerrequest}
+#### ResyncProducerRequest
 
 ResyncProducerRequest is used to trigger a manual resynchronization of producer data.
 
@@ -24834,7 +24809,7 @@ ResyncProducerRequest is used to trigger a manual resynchronization of producer 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to resynchronize.
+| `producer_id` | string |  | The UUID of the producer to resynchronize.
 Must be a valid UUID format. |
 
 
@@ -24844,8 +24819,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### ResyncProducerResponse {#producerflowproducerv1resyncproducerresponse}
+#### ResyncProducerResponse
 
 ResyncProducerResponse is the empty response returned after successfully triggering a resynchronization.
 
@@ -24856,8 +24830,7 @@ ResyncProducerResponse is the empty response returned after successfully trigger
 
 
 
-
-#### SetExternalIDRequest {#producerflowproducerv1setexternalidrequest}
+#### SetExternalIDRequest
 
 SetExternalIDRequest is used to associate an external identifier with a producer, agency, or contact.
 This allows integration with external systems that use different ID schemes.
@@ -24868,17 +24841,15 @@ Only one entity type can be specified.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to set an external ID for. |
+| `producer_id` | string |  | The UUID of the producer to set an external ID for. |
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to set an external ID for. |
+| `agency_id` | string |  | The UUID of the agency to set an external ID for. |
 
-| `contact_id` | [string](#string) |  | The UUID of the contact to set an external ID for. |
+| `contact_id` | string |  | The UUID of the contact to set an external ID for. |
 
-| `organization_id` | [string](#string) |  | The UUID of the organization to set an external ID for. |
+| `organization_id` | string |  | The UUID of the organization to set an external ID for. |
 
-| `tenant_id` | [string](#string) |  | External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters |
-
-
+| `tenant_id` | string |  | External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters |
 
 
 
@@ -24886,7 +24857,8 @@ Only one entity type can be specified.
 
 
 
-#### SetExternalIDResponse {#producerflowproducerv1setexternalidresponse}
+
+#### SetExternalIDResponse
 
 SetExternalIDResponse is the empty response returned after successfully setting an external ID.
 
@@ -24897,8 +24869,7 @@ SetExternalIDResponse is the empty response returned after successfully setting 
 
 
 
-
-#### StopSyncAgencyWithNIPRRequest {#producerflowproducerv1stopsyncagencywithniprrequest}
+#### StopSyncAgencyWithNIPRRequest
 
 StopSyncAgencyWithNIPRRequest is used to stop synchronizing an agency's data with the NIPR API.
 
@@ -24906,10 +24877,10 @@ StopSyncAgencyWithNIPRRequest is used to stop synchronizing an agency's data wit
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to stop synchronizing.
+| `agency_id` | string |  | The UUID of the agency to stop synchronizing.
 Must be a valid UUID format. |
 
-| `stop_all_producers` | [bool](#bool) |  | If true, all producers associated with the agency will be stopped from synchronizing.
+| `stop_all_producers` | bool |  | If true, all producers associated with the agency will be stopped from synchronizing.
 If false, only the agency will be stopped from synchronizing. |
 
 
@@ -24919,8 +24890,7 @@ If false, only the agency will be stopped from synchronizing. |
 
 
 
-
-#### StopSyncAgencyWithNIPRResponse {#producerflowproducerv1stopsyncagencywithniprresponse}
+#### StopSyncAgencyWithNIPRResponse
 
 StopSyncAgencyWithNIPRResponse is the empty response returned after successfully stopping the synchronization of an agency's data with the NIPR API.
 
@@ -24931,8 +24901,7 @@ StopSyncAgencyWithNIPRResponse is the empty response returned after successfully
 
 
 
-
-#### StopSyncProducerWithNIPRRequest {#producerflowproducerv1stopsyncproducerwithniprrequest}
+#### StopSyncProducerWithNIPRRequest
 
 StopSyncProducerWithNIPRRequest is used to stop synchronizing a producer's data with the NIPR API.
 
@@ -24940,7 +24909,7 @@ StopSyncProducerWithNIPRRequest is used to stop synchronizing a producer's data 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to stop synchronizing.
+| `producer_id` | string |  | The UUID of the producer to stop synchronizing.
 Must be a valid UUID format. |
 
 
@@ -24950,8 +24919,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### StopSyncProducerWithNIPRResponse {#producerflowproducerv1stopsyncproducerwithniprresponse}
+#### StopSyncProducerWithNIPRResponse
 
 StopSyncProducerWithNIPRResponse is the empty response returned after successfully stopping the synchronization of a producer's data with the NIPR API.
 
@@ -24962,8 +24930,7 @@ StopSyncProducerWithNIPRResponse is the empty response returned after successful
 
 
 
-
-#### SyncAgencyWithNIPRRequest {#producerflowproducerv1syncagencywithniprrequest}
+#### SyncAgencyWithNIPRRequest
 
 SyncAgencyWithNIPRRequest is used to synchronize an agency's data with the NIPR API.
 
@@ -24971,10 +24938,10 @@ SyncAgencyWithNIPRRequest is used to synchronize an agency's data with the NIPR 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The UUID of the agency to synchronize.
+| `agency_id` | string |  | The UUID of the agency to synchronize.
 Must be a valid UUID format. |
 
-| `sync_all_producers` | [bool](#bool) |  | If true, all producers associated with the agency will be synchronized.
+| `sync_all_producers` | bool |  | If true, all producers associated with the agency will be synchronized.
 If false, only the agency will be synchronized. |
 
 
@@ -24984,8 +24951,7 @@ If false, only the agency will be synchronized. |
 
 
 
-
-#### SyncAgencyWithNIPRResponse {#producerflowproducerv1syncagencywithniprresponse}
+#### SyncAgencyWithNIPRResponse
 
 SyncAgencyWithNIPRResponse is the empty response returned after successfully synchronizing an agency's data with the NIPR API.
 
@@ -24996,8 +24962,7 @@ SyncAgencyWithNIPRResponse is the empty response returned after successfully syn
 
 
 
-
-#### SyncProducerWithNIPRRequest {#producerflowproducerv1syncproducerwithniprrequest}
+#### SyncProducerWithNIPRRequest
 
 SyncProducerWithNIPRRequest is used to synchronize a producer's data with the NIPR API.
 
@@ -25005,7 +24970,7 @@ SyncProducerWithNIPRRequest is used to synchronize a producer's data with the NI
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The UUID of the producer to synchronize.
+| `producer_id` | string |  | The UUID of the producer to synchronize.
 Must be a valid UUID format. |
 
 
@@ -25015,8 +24980,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### SyncProducerWithNIPRResponse {#producerflowproducerv1syncproducerwithniprresponse}
+#### SyncProducerWithNIPRResponse
 
 SyncProducerWithNIPRResponse is the empty response returned after successfully synchronizing a producer's data with the NIPR API.
 
@@ -25027,8 +24991,7 @@ SyncProducerWithNIPRResponse is the empty response returned after successfully s
 
 
 
-
-#### UnassignProducerFromLocationsRequest {#producerflowproducerv1unassignproducerfromlocationsrequest}
+#### UnassignProducerFromLocationsRequest
 
 UnassignProducerFromLocationsRequest removes location assignments from a producer.
 
@@ -25036,11 +24999,9 @@ UnassignProducerFromLocationsRequest removes location assignments from a produce
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | Required. Producer ID to unassign locations from. |
+| `producer_id` | string |  | Required. Producer ID to unassign locations from. |
 
-| `location_ids` | [string](#string) | repeated | Required. Location IDs to unassign (1-100 items). |
-
-
+| `location_ids` | string | repeated | Required. Location IDs to unassign (1-100 items). |
 
 
 
@@ -25048,7 +25009,8 @@ UnassignProducerFromLocationsRequest removes location assignments from a produce
 
 
 
-#### UnassignProducerFromLocationsResponse {#producerflowproducerv1unassignproducerfromlocationsresponse}
+
+#### UnassignProducerFromLocationsResponse
 
 UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 
@@ -25056,7 +25018,7 @@ UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `unassigned_location_ids` | [string](#string) | repeated | IDs of successfully unassigned locations. |
+| `unassigned_location_ids` | string | repeated | IDs of successfully unassigned locations. |
 
 
 
@@ -25065,8 +25027,7 @@ UnassignProducerFromLocationsResponse contains the unassigned location IDs.
 
 
 
-
-#### UpdateAgencyLocationRequest {#producerflowproducerv1updateagencylocationrequest}
+#### UpdateAgencyLocationRequest
 
 UpdateAgencyLocationRequest updates an existing agency location.
 
@@ -25074,21 +25035,19 @@ UpdateAgencyLocationRequest updates an existing agency location.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | Required. Agency ID that owns the location. |
+| `agency_id` | string |  | Required. Agency ID that owns the location. |
 
-| `location_id` | [string](#string) |  | Required. Location ID to update. |
+| `location_id` | string |  | Required. Location ID to update. |
 
-| `name` | [string](#string) | optional | Optional. New name for the location. Must be unique within the agency. |
+| `name` | string | optional | Optional. New name for the location. Must be unique within the agency. |
 
-| `address` | [Address](#producerflowproducerv1address) | optional | Optional. New address for the location. |
+| `address` | Address | optional | Optional. New address for the location. |
 
-| `phone` | [string](#string) | optional | Optional. New phone number. Must be in E.164 format. |
+| `phone` | string | optional | Optional. New phone number. Must be in E.164 format. |
 
-| `email` | [string](#string) | optional | Optional. New email address. |
+| `email` | string | optional | Optional. New email address. |
 
-| `is_primary` | [bool](#bool) | optional | Optional. Whether this should be the primary location. |
-
-
+| `is_primary` | bool | optional | Optional. Whether this should be the primary location. |
 
 
 
@@ -25096,7 +25055,8 @@ UpdateAgencyLocationRequest updates an existing agency location.
 
 
 
-#### UpdateAgencyLocationResponse {#producerflowproducerv1updateagencylocationresponse}
+
+#### UpdateAgencyLocationResponse
 
 UpdateAgencyLocationResponse contains the updated location details.
 
@@ -25104,7 +25064,7 @@ UpdateAgencyLocationResponse contains the updated location details.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `location` | [Location](#producerflowproducerv1location) |  | The updated location with all current values. |
+| `location` | Location |  | The updated location with all current values. |
 
 
 
@@ -25113,8 +25073,7 @@ UpdateAgencyLocationResponse contains the updated location details.
 
 
 
-
-#### UpdateAgencyRequest {#producerflowproducerv1updateagencyrequest}
+#### UpdateAgencyRequest
 
 UpdateAgencyRequest contains the fields that can be updated in an agency record.
 Only information collected during the onboarding process can be updated.
@@ -25125,10 +25084,10 @@ All fields are optional, allowing partial updates.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `agency_id` | [string](#string) |  | The ID of the agency to update.
+| `agency_id` | string |  | The ID of the agency to update.
 Must be a valid UUID format. |
 
-| `agency` | [UpdateAgencyRequest.Agency](#producerflowproducerv1updateagencyrequestagency) |  | The agency information to update. |
+| `agency` | UpdateAgencyRequest.Agency |  | The agency information to update. |
 
 
 
@@ -25137,8 +25096,7 @@ Must be a valid UUID format. |
 
 
 
-
-#### UpdateAgencyRequest.Agency {#producerflowproducerv1updateagencyrequestagency}
+#### UpdateAgencyRequest.Agency
 
 Agency contains the fields that can be updated for an agency.
 All fields are optional, allowing partial updates.
@@ -25147,23 +25105,23 @@ All fields are optional, allowing partial updates.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `email` | [string](#string) | optional | Email address of the agency. |
+| `email` | string | optional | Email address of the agency. |
 
-| `phone` | [string](#string) | optional | Phone number of the agency. |
+| `phone` | string | optional | Phone number of the agency. |
 
-| `fax` | [string](#string) | optional | Fax number of the agency. |
+| `fax` | string | optional | Fax number of the agency. |
 
-| `website` | [string](#string) | optional | Website URL of the agency. |
+| `website` | string | optional | Website URL of the agency. |
 
-| `requested_appointments` | [string](#string) | repeated | List of requested appointments for the agency (state codes).
+| `requested_appointments` | string | repeated | List of requested appointments for the agency (state codes).
 The list contains a list of two-lettercd  country codes where the appointments are requested.
 The only valid values are the U.S country codes. |
 
-| `notes` | [string](#string) | optional |  |
+| `notes` | string | optional |  |
 
-| `physical_address` | [UpdateAgencyRequest.Agency.Address](#producerflowproducerv1updateagencyrequestagencyaddress) | optional | Physical address of the agency. |
+| `physical_address` | UpdateAgencyRequest.Agency.Address | optional | Physical address of the agency. |
 
-| `external_metadata` | [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#producerflowproducerv1updateagencyrequestagencyexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+| `external_metadata` | UpdateAgencyRequest.Agency.ExternalMetadataEntry | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
 reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
 Common use cases include:
@@ -25185,8 +25143,7 @@ Update behavior:
 
 
 
-
-#### UpdateAgencyRequest.Agency.Address {#producerflowproducerv1updateagencyrequestagencyaddress}
+#### UpdateAgencyRequest.Agency.Address
 
 Address represents a physical location with standard address components.
 All fields are optional, allowing partial updates of address fields.
@@ -25196,19 +25153,19 @@ Address fields cannot be cleared - if provided, they must have valid values.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `street` | [string](#string) | optional | Street address including house/building number and street name.
+| `street` | string | optional | Street address including house/building number and street name.
 If provided, must be non-empty. |
 
-| `city` | [string](#string) | optional | City of the address.
+| `city` | string | optional | City of the address.
 If provided, must be non-empty. |
 
-| `state` | [string](#string) | optional | State of the address.
+| `state` | string | optional | State of the address.
 If provided, must be exactly 2 characters (state code). |
 
-| `zip` | [string](#string) | optional | Zip code of the address.
+| `zip` | string | optional | Zip code of the address.
 If provided, must be between 1 and 10 characters. |
 
-| `address_line_2` | [string](#string) | optional | Additional address line (e.g., apartment, suite, floor number).
+| `address_line_2` | string | optional | Additional address line (e.g., apartment, suite, floor number).
 If provided, must be non-empty. |
 
 
@@ -25218,8 +25175,7 @@ If provided, must be non-empty. |
 
 
 
-
-#### UpdateAgencyRequest.Agency.ExternalMetadataEntry {#producerflowproducerv1updateagencyrequestagencyexternalmetadataentry}
+#### UpdateAgencyRequest.Agency.ExternalMetadataEntry
 
 
 
@@ -25227,11 +25183,9 @@ If provided, must be non-empty. |
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -25239,7 +25193,8 @@ If provided, must be non-empty. |
 
 
 
-#### UpdateAgencyResponse {#producerflowproducerv1updateagencyresponse}
+
+#### UpdateAgencyResponse
 
 UpdateAgencyResponse is the empty response returned after successfully updating an agency.
 
@@ -25250,8 +25205,7 @@ UpdateAgencyResponse is the empty response returned after successfully updating 
 
 
 
-
-#### UpdateProducerRequest {#producerflowproducerv1updateproducerrequest}
+#### UpdateProducerRequest
 
 UpdateProducerRequest contains the fields that can be updated in a producer record.
 Only information collected during the onboarding process can be updated.
@@ -25261,10 +25215,10 @@ Information from NIPR and other third-party sources cannot be updated directly.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `producer_id` | [string](#string) |  | The ID of the producer to update.
+| `producer_id` | string |  | The ID of the producer to update.
 Must be a valid UUID format. |
 
-| `producer` | [UpdateProducerRequest.Producer](#producerflowproducerv1updateproducerrequestproducer) |  | The producer information to update.
+| `producer` | UpdateProducerRequest.Producer |  | The producer information to update.
 The field is required. |
 
 
@@ -25274,8 +25228,7 @@ The field is required. |
 
 
 
-
-#### UpdateProducerRequest.Producer {#producerflowproducerv1updateproducerrequestproducer}
+#### UpdateProducerRequest.Producer
 
 Producer contains the fields that can be updated for a producer.
 All fields are optional, allowing partial updates.
@@ -25284,42 +25237,42 @@ All fields are optional, allowing partial updates.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `first_name` | [string](#string) | optional | First name of the producer.
+| `first_name` | string | optional | First name of the producer.
 If provided, must be non-empty. |
 
-| `last_name` | [string](#string) | optional | Last name of the producer.
+| `last_name` | string | optional | Last name of the producer.
 If provided, must be non-empty. |
 
-| `middle_name` | [string](#string) | optional | Middle name of the producer.
+| `middle_name` | string | optional | Middle name of the producer.
 If provided, must be non-empty. |
 
-| `email` | [string](#string) | optional | Email address of the producer.
+| `email` | string | optional | Email address of the producer.
 If provided, must be a valid email format.
 Must be unique within the tenant. |
 
-| `npn` | [string](#string) | optional | **Deprecated.** National Producer Number (NPN) of the producer.
+| `npn` | string | optional | **Deprecated.** National Producer Number (NPN) of the producer.
 If provided, must be non-empty.
 Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version. |
 
-| `phone` | [string](#string) | optional | Phone number of the producer.
+| `phone` | string | optional | Phone number of the producer.
 If provided, must be a valid phone number format. |
 
-| `street` | [string](#string) | optional | Street address of the producer.
+| `street` | string | optional | Street address of the producer.
 If provided, must be non-empty. |
 
-| `address_line_2` | [string](#string) | optional | Second line of the address (apartment, suite, unit, etc.).
+| `address_line_2` | string | optional | Second line of the address (apartment, suite, unit, etc.).
 If provided, must be non-empty. |
 
-| `city` | [string](#string) | optional | City of the producer.
+| `city` | string | optional | City of the producer.
 If provided, must be non-empty. |
 
-| `state` | [string](#string) | optional | State of the producer.
+| `state` | string | optional | State of the producer.
 If provided, must be a valid 2-letter US state code. |
 
-| `zip` | [string](#string) | optional | ZIP code of the producer's address.
+| `zip` | string | optional | ZIP code of the producer's address.
 If provided, must be at least 5 characters. |
 
-| `external_metadata` | [UpdateProducerRequest.Producer.ExternalMetadataEntry](#producerflowproducerv1updateproducerrequestproducerexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+| `external_metadata` | UpdateProducerRequest.Producer.ExternalMetadataEntry | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
 reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
 Common use cases include:
@@ -25341,8 +25294,7 @@ Update behavior:
 
 
 
-
-#### UpdateProducerRequest.Producer.ExternalMetadataEntry {#producerflowproducerv1updateproducerrequestproducerexternalmetadataentry}
+#### UpdateProducerRequest.Producer.ExternalMetadataEntry
 
 
 
@@ -25350,11 +25302,9 @@ Update behavior:
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `key` | [string](#string) |  |  |
+| `key` | string |  |  |
 
-| `value` | [string](#string) |  |  |
-
-
+| `value` | string |  |  |
 
 
 
@@ -25362,7 +25312,8 @@ Update behavior:
 
 
 
-#### UpdateProducerResponse {#producerflowproducerv1updateproducerresponse}
+
+#### UpdateProducerResponse
 
 UpdateProducerResponse is the empty response returned after successfully updating a producer.
 
@@ -25373,8 +25324,7 @@ UpdateProducerResponse is the empty response returned after successfully updatin
 
 
 
-
-#### ValidateAgencyNPNRequest {#producerflowproducerv1validateagencynpnrequest}
+#### ValidateAgencyNPNRequest
 
 ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
 
@@ -25382,7 +25332,7 @@ ValidateAgencyNPNRequest is used to validate an agency's National Producer Numbe
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate.
+| `npn` | string |  | The National Producer Number (NPN) to validate.
 Required and must be non-empty. |
 
 
@@ -25392,8 +25342,7 @@ Required and must be non-empty. |
 
 
 
-
-#### ValidateAgencyNPNResponse {#producerflowproducerv1validateagencynpnresponse}
+#### ValidateAgencyNPNResponse
 
 ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 
@@ -25401,7 +25350,7 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid.
+| `valid` | bool |  | Indicates whether the NPN is valid.
 True if the NPN exists and is valid, false otherwise. |
 
 
@@ -25411,8 +25360,7 @@ True if the NPN exists and is valid, false otherwise. |
 
 
 
-
-#### ValidateProducerNPNRequest {#producerflowproducerv1validateproducernpnrequest}
+#### ValidateProducerNPNRequest
 
 ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
 
@@ -25420,10 +25368,10 @@ ValidateProducerNPNRequest is used to validate a producer's National Producer Nu
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate.
+| `npn` | string |  | The National Producer Number (NPN) to validate.
 Required and must be non-empty. |
 
-| `name` | [string](#string) | optional | Optional name of the producer to validate.
+| `name` | string | optional | Optional name of the producer to validate.
 If provided, the NPN will be validated against this name. |
 
 
@@ -25433,8 +25381,7 @@ If provided, the NPN will be validated against this name. |
 
 
 
-
-#### ValidateProducerNPNResponse {#producerflowproducerv1validateproducernpnresponse}
+#### ValidateProducerNPNResponse
 
 ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
@@ -25442,7 +25389,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid.
+| `valid` | bool |  | Indicates whether the NPN is valid.
 True if the NPN exists and is valid, false otherwise. |
 
 
@@ -25460,10 +25407,10 @@ True if the NPN exists and is valid, false otherwise. |
 
 
 
-### producerflow/appointment/v1/appointment.proto - Enums
+### producerflow/appointment/v1/appointment.proto
 
 
-#### AppointmentType {#producerflowappointmentv1appointmenttype}
+#### AppointmentType
 
 Type of appointment.
 
@@ -25489,7 +25436,7 @@ terminated. |
 
 
 
-#### OperationalStatus {#producerflowappointmentv1operationalstatus}
+#### OperationalStatus
 
 OperationalStatus represents the current operational status of an appointment.
 This indicates whether the appointment is actively functioning or at risk of termination.
@@ -25505,7 +25452,7 @@ This indicates whether the appointment is actively functioning or at risk of ter
 
 
 
-#### ProcessingStatus {#producerflowappointmentv1processingstatus}
+#### ProcessingStatus
 
 Processing status of the appointment.
 
@@ -25528,7 +25475,7 @@ Processing status of the appointment.
 
 
 
-#### RiskReason {#producerflowappointmentv1riskreason}
+#### RiskReason
 
 RiskReason represents the specific reason why an appointment is considered at risk.
 These reasons correspond to business rules and compliance requirements that may
@@ -25551,9 +25498,15 @@ trigger operational status changes.
 
 
 
-#### TerminationReason {#producerflowappointmentv1terminationreason}
+#### TerminationReason
 
-TerminationReason represents the reason for the termination of an appointment. These reasons correspond to NIPR's valid termination codes and vary by state. Use ListTerminationReasons to get the valid reasons for a specific state before terminating an appointment. Reference: https://pdb.nipr.com/Gateway/ValidTerms
+TerminationReason represents the reason for the termination of an appointment.
+
+These reasons correspond to NIPR's valid termination codes and vary by
+state. Use ListTerminationReasons to get the valid reasons for a specific
+state before terminating an appointment.
+
+Reference: https://pdb.nipr.com/Gateway/ValidTerms
 
 | Name | Number | Description |
 |------|--------|-------------|
@@ -25595,10 +25548,10 @@ TerminationReason represents the reason for the termination of an appointment. T
 
 
 
-### producerflow/producer/v1/producer.proto - Enums
+### producerflow/producer/v1/producer.proto
 
 
-#### Agency.BankAccount.AccountType {#producerflowproducerv1agencybankaccountaccounttype}
+#### Agency.BankAccount.AccountType
 
 The type of account.
 
@@ -25613,7 +25566,7 @@ The type of account.
 
 
 
-#### Agency.NIPR.License.LicenseStatus {#producerflowproducerv1agencyniprlicenselicensestatus}
+#### Agency.NIPR.License.LicenseStatus
 
 LicenseStatus defines the possible statuses of an insurance license.
 
@@ -25631,7 +25584,7 @@ This could be due to suspension, revocation, or other reasons. |
 
 
 
-#### AgencyType {#producerflowproducerv1agencytype}
+#### AgencyType
 
 AgencyType defines whether an agency is internal (tenant agency) or external.
 
@@ -25646,7 +25599,7 @@ AgencyType defines whether an agency is internal (tenant agency) or external.
 
 
 
-#### EntityType {#producerflowproducerv1entitytype}
+#### EntityType
 
 EntityType defines the business entity type for an agency.
 
@@ -25666,7 +25619,7 @@ The UI will ask the user to select the entity type. |
 
 
 
-#### NIPRSyncState {#producerflowproducerv1niprsyncstate}
+#### NIPRSyncState
 
 NIPRSyncState defines the synchronization state with the NIPR system.
 
@@ -25685,7 +25638,7 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 
 
 
-#### NewAgencyRequest.Agency.BankAccount.AccountType {#producerflowproducerv1newagencyrequestagencybankaccountaccounttype}
+#### NewAgencyRequest.Agency.BankAccount.AccountType
 
 
 
@@ -25700,7 +25653,7 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 
 
 
-#### NewAgencyRequest.Agency.PointOfContact.CommunicationRole {#producerflowproducerv1newagencyrequestagencypointofcontactcommunicationrole}
+#### NewAgencyRequest.Agency.PointOfContact.CommunicationRole
 
 
 
@@ -25723,7 +25676,7 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 
 
 
-#### Producer.NIPR.License.LicenseStatus {#producerflowproducerv1producerniprlicenselicensestatus}
+#### Producer.NIPR.License.LicenseStatus
 
 LicenseStatus defines the possible statuses of an insurance license.
 
@@ -25742,9 +25695,6 @@ This could be due to suspension, revocation, or other reasons. |
 
 
 
-
-
----
 
 
 
