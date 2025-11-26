@@ -36,9 +36,15 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Navigate to package directory
-        run: cd gen/ts
+      - name: Verify npm authentication
+        working-directory: gen/ts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm whoami --registry=https://registry.npmjs.org
 
       - name: Verify package name and version
         working-directory: gen/ts
@@ -48,12 +54,14 @@ jobs:
           echo "Package: $PACKAGE_NAME"
           echo "Version to unpublish: $VERSION"
           echo "⚠️  WARNING: This will permanently remove version $VERSION of $PACKAGE_NAME from npm"
+          echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Unpublish version from npm
         working-directory: gen/ts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm unpublish "${{ github.event.inputs.version }}" --force
-          echo "✅ Successfully unpublished version ${{ github.event.inputs.version }}"
+          npm unpublish "${PACKAGE_NAME}@${VERSION}" --force
+          echo "✅ Successfully unpublished version ${VERSION} of ${PACKAGE_NAME}"
 
