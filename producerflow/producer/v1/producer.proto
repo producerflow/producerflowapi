@@ -47,6 +47,11 @@ service ProducerService {
   // Returns the organization's information including name and external ID.
   rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
 
+  // CreateOrganization creates a new organization for the authenticated tenant.
+  // The organization name must be unique within the tenant.
+  // Returns the ID of the newly created organization.
+  rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse);
+
   // NewProducer creates a new producer and associates them with an existing agency.
   // It validates the producer's information and checks that the email is unique.
   // Returns the ID of the created producer.
@@ -2125,6 +2130,26 @@ message GetOrganizationRequest {
 message GetOrganizationResponse {
   // The requested organization.
   Organization organization = 1;
+}
+
+// CreateOrganizationRequest contains the information needed to create a new organization.
+message CreateOrganizationRequest {
+  // Required. The display name of the organization.
+  // Must be unique within the tenant.
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+
+  // Optional. The external identifier for the organization.
+  // This is the identifier used by the tenant's system to identify the organization.
+  string external_id = 2;
+
+  // Optional. The contact email address for the organization.
+  string email = 3;
+}
+
+// CreateOrganizationResponse contains the result of creating a new organization.
+message CreateOrganizationResponse {
+  // The unique identifier of the newly created organization.
+  string organization_id = 1;
 }
 
 // CreateProducerUploadURLRequest contains information needed to generate
