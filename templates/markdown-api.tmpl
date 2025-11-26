@@ -3,10 +3,10 @@
 ## Table of Contents
 
 {{range .Files}}
-{{range $service := .Services}}
-- [{{.Name}}](#{{.FullName | lower | replace "." ""}})
+{{range .Services}}
+- [{{.Name}}](#{{.Name | lower}})
 {{range .Methods}}
-  - [{{.Name}}](#{{$service.FullName | lower | replace "." ""}}-{{.Name | lower}})
+  - [{{.Name}}](#{{.Name | lower}})
 {{end}}
 {{end}}
 {{end}}
@@ -15,17 +15,14 @@
 
 ---
 
-{{/* Services */}}
 {{range $file := .Files}}
-{{range $service := .Services}}
+{{range .Services}}
 ## {{.Name}}
-
-[Back to Top](#producerflow-api-documentation)
 
 {{.Description}}
 
 {{range $method := .Methods}}
-### {{.Name}} {#{{$service.FullName | lower | replace "." ""}}-{{.Name | lower}}}
+### {{.Name}}
 
 {{if .RequestStreaming}}**STREAMING**{{end}}
 
@@ -41,7 +38,7 @@
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 {{else}}
 *This message has no fields.*
@@ -59,7 +56,7 @@
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 {{else}}
 *This message has no fields.*
@@ -79,12 +76,11 @@ These types are used across multiple API methods.
 
 {{range .Files}}
 {{if .HasMessages}}
-### {{.Name}} - Types
+### {{.Name}}
 
 {{range .Messages}}
-{{/* Skip Request/Response messages as they're shown inline */}}
 {{if not (or (hasSuffix .Name "Request") (hasSuffix .Name "Response"))}}
-#### {{.LongName}} {#{{.FullName | lower | replace "." ""}}}
+#### {{.LongName}}
 
 {{.Description}}
 
@@ -92,7 +88,7 @@ These types are used across multiple API methods.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 {{end}}
 
@@ -100,7 +96,7 @@ These types are used across multiple API methods.
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
 {{range .Extensions}}
-| {{.Name}} | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | [{{.ContainingLongType}}](#{{.ContainingFullType | lower | replace "." ""}}) | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 {{end}}
 
@@ -115,10 +111,10 @@ These types are used across multiple API methods.
 
 {{range .Files}}
 {{if .HasEnums}}
-### {{.Name}} - Enums
+### {{.Name}}
 
 {{range .Enums}}
-#### {{.LongName}} {#{{.FullName | lower | replace "." ""}}}
+#### {{.LongName}}
 
 {{.Description}}
 
@@ -132,17 +128,14 @@ These types are used across multiple API methods.
 {{end}}
 {{end}}
 
----
-
-{{/* File-level extensions */}}
 {{range .Files}}
 {{if .HasExtensions}}
-### {{.Name}} - File-level Extensions {#{{.Name | lower | replace "." ""}}-extensions}
+### {{.Name}} - File-level Extensions
 
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
 {{range .Extensions}}
-| {{.Name}} | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | [{{.ContainingLongType}}](#{{.ContainingFullType | lower | replace "." ""}}) | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{end}}
 
 {{end}}
