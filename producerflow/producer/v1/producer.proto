@@ -415,6 +415,9 @@ message NewAgencyRequest {
       // Producerflow and their corresponding responses. Keys are question identifiers or text,
       // values are the answers provided.
       map<string, string> tenant_additional_questions = 8;
+      // The mailing address of the principal.
+      // This is where correspondence for the principal will be sent.
+      Address mailing_address = 9;
     }
 
     // Information about the agency's principal.
