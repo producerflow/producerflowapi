@@ -26,7 +26,7 @@ API and how to interact with it at the type level. It does not cover integration
 end-to-end flows, webhooks, or domain explanations.
 
 For those topics, including onboarding guides, webhook behavior, examples, and architecture, please
-visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/producerflow/wiki).
+visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/producerflowapi/wiki/).
 
 ## Table of Contents
 - [AppointmentService](#appointmentservice)
