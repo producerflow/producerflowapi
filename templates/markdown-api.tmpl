@@ -1,142 +1,168 @@
 # Producerflow API Documentation
 
+Welcome to the Producerflow Public API reference.
+
+This page is automatically generated from the Protocol Buffers definitions that power the API,
+ensuring that the information you see here is always up-to-date and consistent with the actual
+service implementation.
+
+The Producerflow API provides programmatic access to the core onboarding, licensing, appointment,
+and compliance capabilities of the Producerflow platform. It allows carriers, MGAs, agencies, and
+technology partners to automate:
+- Producer onboarding and data ingestion
+- Agency creation and updates
+- License synchronization and real-time compliance checks
+- Appointment submission, tracking, and termination
+- Management of locations, bank accounts, E&O data, and other agency-level information
+
+This document serves as the definitive schema reference for:
+- All API services and their RPC methods
+- Request and response message structures
+- Shared types reused across the API
+- Enumerations and field-level definitions (including deprecations)
+
+The goal of this reference is to help developers understand the exact shape of the
+API and how to interact with it at the type level. It does not cover integration patterns,
+end-to-end flows, webhooks, or domain explanations.
+
+For those topics, including onboarding guides, webhook behavior, examples, and architecture, please
+visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/producerflow/wiki).
+
 ## Table of Contents
 
-{{range .Files}}
-{{range .Services}}
+{{- range .Files}}
+{{- range .Services}}
 - [{{.Name}}](#{{.Name | lower}})
-{{range .Methods}}
+{{- range .Methods}}
   - [{{.Name}}](#{{.Name | lower}})
-{{end}}
-{{end}}
-{{end}}
-- [Shared Types](#shared-types)
-- [Enums](#enums)
+{{- end}}
+{{- end}}
+{{- end}}
 
 ---
 
 {{range $file := .Files}}
-{{range .Services}}
+{{- range .Services}}
 ## {{.Name}}
 
 {{.Description}}
-
 {{range $method := .Methods}}
-### {{.Name}}
 
-{{if .RequestStreaming}}**STREAMING**{{end}}
+### {{.Name}}
+{{if .RequestStreaming}}
+**STREAMING**
+{{- end}}
 
 {{.Description}}
 
 #### Request: `{{.RequestLongType}}`
-
 {{range $file.Messages}}
-{{if eq .FullName $method.RequestFullType}}
-{{if .Description}}{{.Description}}{{end}}
+{{- if eq .FullName $method.RequestFullType}}
+{{- if .Description}}
 
+{{.Description}}
+{{- end}}
 {{if .HasFields}}
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-{{range .Fields}}
-| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
-{{end}}
-{{else}}
+{{- range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- else}}
+
 *This message has no fields.*
-{{end}}
-{{end}}
-{{end}}
+{{- end}}
+{{- end}}
+{{- end}}
 
 #### Response: `{{.ResponseLongType}}`{{if .ResponseStreaming}} **STREAMING**{{end}}
-
 {{range $file.Messages}}
-{{if eq .FullName $method.ResponseFullType}}
-{{if .Description}}{{.Description}}{{end}}
+{{- if eq .FullName $method.ResponseFullType}}
+{{- if .Description}}
 
+{{.Description}}
+{{- end}}
 {{if .HasFields}}
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-{{range .Fields}}
-| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
-{{end}}
-{{else}}
+{{- range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- else}}
+
 *This message has no fields.*
-{{end}}
-{{end}}
-{{end}}
+{{- end}}
+{{- end}}
+{{- end}}
 
 ---
-
 {{end}}
-{{end}}
-{{end}}
+{{- end}}
+{{- end}}
 
 ## Shared Types
 
 These types are used across multiple API methods.
-
 {{range .Files}}
-{{if .HasMessages}}
-### {{.Name}}
+{{- if .HasMessages}}
 
+### {{.Name}}
 {{range .Messages}}
-{{if not (or (hasSuffix .Name "Request") (hasSuffix .Name "Response"))}}
+{{- if not (or (hasSuffix .Name "Request") (hasSuffix .Name "Response"))}}
+
 #### {{.LongName}}
 
 {{.Description}}
-
 {{if .HasFields}}
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-{{range .Fields}}
-| `{{.Name}}` | {{.LongType}} | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
-{{end}}
-{{end}}
+{{- range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- end}}
+{{- if .HasExtensions}}
 
-{{if .HasExtensions}}
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
-{{range .Extensions}}
-| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
-{{end}}
-{{end}}
-
-{{end}}
-{{end}}
-{{end}}
-{{end}}
+{{- range .Extensions}}
+| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
 
 ---
 
 ## Enums
-
 {{range .Files}}
-{{if .HasEnums}}
-### {{.Name}}
+{{- if .HasEnums}}
 
+### {{.Name}}
 {{range .Enums}}
+
 #### {{.LongName}}
 
 {{.Description}}
 
 | Name | Number | Description |
 |------|--------|-------------|
-{{range .Values}}
-| {{.Name}} | {{.Number}} | {{.Description}} |
+{{- range .Values}}
+| `{{.Name}}` | {{.Number}} | {{.Description}} |
+{{- end}}
 {{end}}
-
-{{end}}
-{{end}}
-{{end}}
-
+{{- end}}
+{{- end}}
 {{range .Files}}
-{{if .HasExtensions}}
+{{- if .HasExtensions}}
+
 ### {{.Name}} - File-level Extensions
 
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
-{{range .Extensions}}
-| {{.Name}} | {{.LongType}} | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
-{{end}}
-
-{{end}}
-{{end}}
+{{- range .Extensions}}
+| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- end}}
+{{- end}}
