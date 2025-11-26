@@ -2124,15 +2124,30 @@ in this state. </td>
           </div>
 
           <div class="description-content">
-            ProducerService provides a comprehensive API for managing insurance producers
-and agencies, including onboarding, data synchronization, and integration with
-external systems like NIPR for license verification.
+            ProducerService provides a comprehensive API for managing insurance
+producers and agencies. This service simplifies producer and agency
+onboarding, data synchronization, and integration with the National Insurance
+Producer Registry (NIPR).
 
-Available endpoints:
-  UAT (User Acceptance Testing): https://api.uat.producerflow.com
-  Production: https://api.producerflow.com
+Key capabilities:
+- Producer and agency onboarding with self-service URLs
+- Automatic synchronization of license, appointment, and regulatory data from NIPR
+- NPN (National Producer Number) validation and lookup
+- Multi-location management for agencies
+- Integration with NIPR PDB Gateway, PDB Alerts, and NPN Lookup services
 
-RPCs for starting the onboarding agency process.
+NIPR Integration:
+This service automatically fetches and maintains up-to-date licensing
+information, carrier appointments, and regulatory actions from NIPR. Most
+NIPR sync operations are billable and count against your monthly unique NPN
+quota. Enable PDB Alerts synchronization to receive automatic daily updates
+and reduce manual sync costs.
+
+Authentication:
+All endpoints require API key authentication provided via the Authorization header.
+
+Onboarding Operations
+Generate self-service URLs and create agencies/producers with NIPR validation.
           </div>
 
           
@@ -2142,12 +2157,43 @@ RPCs for starting the onboarding agency process.
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency.
-The URL contains encoded information about the agency defaults and tenant context.
-All fields in the request are optional - you can provide as much or as little
-information as available. Any missing information will be collected during
-the onboarding process.
-Returns a URL string that can be shared with the agency for self-onboarding.</p>
+                <p class="method-description">CreateAgencyOnboardingURL generates a secure, pre-filled URL for agency
+self-onboarding.
+
+Use this endpoint to create personalized onboarding links that can be
+shared with agencies. The URL encodes agency defaults, tenant context, and
+optional pre-filled information to streamline the onboarding experience.
+
+All fields in the request are optional. Provide as much or as little
+information as available - any missing data will be collected through the
+onboarding flow.
+
+Typical Workflow:
+1. Generate onboarding URL with optional pre-filled data (agency name, NPN,
+   principal info)
+2. Share URL with agency contact via email or portal
+3. Agency completes onboarding form through the URL
+4. System validates NPN with NIPR and creates agency record
+5. Optionally sync with NIPR to fetch licenses and appointments
+
+Validation Rules:
+All fields in the request are optional. The system generates valid URLs
+even with an empty request. When fields are provided:
+- entity_type: Must be ENTITY_TYPE_SOLE_PROPRIETOR (1), ENTITY_TYPE_AGENCY (2),
+  or ENTITY_TYPE_ASK_DURING_ONBOARDING (3). This is the only endpoint where
+  ENTITY_TYPE_ASK_DURING_ONBOARDING is valid.
+- email: Must be a valid email format if provided
+- npn: Must be a valid NPN format (2-10 digits) if provided. Note that NPN
+  validation against NIPR occurs during onboarding, not during URL generation.
+- fein: Must be exactly 9 digits if provided
+- organization_id: Must be a valid organization ID belonging to your tenant if provided
+- principal.email: Must be a valid email format if provided
+- principal.npn: Must be a valid NPN format (2-10 digits) if provided
+- principal.tenant_id: Maximum 255 characters if provided
+
+Returns:
+A time-limited URL string that can be shared with the agency for
+self-service onboarding.</p>
 
                 
                 <div class="message-section">
@@ -2211,7 +2257,13 @@ Returns a URL string that can be shared with the agency for self-onboarding.</p>
                     
                   
                     
-                      <p class="message-description">CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.</p>
+                      <p class="message-description">CreateAgencyOnboardingURLRequest contains information needed to generate
+an agency onboarding URL. This includes basic agency information and
+defaults.
+
+All fields in this request are optional. You can provide as much or as little
+information as you have available. Any missing information will be collected
+from the user during the onboarding process through the generated URL.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -2766,10 +2818,42 @@ Returns a URL string that can be shared with the agency for self-onboarding.</p>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
-with optional pre-filled NPN. The URL can be shared directly with the producer.
-The generated URL will take the producer through the onboarding flow with the NPN field
-pre-populated if provided, reducing friction in the onboarding process.</p>
+                <p class="method-description">CreateProducerOnboardingURL generates a secure, pre-filled URL for producer
+self-onboarding.
+
+Use this endpoint to create personalized onboarding links for individual
+producers joining an existing agency. The URL can include optional
+pre-filled data like NPN, name, email, and address to reduce manual data
+entry.
+
+The producer must be associated with an existing agency. Use
+CreateAgencyOnboardingURL if you need to onboard an agency and its
+principal together.
+
+Typical Workflow:
+1. Generate producer onboarding URL with agency_id and optional pre-filled data
+2. Share URL with producer via email
+3. Producer completes onboarding form through the URL
+4. System validates NPN with NIPR and associates producer with agency
+5. Optionally sync with NIPR to fetch producer licenses and appointments
+
+Validation Rules:
+- agency_id: Required. must be a valid UUID of an agency belonging
+  to your tenant.
+- producer_data: All fields are optional. When provided:
+  - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
+    against NIPR occurs during onboarding, not during URL generation.
+  - email: Must be a valid email format if provided
+  - mailing_address.state: Must be exactly 2 characters (state code) if provided
+  - mailing_address.zip: Must be 1-10 characters if provided
+
+Returns:
+A time-limited URL string that can be shared with the producer for
+self-service onboarding.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Invalid NPN provided (not found in NIPR)</p>
 
                 
                 <div class="message-section">
@@ -3395,7 +3479,87 @@ pre-populated if provided, reducing friction in the onboarding process.</p>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.</p>
+                <p class="method-description">NewAgency creates a new agency with principal and optional additional producers.
+
+This is the programmatic alternative to CreateAgencyOnboardingURL - use
+this when you want to create agencies directly via API instead of through a
+self-service form.
+
+Entity Type Rules:
+- ENTITY_TYPE_SOLE_PROPRIETOR: Individual producer operating as their own agency.
+  Cannot have an agency NPN. Only the principal is created.
+- ENTITY_TYPE_AGENCY: Standard insurance agency with multiple producers.
+  Must provide either an NPN or FEIN. Can have multiple producers beyond the principal.
+
+NIPR Validation and Sync:
+The system performs free NIPR API lookups to validate NPNs before
+creation. If sync_with_nipr is true (or tenant default), the system
+performs paid NIPR EntityInfo lookups to fetch complete license, appointment,
+and regulatory data.
+
+Validation Performed:
+- Required fields are present and valid
+- Email addresses are unique within tenant
+- Agency NPN exists in NIPR (if provided)
+- Principal NPN exists in NIPR
+- Entity type rules are followed
+- Principal and subsequent producers last names must match NIPR records for the given NPN
+
+Validation Rules:
+Proto validation (format checks):
+- agency: Required field containing all agency information
+- agency.name: Required, must be non-empty
+- agency.email: Required, must be a valid email format
+- agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+- agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
+  ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
+- agency.fein: Optional, if provided must be exactly 9 digits. Required for
+  ENTITY_TYPE_AGENCY if NPN is not provided.
+- agency.principal: Required, contains principal producer information
+  - principal.first_name: Required, must be non-empty
+  - principal.last_name: Required, must be non-empty
+  - principal.email: Required, must be a valid email format
+  - principal.npn: Required, must be 1-10 characters
+  - principal.phone: Optional, if provided must match E.164 pattern
+  - principal.tenant_id: Optional, maximum 255 characters
+- agency.bank_account (optional, if provided all subfields are required):
+  - account_number: 8-17 characters
+  - routing_number: Exactly 9 characters
+  - account_type: Required, must be CHECKING (1) or SAVINGS (2)
+  - account_holder_name: Required, must be non-empty
+- agency.eo_info (optional, if provided):
+  - carrier: Required, must be non-empty
+  - expiration_date: Required, must be in the future
+  - coverage_amount: Required, must be non-empty
+  - effective_date: Required
+  - per_occurrence: Required, must be non-empty
+- agency.business_hours (optional, if provided):
+  - timezone: Required, must be non-empty
+  - business_hours: Required, at least one entry
+    - week_days: Required, 1-7 days
+    - opening_time: Required
+    - closing_time: Required
+- agency.producers: Optional list of additional producers (see NewProducer validation)
+- agency.points_of_contact (optional, for each contact):
+  - email: Required, must be a valid email format
+  - role: Required
+- agency.root_organization_id: Optional, if provided must be 1-36 characters
+- agency.locations: Optional, maximum 100 locations
+
+Business logic validation:
+- agency.email: Must be unique within the tenant
+- agency.npn: If provided, must exist in NIPR (validated via free NIPR lookup)
+- principal.email: Must be unique within the tenant
+- principal.npn: Must exist in NIPR (validated via free NIPR lookup)
+- All producer emails must be unique within the tenant
+
+Returns:
+IDs of the created agency, principal, optional producers, and locations (if provided).
+
+Common Error Codes:
+- INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
+  NPN not found in NIPR
+- ALREADY_EXISTS: Email or NPN already registered in your tenant</p>
 
                 
                 <div class="message-section">
@@ -4044,8 +4208,40 @@ If specified, this value takes precedence over the tenant's default behavior. </
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ListAgencies returns a list of agencies associated with the tenant.
-Supports optional filtering by organization ID and search queries.</p>
+                <p class="method-description">ListAgencies retrieves a paginated list of agencies associated with the tenant.
+
+This endpoint provides comprehensive agency listing with powerful filtering
+capabilities to efficiently manage and search through large numbers of
+agencies. Each agency in the response includes summary information for
+quick overview without the full NIPR data.
+
+Filtering Capabilities:
+- Organization: Filter agencies belonging to a specific organization
+- Search: Free-text search across agency name, NPN, and email
+- Agency Type: Filter by internal (tenant) vs external agencies
+- Entity Type: Filter by sole proprietor vs standard agency
+- NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+
+The response uses cursor-based pagination for efficient data retrieval:
+- Default page size is 50 if not specified
+- Maximum page size is 200
+- Results are ordered by creation date, most recent first
+- Use the next_page_token to retrieve subsequent pages
+
+Validation Rules:
+All fields are optional filters:
+- organization_id: If provided, must be a valid UUID format
+- search_query: Optional free-text search string (case-insensitive, partial matching)
+- pagination.page_size: Must be <= 200. Default is 50 if not specified.
+- pagination.page_token: Opaque token from previous response for pagination
+- agency_type: If provided, must be AGENCY_TYPE_INTERNAL (1) or AGENCY_TYPE_EXTERNAL (2)
+- entity_type: If provided, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or ENTITY_TYPE_AGENCY (2)
+- nipr_sync_statuses: Array of sync states to filter by (ACTIVE, FAILING, PENDING, DISABLED)
+
+Returns:
+A paginated list of AgencySummary objects containing essential agency
+information without full NIPR data. Use GetAgencyAndProducers for complete
+agency details including NIPR data.</p>
 
                 
                 <div class="message-section">
@@ -4151,8 +4347,19 @@ Supports optional filtering by organization ID and search queries.</p>
                     
                   
                     
-                      <p class="message-description">ListAgenciesRequest requests a list of agencies associated with the tenant.
-Supports optional filtering and pagination parameters.</p>
+                      <p class="message-description">ListAgenciesRequest enables flexible querying of agencies with multiple filter
+options and pagination support.
+
+All filters are optional and can be combined for precise results. When multiple
+filters are specified, they are applied with AND logic (agencies must match all
+specified criteria).
+
+Example Use Cases:
+- Get all agencies in an organization: set organization_id
+- Search for an agency by name: set search_query
+- Find failing NIPR syncs: set nipr_sync_statuses to [NIPR_SYNC_STATE_FAILING]
+- Get sole proprietors only: set entity_type to ENTITY_TYPE_SOLE_PROPRIETOR
+- Paginate through all agencies: use pagination with page_token</p>
                       
                         <table class="field-table">
                           <thead>
@@ -4165,47 +4372,59 @@ Supports optional filtering and pagination parameters.</p>
                                 <td><a href="#string">string</a></td>
                                 <td>optional</td>
                                 <td>Optional. Filter agencies by organization ID.
-If provided, only agencies belonging to this organization will be returned. </td>
+Only agencies belonging to this specific organization will be returned.
+Must be a valid UUID if provided.
+Use ListOrganizations to get valid organization IDs. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>search_query</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td>optional</td>
-                                <td>Optional. Search query to filter agencies by name, NPN, or email.
-If provided, only agencies matching the search query will be returned. </td>
+                                <td>Optional. Free-text search across agency fields.
+Searches in: agency name, NPN, and email address.
+The search is case-insensitive and uses partial matching.
+Example: "smith" will match "Smith Insurance Agency" and "john.smith@agency.com" </td>
                               </tr>
                             
                               <tr>
                                 <td><code>pagination</code></td>
                                 <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
                                 <td></td>
-                                <td>Optional. Pagination parameters.
-If not provided, defaults to page_size=50. </td>
+                                <td>Optional. Pagination parameters for controlling result set size and navigation.
+If not provided, defaults to page_size=50 with no offset.
+Maximum allowed page_size is 200; values above this will be capped. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>agency_type</code></td>
                                 <td><a href="#producerflow.producer.v1.AgencyType">AgencyType</a></td>
                                 <td>optional</td>
-                                <td>Optional. Filter by agency type (internal vs external).
-If not provided, returns all agencies regardless of type. </td>
+                                <td>Optional. Filter by agency classification (internal vs external).
+- AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant
+- AGENCY_TYPE_EXTERNAL: Partner or third-party agencies
+If not specified, returns both internal and external agencies. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>entity_type</code></td>
                                 <td><a href="#producerflow.producer.v1.EntityType">EntityType</a></td>
                                 <td>optional</td>
-                                <td>Optional. Filter by entity type (sole proprietor vs agency).
-If not provided, returns all agencies regardless of entity type. </td>
+                                <td>Optional. Filter by business entity structure.
+- ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies
+- ENTITY_TYPE_AGENCY: Standard multi-producer agencies
+If not specified, returns both sole proprietors and standard agencies. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>nipr_sync_statuses</code></td>
                                 <td><a href="#producerflow.producer.v1.NIPRSyncState">NIPRSyncState</a></td>
                                 <td>repeated</td>
-                                <td>Optional. Filter by NIPR sync status.
-If not provided, returns all agencies regardless of sync status. </td>
+                                <td>Optional. Filter by NIPR synchronization status.
+Multiple statuses can be specified to match agencies in any of those states.
+Useful for monitoring sync health and identifying agencies needing attention.
+Valid values: ACTIVE, FAILING, PENDING, DISABLED
+If empty, returns agencies in all sync states. </td>
                               </tr>
                             
                           </tbody>
@@ -4500,7 +4719,18 @@ If not provided, returns all agencies regardless of sync status. </td>
                     
                   
                     
-                      <p class="message-description">ListAgenciesResponse contains the list of agencies matching the filter criteria.</p>
+                      <p class="message-description">ListAgenciesResponse provides paginated agency results with metadata for
+navigation and total counts.
+
+The response is optimized for UI display with summary data only. For complete
+agency information including NIPR data, use GetAgencyAndProducers with the
+agency_id from the summary.
+
+Pagination Notes:
+- Results are always ordered by creation date (newest first)
+- Page tokens are opaque and should not be constructed by clients
+- Total count reflects all matching agencies, not just the current page
+- Empty agencies list with total_count > 0 indicates you've paginated past the end</p>
                       
                         <table class="field-table">
                           <thead>
@@ -4513,22 +4743,29 @@ If not provided, returns all agencies regardless of sync status. </td>
                                 <td><a href="#producerflow.producer.v1.AgencySummary">AgencySummary</a></td>
                                 <td>repeated</td>
                                 <td>List of agency summaries matching the filter criteria.
-The agencies are ordered by creation date, most recent first. </td>
+Ordered by creation date with the most recently created agencies first.
+Will be empty if no agencies match the filters or if paginating past the last page.
+Maximum of page_size agencies per response (default 50, max 200). </td>
                               </tr>
                             
                               <tr>
                                 <td><code>next_page_token</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>A token that can be sent as `page_token` to retrieve the next page.
-If this field is omitted, there are no subsequent pages. </td>
+                                <td>Pagination token for retrieving the next page of results.
+Pass this value as page_token in the next request to continue pagination.
+Empty string indicates this is the last page of results.
+Tokens are opaque and their format may change; treat as black box. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>total_count</code></td>
                                 <td><a href="#int32">int32</a></td>
                                 <td></td>
-                                <td>Total number of agencies matching the filter criteria. </td>
+                                <td>Total number of agencies matching the filter criteria across all pages.
+This count is independent of pagination and represents the full result set.
+Useful for displaying "Showing X-Y of Z agencies" in UIs.
+Will be 0 if no agencies match the specified filters. </td>
                               </tr>
                             
                           </tbody>
@@ -4722,9 +4959,27 @@ If this field is omitted, there are no subsequent pages. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ListOrganizations returns a list of organizations associated with the tenant.
-Organizations represent logical groupings or hierarchical structures within a tenant
-that can be used to organize agencies and producers.</p>
+                <p class="method-description">ListOrganizations retrieves all organizations accessible to your tenant.
+
+Organizations represent logical groupings or hierarchical structures for
+managing agencies. They enable better organization of agencies into business
+units, networks, or aggregator relationships. Each
+organization can contain multiple agencies, allowing for hierarchical
+management and reporting across your insurance distribution network.
+
+Not all tenants use organizations - this list may be empty if your tenant
+doesn't have organizational hierarchies enabled.
+
+Validation Rules:
+Proto validation (format checks):
+All fields are optional:
+- pagination.page_size: Must be <= 200. Default is 50 if not specified.
+- pagination.page_token: Opaque token from previous response for pagination
+
+Returns:
+A list of all organizations accessible to your tenant, including their IDs,
+names and external identifiers. Organizations are
+returned in alphabetical order by name for consistent presentation.</p>
 
                 
                 <div class="message-section">
@@ -4846,9 +5101,17 @@ that can be used to organize agencies and producers.</p>
                     
                   
                     
-                      <p class="message-description">ListOrganizationsRequest requests a list of all organizations associated with the tenant.
-This request requires no parameters  and will return all organizations that
-the authenticated tenant has access to.</p>
+                      <p class="message-description">ListOrganizationsRequest requests a list of all organizations associated with
+the authenticated tenant.
+
+Organizations provide a way to group agencies into logical business units,
+networks, or aggregator relationships. This endpoint returns all organizations
+accessible to your tenant, which can be used to:
+- Display organization hierarchies in user interfaces
+- Filter agencies by organization
+- Apply organization-specific business rules or workflows
+
+The response supports pagination for tenants with large numbers of organizations.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -4860,8 +5123,17 @@ the authenticated tenant has access to.</p>
                                 <td><code>pagination</code></td>
                                 <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
                                 <td></td>
-                                <td>Optional. Pagination parameters.
-If not provided, defaults to page_size=50. </td>
+                                <td>Optional pagination parameters to control the result set.
+
+Pagination allows you to retrieve organizations in manageable chunks:
+- page_size: Number of organizations to return (default: 50, max: 200)
+- page_token: Token from previous response to get the next page
+
+Example usage:
+- First request: page_size=100 (returns first 100 organizations)
+- Subsequent requests: Use next_page_token from previous response
+
+If omitted, returns the first 50 organizations. </td>
                               </tr>
                             
                           </tbody>
@@ -5156,9 +5428,15 @@ If not provided, defaults to page_size=50. </td>
                     
                   
                     
-                      <p class="message-description">ListOrganizationsResponse contains the list of organizations associated with the tenant.
-The organizations are returned ordered by name. If the tenant has no organizations,
-the organizations list will be empty.</p>
+                      <p class="message-description">ListOrganizationsResponse contains the paginated list of organizations for the tenant.
+
+The response includes all organizations accessible to your authenticated tenant,
+ordered alphabetically by name for consistent display. Empty results indicate
+that your tenant either doesn't use organizational hierarchies or has no
+organizations configured yet.
+
+Pagination is automatically applied to large result sets to ensure optimal
+performance and reasonable response sizes.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -5171,24 +5449,48 @@ the organizations list will be empty.</p>
                                 <td><a href="#producerflow.producer.v1.Organization">Organization</a></td>
                                 <td>repeated</td>
                                 <td>List of organizations associated with the tenant.
-Each organization includes its unique identifier and display name.
-The list may be empty if no organizations are associated with the tenant.
-Organizations are ordered alphabetically by name. </td>
+
+Each organization in the list includes:
+- Unique identifier (id) for API operations
+- Display name for user interfaces
+- External ID for system integration
+- Contact email (if configured)
+
+The list may be empty ([]) if:
+- No organizations are configured for your tenant
+- Your tenant doesn't use organizational hierarchies </td>
                               </tr>
                             
                               <tr>
                                 <td><code>next_page_token</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>A token that can be sent as `page_token` to retrieve the next page.
-If this field is omitted, there are no subsequent pages. </td>
+                                <td>Pagination token for retrieving the next page of results.
+
+When present, indicates more organizations are available. Pass this
+token as the page_token in the next ListOrganizationsRequest to
+retrieve the subsequent page.
+
+Empty string or omitted field indicates this is the last page.
+
+Important: Tokens are opaque and may expire. Don't store tokens
+long-term; retrieve fresh data when needed. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>total_count</code></td>
                                 <td><a href="#int32">int32</a></td>
                                 <td></td>
-                                <td>Total number of organizations matching the filter criteria. </td>
+                                <td>Total count of organizations matching the filter criteria.
+
+This count represents the total number of organizations available
+to your tenant, regardless of pagination. Use this to:
+- Display result counts in user interfaces ("Showing 1-50 of 237")
+- Calculate the number of pages available
+- Determine if pagination is needed
+
+The count remains consistent across paginated requests unless
+organizations are added or removed between calls. </td>
                               </tr>
                             
                           </tbody>
@@ -5366,8 +5668,24 @@ If this field is omitted, there are no subsequent pages. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">GetOrganization retrieves details of a specific organization by ID.
-Returns the organization's information including name and external ID.</p>
+                <p class="method-description">GetOrganization retrieves comprehensive details about a specific organization.
+
+This endpoint returns complete organization information including all
+agencies assigned to it. For each agency, it provides summary data including
+appointment overview statistics and NIPR synchronization status. This allows
+you to understand the full scope of an organization's agency network in a
+single API call.
+
+Validation Rules:
+Proto validation (format checks):
+- organization_id: Required, must be a valid UUID format
+
+Returns:
+Complete organization details including all assigned agencies with their
+appointment overviews and sync statuses.
+
+Common Error Codes:
+- NOT_FOUND: Organization doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -5459,7 +5777,10 @@ Returns the organization's information including name and external ID.</p>
                     
                   
                     
-                      <p class="message-description">GetOrganizationRequest specifies which organization to retrieve.</p>
+                      <p class="message-description">GetOrganizationRequest specifies which organization to retrieve detailed information for.
+
+Use this request to fetch comprehensive details about a specific organization,
+including all agencies assigned to it and their current status.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -5472,7 +5793,16 @@ Returns the organization's information including name and external ID.</p>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
                                 <td>Unique identifier of the organization to retrieve.
-Must be a valid UUID. </td>
+
+This must be a valid UUID that was previously returned from:
+- ListOrganizations response
+- Agency creation response (when agency is assigned to an organization)
+- Other API calls that reference organizations
+
+The organization must belong to your authenticated tenant; attempting
+to access organizations from other tenants will result in a NOT_FOUND error.
+
+Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                               </tr>
                             
                           </tbody>
@@ -5767,7 +6097,7 @@ Must be a valid UUID. </td>
                     
                   
                     
-                      <p class="message-description">GetOrganizationResponse contains the details of the requested organization.</p>
+                      <p class="message-description">GetOrganizationResponse contains details about the requested organization.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -5779,7 +6109,7 @@ Must be a valid UUID. </td>
                                 <td><code>organization</code></td>
                                 <td><a href="#producerflow.producer.v1.Organization">Organization</a></td>
                                 <td></td>
-                                <td>The requested organization. </td>
+                                <td>The requested organization with all available details. </td>
                               </tr>
                             
                           </tbody>
@@ -6624,9 +6954,57 @@ This is the identifier used by the tenant's system to identify the organization.
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">NewProducer creates a new producer and associates them with an existing agency.
-It validates the producer's information and checks that the email is unique.
-Returns the ID of the created producer.</p>
+                <p class="method-description">NewProducer adds a single producer to an existing agency.
+
+Use this endpoint to programmatically add producers to agencies. This is
+the programmatic alternative to CreateProducerOnboardingURL.
+
+NIPR Validation and Sync:
+If an NPN is provided, the system validates it exists in NIPR using a free
+API lookup. If sync_with_nipr is enabled, the system performs a paid
+NIPR EntityInfo lookup to fetch complete license, appointment, and
+regulatory data.
+
+Validation Performed:
+- Email is unique within tenant
+- Agency exists and belongs to tenant
+- NPN exists in NIPR (if provided)
+- Location IDs exist and belong to the agency (if provided)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- producer: Required, contains producer information
+  - first_name: Required, must be non-empty
+  - last_name: Required, must be non-empty
+  - email: Required, must be a valid email format
+  - npn: Required, if provided used for NIPR validation
+  - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+  - mailing_address (optional, if provided):
+    - street: Required, must be non-empty
+    - city: Required, must be non-empty
+    - state: Required, must be exactly 2 characters (state code)
+    - zip: Required, must be 1-10 characters
+  - tenant_id: Optional, maximum 255 characters (external identifier)
+  - location_ids: Optional, maximum 100 items, each must be a valid UUID
+- sync_with_nipr: Optional, overrides tenant default NIPR sync setting
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- email: Must be unique within the tenant (not already used by another producer or contact)
+- npn: If provided, must exist in NIPR. If name is also provided, NPN must match the name
+  in NIPR records
+- npn: Must be unique within the tenant (not already assigned to another producer)
+- location_ids: All locations must exist and belong to the specified agency
+
+Returns:
+The UUID of the created producer.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+- ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+- INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+- FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN</p>
 
                 
                 <div class="message-section">
@@ -7265,9 +7643,67 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">NewProducers creates multiple producers and associates them with the specified agency.
-It performs the same validations as NewProducer for each entry.
-Returns the IDs of all created producers.</p>
+                <p class="method-description">NewProducers creates multiple producers in bulk and associates them with a single agency.
+
+This endpoint provides an efficient way to onboard multiple producers to the same
+agency in a single API call.
+
+Bulk Operation Behavior:
+Producers are created sequentially. If a producer fails validation, the request
+returns an error, but any producers created before the failure will remain in
+the system. Each producer in the request undergoes the same validation as
+individual NewProducer calls.
+
+NIPR Validation and Sync:
+For each producer with an NPN:
+- The system performs a free NIPR API lookup to validate the NPN exists
+- If sync_with_nipr is true (or tenant default), performs paid NIPR EntityInfo lookups
+- All NIPR validations must succeed for the bulk operation to proceed
+
+Validation Performed (for each producer):
+- Required fields are present and valid (name, email)
+- Email addresses are unique within the tenant
+- Agency exists and belongs to the authenticated tenant
+- NPNs exist in NIPR (if provided)
+- Location IDs exist and belong to the agency (if provided)
+- Phone numbers match valid patterns (if provided)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- producers: Required, must contain at least 1 producer. Each producer:
+  - first_name: Required, must be non-empty
+  - last_name: Required, must be non-empty
+  - email: Required, must be a valid email format
+  - npn: Optional, if provided used for NIPR validation
+  - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+  - mailing_address (optional, if provided):
+    - street: Required, must be non-empty
+    - city: Required, must be non-empty
+    - state: Required, must be exactly 2 characters (state code)
+    - zip: Required, must be 1-10 characters
+  - tenant_id: Optional, maximum 255 characters (external identifier)
+  - location_ids: Optional, maximum 100 items per producer, each must be a valid UUID
+- sync_with_nipr: Optional, overrides tenant default NIPR sync setting for all producers
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- All producer emails must be unique within the tenant
+- All producer NPNs (if provided) must exist in NIPR and be unique within the tenant
+- All location_ids must exist and belong to the specified agency
+- This is an all-or-nothing operation: if any producer fails validation, no producers
+  are created
+
+Returns:
+List of UUIDs for all created producers in the same order as the request. This
+ordering guarantee allows you to map request entries to their created IDs.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+- ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+- INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+- FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+- PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant</p>
 
                 
                 <div class="message-section">
@@ -7447,8 +7883,34 @@ Returns the IDs of all created producers.</p>
                     
                   
                     
-                      <p class="message-description">NewProducersRequest is used to create multiple producers in a single request.
-All producers will be associated with the specified agency.</p>
+                      <p class="message-description">NewProducersRequest creates multiple producers and associates them with a single agency.
+
+This request supports bulk creation of producers, which is more efficient than making
+multiple individual NewProducer calls. All producers in the request will be associated
+with the same agency, making this ideal for onboarding producer teams.
+
+Operation Behavior:
+Producers are created sequentially. If a producer fails validation, the request
+returns an error, but any producers created before the failure will remain in
+the system.
+
+Request Limits:
+- Minimum producers: 1 (enforced by validation)
+- All producers must be for the same agency
+
+Each producer in the list can specify:
+- Basic information (name, email, phone)
+- NPN for NIPR validation and sync
+- Mailing address
+- Location assignments within the agency
+- External ID for tenant system integration
+- Custom metadata questions
+
+Common Use Cases:
+- Bulk importing producers from spreadsheets or CSV files
+- Migrating producer data from legacy systems
+- Setting up new agencies with their initial producer roster
+- Adding multiple producers during mergers or acquisitions</p>
                       
                         <table class="field-table">
                           <thead>
@@ -7460,25 +7922,34 @@ All producers will be associated with the specified agency.</p>
                                 <td><code>agency_id</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>The UUID of the agency to associate the producers with.
-Must be a valid UUID format. </td>
+                                <td>The UUID of the agency to associate all producers with.
+This agency must exist and belong to the authenticated tenant.
+All producers in the request will be assigned to this single agency. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>producers</code></td>
                                 <td><a href="#producerflow.producer.v1.NewProducer">NewProducer</a></td>
                                 <td>repeated</td>
-                                <td>List of producers to create.
-This field is required and must contain at least one producer. </td>
+                                <td>List of producers to create in this bulk operation.
+Required field that must contain at least one producer.
+Each producer undergoes full validation including NPN verification if provided. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>sync_with_nipr</code></td>
                                 <td><a href="#bool">bool</a></td>
                                 <td>optional</td>
-                                <td>Optional. Overrides the tenant's default NIPR sync setting during onboarding.
-Most tenants have this enabled by default, so it usually doesn't need to be set.
-If specified, this value takes precedence over the tenant's default behavior. </td>
+                                <td>Optional. Overrides the tenant's default NIPR sync setting for all producers in this request.
+NPN validation is always performed regardless of this setting.
+When true: Fetches full NIPR EntityInfo data after validation (paid lookup)
+When false: Skips NIPR EntityInfo fetch, only performs NPN validation
+When omitted: Uses the tenant's default configuration
+
+Cost Implications:
+Setting this to true will trigger billable NIPR EntityInfo lookups for each producer
+with an NPN, counting against your monthly quota. Consider using false for test data
+or when you plan to sync later via SyncProducerWithNIPR. </td>
                               </tr>
                             
                           </tbody>
@@ -7773,7 +8244,25 @@ If specified, this value takes precedence over the tenant's default behavior. </
                     
                   
                     
-                      <p class="message-description">NewProducersResponse contains the IDs of all created producers.</p>
+                      <p class="message-description">NewProducersResponse contains the IDs of all successfully created producers.
+
+The response provides a list of producer IDs that directly corresponds to the
+order of producers in the request, allowing you to map each request entry to
+its created resource.
+
+Order Guarantee:
+The producer_ids array maintains the exact same order as the producers array
+in the request. For example:
+- Request producers[0] → Response producer_ids[0]
+- Request producers[1] → Response producer_ids[1]
+This ordering guarantee simplifies client-side processing and record keeping.
+
+Post-Creation Actions:
+After receiving this response, you can:
+- Use the IDs to fetch full producer details via GetProducer
+- Assign producers to locations via AssignProducerToLocations
+- Trigger NIPR sync if it was skipped during creation
+- Set external IDs via SetExternalID if not provided during creation</p>
                       
                         <table class="field-table">
                           <thead>
@@ -7786,7 +8275,9 @@ If specified, this value takes precedence over the tenant's default behavior. </
                                 <td><a href="#string">string</a></td>
                                 <td>repeated</td>
                                 <td>List of UUIDs for the newly created producers.
-The order matches the order of producers in the request. </td>
+These IDs are immediately available for use in subsequent API calls.
+The array length will always match the number of producers in the request.
+Order is guaranteed to match the request's producer array order. </td>
                               </tr>
                             
                           </tbody>
@@ -7906,8 +8397,28 @@ The order matches the order of producers in the request. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">GetAgencyAndProducers retrieves details for an agency and all associated producers.
-Returns the agency information and a list of producers.</p>
+                <p class="method-description">GetAgencyAndProducers retrieves complete information for an agency and all
+its producers.
+
+This endpoint returns comprehensive agency details including:
+- Agency contact information and business details
+- Principal producer information
+- Bank account for commission payments
+- Errors & Omissions insurance details
+- Business hours and contact points
+- NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
+- All associated producers with their NIPR data
+- Agency locations
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+Agency object with complete NIPR data and list of all associated producers.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -8535,8 +9046,37 @@ Must be a valid UUID format. </td>
               </summary>
               <div class="details-content">
                 <p class="method-description">GetProducer retrieves detailed information about a specific producer.
-The producer can be found by ID, NPN, or email.
-Returns the producer's information, including NIPR data and agency association.</p>
+
+Supports three lookup methods:
+- By producer ID (UUID)
+- By NPN (National Producer Number)
+- By email address
+
+The response includes:
+- Producer contact information (name, email, phone, address)
+- Associated agency information
+- NIPR synchronized data:
+  - State licenses with expiration dates and Lines of Authority (LOAs)
+  - Biographic information (name, DOB, state of domicile)
+  - Regulatory actions by state
+  - Carrier appointments with status and renewal dates
+- Location assignments
+
+Validation Rules:
+Proto validation (format checks):
+Exactly one lookup method must be provided (oneof required):
+- producer_id_lookup.producer_id: Must be a valid UUID format
+- npn_lookup.producer_npn: Must be non-empty string
+- email_lookup.email: Must be a valid email format
+
+Returns:
+Complete producer information including all NIPR data.
+
+Common Error Codes:
+- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
+  associated agency not found
+- UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
+  lookups are implemented)</p>
 
                 
                 <div class="message-section">
@@ -9171,7 +9711,27 @@ and NIPR data. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">GetAgencyFiles returns URLs for accessing files associated with an agency, such as contracts.</p>
+                <p class="method-description">GetAgencyFiles retrieves signed URLs for accessing agency documents.
+
+Returns pre-signed URLs for the following document types:
+- Errors & Omissions (E&O) insurance certificate
+- Voided check for ACH commission payments
+- W9 tax form
+- License documents
+- Broker bond documents
+
+The URLs are time-limited and grant temporary read access to the documents.
+Empty strings are returned for documents that haven't been uploaded.
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+A set of pre-signed URLs for accessing agency documents.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -9827,11 +10387,48 @@ providing financial security for clients. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">UpdateProducer updates information for an existing producer.
-Supports updating contact details, background check responses,
-employment history, and non-uniform licensing questions.
-Information from NIPR and other third-party sources cannot be updated.
-Validates email uniqueness if the email is changed.</p>
+                <p class="method-description">UpdateProducer updates editable fields for an existing producer.
+
+Only information collected during onboarding can be updated via this
+endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+read-only and can only be updated by triggering a NIPR sync via
+SyncProducerWithNIPR.
+
+Updatable Fields:
+- Contact information (first_name, last_name, middle_name, email, phone)
+- Mailing address (street, city, state, zip)
+- External metadata (for tenant-specific data)
+
+Note: NPN cannot be updated after creation. The NPN field is deprecated
+in UpdateProducerRequest.Producer and will be ignored.
+
+Validation:
+- Email must be unique within tenant if changed
+- All field format validations apply (e.g., valid email format, phone pattern)
+
+Validation Rules:
+Proto validation (format checks):
+- producer_id: Required, must be a valid UUID format
+- producer: Required, contains fields to update (all fields optional):
+  - first_name: If provided, must be non-empty
+  - last_name: If provided, must be non-empty
+  - middle_name: If provided, must be non-empty
+  - email: If provided, must be a valid email format
+  - npn: Deprecated and ignored - NPN cannot be updated after creation
+  - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+  - street: If provided, must be non-empty
+  - city: If provided, must be non-empty
+  - state: If provided, must be at most 2 characters
+  - zip: If provided, must be at least 5 characters
+  - external_metadata: Map of key-value pairs for tenant-specific data
+
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Producer field is missing in request</p>
 
                 
                 <div class="message-section">
@@ -10447,12 +11044,58 @@ The field is required. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">UpdateAgency updates information for an existing agency.
-Supports updating contact details (email, phone, fax), website, physical address,
-requested appointments, and notes.
-Information from NIPR and other third-party sources cannot be updated.
+                <p class="method-description">UpdateAgency updates editable fields for an existing agency.
+
+Only information collected during onboarding can be updated via this
+endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+read-only and can only be updated by triggering a NIPR sync via
+SyncAgencyWithNIPR.
+
+Updatable Fields:
+- Contact details (email, phone, fax)
+- Website URL
+- Physical address components
+- Requested appointments (state codes)
+- Notes
+- External metadata (for tenant-specific data)
+
 All fields are optional - only provide the fields you want to update.
-Validates email uniqueness if the email is changed.</p>
+Unchanged fields retain their current values.
+
+Validation:
+- Email must be unique within tenant if changed
+- All field format validations apply
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- agency: Required, contains fields to update (all fields optional):
+  - email: If provided, must be a valid email format
+  - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+  - fax: If provided, must match E.164 pattern
+  - website: If provided, must be a valid URI format
+  - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
+  - notes: If provided, maximum 500 characters
+  - physical_address (optional, if provided):
+    - street: If provided, must be non-empty
+    - city: If provided, must be non-empty
+    - state: If provided, must be exactly 2 characters
+    - zip: If provided, must be 1-10 characters
+  - external_metadata: Map of key-value pairs for tenant-specific data
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- email: If changed, must be unique within the tenant (case-insensitive comparison)
+- phone: If provided, must be a valid phone number format
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- ALREADY_EXISTS: Email already exists within tenant
+- INVALID_ARGUMENT: Invalid phone number format or all address fields required
+  when creating new address</p>
 
                 
                 <div class="message-section">
@@ -11069,8 +11712,47 @@ Must be a valid UUID format. </td>
               </summary>
               <div class="details-content">
                 <p class="method-description">NewContact creates a new contact associated with an agency.
-Contacts represent non-producer individuals linked to the agency.
-Returns the ID of the created contact.</p>
+
+Use this endpoint to programmatically add non-producer individuals to
+agencies. Contacts represent staff members, administrators, or other
+personnel who are not licensed insurance producers but need to be
+associated with the agency for communication or administrative purposes.
+
+Validation Performed:
+- Agency exists and belongs to the authenticated tenant
+- Email is unique within the tenant (across both producers and contacts)
+- Required fields are present and valid (first name, last name, email, role)
+- Phone number matches valid pattern (if provided)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- contact: Required, contains contact information:
+  - first_name: Required, must be non-empty
+  - last_name: Required, must be non-empty
+  - email: Required, must be a valid email format
+  - role: Required, must be non-empty
+  - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+  - middle_name: Optional
+  - address (optional, if provided):
+    - street: Required, must be non-empty
+    - city: Required, must be non-empty
+    - state: Required, must be exactly 2 characters (state code)
+    - zip: Required, must be 1-10 characters
+  - tenant_id: Optional, maximum 255 characters (external identifier)
+  - npn: Optional
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- email: Must be unique within the tenant (not already used by another producer or contact)
+
+Returns:
+The UUID of the created contact.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Missing required fields or invalid field format
+- ALREADY_EXISTS: Email already registered in your tenant
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -11698,9 +12380,58 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">NewContacts creates multiple contacts in a single request.
-Each contact is associated with the specified agency.
-Returns the IDs of all created contacts.</p>
+                <p class="method-description">NewContacts creates multiple contacts in bulk and associates them with a
+single agency.
+
+This endpoint provides an efficient way to add multiple non-producer
+contacts to the same agency in a single API call. Contacts represent staff
+members, administrators, or other personnel who are not licensed insurance
+producers.
+
+Partial Success Behavior:
+Unlike bulk producer operations, this endpoint uses partial success
+semantics. Contacts that pass validation are created even if other contacts
+in the request fail. The response contains only the IDs of successfully
+created contacts.
+
+Validation Performed (for each contact):
+- Agency exists and belongs to the authenticated tenant
+- Email is unique within the tenant (across both producers and contacts)
+- Required fields are present and valid (first name, last name, email, role)
+- Phone number matches valid pattern (if provided)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- contacts: Required, must contain at least 1 contact. Each contact:
+  - first_name: Required, must be non-empty
+  - last_name: Required, must be non-empty
+  - email: Required, must be a valid email format
+  - role: Required, must be non-empty
+  - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+  - middle_name: Optional
+  - address (optional, if provided):
+    - street: Required, must be non-empty
+    - city: Required, must be non-empty
+    - state: Required, must be exactly 2 characters (state code)
+    - zip: Required, must be 1-10 characters
+  - tenant_id: Optional, maximum 255 characters (external identifier)
+  - npn: Optional
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- Each contact email: Must be unique within the tenant. Contacts with duplicate
+  emails are skipped (partial success - other valid contacts are still created)
+
+Returns:
+List of UUIDs for successfully created contacts. If some contacts failed
+validation, only the IDs of successfully created contacts are returned.
+Failed contacts are logged but not included in the response. The order of
+returned IDs corresponds to the order of successful contacts, not the
+original request order.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -12331,7 +13062,29 @@ The order matches the order of contacts in the request. </td>
               </summary>
               <div class="details-content">
                 <p class="method-description">ListAgencyContacts retrieves all contacts associated with an agency.
-Returns a list of contacts with their full details.</p>
+
+Use this endpoint to fetch all non-producer contacts linked to a specific
+agency. Contacts represent staff members, administrators, or other
+personnel who are not licensed insurance producers but are associated with
+the agency.
+
+The response includes complete contact information:
+- Personal details (name, email, phone)
+- Role within the agency
+- Mailing address
+- NPN (if applicable)
+- Creation timestamp
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+A list of all contacts associated with the specified agency. Returns an
+empty list if the agency has no contacts.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -12951,8 +13704,54 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">SetExternalID sets an external identifier for a producer or contact.
-Useful for integrating with external systems that use different ID schemes.</p>
+                <p class="method-description">SetExternalID sets an external identifier for a producer, agency, contact,
+or organization.
+
+Use this endpoint to link ProducerFlow entities to corresponding records in
+your external systems (CRM, AMS, legacy databases). This enables bi-directional
+synchronization and lookups across systems.
+
+Supported Entity Types:
+- Producer: Links a producer to an external system record
+- Agency: Links an agency to an external system record
+- Contact: Links a contact to an external system record
+- Organization: Links an organization to an external system record
+
+Exactly one entity type must be specified per request.
+
+Validation Performed:
+- Exactly one entity ID is provided (producer_id, agency_id, contact_id, or organization_id)
+- The external ID (tenant_id) is non-empty and at most 255 characters
+- The external ID is unique within the tenant (not already assigned to another entity)
+- The specified entity exists and belongs to the authenticated tenant
+
+Validation Rules:
+Proto validation (format checks):
+Exactly one entity ID must be provided (oneof required):
+- producer_id: Must be a valid UUID format
+- agency_id: Must be a valid UUID format
+- contact_id: Must be a valid UUID format
+- organization_id: Must be a valid UUID format
+
+Required field:
+- tenant_id: Required, must be 1-255 characters (the external identifier to assign)
+
+Business logic validation:
+- tenant_id: Must be unique within the tenant (not already assigned to any other entity)
+- Entity must exist and belong to the authenticated tenant:
+  - Producer: Verified via tenant-scoped lookup
+  - Contact: Verified via tenant-scoped lookup
+  - Agency: Verified via tenant-scoped lookup and tenant ownership check
+  - Organization: Verified via tenant-scoped lookup and tenant ownership check
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- INVALID_ARGUMENT: No entity ID provided or external ID validation failed
+- NOT_FOUND: The specified entity doesn't exist or doesn't belong to tenant
+- ALREADY_EXISTS: The external ID is already assigned to another entity in the tenant
+- PERMISSION_DENIED: The entity doesn't belong to the authenticated tenant</p>
 
                 
                 <div class="message-section">
@@ -13588,9 +14387,35 @@ Only one entity type can be specified.</p>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ValidateProducerNPN checks whether a producer’s National Producer Number (NPN) is valid.
-It performs a lookup against NIPR and applies internal validation rules.
-Returns a validity flag and any associated error messages.</p>
+                <p class="method-description">ValidateProducerNPN checks whether a producer's National Producer Number (NPN)
+exists in NIPR.
+
+Use this endpoint to verify an NPN is valid before creating a producer. This
+is a free NIPR API lookup that does not count against your monthly billing
+quota.
+
+Validation Modes:
+- NPN only: Validates that the NPN exists in NIPR
+- NPN with name: Validates that the NPN exists AND the name matches the NIPR
+  record (recommended for additional verification)
+
+NIPR Billing:
+This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+incur charges, unlike the other NIPR entity lookups used during sync operations.
+
+Validation Rules:
+Proto validation (format checks):
+- npn: Required, must be non-empty string
+- name: Optional, if provided validates NPN matches this producer name in NIPR
+
+Business logic validation:
+- NPN is validated against NIPR database via free NIPR NPN Lookup API
+- If name is provided, both NPN and name must match a producer record in NIPR
+- If name is not provided, only NPN existence is verified
+
+Returns:
+A boolean indicating whether the NPN is valid. Returns true if the NPN exists
+in NIPR (and name matches, if provided), false otherwise.</p>
 
                 
                 <div class="message-section">
@@ -14219,9 +15044,28 @@ True if the NPN exists and is valid, false otherwise. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ValidateAgencyNPN checks whether an agency’s National Producer Number (NPN) is valid.
-It performs a lookup against NIPR and applies internal validation rules.
-Returns a validity flag and any associated error messages.</p>
+                <p class="method-description">ValidateAgencyNPN checks whether an agency's National Producer Number (NPN)
+exists in NIPR.
+
+Use this endpoint to verify an agency NPN is valid before creating an agency.
+This is a free NIPR API lookup that does not count against your monthly
+billing quota.
+
+NIPR Billing:
+This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+incur charges, unlike the NIPR entity lookups used during sync operations.
+
+Validation Rules:
+Proto validation (format checks):
+- npn: Required, must be non-empty string
+
+Business logic validation:
+- NPN is validated against NIPR database via free NIPR NPN Lookup API
+- Agency NPN must exist in NIPR's agency records
+
+Returns:
+A boolean indicating whether the agency NPN is valid. Returns true if the NPN
+exists in NIPR, false otherwise.</p>
 
                 
                 <div class="message-section">
@@ -14842,9 +15686,30 @@ True if the NPN exists and is valid, false otherwise. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">LookupNPNByFEIN finds an NPN using a Federal Employer Identification Number.
-Used to help agencies that know their FEIN but not their NPN.
-Returns the NPN if found or an error message.</p>
+                <p class="method-description">LookupNPNByFEIN finds an agency's NPN using their Federal Employer
+Identification Number (FEIN).
+
+Use this endpoint to help agencies discover their NPN when they only know
+their FEIN. This is common during onboarding when agencies may not have
+their NPN readily available but know their tax identification number.
+
+NIPR Billing:
+This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+incur charges, unlike the EntityInfo lookups used during sync operations.
+
+Validation Rules:
+Proto validation (format checks):
+- fein: Required, must be exactly 9 characters
+
+Business logic validation:
+- FEIN is looked up against NIPR database via free NIPR NPN Lookup API
+- Agency with the given FEIN must exist in NIPR's records
+
+Returns:
+The agency's NPN if found in NIPR.
+
+Common Error Codes:
+- NOT_FOUND: No agency found in NIPR with the given FEIN</p>
 
                 
                 <div class="message-section">
@@ -15464,7 +16329,12 @@ Required and must be exactly 9 characters. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.</p>
+                <p class="method-description">ResyncProducer triggers a manual resynchronization of a producer's data.
+This can be used to refresh data after external change
+
+Common Error Codes:
+- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Producer ID is empty</p>
 
                 
                 <div class="message-section">
@@ -16070,7 +16940,11 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.</p>
+                <p class="method-description">ResyncAgency triggers a manual resynchronization of an agency's data. Similar
+to ResyncProducer, this can be used to refresh data after external changes.
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Agency ID is empty or request is empty</p>
 
                 
                 <div class="message-section">
@@ -16677,7 +17551,45 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.</p>
+                <p class="method-description">SyncProducerWithNIPR synchronizes a producer's data with NIPR.
+
+Use this endpoint to manually trigger an immediate refresh of producer data
+from NIPR. The operation validates the producer NPN exists in NIPR before
+syncing.
+
+What Gets Synchronized:
+- State licenses with expiration dates and Lines of Authority
+- Carrier appointments with status and renewal dates
+- Regulatory actions and disciplinary history
+- Biographic information (name, DOB, state of domicile)
+- Address by state
+
+Preconditions:
+- Producer must exist and belong to the authenticated tenant
+- Producer must have a valid NPN registered in NIPR
+- Producer must not already be in active sync state
+
+Validation Rules:
+Proto validation (format checks):
+- producer_id: Required, must be a valid UUID format
+
+Business logic validation:
+- producer_id: Producer must exist and belong to the authenticated tenant
+- Producer must have an NPN assigned (cannot sync a producer without NPN)
+- Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+- Producer must not already be in ACTIVE sync state (prevents redundant syncs)
+
+Timeout: 30 seconds. If NIPR takes longer, you'll receive a
+DEADLINE_EXCEEDED error.
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Producer has no NPN or NPN is not registered in NIPR
+- FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
+- DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds</p>
 
                 
                 <div class="message-section">
@@ -17283,7 +18195,52 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.</p>
+                <p class="method-description">SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
+
+Use this endpoint to manually trigger an immediate refresh of agency data
+from NIPR. The operation validates the agency NPN exists in NIPR before
+syncing.
+
+What Gets Synchronized:
+- Agency biographic information (company name, FEIN, contact details)
+- State licenses with expiration dates and Lines of Authority
+- Carrier appointments with status and renewal dates
+- Regulatory actions and disciplinary history
+- Address history by state
+
+Bulk Producer Sync:
+When sync_all_producers is set to true, the system will also sync all
+producers associated with the agency. This extends the timeout to 10
+minutes to accommodate the additional operations. Each producer sync is
+a separate billable NIPR lookup.
+
+Preconditions:
+- Agency must exist and belong to the authenticated tenant
+- Agency must have a valid NPN registered in NIPR
+- Agency must not already be in active sync state
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- sync_all_producers: Optional boolean, defaults to false
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+- Agency must not already be in ACTIVE sync state (prevents redundant syncs)
+
+Timeout:
+- 30 seconds when syncing agency only
+- 10 minutes when sync_all_producers is true
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
+- FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+- DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)</p>
 
                 
                 <div class="message-section">
@@ -17897,8 +18854,34 @@ If false, only the agency will be synchronized. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">StopSyncProducerWithNIPR stops the synchronization process with NIPR for a producer.
-Use this to prevent further automatic updates from NIPR.</p>
+                <p class="method-description">StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
+
+Use this endpoint to stop receiving automatic updates from NIPR for a
+specific producer. Once stopped, the producer's NIPR data will no longer
+be refreshed via PDB Alerts or other automatic sync mechanisms.
+
+This does not delete existing NIPR data - it only prevents future updates.
+To re-enable synchronization, use the SyncProducerWithNIPR endpoint.
+
+Preconditions:
+- Producer must exist and belong to the authenticated tenant
+- Producer must be in active or failing sync state (not already disabled/pending)
+
+Validation Rules:
+Proto validation (format checks):
+- producer_id: Required, must be a valid UUID format
+
+Business logic validation:
+- producer_id: Producer must exist and belong to the authenticated tenant
+- Producer must be in ACTIVE or FAILING sync state (cannot stop if already
+  DISABLED or PENDING)
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+- FAILED_PRECONDITION: Producer is already unsynced (DISABLED or PENDING sync state)</p>
 
                 
                 <div class="message-section">
@@ -18504,8 +19487,42 @@ Must be a valid UUID format. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">StopSyncAgencyWithNIPR stops the synchronization process with NIPR for an agency.
-Use this to prevent further automatic updates from NIPR.</p>
+                <p class="method-description">StopSyncAgencyWithNIPR disables automatic NIPR synchronization for an agency.
+
+Use this endpoint to stop receiving automatic updates from NIPR for a
+specific agency. Once stopped, the agency's NIPR data will no longer be
+refreshed via PDB Alerts or other automatic sync mechanisms.
+
+This does not delete existing NIPR data - it only prevents future updates.
+To re-enable synchronization, use the SyncAgencyWithNIPR endpoint.
+
+Bulk Producer Stop:
+When stop_all_producers is set to true, the system will also stop sync for
+all producers associated with the agency. This is useful when offboarding
+an entire agency from NIPR synchronization. When this flag is set, the
+precondition check for agency sync state is bypassed.
+
+Preconditions:
+- Agency must exist and belong to the authenticated tenant
+- Agency must be in active or failing sync state (unless stop_all_producers is true)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- stop_all_producers: Optional boolean, defaults to false
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- Unless stop_all_producers is true, agency must be in ACTIVE or FAILING sync
+  state (cannot stop if already DISABLED or PENDING)
+
+Returns:
+Empty response on success.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- FAILED_PRECONDITION: Agency is already unsynced (DISABLED or PENDING sync state,
+  unless stop_all_producers is true)</p>
 
                 
                 <div class="message-section">
@@ -19119,7 +20136,53 @@ If false, only the agency will be stopped from synchronizing. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.</p>
+                <p class="method-description">CreateProducerUploadURL generates a secure URL for bulk producer uploads to
+an existing agency.
+
+Use this endpoint to create a shareable link that allows agencies to upload
+multiple producers at once. The URL includes security tokens and tenant
+context to ensure secure, authenticated access.
+
+Unlike CreateProducerOnboardingURL which creates a self-service form for a
+single producer, this endpoint generates a URL for bulk uploading producer
+data (typically via CSV or spreadsheet format).
+
+The agency is identified by its National Producer Number (NPN), which must
+already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
+look up agency NPNs if needed.
+
+Typical Workflow:
+1. Generate producer upload URL using the agency's NPN
+2. Share URL with agency contact via email or portal
+3. Agency uploads producer data through the URL
+4. System processes uploads, validates NPNs with NIPR, and creates producer
+   records
+5. Producers are associated with the agency and optionally synced with NIPR
+
+URL Expiration:
+The generated URL has a default expiration of 7 days. After expiration, a
+new URL must be generated.
+
+Validation Performed:
+- Agency NPN format is valid (numeric string, 2-10 digits)
+- Agency with the given NPN exists in your tenant
+- Agency belongs to the authenticated tenant
+
+Validation Rules:
+Proto validation (format checks):
+- agency_npn: Required, must be 2-10 digits (numeric characters only)
+
+Business logic validation:
+- Agency with the given NPN must exist in the authenticated tenant
+- Agency must belong to the authenticated tenant (ownership verification)
+- Only one agency should match the NPN (multiple matches indicate data issue)
+
+Returns:
+A time-limited URL string that can be shared with the agency for bulk
+producer uploads.
+
+Common Error Codes:
+- NOT_FOUND: No agency found with the given NPN in your tenant</p>
 
                 
                 <div class="message-section">
@@ -19741,7 +20804,52 @@ The URL is time-limited and includes necessary security tokens. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.</p>
+                <p class="method-description">AddAgencyLocations adds one or more locations to an existing agency.
+
+Use this endpoint to programmatically add physical locations (offices,
+branches, etc.) to an agency. Locations enable organizing producers by
+their work sites and tracking agency presence across different addresses.
+
+Bulk Operation Behavior:
+This is an all-or-nothing operation - if any location fails validation,
+the entire request will fail and no locations will be added. You can add
+up to 100 locations in a single request.
+
+Validation Performed:
+- Agency exists and belongs to the authenticated tenant
+- At least one location is provided
+- Location names are unique within the agency (case-insensitive)
+- Location names are not duplicated within the request
+- Valid address information is provided for each location
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- locations: Required, 1-100 locations. Each location:
+  - name: Required, must be non-empty (unique within agency)
+  - address: Required
+    - street: Required, must be non-empty
+    - city: Required, must be non-empty
+    - state: Required, must be exactly 2 characters (state code)
+    - zip: Required, must be 1-10 characters
+  - phone: Required, must match E.164 pattern (e.g., +15551234567)
+  - email: Required, must be a valid email format
+  - is_primary: Optional boolean, marks location as primary
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- Location names must be unique within the agency (case-insensitive)
+- Location names must not duplicate any existing location names in the agency
+- Location names must not duplicate other location names within the same request
+
+Returns:
+List of UUIDs for all created locations in the same order as the request.
+This ordering guarantee allows you to map request entries to their created IDs.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
+  location names, or location with name already exists in agency
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -20367,7 +21475,38 @@ The URL is time-limited and includes necessary security tokens. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.</p>
+                <p class="method-description">RemoveAgencyLocations removes one or more locations from an agency.
+
+Use this endpoint to delete locations that are no longer needed. This is
+useful when closing branch offices or consolidating agency locations.
+
+Producer Unassignment:
+When a location is removed, all producers assigned to that location are
+automatically unassigned. The producers themselves are not deleted - they
+remain associated with the agency but without a location assignment.
+
+Partial Success Behavior:
+Locations that don't exist are silently ignored. The response contains only
+the IDs of locations that were actually removed.
+
+Validation Performed:
+- At least one location ID is provided
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- location_ids: Required, 1-100 items, each must be a valid UUID format
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- Location IDs that don't exist are silently ignored (partial success)
+
+Returns:
+List of UUIDs for locations that were successfully removed.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Missing agency_id or no location_ids provided
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -20993,7 +22132,29 @@ The URL is time-limited and includes necessary security tokens. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.</p>
+                <p class="method-description">ListAgencyLocations retrieves all locations associated with an agency.
+
+Use this endpoint to fetch the complete list of physical locations
+belonging to an agency. Each location includes its address, contact
+information, and primary status.
+
+The response includes complete location information:
+- Location ID and name
+- Physical address (street, city, state, zip)
+- Contact information (phone, email)
+- Primary location indicator
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+A list of all locations associated with the specified agency. Returns an
+empty list if the agency has no locations.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Invalid request
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
                 <div class="message-section">
@@ -21612,7 +22773,44 @@ The URL is time-limited and includes necessary security tokens. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.</p>
+                <p class="method-description">AssignProducerToLocations assigns one or more locations to a producer.
+
+Use this endpoint to associate a producer with specific agency locations
+(branch offices, work sites, etc.). A producer can be assigned to multiple
+locations within their agency.
+
+Location Ownership:
+All specified locations must belong to the same agency as the producer.
+Cross-agency location assignments are not permitted.
+
+Idempotent Behavior:
+If a producer is already assigned to a location, the assignment is
+preserved without error. The response includes all successfully assigned
+location IDs.
+
+Validation Performed:
+- Producer exists and belongs to the authenticated tenant
+- All location IDs exist and belong to the producer's agency
+- At least one location ID is provided
+
+Validation Rules:
+Proto validation (format checks):
+- producer_id: Required, must be a valid UUID format
+- location_ids: Required, 1-100 items, each must be a valid UUID format
+
+Business logic validation:
+- producer_id: Producer must exist and belong to the authenticated tenant
+- Producer's agency must exist and belong to the authenticated tenant
+- All location_ids must exist and belong to the producer's agency
+
+Returns:
+List of location IDs that were successfully assigned to the producer.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Request is missing
+- NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
+  locations don't exist
+- PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant</p>
 
                 
                 <div class="message-section">
@@ -22239,7 +23437,38 @@ These locations must belong to the same agency as the producer. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.</p>
+                <p class="method-description">UnassignProducerFromLocations removes one or more location assignments from
+a producer.
+
+Use this endpoint to disassociate a producer from specific agency locations.
+This is useful when producers change work sites or when consolidating
+location assignments.
+
+Producer Preservation:
+This operation only removes the location assignments - the producer remains
+active and associated with the agency. To fully remove a producer, use the
+appropriate producer deletion endpoint.
+
+Validation Performed:
+- Producer exists and belongs to the authenticated tenant
+- All location IDs exist and belong to the producer's agency
+- At least one location ID is provided
+
+Validation Rules:
+Proto validation (format checks):
+- producer_id: Required, must be a valid UUID format
+- location_ids: Required, 1-100 items, each must be a valid UUID format
+
+Business logic validation:
+- producer_id: Producer must exist and belong to the authenticated tenant
+- All location_ids must exist and belong to the producer's agency
+
+Returns:
+List of location IDs that were successfully unassigned from the producer.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+- NOT_FOUND: Producer doesn't exist or specified locations don't exist</p>
 
                 
                 <div class="message-section">
@@ -22865,7 +24094,52 @@ These locations must belong to the same agency as the producer. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.</p>
+                <p class="method-description">UpdateAgencyLocation updates an existing agency location.
+
+Use this endpoint to modify location details such as address, contact
+information, or primary status. This is useful when locations move,
+change phone numbers, or when designating a new primary location.
+
+Updatable Fields:
+- Name (must remain unique within the agency)
+- Address (street, city, state, zip)
+- Contact information (phone, email)
+- Primary location status
+
+All fields are optional - only provide the fields you want to update.
+Unchanged fields retain their current values.
+
+Name Uniqueness:
+If updating the location name, the new name must not already exist for
+another location within the same agency (case-insensitive comparison).
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+- location_id: Required, must be a valid UUID format
+- name: If provided, must be non-empty (unique within agency)
+- address: If provided (all fields optional within):
+  - street: If provided, must be non-empty
+  - city: If provided, must be non-empty
+  - state: If provided, must be exactly 2 characters (state code)
+  - zip: If provided, must be 1-10 characters
+- phone: If provided, must match E.164 pattern (e.g., +15551234567)
+- email: If provided, must be a valid email format
+- is_primary: Optional boolean
+
+Business logic validation:
+- agency_id: Agency must exist and belong to the authenticated tenant
+- location_id: Location must exist and belong to the specified agency
+- name: If provided, must be unique within the agency (case-insensitive,
+  excluding the location being updated)
+
+Returns:
+The complete updated location object with all current field values.
+
+Common Error Codes:
+- INVALID_ARGUMENT: Missing agency_id or location_id, or invalid request
+- NOT_FOUND: Agency or location doesn't exist or doesn't belong to tenant
+- ALREADY_EXISTS: New location name already exists within the agency</p>
 
                 
                 <div class="message-section">
@@ -24501,7 +25775,20 @@ Used for mailing, physical, and invoicing addresses throughout the API.</div>
               
               
                 <h3 id="producerflow.producer.v1.Agency">Agency</h3>
-                <div class="description-content">Agency represents a complete agency entity with all associated information.</div>
+                <div class="description-content">Agency represents a complete insurance agency with all associated data.
+
+This message contains comprehensive agency information including:
+- Basic contact and identification details
+- Principal producer information
+- Banking details for commission payments
+- Business operating information
+- NIPR-synchronized licensing and regulatory data
+- Physical locations
+
+The NIPR data is automatically synchronized from the National Insurance
+Producer Registry and includes licenses, appointments, regulatory actions,
+and addresses. This data is read-only and can only be updated by triggering
+NIPR sync operations.</div>
 
                 
                   <table class="field-table">
@@ -24514,7 +25801,8 @@ Used for mailing, physical, and invoicing addresses throughout the API.</div>
                           <td><code>agency_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Unique identifier for the agency. </td>
+                          <td>Unique identifier for the agency (UUID format).
+This ID is used in all API operations that reference this agency. </td>
                         </tr>
                       
                         <tr>
@@ -25760,8 +27048,16 @@ This may differ from the agency address. </td>
               
               
                 <h3 id="producerflow.producer.v1.AgencySummary">AgencySummary</h3>
-                <div class="description-content">AgencySummary contains a lightweight summary of an agency for list views.
-This message contains only the essential fields needed for displaying agencies in a list.</div>
+                <div class="description-content">AgencySummary provides essential agency information for list views and quick
+reference.
+
+This message is optimized for displaying agencies in lists, tables, and
+search results without the overhead of full NIPR data. It contains only the
+most commonly needed fields for agency identification and basic contact
+information.
+
+For complete agency information including NIPR data, licenses, appointments,
+and associated producers, use the GetAgencyAndProducers RPC.</div>
 
                 
                   <table class="field-table">
@@ -25774,70 +27070,86 @@ This message contains only the essential fields needed for displaying agencies i
                           <td><code>agency_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Unique identifier for the agency. </td>
+                          <td>Unique identifier for the agency (UUID format).
+Use this ID to retrieve full agency details via GetAgencyAndProducers. </td>
                         </tr>
                       
                         <tr>
                           <td><code>name</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Agency name. </td>
+                          <td>The official name of the agency.
+This is typically the legal business name. </td>
                         </tr>
                       
                         <tr>
                           <td><code>email</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Agency email address. </td>
+                          <td>Primary email address for the agency.
+Used for general communication and must be unique within the tenant. </td>
                         </tr>
                       
                         <tr>
                           <td><code>phone</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Agency phone number. </td>
+                          <td>Main phone number for the agency.
+Format may vary but typically includes country code for international numbers. </td>
                         </tr>
                       
                         <tr>
                           <td><code>npn</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Agency NPN (National Producer Number). </td>
+                          <td>National Producer Number (NPN) assigned by NIPR.
+Only present for standard agencies (not sole proprietors).
+Empty string if the agency doesn't have an NPN. </td>
                         </tr>
                       
                         <tr>
                           <td><code>fein</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Agency FEIN (Federal Employer Identification Number). </td>
+                          <td>Federal Employer Identification Number (FEIN).
+Nine-digit number assigned by the IRS for tax purposes.
+May be empty for sole proprietors or agencies without FEIN. </td>
                         </tr>
                       
                         <tr>
                           <td><code>organization_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
-                          <td>Organization ID that the agency belongs to. </td>
+                          <td>Organization ID that the agency belongs to.
+References organizations like aggregators or agency networks.
+Optional field - null if the agency isn't part of an organization. </td>
                         </tr>
                       
                         <tr>
                           <td><code>is_tenant_agency</code></td>
                           <td><a href="#bool">bool</a></td>
                           <td></td>
-                          <td>Whether this is an internal tenant agency. </td>
+                          <td>Indicates whether this is an internal tenant agency.
+True for agencies owned/operated by the tenant.
+False for external/partner agencies. </td>
                         </tr>
                       
                         <tr>
                           <td><code>is_sole_proprietor</code></td>
                           <td><a href="#bool">bool</a></td>
                           <td></td>
-                          <td>Whether this is a sole proprietor. </td>
+                          <td>Indicates whether this agency is a sole proprietor.
+True: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR).
+False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY). </td>
                         </tr>
                       
                         <tr>
                           <td><code>created_at</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>When the agency was created. </td>
+                          <td>Timestamp when the agency was created in the system.
+Used for sorting agencies by creation date in list views.
+Always in UTC timezone. </td>
                         </tr>
                       
                     </tbody>
@@ -26001,7 +27313,13 @@ Must be unique within the tenant. </td>
               
               
                 <h3 id="producerflow.producer.v1.CreateAgencyOnboardingURLRequest">CreateAgencyOnboardingURLRequest</h3>
-                <div class="description-content">CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.</div>
+                <div class="description-content">CreateAgencyOnboardingURLRequest contains information needed to generate
+an agency onboarding URL. This includes basic agency information and
+defaults.
+
+All fields in this request are optional. You can provide as much or as little
+information as you have available. Any missing information will be collected
+from the user during the onboarding process through the generated URL.</div>
 
                 
                   <table class="field-table">
@@ -26587,7 +27905,10 @@ providing financial security for clients. </td>
               
               
                 <h3 id="producerflow.producer.v1.GetOrganizationRequest">GetOrganizationRequest</h3>
-                <div class="description-content">GetOrganizationRequest specifies which organization to retrieve.</div>
+                <div class="description-content">GetOrganizationRequest specifies which organization to retrieve detailed information for.
+
+Use this request to fetch comprehensive details about a specific organization,
+including all agencies assigned to it and their current status.</div>
 
                 
                   <table class="field-table">
@@ -26601,7 +27922,16 @@ providing financial security for clients. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Unique identifier of the organization to retrieve.
-Must be a valid UUID. </td>
+
+This must be a valid UUID that was previously returned from:
+- ListOrganizations response
+- Agency creation response (when agency is assigned to an organization)
+- Other API calls that reference organizations
+
+The organization must belong to your authenticated tenant; attempting
+to access organizations from other tenants will result in a NOT_FOUND error.
+
+Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                         </tr>
                       
                     </tbody>
@@ -26614,7 +27944,7 @@ Must be a valid UUID. </td>
               
               
                 <h3 id="producerflow.producer.v1.GetOrganizationResponse">GetOrganizationResponse</h3>
-                <div class="description-content">GetOrganizationResponse contains the details of the requested organization.</div>
+                <div class="description-content">GetOrganizationResponse contains details about the requested organization.</div>
 
                 
                   <table class="field-table">
@@ -26627,7 +27957,7 @@ Must be a valid UUID. </td>
                           <td><code>organization</code></td>
                           <td><a href="#producerflow.producer.v1.Organization">Organization</a></td>
                           <td></td>
-                          <td>The requested organization. </td>
+                          <td>The requested organization with all available details. </td>
                         </tr>
                       
                     </tbody>
@@ -26789,8 +28119,19 @@ and NIPR data. </td>
               
               
                 <h3 id="producerflow.producer.v1.ListAgenciesRequest">ListAgenciesRequest</h3>
-                <div class="description-content">ListAgenciesRequest requests a list of agencies associated with the tenant.
-Supports optional filtering and pagination parameters.</div>
+                <div class="description-content">ListAgenciesRequest enables flexible querying of agencies with multiple filter
+options and pagination support.
+
+All filters are optional and can be combined for precise results. When multiple
+filters are specified, they are applied with AND logic (agencies must match all
+specified criteria).
+
+Example Use Cases:
+- Get all agencies in an organization: set organization_id
+- Search for an agency by name: set search_query
+- Find failing NIPR syncs: set nipr_sync_statuses to [NIPR_SYNC_STATE_FAILING]
+- Get sole proprietors only: set entity_type to ENTITY_TYPE_SOLE_PROPRIETOR
+- Paginate through all agencies: use pagination with page_token</div>
 
                 
                   <table class="field-table">
@@ -26804,47 +28145,59 @@ Supports optional filtering and pagination parameters.</div>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
                           <td>Optional. Filter agencies by organization ID.
-If provided, only agencies belonging to this organization will be returned. </td>
+Only agencies belonging to this specific organization will be returned.
+Must be a valid UUID if provided.
+Use ListOrganizations to get valid organization IDs. </td>
                         </tr>
                       
                         <tr>
                           <td><code>search_query</code></td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
-                          <td>Optional. Search query to filter agencies by name, NPN, or email.
-If provided, only agencies matching the search query will be returned. </td>
+                          <td>Optional. Free-text search across agency fields.
+Searches in: agency name, NPN, and email address.
+The search is case-insensitive and uses partial matching.
+Example: "smith" will match "Smith Insurance Agency" and "john.smith@agency.com" </td>
                         </tr>
                       
                         <tr>
                           <td><code>pagination</code></td>
                           <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
                           <td></td>
-                          <td>Optional. Pagination parameters.
-If not provided, defaults to page_size=50. </td>
+                          <td>Optional. Pagination parameters for controlling result set size and navigation.
+If not provided, defaults to page_size=50 with no offset.
+Maximum allowed page_size is 200; values above this will be capped. </td>
                         </tr>
                       
                         <tr>
                           <td><code>agency_type</code></td>
                           <td><a href="#producerflow.producer.v1.AgencyType">AgencyType</a></td>
                           <td>optional</td>
-                          <td>Optional. Filter by agency type (internal vs external).
-If not provided, returns all agencies regardless of type. </td>
+                          <td>Optional. Filter by agency classification (internal vs external).
+- AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant
+- AGENCY_TYPE_EXTERNAL: Partner or third-party agencies
+If not specified, returns both internal and external agencies. </td>
                         </tr>
                       
                         <tr>
                           <td><code>entity_type</code></td>
                           <td><a href="#producerflow.producer.v1.EntityType">EntityType</a></td>
                           <td>optional</td>
-                          <td>Optional. Filter by entity type (sole proprietor vs agency).
-If not provided, returns all agencies regardless of entity type. </td>
+                          <td>Optional. Filter by business entity structure.
+- ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies
+- ENTITY_TYPE_AGENCY: Standard multi-producer agencies
+If not specified, returns both sole proprietors and standard agencies. </td>
                         </tr>
                       
                         <tr>
                           <td><code>nipr_sync_statuses</code></td>
                           <td><a href="#producerflow.producer.v1.NIPRSyncState">NIPRSyncState</a></td>
                           <td>repeated</td>
-                          <td>Optional. Filter by NIPR sync status.
-If not provided, returns all agencies regardless of sync status. </td>
+                          <td>Optional. Filter by NIPR synchronization status.
+Multiple statuses can be specified to match agencies in any of those states.
+Useful for monitoring sync health and identifying agencies needing attention.
+Valid values: ACTIVE, FAILING, PENDING, DISABLED
+If empty, returns agencies in all sync states. </td>
                         </tr>
                       
                     </tbody>
@@ -26857,7 +28210,18 @@ If not provided, returns all agencies regardless of sync status. </td>
               
               
                 <h3 id="producerflow.producer.v1.ListAgenciesResponse">ListAgenciesResponse</h3>
-                <div class="description-content">ListAgenciesResponse contains the list of agencies matching the filter criteria.</div>
+                <div class="description-content">ListAgenciesResponse provides paginated agency results with metadata for
+navigation and total counts.
+
+The response is optimized for UI display with summary data only. For complete
+agency information including NIPR data, use GetAgencyAndProducers with the
+agency_id from the summary.
+
+Pagination Notes:
+- Results are always ordered by creation date (newest first)
+- Page tokens are opaque and should not be constructed by clients
+- Total count reflects all matching agencies, not just the current page
+- Empty agencies list with total_count > 0 indicates you've paginated past the end</div>
 
                 
                   <table class="field-table">
@@ -26871,22 +28235,29 @@ If not provided, returns all agencies regardless of sync status. </td>
                           <td><a href="#producerflow.producer.v1.AgencySummary">AgencySummary</a></td>
                           <td>repeated</td>
                           <td>List of agency summaries matching the filter criteria.
-The agencies are ordered by creation date, most recent first. </td>
+Ordered by creation date with the most recently created agencies first.
+Will be empty if no agencies match the filters or if paginating past the last page.
+Maximum of page_size agencies per response (default 50, max 200). </td>
                         </tr>
                       
                         <tr>
                           <td><code>next_page_token</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>A token that can be sent as `page_token` to retrieve the next page.
-If this field is omitted, there are no subsequent pages. </td>
+                          <td>Pagination token for retrieving the next page of results.
+Pass this value as page_token in the next request to continue pagination.
+Empty string indicates this is the last page of results.
+Tokens are opaque and their format may change; treat as black box. </td>
                         </tr>
                       
                         <tr>
                           <td><code>total_count</code></td>
                           <td><a href="#int32">int32</a></td>
                           <td></td>
-                          <td>Total number of agencies matching the filter criteria. </td>
+                          <td>Total number of agencies matching the filter criteria across all pages.
+This count is independent of pagination and represents the full result set.
+Useful for displaying "Showing X-Y of Z agencies" in UIs.
+Will be 0 if no agencies match the specified filters. </td>
                         </tr>
                       
                     </tbody>
@@ -27059,9 +28430,17 @@ These are producers typically in the NEW or pending onboarding state. </td>
               
               
                 <h3 id="producerflow.producer.v1.ListOrganizationsRequest">ListOrganizationsRequest</h3>
-                <div class="description-content">ListOrganizationsRequest requests a list of all organizations associated with the tenant.
-This request requires no parameters  and will return all organizations that
-the authenticated tenant has access to.</div>
+                <div class="description-content">ListOrganizationsRequest requests a list of all organizations associated with
+the authenticated tenant.
+
+Organizations provide a way to group agencies into logical business units,
+networks, or aggregator relationships. This endpoint returns all organizations
+accessible to your tenant, which can be used to:
+- Display organization hierarchies in user interfaces
+- Filter agencies by organization
+- Apply organization-specific business rules or workflows
+
+The response supports pagination for tenants with large numbers of organizations.</div>
 
                 
                   <table class="field-table">
@@ -27074,8 +28453,17 @@ the authenticated tenant has access to.</div>
                           <td><code>pagination</code></td>
                           <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
                           <td></td>
-                          <td>Optional. Pagination parameters.
-If not provided, defaults to page_size=50. </td>
+                          <td>Optional pagination parameters to control the result set.
+
+Pagination allows you to retrieve organizations in manageable chunks:
+- page_size: Number of organizations to return (default: 50, max: 200)
+- page_token: Token from previous response to get the next page
+
+Example usage:
+- First request: page_size=100 (returns first 100 organizations)
+- Subsequent requests: Use next_page_token from previous response
+
+If omitted, returns the first 50 organizations. </td>
                         </tr>
                       
                     </tbody>
@@ -27088,9 +28476,15 @@ If not provided, defaults to page_size=50. </td>
               
               
                 <h3 id="producerflow.producer.v1.ListOrganizationsResponse">ListOrganizationsResponse</h3>
-                <div class="description-content">ListOrganizationsResponse contains the list of organizations associated with the tenant.
-The organizations are returned ordered by name. If the tenant has no organizations,
-the organizations list will be empty.</div>
+                <div class="description-content">ListOrganizationsResponse contains the paginated list of organizations for the tenant.
+
+The response includes all organizations accessible to your authenticated tenant,
+ordered alphabetically by name for consistent display. Empty results indicate
+that your tenant either doesn't use organizational hierarchies or has no
+organizations configured yet.
+
+Pagination is automatically applied to large result sets to ensure optimal
+performance and reasonable response sizes.</div>
 
                 
                   <table class="field-table">
@@ -27104,24 +28498,48 @@ the organizations list will be empty.</div>
                           <td><a href="#producerflow.producer.v1.Organization">Organization</a></td>
                           <td>repeated</td>
                           <td>List of organizations associated with the tenant.
-Each organization includes its unique identifier and display name.
-The list may be empty if no organizations are associated with the tenant.
-Organizations are ordered alphabetically by name. </td>
+
+Each organization in the list includes:
+- Unique identifier (id) for API operations
+- Display name for user interfaces
+- External ID for system integration
+- Contact email (if configured)
+
+The list may be empty ([]) if:
+- No organizations are configured for your tenant
+- Your tenant doesn't use organizational hierarchies </td>
                         </tr>
                       
                         <tr>
                           <td><code>next_page_token</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>A token that can be sent as `page_token` to retrieve the next page.
-If this field is omitted, there are no subsequent pages. </td>
+                          <td>Pagination token for retrieving the next page of results.
+
+When present, indicates more organizations are available. Pass this
+token as the page_token in the next ListOrganizationsRequest to
+retrieve the subsequent page.
+
+Empty string or omitted field indicates this is the last page.
+
+Important: Tokens are opaque and may expire. Don't store tokens
+long-term; retrieve fresh data when needed. </td>
                         </tr>
                       
                         <tr>
                           <td><code>total_count</code></td>
                           <td><a href="#int32">int32</a></td>
                           <td></td>
-                          <td>Total number of organizations matching the filter criteria. </td>
+                          <td>Total count of organizations matching the filter criteria.
+
+This count represents the total number of organizations available
+to your tenant, regardless of pagination. Use this to:
+- Display result counts in user interfaces ("Showing 1-50 of 237")
+- Calculate the number of pages available
+- Determine if pagination is needed
+
+The count remains consistent across paginated requests unless
+organizations are added or removed between calls. </td>
                         </tr>
                       
                     </tbody>
@@ -28186,7 +29604,21 @@ The order matches the order of contacts in the request. </td>
               
               
                 <h3 id="producerflow.producer.v1.NewProducer">NewProducer</h3>
-                <div class="description-content">NewProducer represents the data needed to create a new producer in the system.</div>
+                <div class="description-content">NewProducer represents the data needed to create a new producer in the system.
+
+This message is used by both NewProducer (single) and NewProducers (bulk) RPCs
+to define producer information during creation. Producers are licensed insurance
+professionals who can sell insurance products on behalf of carriers.
+
+Required vs Optional Fields:
+- Required: first_name, last_name, email
+- Strongly recommended: npn (for NIPR sync and validation)
+- Optional: All other fields
+
+NIPR Integration:
+If an NPN is provided, the system will validate it against NIPR's database.
+Depending on the sync_with_nipr setting, it may also fetch complete license,
+appointment, and regulatory information from NIPR.</div>
 
                 
                   <table class="field-table">
@@ -28200,7 +29632,8 @@ The order matches the order of contacts in the request. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>First name of the producer.
-Required and must be non-empty. </td>
+Required field that must be non-empty.
+Used for identification and correspondence. </td>
                         </tr>
                       
                         <tr>
@@ -28208,7 +29641,8 @@ Required and must be non-empty. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Last name of the producer.
-Required and must be non-empty. </td>
+Required field that must be non-empty.
+Used for identification and formal communications. </td>
                         </tr>
                       
                         <tr>
@@ -28216,7 +29650,8 @@ Required and must be non-empty. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Middle name of the producer.
-Optional. </td>
+Optional field for complete name identification.
+Important for NIPR matching when multiple producers have similar names. </td>
                         </tr>
                       
                         <tr>
@@ -28224,15 +29659,25 @@ Optional. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Email address of the producer.
-Required and must be a valid email format.
-Must be unique within the tenant. </td>
+Required field with email format validation.
+Must be unique across all producers in the tenant.
+Used for:
+- Account notifications and communications
+- Password resets and authentication
+- Unique identifier within the system </td>
                         </tr>
                       
                         <tr>
                           <td><code>npn</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>National Producer Number (NPN) of the producer. </td>
+                          <td>National Producer Number (NPN) of the producer.
+Optional but strongly recommended for licensed producers.
+This unique identifier from NAIC enables:
+- NIPR data synchronization (licenses, appointments, regulatory actions)
+- Carrier appointment verification
+- Compliance tracking across states
+If provided, must be valid in NIPR's database or creation will fail. </td>
                         </tr>
                       
                         <tr>
@@ -28240,7 +29685,9 @@ Must be unique within the tenant. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Phone number of the producer.
-Optional if default value, but if provided must match the pattern of a valid phone number. </td>
+Optional field for contact purposes.
+If provided, must match international phone number pattern.
+Format: Can include country code (e.g., +1 for US) </td>
                         </tr>
                       
                         <tr>
@@ -28248,31 +29695,82 @@ Optional if default value, but if provided must match the pattern of a valid pho
                           <td><a href="#producerflow.producer.v1.NewProducer.Address">NewProducer.Address</a></td>
                           <td></td>
                           <td>Mailing address of the producer.
-This is where correspondence will be sent. </td>
+Optional but recommended for complete producer profiles.
+This address is used for physical mail delivery and may differ
+from the agency's address. </td>
                         </tr>
                       
                         <tr>
                           <td><code>tenant_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters. </td>
+                          <td>External identifier for the producer in the tenant's system.
+
+Optional field that enables bi-directional synchronization between ProducerFlow
+and your internal systems. This allows you to maintain your existing producer
+identifiers while leveraging ProducerFlow's capabilities.
+
+Usage Guidelines:
+- Provide this when you have an existing identifier for the producer
+- Omit if you don't need to track a reference to your internal system
+- Can be updated later using the SetExternalID RPC
+- Must be unique within your tenant for meaningful lookups
+
+Common Use Cases:
+- Linking to an existing CRM or AMS system producer ID
+- Maintaining synchronization with legacy systems
+- Enabling lookups from external systems back to ProducerFlow
+- Supporting data migration and system transitions
+
+Format: Any string identifier meaningful in your system (e.g., "PROD-12345", UUID)
+Maximum length: 255 characters </td>
                         </tr>
                       
                         <tr>
                           <td><code>location_ids</code></td>
                           <td><a href="#string">string</a></td>
                           <td>repeated</td>
-                          <td>Optional list of location IDs to assign to the producer during creation.
-All locations must exist and belong to the specified agency. </td>
+                          <td>Location IDs to assign to the producer during creation.
+
+Optional field for associating the producer with specific agency locations.
+This is useful for multi-location agencies where producers work from or
+service specific offices.
+
+Validation:
+- All location IDs must be valid UUIDs
+- All locations must exist and belong to the specified agency
+- Maximum of 100 locations per producer
+- Invalid location IDs will cause the entire creation to fail
+
+Post-Creation Management:
+- Use AssignProducerToLocations to add more locations later
+- Use UnassignProducerFromLocations to remove locations
+- Use ListAgencyLocations to see available locations for an agency </td>
                         </tr>
                       
                         <tr>
                           <td><code>metadata_questions</code></td>
                           <td><a href="#producerflow.producer.v1.NewProducer.MetadataQuestionsEntry">NewProducer.MetadataQuestionsEntry</a></td>
                           <td>repeated</td>
-                          <td>MetadataQuestions contains custom metadata questions and answers for the producer.
-The map key is the question identifier/text, and the value is the answer provided.
-This field is deprecated and will be removed in a future release. </td>
+                          <td>Custom metadata questions and answers for the producer.
+
+Optional field for storing tenant-specific information collected during
+producer onboarding. This allows tenants to capture additional data points
+that are important for their business processes but not part of the
+standard producer fields.
+
+Structure:
+- Key: Question identifier or the question text itself
+- Value: The producer's answer or response
+
+Common Use Cases:
+- Compliance questionnaires (e.g., "Have you ever had a license revoked?")
+- Business preferences (e.g., "Preferred carrier partners")
+- Specializations (e.g., "Areas of expertise")
+- Internal classifications (e.g., "Producer tier", "Region")
+
+Note: This data is stored but not validated by ProducerFlow. Ensure your
+application handles any necessary validation of the responses. </td>
                         </tr>
                       
                         <tr>
@@ -28294,7 +29792,12 @@ values are the answers provided. </td>
               
               
                 <h3 id="producerflow.producer.v1.NewProducer.Address">NewProducer.Address</h3>
-                <div class="description-content">Address represents a mailing address for the producer.</div>
+                <div class="description-content">Address represents a mailing address for the producer.
+All fields are required when an address is provided.
+This address is used for:
+- Official correspondence
+- Licensing documentation
+- Commission statements</div>
 
                 
                   <table class="field-table">
@@ -28308,31 +29811,30 @@ values are the answers provided. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Street address of the producer.
-Required and must be non-empty. </td>
+Include apartment/suite numbers if applicable. </td>
                         </tr>
                       
                         <tr>
                           <td><code>city</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>City of the producer.
-Required and must be non-empty. </td>
+                          <td>City of the producer's mailing address. </td>
                         </tr>
                       
                         <tr>
                           <td><code>state</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>State of the producer.
-Required and must be a 2-letter state code. </td>
+                          <td>State of the producer's mailing address.
+Must be a valid 2-letter US state code (e.g., "CA", "NY"). </td>
                         </tr>
                       
                         <tr>
                           <td><code>zip</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Zip code of the producer.
-Required and must be between 1 and 10 characters. </td>
+                          <td>Zip code of the producer's mailing address.
+Supports both 5-digit (12345) and ZIP+4 (12345-6789) formats. </td>
                         </tr>
                       
                         <tr>
@@ -28490,8 +29992,34 @@ Must be a valid UUID format. </td>
               
               
                 <h3 id="producerflow.producer.v1.NewProducersRequest">NewProducersRequest</h3>
-                <div class="description-content">NewProducersRequest is used to create multiple producers in a single request.
-All producers will be associated with the specified agency.</div>
+                <div class="description-content">NewProducersRequest creates multiple producers and associates them with a single agency.
+
+This request supports bulk creation of producers, which is more efficient than making
+multiple individual NewProducer calls. All producers in the request will be associated
+with the same agency, making this ideal for onboarding producer teams.
+
+Operation Behavior:
+Producers are created sequentially. If a producer fails validation, the request
+returns an error, but any producers created before the failure will remain in
+the system.
+
+Request Limits:
+- Minimum producers: 1 (enforced by validation)
+- All producers must be for the same agency
+
+Each producer in the list can specify:
+- Basic information (name, email, phone)
+- NPN for NIPR validation and sync
+- Mailing address
+- Location assignments within the agency
+- External ID for tenant system integration
+- Custom metadata questions
+
+Common Use Cases:
+- Bulk importing producers from spreadsheets or CSV files
+- Migrating producer data from legacy systems
+- Setting up new agencies with their initial producer roster
+- Adding multiple producers during mergers or acquisitions</div>
 
                 
                   <table class="field-table">
@@ -28504,25 +30032,34 @@ All producers will be associated with the specified agency.</div>
                           <td><code>agency_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>The UUID of the agency to associate the producers with.
-Must be a valid UUID format. </td>
+                          <td>The UUID of the agency to associate all producers with.
+This agency must exist and belong to the authenticated tenant.
+All producers in the request will be assigned to this single agency. </td>
                         </tr>
                       
                         <tr>
                           <td><code>producers</code></td>
                           <td><a href="#producerflow.producer.v1.NewProducer">NewProducer</a></td>
                           <td>repeated</td>
-                          <td>List of producers to create.
-This field is required and must contain at least one producer. </td>
+                          <td>List of producers to create in this bulk operation.
+Required field that must contain at least one producer.
+Each producer undergoes full validation including NPN verification if provided. </td>
                         </tr>
                       
                         <tr>
                           <td><code>sync_with_nipr</code></td>
                           <td><a href="#bool">bool</a></td>
                           <td>optional</td>
-                          <td>Optional. Overrides the tenant's default NIPR sync setting during onboarding.
-Most tenants have this enabled by default, so it usually doesn't need to be set.
-If specified, this value takes precedence over the tenant's default behavior. </td>
+                          <td>Optional. Overrides the tenant's default NIPR sync setting for all producers in this request.
+NPN validation is always performed regardless of this setting.
+When true: Fetches full NIPR EntityInfo data after validation (paid lookup)
+When false: Skips NIPR EntityInfo fetch, only performs NPN validation
+When omitted: Uses the tenant's default configuration
+
+Cost Implications:
+Setting this to true will trigger billable NIPR EntityInfo lookups for each producer
+with an NPN, counting against your monthly quota. Consider using false for test data
+or when you plan to sync later via SyncProducerWithNIPR. </td>
                         </tr>
                       
                     </tbody>
@@ -28535,7 +30072,25 @@ If specified, this value takes precedence over the tenant's default behavior. </
               
               
                 <h3 id="producerflow.producer.v1.NewProducersResponse">NewProducersResponse</h3>
-                <div class="description-content">NewProducersResponse contains the IDs of all created producers.</div>
+                <div class="description-content">NewProducersResponse contains the IDs of all successfully created producers.
+
+The response provides a list of producer IDs that directly corresponds to the
+order of producers in the request, allowing you to map each request entry to
+its created resource.
+
+Order Guarantee:
+The producer_ids array maintains the exact same order as the producers array
+in the request. For example:
+- Request producers[0] → Response producer_ids[0]
+- Request producers[1] → Response producer_ids[1]
+This ordering guarantee simplifies client-side processing and record keeping.
+
+Post-Creation Actions:
+After receiving this response, you can:
+- Use the IDs to fetch full producer details via GetProducer
+- Assign producers to locations via AssignProducerToLocations
+- Trigger NIPR sync if it was skipped during creation
+- Set external IDs via SetExternalID if not provided during creation</div>
 
                 
                   <table class="field-table">
@@ -28549,7 +30104,9 @@ If specified, this value takes precedence over the tenant's default behavior. </
                           <td><a href="#string">string</a></td>
                           <td>repeated</td>
                           <td>List of UUIDs for the newly created producers.
-The order matches the order of producers in the request. </td>
+These IDs are immediately available for use in subsequent API calls.
+The array length will always match the number of producers in the request.
+Order is guaranteed to match the request's producer array order. </td>
                         </tr>
                       
                     </tbody>
@@ -28562,9 +30119,15 @@ The order matches the order of producers in the request. </td>
               
               
                 <h3 id="producerflow.producer.v1.Organization">Organization</h3>
-                <div class="description-content">Organization represents a logical grouping or hierarchical structure within a tenant.
-Organizations can be used to organize agencies into meaningful groups
-such as agency networks, aggregators, or other business hierarchies.</div>
+                <div class="description-content">Organization represents a logical grouping or hierarchical structure for managing agencies.
+
+Organizations enable better management of insurance distribution networks by grouping
+agencies into meaningful business units. Common organization types include:
+- Agency networks or clusters
+- Aggregators
+- Geographic regions or territories
+- Franchise groups or corporate structures
+- Market segments or product lines</div>
 
                 
                   <table class="field-table">
@@ -28577,8 +30140,14 @@ such as agency networks, aggregators, or other business hierarchies.</div>
                           <td><code>id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Unique identifier for the organization.
-This is a UUID that can be used to reference the organization in other API calls. </td>
+                          <td>Unique identifier for the organization (UUID format).
+
+This ID is system-generated and immutable. Use this ID to:
+- Reference the organization in API calls (GetOrganization, agency creation)
+- Establish relationships between organizations and agencies
+- Track organization-level metrics and reporting
+
+Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                         </tr>
                       
                         <tr>
@@ -28586,7 +30155,16 @@ This is a UUID that can be used to reference the organization in other API calls
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>Display name of the organization.
-This is the human-readable name that identifies the organization to users. </td>
+
+This is the human-readable name shown in user interfaces and reports.
+Names must be unique within your tenant (case-insensitive comparison).
+
+Best Practices:
+- Use clear, descriptive names that reflect the organization's purpose
+- Include geographic or business unit identifiers when relevant
+- Avoid special characters that may cause display issues
+
+Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group" </td>
                         </tr>
                       
                         <tr>
@@ -28594,14 +30172,27 @@ This is the human-readable name that identifies the organization to users. </td>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>External identifier for the organization.
-This is the identifier used by the tenant's system to identify the organization. </td>
+
+This field maps the ProducerFlow organization to your internal system's
+organization ID, enabling bi-directional synchronization and integration.
+
+Use Cases:
+- Maintain references to your CRM or ERP system
+- Enable data synchronization between systems
+- Support migration from legacy systems
+
+This field is optional and can be any string format meaningful to your system.
+Examples: "ORG-12345", "west-coast-001", UUID from your system </td>
                         </tr>
                       
                         <tr>
                           <td><code>email</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Contact email address for the organization. </td>
+                          <td>Primary contact email address for the organization.
+
+Optional field. If provided, must be a valid email format.
+Example: "admin@westcoastnetwork.com" </td>
                         </tr>
                       
                     </tbody>
@@ -28651,9 +30242,28 @@ When paginating, all other parameters must match the call that provided the page
               
               
                 <h3 id="producerflow.producer.v1.Producer">Producer</h3>
-                <div class="description-content">Producer represents a producer that has been onboarded.
+                <div class="description-content">Producer represents an insurance producer (agent) with complete licensing
+information.
 
-Internal ID of the producer.</div>
+This message contains comprehensive producer information including:
+- Basic contact details (name, email, phone, address)
+- Agency association
+- NIPR-synchronized licensing data (licenses, appointments, regulatory actions)
+- Location assignments within the agency
+
+NIPR Data Synchronization:
+The NIPR data is automatically fetched from the National Insurance Producer
+Registry when the producer is created (if sync_with_nipr is enabled) and can
+be refreshed by:
+- Calling SyncProducerWithNIPR manually
+- Automatic daily updates via PDB Alerts (if pdb_alerts_sync_enabled is true)
+
+Use Cases:
+- Verify producer licenses before selling insurance products
+- Check Lines of Authority (LOAs) to ensure producers can sell specific product types
+- Monitor license expiration dates for compliance
+- Track carrier appointments to know which companies the producer can represent
+- Review regulatory history before hiring or contracting</div>
 
                 
                   <table class="field-table">
@@ -28666,7 +30276,8 @@ Internal ID of the producer.</div>
                           <td><code>id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td> </td>
+                          <td>Unique identifier for the producer (UUID format).
+This ID is used in all API operations that reference this producer. </td>
                         </tr>
                       
                         <tr>
@@ -28720,7 +30331,8 @@ Must be non-empty. </td>
                           <td><a href="#bool">bool</a></td>
                           <td></td>
                           <td>Indicates whether the producer is enabled to be synchronized with NIPR API.
-When true, the system will regularly check for updates from NIPR. </td>
+When true, the system will regularly check for updates from NIPR using
+PDB Alerts, providing automatic daily updates at no extra cost. </td>
                         </tr>
                       
                         <tr>
@@ -28999,9 +30611,18 @@ values are the answers provided. </td>
                           <td><code>appointments</code></td>
                           <td><a href="#producerflow.producer.v1.Producer.NIPR.Appointment">Producer.NIPR.Appointment</a></td>
                           <td>repeated</td>
-                          <td>List of carrier appointments held by the producer in NIPR.
-These represent relationships with insurance carriers that allow
-the producer to sell their products. </td>
+                          <td>List of carrier appointments held by the producer.
+
+Each appointment represents authorization to sell a specific carrier's
+products for a specific line of authority. A producer typically has
+multiple appointments across different carriers and LOAs.
+
+Before allowing a producer to quote or sell a product:
+1. Verify they have an active appointment with that carrier
+2. Verify the appointment's LOA matches the product type
+3. Check the appointment renewal date hasn't passed
+
+This data is synchronized from NIPR and is read-only. </td>
                         </tr>
                       
                     </tbody>
@@ -29014,7 +30635,27 @@ the producer to sell their products. </td>
               
               
                 <h3 id="producerflow.producer.v1.Producer.NIPR.Appointment">Producer.NIPR.Appointment</h3>
-                <div class="description-content">Appointment represents a relationship between a producer and an insurance carrier.</div>
+                <div class="description-content">Appointment represents a producer's authorization to sell products for a
+specific insurance carrier.
+
+What is an Appointment?
+An appointment is a formal relationship between a producer and an
+insurance company that grants the producer authority to sell that
+company's insurance products. Having a license is not enough - the
+producer must also be appointed by each carrier whose products they want
+to sell.
+
+Appointment Lifecycle:
+1. Active: Producer can sell this carrier's products
+2. Terminated: Appointment ended (various reasons: producer left, carrier
+   terminated, etc.)
+
+Use Cases:
+- Verify producer is appointed before allowing them to quote/sell a
+  carrier's products
+- Track which carriers each producer can represent
+- Monitor appointment renewal dates
+- Understand termination reasons for compliance and vetting</div>
 
                 
                   <table class="field-table">
@@ -29027,78 +30668,108 @@ the producer to sell their products. </td>
                           <td><code>branch_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td> </td>
+                          <td>Branch identifier for multi-branch agencies.
+This links the appointment to a specific agency branch if applicable. </td>
                         </tr>
                       
                         <tr>
                           <td><code>company_name</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Name of the insurance company for this appointment. </td>
+                          <td>Name of the insurance company for this appointment.
+Examples: "State Farm", "Allstate", "Blue Cross Blue Shield" </td>
                         </tr>
                       
                         <tr>
                           <td><code>fein</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Federal Employer Identification Number of the producer's company. </td>
+                          <td>Federal Employer Identification Number (FEIN) of the insurance carrier.
+This uniquely identifies the carrier company. </td>
                         </tr>
                       
                         <tr>
                           <td><code>co_code</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Company code for the insurance carrier. </td>
+                          <td>Company code: A standardized code identifying the insurance carrier.
+This is used in industry systems for carrier identification. </td>
                         </tr>
                       
                         <tr>
                           <td><code>line_of_authority</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Line of authority for this appointment (e.g., Life, Property, Casualty).
-Indicates what types of insurance the producer can sell. </td>
+                          <td>Line of authority for this appointment.
+
+This indicates what type of insurance the producer can sell for this
+carrier. A producer might have multiple appointments with the same
+carrier for different LOAs.
+
+Examples: "LIFE", "HEALTH", "PROPERTY AND CASUALTY", "VARIABLE LIFE AND
+VARIABLE ANNUITY" </td>
                         </tr>
                       
                         <tr>
                           <td><code>loa_code</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Code for the line of authority for this appointment. </td>
+                          <td>Code for the line of authority.
+A standardized code representing the LOA type. </td>
                         </tr>
                       
                         <tr>
                           <td><code>status</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Current status of the appointment (e.g., Active, Terminated). </td>
+                          <td>Current status of the appointment.
+
+Common values:
+- "Active": Producer can sell this carrier's products
+- "Terminated": Appointment has ended
+- "Pending": Appointment is being processed
+
+Always check status is "Active" before allowing sales. </td>
                         </tr>
                       
                         <tr>
                           <td><code>termination_reason</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Reason for termination if the appointment has been terminated. </td>
+                          <td>Reason for termination if the appointment has been terminated.
+
+Common termination reasons:
+- Producer requested termination
+- Carrier terminated appointment
+- Producer left agency
+- Compliance or regulatory issues
+
+This field is empty if the appointment is still active. </td>
                         </tr>
                       
                         <tr>
                           <td><code>status_reason_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>Date associated with the current status or reason. </td>
+                          <td>Date when the status or termination reason became effective.
+For terminated appointments, this is when the termination occurred. </td>
                         </tr>
                       
                         <tr>
                           <td><code>appointment_renewal_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>Date when the appointment will renew. </td>
+                          <td>Date when the appointment will renew.
+Appointments typically renew annually. Monitor this date for upcoming
+renewals. </td>
                         </tr>
                       
                         <tr>
                           <td><code>agency_affiliations</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Additional affiliations or roles the producer has with the agency. </td>
+                          <td>Additional affiliations or roles the producer has with the agency.
+This may include special designations or relationship details. </td>
                         </tr>
                       
                     </tbody>
@@ -29180,7 +30851,25 @@ This is the state where the producer is primarily located. </td>
               
               
                 <h3 id="producerflow.producer.v1.Producer.NIPR.License">Producer.NIPR.License</h3>
-                <div class="description-content">License contains information about a producer's insurance license.</div>
+                <div class="description-content">License contains information about a producer's insurance license in a
+specific state.
+
+Each producer can hold multiple licenses across different states. Each
+license includes a set of Lines of Authority (LOAs) that define what
+types of insurance the producer is authorized to sell.
+
+Key Concepts:
+- Resident License: License in the producer's home state
+- Non-Resident License: License in states other than the producer's home
+  state
+- Lines of Authority (LOAs): Specific insurance types the license permits
+  (e.g., Life, Health, Property & Casualty, Variable Contracts)
+
+Compliance Use Cases:
+- Verify producer is licensed in the state where they're selling
+- Check license hasn't expired before allowing sales
+- Ensure producer has the correct LOA for the product type
+- Monitor expiration dates to send renewal reminders</div>
 
                 
                   <table class="field-table">
@@ -29244,8 +30933,12 @@ Values are typically "Resident" or "Non-Resident". </td>
                           <td><code>lines_of_authority</code></td>
                           <td><a href="#producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority">Producer.NIPR.License.LineOfAuthority</a></td>
                           <td>repeated</td>
-                          <td>Lines of Authority associated with this license.
-These define what types of insurance the producer can sell in this state. </td>
+                          <td>Lines of Authority (LOAs) associated with this license.
+
+These define what types of insurance the producer is authorized to sell
+in this state. A single license typically has multiple LOAs. Always
+check that the producer has an active LOA matching the product type
+before allowing sales. </td>
                         </tr>
                       
                     </tbody>
@@ -29258,8 +30951,24 @@ These define what types of insurance the producer can sell in this state. </td>
               
               
                 <h3 id="producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority">Producer.NIPR.License.LineOfAuthority</h3>
-                <div class="description-content">LineOfAuthority represents a specific type of insurance coverage
-that a producer is authorized to sell under this license.</div>
+                <div class="description-content">LineOfAuthority (LOA) represents a specific type of insurance that a
+producer is authorized to sell under this license.
+
+Each license can have multiple LOAs. For example, a license might
+include:
+- LIFE
+- HEALTH
+- ACCIDENT AND HEALTH
+- PROPERTY AND CASUALTY
+- VARIABLE LIFE AND VARIABLE ANNUITY
+
+LOA Compliance:
+Before allowing a producer to sell a product, verify they have an
+active LOA that matches the product type. For example, a producer with
+only a LIFE LOA cannot sell Property & Casualty insurance.
+
+LOA names are standardized by NIPR but may vary slightly between
+states.</div>
 
                 
                   <table class="field-table">
@@ -29272,22 +30981,39 @@ that a producer is authorized to sell under this license.</div>
                           <td><code>loa</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-This is typically an uppercase string that describes the insurance type. </td>
+                          <td>The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+"HEALTH").
+
+Common LOA types:
+- LIFE: Life insurance products
+- HEALTH: Health insurance products
+- ACCIDENT AND HEALTH: Combined accident and health coverage
+- PROPERTY: Property insurance
+- CASUALTY: Casualty insurance
+- PROPERTY AND CASUALTY: Combined property and casualty
+- VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+  securities license
+- PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+- COMMERCIAL LINES: Business insurance policies
+
+This is typically an uppercase string standardized by NIPR. </td>
                         </tr>
                       
                         <tr>
                           <td><code>active</code></td>
                           <td><a href="#bool">bool</a></td>
                           <td></td>
-                          <td>Whether this Line of Authority is currently active. </td>
+                          <td>Whether this Line of Authority is currently active.
+Inactive LOAs cannot be used to sell that type of insurance. </td>
                         </tr>
                       
                         <tr>
                           <td><code>issue_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>The date when this Line of Authority was issued. </td>
+                          <td>The date when this Line of Authority was first issued.
+This helps track how long the producer has been authorized for this
+insurance type. </td>
                         </tr>
                       
                     </tbody>
@@ -31110,7 +32836,10 @@ This could be due to suspension, revocation, or other reasons.</p></td>
               </table>
             
               <h3 id="producerflow.producer.v1.EntityType">EntityType</h3>
-              <div class="description-content">EntityType defines the business entity type for an agency.</div>
+              <div class="description-content">EntityType defines the business structure of an agency.
+
+This determines important business rules around NPNs, producers, and
+onboarding requirements.</div>
               <table class="enum-table">
                 <thead>
                   <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -31120,28 +32849,49 @@ This could be due to suspension, revocation, or other reasons.</p></td>
                     <tr>
                       <td>ENTITY_TYPE_UNSPECIFIED</td>
                       <td>0</td>
-                      <td><p>Default unspecified value. Do not use.</p></td>
+                      <td><p>Default unspecified value. Do not use.
+This value is invalid and will be rejected by the API.</p></td>
                     </tr>
                   
                     <tr>
                       <td>ENTITY_TYPE_SOLE_PROPRIETOR</td>
                       <td>1</td>
-                      <td><p>An individual producer operating as their own agency.
-For this type, an agency NPN is not allowed, and additional producers are not supported.</p></td>
+                      <td><p>Sole proprietor: An individual insurance producer operating independently.
+
+Business Rules for Sole Proprietors:
+- Cannot have a separate agency NPN (only the principal's NPN is used)
+- Cannot have additional producers beyond the principal
+- The principal producer IS the agency
+- FEIN is optional
+
+Use this type for independent agents who operate alone.</p></td>
                     </tr>
                   
                     <tr>
                       <td>ENTITY_TYPE_AGENCY</td>
                       <td>2</td>
-                      <td><p>A standard insurance agency that can have multiple producers.
-For this type, either NPN or FEIN is required.</p></td>
+                      <td><p>Standard insurance agency: A business entity with multiple producers.
+
+Business Rules for Agencies:
+- Must provide either an agency NPN or FEIN (or both)
+- Can have multiple producers in addition to the principal
+- The agency is a separate legal entity from its producers
+- Typically has business structure (LLC, Corporation, Partnership, etc.)
+
+Use this type for traditional insurance agencies with multiple agents.</p></td>
                     </tr>
                   
                     <tr>
                       <td>ENTITY_TYPE_ASK_DURING_ONBOARDING</td>
                       <td>3</td>
-                      <td><p>Ask during onboarding because the entity type is not known when the agency onboarding url is created.
-The UI will ask the user to select the entity type.</p></td>
+                      <td><p>Dynamic determination: Let the user select during onboarding.
+
+Use this value only when generating onboarding URLs and you don't know
+the entity type in advance. The onboarding form will present both options
+and let the user choose.
+
+This value is ONLY valid for CreateAgencyOnboardingURL and will be rejected
+by NewAgency and other direct creation endpoints.</p></td>
                     </tr>
                   
                 </tbody>
@@ -31271,7 +33021,7 @@ The UI will ask the user to select the entity type.</p></td>
               </table>
             
               <h3 id="producerflow.producer.v1.Producer.NIPR.License.LicenseStatus">Producer.NIPR.License.LicenseStatus</h3>
-              <div class="description-content">LicenseStatus defines the possible statuses of an insurance license.</div>
+              <div class="description-content">LicenseStatus defines the current state of an insurance license.</div>
               <table class="enum-table">
                 <thead>
                   <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -31287,20 +33037,26 @@ The UI will ask the user to select the entity type.</p></td>
                     <tr>
                       <td>LICENSE_STATUS_EXPIRED</td>
                       <td>1</td>
-                      <td><p>The license has expired and is no longer valid.</p></td>
+                      <td><p>The license has expired and is no longer valid for selling insurance.
+The producer must renew the license before conducting business in
+this state.</p></td>
                     </tr>
                   
                     <tr>
                       <td>LICENSE_STATUS_VALID</td>
                       <td>2</td>
-                      <td><p>License is currently active.</p></td>
+                      <td><p>License is currently active and in good standing.
+The producer can sell insurance in this state according to their
+LOAs.</p></td>
                     </tr>
                   
                     <tr>
                       <td>LICENSE_STATUS_NOT_ACTIVE</td>
                       <td>3</td>
-                      <td><p>The license exists but is not in an active state.
-This could be due to suspension, revocation, or other reasons.</p></td>
+                      <td><p>The license exists but is not currently active.
+Reasons include: suspension, revocation, lapsed (not renewed), or
+voluntarily inactive. The producer cannot sell insurance in this
+state until the license is reinstated.</p></td>
                     </tr>
                   
                 </tbody>

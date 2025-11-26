@@ -25,20 +25,44 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// EntityType defines the business entity type for an agency.
+// EntityType defines the business structure of an agency.
+//
+// This determines important business rules around NPNs, producers, and
+// onboarding requirements.
 type EntityType int32
 
 const (
 	// Default unspecified value. Do not use.
+	// This value is invalid and will be rejected by the API.
 	EntityType_ENTITY_TYPE_UNSPECIFIED EntityType = 0
-	// An individual producer operating as their own agency.
-	// For this type, an agency NPN is not allowed, and additional producers are not supported.
+	// Sole proprietor: An individual insurance producer operating independently.
+	//
+	// Business Rules for Sole Proprietors:
+	// - Cannot have a separate agency NPN (only the principal's NPN is used)
+	// - Cannot have additional producers beyond the principal
+	// - The principal producer IS the agency
+	// - FEIN is optional
+	//
+	// Use this type for independent agents who operate alone.
 	EntityType_ENTITY_TYPE_SOLE_PROPRIETOR EntityType = 1
-	// A standard insurance agency that can have multiple producers.
-	// For this type, either NPN or FEIN is required.
+	// Standard insurance agency: A business entity with multiple producers.
+	//
+	// Business Rules for Agencies:
+	// - Must provide either an agency NPN or FEIN (or both)
+	// - Can have multiple producers in addition to the principal
+	// - The agency is a separate legal entity from its producers
+	// - Typically has business structure (LLC, Corporation, Partnership, etc.)
+	//
+	// Use this type for traditional insurance agencies with multiple agents.
 	EntityType_ENTITY_TYPE_AGENCY EntityType = 2
-	// Ask during onboarding because the entity type is not known when the agency onboarding url is created.
-	// The UI will ask the user to select the entity type.
+	// Dynamic determination: Let the user select during onboarding.
+	//
+	// Use this value only when generating onboarding URLs and you don't know
+	// the entity type in advance. The onboarding form will present both options
+	// and let the user choose.
+	//
+	// This value is ONLY valid for CreateAgencyOnboardingURL and will be rejected
+	// by NewAgency and other direct creation endpoints.
 	EntityType_ENTITY_TYPE_ASK_DURING_ONBOARDING EntityType = 3
 )
 
@@ -430,18 +454,24 @@ func (Agency_NIPR_License_LicenseStatus) EnumDescriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{21, 7, 2, 0}
 }
 
-// LicenseStatus defines the possible statuses of an insurance license.
+// LicenseStatus defines the current state of an insurance license.
 type Producer_NIPR_License_LicenseStatus int32
 
 const (
 	// Default unspecified value. Avoid using this.
 	Producer_NIPR_License_LICENSE_STATUS_UNSPECIFIED Producer_NIPR_License_LicenseStatus = 0
-	// The license has expired and is no longer valid.
+	// The license has expired and is no longer valid for selling insurance.
+	// The producer must renew the license before conducting business in
+	// this state.
 	Producer_NIPR_License_LICENSE_STATUS_EXPIRED Producer_NIPR_License_LicenseStatus = 1
-	// License is currently active.
+	// License is currently active and in good standing.
+	// The producer can sell insurance in this state according to their
+	// LOAs.
 	Producer_NIPR_License_LICENSE_STATUS_VALID Producer_NIPR_License_LicenseStatus = 2
-	// The license exists but is not in an active state.
-	// This could be due to suspension, revocation, or other reasons.
+	// The license exists but is not currently active.
+	// Reasons include: suspension, revocation, lapsed (not renewed), or
+	// voluntarily inactive. The producer cannot sell insurance in this
+	// state until the license is reinstated.
 	Producer_NIPR_License_LICENSE_STATUS_NOT_ACTIVE Producer_NIPR_License_LicenseStatus = 3
 )
 
@@ -639,7 +669,13 @@ func (x *Address) GetAddressLine_2() string {
 	return ""
 }
 
-// CreateAgencyOnboardingURLRequest contains information needed to generate an agency onboarding URL. This includes basic agency information and defaults. All fields in this request are optional. You can provide as much or as little information as you have available. Any missing information will be collected from the user during the onboarding process through the generated URL.
+// CreateAgencyOnboardingURLRequest contains information needed to generate
+// an agency onboarding URL. This includes basic agency information and
+// defaults.
+//
+// All fields in this request are optional. You can provide as much or as little
+// information as you have available. Any missing information will be collected
+// from the user during the onboarding process through the generated URL.
 type CreateAgencyOnboardingURLRequest struct {
 	state         protoimpl.MessageState                   `protogen:"open.v1"`
 	Agency        *CreateAgencyOnboardingURLRequest_Agency `protobuf:"bytes,1,opt,name=agency,proto3" json:"agency,omitempty"`
@@ -1734,10 +1770,24 @@ func (x *ListNewProducersResponse) GetNewProducers() []*Producer {
 	return nil
 }
 
-// Agency represents a complete agency entity with all associated information.
+// Agency represents a complete insurance agency with all associated data.
+//
+// This message contains comprehensive agency information including:
+// - Basic contact and identification details
+// - Principal producer information
+// - Banking details for commission payments
+// - Business operating information
+// - NIPR-synchronized licensing and regulatory data
+// - Physical locations
+//
+// The NIPR data is automatically synchronized from the National Insurance
+// Producer Registry and includes licenses, appointments, regulatory actions,
+// and addresses. This data is read-only and can only be updated by triggering
+// NIPR sync operations.
 type Agency struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the agency.
+	// Unique identifier for the agency (UUID format).
+	// This ID is used in all API operations that reference this agency.
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
 	// AgencyInfo type field named agency_info
 	AgencyInfo *Agency_AgencyInfo `protobuf:"bytes,2,opt,name=agency_info,json=agencyInfo,proto3" json:"agency_info,omitempty"`
@@ -1892,10 +1942,33 @@ func (x *Agency) GetLocations() []*Location {
 	return nil
 }
 
-// Producer represents a producer that has been onboarded.
+// Producer represents an insurance producer (agent) with complete licensing
+// information.
+//
+// This message contains comprehensive producer information including:
+// - Basic contact details (name, email, phone, address)
+// - Agency association
+// - NIPR-synchronized licensing data (licenses, appointments, regulatory actions)
+// - Location assignments within the agency
+//
+// NIPR Data Synchronization:
+// The NIPR data is automatically fetched from the National Insurance Producer
+// Registry when the producer is created (if sync_with_nipr is enabled) and can
+// be refreshed by:
+// - Calling SyncProducerWithNIPR manually
+// - Automatic daily updates via PDB Alerts (if pdb_alerts_sync_enabled is true)
+//
+// Use Cases:
+// - Verify producer licenses before selling insurance products
+// - Check Lines of Authority (LOAs) to ensure producers can sell specific product types
+// - Monitor license expiration dates for compliance
+// - Track carrier appointments to know which companies the producer can represent
+// - Review regulatory history before hiring or contracting
 type Producer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Id    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Unique identifier for the producer (UUID format).
+	// This ID is used in all API operations that reference this producer.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// First name of the producer.
 	FirstName string `protobuf:"bytes,15,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	// Middle name of the producer.
@@ -1913,7 +1986,8 @@ type Producer struct {
 	// Phone number of the producer.
 	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	// Indicates whether the producer is enabled to be synchronized with NIPR API.
-	// When true, the system will regularly check for updates from NIPR.
+	// When true, the system will regularly check for updates from NIPR using
+	// PDB Alerts, providing automatic daily updates at no extra cost.
 	PdbAlertsSyncEnabled bool `protobuf:"varint,13,opt,name=pdb_alerts_sync_enabled,json=pdbAlertsSyncEnabled,proto3" json:"pdb_alerts_sync_enabled,omitempty"`
 	// Basic information about the agency this producer is associated with.
 	Agency *Producer_Agency `protobuf:"bytes,7,opt,name=agency,proto3" json:"agency,omitempty"`
@@ -2103,37 +2177,117 @@ func (x *Producer) GetTenantAdditionalQuestions() map[string]string {
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
+//
+// This message is used by both NewProducer (single) and NewProducers (bulk) RPCs
+// to define producer information during creation. Producers are licensed insurance
+// professionals who can sell insurance products on behalf of carriers.
+//
+// Required vs Optional Fields:
+// - Required: first_name, last_name, email
+// - Strongly recommended: npn (for NIPR sync and validation)
+// - Optional: All other fields
+//
+// NIPR Integration:
+// If an NPN is provided, the system will validate it against NIPR's database.
+// Depending on the sync_with_nipr setting, it may also fetch complete license,
+// appointment, and regulatory information from NIPR.
 type NewProducer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// First name of the producer.
-	// Required and must be non-empty.
+	// Required field that must be non-empty.
+	// Used for identification and correspondence.
 	FirstName string `protobuf:"bytes,1,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	// Last name of the producer.
-	// Required and must be non-empty.
+	// Required field that must be non-empty.
+	// Used for identification and formal communications.
 	LastName string `protobuf:"bytes,2,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	// Middle name of the producer.
-	// Optional.
+	// Optional field for complete name identification.
+	// Important for NIPR matching when multiple producers have similar names.
 	MiddleName string `protobuf:"bytes,7,opt,name=middle_name,json=middleName,proto3" json:"middle_name,omitempty"`
 	// Email address of the producer.
-	// Required and must be a valid email format.
-	// Must be unique within the tenant.
+	// Required field with email format validation.
+	// Must be unique across all producers in the tenant.
+	// Used for:
+	// - Account notifications and communications
+	// - Password resets and authentication
+	// - Unique identifier within the system
 	Email string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	// National Producer Number (NPN) of the producer.
+	// Optional but strongly recommended for licensed producers.
+	// This unique identifier from NAIC enables:
+	// - NIPR data synchronization (licenses, appointments, regulatory actions)
+	// - Carrier appointment verification
+	// - Compliance tracking across states
+	// If provided, must be valid in NIPR's database or creation will fail.
 	Npn string `protobuf:"bytes,4,opt,name=npn,proto3" json:"npn,omitempty"`
 	// Phone number of the producer.
-	// Optional if default value, but if provided must match the pattern of a valid phone number.
+	// Optional field for contact purposes.
+	// If provided, must match international phone number pattern.
+	// Format: Can include country code (e.g., +1 for US)
 	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	// Mailing address of the producer.
-	// This is where correspondence will be sent.
+	// Optional but recommended for complete producer profiles.
+	// This address is used for physical mail delivery and may differ
+	// from the agency's address.
 	MailingAddress *NewProducer_Address `protobuf:"bytes,6,opt,name=mailing_address,json=mailingAddress,proto3" json:"mailing_address,omitempty"`
-	// Optional. External identifier for the producer in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this producer, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the producer in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system producer ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "PROD-12345", "uuid"). Validation: Maximum length of 255 characters.
+	// External identifier for the producer in the tenant's system.
+	//
+	// Optional field that enables bi-directional synchronization between ProducerFlow
+	// and your internal systems. This allows you to maintain your existing producer
+	// identifiers while leveraging ProducerFlow's capabilities.
+	//
+	// Usage Guidelines:
+	// - Provide this when you have an existing identifier for the producer
+	// - Omit if you don't need to track a reference to your internal system
+	// - Can be updated later using the SetExternalID RPC
+	// - Must be unique within your tenant for meaningful lookups
+	//
+	// Common Use Cases:
+	// - Linking to an existing CRM or AMS system producer ID
+	// - Maintaining synchronization with legacy systems
+	// - Enabling lookups from external systems back to ProducerFlow
+	// - Supporting data migration and system transitions
+	//
+	// Format: Any string identifier meaningful in your system (e.g., "PROD-12345", UUID)
+	// Maximum length: 255 characters
 	TenantId string `protobuf:"bytes,8,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	// Optional list of location IDs to assign to the producer during creation.
-	// All locations must exist and belong to the specified agency.
+	// Location IDs to assign to the producer during creation.
+	//
+	// Optional field for associating the producer with specific agency locations.
+	// This is useful for multi-location agencies where producers work from or
+	// service specific offices.
+	//
+	// Validation:
+	// - All location IDs must be valid UUIDs
+	// - All locations must exist and belong to the specified agency
+	// - Maximum of 100 locations per producer
+	// - Invalid location IDs will cause the entire creation to fail
+	//
+	// Post-Creation Management:
+	// - Use AssignProducerToLocations to add more locations later
+	// - Use UnassignProducerFromLocations to remove locations
+	// - Use ListAgencyLocations to see available locations for an agency
 	LocationIds []string `protobuf:"bytes,10,rep,name=location_ids,json=locationIds,proto3" json:"location_ids,omitempty"`
-	// MetadataQuestions contains custom metadata questions and answers for the producer.
-	// The map key is the question identifier/text, and the value is the answer provided.
-	// This field is deprecated and will be removed in a future release.
+	// Custom metadata questions and answers for the producer.
+	//
+	// Optional field for storing tenant-specific information collected during
+	// producer onboarding. This allows tenants to capture additional data points
+	// that are important for their business processes but not part of the
+	// standard producer fields.
+	//
+	// Structure:
+	// - Key: Question identifier or the question text itself
+	// - Value: The producer's answer or response
+	//
+	// Common Use Cases:
+	// - Compliance questionnaires (e.g., "Have you ever had a license revoked?")
+	// - Business preferences (e.g., "Preferred carrier partners")
+	// - Specializations (e.g., "Areas of expertise")
+	// - Internal classifications (e.g., "Producer tier", "Region")
+	//
+	// Note: This data is stored but not validated by ProducerFlow. Ensure your
+	// application handles any necessary validation of the responses.
 	MetadataQuestions map[string]string `protobuf:"bytes,11,rep,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// tenant_additional_questions contains tenant-specific custom questions configured by
 	// Producerflow and their corresponding responses. Keys are question identifiers or text,
@@ -2366,19 +2520,54 @@ func (x *NewProducerResponse) GetProducerId() string {
 	return ""
 }
 
-// NewProducersRequest is used to create multiple producers in a single request.
-// All producers will be associated with the specified agency.
+// NewProducersRequest creates multiple producers and associates them with a single agency.
+//
+// This request supports bulk creation of producers, which is more efficient than making
+// multiple individual NewProducer calls. All producers in the request will be associated
+// with the same agency, making this ideal for onboarding producer teams.
+//
+// Operation Behavior:
+// Producers are created sequentially. If a producer fails validation, the request
+// returns an error, but any producers created before the failure will remain in
+// the system.
+//
+// Request Limits:
+// - Minimum producers: 1 (enforced by validation)
+// - All producers must be for the same agency
+//
+// Each producer in the list can specify:
+// - Basic information (name, email, phone)
+// - NPN for NIPR validation and sync
+// - Mailing address
+// - Location assignments within the agency
+// - External ID for tenant system integration
+// - Custom metadata questions
+//
+// Common Use Cases:
+// - Bulk importing producers from spreadsheets or CSV files
+// - Migrating producer data from legacy systems
+// - Setting up new agencies with their initial producer roster
+// - Adding multiple producers during mergers or acquisitions
 type NewProducersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The UUID of the agency to associate the producers with.
-	// Must be a valid UUID format.
+	// The UUID of the agency to associate all producers with.
+	// This agency must exist and belong to the authenticated tenant.
+	// All producers in the request will be assigned to this single agency.
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
-	// List of producers to create.
-	// This field is required and must contain at least one producer.
+	// List of producers to create in this bulk operation.
+	// Required field that must contain at least one producer.
+	// Each producer undergoes full validation including NPN verification if provided.
 	Producers []*NewProducer `protobuf:"bytes,2,rep,name=producers,proto3" json:"producers,omitempty"`
-	// Optional. Overrides the tenant's default NIPR sync setting during onboarding.
-	// Most tenants have this enabled by default, so it usually doesn't need to be set.
-	// If specified, this value takes precedence over the tenant's default behavior.
+	// Optional. Overrides the tenant's default NIPR sync setting for all producers in this request.
+	// NPN validation is always performed regardless of this setting.
+	// When true: Fetches full NIPR EntityInfo data after validation (paid lookup)
+	// When false: Skips NIPR EntityInfo fetch, only performs NPN validation
+	// When omitted: Uses the tenant's default configuration
+	//
+	// Cost Implications:
+	// Setting this to true will trigger billable NIPR EntityInfo lookups for each producer
+	// with an NPN, counting against your monthly quota. Consider using false for test data
+	// or when you plan to sync later via SyncProducerWithNIPR.
 	SyncWithNipr  *bool `protobuf:"varint,3,opt,name=sync_with_nipr,json=syncWithNipr,proto3,oneof" json:"sync_with_nipr,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2435,11 +2624,31 @@ func (x *NewProducersRequest) GetSyncWithNipr() bool {
 	return false
 }
 
-// NewProducersResponse contains the IDs of all created producers.
+// NewProducersResponse contains the IDs of all successfully created producers.
+//
+// The response provides a list of producer IDs that directly corresponds to the
+// order of producers in the request, allowing you to map each request entry to
+// its created resource.
+//
+// Order Guarantee:
+// The producer_ids array maintains the exact same order as the producers array
+// in the request. For example:
+// - Request producers[0] → Response producer_ids[0]
+// - Request producers[1] → Response producer_ids[1]
+// This ordering guarantee simplifies client-side processing and record keeping.
+//
+// Post-Creation Actions:
+// After receiving this response, you can:
+// - Use the IDs to fetch full producer details via GetProducer
+// - Assign producers to locations via AssignProducerToLocations
+// - Trigger NIPR sync if it was skipped during creation
+// - Set external IDs via SetExternalID if not provided during creation
 type NewProducersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of UUIDs for the newly created producers.
-	// The order matches the order of producers in the request.
+	// These IDs are immediately available for use in subsequent API calls.
+	// The array length will always match the number of producers in the request.
+	// Order is guaranteed to match the request's producer array order.
 	ProducerIds   []string `protobuf:"bytes,1,rep,name=producer_ids,json=producerIds,proto3" json:"producer_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4020,29 +4229,53 @@ func (*StopSyncAgencyWithNIPRResponse) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{55}
 }
 
-// AgencySummary contains a lightweight summary of an agency for list views.
-// This message contains only the essential fields needed for displaying agencies in a list.
+// AgencySummary provides essential agency information for list views and quick
+// reference.
+//
+// This message is optimized for displaying agencies in lists, tables, and
+// search results without the overhead of full NIPR data. It contains only the
+// most commonly needed fields for agency identification and basic contact
+// information.
+//
+// For complete agency information including NIPR data, licenses, appointments,
+// and associated producers, use the GetAgencyAndProducers RPC.
 type AgencySummary struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the agency.
+	// Unique identifier for the agency (UUID format).
+	// Use this ID to retrieve full agency details via GetAgencyAndProducers.
 	AgencyId string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
-	// Agency name.
+	// The official name of the agency.
+	// This is typically the legal business name.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Agency email address.
+	// Primary email address for the agency.
+	// Used for general communication and must be unique within the tenant.
 	Email string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	// Agency phone number.
+	// Main phone number for the agency.
+	// Format may vary but typically includes country code for international numbers.
 	Phone string `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
-	// Agency NPN (National Producer Number).
+	// National Producer Number (NPN) assigned by NIPR.
+	// Only present for standard agencies (not sole proprietors).
+	// Empty string if the agency doesn't have an NPN.
 	Npn string `protobuf:"bytes,5,opt,name=npn,proto3" json:"npn,omitempty"`
-	// Agency FEIN (Federal Employer Identification Number).
+	// Federal Employer Identification Number (FEIN).
+	// Nine-digit number assigned by the IRS for tax purposes.
+	// May be empty for sole proprietors or agencies without FEIN.
 	Fein string `protobuf:"bytes,6,opt,name=fein,proto3" json:"fein,omitempty"`
 	// Organization ID that the agency belongs to.
+	// References organizations like aggregators or agency networks.
+	// Optional field - null if the agency isn't part of an organization.
 	OrganizationId *string `protobuf:"bytes,7,opt,name=organization_id,json=organizationId,proto3,oneof" json:"organization_id,omitempty"`
-	// Whether this is an internal tenant agency.
+	// Indicates whether this is an internal tenant agency.
+	// True for agencies owned/operated by the tenant.
+	// False for external/partner agencies.
 	IsTenantAgency bool `protobuf:"varint,8,opt,name=is_tenant_agency,json=isTenantAgency,proto3" json:"is_tenant_agency,omitempty"`
-	// Whether this is a sole proprietor.
+	// Indicates whether this agency is a sole proprietor.
+	// True: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR).
+	// False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY).
 	IsSoleProprietor bool `protobuf:"varint,9,opt,name=is_sole_proprietor,json=isSoleProprietor,proto3" json:"is_sole_proprietor,omitempty"`
-	// When the agency was created.
+	// Timestamp when the agency was created in the system.
+	// Used for sorting agencies by creation date in list views.
+	// Always in UTC timezone.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4148,27 +4381,50 @@ func (x *AgencySummary) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-// ListAgenciesRequest requests a list of agencies associated with the tenant.
-// Supports optional filtering and pagination parameters.
+// ListAgenciesRequest enables flexible querying of agencies with multiple filter
+// options and pagination support.
+//
+// All filters are optional and can be combined for precise results. When multiple
+// filters are specified, they are applied with AND logic (agencies must match all
+// specified criteria).
+//
+// Example Use Cases:
+// - Get all agencies in an organization: set organization_id
+// - Search for an agency by name: set search_query
+// - Find failing NIPR syncs: set nipr_sync_statuses to [NIPR_SYNC_STATE_FAILING]
+// - Get sole proprietors only: set entity_type to ENTITY_TYPE_SOLE_PROPRIETOR
+// - Paginate through all agencies: use pagination with page_token
 type ListAgenciesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional. Filter agencies by organization ID.
-	// If provided, only agencies belonging to this organization will be returned.
+	// Only agencies belonging to this specific organization will be returned.
+	// Must be a valid UUID if provided.
+	// Use ListOrganizations to get valid organization IDs.
 	OrganizationId *string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3,oneof" json:"organization_id,omitempty"`
-	// Optional. Search query to filter agencies by name, NPN, or email.
-	// If provided, only agencies matching the search query will be returned.
+	// Optional. Free-text search across agency fields.
+	// Searches in: agency name, NPN, and email address.
+	// The search is case-insensitive and uses partial matching.
+	// Example: "smith" will match "Smith Insurance Agency" and "john.smith@agency.com"
 	SearchQuery *string `protobuf:"bytes,2,opt,name=search_query,json=searchQuery,proto3,oneof" json:"search_query,omitempty"`
-	// Optional. Pagination parameters.
-	// If not provided, defaults to page_size=50.
+	// Optional. Pagination parameters for controlling result set size and navigation.
+	// If not provided, defaults to page_size=50 with no offset.
+	// Maximum allowed page_size is 200; values above this will be capped.
 	Pagination *Pagination `protobuf:"bytes,3,opt,name=pagination,proto3" json:"pagination,omitempty"`
-	// Optional. Filter by agency type (internal vs external).
-	// If not provided, returns all agencies regardless of type.
+	// Optional. Filter by agency classification (internal vs external).
+	// - AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant
+	// - AGENCY_TYPE_EXTERNAL: Partner or third-party agencies
+	// If not specified, returns both internal and external agencies.
 	AgencyType *AgencyType `protobuf:"varint,4,opt,name=agency_type,json=agencyType,proto3,enum=producerflow.producer.v1.AgencyType,oneof" json:"agency_type,omitempty"`
-	// Optional. Filter by entity type (sole proprietor vs agency).
-	// If not provided, returns all agencies regardless of entity type.
+	// Optional. Filter by business entity structure.
+	// - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies
+	// - ENTITY_TYPE_AGENCY: Standard multi-producer agencies
+	// If not specified, returns both sole proprietors and standard agencies.
 	EntityType *EntityType `protobuf:"varint,5,opt,name=entity_type,json=entityType,proto3,enum=producerflow.producer.v1.EntityType,oneof" json:"entity_type,omitempty"`
-	// Optional. Filter by NIPR sync status.
-	// If not provided, returns all agencies regardless of sync status.
+	// Optional. Filter by NIPR synchronization status.
+	// Multiple statuses can be specified to match agencies in any of those states.
+	// Useful for monitoring sync health and identifying agencies needing attention.
+	// Valid values: ACTIVE, FAILING, PENDING, DISABLED
+	// If empty, returns agencies in all sync states.
 	NiprSyncStatuses []NIPRSyncState `protobuf:"varint,6,rep,packed,name=nipr_sync_statuses,json=niprSyncStatuses,proto3,enum=producerflow.producer.v1.NIPRSyncState" json:"nipr_sync_statuses,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -4246,16 +4502,34 @@ func (x *ListAgenciesRequest) GetNiprSyncStatuses() []NIPRSyncState {
 	return nil
 }
 
-// ListAgenciesResponse contains the list of agencies matching the filter criteria.
+// ListAgenciesResponse provides paginated agency results with metadata for
+// navigation and total counts.
+//
+// The response is optimized for UI display with summary data only. For complete
+// agency information including NIPR data, use GetAgencyAndProducers with the
+// agency_id from the summary.
+//
+// Pagination Notes:
+// - Results are always ordered by creation date (newest first)
+// - Page tokens are opaque and should not be constructed by clients
+// - Total count reflects all matching agencies, not just the current page
+// - Empty agencies list with total_count > 0 indicates you've paginated past the end
 type ListAgenciesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of agency summaries matching the filter criteria.
-	// The agencies are ordered by creation date, most recent first.
+	// Ordered by creation date with the most recently created agencies first.
+	// Will be empty if no agencies match the filters or if paginating past the last page.
+	// Maximum of page_size agencies per response (default 50, max 200).
 	Agencies []*AgencySummary `protobuf:"bytes,1,rep,name=agencies,proto3" json:"agencies,omitempty"`
-	// A token that can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
+	// Pagination token for retrieving the next page of results.
+	// Pass this value as page_token in the next request to continue pagination.
+	// Empty string indicates this is the last page of results.
+	// Tokens are opaque and their format may change; treat as black box.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	// Total number of agencies matching the filter criteria.
+	// Total number of agencies matching the filter criteria across all pages.
+	// This count is independent of pagination and represents the full result set.
+	// Useful for displaying "Showing X-Y of Z agencies" in UIs.
+	// Will be 0 if no agencies match the specified filters.
 	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4312,13 +4586,30 @@ func (x *ListAgenciesResponse) GetTotalCount() int32 {
 	return 0
 }
 
-// ListOrganizationsRequest requests a list of all organizations associated with the tenant.
-// This request requires no parameters  and will return all organizations that
-// the authenticated tenant has access to.
+// ListOrganizationsRequest requests a list of all organizations associated with
+// the authenticated tenant.
+//
+// Organizations provide a way to group agencies into logical business units,
+// networks, or aggregator relationships. This endpoint returns all organizations
+// accessible to your tenant, which can be used to:
+// - Display organization hierarchies in user interfaces
+// - Filter agencies by organization
+// - Apply organization-specific business rules or workflows
+//
+// The response supports pagination for tenants with large numbers of organizations.
 type ListOrganizationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional. Pagination parameters.
-	// If not provided, defaults to page_size=50.
+	// Optional pagination parameters to control the result set.
+	//
+	// Pagination allows you to retrieve organizations in manageable chunks:
+	// - page_size: Number of organizations to return (default: 50, max: 200)
+	// - page_token: Token from previous response to get the next page
+	//
+	// Example usage:
+	// - First request: page_size=100 (returns first 100 organizations)
+	// - Subsequent requests: Use next_page_token from previous response
+	//
+	// If omitted, returns the first 50 organizations.
 	Pagination    *Pagination `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4361,21 +4652,55 @@ func (x *ListOrganizationsRequest) GetPagination() *Pagination {
 	return nil
 }
 
-// Organization represents a logical grouping or hierarchical structure within a tenant.
-// Organizations can be used to organize agencies into meaningful groups
-// such as agency networks, aggregators, or other business hierarchies.
+// Organization represents a logical grouping or hierarchical structure for managing agencies.
+//
+// Organizations enable better management of insurance distribution networks by grouping
+// agencies into meaningful business units. Common organization types include:
+// - Agency networks or clusters
+// - Aggregators
+// - Geographic regions or territories
+// - Franchise groups or corporate structures
+// - Market segments or product lines
 type Organization struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the organization.
-	// This is a UUID that can be used to reference the organization in other API calls.
+	// Unique identifier for the organization (UUID format).
+	//
+	// This ID is system-generated and immutable. Use this ID to:
+	// - Reference the organization in API calls (GetOrganization, agency creation)
+	// - Establish relationships between organizations and agencies
+	// - Track organization-level metrics and reporting
+	//
+	// Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000")
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Display name of the organization.
-	// This is the human-readable name that identifies the organization to users.
+	//
+	// This is the human-readable name shown in user interfaces and reports.
+	// Names must be unique within your tenant (case-insensitive comparison).
+	//
+	// Best Practices:
+	// - Use clear, descriptive names that reflect the organization's purpose
+	// - Include geographic or business unit identifiers when relevant
+	// - Avoid special characters that may cause display issues
+	//
+	// Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// External identifier for the organization.
-	// This is the identifier used by the tenant's system to identify the organization.
+	//
+	// This field maps the ProducerFlow organization to your internal system's
+	// organization ID, enabling bi-directional synchronization and integration.
+	//
+	// Use Cases:
+	// - Maintain references to your CRM or ERP system
+	// - Enable data synchronization between systems
+	// - Support migration from legacy systems
+	//
+	// This field is optional and can be any string format meaningful to your system.
+	// Examples: "ORG-12345", "west-coast-001", UUID from your system
 	ExternalId string `protobuf:"bytes,3,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	// Contact email address for the organization.
+	// Primary contact email address for the organization.
+	//
+	// Optional field. If provided, must be a valid email format.
+	// Example: "admin@westcoastnetwork.com"
 	Email         string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4439,20 +4764,50 @@ func (x *Organization) GetEmail() string {
 	return ""
 }
 
-// ListOrganizationsResponse contains the list of organizations associated with the tenant.
-// The organizations are returned ordered by name. If the tenant has no organizations,
-// the organizations list will be empty.
+// ListOrganizationsResponse contains the paginated list of organizations for the tenant.
+//
+// The response includes all organizations accessible to your authenticated tenant,
+// ordered alphabetically by name for consistent display. Empty results indicate
+// that your tenant either doesn't use organizational hierarchies or has no
+// organizations configured yet.
+//
+// Pagination is automatically applied to large result sets to ensure optimal
+// performance and reasonable response sizes.
 type ListOrganizationsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of organizations associated with the tenant.
-	// Each organization includes its unique identifier and display name.
-	// The list may be empty if no organizations are associated with the tenant.
-	// Organizations are ordered alphabetically by name.
+	//
+	// Each organization in the list includes:
+	// - Unique identifier (id) for API operations
+	// - Display name for user interfaces
+	// - External ID for system integration
+	// - Contact email (if configured)
+	//
+	// The list may be empty ([]) if:
+	// - No organizations are configured for your tenant
+	// - Your tenant doesn't use organizational hierarchies
 	Organizations []*Organization `protobuf:"bytes,1,rep,name=organizations,proto3" json:"organizations,omitempty"`
-	// A token that can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
+	// Pagination token for retrieving the next page of results.
+	//
+	// When present, indicates more organizations are available. Pass this
+	// token as the page_token in the next ListOrganizationsRequest to
+	// retrieve the subsequent page.
+	//
+	// Empty string or omitted field indicates this is the last page.
+	//
+	// Important: Tokens are opaque and may expire. Don't store tokens
+	// long-term; retrieve fresh data when needed.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	// Total number of organizations matching the filter criteria.
+	// Total count of organizations matching the filter criteria.
+	//
+	// This count represents the total number of organizations available
+	// to your tenant, regardless of pagination. Use this to:
+	// - Display result counts in user interfaces ("Showing 1-50 of 237")
+	// - Calculate the number of pages available
+	// - Determine if pagination is needed
+	//
+	// The count remains consistent across paginated requests unless
+	// organizations are added or removed between calls.
 	TotalCount    int32 `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4509,11 +4864,23 @@ func (x *ListOrganizationsResponse) GetTotalCount() int32 {
 	return 0
 }
 
-// GetOrganizationRequest specifies which organization to retrieve.
+// GetOrganizationRequest specifies which organization to retrieve detailed information for.
+//
+// Use this request to fetch comprehensive details about a specific organization,
+// including all agencies assigned to it and their current status.
 type GetOrganizationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier of the organization to retrieve.
-	// Must be a valid UUID.
+	//
+	// This must be a valid UUID that was previously returned from:
+	// - ListOrganizations response
+	// - Agency creation response (when agency is assigned to an organization)
+	// - Other API calls that reference organizations
+	//
+	// The organization must belong to your authenticated tenant; attempting
+	// to access organizations from other tenants will result in a NOT_FOUND error.
+	//
+	// Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000")
 	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -4556,10 +4923,10 @@ func (x *GetOrganizationRequest) GetOrganizationId() string {
 	return ""
 }
 
-// GetOrganizationResponse contains the details of the requested organization.
+// GetOrganizationResponse contains details about the requested organization.
 type GetOrganizationResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The requested organization.
+	// The requested organization with all available details.
 	Organization  *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8820,9 +9187,18 @@ type Producer_NIPR struct {
 	Biographic *Producer_NIPR_Biographic `protobuf:"bytes,8,opt,name=biographic,proto3" json:"biographic,omitempty"`
 	// Producer's regulatory information from NIPR
 	RegulatoryInfo *Producer_NIPR_ProducerRegulatoryInfo `protobuf:"bytes,9,opt,name=regulatory_info,json=regulatoryInfo,proto3" json:"regulatory_info,omitempty"`
-	// List of carrier appointments held by the producer in NIPR.
-	// These represent relationships with insurance carriers that allow
-	// the producer to sell their products.
+	// List of carrier appointments held by the producer.
+	//
+	// Each appointment represents authorization to sell a specific carrier's
+	// products for a specific line of authority. A producer typically has
+	// multiple appointments across different carriers and LOAs.
+	//
+	// Before allowing a producer to quote or sell a product:
+	// 1. Verify they have an active appointment with that carrier
+	// 2. Verify the appointment's LOA matches the product type
+	// 3. Check the appointment renewal date hasn't passed
+	//
+	// This data is synchronized from NIPR and is read-only.
 	Appointments  []*Producer_NIPR_Appointment `protobuf:"bytes,10,rep,name=appointments,proto3" json:"appointments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8968,7 +9344,25 @@ func (x *Producer_Address) GetAddressLine_2() string {
 	return ""
 }
 
-// License contains information about a producer's insurance license.
+// License contains information about a producer's insurance license in a
+// specific state.
+//
+// Each producer can hold multiple licenses across different states. Each
+// license includes a set of Lines of Authority (LOAs) that define what
+// types of insurance the producer is authorized to sell.
+//
+// Key Concepts:
+//   - Resident License: License in the producer's home state
+//   - Non-Resident License: License in states other than the producer's home
+//     state
+//   - Lines of Authority (LOAs): Specific insurance types the license permits
+//     (e.g., Life, Health, Property & Casualty, Variable Contracts)
+//
+// Compliance Use Cases:
+// - Verify producer is licensed in the state where they're selling
+// - Check license hasn't expired before allowing sales
+// - Ensure producer has the correct LOA for the product type
+// - Monitor expiration dates to send renewal reminders
 type Producer_NIPR_License struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The license number assigned by the state regulatory authority.
@@ -8987,8 +9381,12 @@ type Producer_NIPR_License struct {
 	ExpirationDate *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`
 	// The last time this license information was updated from NIPR.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Lines of Authority associated with this license.
-	// These define what types of insurance the producer can sell in this state.
+	// Lines of Authority (LOAs) associated with this license.
+	//
+	// These define what types of insurance the producer is authorized to sell
+	// in this state. A single license typically has multiple LOAs. Always
+	// check that the producer has an active LOA matching the product type
+	// before allowing sales.
 	LinesOfAuthority []*Producer_NIPR_License_LineOfAuthority `protobuf:"bytes,8,rep,name=lines_of_authority,json=linesOfAuthority,proto3" json:"lines_of_authority,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -9247,30 +9645,81 @@ func (x *Producer_NIPR_ProducerRegulatoryInfo) GetNasdExamDetails() string {
 	return ""
 }
 
-// Appointment represents a relationship between a producer and an insurance carrier.
+// Appointment represents a producer's authorization to sell products for a
+// specific insurance carrier.
+//
+// What is an Appointment?
+// An appointment is a formal relationship between a producer and an
+// insurance company that grants the producer authority to sell that
+// company's insurance products. Having a license is not enough - the
+// producer must also be appointed by each carrier whose products they want
+// to sell.
+//
+// Appointment Lifecycle:
+//  1. Active: Producer can sell this carrier's products
+//  2. Terminated: Appointment ended (various reasons: producer left, carrier
+//     terminated, etc.)
+//
+// Use Cases:
+//   - Verify producer is appointed before allowing them to quote/sell a
+//     carrier's products
+//   - Track which carriers each producer can represent
+//   - Monitor appointment renewal dates
+//   - Understand termination reasons for compliance and vetting
 type Producer_NIPR_Appointment struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	BranchId string                 `protobuf:"bytes,1,opt,name=branch_id,json=branchId,proto3" json:"branch_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Branch identifier for multi-branch agencies.
+	// This links the appointment to a specific agency branch if applicable.
+	BranchId string `protobuf:"bytes,1,opt,name=branch_id,json=branchId,proto3" json:"branch_id,omitempty"`
 	// Name of the insurance company for this appointment.
+	// Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
 	CompanyName string `protobuf:"bytes,2,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
-	// Federal Employer Identification Number of the producer's company.
+	// Federal Employer Identification Number (FEIN) of the insurance carrier.
+	// This uniquely identifies the carrier company.
 	Fein string `protobuf:"bytes,3,opt,name=fein,proto3" json:"fein,omitempty"`
-	// Company code for the insurance carrier.
+	// Company code: A standardized code identifying the insurance carrier.
+	// This is used in industry systems for carrier identification.
 	CoCode string `protobuf:"bytes,4,opt,name=co_code,json=coCode,proto3" json:"co_code,omitempty"`
-	// Line of authority for this appointment (e.g., Life, Property, Casualty).
-	// Indicates what types of insurance the producer can sell.
+	// Line of authority for this appointment.
+	//
+	// This indicates what type of insurance the producer can sell for this
+	// carrier. A producer might have multiple appointments with the same
+	// carrier for different LOAs.
+	//
+	// Examples: "LIFE", "HEALTH", "PROPERTY AND CASUALTY", "VARIABLE LIFE AND
+	// VARIABLE ANNUITY"
 	LineOfAuthority string `protobuf:"bytes,5,opt,name=line_of_authority,json=lineOfAuthority,proto3" json:"line_of_authority,omitempty"`
-	// Code for the line of authority for this appointment.
+	// Code for the line of authority.
+	// A standardized code representing the LOA type.
 	LoaCode string `protobuf:"bytes,6,opt,name=loa_code,json=loaCode,proto3" json:"loa_code,omitempty"`
-	// Current status of the appointment (e.g., Active, Terminated).
+	// Current status of the appointment.
+	//
+	// Common values:
+	// - "Active": Producer can sell this carrier's products
+	// - "Terminated": Appointment has ended
+	// - "Pending": Appointment is being processed
+	//
+	// Always check status is "Active" before allowing sales.
 	Status string `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	// Reason for termination if the appointment has been terminated.
+	//
+	// Common termination reasons:
+	// - Producer requested termination
+	// - Carrier terminated appointment
+	// - Producer left agency
+	// - Compliance or regulatory issues
+	//
+	// This field is empty if the appointment is still active.
 	TerminationReason string `protobuf:"bytes,8,opt,name=termination_reason,json=terminationReason,proto3" json:"termination_reason,omitempty"`
-	// Date associated with the current status or reason.
+	// Date when the status or termination reason became effective.
+	// For terminated appointments, this is when the termination occurred.
 	StatusReasonDate *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=status_reason_date,json=statusReasonDate,proto3" json:"status_reason_date,omitempty"`
 	// Date when the appointment will renew.
+	// Appointments typically renew annually. Monitor this date for upcoming
+	// renewals.
 	AppointmentRenewalDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=appointment_renewal_date,json=appointmentRenewalDate,proto3" json:"appointment_renewal_date,omitempty"`
 	// Additional affiliations or roles the producer has with the agency.
+	// This may include special designations or relationship details.
 	AgencyAffiliations string `protobuf:"bytes,11,opt,name=agency_affiliations,json=agencyAffiliations,proto3" json:"agency_affiliations,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -9383,16 +9832,49 @@ func (x *Producer_NIPR_Appointment) GetAgencyAffiliations() string {
 	return ""
 }
 
-// LineOfAuthority represents a specific type of insurance coverage
-// that a producer is authorized to sell under this license.
+// LineOfAuthority (LOA) represents a specific type of insurance that a
+// producer is authorized to sell under this license.
+//
+// Each license can have multiple LOAs. For example, a license might
+// include:
+// - LIFE
+// - HEALTH
+// - ACCIDENT AND HEALTH
+// - PROPERTY AND CASUALTY
+// - VARIABLE LIFE AND VARIABLE ANNUITY
+//
+// LOA Compliance:
+// Before allowing a producer to sell a product, verify they have an
+// active LOA that matches the product type. For example, a producer with
+// only a LIFE LOA cannot sell Property & Casualty insurance.
+//
+// LOA names are standardized by NIPR but may vary slightly between
+// states.
 type Producer_NIPR_License_LineOfAuthority struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-	// This is typically an uppercase string that describes the insurance type.
+	// The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+	// "HEALTH").
+	//
+	// Common LOA types:
+	//   - LIFE: Life insurance products
+	//   - HEALTH: Health insurance products
+	//   - ACCIDENT AND HEALTH: Combined accident and health coverage
+	//   - PROPERTY: Property insurance
+	//   - CASUALTY: Casualty insurance
+	//   - PROPERTY AND CASUALTY: Combined property and casualty
+	//   - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+	//     securities license
+	//   - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+	//   - COMMERCIAL LINES: Business insurance policies
+	//
+	// This is typically an uppercase string standardized by NIPR.
 	Loa string `protobuf:"bytes,1,opt,name=loa,proto3" json:"loa,omitempty"`
 	// Whether this Line of Authority is currently active.
+	// Inactive LOAs cannot be used to sell that type of insurance.
 	Active bool `protobuf:"varint,2,opt,name=active,proto3" json:"active,omitempty"`
-	// The date when this Line of Authority was issued.
+	// The date when this Line of Authority was first issued.
+	// This helps track how long the producer has been authorized for this
+	// insurance type.
 	IssueDate     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=issue_date,json=issueDate,proto3" json:"issue_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9578,19 +10060,23 @@ func (x *Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) GetLengthOfOrder
 }
 
 // Address represents a mailing address for the producer.
+// All fields are required when an address is provided.
+// This address is used for:
+// - Official correspondence
+// - Licensing documentation
+// - Commission statements
 type NewProducer_Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Street address of the producer.
-	// Required and must be non-empty.
+	// Include apartment/suite numbers if applicable.
 	Street string `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
-	// City of the producer.
-	// Required and must be non-empty.
+	// City of the producer's mailing address.
 	City string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
-	// State of the producer.
-	// Required and must be a 2-letter state code.
+	// State of the producer's mailing address.
+	// Must be a valid 2-letter US state code (e.g., "CA", "NY").
 	State string `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
-	// Zip code of the producer.
-	// Required and must be between 1 and 10 characters.
+	// Zip code of the producer's mailing address.
+	// Supports both 5-digit (12345) and ZIP+4 (12345-6789) formats.
 	Zip string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
 	// Optional second line of address (apt, suite, unit, etc.)
 	AddressLine_2 *string `protobuf:"bytes,5,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
@@ -10510,12 +10996,12 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x16NIPR_SYNC_STATE_ACTIVE\x10\x01\x12\x1b\n" +
 	"\x17NIPR_SYNC_STATE_FAILING\x10\x02\x12\x1b\n" +
 	"\x17NIPR_SYNC_STATE_PENDING\x10\x03\x12\x1c\n" +
-	"\x18NIPR_SYNC_STATE_DISABLED\x10\x042\xa0\"\n" +
+	"\x18NIPR_SYNC_STATE_DISABLED\x10\x042\xa2\"\n" +
 	"\x0fProducerService\x12\x96\x01\n" +
 	"\x19CreateAgencyOnboardingURL\x12:.producerflow.producer.v1.CreateAgencyOnboardingURLRequest\x1a;.producerflow.producer.v1.CreateAgencyOnboardingURLResponse\"\x00\x12\x9c\x01\n" +
 	"\x1bCreateProducerOnboardingURL\x12<.producerflow.producer.v1.CreateProducerOnboardingURLRequest\x1a=.producerflow.producer.v1.CreateProducerOnboardingURLResponse\"\x00\x12f\n" +
-	"\tNewAgency\x12*.producerflow.producer.v1.NewAgencyRequest\x1a+.producerflow.producer.v1.NewAgencyResponse\"\x00\x12m\n" +
-	"\fListAgencies\x12-.producerflow.producer.v1.ListAgenciesRequest\x1a..producerflow.producer.v1.ListAgenciesResponse\x12|\n" +
+	"\tNewAgency\x12*.producerflow.producer.v1.NewAgencyRequest\x1a+.producerflow.producer.v1.NewAgencyResponse\"\x00\x12o\n" +
+	"\fListAgencies\x12-.producerflow.producer.v1.ListAgenciesRequest\x1a..producerflow.producer.v1.ListAgenciesResponse\"\x00\x12|\n" +
 	"\x11ListOrganizations\x122.producerflow.producer.v1.ListOrganizationsRequest\x1a3.producerflow.producer.v1.ListOrganizationsResponse\x12v\n" +
 	"\x0fGetOrganization\x120.producerflow.producer.v1.GetOrganizationRequest\x1a1.producerflow.producer.v1.GetOrganizationResponse\x12\x7f\n" +
 	"\x12CreateOrganization\x123.producerflow.producer.v1.CreateOrganizationRequest\x1a4.producerflow.producer.v1.CreateOrganizationResponse\x12l\n" +

@@ -59,126 +59,1240 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// ProducerService provides a comprehensive API for managing insurance producers
-// and agencies, including onboarding, data synchronization, and integration with
-// external systems like NIPR for license verification.
+// ProducerService provides a comprehensive API for managing insurance
+// producers and agencies. This service simplifies producer and agency
+// onboarding, data synchronization, and integration with the National Insurance
+// Producer Registry (NIPR).
 //
-// Available endpoints:
+// Key capabilities:
+// - Producer and agency onboarding with self-service URLs
+// - Automatic synchronization of license, appointment, and regulatory data from NIPR
+// - NPN (National Producer Number) validation and lookup
+// - Multi-location management for agencies
+// - Integration with NIPR PDB Gateway, PDB Alerts, and NPN Lookup services
 //
-//	UAT (User Acceptance Testing): https://api.uat.producerflow.com
-//	Production: https://api.producerflow.com
+// NIPR Integration:
+// This service automatically fetches and maintains up-to-date licensing
+// information, carrier appointments, and regulatory actions from NIPR. Most
+// NIPR sync operations are billable and count against your monthly unique NPN
+// quota. Enable PDB Alerts synchronization to receive automatic daily updates
+// and reduce manual sync costs.
+//
+// Authentication:
+// All endpoints require API key authentication provided via the Authorization header.
 type ProducerServiceClient interface {
-	// CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency.
-	// The URL contains encoded information about the agency defaults and tenant context.
-	// All fields in the request are optional - you can provide as much or as little
-	// information as available. Any missing information will be collected during
-	// the onboarding process.
-	// Returns a URL string that can be shared with the agency for self-onboarding.
+	// CreateAgencyOnboardingURL generates a secure, pre-filled URL for agency
+	// self-onboarding.
+	//
+	// Use this endpoint to create personalized onboarding links that can be
+	// shared with agencies. The URL encodes agency defaults, tenant context, and
+	// optional pre-filled information to streamline the onboarding experience.
+	//
+	// All fields in the request are optional. Provide as much or as little
+	// information as available - any missing data will be collected through the
+	// onboarding flow.
+	//
+	// Typical Workflow:
+	//  1. Generate onboarding URL with optional pre-filled data (agency name, NPN,
+	//     principal info)
+	//  2. Share URL with agency contact via email or portal
+	//  3. Agency completes onboarding form through the URL
+	//  4. System validates NPN with NIPR and creates agency record
+	//  5. Optionally sync with NIPR to fetch licenses and appointments
+	//
+	// Validation Rules:
+	// All fields in the request are optional. The system generates valid URLs
+	// even with an empty request. When fields are provided:
+	//   - entity_type: Must be ENTITY_TYPE_SOLE_PROPRIETOR (1), ENTITY_TYPE_AGENCY (2),
+	//     or ENTITY_TYPE_ASK_DURING_ONBOARDING (3). This is the only endpoint where
+	//     ENTITY_TYPE_ASK_DURING_ONBOARDING is valid.
+	//   - email: Must be a valid email format if provided
+	//   - npn: Must be a valid NPN format (2-10 digits) if provided. Note that NPN
+	//     validation against NIPR occurs during onboarding, not during URL generation.
+	//   - fein: Must be exactly 9 digits if provided
+	//   - organization_id: Must be a valid organization ID belonging to your tenant if provided
+	//   - principal.email: Must be a valid email format if provided
+	//   - principal.npn: Must be a valid NPN format (2-10 digits) if provided
+	//   - principal.tenant_id: Maximum 255 characters if provided
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the agency for
+	// self-service onboarding.
 	CreateAgencyOnboardingURL(ctx context.Context, in *CreateAgencyOnboardingURLRequest, opts ...grpc.CallOption) (*CreateAgencyOnboardingURLResponse, error)
-	// CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
-	// with optional pre-filled NPN. The URL can be shared directly with the producer.
-	// The generated URL will take the producer through the onboarding flow with the NPN field
-	// pre-populated if provided, reducing friction in the onboarding process.
+	// CreateProducerOnboardingURL generates a secure, pre-filled URL for producer
+	// self-onboarding.
+	//
+	// Use this endpoint to create personalized onboarding links for individual
+	// producers joining an existing agency. The URL can include optional
+	// pre-filled data like NPN, name, email, and address to reduce manual data
+	// entry.
+	//
+	// The producer must be associated with an existing agency. Use
+	// CreateAgencyOnboardingURL if you need to onboard an agency and its
+	// principal together.
+	//
+	// Typical Workflow:
+	// 1. Generate producer onboarding URL with agency_id and optional pre-filled data
+	// 2. Share URL with producer via email
+	// 3. Producer completes onboarding form through the URL
+	// 4. System validates NPN with NIPR and associates producer with agency
+	// 5. Optionally sync with NIPR to fetch producer licenses and appointments
+	//
+	// Validation Rules:
+	//   - agency_id: Required. must be a valid UUID of an agency belonging
+	//     to your tenant.
+	//   - producer_data: All fields are optional. When provided:
+	//   - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
+	//     against NIPR occurs during onboarding, not during URL generation.
+	//   - email: Must be a valid email format if provided
+	//   - mailing_address.state: Must be exactly 2 characters (state code) if provided
+	//   - mailing_address.zip: Must be 1-10 characters if provided
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the producer for
+	// self-service onboarding.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Invalid NPN provided (not found in NIPR)
 	CreateProducerOnboardingURL(ctx context.Context, in *CreateProducerOnboardingURLRequest, opts ...grpc.CallOption) (*CreateProducerOnboardingURLResponse, error)
-	// NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.
+	// NewAgency creates a new agency with principal and optional additional producers.
+	//
+	// This is the programmatic alternative to CreateAgencyOnboardingURL - use
+	// this when you want to create agencies directly via API instead of through a
+	// self-service form.
+	//
+	// Entity Type Rules:
+	//   - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producer operating as their own agency.
+	//     Cannot have an agency NPN. Only the principal is created.
+	//   - ENTITY_TYPE_AGENCY: Standard insurance agency with multiple producers.
+	//     Must provide either an NPN or FEIN. Can have multiple producers beyond the principal.
+	//
+	// NIPR Validation and Sync:
+	// The system performs free NIPR API lookups to validate NPNs before
+	// creation. If sync_with_nipr is true (or tenant default), the system
+	// performs paid NIPR EntityInfo lookups to fetch complete license, appointment,
+	// and regulatory data.
+	//
+	// Validation Performed:
+	// - Required fields are present and valid
+	// - Email addresses are unique within tenant
+	// - Agency NPN exists in NIPR (if provided)
+	// - Principal NPN exists in NIPR
+	// - Entity type rules are followed
+	// - Principal and subsequent producers last names must match NIPR records for the given NPN
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	//   - agency: Required field containing all agency information
+	//   - agency.name: Required, must be non-empty
+	//   - agency.email: Required, must be a valid email format
+	//   - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
+	//     ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
+	//   - agency.fein: Optional, if provided must be exactly 9 digits. Required for
+	//     ENTITY_TYPE_AGENCY if NPN is not provided.
+	//   - agency.principal: Required, contains principal producer information
+	//   - principal.first_name: Required, must be non-empty
+	//   - principal.last_name: Required, must be non-empty
+	//   - principal.email: Required, must be a valid email format
+	//   - principal.npn: Required, must be 1-10 characters
+	//   - principal.phone: Optional, if provided must match E.164 pattern
+	//   - principal.tenant_id: Optional, maximum 255 characters
+	//   - agency.bank_account (optional, if provided all subfields are required):
+	//   - account_number: 8-17 characters
+	//   - routing_number: Exactly 9 characters
+	//   - account_type: Required, must be CHECKING (1) or SAVINGS (2)
+	//   - account_holder_name: Required, must be non-empty
+	//   - agency.eo_info (optional, if provided):
+	//   - carrier: Required, must be non-empty
+	//   - expiration_date: Required, must be in the future
+	//   - coverage_amount: Required, must be non-empty
+	//   - effective_date: Required
+	//   - per_occurrence: Required, must be non-empty
+	//   - agency.business_hours (optional, if provided):
+	//   - timezone: Required, must be non-empty
+	//   - business_hours: Required, at least one entry
+	//   - week_days: Required, 1-7 days
+	//   - opening_time: Required
+	//   - closing_time: Required
+	//   - agency.producers: Optional list of additional producers (see NewProducer validation)
+	//   - agency.points_of_contact (optional, for each contact):
+	//   - email: Required, must be a valid email format
+	//   - role: Required
+	//   - agency.root_organization_id: Optional, if provided must be 1-36 characters
+	//   - agency.locations: Optional, maximum 100 locations
+	//
+	// Business logic validation:
+	// - agency.email: Must be unique within the tenant
+	// - agency.npn: If provided, must exist in NIPR (validated via free NIPR lookup)
+	// - principal.email: Must be unique within the tenant
+	// - principal.npn: Must exist in NIPR (validated via free NIPR lookup)
+	// - All producer emails must be unique within the tenant
+	//
+	// Returns:
+	// IDs of the created agency, principal, optional producers, and locations (if provided).
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
+	//     NPN not found in NIPR
+	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant
 	NewAgency(ctx context.Context, in *NewAgencyRequest, opts ...grpc.CallOption) (*NewAgencyResponse, error)
-	// ListAgencies returns a list of agencies associated with the tenant.
-	// Supports optional filtering by organization ID and search queries.
+	// ListAgencies retrieves a paginated list of agencies associated with the tenant.
+	//
+	// This endpoint provides comprehensive agency listing with powerful filtering
+	// capabilities to efficiently manage and search through large numbers of
+	// agencies. Each agency in the response includes summary information for
+	// quick overview without the full NIPR data.
+	//
+	// Filtering Capabilities:
+	// - Organization: Filter agencies belonging to a specific organization
+	// - Search: Free-text search across agency name, NPN, and email
+	// - Agency Type: Filter by internal (tenant) vs external agencies
+	// - Entity Type: Filter by sole proprietor vs standard agency
+	// - NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+	//
+	// The response uses cursor-based pagination for efficient data retrieval:
+	// - Default page size is 50 if not specified
+	// - Maximum page size is 200
+	// - Results are ordered by creation date, most recent first
+	// - Use the next_page_token to retrieve subsequent pages
+	//
+	// Validation Rules:
+	// All fields are optional filters:
+	// - organization_id: If provided, must be a valid UUID format
+	// - search_query: Optional free-text search string (case-insensitive, partial matching)
+	// - pagination.page_size: Must be <= 200. Default is 50 if not specified.
+	// - pagination.page_token: Opaque token from previous response for pagination
+	// - agency_type: If provided, must be AGENCY_TYPE_INTERNAL (1) or AGENCY_TYPE_EXTERNAL (2)
+	// - entity_type: If provided, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or ENTITY_TYPE_AGENCY (2)
+	// - nipr_sync_statuses: Array of sync states to filter by (ACTIVE, FAILING, PENDING, DISABLED)
+	//
+	// Returns:
+	// A paginated list of AgencySummary objects containing essential agency
+	// information without full NIPR data. Use GetAgencyAndProducers for complete
+	// agency details including NIPR data.
 	ListAgencies(ctx context.Context, in *ListAgenciesRequest, opts ...grpc.CallOption) (*ListAgenciesResponse, error)
-	// ListOrganizations returns a list of organizations associated with the tenant.
-	// Organizations represent logical groupings or hierarchical structures within a tenant
-	// that can be used to organize agencies and producers.
+	// ListOrganizations retrieves all organizations accessible to your tenant.
+	//
+	// Organizations represent logical groupings or hierarchical structures for
+	// managing agencies. They enable better organization of agencies into business
+	// units, networks, or aggregator relationships. Each
+	// organization can contain multiple agencies, allowing for hierarchical
+	// management and reporting across your insurance distribution network.
+	//
+	// Not all tenants use organizations - this list may be empty if your tenant
+	// doesn't have organizational hierarchies enabled.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// All fields are optional:
+	// - pagination.page_size: Must be <= 200. Default is 50 if not specified.
+	// - pagination.page_token: Opaque token from previous response for pagination
+	//
+	// Returns:
+	// A list of all organizations accessible to your tenant, including their IDs,
+	// names and external identifiers. Organizations are
+	// returned in alphabetical order by name for consistent presentation.
 	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
-	// GetOrganization retrieves details of a specific organization by ID.
-	// Returns the organization's information including name and external ID.
+	// GetOrganization retrieves comprehensive details about a specific organization.
+	//
+	// This endpoint returns complete organization information including all
+	// agencies assigned to it. For each agency, it provides summary data including
+	// appointment overview statistics and NIPR synchronization status. This allows
+	// you to understand the full scope of an organization's agency network in a
+	// single API call.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - organization_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// Complete organization details including all assigned agencies with their
+	// appointment overviews and sync statuses.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Organization doesn't exist or doesn't belong to tenant
 	GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error)
 	// CreateOrganization creates a new organization for the authenticated tenant.
 	// The organization name must be unique within the tenant.
 	// Returns the ID of the newly created organization.
 	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*CreateOrganizationResponse, error)
-	// NewProducer creates a new producer and associates them with an existing agency.
-	// It validates the producer's information and checks that the email is unique.
-	// Returns the ID of the created producer.
+	// NewProducer adds a single producer to an existing agency.
+	//
+	// Use this endpoint to programmatically add producers to agencies. This is
+	// the programmatic alternative to CreateProducerOnboardingURL.
+	//
+	// NIPR Validation and Sync:
+	// If an NPN is provided, the system validates it exists in NIPR using a free
+	// API lookup. If sync_with_nipr is enabled, the system performs a paid
+	// NIPR EntityInfo lookup to fetch complete license, appointment, and
+	// regulatory data.
+	//
+	// Validation Performed:
+	// - Email is unique within tenant
+	// - Agency exists and belongs to tenant
+	// - NPN exists in NIPR (if provided)
+	// - Location IDs exist and belong to the agency (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - producer: Required, contains producer information
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - npn: Required, if provided used for NIPR validation
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - mailing_address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - location_ids: Optional, maximum 100 items, each must be a valid UUID
+	//
+	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - email: Must be unique within the tenant (not already used by another producer or contact)
+	//   - npn: If provided, must exist in NIPR. If name is also provided, NPN must match the name
+	//     in NIPR records
+	//   - npn: Must be unique within the tenant (not already assigned to another producer)
+	//   - location_ids: All locations must exist and belong to the specified agency
+	//
+	// Returns:
+	// The UUID of the created producer.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	NewProducer(ctx context.Context, in *NewProducerRequest, opts ...grpc.CallOption) (*NewProducerResponse, error)
-	// NewProducers creates multiple producers and associates them with the specified agency.
-	// It performs the same validations as NewProducer for each entry.
-	// Returns the IDs of all created producers.
+	// NewProducers creates multiple producers in bulk and associates them with a single agency.
+	//
+	// This endpoint provides an efficient way to onboard multiple producers to the same
+	// agency in a single API call.
+	//
+	// Bulk Operation Behavior:
+	// Producers are created sequentially. If a producer fails validation, the request
+	// returns an error, but any producers created before the failure will remain in
+	// the system. Each producer in the request undergoes the same validation as
+	// individual NewProducer calls.
+	//
+	// NIPR Validation and Sync:
+	// For each producer with an NPN:
+	// - The system performs a free NIPR API lookup to validate the NPN exists
+	// - If sync_with_nipr is true (or tenant default), performs paid NIPR EntityInfo lookups
+	// - All NIPR validations must succeed for the bulk operation to proceed
+	//
+	// Validation Performed (for each producer):
+	// - Required fields are present and valid (name, email)
+	// - Email addresses are unique within the tenant
+	// - Agency exists and belongs to the authenticated tenant
+	// - NPNs exist in NIPR (if provided)
+	// - Location IDs exist and belong to the agency (if provided)
+	// - Phone numbers match valid patterns (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - producers: Required, must contain at least 1 producer. Each producer:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - npn: Optional, if provided used for NIPR validation
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - mailing_address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - location_ids: Optional, maximum 100 items per producer, each must be a valid UUID
+	//
+	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting for all producers
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - All producer emails must be unique within the tenant
+	//   - All producer NPNs (if provided) must exist in NIPR and be unique within the tenant
+	//   - All location_ids must exist and belong to the specified agency
+	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
+	//     are created
+	//
+	// Returns:
+	// List of UUIDs for all created producers in the same order as the request. This
+	// ordering guarantee allows you to map request entries to their created IDs.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(ctx context.Context, in *NewProducersRequest, opts ...grpc.CallOption) (*NewProducersResponse, error)
-	// GetAgencyAndProducers retrieves details for an agency and all associated producers.
-	// Returns the agency information and a list of producers.
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers.
+	//
+	// This endpoint returns comprehensive agency details including:
+	// - Agency contact information and business details
+	// - Principal producer information
+	// - Bank account for commission payments
+	// - Errors & Omissions insurance details
+	// - Business hours and contact points
+	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
+	// - All associated producers with their NIPR data
+	// - Agency locations
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// Agency object with complete NIPR data and list of all associated producers.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyAndProducers(ctx context.Context, in *GetAgencyAndProducersRequest, opts ...grpc.CallOption) (*GetAgencyAndProducersResponse, error)
 	// GetProducer retrieves detailed information about a specific producer.
-	// The producer can be found by ID, NPN, or email.
-	// Returns the producer's information, including NIPR data and agency association.
+	//
+	// Supports three lookup methods:
+	// - By producer ID (UUID)
+	// - By NPN (National Producer Number)
+	// - By email address
+	//
+	// The response includes:
+	// - Producer contact information (name, email, phone, address)
+	// - Associated agency information
+	// - NIPR synchronized data:
+	//   - State licenses with expiration dates and Lines of Authority (LOAs)
+	//   - Biographic information (name, DOB, state of domicile)
+	//   - Regulatory actions by state
+	//   - Carrier appointments with status and renewal dates
+	//
+	// - Location assignments
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - producer_id_lookup.producer_id: Must be a valid UUID format
+	// - npn_lookup.producer_npn: Must be non-empty string
+	// - email_lookup.email: Must be a valid email format
+	//
+	// Returns:
+	// Complete producer information including all NIPR data.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
+	//     associated agency not found
+	//   - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
+	//     lookups are implemented)
 	GetProducer(ctx context.Context, in *GetProducerRequest, opts ...grpc.CallOption) (*GetProducerResponse, error)
-	// GetAgencyFiles returns URLs for accessing files associated with an agency, such as contracts.
+	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
+	//
+	// Returns pre-signed URLs for the following document types:
+	// - Errors & Omissions (E&O) insurance certificate
+	// - Voided check for ACH commission payments
+	// - W9 tax form
+	// - License documents
+	// - Broker bond documents
+	//
+	// The URLs are time-limited and grant temporary read access to the documents.
+	// Empty strings are returned for documents that haven't been uploaded.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A set of pre-signed URLs for accessing agency documents.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyFiles(ctx context.Context, in *GetAgencyFilesRequest, opts ...grpc.CallOption) (*GetAgencyFilesResponse, error)
-	// UpdateProducer updates information for an existing producer.
-	// Supports updating contact details, background check responses,
-	// employment history, and non-uniform licensing questions.
-	// Information from NIPR and other third-party sources cannot be updated.
-	// Validates email uniqueness if the email is changed.
+	// UpdateProducer updates editable fields for an existing producer.
+	//
+	// Only information collected during onboarding can be updated via this
+	// endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+	// read-only and can only be updated by triggering a NIPR sync via
+	// SyncProducerWithNIPR.
+	//
+	// Updatable Fields:
+	// - Contact information (first_name, last_name, middle_name, email, phone)
+	// - Mailing address (street, city, state, zip)
+	// - External metadata (for tenant-specific data)
+	//
+	// Note: NPN cannot be updated after creation. The NPN field is deprecated
+	// in UpdateProducerRequest.Producer and will be ignored.
+	//
+	// Validation:
+	// - Email must be unique within tenant if changed
+	// - All field format validations apply (e.g., valid email format, phone pattern)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - producer: Required, contains fields to update (all fields optional):
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - npn: Deprecated and ignored - NPN cannot be updated after creation
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be at most 2 characters
+	//   - zip: If provided, must be at least 5 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer field is missing in request
 	UpdateProducer(ctx context.Context, in *UpdateProducerRequest, opts ...grpc.CallOption) (*UpdateProducerResponse, error)
-	// UpdateAgency updates information for an existing agency.
-	// Supports updating contact details (email, phone, fax), website, physical address,
-	// requested appointments, and notes.
-	// Information from NIPR and other third-party sources cannot be updated.
+	// UpdateAgency updates editable fields for an existing agency.
+	//
+	// Only information collected during onboarding can be updated via this
+	// endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+	// read-only and can only be updated by triggering a NIPR sync via
+	// SyncAgencyWithNIPR.
+	//
+	// Updatable Fields:
+	// - Contact details (email, phone, fax)
+	// - Website URL
+	// - Physical address components
+	// - Requested appointments (state codes)
+	// - Notes
+	// - External metadata (for tenant-specific data)
+	//
 	// All fields are optional - only provide the fields you want to update.
-	// Validates email uniqueness if the email is changed.
+	// Unchanged fields retain their current values.
+	//
+	// Validation:
+	// - Email must be unique within tenant if changed
+	// - All field format validations apply
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - agency: Required, contains fields to update (all fields optional):
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - fax: If provided, must match E.164 pattern
+	//   - website: If provided, must be a valid URI format
+	//   - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
+	//   - notes: If provided, maximum 500 characters
+	//   - physical_address (optional, if provided):
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters
+	//   - zip: If provided, must be 1-10 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: If changed, must be unique within the tenant (case-insensitive comparison)
+	// - phone: If provided, must be a valid phone number format
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - ALREADY_EXISTS: Email already exists within tenant
+	//   - INVALID_ARGUMENT: Invalid phone number format or all address fields required
+	//     when creating new address
 	UpdateAgency(ctx context.Context, in *UpdateAgencyRequest, opts ...grpc.CallOption) (*UpdateAgencyResponse, error)
 	// NewContact creates a new contact associated with an agency.
-	// Contacts represent non-producer individuals linked to the agency.
-	// Returns the ID of the created contact.
+	//
+	// Use this endpoint to programmatically add non-producer individuals to
+	// agencies. Contacts represent staff members, administrators, or other
+	// personnel who are not licensed insurance producers but need to be
+	// associated with the agency for communication or administrative purposes.
+	//
+	// Validation Performed:
+	// - Agency exists and belongs to the authenticated tenant
+	// - Email is unique within the tenant (across both producers and contacts)
+	// - Required fields are present and valid (first name, last name, email, role)
+	// - Phone number matches valid pattern (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - contact: Required, contains contact information:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - role: Required, must be non-empty
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - middle_name: Optional
+	//   - address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - npn: Optional
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	//
+	// Returns:
+	// The UUID of the created contact.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing required fields or invalid field format
+	// - ALREADY_EXISTS: Email already registered in your tenant
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContact(ctx context.Context, in *NewContactRequest, opts ...grpc.CallOption) (*NewContactResponse, error)
-	// NewContacts creates multiple contacts in a single request.
-	// Each contact is associated with the specified agency.
-	// Returns the IDs of all created contacts.
+	// NewContacts creates multiple contacts in bulk and associates them with a
+	// single agency.
+	//
+	// This endpoint provides an efficient way to add multiple non-producer
+	// contacts to the same agency in a single API call. Contacts represent staff
+	// members, administrators, or other personnel who are not licensed insurance
+	// producers.
+	//
+	// Partial Success Behavior:
+	// Unlike bulk producer operations, this endpoint uses partial success
+	// semantics. Contacts that pass validation are created even if other contacts
+	// in the request fail. The response contains only the IDs of successfully
+	// created contacts.
+	//
+	// Validation Performed (for each contact):
+	// - Agency exists and belongs to the authenticated tenant
+	// - Email is unique within the tenant (across both producers and contacts)
+	// - Required fields are present and valid (first name, last name, email, role)
+	// - Phone number matches valid pattern (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - contacts: Required, must contain at least 1 contact. Each contact:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - role: Required, must be non-empty
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - middle_name: Optional
+	//   - address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - npn: Optional
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - Each contact email: Must be unique within the tenant. Contacts with duplicate
+	//     emails are skipped (partial success - other valid contacts are still created)
+	//
+	// Returns:
+	// List of UUIDs for successfully created contacts. If some contacts failed
+	// validation, only the IDs of successfully created contacts are returned.
+	// Failed contacts are logged but not included in the response. The order of
+	// returned IDs corresponds to the order of successful contacts, not the
+	// original request order.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContacts(ctx context.Context, in *NewContactsRequest, opts ...grpc.CallOption) (*NewContactsResponse, error)
 	// ListAgencyContacts retrieves all contacts associated with an agency.
-	// Returns a list of contacts with their full details.
+	//
+	// Use this endpoint to fetch all non-producer contacts linked to a specific
+	// agency. Contacts represent staff members, administrators, or other
+	// personnel who are not licensed insurance producers but are associated with
+	// the agency.
+	//
+	// The response includes complete contact information:
+	// - Personal details (name, email, phone)
+	// - Role within the agency
+	// - Mailing address
+	// - NPN (if applicable)
+	// - Creation timestamp
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A list of all contacts associated with the specified agency. Returns an
+	// empty list if the agency has no contacts.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(ctx context.Context, in *ListAgencyContactsRequest, opts ...grpc.CallOption) (*ListAgencyContactsResponse, error)
-	// SetExternalID sets an external identifier for a producer or contact.
-	// Useful for integrating with external systems that use different ID schemes.
+	// SetExternalID sets an external identifier for a producer, agency, contact,
+	// or organization.
+	//
+	// Use this endpoint to link ProducerFlow entities to corresponding records in
+	// your external systems (CRM, AMS, legacy databases). This enables bi-directional
+	// synchronization and lookups across systems.
+	//
+	// Supported Entity Types:
+	// - Producer: Links a producer to an external system record
+	// - Agency: Links an agency to an external system record
+	// - Contact: Links a contact to an external system record
+	// - Organization: Links an organization to an external system record
+	//
+	// Exactly one entity type must be specified per request.
+	//
+	// Validation Performed:
+	// - Exactly one entity ID is provided (producer_id, agency_id, contact_id, or organization_id)
+	// - The external ID (tenant_id) is non-empty and at most 255 characters
+	// - The external ID is unique within the tenant (not already assigned to another entity)
+	// - The specified entity exists and belongs to the authenticated tenant
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one entity ID must be provided (oneof required):
+	// - producer_id: Must be a valid UUID format
+	// - agency_id: Must be a valid UUID format
+	// - contact_id: Must be a valid UUID format
+	// - organization_id: Must be a valid UUID format
+	//
+	// Required field:
+	// - tenant_id: Required, must be 1-255 characters (the external identifier to assign)
+	//
+	// Business logic validation:
+	// - tenant_id: Must be unique within the tenant (not already assigned to any other entity)
+	// - Entity must exist and belong to the authenticated tenant:
+	//   - Producer: Verified via tenant-scoped lookup
+	//   - Contact: Verified via tenant-scoped lookup
+	//   - Agency: Verified via tenant-scoped lookup and tenant ownership check
+	//   - Organization: Verified via tenant-scoped lookup and tenant ownership check
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: No entity ID provided or external ID validation failed
+	// - NOT_FOUND: The specified entity doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: The external ID is already assigned to another entity in the tenant
+	// - PERMISSION_DENIED: The entity doesn't belong to the authenticated tenant
 	SetExternalID(ctx context.Context, in *SetExternalIDRequest, opts ...grpc.CallOption) (*SetExternalIDResponse, error)
-	// ValidateProducerNPN checks whether a producer’s National Producer Number (NPN) is valid.
-	// It performs a lookup against NIPR and applies internal validation rules.
-	// Returns a validity flag and any associated error messages.
+	// ValidateProducerNPN checks whether a producer's National Producer Number (NPN)
+	// exists in NIPR.
+	//
+	// Use this endpoint to verify an NPN is valid before creating a producer. This
+	// is a free NIPR API lookup that does not count against your monthly billing
+	// quota.
+	//
+	// Validation Modes:
+	//   - NPN only: Validates that the NPN exists in NIPR
+	//   - NPN with name: Validates that the NPN exists AND the name matches the NIPR
+	//     record (recommended for additional verification)
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the other NIPR entity lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - npn: Required, must be non-empty string
+	// - name: Optional, if provided validates NPN matches this producer name in NIPR
+	//
+	// Business logic validation:
+	// - NPN is validated against NIPR database via free NIPR NPN Lookup API
+	// - If name is provided, both NPN and name must match a producer record in NIPR
+	// - If name is not provided, only NPN existence is verified
+	//
+	// Returns:
+	// A boolean indicating whether the NPN is valid. Returns true if the NPN exists
+	// in NIPR (and name matches, if provided), false otherwise.
 	ValidateProducerNPN(ctx context.Context, in *ValidateProducerNPNRequest, opts ...grpc.CallOption) (*ValidateProducerNPNResponse, error)
-	// ValidateAgencyNPN checks whether an agency’s National Producer Number (NPN) is valid.
-	// It performs a lookup against NIPR and applies internal validation rules.
-	// Returns a validity flag and any associated error messages.
+	// ValidateAgencyNPN checks whether an agency's National Producer Number (NPN)
+	// exists in NIPR.
+	//
+	// Use this endpoint to verify an agency NPN is valid before creating an agency.
+	// This is a free NIPR API lookup that does not count against your monthly
+	// billing quota.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the NIPR entity lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - npn: Required, must be non-empty string
+	//
+	// Business logic validation:
+	// - NPN is validated against NIPR database via free NIPR NPN Lookup API
+	// - Agency NPN must exist in NIPR's agency records
+	//
+	// Returns:
+	// A boolean indicating whether the agency NPN is valid. Returns true if the NPN
+	// exists in NIPR, false otherwise.
 	ValidateAgencyNPN(ctx context.Context, in *ValidateAgencyNPNRequest, opts ...grpc.CallOption) (*ValidateAgencyNPNResponse, error)
-	// LookupNPNByFEIN finds an NPN using a Federal Employer Identification Number.
-	// Used to help agencies that know their FEIN but not their NPN.
-	// Returns the NPN if found or an error message.
+	// LookupNPNByFEIN finds an agency's NPN using their Federal Employer
+	// Identification Number (FEIN).
+	//
+	// Use this endpoint to help agencies discover their NPN when they only know
+	// their FEIN. This is common during onboarding when agencies may not have
+	// their NPN readily available but know their tax identification number.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the EntityInfo lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - fein: Required, must be exactly 9 characters
+	//
+	// Business logic validation:
+	// - FEIN is looked up against NIPR database via free NIPR NPN Lookup API
+	// - Agency with the given FEIN must exist in NIPR's records
+	//
+	// Returns:
+	// The agency's NPN if found in NIPR.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No agency found in NIPR with the given FEIN
 	LookupNPNByFEIN(ctx context.Context, in *LookupNPNByFEINRequest, opts ...grpc.CallOption) (*LookupNPNByFEINResponse, error)
-	// ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
+	// ResyncProducer triggers a manual resynchronization of a producer's data.
+	// This can be used to refresh data after external change
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer ID is empty
 	ResyncProducer(ctx context.Context, in *ResyncProducerRequest, opts ...grpc.CallOption) (*ResyncProducerResponse, error)
-	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
+	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar
+	// to ResyncProducer, this can be used to refresh data after external changes.
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Agency ID is empty or request is empty
 	ResyncAgency(ctx context.Context, in *ResyncAgencyRequest, opts ...grpc.CallOption) (*ResyncAgencyResponse, error)
-	// SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
+	// SyncProducerWithNIPR synchronizes a producer's data with NIPR.
+	//
+	// Use this endpoint to manually trigger an immediate refresh of producer data
+	// from NIPR. The operation validates the producer NPN exists in NIPR before
+	// syncing.
+	//
+	// What Gets Synchronized:
+	// - State licenses with expiration dates and Lines of Authority
+	// - Carrier appointments with status and renewal dates
+	// - Regulatory actions and disciplinary history
+	// - Biographic information (name, DOB, state of domicile)
+	// - Address by state
+	//
+	// Preconditions:
+	// - Producer must exist and belong to the authenticated tenant
+	// - Producer must have a valid NPN registered in NIPR
+	// - Producer must not already be in active sync state
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - Producer must have an NPN assigned (cannot sync a producer without NPN)
+	// - Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+	// - Producer must not already be in ACTIVE sync state (prevents redundant syncs)
+	//
+	// Timeout: 30 seconds. If NIPR takes longer, you'll receive a
+	// DEADLINE_EXCEEDED error.
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer has no NPN or NPN is not registered in NIPR
+	// - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
+	// - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
 	SyncProducerWithNIPR(ctx context.Context, in *SyncProducerWithNIPRRequest, opts ...grpc.CallOption) (*SyncProducerWithNIPRResponse, error)
-	// SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
+	// SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
+	//
+	// Use this endpoint to manually trigger an immediate refresh of agency data
+	// from NIPR. The operation validates the agency NPN exists in NIPR before
+	// syncing.
+	//
+	// What Gets Synchronized:
+	// - Agency biographic information (company name, FEIN, contact details)
+	// - State licenses with expiration dates and Lines of Authority
+	// - Carrier appointments with status and renewal dates
+	// - Regulatory actions and disciplinary history
+	// - Address history by state
+	//
+	// Bulk Producer Sync:
+	// When sync_all_producers is set to true, the system will also sync all
+	// producers associated with the agency. This extends the timeout to 10
+	// minutes to accommodate the additional operations. Each producer sync is
+	// a separate billable NIPR lookup.
+	//
+	// Preconditions:
+	// - Agency must exist and belong to the authenticated tenant
+	// - Agency must have a valid NPN registered in NIPR
+	// - Agency must not already be in active sync state
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - sync_all_producers: Optional boolean, defaults to false
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+	// - Agency must not already be in ACTIVE sync state (prevents redundant syncs)
+	//
+	// Timeout:
+	// - 30 seconds when syncing agency only
+	// - 10 minutes when sync_all_producers is true
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
+	// - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+	// - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
 	SyncAgencyWithNIPR(ctx context.Context, in *SyncAgencyWithNIPRRequest, opts ...grpc.CallOption) (*SyncAgencyWithNIPRResponse, error)
-	// StopSyncProducerWithNIPR stops the synchronization process with NIPR for a producer.
-	// Use this to prevent further automatic updates from NIPR.
+	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
+	//
+	// Use this endpoint to stop receiving automatic updates from NIPR for a
+	// specific producer. Once stopped, the producer's NIPR data will no longer
+	// be refreshed via PDB Alerts or other automatic sync mechanisms.
+	//
+	// This does not delete existing NIPR data - it only prevents future updates.
+	// To re-enable synchronization, use the SyncProducerWithNIPR endpoint.
+	//
+	// Preconditions:
+	// - Producer must exist and belong to the authenticated tenant
+	// - Producer must be in active or failing sync state (not already disabled/pending)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	//
+	// Business logic validation:
+	//   - producer_id: Producer must exist and belong to the authenticated tenant
+	//   - Producer must be in ACTIVE or FAILING sync state (cannot stop if already
+	//     DISABLED or PENDING)
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - FAILED_PRECONDITION: Producer is already unsynced (DISABLED or PENDING sync state)
 	StopSyncProducerWithNIPR(ctx context.Context, in *StopSyncProducerWithNIPRRequest, opts ...grpc.CallOption) (*StopSyncProducerWithNIPRResponse, error)
-	// StopSyncAgencyWithNIPR stops the synchronization process with NIPR for an agency.
-	// Use this to prevent further automatic updates from NIPR.
+	// StopSyncAgencyWithNIPR disables automatic NIPR synchronization for an agency.
+	//
+	// Use this endpoint to stop receiving automatic updates from NIPR for a
+	// specific agency. Once stopped, the agency's NIPR data will no longer be
+	// refreshed via PDB Alerts or other automatic sync mechanisms.
+	//
+	// This does not delete existing NIPR data - it only prevents future updates.
+	// To re-enable synchronization, use the SyncAgencyWithNIPR endpoint.
+	//
+	// Bulk Producer Stop:
+	// When stop_all_producers is set to true, the system will also stop sync for
+	// all producers associated with the agency. This is useful when offboarding
+	// an entire agency from NIPR synchronization. When this flag is set, the
+	// precondition check for agency sync state is bypassed.
+	//
+	// Preconditions:
+	// - Agency must exist and belong to the authenticated tenant
+	// - Agency must be in active or failing sync state (unless stop_all_producers is true)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - stop_all_producers: Optional boolean, defaults to false
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - Unless stop_all_producers is true, agency must be in ACTIVE or FAILING sync
+	//     state (cannot stop if already DISABLED or PENDING)
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - FAILED_PRECONDITION: Agency is already unsynced (DISABLED or PENDING sync state,
+	//     unless stop_all_producers is true)
 	StopSyncAgencyWithNIPR(ctx context.Context, in *StopSyncAgencyWithNIPRRequest, opts ...grpc.CallOption) (*StopSyncAgencyWithNIPRResponse, error)
-	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.
+	// CreateProducerUploadURL generates a secure URL for bulk producer uploads to
+	// an existing agency.
+	//
+	// Use this endpoint to create a shareable link that allows agencies to upload
+	// multiple producers at once. The URL includes security tokens and tenant
+	// context to ensure secure, authenticated access.
+	//
+	// Unlike CreateProducerOnboardingURL which creates a self-service form for a
+	// single producer, this endpoint generates a URL for bulk uploading producer
+	// data (typically via CSV or spreadsheet format).
+	//
+	// The agency is identified by its National Producer Number (NPN), which must
+	// already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
+	// look up agency NPNs if needed.
+	//
+	// Typical Workflow:
+	//  1. Generate producer upload URL using the agency's NPN
+	//  2. Share URL with agency contact via email or portal
+	//  3. Agency uploads producer data through the URL
+	//  4. System processes uploads, validates NPNs with NIPR, and creates producer
+	//     records
+	//  5. Producers are associated with the agency and optionally synced with NIPR
+	//
+	// URL Expiration:
+	// The generated URL has a default expiration of 7 days. After expiration, a
+	// new URL must be generated.
+	//
+	// Validation Performed:
+	// - Agency NPN format is valid (numeric string, 2-10 digits)
+	// - Agency with the given NPN exists in your tenant
+	// - Agency belongs to the authenticated tenant
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_npn: Required, must be 2-10 digits (numeric characters only)
+	//
+	// Business logic validation:
+	// - Agency with the given NPN must exist in the authenticated tenant
+	// - Agency must belong to the authenticated tenant (ownership verification)
+	// - Only one agency should match the NPN (multiple matches indicate data issue)
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the agency for bulk
+	// producer uploads.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No agency found with the given NPN in your tenant
 	CreateProducerUploadURL(ctx context.Context, in *CreateProducerUploadURLRequest, opts ...grpc.CallOption) (*CreateProducerUploadURLResponse, error)
-	// AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// AddAgencyLocations adds one or more locations to an existing agency.
+	//
+	// Use this endpoint to programmatically add physical locations (offices,
+	// branches, etc.) to an agency. Locations enable organizing producers by
+	// their work sites and tracking agency presence across different addresses.
+	//
+	// Bulk Operation Behavior:
+	// This is an all-or-nothing operation - if any location fails validation,
+	// the entire request will fail and no locations will be added. You can add
+	// up to 100 locations in a single request.
+	//
+	// Validation Performed:
+	// - Agency exists and belongs to the authenticated tenant
+	// - At least one location is provided
+	// - Location names are unique within the agency (case-insensitive)
+	// - Location names are not duplicated within the request
+	// - Valid address information is provided for each location
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - locations: Required, 1-100 locations. Each location:
+	//   - name: Required, must be non-empty (unique within agency)
+	//   - address: Required
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - phone: Required, must match E.164 pattern (e.g., +15551234567)
+	//   - email: Required, must be a valid email format
+	//   - is_primary: Optional boolean, marks location as primary
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Location names must be unique within the agency (case-insensitive)
+	// - Location names must not duplicate any existing location names in the agency
+	// - Location names must not duplicate other location names within the same request
+	//
+	// Returns:
+	// List of UUIDs for all created locations in the same order as the request.
+	// This ordering guarantee allows you to map request entries to their created IDs.
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
+	//     location names, or location with name already exists in agency
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(ctx context.Context, in *AddAgencyLocationsRequest, opts ...grpc.CallOption) (*AddAgencyLocationsResponse, error)
-	// RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// RemoveAgencyLocations removes one or more locations from an agency.
+	//
+	// Use this endpoint to delete locations that are no longer needed. This is
+	// useful when closing branch offices or consolidating agency locations.
+	//
+	// Producer Unassignment:
+	// When a location is removed, all producers assigned to that location are
+	// automatically unassigned. The producers themselves are not deleted - they
+	// remain associated with the agency but without a location assignment.
+	//
+	// Partial Success Behavior:
+	// Locations that don't exist are silently ignored. The response contains only
+	// the IDs of locations that were actually removed.
+	//
+	// Validation Performed:
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Location IDs that don't exist are silently ignored (partial success)
+	//
+	// Returns:
+	// List of UUIDs for locations that were successfully removed.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing agency_id or no location_ids provided
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	RemoveAgencyLocations(ctx context.Context, in *RemoveAgencyLocationsRequest, opts ...grpc.CallOption) (*RemoveAgencyLocationsResponse, error)
-	// ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.
+	// ListAgencyLocations retrieves all locations associated with an agency.
+	//
+	// Use this endpoint to fetch the complete list of physical locations
+	// belonging to an agency. Each location includes its address, contact
+	// information, and primary status.
+	//
+	// The response includes complete location information:
+	// - Location ID and name
+	// - Physical address (street, city, state, zip)
+	// - Contact information (phone, email)
+	// - Primary location indicator
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A list of all locations associated with the specified agency. Returns an
+	// empty list if the agency has no locations.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Invalid request
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyLocations(ctx context.Context, in *ListAgencyLocationsRequest, opts ...grpc.CallOption) (*ListAgencyLocationsResponse, error)
-	// AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	//
+	// Use this endpoint to associate a producer with specific agency locations
+	// (branch offices, work sites, etc.). A producer can be assigned to multiple
+	// locations within their agency.
+	//
+	// Location Ownership:
+	// All specified locations must belong to the same agency as the producer.
+	// Cross-agency location assignments are not permitted.
+	//
+	// Idempotent Behavior:
+	// If a producer is already assigned to a location, the assignment is
+	// preserved without error. The response includes all successfully assigned
+	// location IDs.
+	//
+	// Validation Performed:
+	// - Producer exists and belongs to the authenticated tenant
+	// - All location IDs exist and belong to the producer's agency
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - Producer's agency must exist and belong to the authenticated tenant
+	// - All location_ids must exist and belong to the producer's agency
+	//
+	// Returns:
+	// List of location IDs that were successfully assigned to the producer.
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Request is missing
+	//   - NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
+	//     locations don't exist
+	//   - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	AssignProducerToLocations(ctx context.Context, in *AssignProducerToLocationsRequest, opts ...grpc.CallOption) (*AssignProducerToLocationsResponse, error)
-	// UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.
+	// UnassignProducerFromLocations removes one or more location assignments from
+	// a producer.
+	//
+	// Use this endpoint to disassociate a producer from specific agency locations.
+	// This is useful when producers change work sites or when consolidating
+	// location assignments.
+	//
+	// Producer Preservation:
+	// This operation only removes the location assignments - the producer remains
+	// active and associated with the agency. To fully remove a producer, use the
+	// appropriate producer deletion endpoint.
+	//
+	// Validation Performed:
+	// - Producer exists and belongs to the authenticated tenant
+	// - All location IDs exist and belong to the producer's agency
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - All location_ids must exist and belong to the producer's agency
+	//
+	// Returns:
+	// List of location IDs that were successfully unassigned from the producer.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+	// - NOT_FOUND: Producer doesn't exist or specified locations don't exist
 	UnassignProducerFromLocations(ctx context.Context, in *UnassignProducerFromLocationsRequest, opts ...grpc.CallOption) (*UnassignProducerFromLocationsResponse, error)
-	// UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.
+	// UpdateAgencyLocation updates an existing agency location.
+	//
+	// Use this endpoint to modify location details such as address, contact
+	// information, or primary status. This is useful when locations move,
+	// change phone numbers, or when designating a new primary location.
+	//
+	// Updatable Fields:
+	// - Name (must remain unique within the agency)
+	// - Address (street, city, state, zip)
+	// - Contact information (phone, email)
+	// - Primary location status
+	//
+	// All fields are optional - only provide the fields you want to update.
+	// Unchanged fields retain their current values.
+	//
+	// Name Uniqueness:
+	// If updating the location name, the new name must not already exist for
+	// another location within the same agency (case-insensitive comparison).
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - location_id: Required, must be a valid UUID format
+	// - name: If provided, must be non-empty (unique within agency)
+	// - address: If provided (all fields optional within):
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	// - email: If provided, must be a valid email format
+	// - is_primary: Optional boolean
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - location_id: Location must exist and belong to the specified agency
+	//   - name: If provided, must be unique within the agency (case-insensitive,
+	//     excluding the location being updated)
+	//
+	// Returns:
+	// The complete updated location object with all current field values.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing agency_id or location_id, or invalid request
+	// - NOT_FOUND: Agency or location doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: New location name already exists within the agency
 	UpdateAgencyLocation(ctx context.Context, in *UpdateAgencyLocationRequest, opts ...grpc.CallOption) (*UpdateAgencyLocationResponse, error)
 }
 
@@ -534,126 +1648,1240 @@ func (c *producerServiceClient) UpdateAgencyLocation(ctx context.Context, in *Up
 // All implementations must embed UnimplementedProducerServiceServer
 // for forward compatibility.
 //
-// ProducerService provides a comprehensive API for managing insurance producers
-// and agencies, including onboarding, data synchronization, and integration with
-// external systems like NIPR for license verification.
+// ProducerService provides a comprehensive API for managing insurance
+// producers and agencies. This service simplifies producer and agency
+// onboarding, data synchronization, and integration with the National Insurance
+// Producer Registry (NIPR).
 //
-// Available endpoints:
+// Key capabilities:
+// - Producer and agency onboarding with self-service URLs
+// - Automatic synchronization of license, appointment, and regulatory data from NIPR
+// - NPN (National Producer Number) validation and lookup
+// - Multi-location management for agencies
+// - Integration with NIPR PDB Gateway, PDB Alerts, and NPN Lookup services
 //
-//	UAT (User Acceptance Testing): https://api.uat.producerflow.com
-//	Production: https://api.producerflow.com
+// NIPR Integration:
+// This service automatically fetches and maintains up-to-date licensing
+// information, carrier appointments, and regulatory actions from NIPR. Most
+// NIPR sync operations are billable and count against your monthly unique NPN
+// quota. Enable PDB Alerts synchronization to receive automatic daily updates
+// and reduce manual sync costs.
+//
+// Authentication:
+// All endpoints require API key authentication provided via the Authorization header.
 type ProducerServiceServer interface {
-	// CreateAgencyOnboardingURL generates a URL that can be used to onboard a new agency.
-	// The URL contains encoded information about the agency defaults and tenant context.
-	// All fields in the request are optional - you can provide as much or as little
-	// information as available. Any missing information will be collected during
-	// the onboarding process.
-	// Returns a URL string that can be shared with the agency for self-onboarding.
+	// CreateAgencyOnboardingURL generates a secure, pre-filled URL for agency
+	// self-onboarding.
+	//
+	// Use this endpoint to create personalized onboarding links that can be
+	// shared with agencies. The URL encodes agency defaults, tenant context, and
+	// optional pre-filled information to streamline the onboarding experience.
+	//
+	// All fields in the request are optional. Provide as much or as little
+	// information as available - any missing data will be collected through the
+	// onboarding flow.
+	//
+	// Typical Workflow:
+	//  1. Generate onboarding URL with optional pre-filled data (agency name, NPN,
+	//     principal info)
+	//  2. Share URL with agency contact via email or portal
+	//  3. Agency completes onboarding form through the URL
+	//  4. System validates NPN with NIPR and creates agency record
+	//  5. Optionally sync with NIPR to fetch licenses and appointments
+	//
+	// Validation Rules:
+	// All fields in the request are optional. The system generates valid URLs
+	// even with an empty request. When fields are provided:
+	//   - entity_type: Must be ENTITY_TYPE_SOLE_PROPRIETOR (1), ENTITY_TYPE_AGENCY (2),
+	//     or ENTITY_TYPE_ASK_DURING_ONBOARDING (3). This is the only endpoint where
+	//     ENTITY_TYPE_ASK_DURING_ONBOARDING is valid.
+	//   - email: Must be a valid email format if provided
+	//   - npn: Must be a valid NPN format (2-10 digits) if provided. Note that NPN
+	//     validation against NIPR occurs during onboarding, not during URL generation.
+	//   - fein: Must be exactly 9 digits if provided
+	//   - organization_id: Must be a valid organization ID belonging to your tenant if provided
+	//   - principal.email: Must be a valid email format if provided
+	//   - principal.npn: Must be a valid NPN format (2-10 digits) if provided
+	//   - principal.tenant_id: Maximum 255 characters if provided
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the agency for
+	// self-service onboarding.
 	CreateAgencyOnboardingURL(context.Context, *CreateAgencyOnboardingURLRequest) (*CreateAgencyOnboardingURLResponse, error)
-	// CreateProducerOnboardingURL generates a secure, time-limited link for onboarding a new producer
-	// with optional pre-filled NPN. The URL can be shared directly with the producer.
-	// The generated URL will take the producer through the onboarding flow with the NPN field
-	// pre-populated if provided, reducing friction in the onboarding process.
+	// CreateProducerOnboardingURL generates a secure, pre-filled URL for producer
+	// self-onboarding.
+	//
+	// Use this endpoint to create personalized onboarding links for individual
+	// producers joining an existing agency. The URL can include optional
+	// pre-filled data like NPN, name, email, and address to reduce manual data
+	// entry.
+	//
+	// The producer must be associated with an existing agency. Use
+	// CreateAgencyOnboardingURL if you need to onboard an agency and its
+	// principal together.
+	//
+	// Typical Workflow:
+	// 1. Generate producer onboarding URL with agency_id and optional pre-filled data
+	// 2. Share URL with producer via email
+	// 3. Producer completes onboarding form through the URL
+	// 4. System validates NPN with NIPR and associates producer with agency
+	// 5. Optionally sync with NIPR to fetch producer licenses and appointments
+	//
+	// Validation Rules:
+	//   - agency_id: Required. must be a valid UUID of an agency belonging
+	//     to your tenant.
+	//   - producer_data: All fields are optional. When provided:
+	//   - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
+	//     against NIPR occurs during onboarding, not during URL generation.
+	//   - email: Must be a valid email format if provided
+	//   - mailing_address.state: Must be exactly 2 characters (state code) if provided
+	//   - mailing_address.zip: Must be 1-10 characters if provided
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the producer for
+	// self-service onboarding.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Invalid NPN provided (not found in NIPR)
 	CreateProducerOnboardingURL(context.Context, *CreateProducerOnboardingURLRequest) (*CreateProducerOnboardingURLResponse, error)
-	// NewAgency creates a new agency, optionally with associated producers. It performs the following validation checks: Ensures all required fields are present and valid. Checks whether the NPN is already registered. Verifies agency and principal information with NIPR. Business rules: Sole proprietors can't have an agency NPN or additional producers. Regular agencies must provide either an NPN or a FEIN. If validation passes, it creates the agency, principal, and any producers. Returns the IDs of the created agency, principal, and producers.
+	// NewAgency creates a new agency with principal and optional additional producers.
+	//
+	// This is the programmatic alternative to CreateAgencyOnboardingURL - use
+	// this when you want to create agencies directly via API instead of through a
+	// self-service form.
+	//
+	// Entity Type Rules:
+	//   - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producer operating as their own agency.
+	//     Cannot have an agency NPN. Only the principal is created.
+	//   - ENTITY_TYPE_AGENCY: Standard insurance agency with multiple producers.
+	//     Must provide either an NPN or FEIN. Can have multiple producers beyond the principal.
+	//
+	// NIPR Validation and Sync:
+	// The system performs free NIPR API lookups to validate NPNs before
+	// creation. If sync_with_nipr is true (or tenant default), the system
+	// performs paid NIPR EntityInfo lookups to fetch complete license, appointment,
+	// and regulatory data.
+	//
+	// Validation Performed:
+	// - Required fields are present and valid
+	// - Email addresses are unique within tenant
+	// - Agency NPN exists in NIPR (if provided)
+	// - Principal NPN exists in NIPR
+	// - Entity type rules are followed
+	// - Principal and subsequent producers last names must match NIPR records for the given NPN
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	//   - agency: Required field containing all agency information
+	//   - agency.name: Required, must be non-empty
+	//   - agency.email: Required, must be a valid email format
+	//   - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
+	//     ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
+	//   - agency.fein: Optional, if provided must be exactly 9 digits. Required for
+	//     ENTITY_TYPE_AGENCY if NPN is not provided.
+	//   - agency.principal: Required, contains principal producer information
+	//   - principal.first_name: Required, must be non-empty
+	//   - principal.last_name: Required, must be non-empty
+	//   - principal.email: Required, must be a valid email format
+	//   - principal.npn: Required, must be 1-10 characters
+	//   - principal.phone: Optional, if provided must match E.164 pattern
+	//   - principal.tenant_id: Optional, maximum 255 characters
+	//   - agency.bank_account (optional, if provided all subfields are required):
+	//   - account_number: 8-17 characters
+	//   - routing_number: Exactly 9 characters
+	//   - account_type: Required, must be CHECKING (1) or SAVINGS (2)
+	//   - account_holder_name: Required, must be non-empty
+	//   - agency.eo_info (optional, if provided):
+	//   - carrier: Required, must be non-empty
+	//   - expiration_date: Required, must be in the future
+	//   - coverage_amount: Required, must be non-empty
+	//   - effective_date: Required
+	//   - per_occurrence: Required, must be non-empty
+	//   - agency.business_hours (optional, if provided):
+	//   - timezone: Required, must be non-empty
+	//   - business_hours: Required, at least one entry
+	//   - week_days: Required, 1-7 days
+	//   - opening_time: Required
+	//   - closing_time: Required
+	//   - agency.producers: Optional list of additional producers (see NewProducer validation)
+	//   - agency.points_of_contact (optional, for each contact):
+	//   - email: Required, must be a valid email format
+	//   - role: Required
+	//   - agency.root_organization_id: Optional, if provided must be 1-36 characters
+	//   - agency.locations: Optional, maximum 100 locations
+	//
+	// Business logic validation:
+	// - agency.email: Must be unique within the tenant
+	// - agency.npn: If provided, must exist in NIPR (validated via free NIPR lookup)
+	// - principal.email: Must be unique within the tenant
+	// - principal.npn: Must exist in NIPR (validated via free NIPR lookup)
+	// - All producer emails must be unique within the tenant
+	//
+	// Returns:
+	// IDs of the created agency, principal, optional producers, and locations (if provided).
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
+	//     NPN not found in NIPR
+	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant
 	NewAgency(context.Context, *NewAgencyRequest) (*NewAgencyResponse, error)
-	// ListAgencies returns a list of agencies associated with the tenant.
-	// Supports optional filtering by organization ID and search queries.
+	// ListAgencies retrieves a paginated list of agencies associated with the tenant.
+	//
+	// This endpoint provides comprehensive agency listing with powerful filtering
+	// capabilities to efficiently manage and search through large numbers of
+	// agencies. Each agency in the response includes summary information for
+	// quick overview without the full NIPR data.
+	//
+	// Filtering Capabilities:
+	// - Organization: Filter agencies belonging to a specific organization
+	// - Search: Free-text search across agency name, NPN, and email
+	// - Agency Type: Filter by internal (tenant) vs external agencies
+	// - Entity Type: Filter by sole proprietor vs standard agency
+	// - NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+	//
+	// The response uses cursor-based pagination for efficient data retrieval:
+	// - Default page size is 50 if not specified
+	// - Maximum page size is 200
+	// - Results are ordered by creation date, most recent first
+	// - Use the next_page_token to retrieve subsequent pages
+	//
+	// Validation Rules:
+	// All fields are optional filters:
+	// - organization_id: If provided, must be a valid UUID format
+	// - search_query: Optional free-text search string (case-insensitive, partial matching)
+	// - pagination.page_size: Must be <= 200. Default is 50 if not specified.
+	// - pagination.page_token: Opaque token from previous response for pagination
+	// - agency_type: If provided, must be AGENCY_TYPE_INTERNAL (1) or AGENCY_TYPE_EXTERNAL (2)
+	// - entity_type: If provided, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or ENTITY_TYPE_AGENCY (2)
+	// - nipr_sync_statuses: Array of sync states to filter by (ACTIVE, FAILING, PENDING, DISABLED)
+	//
+	// Returns:
+	// A paginated list of AgencySummary objects containing essential agency
+	// information without full NIPR data. Use GetAgencyAndProducers for complete
+	// agency details including NIPR data.
 	ListAgencies(context.Context, *ListAgenciesRequest) (*ListAgenciesResponse, error)
-	// ListOrganizations returns a list of organizations associated with the tenant.
-	// Organizations represent logical groupings or hierarchical structures within a tenant
-	// that can be used to organize agencies and producers.
+	// ListOrganizations retrieves all organizations accessible to your tenant.
+	//
+	// Organizations represent logical groupings or hierarchical structures for
+	// managing agencies. They enable better organization of agencies into business
+	// units, networks, or aggregator relationships. Each
+	// organization can contain multiple agencies, allowing for hierarchical
+	// management and reporting across your insurance distribution network.
+	//
+	// Not all tenants use organizations - this list may be empty if your tenant
+	// doesn't have organizational hierarchies enabled.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// All fields are optional:
+	// - pagination.page_size: Must be <= 200. Default is 50 if not specified.
+	// - pagination.page_token: Opaque token from previous response for pagination
+	//
+	// Returns:
+	// A list of all organizations accessible to your tenant, including their IDs,
+	// names and external identifiers. Organizations are
+	// returned in alphabetical order by name for consistent presentation.
 	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
-	// GetOrganization retrieves details of a specific organization by ID.
-	// Returns the organization's information including name and external ID.
+	// GetOrganization retrieves comprehensive details about a specific organization.
+	//
+	// This endpoint returns complete organization information including all
+	// agencies assigned to it. For each agency, it provides summary data including
+	// appointment overview statistics and NIPR synchronization status. This allows
+	// you to understand the full scope of an organization's agency network in a
+	// single API call.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - organization_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// Complete organization details including all assigned agencies with their
+	// appointment overviews and sync statuses.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Organization doesn't exist or doesn't belong to tenant
 	GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error)
 	// CreateOrganization creates a new organization for the authenticated tenant.
 	// The organization name must be unique within the tenant.
 	// Returns the ID of the newly created organization.
 	CreateOrganization(context.Context, *CreateOrganizationRequest) (*CreateOrganizationResponse, error)
-	// NewProducer creates a new producer and associates them with an existing agency.
-	// It validates the producer's information and checks that the email is unique.
-	// Returns the ID of the created producer.
+	// NewProducer adds a single producer to an existing agency.
+	//
+	// Use this endpoint to programmatically add producers to agencies. This is
+	// the programmatic alternative to CreateProducerOnboardingURL.
+	//
+	// NIPR Validation and Sync:
+	// If an NPN is provided, the system validates it exists in NIPR using a free
+	// API lookup. If sync_with_nipr is enabled, the system performs a paid
+	// NIPR EntityInfo lookup to fetch complete license, appointment, and
+	// regulatory data.
+	//
+	// Validation Performed:
+	// - Email is unique within tenant
+	// - Agency exists and belongs to tenant
+	// - NPN exists in NIPR (if provided)
+	// - Location IDs exist and belong to the agency (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - producer: Required, contains producer information
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - npn: Required, if provided used for NIPR validation
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - mailing_address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - location_ids: Optional, maximum 100 items, each must be a valid UUID
+	//
+	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - email: Must be unique within the tenant (not already used by another producer or contact)
+	//   - npn: If provided, must exist in NIPR. If name is also provided, NPN must match the name
+	//     in NIPR records
+	//   - npn: Must be unique within the tenant (not already assigned to another producer)
+	//   - location_ids: All locations must exist and belong to the specified agency
+	//
+	// Returns:
+	// The UUID of the created producer.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	NewProducer(context.Context, *NewProducerRequest) (*NewProducerResponse, error)
-	// NewProducers creates multiple producers and associates them with the specified agency.
-	// It performs the same validations as NewProducer for each entry.
-	// Returns the IDs of all created producers.
+	// NewProducers creates multiple producers in bulk and associates them with a single agency.
+	//
+	// This endpoint provides an efficient way to onboard multiple producers to the same
+	// agency in a single API call.
+	//
+	// Bulk Operation Behavior:
+	// Producers are created sequentially. If a producer fails validation, the request
+	// returns an error, but any producers created before the failure will remain in
+	// the system. Each producer in the request undergoes the same validation as
+	// individual NewProducer calls.
+	//
+	// NIPR Validation and Sync:
+	// For each producer with an NPN:
+	// - The system performs a free NIPR API lookup to validate the NPN exists
+	// - If sync_with_nipr is true (or tenant default), performs paid NIPR EntityInfo lookups
+	// - All NIPR validations must succeed for the bulk operation to proceed
+	//
+	// Validation Performed (for each producer):
+	// - Required fields are present and valid (name, email)
+	// - Email addresses are unique within the tenant
+	// - Agency exists and belongs to the authenticated tenant
+	// - NPNs exist in NIPR (if provided)
+	// - Location IDs exist and belong to the agency (if provided)
+	// - Phone numbers match valid patterns (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - producers: Required, must contain at least 1 producer. Each producer:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - npn: Optional, if provided used for NIPR validation
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - mailing_address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - location_ids: Optional, maximum 100 items per producer, each must be a valid UUID
+	//
+	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting for all producers
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - All producer emails must be unique within the tenant
+	//   - All producer NPNs (if provided) must exist in NIPR and be unique within the tenant
+	//   - All location_ids must exist and belong to the specified agency
+	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
+	//     are created
+	//
+	// Returns:
+	// List of UUIDs for all created producers in the same order as the request. This
+	// ordering guarantee allows you to map request entries to their created IDs.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
+	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
+	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(context.Context, *NewProducersRequest) (*NewProducersResponse, error)
-	// GetAgencyAndProducers retrieves details for an agency and all associated producers.
-	// Returns the agency information and a list of producers.
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers.
+	//
+	// This endpoint returns comprehensive agency details including:
+	// - Agency contact information and business details
+	// - Principal producer information
+	// - Bank account for commission payments
+	// - Errors & Omissions insurance details
+	// - Business hours and contact points
+	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
+	// - All associated producers with their NIPR data
+	// - Agency locations
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// Agency object with complete NIPR data and list of all associated producers.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyAndProducers(context.Context, *GetAgencyAndProducersRequest) (*GetAgencyAndProducersResponse, error)
 	// GetProducer retrieves detailed information about a specific producer.
-	// The producer can be found by ID, NPN, or email.
-	// Returns the producer's information, including NIPR data and agency association.
+	//
+	// Supports three lookup methods:
+	// - By producer ID (UUID)
+	// - By NPN (National Producer Number)
+	// - By email address
+	//
+	// The response includes:
+	// - Producer contact information (name, email, phone, address)
+	// - Associated agency information
+	// - NIPR synchronized data:
+	//   - State licenses with expiration dates and Lines of Authority (LOAs)
+	//   - Biographic information (name, DOB, state of domicile)
+	//   - Regulatory actions by state
+	//   - Carrier appointments with status and renewal dates
+	//
+	// - Location assignments
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - producer_id_lookup.producer_id: Must be a valid UUID format
+	// - npn_lookup.producer_npn: Must be non-empty string
+	// - email_lookup.email: Must be a valid email format
+	//
+	// Returns:
+	// Complete producer information including all NIPR data.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
+	//     associated agency not found
+	//   - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
+	//     lookups are implemented)
 	GetProducer(context.Context, *GetProducerRequest) (*GetProducerResponse, error)
-	// GetAgencyFiles returns URLs for accessing files associated with an agency, such as contracts.
+	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
+	//
+	// Returns pre-signed URLs for the following document types:
+	// - Errors & Omissions (E&O) insurance certificate
+	// - Voided check for ACH commission payments
+	// - W9 tax form
+	// - License documents
+	// - Broker bond documents
+	//
+	// The URLs are time-limited and grant temporary read access to the documents.
+	// Empty strings are returned for documents that haven't been uploaded.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A set of pre-signed URLs for accessing agency documents.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyFiles(context.Context, *GetAgencyFilesRequest) (*GetAgencyFilesResponse, error)
-	// UpdateProducer updates information for an existing producer.
-	// Supports updating contact details, background check responses,
-	// employment history, and non-uniform licensing questions.
-	// Information from NIPR and other third-party sources cannot be updated.
-	// Validates email uniqueness if the email is changed.
+	// UpdateProducer updates editable fields for an existing producer.
+	//
+	// Only information collected during onboarding can be updated via this
+	// endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+	// read-only and can only be updated by triggering a NIPR sync via
+	// SyncProducerWithNIPR.
+	//
+	// Updatable Fields:
+	// - Contact information (first_name, last_name, middle_name, email, phone)
+	// - Mailing address (street, city, state, zip)
+	// - External metadata (for tenant-specific data)
+	//
+	// Note: NPN cannot be updated after creation. The NPN field is deprecated
+	// in UpdateProducerRequest.Producer and will be ignored.
+	//
+	// Validation:
+	// - Email must be unique within tenant if changed
+	// - All field format validations apply (e.g., valid email format, phone pattern)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - producer: Required, contains fields to update (all fields optional):
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - npn: Deprecated and ignored - NPN cannot be updated after creation
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be at most 2 characters
+	//   - zip: If provided, must be at least 5 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer field is missing in request
 	UpdateProducer(context.Context, *UpdateProducerRequest) (*UpdateProducerResponse, error)
-	// UpdateAgency updates information for an existing agency.
-	// Supports updating contact details (email, phone, fax), website, physical address,
-	// requested appointments, and notes.
-	// Information from NIPR and other third-party sources cannot be updated.
+	// UpdateAgency updates editable fields for an existing agency.
+	//
+	// Only information collected during onboarding can be updated via this
+	// endpoint. NIPR-sourced data (licenses, appointments, regulatory actions) is
+	// read-only and can only be updated by triggering a NIPR sync via
+	// SyncAgencyWithNIPR.
+	//
+	// Updatable Fields:
+	// - Contact details (email, phone, fax)
+	// - Website URL
+	// - Physical address components
+	// - Requested appointments (state codes)
+	// - Notes
+	// - External metadata (for tenant-specific data)
+	//
 	// All fields are optional - only provide the fields you want to update.
-	// Validates email uniqueness if the email is changed.
+	// Unchanged fields retain their current values.
+	//
+	// Validation:
+	// - Email must be unique within tenant if changed
+	// - All field format validations apply
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - agency: Required, contains fields to update (all fields optional):
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - fax: If provided, must match E.164 pattern
+	//   - website: If provided, must be a valid URI format
+	//   - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
+	//   - notes: If provided, maximum 500 characters
+	//   - physical_address (optional, if provided):
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters
+	//   - zip: If provided, must be 1-10 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: If changed, must be unique within the tenant (case-insensitive comparison)
+	// - phone: If provided, must be a valid phone number format
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - ALREADY_EXISTS: Email already exists within tenant
+	//   - INVALID_ARGUMENT: Invalid phone number format or all address fields required
+	//     when creating new address
 	UpdateAgency(context.Context, *UpdateAgencyRequest) (*UpdateAgencyResponse, error)
 	// NewContact creates a new contact associated with an agency.
-	// Contacts represent non-producer individuals linked to the agency.
-	// Returns the ID of the created contact.
+	//
+	// Use this endpoint to programmatically add non-producer individuals to
+	// agencies. Contacts represent staff members, administrators, or other
+	// personnel who are not licensed insurance producers but need to be
+	// associated with the agency for communication or administrative purposes.
+	//
+	// Validation Performed:
+	// - Agency exists and belongs to the authenticated tenant
+	// - Email is unique within the tenant (across both producers and contacts)
+	// - Required fields are present and valid (first name, last name, email, role)
+	// - Phone number matches valid pattern (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - contact: Required, contains contact information:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - role: Required, must be non-empty
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - middle_name: Optional
+	//   - address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - npn: Optional
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	//
+	// Returns:
+	// The UUID of the created contact.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing required fields or invalid field format
+	// - ALREADY_EXISTS: Email already registered in your tenant
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContact(context.Context, *NewContactRequest) (*NewContactResponse, error)
-	// NewContacts creates multiple contacts in a single request.
-	// Each contact is associated with the specified agency.
-	// Returns the IDs of all created contacts.
+	// NewContacts creates multiple contacts in bulk and associates them with a
+	// single agency.
+	//
+	// This endpoint provides an efficient way to add multiple non-producer
+	// contacts to the same agency in a single API call. Contacts represent staff
+	// members, administrators, or other personnel who are not licensed insurance
+	// producers.
+	//
+	// Partial Success Behavior:
+	// Unlike bulk producer operations, this endpoint uses partial success
+	// semantics. Contacts that pass validation are created even if other contacts
+	// in the request fail. The response contains only the IDs of successfully
+	// created contacts.
+	//
+	// Validation Performed (for each contact):
+	// - Agency exists and belongs to the authenticated tenant
+	// - Email is unique within the tenant (across both producers and contacts)
+	// - Required fields are present and valid (first name, last name, email, role)
+	// - Phone number matches valid pattern (if provided)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - contacts: Required, must contain at least 1 contact. Each contact:
+	//   - first_name: Required, must be non-empty
+	//   - last_name: Required, must be non-empty
+	//   - email: Required, must be a valid email format
+	//   - role: Required, must be non-empty
+	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
+	//   - middle_name: Optional
+	//   - address (optional, if provided):
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - tenant_id: Optional, maximum 255 characters (external identifier)
+	//   - npn: Optional
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - Each contact email: Must be unique within the tenant. Contacts with duplicate
+	//     emails are skipped (partial success - other valid contacts are still created)
+	//
+	// Returns:
+	// List of UUIDs for successfully created contacts. If some contacts failed
+	// validation, only the IDs of successfully created contacts are returned.
+	// Failed contacts are logged but not included in the response. The order of
+	// returned IDs corresponds to the order of successful contacts, not the
+	// original request order.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContacts(context.Context, *NewContactsRequest) (*NewContactsResponse, error)
 	// ListAgencyContacts retrieves all contacts associated with an agency.
-	// Returns a list of contacts with their full details.
+	//
+	// Use this endpoint to fetch all non-producer contacts linked to a specific
+	// agency. Contacts represent staff members, administrators, or other
+	// personnel who are not licensed insurance producers but are associated with
+	// the agency.
+	//
+	// The response includes complete contact information:
+	// - Personal details (name, email, phone)
+	// - Role within the agency
+	// - Mailing address
+	// - NPN (if applicable)
+	// - Creation timestamp
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A list of all contacts associated with the specified agency. Returns an
+	// empty list if the agency has no contacts.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error)
-	// SetExternalID sets an external identifier for a producer or contact.
-	// Useful for integrating with external systems that use different ID schemes.
+	// SetExternalID sets an external identifier for a producer, agency, contact,
+	// or organization.
+	//
+	// Use this endpoint to link ProducerFlow entities to corresponding records in
+	// your external systems (CRM, AMS, legacy databases). This enables bi-directional
+	// synchronization and lookups across systems.
+	//
+	// Supported Entity Types:
+	// - Producer: Links a producer to an external system record
+	// - Agency: Links an agency to an external system record
+	// - Contact: Links a contact to an external system record
+	// - Organization: Links an organization to an external system record
+	//
+	// Exactly one entity type must be specified per request.
+	//
+	// Validation Performed:
+	// - Exactly one entity ID is provided (producer_id, agency_id, contact_id, or organization_id)
+	// - The external ID (tenant_id) is non-empty and at most 255 characters
+	// - The external ID is unique within the tenant (not already assigned to another entity)
+	// - The specified entity exists and belongs to the authenticated tenant
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one entity ID must be provided (oneof required):
+	// - producer_id: Must be a valid UUID format
+	// - agency_id: Must be a valid UUID format
+	// - contact_id: Must be a valid UUID format
+	// - organization_id: Must be a valid UUID format
+	//
+	// Required field:
+	// - tenant_id: Required, must be 1-255 characters (the external identifier to assign)
+	//
+	// Business logic validation:
+	// - tenant_id: Must be unique within the tenant (not already assigned to any other entity)
+	// - Entity must exist and belong to the authenticated tenant:
+	//   - Producer: Verified via tenant-scoped lookup
+	//   - Contact: Verified via tenant-scoped lookup
+	//   - Agency: Verified via tenant-scoped lookup and tenant ownership check
+	//   - Organization: Verified via tenant-scoped lookup and tenant ownership check
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: No entity ID provided or external ID validation failed
+	// - NOT_FOUND: The specified entity doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: The external ID is already assigned to another entity in the tenant
+	// - PERMISSION_DENIED: The entity doesn't belong to the authenticated tenant
 	SetExternalID(context.Context, *SetExternalIDRequest) (*SetExternalIDResponse, error)
-	// ValidateProducerNPN checks whether a producer’s National Producer Number (NPN) is valid.
-	// It performs a lookup against NIPR and applies internal validation rules.
-	// Returns a validity flag and any associated error messages.
+	// ValidateProducerNPN checks whether a producer's National Producer Number (NPN)
+	// exists in NIPR.
+	//
+	// Use this endpoint to verify an NPN is valid before creating a producer. This
+	// is a free NIPR API lookup that does not count against your monthly billing
+	// quota.
+	//
+	// Validation Modes:
+	//   - NPN only: Validates that the NPN exists in NIPR
+	//   - NPN with name: Validates that the NPN exists AND the name matches the NIPR
+	//     record (recommended for additional verification)
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the other NIPR entity lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - npn: Required, must be non-empty string
+	// - name: Optional, if provided validates NPN matches this producer name in NIPR
+	//
+	// Business logic validation:
+	// - NPN is validated against NIPR database via free NIPR NPN Lookup API
+	// - If name is provided, both NPN and name must match a producer record in NIPR
+	// - If name is not provided, only NPN existence is verified
+	//
+	// Returns:
+	// A boolean indicating whether the NPN is valid. Returns true if the NPN exists
+	// in NIPR (and name matches, if provided), false otherwise.
 	ValidateProducerNPN(context.Context, *ValidateProducerNPNRequest) (*ValidateProducerNPNResponse, error)
-	// ValidateAgencyNPN checks whether an agency’s National Producer Number (NPN) is valid.
-	// It performs a lookup against NIPR and applies internal validation rules.
-	// Returns a validity flag and any associated error messages.
+	// ValidateAgencyNPN checks whether an agency's National Producer Number (NPN)
+	// exists in NIPR.
+	//
+	// Use this endpoint to verify an agency NPN is valid before creating an agency.
+	// This is a free NIPR API lookup that does not count against your monthly
+	// billing quota.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the NIPR entity lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - npn: Required, must be non-empty string
+	//
+	// Business logic validation:
+	// - NPN is validated against NIPR database via free NIPR NPN Lookup API
+	// - Agency NPN must exist in NIPR's agency records
+	//
+	// Returns:
+	// A boolean indicating whether the agency NPN is valid. Returns true if the NPN
+	// exists in NIPR, false otherwise.
 	ValidateAgencyNPN(context.Context, *ValidateAgencyNPNRequest) (*ValidateAgencyNPNResponse, error)
-	// LookupNPNByFEIN finds an NPN using a Federal Employer Identification Number.
-	// Used to help agencies that know their FEIN but not their NPN.
-	// Returns the NPN if found or an error message.
+	// LookupNPNByFEIN finds an agency's NPN using their Federal Employer
+	// Identification Number (FEIN).
+	//
+	// Use this endpoint to help agencies discover their NPN when they only know
+	// their FEIN. This is common during onboarding when agencies may not have
+	// their NPN readily available but know their tax identification number.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the EntityInfo lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - fein: Required, must be exactly 9 characters
+	//
+	// Business logic validation:
+	// - FEIN is looked up against NIPR database via free NIPR NPN Lookup API
+	// - Agency with the given FEIN must exist in NIPR's records
+	//
+	// Returns:
+	// The agency's NPN if found in NIPR.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No agency found in NIPR with the given FEIN
 	LookupNPNByFEIN(context.Context, *LookupNPNByFEINRequest) (*LookupNPNByFEINResponse, error)
-	// ResyncProducer triggers a manual resynchronization of a producer's data. This can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
+	// ResyncProducer triggers a manual resynchronization of a producer's data.
+	// This can be used to refresh data after external change
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer ID is empty
 	ResyncProducer(context.Context, *ResyncProducerRequest) (*ResyncProducerResponse, error)
-	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar to ResyncProducer, this can be used to refresh data after external changes. WARNING: This call counts as an additional NPN lookup for billing purposes. Most billing plans are based on unique NPNs per month, so using this method may result in extra charges.
+	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar
+	// to ResyncProducer, this can be used to refresh data after external changes.
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Agency ID is empty or request is empty
 	ResyncAgency(context.Context, *ResyncAgencyRequest) (*ResyncAgencyResponse, error)
-	// SyncProducerWithNIPR synchronizes a producer's data with the NIPR system. Fetches the latest producer information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
+	// SyncProducerWithNIPR synchronizes a producer's data with NIPR.
+	//
+	// Use this endpoint to manually trigger an immediate refresh of producer data
+	// from NIPR. The operation validates the producer NPN exists in NIPR before
+	// syncing.
+	//
+	// What Gets Synchronized:
+	// - State licenses with expiration dates and Lines of Authority
+	// - Carrier appointments with status and renewal dates
+	// - Regulatory actions and disciplinary history
+	// - Biographic information (name, DOB, state of domicile)
+	// - Address by state
+	//
+	// Preconditions:
+	// - Producer must exist and belong to the authenticated tenant
+	// - Producer must have a valid NPN registered in NIPR
+	// - Producer must not already be in active sync state
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - Producer must have an NPN assigned (cannot sync a producer without NPN)
+	// - Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+	// - Producer must not already be in ACTIVE sync state (prevents redundant syncs)
+	//
+	// Timeout: 30 seconds. If NIPR takes longer, you'll receive a
+	// DEADLINE_EXCEEDED error.
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Producer has no NPN or NPN is not registered in NIPR
+	// - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
+	// - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
 	SyncProducerWithNIPR(context.Context, *SyncProducerWithNIPRRequest) (*SyncProducerWithNIPRResponse, error)
-	// SyncAgencyWithNIPR synchronizes an agency's data with the NIPR system. Fetches the latest agency information and appointments. WARNING: This call counts as an extra NPN lookup against your billing. Most billing plans are based on unique NPNs per month, so using this method may result in additional charges.
+	// SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
+	//
+	// Use this endpoint to manually trigger an immediate refresh of agency data
+	// from NIPR. The operation validates the agency NPN exists in NIPR before
+	// syncing.
+	//
+	// What Gets Synchronized:
+	// - Agency biographic information (company name, FEIN, contact details)
+	// - State licenses with expiration dates and Lines of Authority
+	// - Carrier appointments with status and renewal dates
+	// - Regulatory actions and disciplinary history
+	// - Address history by state
+	//
+	// Bulk Producer Sync:
+	// When sync_all_producers is set to true, the system will also sync all
+	// producers associated with the agency. This extends the timeout to 10
+	// minutes to accommodate the additional operations. Each producer sync is
+	// a separate billable NIPR lookup.
+	//
+	// Preconditions:
+	// - Agency must exist and belong to the authenticated tenant
+	// - Agency must have a valid NPN registered in NIPR
+	// - Agency must not already be in active sync state
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - sync_all_producers: Optional boolean, defaults to false
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
+	// - Agency must not already be in ACTIVE sync state (prevents redundant syncs)
+	//
+	// Timeout:
+	// - 30 seconds when syncing agency only
+	// - 10 minutes when sync_all_producers is true
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
+	// - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+	// - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
 	SyncAgencyWithNIPR(context.Context, *SyncAgencyWithNIPRRequest) (*SyncAgencyWithNIPRResponse, error)
-	// StopSyncProducerWithNIPR stops the synchronization process with NIPR for a producer.
-	// Use this to prevent further automatic updates from NIPR.
+	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
+	//
+	// Use this endpoint to stop receiving automatic updates from NIPR for a
+	// specific producer. Once stopped, the producer's NIPR data will no longer
+	// be refreshed via PDB Alerts or other automatic sync mechanisms.
+	//
+	// This does not delete existing NIPR data - it only prevents future updates.
+	// To re-enable synchronization, use the SyncProducerWithNIPR endpoint.
+	//
+	// Preconditions:
+	// - Producer must exist and belong to the authenticated tenant
+	// - Producer must be in active or failing sync state (not already disabled/pending)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	//
+	// Business logic validation:
+	//   - producer_id: Producer must exist and belong to the authenticated tenant
+	//   - Producer must be in ACTIVE or FAILING sync state (cannot stop if already
+	//     DISABLED or PENDING)
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
+	// - FAILED_PRECONDITION: Producer is already unsynced (DISABLED or PENDING sync state)
 	StopSyncProducerWithNIPR(context.Context, *StopSyncProducerWithNIPRRequest) (*StopSyncProducerWithNIPRResponse, error)
-	// StopSyncAgencyWithNIPR stops the synchronization process with NIPR for an agency.
-	// Use this to prevent further automatic updates from NIPR.
+	// StopSyncAgencyWithNIPR disables automatic NIPR synchronization for an agency.
+	//
+	// Use this endpoint to stop receiving automatic updates from NIPR for a
+	// specific agency. Once stopped, the agency's NIPR data will no longer be
+	// refreshed via PDB Alerts or other automatic sync mechanisms.
+	//
+	// This does not delete existing NIPR data - it only prevents future updates.
+	// To re-enable synchronization, use the SyncAgencyWithNIPR endpoint.
+	//
+	// Bulk Producer Stop:
+	// When stop_all_producers is set to true, the system will also stop sync for
+	// all producers associated with the agency. This is useful when offboarding
+	// an entire agency from NIPR synchronization. When this flag is set, the
+	// precondition check for agency sync state is bypassed.
+	//
+	// Preconditions:
+	// - Agency must exist and belong to the authenticated tenant
+	// - Agency must be in active or failing sync state (unless stop_all_producers is true)
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - stop_all_producers: Optional boolean, defaults to false
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - Unless stop_all_producers is true, agency must be in ACTIVE or FAILING sync
+	//     state (cannot stop if already DISABLED or PENDING)
+	//
+	// Returns:
+	// Empty response on success.
+	//
+	// Common Error Codes:
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - FAILED_PRECONDITION: Agency is already unsynced (DISABLED or PENDING sync state,
+	//     unless stop_all_producers is true)
 	StopSyncAgencyWithNIPR(context.Context, *StopSyncAgencyWithNIPRRequest) (*StopSyncAgencyWithNIPRResponse, error)
-	// CreateProducerUploadURL generates a URL that can be used to upload new producers for an existing agency. The agency is identified by its NPN, and the URL can be shared with the agency to allow them to upload producer information securely. The URL is time-limited and includes necessary security tokens. A default expiration of 7 days will be used. The agency must: Exist and belong to the authenticated tenant. Have a valid NPN. Returns a URL string that can be shared with the agency for producer uploads. Returns errors in the following cases: INVALID_ARGUMENT: if agency NPN is empty or invalid format. NOT_FOUND: if agency NPN doesn't exist. INTERNAL: for other unexpected errors.
+	// CreateProducerUploadURL generates a secure URL for bulk producer uploads to
+	// an existing agency.
+	//
+	// Use this endpoint to create a shareable link that allows agencies to upload
+	// multiple producers at once. The URL includes security tokens and tenant
+	// context to ensure secure, authenticated access.
+	//
+	// Unlike CreateProducerOnboardingURL which creates a self-service form for a
+	// single producer, this endpoint generates a URL for bulk uploading producer
+	// data (typically via CSV or spreadsheet format).
+	//
+	// The agency is identified by its National Producer Number (NPN), which must
+	// already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
+	// look up agency NPNs if needed.
+	//
+	// Typical Workflow:
+	//  1. Generate producer upload URL using the agency's NPN
+	//  2. Share URL with agency contact via email or portal
+	//  3. Agency uploads producer data through the URL
+	//  4. System processes uploads, validates NPNs with NIPR, and creates producer
+	//     records
+	//  5. Producers are associated with the agency and optionally synced with NIPR
+	//
+	// URL Expiration:
+	// The generated URL has a default expiration of 7 days. After expiration, a
+	// new URL must be generated.
+	//
+	// Validation Performed:
+	// - Agency NPN format is valid (numeric string, 2-10 digits)
+	// - Agency with the given NPN exists in your tenant
+	// - Agency belongs to the authenticated tenant
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_npn: Required, must be 2-10 digits (numeric characters only)
+	//
+	// Business logic validation:
+	// - Agency with the given NPN must exist in the authenticated tenant
+	// - Agency must belong to the authenticated tenant (ownership verification)
+	// - Only one agency should match the NPN (multiple matches indicate data issue)
+	//
+	// Returns:
+	// A time-limited URL string that can be shared with the agency for bulk
+	// producer uploads.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No agency found with the given NPN in your tenant
 	CreateProducerUploadURL(context.Context, *CreateProducerUploadURLRequest) (*CreateProducerUploadURLResponse, error)
-	// AddAgencyLocations adds one or more locations to an existing agency. Each location must have a unique name within the agency and valid address information. You can add up to 100 locations in a single request. This is a bulk operation with all-or-nothing behavior - if any location fails validation, the entire request will fail and no locations will be added. Returns the IDs of successfully added locations. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, no locations provided, location names are duplicated within the request or already exist for the agency. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// AddAgencyLocations adds one or more locations to an existing agency.
+	//
+	// Use this endpoint to programmatically add physical locations (offices,
+	// branches, etc.) to an agency. Locations enable organizing producers by
+	// their work sites and tracking agency presence across different addresses.
+	//
+	// Bulk Operation Behavior:
+	// This is an all-or-nothing operation - if any location fails validation,
+	// the entire request will fail and no locations will be added. You can add
+	// up to 100 locations in a single request.
+	//
+	// Validation Performed:
+	// - Agency exists and belongs to the authenticated tenant
+	// - At least one location is provided
+	// - Location names are unique within the agency (case-insensitive)
+	// - Location names are not duplicated within the request
+	// - Valid address information is provided for each location
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - locations: Required, 1-100 locations. Each location:
+	//   - name: Required, must be non-empty (unique within agency)
+	//   - address: Required
+	//   - street: Required, must be non-empty
+	//   - city: Required, must be non-empty
+	//   - state: Required, must be exactly 2 characters (state code)
+	//   - zip: Required, must be 1-10 characters
+	//   - phone: Required, must match E.164 pattern (e.g., +15551234567)
+	//   - email: Required, must be a valid email format
+	//   - is_primary: Optional boolean, marks location as primary
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Location names must be unique within the agency (case-insensitive)
+	// - Location names must not duplicate any existing location names in the agency
+	// - Location names must not duplicate other location names within the same request
+	//
+	// Returns:
+	// List of UUIDs for all created locations in the same order as the request.
+	// This ordering guarantee allows you to map request entries to their created IDs.
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
+	//     location names, or location with name already exists in agency
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(context.Context, *AddAgencyLocationsRequest) (*AddAgencyLocationsResponse, error)
-	// RemoveAgencyLocations removes one or more locations from an agency. Locations that don't exist will be silently ignored. Returns the IDs of successfully removed locations. When a location is removed, all the producers associated with that location will be unassigned from that location. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the request is nil, agency_id is empty, or no location_ids provided. NOT_FOUND: if the agency doesn't exist or doesn't belong to the authenticated tenant.
+	// RemoveAgencyLocations removes one or more locations from an agency.
+	//
+	// Use this endpoint to delete locations that are no longer needed. This is
+	// useful when closing branch offices or consolidating agency locations.
+	//
+	// Producer Unassignment:
+	// When a location is removed, all producers assigned to that location are
+	// automatically unassigned. The producers themselves are not deleted - they
+	// remain associated with the agency but without a location assignment.
+	//
+	// Partial Success Behavior:
+	// Locations that don't exist are silently ignored. The response contains only
+	// the IDs of locations that were actually removed.
+	//
+	// Validation Performed:
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - Location IDs that don't exist are silently ignored (partial success)
+	//
+	// Returns:
+	// List of UUIDs for locations that were successfully removed.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing agency_id or no location_ids provided
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	RemoveAgencyLocations(context.Context, *RemoveAgencyLocationsRequest) (*RemoveAgencyLocationsResponse, error)
-	// ListAgencyLocations retrieves all locations associated with an agency. Returns errors in the following cases: UNAUTHENTICATED: if the API key is invalid or missing. INVALID_ARGUMENT: if the agency_id is empty. NOT_FOUND: if the agency doesn't exist.
+	// ListAgencyLocations retrieves all locations associated with an agency.
+	//
+	// Use this endpoint to fetch the complete list of physical locations
+	// belonging to an agency. Each location includes its address, contact
+	// information, and primary status.
+	//
+	// The response includes complete location information:
+	// - Location ID and name
+	// - Physical address (street, city, state, zip)
+	// - Contact information (phone, email)
+	// - Primary location indicator
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	//
+	// Returns:
+	// A list of all locations associated with the specified agency. Returns an
+	// empty list if the agency has no locations.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Invalid request
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyLocations(context.Context, *ListAgencyLocationsRequest) (*ListAgencyLocationsResponse, error)
-	// AssignProducerToLocations assigns one or more locations to a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer or locations don't exist. PERMISSION_DENIED: Locations don't belong to the producer's agency.
+	// AssignProducerToLocations assigns one or more locations to a producer.
+	//
+	// Use this endpoint to associate a producer with specific agency locations
+	// (branch offices, work sites, etc.). A producer can be assigned to multiple
+	// locations within their agency.
+	//
+	// Location Ownership:
+	// All specified locations must belong to the same agency as the producer.
+	// Cross-agency location assignments are not permitted.
+	//
+	// Idempotent Behavior:
+	// If a producer is already assigned to a location, the assignment is
+	// preserved without error. The response includes all successfully assigned
+	// location IDs.
+	//
+	// Validation Performed:
+	// - Producer exists and belongs to the authenticated tenant
+	// - All location IDs exist and belong to the producer's agency
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - Producer's agency must exist and belong to the authenticated tenant
+	// - All location_ids must exist and belong to the producer's agency
+	//
+	// Returns:
+	// List of location IDs that were successfully assigned to the producer.
+	//
+	// Common Error Codes:
+	//   - INVALID_ARGUMENT: Request is missing
+	//   - NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
+	//     locations don't exist
+	//   - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	AssignProducerToLocations(context.Context, *AssignProducerToLocationsRequest) (*AssignProducerToLocationsResponse, error)
-	// UnassignProducerFromLocations removes one or more location assignments from a producer. The locations must belong to the same agency as the producer. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Empty producer_id or no location_ids. NOT_FOUND: Producer doesn't exist.
+	// UnassignProducerFromLocations removes one or more location assignments from
+	// a producer.
+	//
+	// Use this endpoint to disassociate a producer from specific agency locations.
+	// This is useful when producers change work sites or when consolidating
+	// location assignments.
+	//
+	// Producer Preservation:
+	// This operation only removes the location assignments - the producer remains
+	// active and associated with the agency. To fully remove a producer, use the
+	// appropriate producer deletion endpoint.
+	//
+	// Validation Performed:
+	// - Producer exists and belongs to the authenticated tenant
+	// - All location IDs exist and belong to the producer's agency
+	// - At least one location ID is provided
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - producer_id: Required, must be a valid UUID format
+	// - location_ids: Required, 1-100 items, each must be a valid UUID format
+	//
+	// Business logic validation:
+	// - producer_id: Producer must exist and belong to the authenticated tenant
+	// - All location_ids must exist and belong to the producer's agency
+	//
+	// Returns:
+	// List of location IDs that were successfully unassigned from the producer.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+	// - NOT_FOUND: Producer doesn't exist or specified locations don't exist
 	UnassignProducerFromLocations(context.Context, *UnassignProducerFromLocationsRequest) (*UnassignProducerFromLocationsResponse, error)
-	// UpdateAgencyLocation updates an existing agency location. You can update the name, address, contact information, and primary status of a location. All fields are optional - only provide the fields you want to update. Location name must be unique within the agency. Returns the updated location details. Error cases: UNAUTHENTICATED: Invalid or missing API key. INVALID_ARGUMENT: Missing agency_id or location_id. NOT_FOUND: Agency or location doesn't exist. ALREADY_EXISTS: Location name already exists within the agency.
+	// UpdateAgencyLocation updates an existing agency location.
+	//
+	// Use this endpoint to modify location details such as address, contact
+	// information, or primary status. This is useful when locations move,
+	// change phone numbers, or when designating a new primary location.
+	//
+	// Updatable Fields:
+	// - Name (must remain unique within the agency)
+	// - Address (street, city, state, zip)
+	// - Contact information (phone, email)
+	// - Primary location status
+	//
+	// All fields are optional - only provide the fields you want to update.
+	// Unchanged fields retain their current values.
+	//
+	// Name Uniqueness:
+	// If updating the location name, the new name must not already exist for
+	// another location within the same agency (case-insensitive comparison).
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - agency_id: Required, must be a valid UUID format
+	// - location_id: Required, must be a valid UUID format
+	// - name: If provided, must be non-empty (unique within agency)
+	// - address: If provided (all fields optional within):
+	//   - street: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	// - email: If provided, must be a valid email format
+	// - is_primary: Optional boolean
+	//
+	// Business logic validation:
+	//   - agency_id: Agency must exist and belong to the authenticated tenant
+	//   - location_id: Location must exist and belong to the specified agency
+	//   - name: If provided, must be unique within the agency (case-insensitive,
+	//     excluding the location being updated)
+	//
+	// Returns:
+	// The complete updated location object with all current field values.
+	//
+	// Common Error Codes:
+	// - INVALID_ARGUMENT: Missing agency_id or location_id, or invalid request
+	// - NOT_FOUND: Agency or location doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: New location name already exists within the agency
 	UpdateAgencyLocation(context.Context, *UpdateAgencyLocationRequest) (*UpdateAgencyLocationResponse, error)
 	mustEmbedUnimplementedProducerServiceServer()
 }
