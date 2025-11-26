@@ -26,10 +26,11 @@ plugins:
       - import_extension=none
     include_imports: true
     strategy: all
-  - local: protoc-gen-doc
+  - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
     out: wiki
-    opt:
-      - markdown
-      - API-Reference.md
+    opt: templates/html-api.tmpl,API-Reference.html
     strategy: all
-
+  - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
+    out: wiki
+    opt: templates/markdown-api.tmpl,API-Reference.md
+    strategy: all

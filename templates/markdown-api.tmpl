@@ -1,0 +1,149 @@
+# Producerflow API Documentation
+
+## Table of Contents
+
+{{range .Files}}
+{{range $service := .Services}}
+- [{{.Name}}](#{{.FullName | lower | replace "." ""}})
+{{range .Methods}}
+  - [{{.Name}}](#{{$service.FullName | lower | replace "." ""}}-{{.Name | lower}})
+{{end}}
+{{end}}
+{{end}}
+- [Shared Types](#shared-types)
+- [Enums](#enums)
+
+---
+
+{{/* Services */}}
+{{range $file := .Files}}
+{{range $service := .Services}}
+## {{.Name}}
+
+[Back to Top](#producerflow-api-documentation)
+
+{{.Description}}
+
+{{range $method := .Methods}}
+### {{.Name}} {#{{$service.FullName | lower | replace "." ""}}-{{.Name | lower}}}
+
+{{if .RequestStreaming}}**STREAMING**{{end}}
+
+{{.Description}}
+
+#### Request: `{{.RequestLongType}}`
+
+{{range $file.Messages}}
+{{if eq .FullName $method.RequestFullType}}
+{{if .Description}}{{.Description}}{{end}}
+
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{else}}
+*This message has no fields.*
+{{end}}
+{{end}}
+{{end}}
+
+#### Response: `{{.ResponseLongType}}`{{if .ResponseStreaming}} **STREAMING**{{end}}
+
+{{range $file.Messages}}
+{{if eq .FullName $method.ResponseFullType}}
+{{if .Description}}{{.Description}}{{end}}
+
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{else}}
+*This message has no fields.*
+{{end}}
+{{end}}
+{{end}}
+
+---
+
+{{end}}
+{{end}}
+{{end}}
+
+## Shared Types
+
+These types are used across multiple API methods.
+
+{{range .Files}}
+{{if .HasMessages}}
+### {{.Name}} - Types
+
+{{range .Messages}}
+{{/* Skip Request/Response messages as they're shown inline */}}
+{{if not (or (hasSuffix .Name "Request") (hasSuffix .Name "Response"))}}
+#### {{.LongName}} {#{{.FullName | lower | replace "." ""}}}
+
+{{.Description}}
+
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{range .Fields}}
+| `{{.Name}}` | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+{{if .HasExtensions}}
+| Extension | Type | Base | Number | Description |
+|-----------|------|------|--------|-------------|
+{{range .Extensions}}
+| {{.Name}} | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | [{{.ContainingLongType}}](#{{.ContainingFullType | lower | replace "." ""}}) | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+{{end}}
+
+{{end}}
+{{end}}
+{{end}}
+{{end}}
+
+---
+
+## Enums
+
+{{range .Files}}
+{{if .HasEnums}}
+### {{.Name}} - Enums
+
+{{range .Enums}}
+#### {{.LongName}} {#{{.FullName | lower | replace "." ""}}}
+
+{{.Description}}
+
+| Name | Number | Description |
+|------|--------|-------------|
+{{range .Values}}
+| {{.Name}} | {{.Number}} | {{.Description}} |
+{{end}}
+
+{{end}}
+{{end}}
+{{end}}
+
+---
+
+{{/* File-level extensions */}}
+{{range .Files}}
+{{if .HasExtensions}}
+### {{.Name}} - File-level Extensions {#{{.Name | lower | replace "." ""}}-extensions}
+
+| Extension | Type | Base | Number | Description |
+|-----------|------|------|--------|-------------|
+{{range .Extensions}}
+| {{.Name}} | [{{.LongType}}](#{{.FullType | lower | replace "." ""}}) | [{{.ContainingLongType}}](#{{.ContainingFullType | lower | replace "." ""}}) | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{end}}
+
+{{end}}
+{{end}}
