@@ -400,15 +400,15 @@ type ProducerServiceClient interface {
 	// the programmatic alternative to CreateProducerOnboardingURL.
 	//
 	// NIPR Validation and Sync:
-	// If an NPN is provided, the system validates it exists in NIPR using a free
-	// API lookup. If sync_with_nipr is enabled, the system performs a paid
-	// NIPR EntityInfo lookup to fetch complete license, appointment, and
-	// regulatory data.
+	// The system validates the provided NPN exists in NIPR using a free API
+	// lookup. If sync_with_nipr is enabled, the system performs a paid NIPR
+	// EntityInfo lookup to fetch complete license, appointment, and regulatory
+	// data.
 	//
 	// Validation Performed:
 	// - Email is unique within tenant
 	// - Agency exists and belongs to tenant
-	// - NPN exists in NIPR (if provided)
+	// - NPN exists in NIPR
 	// - Location IDs exist and belong to the agency (if provided)
 	//
 	// Validation Rules:
@@ -418,7 +418,7 @@ type ProducerServiceClient interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, if provided used for NIPR validation
+	//   - npn: Required, used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
 	//   - street: Required, must be non-empty
@@ -431,12 +431,11 @@ type ProducerServiceClient interface {
 	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting
 	//
 	// Business logic validation:
-	//   - agency_id: Agency must exist and belong to the authenticated tenant
-	//   - email: Must be unique within the tenant (not already used by another producer or contact)
-	//   - npn: If provided, must exist in NIPR. If name is also provided, NPN must match the name
-	//     in NIPR records
-	//   - npn: Must be unique within the tenant (not already assigned to another producer)
-	//   - location_ids: All locations must exist and belong to the specified agency
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	// - npn: Must exist in NIPR and the provided last name must match the NIPR records
+	// - npn: Must be unique within the tenant (not already assigned to another producer)
+	// - location_ids: All locations must exist and belong to the specified agency
 	//
 	// Returns:
 	// The UUID of the created producer.
@@ -459,16 +458,16 @@ type ProducerServiceClient interface {
 	// individual NewProducer calls.
 	//
 	// NIPR Validation and Sync:
-	// For each producer with an NPN:
+	// For each producer:
 	// - The system performs a free NIPR API lookup to validate the NPN exists
 	// - If sync_with_nipr is true (or tenant default), performs paid NIPR EntityInfo lookups
 	// - All NIPR validations must succeed for the bulk operation to proceed
 	//
 	// Validation Performed (for each producer):
-	// - Required fields are present and valid (name, email)
+	// - Required fields are present and valid (name, email, NPN)
 	// - Email addresses are unique within the tenant
 	// - Agency exists and belongs to the authenticated tenant
-	// - NPNs exist in NIPR (if provided)
+	// - NPNs exist in NIPR
 	// - Location IDs exist and belong to the agency (if provided)
 	// - Phone numbers match valid patterns (if provided)
 	//
@@ -479,7 +478,7 @@ type ProducerServiceClient interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Optional, if provided used for NIPR validation
+	//   - npn: Required, used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
 	//   - street: Required, must be non-empty
@@ -494,7 +493,7 @@ type ProducerServiceClient interface {
 	// Business logic validation:
 	//   - agency_id: Agency must exist and belong to the authenticated tenant
 	//   - All producer emails must be unique within the tenant
-	//   - All producer NPNs (if provided) must exist in NIPR and be unique within the tenant
+	//   - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
 	//   - All location_ids must exist and belong to the specified agency
 	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
 	//     are created
@@ -2066,15 +2065,15 @@ type ProducerServiceHandler interface {
 	// the programmatic alternative to CreateProducerOnboardingURL.
 	//
 	// NIPR Validation and Sync:
-	// If an NPN is provided, the system validates it exists in NIPR using a free
-	// API lookup. If sync_with_nipr is enabled, the system performs a paid
-	// NIPR EntityInfo lookup to fetch complete license, appointment, and
-	// regulatory data.
+	// The system validates the provided NPN exists in NIPR using a free API
+	// lookup. If sync_with_nipr is enabled, the system performs a paid NIPR
+	// EntityInfo lookup to fetch complete license, appointment, and regulatory
+	// data.
 	//
 	// Validation Performed:
 	// - Email is unique within tenant
 	// - Agency exists and belongs to tenant
-	// - NPN exists in NIPR (if provided)
+	// - NPN exists in NIPR
 	// - Location IDs exist and belong to the agency (if provided)
 	//
 	// Validation Rules:
@@ -2084,7 +2083,7 @@ type ProducerServiceHandler interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, if provided used for NIPR validation
+	//   - npn: Required, used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
 	//   - street: Required, must be non-empty
@@ -2097,12 +2096,11 @@ type ProducerServiceHandler interface {
 	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting
 	//
 	// Business logic validation:
-	//   - agency_id: Agency must exist and belong to the authenticated tenant
-	//   - email: Must be unique within the tenant (not already used by another producer or contact)
-	//   - npn: If provided, must exist in NIPR. If name is also provided, NPN must match the name
-	//     in NIPR records
-	//   - npn: Must be unique within the tenant (not already assigned to another producer)
-	//   - location_ids: All locations must exist and belong to the specified agency
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	// - npn: Must exist in NIPR and the provided last name must match the NIPR records
+	// - npn: Must be unique within the tenant (not already assigned to another producer)
+	// - location_ids: All locations must exist and belong to the specified agency
 	//
 	// Returns:
 	// The UUID of the created producer.
@@ -2125,16 +2123,16 @@ type ProducerServiceHandler interface {
 	// individual NewProducer calls.
 	//
 	// NIPR Validation and Sync:
-	// For each producer with an NPN:
+	// For each producer:
 	// - The system performs a free NIPR API lookup to validate the NPN exists
 	// - If sync_with_nipr is true (or tenant default), performs paid NIPR EntityInfo lookups
 	// - All NIPR validations must succeed for the bulk operation to proceed
 	//
 	// Validation Performed (for each producer):
-	// - Required fields are present and valid (name, email)
+	// - Required fields are present and valid (name, email, NPN)
 	// - Email addresses are unique within the tenant
 	// - Agency exists and belongs to the authenticated tenant
-	// - NPNs exist in NIPR (if provided)
+	// - NPNs exist in NIPR
 	// - Location IDs exist and belong to the agency (if provided)
 	// - Phone numbers match valid patterns (if provided)
 	//
@@ -2145,7 +2143,7 @@ type ProducerServiceHandler interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Optional, if provided used for NIPR validation
+	//   - npn: Required, used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
 	//   - street: Required, must be non-empty
@@ -2160,7 +2158,7 @@ type ProducerServiceHandler interface {
 	// Business logic validation:
 	//   - agency_id: Agency must exist and belong to the authenticated tenant
 	//   - All producer emails must be unique within the tenant
-	//   - All producer NPNs (if provided) must exist in NIPR and be unique within the tenant
+	//   - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
 	//   - All location_ids must exist and belong to the specified agency
 	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
 	//     are created
