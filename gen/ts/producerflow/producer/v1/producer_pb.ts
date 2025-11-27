@@ -6459,8 +6459,27 @@ export const ProducerService: GenService<{
   },
   /**
    * CreateOrganization creates a new organization for the authenticated tenant.
-   * The organization name must be unique within the tenant.
-   * Returns the ID of the newly created organization.
+   *
+   * Organizations are top-level groupings used to organize agencies within your
+   * tenant. They can represent business units, regions, or any logical grouping
+   * that makes sense for your operations.
+   *
+   * Validation Rules:
+   * Proto validation (format checks):
+   * - name: Required, must be non-empty
+   * - external_id: Optional, your system's identifier for the organization
+   * - email: Optional, contact email for the organization
+   *
+   * Business logic validation:
+   * - name: Must be unique within the tenant (case-insensitive)
+   *
+   * Returns:
+   * The UUID of the newly created organization, which can be used to assign
+   * agencies to this organization.
+   *
+   * Common Error Codes:
+   * - ALREADY_EXISTS: Organization with the same name already exists in tenant
+   *
    *
    * @generated from rpc producerflow.producer.v1.ProducerService.CreateOrganization
    */
