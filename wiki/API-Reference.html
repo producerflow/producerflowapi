@@ -25745,7 +25745,15 @@ Used for mailing, physical, and invoicing addresses throughout the API.</div>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Street address including house/building number and street name </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line including house/building number and street name.
+For backward compatibility, either street or address_line_1 can be used. </td>
                         </tr>
                       
                         <tr>
@@ -25936,7 +25944,7 @@ location.</div>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Street name and number of the location. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -25958,6 +25966,20 @@ location.</div>
                           <td><a href="#string">string</a></td>
                           <td></td>
                           <td>ZIP/Postal code of the location. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line including street name and number of the location. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_2</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>optional</td>
+                          <td>Optional second line of address (apt, suite, unit, etc.) </td>
                         </tr>
                       
                     </tbody>
@@ -26516,7 +26538,7 @@ These represent relationships with insurance carriers. </td>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Street address. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -26552,6 +26574,13 @@ These represent relationships with insurance carriers. </td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
                           <td>The last time this address information was updated from NIPR. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line. </td>
                         </tr>
                       
                     </tbody>
@@ -29828,8 +29857,7 @@ This address is used for:
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Street address of the producer.
-Include apartment/suite numbers if applicable. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -29860,6 +29888,14 @@ Supports both 5-digit (12345) and ZIP+4 (12345-6789) formats. </td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
                           <td>Optional second line of address (apt, suite, unit, etc.) </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line of the producer.
+For backward compatibility, either street or address_line_1 can be used. </td>
                         </tr>
                       
                     </tbody>
@@ -30455,7 +30491,7 @@ values are the answers provided. </td>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Street address of the producer. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -30484,6 +30520,13 @@ values are the answers provided. </td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
                           <td>Optional second line of address (apt, suite, unit, etc.) </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line of the producer. </td>
                         </tr>
                       
                     </tbody>
@@ -31323,7 +31366,7 @@ Typically a state insurance department or FINRA. </td>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td> </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -31359,6 +31402,13 @@ Typically a state insurance department or FINRA. </td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
                           <td> </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Primary address line including house/building number and street name </td>
                         </tr>
                       
                     </tbody>
@@ -32032,8 +32082,7 @@ Address fields cannot be cleared - if provided, they must have valid values.</di
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
-                          <td>Street address including house/building number and street name.
-If provided, must be non-empty. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
                         </tr>
                       
                         <tr>
@@ -32065,6 +32114,14 @@ If provided, must be between 1 and 10 characters. </td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
                           <td>Additional address line (e.g., apartment, suite, floor number).
+If provided, must be non-empty. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>optional</td>
+                          <td>Primary address line including house/building number and street name.
 If provided, must be non-empty. </td>
                         </tr>
                       
@@ -32222,7 +32279,14 @@ If provided, must be a valid phone number format. </td>
                           <td><code>street</code></td>
                           <td><a href="#string">string</a></td>
                           <td>optional</td>
-                          <td>Street address of the producer.
+                          <td><strong>Deprecated.</strong> Deprecated: Use address_line_1 instead. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>address_line_1</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>optional</td>
+                          <td>Primary address line of the producer.
 If provided, must be non-empty. </td>
                         </tr>
                       

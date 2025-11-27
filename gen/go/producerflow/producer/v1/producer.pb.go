@@ -581,8 +581,13 @@ func (x *Pagination) GetPageToken() string {
 // Used for mailing, physical, and invoicing addresses throughout the API.
 type Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Street address including house/building number and street name
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street string `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
+	// Primary address line including house/building number and street name.
+	// For backward compatibility, either street or address_line_1 can be used.
+	AddressLine_1 string `protobuf:"bytes,7,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
 	// City of the address
 	City string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
 	// State of the address
@@ -627,9 +632,17 @@ func (*Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{1}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Address) GetStreet() string {
 	if x != nil {
 		return x.Street
+	}
+	return ""
+}
+
+func (x *Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
 	}
 	return ""
 }
@@ -6278,13 +6291,18 @@ func (x *CreateAgencyOnboardingURLRequest_Agency_Principal) GetAddress() *Addres
 }
 
 type ProducerData_Address struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Street        string                 `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
-	City          string                 `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
-	State         string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
-	Zip           string                 `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
-	Country       string                 `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
-	AddressLine_2 *string                `protobuf:"bytes,6,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
+	Street        string  `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
+	City          string  `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
+	State         string  `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
+	Zip           string  `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
+	Country       string  `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	AddressLine_2 *string `protobuf:"bytes,6,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
+	// Primary address line including house/building number and street name
+	AddressLine_1 string `protobuf:"bytes,7,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6319,6 +6337,7 @@ func (*ProducerData_Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{5, 0}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *ProducerData_Address) GetStreet() string {
 	if x != nil {
 		return x.Street
@@ -6357,6 +6376,13 @@ func (x *ProducerData_Address) GetCountry() string {
 func (x *ProducerData_Address) GetAddressLine_2() string {
 	if x != nil && x.AddressLine_2 != nil {
 		return *x.AddressLine_2
+	}
+	return ""
+}
+
+func (x *ProducerData_Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
 	}
 	return ""
 }
@@ -7229,9 +7255,13 @@ type UpdateProducerRequest_Producer struct {
 	// Phone number of the producer.
 	// If provided, must be a valid phone number format.
 	Phone *string `protobuf:"bytes,5,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
-	// Street address of the producer.
-	// If provided, must be non-empty.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street *string `protobuf:"bytes,6,opt,name=street,proto3,oneof" json:"street,omitempty"`
+	// Primary address line of the producer.
+	// If provided, must be non-empty.
+	AddressLine_1 *string `protobuf:"bytes,14,opt,name=address_line_1,json=addressLine1,proto3,oneof" json:"address_line_1,omitempty"`
 	// Second line of the address (apartment, suite, unit, etc.).
 	// If provided, must be non-empty.
 	AddressLine_2 *string `protobuf:"bytes,13,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
@@ -7336,9 +7366,17 @@ func (x *UpdateProducerRequest_Producer) GetPhone() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *UpdateProducerRequest_Producer) GetStreet() string {
 	if x != nil && x.Street != nil {
 		return *x.Street
+	}
+	return ""
+}
+
+func (x *UpdateProducerRequest_Producer) GetAddressLine_1() string {
+	if x != nil && x.AddressLine_1 != nil {
+		return *x.AddressLine_1
 	}
 	return ""
 }
@@ -7507,8 +7545,9 @@ func (x *UpdateAgencyRequest_Agency) GetExternalMetadata() map[string]string {
 // Address fields cannot be cleared - if provided, they must have valid values.
 type UpdateAgencyRequest_Agency_Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Street address including house/building number and street name.
-	// If provided, must be non-empty.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street *string `protobuf:"bytes,1,opt,name=street,proto3,oneof" json:"street,omitempty"`
 	// City of the address.
 	// If provided, must be non-empty.
@@ -7522,6 +7561,9 @@ type UpdateAgencyRequest_Agency_Address struct {
 	// Additional address line (e.g., apartment, suite, floor number).
 	// If provided, must be non-empty.
 	AddressLine_2 *string `protobuf:"bytes,5,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
+	// Primary address line including house/building number and street name.
+	// If provided, must be non-empty.
+	AddressLine_1 *string `protobuf:"bytes,6,opt,name=address_line_1,json=addressLine1,proto3,oneof" json:"address_line_1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7556,6 +7598,7 @@ func (*UpdateAgencyRequest_Agency_Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{17, 0, 0}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *UpdateAgencyRequest_Agency_Address) GetStreet() string {
 	if x != nil && x.Street != nil {
 		return *x.Street
@@ -7587,6 +7630,13 @@ func (x *UpdateAgencyRequest_Agency_Address) GetZip() string {
 func (x *UpdateAgencyRequest_Agency_Address) GetAddressLine_2() string {
 	if x != nil && x.AddressLine_2 != nil {
 		return *x.AddressLine_2
+	}
+	return ""
+}
+
+func (x *UpdateAgencyRequest_Agency_Address) GetAddressLine_1() string {
+	if x != nil && x.AddressLine_1 != nil {
+		return *x.AddressLine_1
 	}
 	return ""
 }
@@ -7772,14 +7822,20 @@ func (x *Agency_AgencyInfo) GetTenantAdditionalQuestions() map[string]string {
 // location.
 type Agency_Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Street name and number of the location.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street string `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
 	// City where the location resides.
 	City string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
 	// State/Province where the location resides.
 	State string `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
 	// ZIP/Postal code of the location.
-	Zip           string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
+	Zip string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
+	// Primary address line including street name and number of the location.
+	AddressLine_1 string `protobuf:"bytes,5,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
+	// Optional second line of address (apt, suite, unit, etc.)
+	AddressLine_2 *string `protobuf:"bytes,6,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7814,6 +7870,7 @@ func (*Agency_Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{21, 1}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Agency_Address) GetStreet() string {
 	if x != nil {
 		return x.Street
@@ -7838,6 +7895,20 @@ func (x *Agency_Address) GetState() string {
 func (x *Agency_Address) GetZip() string {
 	if x != nil {
 		return x.Zip
+	}
+	return ""
+}
+
+func (x *Agency_Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
+	}
+	return ""
+}
+
+func (x *Agency_Address) GetAddressLine_2() string {
+	if x != nil && x.AddressLine_2 != nil {
+		return *x.AddressLine_2
 	}
 	return ""
 }
@@ -8492,7 +8563,9 @@ type Agency_NIPR_Address struct {
 	State string `protobuf:"bytes,2,opt,name=state,proto3" json:"state,omitempty"`
 	// Address state: state of the actual address registered in NIPR.
 	AddressState string `protobuf:"bytes,3,opt,name=address_state,json=addressState,proto3" json:"address_state,omitempty"`
-	// Street address.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street string `protobuf:"bytes,4,opt,name=street,proto3" json:"street,omitempty"`
 	// ZIP code of the address.
 	ZipCode string `protobuf:"bytes,5,opt,name=zip_code,json=zipCode,proto3" json:"zip_code,omitempty"`
@@ -8503,7 +8576,9 @@ type Agency_NIPR_Address struct {
 	// Date when the address was last updated.
 	DateUpdated *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=date_updated,json=dateUpdated,proto3" json:"date_updated,omitempty"`
 	// The last time this address information was updated from NIPR.
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Primary address line.
+	AddressLine_1 string `protobuf:"bytes,10,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8559,6 +8634,7 @@ func (x *Agency_NIPR_Address) GetAddressState() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Agency_NIPR_Address) GetStreet() string {
 	if x != nil {
 		return x.Street
@@ -8599,6 +8675,13 @@ func (x *Agency_NIPR_Address) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *Agency_NIPR_Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
+	}
+	return ""
 }
 
 // License contains information about an insurance license.
@@ -9265,7 +9348,9 @@ func (x *Producer_NIPR) GetAppointments() []*Producer_NIPR_Appointment {
 // Address represents a mailing address for the producer.
 type Producer_Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Street address of the producer.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street string `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
 	// City of the producer.
 	City string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
@@ -9275,6 +9360,8 @@ type Producer_Address struct {
 	Zip string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
 	// Optional second line of address (apt, suite, unit, etc.)
 	AddressLine_2 *string `protobuf:"bytes,13,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
+	// Primary address line of the producer.
+	AddressLine_1 string `protobuf:"bytes,14,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9309,6 +9396,7 @@ func (*Producer_Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{22, 2}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Producer_Address) GetStreet() string {
 	if x != nil {
 		return x.Street
@@ -9340,6 +9428,13 @@ func (x *Producer_Address) GetZip() string {
 func (x *Producer_Address) GetAddressLine_2() string {
 	if x != nil && x.AddressLine_2 != nil {
 		return *x.AddressLine_2
+	}
+	return ""
+}
+
+func (x *Producer_Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
 	}
 	return ""
 }
@@ -10067,8 +10162,9 @@ func (x *Producer_NIPR_ProducerRegulatoryInfo_RegulatoryAction) GetLengthOfOrder
 // - Commission statements
 type NewProducer_Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Street address of the producer.
-	// Include apartment/suite numbers if applicable.
+	// Deprecated: Use address_line_1 instead.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	Street string `protobuf:"bytes,1,opt,name=street,proto3" json:"street,omitempty"`
 	// City of the producer's mailing address.
 	City string `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
@@ -10080,6 +10176,9 @@ type NewProducer_Address struct {
 	Zip string `protobuf:"bytes,4,opt,name=zip,proto3" json:"zip,omitempty"`
 	// Optional second line of address (apt, suite, unit, etc.)
 	AddressLine_2 *string `protobuf:"bytes,5,opt,name=address_line_2,json=addressLine2,proto3,oneof" json:"address_line_2,omitempty"`
+	// Primary address line of the producer.
+	// For backward compatibility, either street or address_line_1 can be used.
+	AddressLine_1 string `protobuf:"bytes,6,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -10114,6 +10213,7 @@ func (*NewProducer_Address) Descriptor() ([]byte, []int) {
 	return file_producerflow_producer_v1_producer_proto_rawDescGZIP(), []int{23, 0}
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *NewProducer_Address) GetStreet() string {
 	if x != nil {
 		return x.Street
@@ -10149,6 +10249,13 @@ func (x *NewProducer_Address) GetAddressLine_2() string {
 	return ""
 }
 
+func (x *NewProducer_Address) GetAddressLine_1() string {
+	if x != nil {
+		return x.AddressLine_1
+	}
+	return ""
+}
+
 var File_producerflow_producer_v1_producer_proto protoreflect.FileDescriptor
 
 const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
@@ -10158,9 +10265,10 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"Pagination\x12%\n" +
 	"\tpage_size\x18\x01 \x01(\x05B\b\xbaH\x05\x1a\x03\x18\xc8\x01R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xe3\x01\n" +
-	"\aAddress\x12\x1f\n" +
-	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x84\x02\n" +
+	"\aAddress\x12\x1a\n" +
+	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12$\n" +
+	"\x0eaddress_line_1\x18\a \x01(\tR\faddressLine1\x12\x1b\n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12\x1b\n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
@@ -10203,7 +10311,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"\x8e\x01\n" +
 	"\"CreateProducerOnboardingURLRequest\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12K\n" +
-	"\rproducer_data\x18\x02 \x01(\v2&.producerflow.producer.v1.ProducerDataR\fproducerData\"\xb5\x04\n" +
+	"\rproducer_data\x18\x02 \x01(\v2&.producerflow.producer.v1.ProducerDataR\fproducerData\"\xdf\x04\n" +
 	"\fProducerData\x12 \n" +
 	"\x03npn\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"H\x00R\x03npn\x88\x01\x01\x12\"\n" +
@@ -10214,14 +10322,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"middleName\x88\x01\x01\x12\x19\n" +
 	"\x05email\x18\x05 \x01(\tH\x04R\x05email\x88\x01\x01\x12\x19\n" +
 	"\x05phone\x18\x06 \x01(\tH\x05R\x05phone\x88\x01\x01\x12W\n" +
-	"\x0fmailing_address\x18\a \x01(\v2..producerflow.producer.v1.ProducerData.AddressR\x0emailingAddress\x1a\xbe\x01\n" +
-	"\aAddress\x12\x16\n" +
-	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
+	"\x0fmailing_address\x18\a \x01(\v2..producerflow.producer.v1.ProducerData.AddressR\x0emailingAddress\x1a\xe8\x01\n" +
+	"\aAddress\x12\x1a\n" +
+	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
 	"\x03zip\x18\x04 \x01(\tR\x03zip\x12\x18\n" +
 	"\acountry\x18\x05 \x01(\tR\acountry\x122\n" +
-	"\x0eaddress_line_2\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01B\x11\n" +
+	"\x0eaddress_line_2\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01\x12$\n" +
+	"\x0eaddress_line_1\x18\a \x01(\tR\faddressLine1B\x11\n" +
 	"\x0f_address_line_2B\x06\n" +
 	"\x04_npnB\r\n" +
 	"\v_first_nameB\f\n" +
@@ -10355,11 +10464,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"w9_doc_url\x18\x03 \x01(\tR\bw9DocUrl\x12&\n" +
 	"\x0flicense_doc_url\x18\x04 \x01(\tR\rlicenseDocUrl\x12-\n" +
-	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\xb4\a\n" +
+	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\xfd\a\n" +
 	"\x15UpdateProducerRequest\x12)\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"producerId\x12\\\n" +
-	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\x91\x06\n" +
+	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\xda\x06\n" +
 	"\bProducer\x12+\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tfirstName\x88\x01\x01\x12)\n" +
@@ -10369,13 +10478,14 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"middleName\x88\x01\x01\x12\"\n" +
 	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12 \n" +
 	"\x03npn\x18\x04 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x04R\x03npn\x88\x01\x01\x124\n" +
-	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x05R\x05phone\x88\x01\x01\x12$\n" +
-	"\x06street\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x06R\x06street\x88\x01\x01\x122\n" +
-	"\x0eaddress_line_2\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\faddressLine2\x88\x01\x01\x12 \n" +
-	"\x04city\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\x04city\x88\x01\x01\x12\"\n" +
-	"\x05state\x18\b \x01(\tB\a\xbaH\x04r\x02\x18\x02H\tR\x05state\x88\x01\x01\x12\x1e\n" +
-	"\x03zip\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x05H\n" +
-	"R\x03zip\x88\x01\x01\x12{\n" +
+	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x05R\x05phone\x88\x01\x01\x12&\n" +
+	"\x06street\x18\x06 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x06R\x06street\x88\x01\x01\x122\n" +
+	"\x0eaddress_line_1\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\faddressLine1\x88\x01\x01\x122\n" +
+	"\x0eaddress_line_2\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\faddressLine2\x88\x01\x01\x12 \n" +
+	"\x04city\x18\a \x01(\tB\a\xbaH\x04r\x02\x10\x01H\tR\x04city\x88\x01\x01\x12\"\n" +
+	"\x05state\x18\b \x01(\tB\a\xbaH\x04r\x02\x18\x02H\n" +
+	"R\x05state\x88\x01\x01\x12\x1e\n" +
+	"\x03zip\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x05H\vR\x03zip\x88\x01\x01\x12{\n" +
 	"\x11external_metadata\x18\v \x03(\v2N.producerflow.producer.v1.UpdateProducerRequest.Producer.ExternalMetadataEntryR\x10externalMetadata\x1aC\n" +
 	"\x15ExternalMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -10388,14 +10498,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x04_npnB\b\n" +
 	"\x06_phoneB\t\n" +
 	"\a_streetB\x11\n" +
+	"\x0f_address_line_1B\x11\n" +
 	"\x0f_address_line_2B\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
 	"\x04_zip\"\x18\n" +
-	"\x16UpdateProducerResponse\"\xcc\b\n" +
+	"\x16UpdateProducerResponse\"\x95\t\n" +
 	"\x13UpdateAgencyRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12T\n" +
-	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\xb7\a\n" +
+	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\x80\b\n" +
 	"\x06Agency\x12\"\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05email\x88\x01\x01\x124\n" +
 	"\x05phone\x18\x02 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x01R\x05phone\x88\x01\x01\x123\n" +
@@ -10405,19 +10516,21 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"^[A-Z]{2}$R\x15requestedAppointments\x12&\n" +
 	"\x05notes\x18\x06 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xf4\x03H\x04R\x05notes\x88\x01\x01\x12l\n" +
 	"\x10physical_address\x18\a \x01(\v2<.producerflow.producer.v1.UpdateAgencyRequest.Agency.AddressH\x05R\x0fphysicalAddress\x88\x01\x01\x12w\n" +
-	"\x11external_metadata\x18\b \x03(\v2J.producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntryR\x10externalMetadata\x1a\x85\x02\n" +
-	"\aAddress\x12$\n" +
-	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x06street\x88\x01\x01\x12 \n" +
+	"\x11external_metadata\x18\b \x03(\v2J.producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntryR\x10externalMetadata\x1a\xce\x02\n" +
+	"\aAddress\x12&\n" +
+	"\x06street\x18\x01 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x00R\x06street\x88\x01\x01\x12 \n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\x04city\x88\x01\x01\x12#\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02H\x02R\x05state\x88\x01\x01\x12 \n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"H\x03R\x03zip\x88\x01\x01\x122\n" +
-	"\x0eaddress_line_2\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\faddressLine2\x88\x01\x01B\t\n" +
+	"\x0eaddress_line_2\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x04R\faddressLine2\x88\x01\x01\x122\n" +
+	"\x0eaddress_line_1\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x05R\faddressLine1\x88\x01\x01B\t\n" +
 	"\a_streetB\a\n" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
 	"\x04_zipB\x11\n" +
-	"\x0f_address_line_2\x1aC\n" +
+	"\x0f_address_line_2B\x11\n" +
+	"\x0f_address_line_1\x1aC\n" +
 	"\x15ExternalMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
@@ -10434,7 +10547,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\x8c1\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\x9f2\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -10477,12 +10590,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a]\n" +
-	"\aAddress\x12\x16\n" +
-	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xc5\x01\n" +
+	"\aAddress\x12\x1a\n" +
+	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
-	"\x03zip\x18\x04 \x01(\tR\x03zip\x1a\xca\x02\n" +
+	"\x03zip\x18\x04 \x01(\tR\x03zip\x12$\n" +
+	"\x0eaddress_line_1\x18\x05 \x01(\tR\faddressLine1\x12)\n" +
+	"\x0eaddress_line_2\x18\x06 \x01(\tH\x00R\faddressLine2\x88\x01\x01B\x11\n" +
+	"\x0f_address_line_2\x1a\xca\x02\n" +
 	"\vBankAccount\x12%\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tR\raccountNumber\x12%\n" +
 	"\x0erouting_number\x18\x02 \x01(\tR\rroutingNumber\x12[\n" +
@@ -10521,7 +10637,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fBusinessHour\x123\n" +
 	"\tweek_days\x18\x01 \x03(\x0e2\x16.google.type.DayOfWeekR\bweekDays\x129\n" +
 	"\fopening_time\x18\x02 \x01(\v2\x16.google.type.TimeOfDayR\vopeningTime\x129\n" +
-	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\xb2\x17\n" +
+	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\xdc\x17\n" +
 	"\x04NIPR\x12P\n" +
 	"\n" +
 	"biographic\x18\x01 \x01(\v20.producerflow.producer.v1.Agency.NIPR.BiographicR\n" +
@@ -10538,18 +10654,20 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0ebusiness_email\x18\x04 \x01(\tR\rbusinessEmail\x12%\n" +
 	"\x0ebusiness_phone\x18\x05 \x01(\tR\rbusinessPhone\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xc2\x02\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xec\x02\n" +
 	"\aAddress\x12!\n" +
 	"\faddress_type\x18\x01 \x01(\tR\vaddressType\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12#\n" +
-	"\raddress_state\x18\x03 \x01(\tR\faddressState\x12\x16\n" +
-	"\x06street\x18\x04 \x01(\tR\x06street\x12\x19\n" +
+	"\raddress_state\x18\x03 \x01(\tR\faddressState\x12\x1a\n" +
+	"\x06street\x18\x04 \x01(\tB\x02\x18\x01R\x06street\x12\x19\n" +
 	"\bzip_code\x18\x05 \x01(\tR\azipCode\x12\x12\n" +
 	"\x04city\x18\x06 \x01(\tR\x04city\x12\x18\n" +
 	"\acountry\x18\a \x01(\tR\acountry\x12=\n" +
 	"\fdate_updated\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\vdateUpdated\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xa4\a\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12$\n" +
+	"\x0eaddress_line_1\x18\n" +
+	" \x01(\tR\faddressLine1\x1a\xa4\a\n" +
 	"\aLicense\x12%\n" +
 	"\x0elicense_number\x18\x01 \x01(\tR\rlicenseNumber\x12#\n" +
 	"\rlicense_state\x18\x02 \x01(\tR\flicenseState\x12)\n" +
@@ -10605,7 +10723,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xbb \n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xe5 \n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -10700,13 +10818,14 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\x1a\xa4\x01\n" +
-	"\aAddress\x12\x16\n" +
-	"\x06street\x18\x01 \x01(\tR\x06street\x12\x12\n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\x1a\xce\x01\n" +
+	"\aAddress\x12\x1a\n" +
+	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x10\n" +
 	"\x03zip\x18\x04 \x01(\tR\x03zip\x122\n" +
-	"\x0eaddress_line_2\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01B\x11\n" +
+	"\x0eaddress_line_2\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01\x12$\n" +
+	"\x0eaddress_line_1\x18\x0e \x01(\tR\faddressLine1B\x11\n" +
 	"\x0f_address_line_2\x1aD\n" +
 	"\x16MetadataQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -10716,7 +10835,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xed\a\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8e\b\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -10731,14 +10850,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\flocation_ids\x18\n" +
 	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x12k\n" +
 	"\x12metadata_questions\x18\v \x03(\v2<.producerflow.producer.v1.NewProducer.MetadataQuestionsEntryR\x11metadataQuestions\x12\x84\x01\n" +
-	"\x1btenant_additional_questions\x18\f \x03(\v2D.producerflow.producer.v1.NewProducer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\xcb\x01\n" +
-	"\aAddress\x12\x1f\n" +
-	"\x06street\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06street\x12\x1b\n" +
+	"\x1btenant_additional_questions\x18\f \x03(\v2D.producerflow.producer.v1.NewProducer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\xec\x01\n" +
+	"\aAddress\x12\x1a\n" +
+	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x1b\n" +
 	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04city\x12\x1e\n" +
 	"\x05state\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12\x1b\n" +
 	"\x03zip\x18\x04 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"R\x03zip\x122\n" +
-	"\x0eaddress_line_2\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01B\x11\n" +
+	"\x0eaddress_line_2\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\faddressLine2\x88\x01\x01\x12$\n" +
+	"\x0eaddress_line_1\x18\x06 \x01(\tR\faddressLine1B\x11\n" +
 	"\x0f_address_line_2\x1aD\n" +
 	"\x16MetadataQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -11447,6 +11567,7 @@ func file_producerflow_producer_v1_producer_proto_init() {
 	file_producerflow_producer_v1_producer_proto_msgTypes[98].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[100].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[101].OneofWrappers = []any{}
+	file_producerflow_producer_v1_producer_proto_msgTypes[104].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[124].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[135].OneofWrappers = []any{}
 	type x struct{}

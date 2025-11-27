@@ -3043,7 +3043,9 @@ Used for mailing, physical, and invoicing addresses throughout the API.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) |  | Street address including house/building number and street name |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
+| `address_line_1` | [string](#string) |  | Primary address line including house/building number and street name.
+For backward compatibility, either street or address_line_1 can be used. |
 | `city` | [string](#string) |  | City of the address |
 | `state` | [string](#string) |  | State of the address |
 | `zip` | [string](#string) |  | Zip code of the address |
@@ -3096,10 +3098,12 @@ location.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) |  | Street name and number of the location. |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `city` | [string](#string) |  | City where the location resides. |
 | `state` | [string](#string) |  | State/Province where the location resides. |
 | `zip` | [string](#string) |  | ZIP/Postal code of the location. |
+| `address_line_1` | [string](#string) |  | Primary address line including street name and number of the location. |
+| `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
 
 #### Agency.AgencyInfo
 
@@ -3250,12 +3254,13 @@ Address represents address information from NIPR.
 | `address_type` | [string](#string) |  | Type of address (Residence, Business, Mailing). |
 | `state` | [string](#string) |  | License state: state of the license for which the address is registered in NIPR. |
 | `address_state` | [string](#string) |  | Address state: state of the actual address registered in NIPR. |
-| `street` | [string](#string) |  | Street address. |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `zip_code` | [string](#string) |  | ZIP code of the address. |
 | `city` | [string](#string) |  | City of the address. |
 | `country` | [string](#string) |  | Country of the address. |
 | `date_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the address was last updated. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this address information was updated from NIPR. |
+| `address_line_1` | [string](#string) |  | Primary address line. |
 
 #### Agency.NIPR.Appointment
 
@@ -4288,14 +4293,15 @@ This address is used for:
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) |  | Street address of the producer.
-Include apartment/suite numbers if applicable. |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `city` | [string](#string) |  | City of the producer's mailing address. |
 | `state` | [string](#string) |  | State of the producer's mailing address.
 Must be a valid 2-letter US state code (e.g., "CA", "NY"). |
 | `zip` | [string](#string) |  | Zip code of the producer's mailing address.
 Supports both 5-digit (12345) and ZIP+4 (12345-6789) formats. |
 | `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
+| `address_line_1` | [string](#string) |  | Primary address line of the producer.
+For backward compatibility, either street or address_line_1 can be used. |
 
 #### NewProducer.MetadataQuestionsEntry
 
@@ -4555,11 +4561,12 @@ Address represents a mailing address for the producer.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) |  | Street address of the producer. |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `city` | [string](#string) |  | City of the producer. |
 | `state` | [string](#string) |  | State of the producer. |
 | `zip` | [string](#string) |  | Zip code of the producer. |
 | `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
+| `address_line_1` | [string](#string) |  | Primary address line of the producer. |
 
 #### Producer.Agency
 
@@ -4847,12 +4854,13 @@ Typically a state insurance department or FINRA. |
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) |  |  |
+| `street` | [string](#string) |  | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `city` | [string](#string) |  |  |
 | `state` | [string](#string) |  |  |
 | `zip` | [string](#string) |  |  |
 | `country` | [string](#string) |  |  |
 | `address_line_2` | [string](#string) | optional |  |
+| `address_line_1` | [string](#string) |  | Primary address line including house/building number and street name |
 
 #### RemoveAgencyLocationsRequest
 
@@ -5071,8 +5079,7 @@ Address fields cannot be cleared - if provided, they must have valid values.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `street` | [string](#string) | optional | Street address including house/building number and street name.
-If provided, must be non-empty. |
+| `street` | [string](#string) | optional | **Deprecated.** Deprecated: Use address_line_1 instead. |
 | `city` | [string](#string) | optional | City of the address.
 If provided, must be non-empty. |
 | `state` | [string](#string) | optional | State of the address.
@@ -5080,6 +5087,8 @@ If provided, must be exactly 2 characters (state code). |
 | `zip` | [string](#string) | optional | Zip code of the address.
 If provided, must be between 1 and 10 characters. |
 | `address_line_2` | [string](#string) | optional | Additional address line (e.g., apartment, suite, floor number).
+If provided, must be non-empty. |
+| `address_line_1` | [string](#string) | optional | Primary address line including house/building number and street name.
 If provided, must be non-empty. |
 
 #### UpdateAgencyRequest.Agency.ExternalMetadataEntry
@@ -5130,7 +5139,8 @@ If provided, must be non-empty.
 Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version. |
 | `phone` | [string](#string) | optional | Phone number of the producer.
 If provided, must be a valid phone number format. |
-| `street` | [string](#string) | optional | Street address of the producer.
+| `street` | [string](#string) | optional | **Deprecated.** Deprecated: Use address_line_1 instead. |
+| `address_line_1` | [string](#string) | optional | Primary address line of the producer.
 If provided, must be non-empty. |
 | `address_line_2` | [string](#string) | optional | Second line of the address (apartment, suite, unit, etc.).
 If provided, must be non-empty. |
