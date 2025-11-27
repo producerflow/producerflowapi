@@ -66,7 +66,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{- range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " "}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{- end}}
 {{- else}}
 
@@ -86,7 +86,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{- range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " "}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{- end}}
 {{- else}}
 
@@ -117,7 +117,7 @@ These types are used across multiple API methods.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 {{- range .Fields}}
-| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| `{{.Name}}` | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " "}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{- end}}
 {{- end}}
 {{- if .HasExtensions}}
@@ -125,13 +125,15 @@ These types are used across multiple API methods.
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
 {{- range .Extensions}}
-| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description | replace "\n" " "}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{- end}}
 {{- end}}
 {{- end}}
 {{- end}}
 {{- end}}
 {{- end}}
+
+[↑ Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -149,7 +151,7 @@ These types are used across multiple API methods.
 | Name | Number | Description |
 |------|--------|-------------|
 {{- range .Values}}
-| `{{.Name}}` | {{.Number}} | {{.Description}} |
+| `{{.Name}}` | {{.Number}} | {{.Description | replace "\n" " "}} |
 {{- end}}
 {{end}}
 {{- end}}
@@ -162,7 +164,9 @@ These types are used across multiple API methods.
 | Extension | Type | Base | Number | Description |
 |-----------|------|------|--------|-------------|
 {{- range .Extensions}}
-| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+| {{.Name}} | [{{.LongType}}](#{{.LongType | lower | replace "." ""}}) | {{.ContainingLongType}} | {{.Number}} | {{.Description | replace "\n" " "}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
 {{- end}}
 {{- end}}
 {{- end}}
+
+[↑ Back to Table of Contents](#table-of-contents)
