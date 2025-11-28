@@ -26091,7 +26091,7 @@ When true, the system will regularly check for updates from NIPR. </td>
                           <td><code>metadata_questions</code></td>
                           <td><a href="#producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry">Agency.AgencyInfo.MetadataQuestionsEntry</a></td>
                           <td>repeated</td>
-                          <td>MetadataQuestions contains custom metadata questions and answers for the agency.
+                          <td><strong>Deprecated.</strong> MetadataQuestions contains custom metadata questions and answers for the agency.
 This field stores tenant-specific questions that were collected during agency onboarding.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. </td>
@@ -28965,7 +28965,7 @@ This is used to link the agency to the tenant. </td>
                           <td><code>metadata_questions</code></td>
                           <td><a href="#producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry">NewAgencyRequest.Agency.MetadataQuestionsEntry</a></td>
                           <td>repeated</td>
-                          <td>MetadataQuestions contains custom metadata questions and answers for the agency.
+                          <td><strong>Deprecated.</strong> MetadataQuestions contains custom metadata questions and answers for the agency.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. </td>
                         </tr>
@@ -29805,7 +29805,7 @@ Post-Creation Management:
                           <td><code>metadata_questions</code></td>
                           <td><a href="#producerflow.producer.v1.NewProducer.MetadataQuestionsEntry">NewProducer.MetadataQuestionsEntry</a></td>
                           <td>repeated</td>
-                          <td>Custom metadata questions and answers for the producer.
+                          <td><strong>Deprecated.</strong> Custom metadata questions and answers for the producer.
 
 Optional field for storing tenant-specific information collected during
 producer onboarding. This allows tenants to capture additional data points
@@ -29823,7 +29823,8 @@ Common Use Cases:
 - Internal classifications (e.g., "Producer tier", "Region")
 
 Note: This data is stored but not validated by ProducerFlow. Ensure your
-application handles any necessary validation of the responses. </td>
+application handles any necessary validation of the responses.
+Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release. </td>
                         </tr>
                       
                         <tr>
@@ -30444,7 +30445,7 @@ A principal producer has additional responsibilities and permissions. </td>
                           <td><code>metadata_questions</code></td>
                           <td><a href="#producerflow.producer.v1.Producer.MetadataQuestionsEntry">Producer.MetadataQuestionsEntry</a></td>
                           <td>repeated</td>
-                          <td>MetadataQuestions contains custom metadata questions and answers for the producer.
+                          <td><strong>Deprecated.</strong> MetadataQuestions contains custom metadata questions and answers for the producer.
 This field stores tenant-specific questions that need to be asked during producer onboarding.
 The map key is the question identifier/text, and the value is the answer provided.
 This field is deprecated and will be removed in a future release. </td>

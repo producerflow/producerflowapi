@@ -2021,6 +2021,8 @@ type Producer struct {
 	// This field stores tenant-specific questions that need to be asked during producer onboarding.
 	// The map key is the question identifier/text, and the value is the answer provided.
 	// This field is deprecated and will be removed in a future release.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	MetadataQuestions map[string]string `protobuf:"bytes,40,rep,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 	// This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
@@ -2168,6 +2170,7 @@ func (x *Producer) GetLocations() []*Location {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Producer) GetMetadataQuestions() map[string]string {
 	if x != nil {
 		return x.MetadataQuestions
@@ -2301,6 +2304,9 @@ type NewProducer struct {
 	//
 	// Note: This data is stored but not validated by ProducerFlow. Ensure your
 	// application handles any necessary validation of the responses.
+	// Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	MetadataQuestions map[string]string `protobuf:"bytes,11,rep,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// tenant_additional_questions contains tenant-specific custom questions configured by
 	// Producerflow and their corresponding responses. Keys are question identifiers or text,
@@ -2403,6 +2409,7 @@ func (x *NewProducer) GetLocationIds() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *NewProducer) GetMetadataQuestions() map[string]string {
 	if x != nil {
 		return x.MetadataQuestions
@@ -6437,6 +6444,8 @@ type NewAgencyRequest_Agency struct {
 	// MetadataQuestions contains custom metadata questions and answers for the agency.
 	// The map key is the question identifier/text, and the value is the answer provided.
 	// This field is deprecated and will be removed in a future release.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	MetadataQuestions map[string]string `protobuf:"bytes,21,rep,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// tenant_additional_questions contains tenant-specific custom questions configured by
 	// Producerflow and their corresponding responses. Keys are question identifiers or text,
@@ -6609,6 +6618,7 @@ func (x *NewAgencyRequest_Agency) GetLocations() []*LocationInput {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *NewAgencyRequest_Agency) GetMetadataQuestions() map[string]string {
 	if x != nil {
 		return x.MetadataQuestions
@@ -7678,6 +7688,8 @@ type Agency_AgencyInfo struct {
 	// This field stores tenant-specific questions that were collected during agency onboarding.
 	// The map key is the question identifier/text, and the value is the answer provided.
 	// This field is deprecated and will be removed in a future release.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	MetadataQuestions map[string]string `protobuf:"bytes,11,rep,name=metadata_questions,json=metadataQuestions,proto3" json:"metadata_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
 	// This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
@@ -7797,6 +7809,7 @@ func (x *Agency_AgencyInfo) GetPdbAlertsSyncEnabled() bool {
 	return false
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Agency_AgencyInfo) GetMetadataQuestions() map[string]string {
 	if x != nil {
 		return x.MetadataQuestions
@@ -10340,10 +10353,10 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06_emailB\b\n" +
 	"\x06_phone\"L\n" +
 	"#CreateProducerOnboardingURLResponse\x12%\n" +
-	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xd1\x1f\n" +
+	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xd5\x1f\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12)\n" +
-	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xab\x1e\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xaf\x1e\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
@@ -10366,8 +10379,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x10physical_address\x18\x11 \x01(\v2!.producerflow.producer.v1.AddressR\x0fphysicalAddress\x12N\n" +
 	"\x11invoicing_address\x18\x12 \x01(\v2!.producerflow.producer.v1.AddressR\x10invoicingAddress\x12(\n" +
 	"\x10tenant_agency_id\x18\x13 \x01(\tR\x0etenantAgencyId\x12O\n" +
-	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x12w\n" +
-	"\x12metadata_questions\x18\x15 \x03(\v2H.producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntryR\x11metadataQuestions\x12\x90\x01\n" +
+	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x12{\n" +
+	"\x12metadata_questions\x18\x15 \x03(\v2H.producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12\x90\x01\n" +
 	"\x1btenant_additional_questions\x18\x16 \x03(\v2P.producerflow.producer.v1.NewAgencyRequest.Agency.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\x89\x05\n" +
 	"\tPrincipal\x12&\n" +
 	"\n" +
@@ -10547,7 +10560,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\x9f2\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xa32\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -10563,7 +10576,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x16requested_appointments\x18\t \x03(\tR\x15requestedAppointments\x12U\n" +
 	"\x0ebusiness_hours\x18\v \x01(\v2..producerflow.producer.v1.Agency.BusinessHoursR\rbusinessHours\x129\n" +
 	"\x04nipr\x18\f \x01(\v2%.producerflow.producer.v1.Agency.NIPRR\x04nipr\x12@\n" +
-	"\tlocations\x18\r \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x1a\x8f\a\n" +
+	"\tlocations\x18\r \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x1a\x93\a\n" +
 	"\n" +
 	"AgencyInfo\x12#\n" +
 	"\ronboarding_id\x18\x01 \x01(\tR\fonboardingId\x120\n" +
@@ -10578,8 +10591,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\awebsite\x18\b \x01(\tR\awebsite\x12\x10\n" +
 	"\x03npn\x18\t \x01(\tR\x03npn\x125\n" +
 	"\x17pdb_alerts_sync_enabled\x18\n" +
-	" \x01(\bR\x14pdbAlertsSyncEnabled\x12q\n" +
-	"\x12metadata_questions\x18\v \x03(\v2B.producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntryR\x11metadataQuestions\x12n\n" +
+	" \x01(\bR\x14pdbAlertsSyncEnabled\x12u\n" +
+	"\x12metadata_questions\x18\v \x03(\v2B.producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12n\n" +
 	"\x11external_metadata\x18\f \x03(\v2A.producerflow.producer.v1.Agency.AgencyInfo.ExternalMetadataEntryR\x10externalMetadata\x12\x8a\x01\n" +
 	"\x1btenant_additional_questions\x18\r \x03(\v2J.producerflow.producer.v1.Agency.AgencyInfo.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1aD\n" +
 	"\x16MetadataQuestionsEntry\x12\x10\n" +
@@ -10723,7 +10736,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xe5 \n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xe9 \n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -10740,8 +10753,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fis_principal\x18\f \x01(\bR\visPrincipal\x125\n" +
 	"\x16requested_appointments\x18\x0e \x03(\tR\x15requestedAppointments\x12D\n" +
 	"\aaddress\x18\x12 \x01(\v2*.producerflow.producer.v1.Producer.AddressR\aaddress\x12@\n" +
-	"\tlocations\x18\x13 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12h\n" +
-	"\x12metadata_questions\x18( \x03(\v29.producerflow.producer.v1.Producer.MetadataQuestionsEntryR\x11metadataQuestions\x12e\n" +
+	"\tlocations\x18\x13 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12l\n" +
+	"\x12metadata_questions\x18( \x03(\v29.producerflow.producer.v1.Producer.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12e\n" +
 	"\x11external_metadata\x18) \x03(\v28.producerflow.producer.v1.Producer.ExternalMetadataEntryR\x10externalMetadata\x12\x81\x01\n" +
 	"\x1btenant_additional_questions\x18* \x03(\v2A.producerflow.producer.v1.Producer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a9\n" +
 	"\x06Agency\x12\x1b\n" +
@@ -10835,7 +10848,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8e\b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x92\b\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -10848,8 +10861,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0fmailing_address\x18\x06 \x01(\v2-.producerflow.producer.v1.NewProducer.AddressR\x0emailingAddress\x12(\n" +
 	"\ttenant_id\x18\b \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x122\n" +
 	"\flocation_ids\x18\n" +
-	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x12k\n" +
-	"\x12metadata_questions\x18\v \x03(\v2<.producerflow.producer.v1.NewProducer.MetadataQuestionsEntryR\x11metadataQuestions\x12\x84\x01\n" +
+	" \x03(\tB\x0f\xbaH\f\x92\x01\t\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\x12o\n" +
+	"\x12metadata_questions\x18\v \x03(\v2<.producerflow.producer.v1.NewProducer.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12\x84\x01\n" +
 	"\x1btenant_additional_questions\x18\f \x03(\v2D.producerflow.producer.v1.NewProducer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\xec\x01\n" +
 	"\aAddress\x12\x1a\n" +
 	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x1b\n" +
