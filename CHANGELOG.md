@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2025-11-28
+
+### Added
+
+#### ProducerService
+
+- **Organization Creation** - New RPC for programmatic organization management
+  - `CreateOrganization` RPC added to create organizations via API
+  - Accepts organization name, external_id, and email
+  - Returns the created organization_id
+
+### Changed
+
+#### Documentation
+
+- **Enhanced API Documentation** - Comprehensive documentation improvements across all proto files
+  - Expanded service and RPC descriptions with detailed behavior explanations
+  - Added validation rules, typical workflows, and common error codes to all endpoints
+  - Improved field-level documentation with clearer descriptions
+  - See the full [API Reference](https://github.com/producerflow/producerflowapi/wiki/API-Reference)
+
+#### Address Field Standardization
+
+- **Address Fields Renamed** - Standardized address field naming across all messages
+  - `address_line_1` replaces `street` as the primary address field
+  - `address_line_2` replaces `street_line_2` for secondary address line
+  - Affected messages: `Address`, `NewAgency`, `NewProducer`, `UpdateAgencyRequest` and `UpdateProducerRequest`
+
+### Deprecated
+
+- **Legacy Address Field** - `street` field deprecated in favor of `address_line_1`
+  - Affects all `Address` message types throughout the API
+  - `street` will continue to work for backward compatibility, but migration to new field is recommended
+
+---
+
 ## [1.0.2] - 2025-11-19
 
 ### Added
