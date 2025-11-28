@@ -1760,7 +1760,7 @@ message NewAgencyRequest {
     // MetadataQuestions contains custom metadata questions and answers for the agency.
     // The map key is the question identifier/text, and the value is the answer provided.
     // This field is deprecated and will be removed in a future release.
-    map<string, string> metadata_questions = 21;
+    map<string, string> metadata_questions = 21 [deprecated = true];
     // tenant_additional_questions contains tenant-specific custom questions configured by
     // Producerflow and their corresponding responses. Keys are question identifiers or text,
     // values are the answers provided.
@@ -2158,7 +2158,7 @@ message Agency {
     // This field stores tenant-specific questions that were collected during agency onboarding.
     // The map key is the question identifier/text, and the value is the answer provided.
     // This field is deprecated and will be removed in a future release.
-    map<string, string> metadata_questions = 11;
+    map<string, string> metadata_questions = 11 [deprecated = true];
 
     // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
     // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
@@ -2954,7 +2954,7 @@ message Producer {
   // This field stores tenant-specific questions that need to be asked during producer onboarding.
   // The map key is the question identifier/text, and the value is the answer provided.
   // This field is deprecated and will be removed in a future release.
-  map<string, string> metadata_questions = 40;
+  map<string, string> metadata_questions = 40 [deprecated = true];
 
   // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
   // This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
@@ -3136,7 +3136,8 @@ message NewProducer {
   //
   // Note: This data is stored but not validated by ProducerFlow. Ensure your
   // application handles any necessary validation of the responses.
-  map<string, string> metadata_questions = 11;
+  // Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release.
+  map<string, string> metadata_questions = 11 [deprecated = true];
 
   // tenant_additional_questions contains tenant-specific custom questions configured by
   // Producerflow and their corresponding responses. Keys are question identifiers or text,
