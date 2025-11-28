@@ -423,6 +423,9 @@ message License {
   // registry states and capacity carriers are processed automatically without
   // going through NIPR.
   bool is_registry_state = 7;
+
+  // The ID of the carrier associated with this license.
+  string carrier_id = 8 [(buf.validate.field).string.uuid = true];
 }
 
 message ListTerminationReasonsRequest {
