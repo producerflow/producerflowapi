@@ -1591,8 +1591,10 @@ type License struct {
 	// registry states and capacity carriers are processed automatically without
 	// going through NIPR.
 	IsRegistryState bool `protobuf:"varint,7,opt,name=is_registry_state,json=isRegistryState,proto3" json:"is_registry_state,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// The ID of the carrier associated with this license.
+	CarrierId     string `protobuf:"bytes,8,opt,name=carrier_id,json=carrierId,proto3" json:"carrier_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *License) Reset() {
@@ -1683,6 +1685,13 @@ func (x *License) GetIsRegistryState() bool {
 		return x.IsRegistryState
 	}
 	return false
+}
+
+func (x *License) GetCarrierId() string {
+	if x != nil {
+		return x.CarrierId
+	}
+	return ""
 }
 
 type isLicense_LicenseOwner interface {
@@ -1881,7 +1890,7 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x06cocode\x18\x0e \x01(\tR\x06cocode\x122\n" +
 	"\x15parent_appointment_id\x18\x0f \x01(\tR\x13parentAppointmentIdB\x0e\n" +
 	"\f_producer_idB\x13\n" +
-	"\x11_termination_date\"\xbc\x02\n" +
+	"\x11_termination_date\"\xe5\x02\n" +
 	"\aLicense\x12'\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x120\n" +
@@ -1891,7 +1900,9 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\tagency_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12\x1e\n" +
 	"\x05state\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12#\n" +
 	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12*\n" +
-	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryStateB\x0f\n" +
+	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryState\x12'\n" +
+	"\n" +
+	"carrier_id\x18\b \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierIdB\x0f\n" +
 	"\rlicense_owner\"?\n" +
 	"\x1dListTerminationReasonsRequest\x12\x1e\n" +
 	"\x05state\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\"\x81\x01\n" +

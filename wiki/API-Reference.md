@@ -2734,6 +2734,7 @@ Request to get termination fees.
 | `state` | [string](#string) |  | The two-letter state code of the license. |
 | `license_class` | [string](#string) |  | The license class. |
 | `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state. Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
+| `carrier_id` | [string](#string) |  | The ID of the carrier associated with this license. |
 
 #### ListAppointmentsRequest
 
