@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### ProducerService
 
-- **License Carrier ID** – The License object now includes a `carrier_id` field to clearly identify which carrier a license belongs to.
+- **License Carrier ID** – The License object now includes a `carrier_id` field to identify which carrier a license is associated with.
 
 ---
 
