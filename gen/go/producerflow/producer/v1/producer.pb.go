@@ -10273,10 +10273,11 @@ var File_producerflow_producer_v1_producer_proto protoreflect.FileDescriptor
 
 const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
-	"'producerflow/producer/v1/producer.proto\x12\x18producerflow.producer.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\"R\n" +
+	"'producerflow/producer/v1/producer.proto\x12\x18producerflow.producer.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\"T\n" +
 	"\n" +
-	"Pagination\x12%\n" +
-	"\tpage_size\x18\x01 \x01(\x05B\b\xbaH\x05\x1a\x03\x18\xc8\x01R\bpageSize\x12\x1d\n" +
+	"Pagination\x12'\n" +
+	"\tpage_size\x18\x01 \x01(\x05B\n" +
+	"\xbaH\a\x1a\x05\x18\xc8\x01(\x00R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tR\tpageToken\"\x84\x02\n" +
 	"\aAddress\x12\x1a\n" +
