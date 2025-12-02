@@ -728,6 +728,56 @@ service ProducerService {
   //
   rpc ListAgencyContacts(ListAgencyContactsRequest) returns (ListAgencyContactsResponse);
 
+  // UpdateContact updates editable fields for an existing contact.
+  //
+  // This endpoint allows updating contact information for non-producer personnel
+  // associated with an agency. All fields are optional, enabling partial updates
+  // where only specified fields are modified.
+  //
+  // Updatable Fields:
+  // - Name fields (first name, middle name, last name)
+  // - Email address (must remain unique within tenant)
+  // - Phone number
+  // - Mailing address components
+  // - Role within the agency
+  //
+  // Validation Rules:
+  // Proto validation (format checks):
+  // - contact_id: Required, must be a valid UUID format
+  // - contact: Required, contains the fields to update
+  //   - first_name: If provided, must be non-empty
+  //   - last_name: If provided, must be non-empty
+  //   - middle_name: If provided, must be non-empty
+  //   - email: If provided, must be a valid email format
+  //   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+  //   - role: If provided, must be non-empty
+  //   - address (if provided, uses address_line_1 and address_line_2):
+  //     - address_line_1: If provided, must be non-empty
+  //     - address_line_2: If provided, must be non-empty
+  //     - city: If provided, must be non-empty
+  //     - state: If provided, must be exactly 2 characters (state code)
+  //     - zip: If provided, must be 1-10 characters
+  //
+  // Business logic validation:
+  // - contact_id: Contact must exist and belong to the authenticated tenant
+  // - email: If provided, must be unique within the tenant (across both producers and contacts)
+  //
+  // Update Behavior:
+  // - Only fields explicitly provided in the request are updated
+  // - Omitted optional fields remain unchanged
+  // - Empty strings are treated as clearing the field value
+  // - Address updates are all-or-nothing (provide complete address or omit entirely)
+  //
+  // Returns:
+  // Empty response on success. The contact is updated atomically.
+  //
+  // Common Error Codes:
+  // - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+  // - ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+  // - INVALID_ARGUMENT: Validation failed for one or more fields
+  //
+  rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse) {}
+
   // SetExternalID sets an external identifier for a producer, agency, contact,
   // or organization.
   //
@@ -1325,6 +1375,37 @@ service ProducerService {
   // - ALREADY_EXISTS: New location name already exists within the agency
   //
   rpc UpdateAgencyLocation(UpdateAgencyLocationRequest) returns (UpdateAgencyLocationResponse) {}
+}
+
+// ContactRole defines the role or position of a contact within an agency.
+//
+// Contacts represent non-producer personnel associated with an agency.
+// These roles help categorize and organize contacts based on their
+// responsibilities and access levels.
+enum ContactRole {
+  // Default unspecified value. Do not use.
+  // This value is invalid and will be rejected by the API.
+  CONTACT_ROLE_UNSPECIFIED = 0;
+
+  // Agency Administrator: A contact with administrative responsibilities.
+  // Typically has elevated permissions and manages agency operations.
+  CONTACT_ROLE_AGENCY_ADMINISTRATOR = 1;
+
+  // Other: A contact role that doesn't fit into predefined categories.
+  // Use this for flexible role assignment.
+  CONTACT_ROLE_OTHER = 2;
+
+  // Customer Service Representative (CSR): A contact who handles customer inquiries
+  // and support. Does not hold an insurance producer license.
+  CONTACT_ROLE_CSR = 3;
+
+  // Unlicensed Producer: An individual working in a producer-like capacity
+  // but who does not hold an active insurance producer license.
+  CONTACT_ROLE_UNLICENSED_PRODUCER = 4;
+
+  // Unlicensed Service: A contact providing services to the agency
+  // without requiring an insurance license.
+  CONTACT_ROLE_UNLICENSED_SERVICE = 5;
 }
 
 // EntityType defines the business structure of an agency.
@@ -3282,8 +3363,12 @@ message NewContact {
   Address address = 6;
 
   // Role or position of the contact within the agency.
-  // Required and must be non-empty.
-  string role = 7 [(buf.validate.field).string.min_len = 1];
+  // Required and must be a valid ContactRole enum value (not UNSPECIFIED).
+  // See ContactRole enum for available options.
+  ContactRole role = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 
   // Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters
   string tenant_id = 8 [(buf.validate.field) = {
@@ -3354,7 +3439,8 @@ message Contact {
   string phone = 6;
 
   // Role or position of the contact within the agency.
-  string role = 7;
+  // See ContactRole enum for available values.
+  ContactRole role = 7;
 
   // Mailing address of the contact.
   Address address = 8;
@@ -3378,6 +3464,58 @@ message ListAgencyContactsResponse {
   // List of all contacts associated with the specified agency.
   repeated Contact contacts = 1;
 }
+
+// UpdateContactRequest is used to update an existing contact's information.
+message UpdateContactRequest {
+  // Contact contains the fields that can be updated for a contact.
+  // All fields are optional, allowing partial updates.
+  message Contact {
+    // First name of the contact.
+    // If provided, must be non-empty.
+    optional string first_name = 1 [(buf.validate.field).string.min_len = 1];
+
+    // Last name of the contact.
+    // If provided, must be non-empty.
+    optional string last_name = 2 [(buf.validate.field).string.min_len = 1];
+
+    // Middle name of the contact.
+    // If provided, must be non-empty.
+    optional string middle_name = 3 [(buf.validate.field).string.min_len = 1];
+
+    // Email address of the contact.
+    // If provided, must be a valid email format.
+    // Must be unique within the tenant.
+    optional string email = 4 [(buf.validate.field).string.email = true];
+
+    // Phone number of the contact.
+    // If provided, must be a valid phone number format.
+    optional string phone = 5 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+
+    // Role or position of the contact within the agency.
+    // If provided, must be a valid ContactRole enum value (not UNSPECIFIED).
+    // See ContactRole enum for available options.
+    optional ContactRole role = 6 [(buf.validate.field).enum = {
+      defined_only: true
+      not_in: [0]
+    }];
+
+    // Mailing address of the contact.
+    // If provided, all address fields should be included.
+    // This replaces the entire address.
+    optional Address address = 7;
+  }
+
+  // The UUID of the contact to update.
+  // Must be a valid UUID format.
+  string contact_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // The contact information to update.
+  // The field is required.
+  Contact contact = 2 [(buf.validate.field).required = true];
+}
+
+// UpdateContactResponse is the empty response returned after successfully updating a contact.
+message UpdateContactResponse {}
 
 // SetExternalIDRequest is used to associate an external identifier with a producer, agency, or contact.
 // This allows integration with external systems that use different ID schemes.
