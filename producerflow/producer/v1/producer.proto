@@ -3439,8 +3439,7 @@ message Contact {
   string phone = 6;
 
   // Role or position of the contact within the agency.
-  // See ContactRole enum for available values.
-  ContactRole role = 7;
+  string role = 7;
 
   // Mailing address of the contact.
   Address address = 8;
