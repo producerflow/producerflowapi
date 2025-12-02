@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2025-12-02
+
+**⚠️ This release includes breaking changes. Please review the Changed section below.**
+
+### Added
+
+#### ProducerService
+
+- **UpdateContact Endpoint** - New RPC for updating existing contact information
+  - `UpdateContact` RPC added to update contact details including name, email, phone, and address
+  - Supports partial updates where only provided fields are modified
+  - Includes email uniqueness validation across both producers and contacts within the tenant
+
+- **ContactRole Enum** - New enumeration for standardized contact roles
+  - Five validated role types: Agency Administrator, CSR, Other, Unlicensed Producer, and Unlicensed Service
+  - Enforces type safety and prevents invalid role values
+  - Available roles:
+    - `CONTACT_ROLE_AGENCY_ADMINISTRATOR` - A contact with administrative responsibilities
+    - `CONTACT_ROLE_CSR` - Customer Service Representative (unlicensed)
+    - `CONTACT_ROLE_OTHER` - Flexible role assignment for non-standard roles
+    - `CONTACT_ROLE_UNLICENSED_PRODUCER` - Producer-like capacity without active license
+    - `CONTACT_ROLE_UNLICENSED_SERVICE` - Service provider without insurance license
+
+### Changed
+
+#### ProducerService
+
+- **Contact Role Field Type** - ⚠️ **BREAKING CHANGE**: The `role` field in `Contact` and `NewContact` messages has been changed from `string` to `ContactRole` enum
+  - Provides better type safety and validation
+  - Rejects invalid role values at the API level
+  - Existing string values will need to be mapped to corresponding enum values
+
+---
+
 ## [1.0.5] - 2025-11-28
 
 ### Added
