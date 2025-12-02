@@ -57,6 +57,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [NewContact](#newcontact)
   - [NewContacts](#newcontacts)
   - [ListAgencyContacts](#listagencycontacts)
+  - [UpdateContact](#updatecontact)
   - [SetExternalID](#setexternalid)
   - [ValidateProducerNPN](#validateproducernpn)
   - [ValidateAgencyNPN](#validateagencynpn)
@@ -1614,6 +1615,78 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `contacts` | [Contact](#contact) | repeated | List of all contacts associated with the specified agency. |
+
+---
+
+
+### UpdateContact
+
+
+UpdateContact updates editable fields for an existing contact.
+
+This endpoint allows updating contact information for non-producer personnel
+associated with an agency. All fields are optional, enabling partial updates
+where only specified fields are modified.
+
+Updatable Fields:
+- Name fields (first name, middle name, last name)
+- Email address (must remain unique within tenant)
+- Phone number
+- Mailing address components
+- Role within the agency
+
+Validation Rules:
+Proto validation (format checks):
+- contact_id: Required, must be a valid UUID format
+- contact: Required, contains the fields to update
+  - first_name: If provided, must be non-empty
+  - last_name: If provided, must be non-empty
+  - middle_name: If provided, must be non-empty
+  - email: If provided, must be a valid email format
+  - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+  - role: If provided, must be non-empty
+  - address (if provided, uses address_line_1 and address_line_2):
+    - address_line_1: If provided, must be non-empty
+    - address_line_2: If provided, must be non-empty
+    - city: If provided, must be non-empty
+    - state: If provided, must be exactly 2 characters (state code)
+    - zip: If provided, must be 1-10 characters
+
+Business logic validation:
+- contact_id: Contact must exist and belong to the authenticated tenant
+- email: If provided, must be unique within the tenant (across both producers and contacts)
+
+Update Behavior:
+- Only fields explicitly provided in the request are updated
+- Omitted optional fields remain unchanged
+- Empty strings are treated as clearing the field value
+- Address updates are all-or-nothing (provide complete address or omit entirely)
+
+Returns:
+Empty response on success. The contact is updated atomically.
+
+Common Error Codes:
+- NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+- ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+- INVALID_ARGUMENT: Validation failed for one or more fields
+
+#### Request: `UpdateContactRequest`
+
+
+UpdateContactRequest is used to update an existing contact's information.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact_id` | [string](#string) |  | The UUID of the contact to update. Must be a valid UUID format. |
+| `contact` | [UpdateContactRequest.Contact](#updatecontactrequestcontact) |  | The contact information to update. The field is required. |
+
+#### Response: `UpdateContactResponse`
+
+
+UpdateContactResponse is the empty response returned after successfully updating a contact.
+
+
+*This message has no fields.*
 
 ---
 
@@ -3196,7 +3269,7 @@ Contacts are non-producer individuals linked to the agency.
 | `last_name` | [string](#string) |  | Last name of the contact. |
 | `email` | [string](#string) |  | Email address of the contact. Must be unique within the tenant. |
 | `phone` | [string](#string) |  | Phone number of the contact. |
-| `role` | [string](#string) |  | Role or position of the contact within the agency. |
+| `role` | [ContactRole](#contactrole) |  | Role or position of the contact within the agency. See ContactRole enum for available values. |
 | `address` | [Address](#address) |  | Mailing address of the contact. |
 | `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
@@ -3748,7 +3821,7 @@ Contacts represent non-producer individuals associated with an agency.
 | `email` | [string](#string) |  | Email address of the contact. Required and must be a valid email format. Must be unique within the tenant. |
 | `phone` | [string](#string) |  | Phone number of the contact. Optional if default value, but if provided must match the pattern of a valid phone number. |
 | `address` | [Address](#address) |  | Mailing address of the contact. |
-| `role` | [string](#string) |  | Role or position of the contact within the agency. Required and must be non-empty. |
+| `role` | [ContactRole](#contactrole) |  | Role or position of the contact within the agency. Required and must be a valid ContactRole enum value (not UNSPECIFIED). See ContactRole enum for available options. |
 | `tenant_id` | [string](#string) |  | Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters |
 | `npn` | [string](#string) | optional | National Producer Number (NPN) of the contact. |
 
@@ -4461,6 +4534,35 @@ Address fields cannot be cleared - if provided, they must have valid values.
 UpdateAgencyResponse is the empty response returned after successfully updating an agency.
 
 
+#### UpdateContactRequest
+
+UpdateContactRequest is used to update an existing contact's information.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact_id` | [string](#string) |  | The UUID of the contact to update. Must be a valid UUID format. |
+| `contact` | [UpdateContactRequest.Contact](#updatecontactrequestcontact) |  | The contact information to update. The field is required. |
+
+#### UpdateContactRequest.Contact
+
+Contact contains the fields that can be updated for a contact.
+All fields are optional, allowing partial updates.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `first_name` | [string](#string) | optional | First name of the contact. If provided, must be non-empty. |
+| `last_name` | [string](#string) | optional | Last name of the contact. If provided, must be non-empty. |
+| `middle_name` | [string](#string) | optional | Middle name of the contact. If provided, must be non-empty. |
+| `email` | [string](#string) | optional | Email address of the contact. If provided, must be a valid email format. Must be unique within the tenant. |
+| `phone` | [string](#string) | optional | Phone number of the contact. If provided, must be a valid phone number format. |
+| `role` | [ContactRole](#contactrole) | optional | Role or position of the contact within the agency. If provided, must be a valid ContactRole enum value (not UNSPECIFIED). See ContactRole enum for available options. |
+| `address` | [Address](#address) | optional | Mailing address of the contact. If provided, all address fields should be included. This replaces the entire address. |
+
+#### UpdateContactResponse
+
+UpdateContactResponse is the empty response returned after successfully updating a contact.
+
+
 #### UpdateProducerRequest
 
 UpdateProducerRequest contains the fields that can be updated in a producer record.
@@ -4671,6 +4773,24 @@ AgencyType defines whether an agency is internal (tenant agency) or external.
 | `AGENCY_TYPE_UNSPECIFIED` | 0 | Default unspecified value. Do not use. |
 | `AGENCY_TYPE_INTERNAL` | 1 | Internal agencies are the agencies that are tenant agencies. |
 | `AGENCY_TYPE_EXTERNAL` | 2 | External agencies are the agencies that are not tenant agencies. |
+
+
+#### ContactRole
+
+ContactRole defines the role or position of a contact within an agency.
+
+Contacts represent non-producer personnel associated with an agency.
+These roles help categorize and organize contacts based on their
+responsibilities and access levels.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `CONTACT_ROLE_UNSPECIFIED` | 0 | Default unspecified value. Do not use. This value is invalid and will be rejected by the API. |
+| `CONTACT_ROLE_AGENCY_ADMINISTRATOR` | 1 | Agency Administrator: A contact with administrative responsibilities. Typically has elevated permissions and manages agency operations. |
+| `CONTACT_ROLE_OTHER` | 2 | Other: A contact role that doesn't fit into predefined categories. Use this for flexible role assignment. |
+| `CONTACT_ROLE_CSR` | 3 | Customer Service Representative (CSR): A contact who handles customer inquiries and support. Does not hold an insurance producer license. |
+| `CONTACT_ROLE_UNLICENSED_PRODUCER` | 4 | Unlicensed Producer: An individual working in a producer-like capacity but who does not hold an active insurance producer license. |
+| `CONTACT_ROLE_UNLICENSED_SERVICE` | 5 | Unlicensed Service: A contact providing services to the agency without requiring an insurance license. |
 
 
 #### EntityType

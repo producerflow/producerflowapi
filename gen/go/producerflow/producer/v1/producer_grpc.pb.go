@@ -36,6 +36,7 @@ const (
 	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
 	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
 	ProducerService_ListAgencyContacts_FullMethodName            = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
+	ProducerService_UpdateContact_FullMethodName                 = "/producerflow.producer.v1.ProducerService/UpdateContact"
 	ProducerService_SetExternalID_FullMethodName                 = "/producerflow.producer.v1.ProducerService/SetExternalID"
 	ProducerService_ValidateProducerNPN_FullMethodName           = "/producerflow.producer.v1.ProducerService/ValidateProducerNPN"
 	ProducerService_ValidateAgencyNPN_FullMethodName             = "/producerflow.producer.v1.ProducerService/ValidateAgencyNPN"
@@ -746,6 +747,54 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(ctx context.Context, in *ListAgencyContactsRequest, opts ...grpc.CallOption) (*ListAgencyContactsResponse, error)
+	// UpdateContact updates editable fields for an existing contact.
+	//
+	// This endpoint allows updating contact information for non-producer personnel
+	// associated with an agency. All fields are optional, enabling partial updates
+	// where only specified fields are modified.
+	//
+	// Updatable Fields:
+	// - Name fields (first name, middle name, last name)
+	// - Email address (must remain unique within tenant)
+	// - Phone number
+	// - Mailing address components
+	// - Role within the agency
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - contact_id: Required, must be a valid UUID format
+	// - contact: Required, contains the fields to update
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - role: If provided, must be non-empty
+	//   - address (if provided, uses address_line_1 and address_line_2):
+	//   - address_line_1: If provided, must be non-empty
+	//   - address_line_2: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// Business logic validation:
+	// - contact_id: Contact must exist and belong to the authenticated tenant
+	// - email: If provided, must be unique within the tenant (across both producers and contacts)
+	//
+	// Update Behavior:
+	// - Only fields explicitly provided in the request are updated
+	// - Omitted optional fields remain unchanged
+	// - Empty strings are treated as clearing the field value
+	// - Address updates are all-or-nothing (provide complete address or omit entirely)
+	//
+	// Returns:
+	// Empty response on success. The contact is updated atomically.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+	// - INVALID_ARGUMENT: Validation failed for one or more fields
+	UpdateContact(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error)
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
@@ -1485,6 +1534,16 @@ func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, in *List
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAgencyContactsResponse)
 	err := c.cc.Invoke(ctx, ProducerService_ListAgencyContacts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) UpdateContact(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateContactResponse)
+	err := c.cc.Invoke(ctx, ProducerService_UpdateContact_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2352,6 +2411,54 @@ type ProducerServiceServer interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error)
+	// UpdateContact updates editable fields for an existing contact.
+	//
+	// This endpoint allows updating contact information for non-producer personnel
+	// associated with an agency. All fields are optional, enabling partial updates
+	// where only specified fields are modified.
+	//
+	// Updatable Fields:
+	// - Name fields (first name, middle name, last name)
+	// - Email address (must remain unique within tenant)
+	// - Phone number
+	// - Mailing address components
+	// - Role within the agency
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - contact_id: Required, must be a valid UUID format
+	// - contact: Required, contains the fields to update
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - role: If provided, must be non-empty
+	//   - address (if provided, uses address_line_1 and address_line_2):
+	//   - address_line_1: If provided, must be non-empty
+	//   - address_line_2: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// Business logic validation:
+	// - contact_id: Contact must exist and belong to the authenticated tenant
+	// - email: If provided, must be unique within the tenant (across both producers and contacts)
+	//
+	// Update Behavior:
+	// - Only fields explicitly provided in the request are updated
+	// - Omitted optional fields remain unchanged
+	// - Empty strings are treated as clearing the field value
+	// - Address updates are all-or-nothing (provide complete address or omit entirely)
+	//
+	// Returns:
+	// Empty response on success. The contact is updated atomically.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+	// - INVALID_ARGUMENT: Validation failed for one or more fields
+	UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error)
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
@@ -2978,6 +3085,9 @@ func (UnimplementedProducerServiceServer) NewContacts(context.Context, *NewConta
 func (UnimplementedProducerServiceServer) ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAgencyContacts not implemented")
 }
+func (UnimplementedProducerServiceServer) UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContact not implemented")
+}
 func (UnimplementedProducerServiceServer) SetExternalID(context.Context, *SetExternalIDRequest) (*SetExternalIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetExternalID not implemented")
 }
@@ -3352,6 +3462,24 @@ func _ProducerService_ListAgencyContacts_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).ListAgencyContacts(ctx, req.(*ListAgencyContactsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_UpdateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).UpdateContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_UpdateContact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).UpdateContact(ctx, req.(*UpdateContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3736,6 +3864,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAgencyContacts",
 			Handler:    _ProducerService_ListAgencyContacts_Handler,
+		},
+		{
+			MethodName: "UpdateContact",
+			Handler:    _ProducerService_UpdateContact_Handler,
 		},
 		{
 			MethodName: "SetExternalID",

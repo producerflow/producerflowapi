@@ -84,6 +84,9 @@ const (
 	// ProducerServiceListAgencyContactsProcedure is the fully-qualified name of the ProducerService's
 	// ListAgencyContacts RPC.
 	ProducerServiceListAgencyContactsProcedure = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
+	// ProducerServiceUpdateContactProcedure is the fully-qualified name of the ProducerService's
+	// UpdateContact RPC.
+	ProducerServiceUpdateContactProcedure = "/producerflow.producer.v1.ProducerService/UpdateContact"
 	// ProducerServiceSetExternalIDProcedure is the fully-qualified name of the ProducerService's
 	// SetExternalID RPC.
 	ProducerServiceSetExternalIDProcedure = "/producerflow.producer.v1.ProducerService/SetExternalID"
@@ -804,6 +807,54 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
+	// UpdateContact updates editable fields for an existing contact.
+	//
+	// This endpoint allows updating contact information for non-producer personnel
+	// associated with an agency. All fields are optional, enabling partial updates
+	// where only specified fields are modified.
+	//
+	// Updatable Fields:
+	// - Name fields (first name, middle name, last name)
+	// - Email address (must remain unique within tenant)
+	// - Phone number
+	// - Mailing address components
+	// - Role within the agency
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - contact_id: Required, must be a valid UUID format
+	// - contact: Required, contains the fields to update
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - role: If provided, must be non-empty
+	//   - address (if provided, uses address_line_1 and address_line_2):
+	//   - address_line_1: If provided, must be non-empty
+	//   - address_line_2: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// Business logic validation:
+	// - contact_id: Contact must exist and belong to the authenticated tenant
+	// - email: If provided, must be unique within the tenant (across both producers and contacts)
+	//
+	// Update Behavior:
+	// - Only fields explicitly provided in the request are updated
+	// - Omitted optional fields remain unchanged
+	// - Empty strings are treated as clearing the field value
+	// - Address updates are all-or-nothing (provide complete address or omit entirely)
+	//
+	// Returns:
+	// Empty response on success. The contact is updated atomically.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+	// - INVALID_ARGUMENT: Validation failed for one or more fields
+	UpdateContact(context.Context, *connect.Request[v1.UpdateContactRequest]) (*connect.Response[v1.UpdateContactResponse], error)
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
@@ -1484,6 +1535,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
 			connect.WithClientOptions(opts...),
 		),
+		updateContact: connect.NewClient[v1.UpdateContactRequest, v1.UpdateContactResponse](
+			httpClient,
+			baseURL+ProducerServiceUpdateContactProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("UpdateContact")),
+			connect.WithClientOptions(opts...),
+		),
 		setExternalID: connect.NewClient[v1.SetExternalIDRequest, v1.SetExternalIDResponse](
 			httpClient,
 			baseURL+ProducerServiceSetExternalIDProcedure,
@@ -1608,6 +1665,7 @@ type producerServiceClient struct {
 	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
 	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
 	listAgencyContacts            *connect.Client[v1.ListAgencyContactsRequest, v1.ListAgencyContactsResponse]
+	updateContact                 *connect.Client[v1.UpdateContactRequest, v1.UpdateContactResponse]
 	setExternalID                 *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
 	validateProducerNPN           *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
 	validateAgencyNPN             *connect.Client[v1.ValidateAgencyNPNRequest, v1.ValidateAgencyNPNResponse]
@@ -1712,6 +1770,11 @@ func (c *producerServiceClient) NewContacts(ctx context.Context, req *connect.Re
 // ListAgencyContacts calls producerflow.producer.v1.ProducerService.ListAgencyContacts.
 func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, req *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
 	return c.listAgencyContacts.CallUnary(ctx, req)
+}
+
+// UpdateContact calls producerflow.producer.v1.ProducerService.UpdateContact.
+func (c *producerServiceClient) UpdateContact(ctx context.Context, req *connect.Request[v1.UpdateContactRequest]) (*connect.Response[v1.UpdateContactResponse], error) {
+	return c.updateContact.CallUnary(ctx, req)
 }
 
 // SetExternalID calls producerflow.producer.v1.ProducerService.SetExternalID.
@@ -2469,6 +2532,54 @@ type ProducerServiceHandler interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
+	// UpdateContact updates editable fields for an existing contact.
+	//
+	// This endpoint allows updating contact information for non-producer personnel
+	// associated with an agency. All fields are optional, enabling partial updates
+	// where only specified fields are modified.
+	//
+	// Updatable Fields:
+	// - Name fields (first name, middle name, last name)
+	// - Email address (must remain unique within tenant)
+	// - Phone number
+	// - Mailing address components
+	// - Role within the agency
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - contact_id: Required, must be a valid UUID format
+	// - contact: Required, contains the fields to update
+	//   - first_name: If provided, must be non-empty
+	//   - last_name: If provided, must be non-empty
+	//   - middle_name: If provided, must be non-empty
+	//   - email: If provided, must be a valid email format
+	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
+	//   - role: If provided, must be non-empty
+	//   - address (if provided, uses address_line_1 and address_line_2):
+	//   - address_line_1: If provided, must be non-empty
+	//   - address_line_2: If provided, must be non-empty
+	//   - city: If provided, must be non-empty
+	//   - state: If provided, must be exactly 2 characters (state code)
+	//   - zip: If provided, must be 1-10 characters
+	//
+	// Business logic validation:
+	// - contact_id: Contact must exist and belong to the authenticated tenant
+	// - email: If provided, must be unique within the tenant (across both producers and contacts)
+	//
+	// Update Behavior:
+	// - Only fields explicitly provided in the request are updated
+	// - Omitted optional fields remain unchanged
+	// - Empty strings are treated as clearing the field value
+	// - Address updates are all-or-nothing (provide complete address or omit entirely)
+	//
+	// Returns:
+	// Empty response on success. The contact is updated atomically.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	// - ALREADY_EXISTS: Email is already in use by another producer or contact within the tenant
+	// - INVALID_ARGUMENT: Validation failed for one or more fields
+	UpdateContact(context.Context, *connect.Request[v1.UpdateContactRequest]) (*connect.Response[v1.UpdateContactResponse], error)
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
@@ -3145,6 +3256,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceUpdateContactHandler := connect.NewUnaryHandler(
+		ProducerServiceUpdateContactProcedure,
+		svc.UpdateContact,
+		connect.WithSchema(producerServiceMethods.ByName("UpdateContact")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceSetExternalIDHandler := connect.NewUnaryHandler(
 		ProducerServiceSetExternalIDProcedure,
 		svc.SetExternalID,
@@ -3283,6 +3400,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceNewContactsHandler.ServeHTTP(w, r)
 		case ProducerServiceListAgencyContactsProcedure:
 			producerServiceListAgencyContactsHandler.ServeHTTP(w, r)
+		case ProducerServiceUpdateContactProcedure:
+			producerServiceUpdateContactHandler.ServeHTTP(w, r)
 		case ProducerServiceSetExternalIDProcedure:
 			producerServiceSetExternalIDHandler.ServeHTTP(w, r)
 		case ProducerServiceValidateProducerNPNProcedure:
@@ -3392,6 +3511,10 @@ func (UnimplementedProducerServiceHandler) NewContacts(context.Context, *connect
 
 func (UnimplementedProducerServiceHandler) ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListAgencyContacts is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) UpdateContact(context.Context, *connect.Request[v1.UpdateContactRequest]) (*connect.Response[v1.UpdateContactResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.UpdateContact is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) SetExternalID(context.Context, *connect.Request[v1.SetExternalIDRequest]) (*connect.Response[v1.SetExternalIDResponse], error) {
