@@ -3269,7 +3269,7 @@ Contacts are non-producer individuals linked to the agency.
 | `last_name` | [string](#string) |  | Last name of the contact. |
 | `email` | [string](#string) |  | Email address of the contact. Must be unique within the tenant. |
 | `phone` | [string](#string) |  | Phone number of the contact. |
-| `role` | [ContactRole](#contactrole) |  | Role or position of the contact within the agency. See ContactRole enum for available values. |
+| `role` | [string](#string) |  | Role or position of the contact within the agency. |
 | `address` | [Address](#address) |  | Mailing address of the contact. |
 | `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
