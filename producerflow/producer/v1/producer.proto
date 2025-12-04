@@ -2993,6 +2993,13 @@ message Producer {
     //
     // This data is synchronized from NIPR and is read-only.
     repeated Appointment appointments = 10;
+
+    // Current synchronization status with NIPR.
+    // Indicates whether NIPR data sync is active, failing, pending, or disabled.
+    NIPRSyncState nipr_sync_status = 11;
+
+    // Timestamp when the NIPR sync status was last updated.
+    google.protobuf.Timestamp nipr_sync_status_updated_at = 12;
   }
 
   // Data synchronized from the NIPR service.
