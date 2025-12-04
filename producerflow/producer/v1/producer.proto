@@ -3446,7 +3446,8 @@ message Contact {
   string phone = 6;
 
   // Role or position of the contact within the agency.
-  string role = 7;
+  // Deprecated: Use role_type instead. This field will be removed in a future version.
+  string role = 7 [deprecated = true];
 
   // Mailing address of the contact.
   Address address = 8;
@@ -3456,6 +3457,10 @@ message Contact {
 
   // When the contact was created.
   google.protobuf.Timestamp created_at = 10;
+
+  // The role type of the contact as an enum.
+  // This field replaces the deprecated string-based 'role' field.
+  ContactRole role_type = 11;
 }
 
 // ListAgencyContactsRequest requests all contacts associated with an agency.
