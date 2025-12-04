@@ -38,8 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### ProducerService
 
-- **Contact Message Fields** - The `Contact` message (returned by `ListAgencyContacts` endpoint) now uses string-based role field
-  - `role` field remains as `string` type for backward compatibility
+- **Contact Message Fields** - The `Contact` message (returned by `ListAgencyContacts` endpoint) still uses string-based role field
+  - `role` field remains as `string` type for backward compatibility but adds new field `role_type` as an enum
   - Maintains consistency with existing integrations
 
 ---
