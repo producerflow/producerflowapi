@@ -3269,10 +3269,11 @@ Contacts are non-producer individuals linked to the agency.
 | `last_name` | [string](#string) |  | Last name of the contact. |
 | `email` | [string](#string) |  | Email address of the contact. Must be unique within the tenant. |
 | `phone` | [string](#string) |  | Phone number of the contact. |
-| `role` | [string](#string) |  | Role or position of the contact within the agency. |
+| `role` | [string](#string) |  | **Deprecated.** Role or position of the contact within the agency. Deprecated: Use role_type instead. This field will be removed in a future version. |
 | `address` | [Address](#address) |  | Mailing address of the contact. |
 | `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
+| `role_type` | [ContactRole](#contactrole) |  | The role type of the contact as an enum. This field replaces the deprecated string-based 'role' field. |
 
 #### CreateAgencyOnboardingURLRequest
 

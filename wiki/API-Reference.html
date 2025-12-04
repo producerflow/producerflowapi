@@ -28414,7 +28414,8 @@ Must be unique within the tenant. </td>
                           <td><code>role</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Role or position of the contact within the agency. </td>
+                          <td><strong>Deprecated.</strong> Role or position of the contact within the agency.
+Deprecated: Use role_type instead. This field will be removed in a future version. </td>
                         </tr>
                       
                         <tr>
@@ -28436,6 +28437,14 @@ Must be unique within the tenant. </td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
                           <td>When the contact was created. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>role_type</code></td>
+                          <td><a href="#producerflow.producer.v1.ContactRole">ContactRole</a></td>
+                          <td></td>
+                          <td>The role type of the contact as an enum.
+This field replaces the deprecated string-based 'role' field. </td>
                         </tr>
                       
                     </tbody>
