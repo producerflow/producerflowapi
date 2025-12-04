@@ -4133,6 +4133,8 @@ NIPR contains data synchronized from the National Insurance Producer Registry.
 | `biographic` | [Producer.NIPR.Biographic](#producerniprbiographic) |  | Biographic information of the producer from NIPR |
 | `regulatory_info` | [Producer.NIPR.ProducerRegulatoryInfo](#producerniprproducerregulatoryinfo) |  | Producer's regulatory information from NIPR |
 | `appointments` | [Producer.NIPR.Appointment](#producerniprappointment) | repeated | List of carrier appointments held by the producer.  Each appointment represents authorization to sell a specific carrier's products for a specific line of authority. A producer typically has multiple appointments across different carriers and LOAs.  Before allowing a producer to quote or sell a product: 1. Verify they have an active appointment with that carrier 2. Verify the appointment's LOA matches the product type 3. Check the appointment renewal date hasn't passed  This data is synchronized from NIPR and is read-only. |
+| `nipr_sync_status` | [NIPRSyncState](#niprsyncstate) |  | Current synchronization status with NIPR. Indicates whether NIPR data sync is active, failing, pending, or disabled. |
+| `nipr_sync_status_updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the NIPR sync status was last updated. |
 
 #### Producer.NIPR.Appointment
 
