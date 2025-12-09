@@ -65,8 +65,14 @@
         "state": { "type": "string" },
         "street": { "type": "string" },
         "zip": { "type": "string" },
-        "is_sole_proprietor": { "type": "boolean", "description": "Whether the producer is a sole proprietor" },
-        "is_principal": { "type": "boolean", "description": "Whether the producer is the principal/lead agent of the agency" }
+        "is_sole_proprietor": {
+          "type": "boolean",
+          "description": "Whether the producer is a sole proprietor"
+        },
+        "is_principal": {
+          "type": "boolean",
+          "description": "Whether the producer is the principal/lead agent of the agency"
+        }
       }
     },
     "producer_nipr_data": {
@@ -103,6 +109,11 @@
       "items": {
         "type": "object",
         "properties": {
+          "license_id": {
+            "type": "string",
+            "format": "string",
+            "description": "Unique identifier for the license"
+          },
           "expiration_date": { "type": "string", "format": "date" },
           "is_active": { "type": "boolean" },
           "issue_date": { "type": "string", "format": "date" },
