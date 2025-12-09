@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.8] - 2025-12-09
+
+### Added
+
+#### ProducerService
+
+- **License ID Field** - Unique identifier added to license objects for tracking and reference
+  - `license_id` field added to `Agency.License` message (returned by `GetAgency` and related endpoints)
+  - `license_id` field added to `Producer.License` message (returned by `GetProducer` and related endpoints)
+  - Enables direct license lookup and cross-system reference
+
+#### Webhook System
+
+- **License ID in Webhook Payloads** - License identifiers now included in webhook notifications
+  - `license_id` field added to agency webhook license objects
+  - `license_id` field added to producer webhook license objects
+  - Simplifies correlation between API data and webhook events
+
+### Changed
+
+#### ProducerService
+
+- **Phone Fields Now Truly Optional** - Phone number fields across multiple endpoints now properly support omission
+  - Affects: `NewAgencyRequest.phone`, `NewAgencyRequest.Principal.phone`, `UpdateProducerRequest.phone`, `UpdateAgencyRequest.phone`, `UpdateContactRequest.phone`, `UpdateAgencyLocationRequest.phone`
+  - Empty phone values are now ignored during validation rather than triggering format errors
+  - Improves flexibility for agencies and producers without phone numbers on file
+
+---
+
 ## [1.0.7] - 2025-12-04
 
 ### Added
