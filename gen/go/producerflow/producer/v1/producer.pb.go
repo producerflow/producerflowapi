@@ -6590,7 +6590,7 @@ type NewAgencyRequest_Agency struct {
 	// Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
 	Npn string `protobuf:"bytes,3,opt,name=npn,proto3" json:"npn,omitempty"`
 	// The phone number of the agency.
-	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Phone *string `protobuf:"bytes,5,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	// The website of the agency.
 	Website string `protobuf:"bytes,6,opt,name=website,proto3" json:"website,omitempty"`
 	// Information about the agency's principal.
@@ -6691,8 +6691,8 @@ func (x *NewAgencyRequest_Agency) GetNpn() string {
 }
 
 func (x *NewAgencyRequest_Agency) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -6831,7 +6831,7 @@ type NewAgencyRequest_Agency_Principal struct {
 	// The email address of the principal.
 	Email string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	// The phone number of the principal.
-	Phone string `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
+	Phone *string `protobuf:"bytes,4,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	// The National Producer Number (NPN) of the principal.
 	Npn string `protobuf:"bytes,5,opt,name=npn,proto3" json:"npn,omitempty"`
 	// Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
@@ -6910,8 +6910,8 @@ func (x *NewAgencyRequest_Agency_Principal) GetEmail() string {
 }
 
 func (x *NewAgencyRequest_Agency_Principal) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -8908,8 +8908,10 @@ type Agency_NIPR_License struct {
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Lines of Authority associated with this license.
 	LinesOfAuthority []*Agency_NIPR_License_LineOfAuthority `protobuf:"bytes,12,rep,name=lines_of_authority,json=linesOfAuthority,proto3" json:"lines_of_authority,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// The unique identifier for this license.
+	LicenseId     string `protobuf:"bytes,13,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Agency_NIPR_License) Reset() {
@@ -9024,6 +9026,13 @@ func (x *Agency_NIPR_License) GetLinesOfAuthority() []*Agency_NIPR_License_LineO
 		return x.LinesOfAuthority
 	}
 	return nil
+}
+
+func (x *Agency_NIPR_License) GetLicenseId() string {
+	if x != nil {
+		return x.LicenseId
+	}
+	return ""
 }
 
 // RegulatoryInfo contains regulatory information,
@@ -9699,8 +9708,10 @@ type Producer_NIPR_License struct {
 	// check that the producer has an active LOA matching the product type
 	// before allowing sales.
 	LinesOfAuthority []*Producer_NIPR_License_LineOfAuthority `protobuf:"bytes,8,rep,name=lines_of_authority,json=linesOfAuthority,proto3" json:"lines_of_authority,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// The unique identifier for this license.
+	LicenseId     string `protobuf:"bytes,9,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Producer_NIPR_License) Reset() {
@@ -9787,6 +9798,13 @@ func (x *Producer_NIPR_License) GetLinesOfAuthority() []*Producer_NIPR_License_L
 		return x.LinesOfAuthority
 	}
 	return nil
+}
+
+func (x *Producer_NIPR_License) GetLicenseId() string {
+	if x != nil {
+		return x.LicenseId
+	}
+	return ""
 }
 
 // Biographic contains personal and identifying information about the producer.
@@ -10668,15 +10686,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x06_emailB\b\n" +
 	"\x06_phone\"L\n" +
 	"#CreateProducerOnboardingURLResponse\x12%\n" +
-	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xd5\x1f\n" +
+	"\x0eonboarding_url\x18\x01 \x01(\tR\ronboardingUrl\"\xf3\x1f\n" +
 	"\x10NewAgencyRequest\x12Q\n" +
 	"\x06agency\x18\x01 \x01(\v21.producerflow.producer.v1.NewAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x12)\n" +
-	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xaf\x1e\n" +
+	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x1a\xcd\x1e\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1d\n" +
 	"\x05email\x18\x02 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
-	"\x03npn\x18\x03 \x01(\tR\x03npn\x122\n" +
-	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12\x18\n" +
+	"\x03npn\x18\x03 \x01(\tR\x03npn\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x00R\x05phone\x88\x01\x01\x12\x18\n" +
 	"\awebsite\x18\x06 \x01(\tR\awebsite\x12a\n" +
 	"\tprincipal\x18\a \x01(\v2;.producerflow.producer.v1.NewAgencyRequest.Agency.PrincipalB\x06\xbaH\x03\xc8\x01\x01R\tprincipal\x12`\n" +
 	"\fbank_account\x18\t \x01(\v2=.producerflow.producer.v1.NewAgencyRequest.Agency.BankAccountR\vbankAccount\x12Q\n" +
@@ -10685,35 +10703,36 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0ebusiness_hours\x18\v \x01(\v2?.producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHoursR\rbusinessHours\x12C\n" +
 	"\tproducers\x18\f \x03(\v2%.producerflow.producer.v1.NewProducerR\tproducers\x12l\n" +
 	"\x11points_of_contact\x18\r \x03(\v2@.producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContactR\x0fpointsOfContact\x12C\n" +
-	"\x14root_organization_id\x18\x0e \x01(\tB\f\xbaH\t\xd8\x01\x02r\x04\x10\x01\x18$H\x00R\x12rootOrganizationId\x88\x01\x01\x12Q\n" +
+	"\x14root_organization_id\x18\x0e \x01(\tB\f\xbaH\t\xd8\x01\x02r\x04\x10\x01\x18$H\x01R\x12rootOrganizationId\x88\x01\x01\x12Q\n" +
 	"\ventity_type\x18\x0f \x01(\x0e2$.producerflow.producer.v1.EntityTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x18\x01\x18\x02R\n" +
 	"entityType\x12$\n" +
-	"\x04fein\x18\x10 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x98\x01\tH\x01R\x04fein\x88\x01\x01\x12J\n" +
+	"\x04fein\x18\x10 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x98\x01\tH\x02R\x04fein\x88\x01\x01\x12J\n" +
 	"\x0fmailing_address\x18\b \x01(\v2!.producerflow.producer.v1.AddressR\x0emailingAddress\x12L\n" +
 	"\x10physical_address\x18\x11 \x01(\v2!.producerflow.producer.v1.AddressR\x0fphysicalAddress\x12N\n" +
 	"\x11invoicing_address\x18\x12 \x01(\v2!.producerflow.producer.v1.AddressR\x10invoicingAddress\x12(\n" +
 	"\x10tenant_agency_id\x18\x13 \x01(\tR\x0etenantAgencyId\x12O\n" +
 	"\tlocations\x18\x14 \x03(\v2'.producerflow.producer.v1.LocationInputB\b\xbaH\x05\x92\x01\x02\x10dR\tlocations\x12{\n" +
 	"\x12metadata_questions\x18\x15 \x03(\v2H.producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12\x90\x01\n" +
-	"\x1btenant_additional_questions\x18\x16 \x03(\v2P.producerflow.producer.v1.NewAgencyRequest.Agency.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\x89\x05\n" +
+	"\x1btenant_additional_questions\x18\x16 \x03(\v2P.producerflow.producer.v1.NewAgencyRequest.Agency.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a\x98\x05\n" +
 	"\tPrincipal\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
 	"\tlast_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\blastName\x12\x1f\n" +
 	"\vmiddle_name\x18\r \x01(\tR\n" +
 	"middleName\x12\x1d\n" +
-	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x122\n" +
-	"\x05phone\x18\x04 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12\x1b\n" +
+	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x127\n" +
+	"\x05phone\x18\x04 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x00R\x05phone\x88\x01\x01\x12\x1b\n" +
 	"\x03npn\x18\x05 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\n" +
 	"R\x03npn\x12(\n" +
 	"\ttenant_id\x18\x06 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12)\n" +
-	"\x0esync_with_nipr\x18\a \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01\x12\x9a\x01\n" +
+	"\x0esync_with_nipr\x18\a \x01(\bH\x01R\fsyncWithNipr\x88\x01\x01\x12\x9a\x01\n" +
 	"\x1btenant_additional_questions\x18\b \x03(\v2Z.producerflow.producer.v1.NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x12J\n" +
 	"\x0fmailing_address\x18\t \x01(\v2!.producerflow.producer.v1.AddressR\x0emailingAddress\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x11\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_phoneB\x11\n" +
 	"\x0f_sync_with_nipr\x1a\x81\x03\n" +
 	"\vBankAccount\x120\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\b\x18\x11R\raccountNumber\x12/\n" +
@@ -10754,7 +10773,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x17\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_phoneB\x17\n" +
 	"\x15_root_organization_idB\a\n" +
 	"\x05_feinB\x11\n" +
 	"\x0f_sync_with_nipr\"\x99\x01\n" +
@@ -10792,11 +10812,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"w9_doc_url\x18\x03 \x01(\tR\bw9DocUrl\x12&\n" +
 	"\x0flicense_doc_url\x18\x04 \x01(\tR\rlicenseDocUrl\x12-\n" +
-	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\xfd\a\n" +
+	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\x80\b\n" +
 	"\x15UpdateProducerRequest\x12)\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"producerId\x12\\\n" +
-	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\xda\x06\n" +
+	"\bproducer\x18\x02 \x01(\v28.producerflow.producer.v1.UpdateProducerRequest.ProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x1a\xdd\x06\n" +
 	"\bProducer\x12+\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tfirstName\x88\x01\x01\x12)\n" +
@@ -10805,8 +10825,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	" \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\n" +
 	"middleName\x88\x01\x01\x12\"\n" +
 	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12 \n" +
-	"\x03npn\x18\x04 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x04R\x03npn\x88\x01\x01\x124\n" +
-	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x05R\x05phone\x88\x01\x01\x12&\n" +
+	"\x03npn\x18\x04 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x04R\x03npn\x88\x01\x01\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x05R\x05phone\x88\x01\x01\x12&\n" +
 	"\x06street\x18\x06 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01H\x06R\x06street\x88\x01\x01\x122\n" +
 	"\x0eaddress_line_1\x18\x0e \x01(\tB\a\xbaH\x04r\x02\x10\x01H\aR\faddressLine1\x88\x01\x01\x122\n" +
 	"\x0eaddress_line_2\x18\r \x01(\tB\a\xbaH\x04r\x02\x10\x01H\bR\faddressLine2\x88\x01\x01\x12 \n" +
@@ -10831,13 +10851,13 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05_cityB\b\n" +
 	"\x06_stateB\x06\n" +
 	"\x04_zip\"\x18\n" +
-	"\x16UpdateProducerResponse\"\x95\t\n" +
+	"\x16UpdateProducerResponse\"\x98\t\n" +
 	"\x13UpdateAgencyRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12T\n" +
-	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\x80\b\n" +
+	"\x06agency\x18\x02 \x01(\v24.producerflow.producer.v1.UpdateAgencyRequest.AgencyB\x06\xbaH\x03\xc8\x01\x01R\x06agency\x1a\x83\b\n" +
 	"\x06Agency\x12\"\n" +
-	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05email\x88\x01\x01\x124\n" +
-	"\x05phone\x18\x02 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x01R\x05phone\x88\x01\x01\x123\n" +
+	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01H\x00R\x05email\x88\x01\x01\x127\n" +
+	"\x05phone\x18\x02 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x01R\x05phone\x88\x01\x01\x123\n" +
 	"\x03fax\x18\x03 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x02R\x03fax\x88\x01\x01\x12*\n" +
 	"\awebsite\x18\x04 \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x88\x01\x01H\x03R\awebsite\x88\x01\x01\x12O\n" +
 	"\x16requested_appointments\x18\x05 \x03(\tB\x18\xbaH\x15\x92\x01\x12\x18\x01\"\x0er\f2\n" +
@@ -10875,7 +10895,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xa32\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xc22\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -10965,7 +10985,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fBusinessHour\x123\n" +
 	"\tweek_days\x18\x01 \x03(\x0e2\x16.google.type.DayOfWeekR\bweekDays\x129\n" +
 	"\fopening_time\x18\x02 \x01(\v2\x16.google.type.TimeOfDayR\vopeningTime\x129\n" +
-	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\xdc\x17\n" +
+	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\xfb\x17\n" +
 	"\x04NIPR\x12P\n" +
 	"\n" +
 	"biographic\x18\x01 \x01(\v20.producerflow.producer.v1.Agency.NIPR.BiographicR\n" +
@@ -10995,7 +11015,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12$\n" +
 	"\x0eaddress_line_1\x18\n" +
-	" \x01(\tR\faddressLine1\x1a\xa4\a\n" +
+	" \x01(\tR\faddressLine1\x1a\xc3\a\n" +
 	"\aLicense\x12%\n" +
 	"\x0elicense_number\x18\x01 \x01(\tR\rlicenseNumber\x12#\n" +
 	"\rlicense_state\x18\x02 \x01(\tR\flicenseState\x12)\n" +
@@ -11012,7 +11032,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"updateDate\x129\n" +
 	"\n" +
 	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12k\n" +
-	"\x12lines_of_authority\x18\f \x03(\v2=.producerflow.producer.v1.Agency.NIPR.License.LineOfAuthorityR\x10linesOfAuthority\x1av\n" +
+	"\x12lines_of_authority\x18\f \x03(\v2=.producerflow.producer.v1.Agency.NIPR.License.LineOfAuthorityR\x10linesOfAuthority\x12\x1d\n" +
+	"\n" +
+	"license_id\x18\r \x01(\tR\tlicenseId\x1av\n" +
 	"\x0fLineOfAuthority\x12\x10\n" +
 	"\x03loa\x18\x01 \x01(\tR\x03loa\x12\x16\n" +
 	"\x06active\x18\x02 \x01(\bR\x06active\x129\n" +
@@ -11051,7 +11073,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\x96\"\n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xb5\"\n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -11074,7 +11096,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x1btenant_additional_questions\x18* \x03(\v2A.producerflow.producer.v1.Producer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a9\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x1a\x87\x17\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x1a\xa6\x17\n" +
 	"\x04NIPR\x12K\n" +
 	"\blicenses\x18\x06 \x03(\v2/.producerflow.producer.v1.Producer.NIPR.LicenseR\blicenses\x12R\n" +
 	"\n" +
@@ -11084,7 +11106,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fappointments\x18\n" +
 	" \x03(\v23.producerflow.producer.v1.Producer.NIPR.AppointmentR\fappointments\x12Q\n" +
 	"\x10nipr_sync_status\x18\v \x01(\x0e2'.producerflow.producer.v1.NIPRSyncStateR\x0eniprSyncStatus\x12X\n" +
-	"\x1bnipr_sync_status_updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\x17niprSyncStatusUpdatedAt\x1a\xdd\x05\n" +
+	"\x1bnipr_sync_status_updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\x17niprSyncStatusUpdatedAt\x1a\xfc\x05\n" +
 	"\aLicense\x12%\n" +
 	"\x0elicense_number\x18\x01 \x01(\tR\rlicenseNumber\x12#\n" +
 	"\rlicense_state\x18\x02 \x01(\tR\flicenseState\x12)\n" +
@@ -11094,7 +11116,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0fexpiration_date\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x0eexpirationDate\x129\n" +
 	"\n" +
 	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12m\n" +
-	"\x12lines_of_authority\x18\b \x03(\v2?.producerflow.producer.v1.Producer.NIPR.License.LineOfAuthorityR\x10linesOfAuthority\x1av\n" +
+	"\x12lines_of_authority\x18\b \x03(\v2?.producerflow.producer.v1.Producer.NIPR.License.LineOfAuthorityR\x10linesOfAuthority\x12\x1d\n" +
+	"\n" +
+	"license_id\x18\t \x01(\tR\tlicenseId\x1av\n" +
 	"\x0fLineOfAuthority\x12\x10\n" +
 	"\x03loa\x18\x01 \x01(\tR\x03loa\x12\x16\n" +
 	"\x06active\x18\x02 \x01(\bR\x06active\x129\n" +
@@ -11257,19 +11281,19 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x19ListAgencyContactsRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"[\n" +
 	"\x1aListAgencyContactsResponse\x12=\n" +
-	"\bcontacts\x18\x01 \x03(\v2!.producerflow.producer.v1.ContactR\bcontacts\"\xea\x04\n" +
+	"\bcontacts\x18\x01 \x03(\v2!.producerflow.producer.v1.ContactR\bcontacts\"\xed\x04\n" +
 	"\x14UpdateContactRequest\x12'\n" +
 	"\n" +
 	"contact_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcontactId\x12X\n" +
-	"\acontact\x18\x02 \x01(\v26.producerflow.producer.v1.UpdateContactRequest.ContactB\x06\xbaH\x03\xc8\x01\x01R\acontact\x1a\xce\x03\n" +
+	"\acontact\x18\x02 \x01(\v26.producerflow.producer.v1.UpdateContactRequest.ContactB\x06\xbaH\x03\xc8\x01\x01R\acontact\x1a\xd1\x03\n" +
 	"\aContact\x12+\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\tfirstName\x88\x01\x01\x12)\n" +
 	"\tlast_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x01R\blastName\x88\x01\x01\x12-\n" +
 	"\vmiddle_name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x02R\n" +
 	"middleName\x88\x01\x01\x12\"\n" +
-	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x124\n" +
-	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x04R\x05phone\x88\x01\x01\x12J\n" +
+	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x04R\x05phone\x88\x01\x01\x12J\n" +
 	"\x04role\x18\x06 \x01(\x0e2%.producerflow.producer.v1.ContactRoleB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00H\x05R\x04role\x88\x01\x01\x12@\n" +
 	"\aaddress\x18\a \x01(\v2!.producerflow.producer.v1.AddressH\x06R\aaddress\x88\x01\x01B\r\n" +
@@ -11426,14 +11450,14 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x1aListAgencyLocationsRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"_\n" +
 	"\x1bListAgencyLocationsResponse\x12@\n" +
-	"\tlocations\x18\x01 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\"\x89\x03\n" +
+	"\tlocations\x18\x01 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\"\x8c\x03\n" +
 	"\x1bUpdateAgencyLocationRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12)\n" +
 	"\vlocation_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"locationId\x12 \n" +
 	"\x04name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\x04name\x88\x01\x01\x12@\n" +
-	"\aaddress\x18\x04 \x01(\v2!.producerflow.producer.v1.AddressH\x01R\aaddress\x88\x01\x01\x124\n" +
-	"\x05phone\x18\x05 \x01(\tB\x19\xbaH\x16r\x142\x12^\\+?[1-9]\\d{1,14}$H\x02R\x05phone\x88\x01\x01\x12\"\n" +
+	"\aaddress\x18\x04 \x01(\v2!.producerflow.producer.v1.AddressH\x01R\aaddress\x88\x01\x01\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x02R\x05phone\x88\x01\x01\x12\"\n" +
 	"\x05email\x18\x06 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"is_primary\x18\a \x01(\bH\x04R\tisPrimary\x88\x01\x01B\a\n" +

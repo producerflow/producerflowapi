@@ -3158,6 +3158,7 @@ License contains information about an insurance license.
 | `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license was last updated. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
 | `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority associated with this license. |
+| `license_id` | [string](#string) |  | The unique identifier for this license. |
 
 #### Agency.NIPR.License.LineOfAuthority
 
@@ -3677,7 +3678,7 @@ Agency contains all information about the agency to be created
 | `name` | [string](#string) |  | The name of the agency. |
 | `email` | [string](#string) |  | The email address of the agency. |
 | `npn` | [string](#string) |  | National Producer Number for the agency Required for ENTITY_TYPE_AGENCY if FEIN is not provided Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR |
-| `phone` | [string](#string) |  | The phone number of the agency. |
+| `phone` | [string](#string) | optional | The phone number of the agency. |
 | `website` | [string](#string) |  | The website of the agency. |
 | `principal` | [NewAgencyRequest.Agency.Principal](#newagencyrequestagencyprincipal) |  | Information about the agency's principal. This is a required field as each agency must have a principal. |
 | `bank_account` | [NewAgencyRequest.Agency.BankAccount](#newagencyrequestagencybankaccount) |  |  |
@@ -3773,7 +3774,7 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `last_name` | [string](#string) |  | The last name of the principal. |
 | `middle_name` | [string](#string) |  | The middle name of the principal. |
 | `email` | [string](#string) |  | The email address of the principal. |
-| `phone` | [string](#string) |  | The phone number of the principal. |
+| `phone` | [string](#string) | optional | The phone number of the principal. |
 | `npn` | [string](#string) |  | The National Producer Number (NPN) of the principal. |
 | `tenant_id` | [string](#string) |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
 | `sync_with_nipr` | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal's NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
@@ -4221,6 +4222,7 @@ Compliance Use Cases:
 | `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license will expire if not renewed. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
 | `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the producer is authorized to sell in this state. A single license typically has multiple LOAs. Always check that the producer has an active LOA matching the product type before allowing sales. |
+| `license_id` | [string](#string) |  | The unique identifier for this license. |
 
 #### Producer.NIPR.License.LineOfAuthority
 
