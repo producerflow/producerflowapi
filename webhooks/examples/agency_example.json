@@ -144,5 +144,6 @@
       "email": "springfield@insuranceagency.com",
       "is_primary": false
     }
-  ]
+  ],
+  "contract_status": "Signed"
 }

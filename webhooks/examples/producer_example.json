@@ -116,5 +116,6 @@
       "email": "sf@business.com",
       "is_primary": true
     }
-  ]
+  ],
+  "contract_status": "Signed"
 }

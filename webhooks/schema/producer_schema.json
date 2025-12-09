@@ -248,6 +248,11 @@
           }
         }
       }
+    },
+    "contract_status": {
+      "type": "string",
+      "enum": ["Unsigned", "Sent", "Signed", "Failed"],
+      "description": "Current status of the producer's contract"
     }
   },
   "required": ["id", "timestamp", "producer_id"],
