@@ -1655,7 +1655,7 @@ message NewAgencyRequest {
     string npn = 3;
 
     // The phone number of the agency.
-    string phone = 5 [
+    optional string phone = 5 [
       (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
       (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
     ];
@@ -1676,7 +1676,7 @@ message NewAgencyRequest {
       // The email address of the principal.
       string email = 3 [(buf.validate.field).string.email = true];
       // The phone number of the principal.
-      string phone = 4 [
+      optional string phone = 4 [
         (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
         (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
       ];
@@ -2006,7 +2006,10 @@ message UpdateProducerRequest {
 
     // Phone number of the producer.
     // If provided, must be a valid phone number format.
-    optional string phone = 5 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+    optional string phone = 5 [
+      (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+    ];
 
     // Deprecated: Use address_line_1 instead.
     optional string street = 6 [
@@ -2108,7 +2111,10 @@ message UpdateAgencyRequest {
     optional string email = 1 [(buf.validate.field).string.email = true];
 
     // Phone number of the agency.
-    optional string phone = 2 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+    optional string phone = 2 [
+      (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+    ];
 
     // Fax number of the agency.
     optional string fax = 3 [
@@ -2527,6 +2533,9 @@ message Agency {
 
       // Lines of Authority associated with this license.
       repeated LineOfAuthority lines_of_authority = 12;
+
+      // The unique identifier for this license.
+      string license_id = 13;
     }
 
     // List of all licenses held across different states.
@@ -2812,6 +2821,9 @@ message Producer {
       // check that the producer has an active LOA matching the product type
       // before allowing sales.
       repeated LineOfAuthority lines_of_authority = 8;
+
+      // The unique identifier for this license.
+      string license_id = 9;
     }
 
     // List of all licenses held by the producer across different states.
@@ -3500,7 +3512,10 @@ message UpdateContactRequest {
 
     // Phone number of the contact.
     // If provided, must be a valid phone number format.
-    optional string phone = 5 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+    optional string phone = 5 [
+      (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+    ];
 
     // Role or position of the contact within the agency.
     // If provided, must be a valid ContactRole enum value (not UNSPECIFIED).
@@ -4114,7 +4129,10 @@ message UpdateAgencyLocationRequest {
   optional Address address = 4;
 
   // Optional. New phone number. Must be in E.164 format.
-  optional string phone = 5 [(buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"];
+  optional string phone = 5 [
+    (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
+    (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+  ];
 
   // Optional. New email address.
   optional string email = 6 [(buf.validate.field).string.email = true];
