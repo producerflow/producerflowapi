@@ -251,7 +251,7 @@
     },
     "contract_status": {
       "type": "string",
-      "enum": ["Unsigned", "Sent", "Signed", "Failed"],
+      "enum": ["unsigned", "sent", "signed", "failed"],
       "description": "Current status of the producer's contract"
     }
   },
