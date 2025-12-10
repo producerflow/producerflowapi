@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.9] - 2025-12-10
+
+### Changed
+
+#### ProducerService
+
+- **License Date Fields** - New date fields instead of timestamps, deprecating the old timestamp-based fields
+  - `expires_on` replaces `expiration_date` (now deprecated) for license expiration
+  - `issued_on` replaces `issue_date` (now deprecated) for license issue date
+  - `last_updated_on` replaces `update_date` (now deprecated) for license last update
+  - Affects: `Agency.License`, `Producer.License`, and their `LineOfAuthority` messages
+  - Date fields provide cleaner representation without timezone complexity
+
+  The deprecated timestamp fields (`expiration_date`, `issue_date`, `update_date`) will continue to be populated for backward compatibility but should be migrated to the new date fields.
+
+---
+
 ## [1.0.8] - 2025-12-09
 
 ### Added
