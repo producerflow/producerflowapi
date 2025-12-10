@@ -27887,7 +27887,7 @@ Indicates what types of insurance can be sold. </td>
                           <td><code>expiration_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>The date when the license will expire if not renewed. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use expires_on instead. </td>
                         </tr>
                       
                         <tr>
@@ -27908,14 +27908,14 @@ Indicates what types of insurance can be sold. </td>
                           <td><code>issue_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>The date when the license was originally issued. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use issued_on instead. </td>
                         </tr>
                       
                         <tr>
                           <td><code>update_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
-                          <td>The date when the license was last updated. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use last_updated_on instead. </td>
                         </tr>
                       
                         <tr>
@@ -27923,6 +27923,27 @@ Indicates what types of insurance can be sold. </td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
                           <td>The last time this license information was updated from NIPR. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>expires_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
+                          <td></td>
+                          <td>The date when the license will expire if not renewed. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>issued_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
+                          <td></td>
+                          <td>The date when the license was originally issued. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>last_updated_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
+                          <td></td>
+                          <td>The date when the license was last updated. </td>
                         </tr>
                       
                         <tr>
@@ -27977,6 +27998,13 @@ This is typically an uppercase string that describes the insurance type. </td>
                         <tr>
                           <td><code>issue_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                          <td></td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use issued_on instead. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>issued_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
                           <td></td>
                           <td>The date when this Line of Authority was issued. </td>
                         </tr>
@@ -32101,6 +32129,13 @@ Values are typically "Resident" or "Non-Resident". </td>
                           <td><code>expiration_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                           <td></td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use expires_on instead. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>expires_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
+                          <td></td>
                           <td>The date when the license will expire if not renewed. </td>
                         </tr>
                       
@@ -32199,6 +32234,13 @@ Inactive LOAs cannot be used to sell that type of insurance. </td>
                         <tr>
                           <td><code>issue_date</code></td>
                           <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                          <td></td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use issued_on instead. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>issued_on</code></td>
+                          <td><a href="#google.type.Date">google.type.Date</a></td>
                           <td></td>
                           <td>The date when this Line of Authority was first issued.
 This helps track how long the producer has been authorized for this

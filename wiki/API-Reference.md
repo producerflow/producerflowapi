@@ -3151,12 +3151,15 @@ License contains information about an insurance license.
 | `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. |
 | `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
 | `status` | [Agency.NIPR.License.LicenseStatus](#agencyniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license will expire if not renewed. |
+| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use expires_on instead. |
 | `license_class` | [string](#string) |  | License class description. |
 | `license_class_code` | [int32](#int32) |  | License class code. |
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license was originally issued. |
-| `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license was last updated. |
+| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
+| `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use last_updated_on instead. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
+| `expires_on` | [google.type.Date](#googletypedate) |  | The date when the license will expire if not renewed. |
+| `issued_on` | [google.type.Date](#googletypedate) |  | The date when the license was originally issued. |
+| `last_updated_on` | [google.type.Date](#googletypedate) |  | The date when the license was last updated. |
 | `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority associated with this license. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
 
@@ -3169,7 +3172,8 @@ that is authorized under this license.
 |-------|------|-------|-------------|
 | `loa` | [string](#string) |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health"). This is typically an uppercase string that describes the insurance type. |
 | `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. |
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when this Line of Authority was issued. |
+| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
+| `issued_on` | [google.type.Date](#googletypedate) |  | The date when this Line of Authority was issued. |
 
 #### Agency.NIPR.RegulatoryInfo
 
@@ -4219,7 +4223,8 @@ Compliance Use Cases:
 | `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. Values are typically "Resident" or "Non-Resident". |
 | `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
 | `status` | [Producer.NIPR.License.LicenseStatus](#producerniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
-| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the license will expire if not renewed. |
+| `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use expires_on instead. |
+| `expires_on` | [google.type.Date](#googletypedate) |  | The date when the license will expire if not renewed. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
 | `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the producer is authorized to sell in this state. A single license typically has multiple LOAs. Always check that the producer has an active LOA matching the product type before allowing sales. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
@@ -4249,7 +4254,8 @@ states.
 |-------|------|-------|-------------|
 | `loa` | [string](#string) |  | The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY", "HEALTH").  Common LOA types: - LIFE: Life insurance products - HEALTH: Health insurance products - ACCIDENT AND HEALTH: Combined accident and health coverage - PROPERTY: Property insurance - CASUALTY: Casualty insurance - PROPERTY AND CASUALTY: Combined property and casualty - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring   securities license - PERSONAL LINES: Homeowners, auto, and personal umbrella policies - COMMERCIAL LINES: Business insurance policies  This is typically an uppercase string standardized by NIPR. |
 | `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. Inactive LOAs cannot be used to sell that type of insurance. |
-| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when this Line of Authority was first issued. This helps track how long the producer has been authorized for this insurance type. |
+| `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
+| `issued_on` | [google.type.Date](#googletypedate) |  | The date when this Line of Authority was first issued. This helps track how long the producer has been authorized for this insurance type. |
 
 #### Producer.NIPR.ProducerRegulatoryInfo
 
