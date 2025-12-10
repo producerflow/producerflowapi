@@ -4,6 +4,7 @@ package producerflow.producer.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/type/date.proto";
 import "google/type/dayofweek.proto";
 import "google/type/timeofday.proto";
 
@@ -2499,8 +2500,8 @@ message Agency {
       // The current status of the license (valid, expired, etc.).
       LicenseStatus status = 5;
 
-      // The date when the license will expire if not renewed.
-      google.protobuf.Timestamp expiration_date = 6;
+      // Deprecated: Use expires_on instead.
+      google.protobuf.Timestamp expiration_date = 6 [deprecated = true];
 
       // License class description.
       string license_class = 7;
@@ -2508,14 +2509,23 @@ message Agency {
       // License class code.
       int32 license_class_code = 8;
 
-      // The date when the license was originally issued.
-      google.protobuf.Timestamp issue_date = 9;
+      // Deprecated: Use issued_on instead.
+      google.protobuf.Timestamp issue_date = 9 [deprecated = true];
 
-      // The date when the license was last updated.
-      google.protobuf.Timestamp update_date = 10;
+      // Deprecated: Use last_updated_on instead.
+      google.protobuf.Timestamp update_date = 10 [deprecated = true];
 
       // The last time this license information was updated from NIPR.
       google.protobuf.Timestamp updated_at = 11;
+
+      // The date when the license will expire if not renewed.
+      google.type.Date expires_on = 14;
+
+      // The date when the license was originally issued.
+      google.type.Date issued_on = 15;
+
+      // The date when the license was last updated.
+      google.type.Date last_updated_on = 16;
 
       // LineOfAuthority represents a specific type of insurance coverage
       // that is authorized under this license.
@@ -2527,8 +2537,11 @@ message Agency {
         // Whether this Line of Authority is currently active.
         bool active = 2;
 
+        // Deprecated: Use issued_on instead.
+        google.protobuf.Timestamp issue_date = 3 [deprecated = true];
+
         // The date when this Line of Authority was issued.
-        google.protobuf.Timestamp issue_date = 3;
+        google.type.Date issued_on = 4;
       }
 
       // Lines of Authority associated with this license.
@@ -2761,8 +2774,11 @@ message Producer {
       // The current status of the license (valid, expired, etc.).
       LicenseStatus status = 5;
 
+      // Deprecated: Use expires_on instead.
+      google.protobuf.Timestamp expiration_date = 6 [deprecated = true];
+
       // The date when the license will expire if not renewed.
-      google.protobuf.Timestamp expiration_date = 6;
+      google.type.Date expires_on = 10;
 
       // The last time this license information was updated from NIPR.
       google.protobuf.Timestamp updated_at = 7;
@@ -2808,10 +2824,13 @@ message Producer {
         // Inactive LOAs cannot be used to sell that type of insurance.
         bool active = 2;
 
+        // Deprecated: Use issued_on instead.
+        google.protobuf.Timestamp issue_date = 3 [deprecated = true];
+
         // The date when this Line of Authority was first issued.
         // This helps track how long the producer has been authorized for this
         // insurance type.
-        google.protobuf.Timestamp issue_date = 3;
+        google.type.Date issued_on = 4;
       }
 
       // Lines of Authority (LOAs) associated with this license.
