@@ -24,19 +24,19 @@
     },
     "agency_id": {
       "type": "string",
-      "description": "Unique identifier for the agency"
+      "description": "Always present. Unique identifier for the agency"
     },
     "external_id": {
       "type": "string",
-      "description": "External identifier for the agency"
+      "description": "Only present if filled in by tenant. External identifier for the agency"
     },
     "fein": {
       "type": "string",
-      "description": "Federal Employer Identification Number"
+      "description": "Always present if agency is not a sole proprietor. Federal Employer Identification Number"
     },
     "npn": {
       "type": "string",
-      "description": "National Producer Number"
+      "description": "Always present if agency is not a sole proprietor. National Producer Number"
     },
     "agency_data": {
       "type": "object",
@@ -185,16 +185,16 @@
     "nipr_sync_status": {
       "type": "string",
       "enum": ["active", "failing", "pending", "disabled"],
-      "description": "NIPR synchronization status of the agency"
+      "description": "Always present. NIPR synchronization status of the agency (disabled, pending, failing, active)"
     },
     "nipr_sync_status_updated_at": {
       "type": "string",
       "format": "date-time",
-      "description": "Timestamp when the NIPR synchronization status was last updated"
+      "description": "Always present. ISO 8601 timestamp when the NIPR synchronization status was last updated"
     },
     "organization": {
       "type": "object",
-      "description": "Organization information associated with the agency",
+      "description": "Present when there is a new organization assigned to the agency. Contains organization information for the agency",
       "properties": {
         "organization_id": {
           "type": "string",
@@ -210,6 +210,20 @@
         }
       }
     },
+    "agency_principal": {
+      "type": "object",
+      "description": "Always present if the agency has a principal. Contains principal information for the agency",
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "description": "Always present. Unique identifier for the principal"
+        },
+        "principal_external_id": {
+          "type": "string",
+          "description": "Only present if filled in by tenant. External identifier for the principal"
+        }
+      }
+    },
     "tenant_additional_questions": {
       "type": "object",
       "description": "Custom additional questions and answers as key-value pairs collected during agency onboarding",
@@ -219,7 +233,7 @@
     },
     "locations": {
       "type": "array",
-      "description": "Physical locations associated with the agency",
+      "description": "Present when agency is created or when agency locations change. Contains all current locations for the agency",
       "items": {
         "type": "object",
         "properties": {
