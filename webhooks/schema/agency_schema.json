@@ -40,7 +40,7 @@
     },
     "agency_data": {
       "type": "object",
-      "description": "Present when agency is created or updated. Contains basic agency information",
+      "description": "Present when agency is created or when any agency data fields (email, phone, fax, name, website, is_sole_proprietor) are updated. Contains basic agency information",
       "properties": {
         "email": { "type": "string", "format": "email" },
         "fax": { "type": "string" },
@@ -239,7 +239,7 @@
     },
     "tenant_additional_questions": {
       "type": "object",
-      "description": "Present when agency is created, updated, or when NIPR data is synced. Contains custom additional questions and answers as key-value pairs collected during agency onboarding",
+      "description": "Present when agency is created with tenant additional questions during onboarding or when the tenant additional questions field is updated. Contains custom additional questions and answers as key-value pairs collected during agency onboarding",
       "additionalProperties": {
         "type": "string"
       }
