@@ -660,13 +660,14 @@ type ProducerServiceClient interface {
 	// Business logic validation:
 	// - agency_id: Agency must exist and belong to the authenticated tenant
 	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	// - role: If CONTACT_ROLE_PRINCIPAL, the agency must not already have a principal
 	//
 	// Returns:
 	// The UUID of the created contact.
 	//
 	// Common Error Codes:
 	// - INVALID_ARGUMENT: Missing required fields or invalid field format
-	// - ALREADY_EXISTS: Email already registered in your tenant
+	// - ALREADY_EXISTS: Email already registered in your tenant, or agency already has a principal
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContact(ctx context.Context, in *NewContactRequest, opts ...grpc.CallOption) (*NewContactResponse, error)
 	// NewContacts creates multiple contacts in bulk and associates them with a
@@ -2324,13 +2325,14 @@ type ProducerServiceServer interface {
 	// Business logic validation:
 	// - agency_id: Agency must exist and belong to the authenticated tenant
 	// - email: Must be unique within the tenant (not already used by another producer or contact)
+	// - role: If CONTACT_ROLE_PRINCIPAL, the agency must not already have a principal
 	//
 	// Returns:
 	// The UUID of the created contact.
 	//
 	// Common Error Codes:
 	// - INVALID_ARGUMENT: Missing required fields or invalid field format
-	// - ALREADY_EXISTS: Email already registered in your tenant
+	// - ALREADY_EXISTS: Email already registered in your tenant, or agency already has a principal
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	NewContact(context.Context, *NewContactRequest) (*NewContactResponse, error)
 	// NewContacts creates multiple contacts in bulk and associates them with a

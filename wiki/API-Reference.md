@@ -1460,13 +1460,14 @@ Proto validation (format checks):
 Business logic validation:
 - agency_id: Agency must exist and belong to the authenticated tenant
 - email: Must be unique within the tenant (not already used by another producer or contact)
+- role: If CONTACT_ROLE_PRINCIPAL, the agency must not already have a principal
 
 Returns:
 The UUID of the created contact.
 
 Common Error Codes:
 - INVALID_ARGUMENT: Missing required fields or invalid field format
-- ALREADY_EXISTS: Email already registered in your tenant
+- ALREADY_EXISTS: Email already registered in your tenant, or agency already has a principal
 - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 
 #### Request: `NewContactRequest`
@@ -4802,6 +4803,7 @@ responsibilities and access levels.
 | `CONTACT_ROLE_CSR` | 3 | Customer Service Representative (CSR): A contact who handles customer inquiries and support. Does not hold an insurance producer license. |
 | `CONTACT_ROLE_UNLICENSED_PRODUCER` | 4 | Unlicensed Producer: An individual working in a producer-like capacity but who does not hold an active insurance producer license. |
 | `CONTACT_ROLE_UNLICENSED_SERVICE` | 5 | Unlicensed Service: A contact providing services to the agency without requiring an insurance license. |
+| `CONTACT_ROLE_PRINCIPAL` | 6 | Principal: The principal owner of the agency who does not hold an active insurance producer license. This role is system-assigned during onboarding and cannot be set via API. |
 
 
 #### EntityType

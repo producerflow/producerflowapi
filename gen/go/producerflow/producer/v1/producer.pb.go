@@ -52,6 +52,10 @@ const (
 	// Unlicensed Service: A contact providing services to the agency
 	// without requiring an insurance license.
 	ContactRole_CONTACT_ROLE_UNLICENSED_SERVICE ContactRole = 5
+	// Principal: The principal owner of the agency who does not hold
+	// an active insurance producer license. This role is system-assigned
+	// during onboarding and cannot be set via API.
+	ContactRole_CONTACT_ROLE_PRINCIPAL ContactRole = 6
 )
 
 // Enum value maps for ContactRole.
@@ -63,6 +67,7 @@ var (
 		3: "CONTACT_ROLE_CSR",
 		4: "CONTACT_ROLE_UNLICENSED_PRODUCER",
 		5: "CONTACT_ROLE_UNLICENSED_SERVICE",
+		6: "CONTACT_ROLE_PRINCIPAL",
 	}
 	ContactRole_value = map[string]int32{
 		"CONTACT_ROLE_UNSPECIFIED":          0,
@@ -71,6 +76,7 @@ var (
 		"CONTACT_ROLE_CSR":                  3,
 		"CONTACT_ROLE_UNLICENSED_PRODUCER":  4,
 		"CONTACT_ROLE_UNLICENSED_SERVICE":   5,
+		"CONTACT_ROLE_PRINCIPAL":            6,
 	}
 )
 
@@ -11562,14 +11568,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"producerId\x124\n" +
 	"\flocation_ids\x18\x02 \x03(\tB\x11\xbaH\x0e\x92\x01\v\b\x01\x10d\"\x05r\x03\xb0\x01\x01R\vlocationIds\"_\n" +
 	"%UnassignProducerFromLocationsResponse\x126\n" +
-	"\x17unassigned_location_ids\x18\x01 \x03(\tR\x15unassignedLocationIds*\xcb\x01\n" +
+	"\x17unassigned_location_ids\x18\x01 \x03(\tR\x15unassignedLocationIds*\xe7\x01\n" +
 	"\vContactRole\x12\x1c\n" +
 	"\x18CONTACT_ROLE_UNSPECIFIED\x10\x00\x12%\n" +
 	"!CONTACT_ROLE_AGENCY_ADMINISTRATOR\x10\x01\x12\x16\n" +
 	"\x12CONTACT_ROLE_OTHER\x10\x02\x12\x14\n" +
 	"\x10CONTACT_ROLE_CSR\x10\x03\x12$\n" +
 	" CONTACT_ROLE_UNLICENSED_PRODUCER\x10\x04\x12#\n" +
-	"\x1fCONTACT_ROLE_UNLICENSED_SERVICE\x10\x05*\x89\x01\n" +
+	"\x1fCONTACT_ROLE_UNLICENSED_SERVICE\x10\x05\x12\x1a\n" +
+	"\x16CONTACT_ROLE_PRINCIPAL\x10\x06*\x89\x01\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
