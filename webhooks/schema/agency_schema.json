@@ -203,7 +203,7 @@
     },
     "organization": {
       "type": "object",
-      "description": "Present when there is a new organization assigned to the agency. Contains organization information for the agency",
+      "description": "Present when the agency's organization assignment changes. Contains organization details.",
       "properties": {
         "organization_id": {
           "type": "string",
@@ -216,6 +216,10 @@
         "external_id": {
           "type": "string",
           "description": "External identifier for the organization from an external system"
+        },
+        "unassigned": {
+          "type": "boolean",
+          "description": "Only present when true, indicates the agency has been removed from this organization. When this happens, the other fields contain details about the organization to which the agency was previously assigned"
         }
       }
     },
