@@ -40,6 +40,7 @@
     },
     "agency_data": {
       "type": "object",
+      "description": "Present when agency is created or updated. Contains basic agency information",
       "properties": {
         "email": { "type": "string", "format": "email" },
         "fax": { "type": "string" },
@@ -54,6 +55,7 @@
     },
     "agency_address": {
       "type": "array",
+      "description": "Present when agency is created or when agency addresses change. Contains address information for the agency",
       "items": {
         "type": "object",
         "properties": {
@@ -67,6 +69,7 @@
     },
     "agency_bank_account": {
       "type": "object",
+      "description": "Present when agency is created or when agency bank account changes. Contains bank account information for the agency",
       "properties": {
         "bank_account_id": { "type": "string" },
         "account_number": { "type": "string" },
@@ -77,6 +80,7 @@
     },
     "agency_eo": {
       "type": "object",
+      "description": "Present when agency is created or when E&O coverage changes. Contains E&O insurance information for the agency",
       "properties": {
         "carrier": { "type": "string" },
         "expiration_date": { "type": "string", "format": "date" },
@@ -87,6 +91,7 @@
     },
     "agency_ivans_account": {
       "type": "object",
+      "description": "Present when agency is created or when IVANS account changes. Contains IVANS integration information for the agency",
       "properties": {
         "account_number": { "type": "string" },
         "ams_software": { "type": "string" },
@@ -96,6 +101,7 @@
     },
     "agency_nipr_data": {
       "type": "object",
+      "description": "Present when NIPR data is synced for the agency. Contains agency information from NIPR",
       "properties": {
         "business_email": { "type": "string", "format": "email" },
         "business_phone": { "type": "string" },
@@ -106,6 +112,7 @@
     },
     "agency_nipr_appointments": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the agency. Contains all current carrier appointments from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -124,6 +131,7 @@
     },
     "agency_nipr_licenses": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the agency. Contains all current licenses with their LOAs from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -163,6 +171,7 @@
     },
     "agency_nipr_addresses": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the agency. Contains all addresses from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -177,7 +186,7 @@
     },
     "requested_appointment_states": {
       "type": "array",
-      "description": "The list of requested appointment states for the agency when the agency was onboarded",
+      "description": "Present when agency is created or updated. Contains the list of appointment states requested for the agency during onboarding",
       "items": {
         "type": "string"
       }
@@ -226,7 +235,7 @@
     },
     "tenant_additional_questions": {
       "type": "object",
-      "description": "Custom additional questions and answers as key-value pairs collected during agency onboarding",
+      "description": "Present when agency is created, updated, or when NIPR data is synced. Contains custom additional questions and answers as key-value pairs collected during agency onboarding",
       "additionalProperties": {
         "type": "string"
       }
@@ -280,7 +289,7 @@
     "contract_status": {
       "type": "string",
       "enum": ["unsigned", "sent", "signed", "failed"],
-      "description": "Current status of the agency's contract"
+      "description": "Present when agency contract status changes. Current status of the agency's contract"
     }
   },
   "required": ["id", "timestamp", "agency_id"],
