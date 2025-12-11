@@ -186,7 +186,7 @@
     },
     "requested_appointment_states": {
       "type": "array",
-      "description": "Present when agency is created or updated. Contains the list of appointment states requested for the agency during onboarding",
+      "description": "Present when agency is created with requested appointment states or when the requested appointment states are updated. Contains the list of appointment states requested for the agency during onboarding",
       "items": {
         "type": "string"
       }
@@ -260,19 +260,19 @@
           },
           "street": {
             "type": "string",
-            "description": "Street address"
+            "description": "Street address of this location"
           },
           "city": {
             "type": "string",
-            "description": "City"
+            "description": "City of this location"
           },
           "state": {
             "type": "string",
-            "description": "State or province"
+            "description": "State or province of this location"
           },
           "zip": {
             "type": "string",
-            "description": "Postal code"
+            "description": "Postal code of this location"
           },
           "phone": {
             "type": "string",
