@@ -3282,6 +3282,16 @@ Contacts are non-producer individuals linked to the agency.
 | `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
 | `role_type` | [ContactRole](#contactrole) |  | The role type of the contact as an enum. This field replaces the deprecated string-based 'role' field. |
+| `external_metadata` | [Contact.ExternalMetadataEntry](#contactexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic, reporting, or integration needs. The map key is the metadata field name, and the value is the associated data. |
+
+#### Contact.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### CreateAgencyOnboardingURLRequest
 

@@ -3158,9 +3158,14 @@ type Contact struct {
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// The role type of the contact as an enum.
 	// This field replaces the deprecated string-based 'role' field.
-	RoleType      ContactRole `protobuf:"varint,11,opt,name=role_type,json=roleType,proto3,enum=producerflow.producer.v1.ContactRole" json:"role_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RoleType ContactRole `protobuf:"varint,11,opt,name=role_type,json=roleType,proto3,enum=producerflow.producer.v1.ContactRole" json:"role_type,omitempty"`
+	// ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+	// This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
+	// reporting, or integration needs.
+	// The map key is the metadata field name, and the value is the associated data.
+	ExternalMetadata map[string]string `protobuf:"bytes,12,rep,name=external_metadata,json=externalMetadata,proto3" json:"external_metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Contact) Reset() {
@@ -3269,6 +3274,13 @@ func (x *Contact) GetRoleType() ContactRole {
 		return x.RoleType
 	}
 	return ContactRole_CONTACT_ROLE_UNSPECIFIED
+}
+
+func (x *Contact) GetExternalMetadata() map[string]string {
+	if x != nil {
+		return x.ExternalMetadata
+	}
+	return nil
 }
 
 // ListAgencyContactsRequest requests all contacts associated with an agency.
@@ -10618,7 +10630,7 @@ type UpdateContactRequest_Contact struct {
 
 func (x *UpdateContactRequest_Contact) Reset() {
 	*x = UpdateContactRequest_Contact{}
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[140]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[141]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10630,7 +10642,7 @@ func (x *UpdateContactRequest_Contact) String() string {
 func (*UpdateContactRequest_Contact) ProtoMessage() {}
 
 func (x *UpdateContactRequest_Contact) ProtoReflect() protoreflect.Message {
-	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[140]
+	mi := &file_producerflow_producer_v1_producer_proto_msgTypes[141]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11371,7 +11383,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\bcontacts\x18\x02 \x03(\v2$.producerflow.producer.v1.NewContactB\b\xbaH\x05\x92\x01\x02\b\x01R\bcontacts\"6\n" +
 	"\x13NewContactsResponse\x12\x1f\n" +
 	"\vcontact_ids\x18\x01 \x03(\tR\n" +
-	"contactIds\"\x88\x03\n" +
+	"contactIds\"\xb3\x04\n" +
 	"\aContact\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -11387,7 +11399,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12B\n" +
-	"\trole_type\x18\v \x01(\x0e2%.producerflow.producer.v1.ContactRoleR\broleType\"B\n" +
+	"\trole_type\x18\v \x01(\x0e2%.producerflow.producer.v1.ContactRoleR\broleType\x12d\n" +
+	"\x11external_metadata\x18\f \x03(\v27.producerflow.producer.v1.Contact.ExternalMetadataEntryR\x10externalMetadata\x1aC\n" +
+	"\x15ExternalMetadataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"B\n" +
 	"\x19ListAgencyContactsRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"[\n" +
 	"\x1aListAgencyContactsResponse\x12=\n" +
@@ -11672,7 +11688,7 @@ func file_producerflow_producer_v1_producer_proto_rawDescGZIP() []byte {
 }
 
 var file_producerflow_producer_v1_producer_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_producerflow_producer_v1_producer_proto_msgTypes = make([]protoimpl.MessageInfo, 142)
+var file_producerflow_producer_v1_producer_proto_msgTypes = make([]protoimpl.MessageInfo, 143)
 var file_producerflow_producer_v1_producer_proto_goTypes = []any{
 	(ContactRole)(0),   // 0: producerflow.producer.v1.ContactRole
 	(EntityType)(0),    // 1: producerflow.producer.v1.EntityType
@@ -11823,12 +11839,13 @@ var file_producerflow_producer_v1_producer_proto_goTypes = []any{
 	(*NewProducer_Address)(nil),          // 146: producerflow.producer.v1.NewProducer.Address
 	nil,                                  // 147: producerflow.producer.v1.NewProducer.MetadataQuestionsEntry
 	nil,                                  // 148: producerflow.producer.v1.NewProducer.TenantAdditionalQuestionsEntry
-	(*UpdateContactRequest_Contact)(nil), // 149: producerflow.producer.v1.UpdateContactRequest.Contact
-	nil,                                  // 150: producerflow.producer.v1.UpdateContactRequest.Contact.ExternalMetadataEntry
-	(*timestamppb.Timestamp)(nil),        // 151: google.protobuf.Timestamp
-	(dayofweek.DayOfWeek)(0),             // 152: google.type.DayOfWeek
-	(*timeofday.TimeOfDay)(nil),          // 153: google.type.TimeOfDay
-	(*date.Date)(nil),                    // 154: google.type.Date
+	nil,                                  // 149: producerflow.producer.v1.Contact.ExternalMetadataEntry
+	(*UpdateContactRequest_Contact)(nil), // 150: producerflow.producer.v1.UpdateContactRequest.Contact
+	nil,                                  // 151: producerflow.producer.v1.UpdateContactRequest.Contact.ExternalMetadataEntry
+	(*timestamppb.Timestamp)(nil),        // 152: google.protobuf.Timestamp
+	(dayofweek.DayOfWeek)(0),             // 153: google.type.DayOfWeek
+	(*timeofday.TimeOfDay)(nil),          // 154: google.type.TimeOfDay
+	(*date.Date)(nil),                    // 155: google.type.Date
 }
 var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
 	93,  // 0: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.agency:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency
@@ -11872,192 +11889,193 @@ var file_producerflow_producer_v1_producer_proto_depIdxs = []int32{
 	37,  // 38: producerflow.producer.v1.NewContactRequest.contact:type_name -> producerflow.producer.v1.NewContact
 	37,  // 39: producerflow.producer.v1.NewContactsRequest.contacts:type_name -> producerflow.producer.v1.NewContact
 	10,  // 40: producerflow.producer.v1.Contact.address:type_name -> producerflow.producer.v1.Address
-	151, // 41: producerflow.producer.v1.Contact.created_at:type_name -> google.protobuf.Timestamp
+	152, // 41: producerflow.producer.v1.Contact.created_at:type_name -> google.protobuf.Timestamp
 	0,   // 42: producerflow.producer.v1.Contact.role_type:type_name -> producerflow.producer.v1.ContactRole
-	42,  // 43: producerflow.producer.v1.ListAgencyContactsResponse.contacts:type_name -> producerflow.producer.v1.Contact
-	149, // 44: producerflow.producer.v1.UpdateContactRequest.contact:type_name -> producerflow.producer.v1.UpdateContactRequest.Contact
-	151, // 45: producerflow.producer.v1.AgencySummary.created_at:type_name -> google.protobuf.Timestamp
-	9,   // 46: producerflow.producer.v1.ListAgenciesRequest.pagination:type_name -> producerflow.producer.v1.Pagination
-	2,   // 47: producerflow.producer.v1.ListAgenciesRequest.agency_type:type_name -> producerflow.producer.v1.AgencyType
-	1,   // 48: producerflow.producer.v1.ListAgenciesRequest.entity_type:type_name -> producerflow.producer.v1.EntityType
-	3,   // 49: producerflow.producer.v1.ListAgenciesRequest.nipr_sync_statuses:type_name -> producerflow.producer.v1.NIPRSyncState
-	67,  // 50: producerflow.producer.v1.ListAgenciesResponse.agencies:type_name -> producerflow.producer.v1.AgencySummary
-	9,   // 51: producerflow.producer.v1.ListOrganizationsRequest.pagination:type_name -> producerflow.producer.v1.Pagination
-	71,  // 52: producerflow.producer.v1.ListOrganizationsResponse.organizations:type_name -> producerflow.producer.v1.Organization
-	71,  // 53: producerflow.producer.v1.GetOrganizationResponse.organization:type_name -> producerflow.producer.v1.Organization
-	10,  // 54: producerflow.producer.v1.Location.address:type_name -> producerflow.producer.v1.Address
-	81,  // 55: producerflow.producer.v1.AddAgencyLocationsRequest.locations:type_name -> producerflow.producer.v1.LocationInput
-	10,  // 56: producerflow.producer.v1.LocationInput.address:type_name -> producerflow.producer.v1.Address
-	79,  // 57: producerflow.producer.v1.ListAgencyLocationsResponse.locations:type_name -> producerflow.producer.v1.Location
-	10,  // 58: producerflow.producer.v1.UpdateAgencyLocationRequest.address:type_name -> producerflow.producer.v1.Address
-	79,  // 59: producerflow.producer.v1.UpdateAgencyLocationResponse.location:type_name -> producerflow.producer.v1.Location
-	1,   // 60: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
-	10,  // 61: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
-	10,  // 62: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
-	10,  // 63: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
-	94,  // 64: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.principal:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
-	10,  // 65: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.address:type_name -> producerflow.producer.v1.Address
-	97,  // 66: producerflow.producer.v1.NewAgencyRequest.Agency.principal:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal
-	98,  // 67: producerflow.producer.v1.NewAgencyRequest.Agency.bank_account:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
-	99,  // 68: producerflow.producer.v1.NewAgencyRequest.Agency.eo_info:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
-	100, // 69: producerflow.producer.v1.NewAgencyRequest.Agency.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
-	32,  // 70: producerflow.producer.v1.NewAgencyRequest.Agency.producers:type_name -> producerflow.producer.v1.NewProducer
-	101, // 71: producerflow.producer.v1.NewAgencyRequest.Agency.points_of_contact:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
-	1,   // 72: producerflow.producer.v1.NewAgencyRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
-	10,  // 73: producerflow.producer.v1.NewAgencyRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
-	10,  // 74: producerflow.producer.v1.NewAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
-	10,  // 75: producerflow.producer.v1.NewAgencyRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
-	81,  // 76: producerflow.producer.v1.NewAgencyRequest.Agency.locations:type_name -> producerflow.producer.v1.LocationInput
-	102, // 77: producerflow.producer.v1.NewAgencyRequest.Agency.metadata_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
-	103, // 78: producerflow.producer.v1.NewAgencyRequest.Agency.tenant_additional_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry
-	104, // 79: producerflow.producer.v1.NewAgencyRequest.Agency.Principal.tenant_additional_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry
-	10,  // 80: producerflow.producer.v1.NewAgencyRequest.Agency.Principal.mailing_address:type_name -> producerflow.producer.v1.Address
-	4,   // 81: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.AccountType
-	151, // 82: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
-	151, // 83: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
-	105, // 84: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
-	5,   // 85: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.role:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.CommunicationRole
-	152, // 86: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
-	153, // 87: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
-	153, // 88: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
-	110, // 89: producerflow.producer.v1.UpdateProducerRequest.Producer.external_metadata:type_name -> producerflow.producer.v1.UpdateProducerRequest.Producer.ExternalMetadataEntry
-	112, // 90: producerflow.producer.v1.UpdateAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
-	113, // 91: producerflow.producer.v1.UpdateAgencyRequest.Agency.external_metadata:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntry
-	122, // 92: producerflow.producer.v1.Agency.AgencyInfo.metadata_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
-	123, // 93: producerflow.producer.v1.Agency.AgencyInfo.external_metadata:type_name -> producerflow.producer.v1.Agency.AgencyInfo.ExternalMetadataEntry
-	124, // 94: producerflow.producer.v1.Agency.AgencyInfo.tenant_additional_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.TenantAdditionalQuestionsEntry
-	6,   // 95: producerflow.producer.v1.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.Agency.BankAccount.AccountType
-	151, // 96: producerflow.producer.v1.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
-	151, // 97: producerflow.producer.v1.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
-	115, // 98: producerflow.producer.v1.Agency.Principal.address:type_name -> producerflow.producer.v1.Agency.Address
-	125, // 99: producerflow.producer.v1.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours.BusinessHour
-	126, // 100: producerflow.producer.v1.Agency.NIPR.biographic:type_name -> producerflow.producer.v1.Agency.NIPR.Biographic
-	127, // 101: producerflow.producer.v1.Agency.NIPR.addresses:type_name -> producerflow.producer.v1.Agency.NIPR.Address
-	128, // 102: producerflow.producer.v1.Agency.NIPR.licenses:type_name -> producerflow.producer.v1.Agency.NIPR.License
-	129, // 103: producerflow.producer.v1.Agency.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
-	130, // 104: producerflow.producer.v1.Agency.NIPR.appointments:type_name -> producerflow.producer.v1.Agency.NIPR.Appointment
-	152, // 105: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
-	153, // 106: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
-	153, // 107: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
-	151, // 108: producerflow.producer.v1.Agency.NIPR.Biographic.updated_at:type_name -> google.protobuf.Timestamp
-	151, // 109: producerflow.producer.v1.Agency.NIPR.Address.date_updated:type_name -> google.protobuf.Timestamp
-	151, // 110: producerflow.producer.v1.Agency.NIPR.Address.updated_at:type_name -> google.protobuf.Timestamp
-	7,   // 111: producerflow.producer.v1.Agency.NIPR.License.status:type_name -> producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
-	151, // 112: producerflow.producer.v1.Agency.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
-	151, // 113: producerflow.producer.v1.Agency.NIPR.License.issue_date:type_name -> google.protobuf.Timestamp
-	151, // 114: producerflow.producer.v1.Agency.NIPR.License.update_date:type_name -> google.protobuf.Timestamp
-	151, // 115: producerflow.producer.v1.Agency.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
-	154, // 116: producerflow.producer.v1.Agency.NIPR.License.expires_on:type_name -> google.type.Date
-	154, // 117: producerflow.producer.v1.Agency.NIPR.License.issued_on:type_name -> google.type.Date
-	154, // 118: producerflow.producer.v1.Agency.NIPR.License.last_updated_on:type_name -> google.type.Date
-	131, // 119: producerflow.producer.v1.Agency.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
-	132, // 120: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.regulatory_actions:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
-	151, // 121: producerflow.producer.v1.Agency.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
-	151, // 122: producerflow.producer.v1.Agency.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
-	151, // 123: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
-	154, // 124: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issued_on:type_name -> google.type.Date
-	151, // 125: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
-	151, // 126: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
-	151, // 127: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
-	139, // 128: producerflow.producer.v1.Producer.NIPR.licenses:type_name -> producerflow.producer.v1.Producer.NIPR.License
-	140, // 129: producerflow.producer.v1.Producer.NIPR.biographic:type_name -> producerflow.producer.v1.Producer.NIPR.Biographic
-	141, // 130: producerflow.producer.v1.Producer.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
-	142, // 131: producerflow.producer.v1.Producer.NIPR.appointments:type_name -> producerflow.producer.v1.Producer.NIPR.Appointment
-	3,   // 132: producerflow.producer.v1.Producer.NIPR.nipr_sync_status:type_name -> producerflow.producer.v1.NIPRSyncState
-	151, // 133: producerflow.producer.v1.Producer.NIPR.nipr_sync_status_updated_at:type_name -> google.protobuf.Timestamp
-	8,   // 134: producerflow.producer.v1.Producer.NIPR.License.status:type_name -> producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
-	151, // 135: producerflow.producer.v1.Producer.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
-	154, // 136: producerflow.producer.v1.Producer.NIPR.License.expires_on:type_name -> google.type.Date
-	151, // 137: producerflow.producer.v1.Producer.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
-	143, // 138: producerflow.producer.v1.Producer.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
-	151, // 139: producerflow.producer.v1.Producer.NIPR.Biographic.date_of_birth:type_name -> google.protobuf.Timestamp
-	145, // 140: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.regulatory_actions_by_state:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
-	151, // 141: producerflow.producer.v1.Producer.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
-	151, // 142: producerflow.producer.v1.Producer.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
-	151, // 143: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
-	154, // 144: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issued_on:type_name -> google.type.Date
-	151, // 145: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
-	151, // 146: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
-	151, // 147: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
-	144, // 148: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry.value:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
-	0,   // 149: producerflow.producer.v1.UpdateContactRequest.Contact.role:type_name -> producerflow.producer.v1.ContactRole
-	10,  // 150: producerflow.producer.v1.UpdateContactRequest.Contact.address:type_name -> producerflow.producer.v1.Address
-	150, // 151: producerflow.producer.v1.UpdateContactRequest.Contact.external_metadata:type_name -> producerflow.producer.v1.UpdateContactRequest.Contact.ExternalMetadataEntry
-	11,  // 152: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:input_type -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest
-	13,  // 153: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:input_type -> producerflow.producer.v1.CreateProducerOnboardingURLRequest
-	16,  // 154: producerflow.producer.v1.ProducerService.NewAgency:input_type -> producerflow.producer.v1.NewAgencyRequest
-	68,  // 155: producerflow.producer.v1.ProducerService.ListAgencies:input_type -> producerflow.producer.v1.ListAgenciesRequest
-	70,  // 156: producerflow.producer.v1.ProducerService.ListOrganizations:input_type -> producerflow.producer.v1.ListOrganizationsRequest
-	73,  // 157: producerflow.producer.v1.ProducerService.GetOrganization:input_type -> producerflow.producer.v1.GetOrganizationRequest
-	75,  // 158: producerflow.producer.v1.ProducerService.CreateOrganization:input_type -> producerflow.producer.v1.CreateOrganizationRequest
-	33,  // 159: producerflow.producer.v1.ProducerService.NewProducer:input_type -> producerflow.producer.v1.NewProducerRequest
-	35,  // 160: producerflow.producer.v1.ProducerService.NewProducers:input_type -> producerflow.producer.v1.NewProducersRequest
-	20,  // 161: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:input_type -> producerflow.producer.v1.GetAgencyAndProducersRequest
-	18,  // 162: producerflow.producer.v1.ProducerService.GetProducer:input_type -> producerflow.producer.v1.GetProducerRequest
-	22,  // 163: producerflow.producer.v1.ProducerService.GetAgencyFiles:input_type -> producerflow.producer.v1.GetAgencyFilesRequest
-	24,  // 164: producerflow.producer.v1.ProducerService.UpdateProducer:input_type -> producerflow.producer.v1.UpdateProducerRequest
-	26,  // 165: producerflow.producer.v1.ProducerService.UpdateAgency:input_type -> producerflow.producer.v1.UpdateAgencyRequest
-	38,  // 166: producerflow.producer.v1.ProducerService.NewContact:input_type -> producerflow.producer.v1.NewContactRequest
-	40,  // 167: producerflow.producer.v1.ProducerService.NewContacts:input_type -> producerflow.producer.v1.NewContactsRequest
-	43,  // 168: producerflow.producer.v1.ProducerService.ListAgencyContacts:input_type -> producerflow.producer.v1.ListAgencyContactsRequest
-	45,  // 169: producerflow.producer.v1.ProducerService.UpdateContact:input_type -> producerflow.producer.v1.UpdateContactRequest
-	47,  // 170: producerflow.producer.v1.ProducerService.SetExternalID:input_type -> producerflow.producer.v1.SetExternalIDRequest
-	49,  // 171: producerflow.producer.v1.ProducerService.ValidateProducerNPN:input_type -> producerflow.producer.v1.ValidateProducerNPNRequest
-	51,  // 172: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:input_type -> producerflow.producer.v1.ValidateAgencyNPNRequest
-	53,  // 173: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:input_type -> producerflow.producer.v1.LookupNPNByFEINRequest
-	57,  // 174: producerflow.producer.v1.ProducerService.ResyncProducer:input_type -> producerflow.producer.v1.ResyncProducerRequest
-	55,  // 175: producerflow.producer.v1.ProducerService.ResyncAgency:input_type -> producerflow.producer.v1.ResyncAgencyRequest
-	59,  // 176: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:input_type -> producerflow.producer.v1.SyncProducerWithNIPRRequest
-	61,  // 177: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:input_type -> producerflow.producer.v1.SyncAgencyWithNIPRRequest
-	63,  // 178: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:input_type -> producerflow.producer.v1.StopSyncProducerWithNIPRRequest
-	65,  // 179: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:input_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
-	77,  // 180: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:input_type -> producerflow.producer.v1.CreateProducerUploadURLRequest
-	80,  // 181: producerflow.producer.v1.ProducerService.AddAgencyLocations:input_type -> producerflow.producer.v1.AddAgencyLocationsRequest
-	83,  // 182: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:input_type -> producerflow.producer.v1.RemoveAgencyLocationsRequest
-	85,  // 183: producerflow.producer.v1.ProducerService.ListAgencyLocations:input_type -> producerflow.producer.v1.ListAgencyLocationsRequest
-	89,  // 184: producerflow.producer.v1.ProducerService.AssignProducerToLocations:input_type -> producerflow.producer.v1.AssignProducerToLocationsRequest
-	91,  // 185: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:input_type -> producerflow.producer.v1.UnassignProducerFromLocationsRequest
-	87,  // 186: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:input_type -> producerflow.producer.v1.UpdateAgencyLocationRequest
-	12,  // 187: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:output_type -> producerflow.producer.v1.CreateAgencyOnboardingURLResponse
-	15,  // 188: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:output_type -> producerflow.producer.v1.CreateProducerOnboardingURLResponse
-	17,  // 189: producerflow.producer.v1.ProducerService.NewAgency:output_type -> producerflow.producer.v1.NewAgencyResponse
-	69,  // 190: producerflow.producer.v1.ProducerService.ListAgencies:output_type -> producerflow.producer.v1.ListAgenciesResponse
-	72,  // 191: producerflow.producer.v1.ProducerService.ListOrganizations:output_type -> producerflow.producer.v1.ListOrganizationsResponse
-	74,  // 192: producerflow.producer.v1.ProducerService.GetOrganization:output_type -> producerflow.producer.v1.GetOrganizationResponse
-	76,  // 193: producerflow.producer.v1.ProducerService.CreateOrganization:output_type -> producerflow.producer.v1.CreateOrganizationResponse
-	34,  // 194: producerflow.producer.v1.ProducerService.NewProducer:output_type -> producerflow.producer.v1.NewProducerResponse
-	36,  // 195: producerflow.producer.v1.ProducerService.NewProducers:output_type -> producerflow.producer.v1.NewProducersResponse
-	21,  // 196: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:output_type -> producerflow.producer.v1.GetAgencyAndProducersResponse
-	19,  // 197: producerflow.producer.v1.ProducerService.GetProducer:output_type -> producerflow.producer.v1.GetProducerResponse
-	23,  // 198: producerflow.producer.v1.ProducerService.GetAgencyFiles:output_type -> producerflow.producer.v1.GetAgencyFilesResponse
-	25,  // 199: producerflow.producer.v1.ProducerService.UpdateProducer:output_type -> producerflow.producer.v1.UpdateProducerResponse
-	27,  // 200: producerflow.producer.v1.ProducerService.UpdateAgency:output_type -> producerflow.producer.v1.UpdateAgencyResponse
-	39,  // 201: producerflow.producer.v1.ProducerService.NewContact:output_type -> producerflow.producer.v1.NewContactResponse
-	41,  // 202: producerflow.producer.v1.ProducerService.NewContacts:output_type -> producerflow.producer.v1.NewContactsResponse
-	44,  // 203: producerflow.producer.v1.ProducerService.ListAgencyContacts:output_type -> producerflow.producer.v1.ListAgencyContactsResponse
-	46,  // 204: producerflow.producer.v1.ProducerService.UpdateContact:output_type -> producerflow.producer.v1.UpdateContactResponse
-	48,  // 205: producerflow.producer.v1.ProducerService.SetExternalID:output_type -> producerflow.producer.v1.SetExternalIDResponse
-	50,  // 206: producerflow.producer.v1.ProducerService.ValidateProducerNPN:output_type -> producerflow.producer.v1.ValidateProducerNPNResponse
-	52,  // 207: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:output_type -> producerflow.producer.v1.ValidateAgencyNPNResponse
-	54,  // 208: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:output_type -> producerflow.producer.v1.LookupNPNByFEINResponse
-	58,  // 209: producerflow.producer.v1.ProducerService.ResyncProducer:output_type -> producerflow.producer.v1.ResyncProducerResponse
-	56,  // 210: producerflow.producer.v1.ProducerService.ResyncAgency:output_type -> producerflow.producer.v1.ResyncAgencyResponse
-	60,  // 211: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:output_type -> producerflow.producer.v1.SyncProducerWithNIPRResponse
-	62,  // 212: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:output_type -> producerflow.producer.v1.SyncAgencyWithNIPRResponse
-	64,  // 213: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:output_type -> producerflow.producer.v1.StopSyncProducerWithNIPRResponse
-	66,  // 214: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:output_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
-	78,  // 215: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:output_type -> producerflow.producer.v1.CreateProducerUploadURLResponse
-	82,  // 216: producerflow.producer.v1.ProducerService.AddAgencyLocations:output_type -> producerflow.producer.v1.AddAgencyLocationsResponse
-	84,  // 217: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:output_type -> producerflow.producer.v1.RemoveAgencyLocationsResponse
-	86,  // 218: producerflow.producer.v1.ProducerService.ListAgencyLocations:output_type -> producerflow.producer.v1.ListAgencyLocationsResponse
-	90,  // 219: producerflow.producer.v1.ProducerService.AssignProducerToLocations:output_type -> producerflow.producer.v1.AssignProducerToLocationsResponse
-	92,  // 220: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:output_type -> producerflow.producer.v1.UnassignProducerFromLocationsResponse
-	88,  // 221: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:output_type -> producerflow.producer.v1.UpdateAgencyLocationResponse
-	187, // [187:222] is the sub-list for method output_type
-	152, // [152:187] is the sub-list for method input_type
-	152, // [152:152] is the sub-list for extension type_name
-	152, // [152:152] is the sub-list for extension extendee
-	0,   // [0:152] is the sub-list for field type_name
+	149, // 43: producerflow.producer.v1.Contact.external_metadata:type_name -> producerflow.producer.v1.Contact.ExternalMetadataEntry
+	42,  // 44: producerflow.producer.v1.ListAgencyContactsResponse.contacts:type_name -> producerflow.producer.v1.Contact
+	150, // 45: producerflow.producer.v1.UpdateContactRequest.contact:type_name -> producerflow.producer.v1.UpdateContactRequest.Contact
+	152, // 46: producerflow.producer.v1.AgencySummary.created_at:type_name -> google.protobuf.Timestamp
+	9,   // 47: producerflow.producer.v1.ListAgenciesRequest.pagination:type_name -> producerflow.producer.v1.Pagination
+	2,   // 48: producerflow.producer.v1.ListAgenciesRequest.agency_type:type_name -> producerflow.producer.v1.AgencyType
+	1,   // 49: producerflow.producer.v1.ListAgenciesRequest.entity_type:type_name -> producerflow.producer.v1.EntityType
+	3,   // 50: producerflow.producer.v1.ListAgenciesRequest.nipr_sync_statuses:type_name -> producerflow.producer.v1.NIPRSyncState
+	67,  // 51: producerflow.producer.v1.ListAgenciesResponse.agencies:type_name -> producerflow.producer.v1.AgencySummary
+	9,   // 52: producerflow.producer.v1.ListOrganizationsRequest.pagination:type_name -> producerflow.producer.v1.Pagination
+	71,  // 53: producerflow.producer.v1.ListOrganizationsResponse.organizations:type_name -> producerflow.producer.v1.Organization
+	71,  // 54: producerflow.producer.v1.GetOrganizationResponse.organization:type_name -> producerflow.producer.v1.Organization
+	10,  // 55: producerflow.producer.v1.Location.address:type_name -> producerflow.producer.v1.Address
+	81,  // 56: producerflow.producer.v1.AddAgencyLocationsRequest.locations:type_name -> producerflow.producer.v1.LocationInput
+	10,  // 57: producerflow.producer.v1.LocationInput.address:type_name -> producerflow.producer.v1.Address
+	79,  // 58: producerflow.producer.v1.ListAgencyLocationsResponse.locations:type_name -> producerflow.producer.v1.Location
+	10,  // 59: producerflow.producer.v1.UpdateAgencyLocationRequest.address:type_name -> producerflow.producer.v1.Address
+	79,  // 60: producerflow.producer.v1.UpdateAgencyLocationResponse.location:type_name -> producerflow.producer.v1.Location
+	1,   // 61: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
+	10,  // 62: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
+	10,  // 63: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
+	10,  // 64: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
+	94,  // 65: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.principal:type_name -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
+	10,  // 66: producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.address:type_name -> producerflow.producer.v1.Address
+	97,  // 67: producerflow.producer.v1.NewAgencyRequest.Agency.principal:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal
+	98,  // 68: producerflow.producer.v1.NewAgencyRequest.Agency.bank_account:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount
+	99,  // 69: producerflow.producer.v1.NewAgencyRequest.Agency.eo_info:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo
+	100, // 70: producerflow.producer.v1.NewAgencyRequest.Agency.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours
+	32,  // 71: producerflow.producer.v1.NewAgencyRequest.Agency.producers:type_name -> producerflow.producer.v1.NewProducer
+	101, // 72: producerflow.producer.v1.NewAgencyRequest.Agency.points_of_contact:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact
+	1,   // 73: producerflow.producer.v1.NewAgencyRequest.Agency.entity_type:type_name -> producerflow.producer.v1.EntityType
+	10,  // 74: producerflow.producer.v1.NewAgencyRequest.Agency.mailing_address:type_name -> producerflow.producer.v1.Address
+	10,  // 75: producerflow.producer.v1.NewAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.Address
+	10,  // 76: producerflow.producer.v1.NewAgencyRequest.Agency.invoicing_address:type_name -> producerflow.producer.v1.Address
+	81,  // 77: producerflow.producer.v1.NewAgencyRequest.Agency.locations:type_name -> producerflow.producer.v1.LocationInput
+	102, // 78: producerflow.producer.v1.NewAgencyRequest.Agency.metadata_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.MetadataQuestionsEntry
+	103, // 79: producerflow.producer.v1.NewAgencyRequest.Agency.tenant_additional_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry
+	104, // 80: producerflow.producer.v1.NewAgencyRequest.Agency.Principal.tenant_additional_questions:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry
+	10,  // 81: producerflow.producer.v1.NewAgencyRequest.Agency.Principal.mailing_address:type_name -> producerflow.producer.v1.Address
+	4,   // 82: producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BankAccount.AccountType
+	152, // 83: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
+	152, // 84: producerflow.producer.v1.NewAgencyRequest.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
+	105, // 85: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour
+	5,   // 86: producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.role:type_name -> producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.CommunicationRole
+	153, // 87: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
+	154, // 88: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
+	154, // 89: producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
+	110, // 90: producerflow.producer.v1.UpdateProducerRequest.Producer.external_metadata:type_name -> producerflow.producer.v1.UpdateProducerRequest.Producer.ExternalMetadataEntry
+	112, // 91: producerflow.producer.v1.UpdateAgencyRequest.Agency.physical_address:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.Address
+	113, // 92: producerflow.producer.v1.UpdateAgencyRequest.Agency.external_metadata:type_name -> producerflow.producer.v1.UpdateAgencyRequest.Agency.ExternalMetadataEntry
+	122, // 93: producerflow.producer.v1.Agency.AgencyInfo.metadata_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntry
+	123, // 94: producerflow.producer.v1.Agency.AgencyInfo.external_metadata:type_name -> producerflow.producer.v1.Agency.AgencyInfo.ExternalMetadataEntry
+	124, // 95: producerflow.producer.v1.Agency.AgencyInfo.tenant_additional_questions:type_name -> producerflow.producer.v1.Agency.AgencyInfo.TenantAdditionalQuestionsEntry
+	6,   // 96: producerflow.producer.v1.Agency.BankAccount.account_type:type_name -> producerflow.producer.v1.Agency.BankAccount.AccountType
+	152, // 97: producerflow.producer.v1.Agency.EOInfo.expiration_date:type_name -> google.protobuf.Timestamp
+	152, // 98: producerflow.producer.v1.Agency.EOInfo.effective_date:type_name -> google.protobuf.Timestamp
+	115, // 99: producerflow.producer.v1.Agency.Principal.address:type_name -> producerflow.producer.v1.Agency.Address
+	125, // 100: producerflow.producer.v1.Agency.BusinessHours.business_hours:type_name -> producerflow.producer.v1.Agency.BusinessHours.BusinessHour
+	126, // 101: producerflow.producer.v1.Agency.NIPR.biographic:type_name -> producerflow.producer.v1.Agency.NIPR.Biographic
+	127, // 102: producerflow.producer.v1.Agency.NIPR.addresses:type_name -> producerflow.producer.v1.Agency.NIPR.Address
+	128, // 103: producerflow.producer.v1.Agency.NIPR.licenses:type_name -> producerflow.producer.v1.Agency.NIPR.License
+	129, // 104: producerflow.producer.v1.Agency.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo
+	130, // 105: producerflow.producer.v1.Agency.NIPR.appointments:type_name -> producerflow.producer.v1.Agency.NIPR.Appointment
+	153, // 106: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.week_days:type_name -> google.type.DayOfWeek
+	154, // 107: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.opening_time:type_name -> google.type.TimeOfDay
+	154, // 108: producerflow.producer.v1.Agency.BusinessHours.BusinessHour.closing_time:type_name -> google.type.TimeOfDay
+	152, // 109: producerflow.producer.v1.Agency.NIPR.Biographic.updated_at:type_name -> google.protobuf.Timestamp
+	152, // 110: producerflow.producer.v1.Agency.NIPR.Address.date_updated:type_name -> google.protobuf.Timestamp
+	152, // 111: producerflow.producer.v1.Agency.NIPR.Address.updated_at:type_name -> google.protobuf.Timestamp
+	7,   // 112: producerflow.producer.v1.Agency.NIPR.License.status:type_name -> producerflow.producer.v1.Agency.NIPR.License.LicenseStatus
+	152, // 113: producerflow.producer.v1.Agency.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
+	152, // 114: producerflow.producer.v1.Agency.NIPR.License.issue_date:type_name -> google.protobuf.Timestamp
+	152, // 115: producerflow.producer.v1.Agency.NIPR.License.update_date:type_name -> google.protobuf.Timestamp
+	152, // 116: producerflow.producer.v1.Agency.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
+	155, // 117: producerflow.producer.v1.Agency.NIPR.License.expires_on:type_name -> google.type.Date
+	155, // 118: producerflow.producer.v1.Agency.NIPR.License.issued_on:type_name -> google.type.Date
+	155, // 119: producerflow.producer.v1.Agency.NIPR.License.last_updated_on:type_name -> google.type.Date
+	131, // 120: producerflow.producer.v1.Agency.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority
+	132, // 121: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.regulatory_actions:type_name -> producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction
+	152, // 122: producerflow.producer.v1.Agency.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
+	152, // 123: producerflow.producer.v1.Agency.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
+	152, // 124: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
+	155, // 125: producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issued_on:type_name -> google.type.Date
+	152, // 126: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
+	152, // 127: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
+	152, // 128: producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
+	139, // 129: producerflow.producer.v1.Producer.NIPR.licenses:type_name -> producerflow.producer.v1.Producer.NIPR.License
+	140, // 130: producerflow.producer.v1.Producer.NIPR.biographic:type_name -> producerflow.producer.v1.Producer.NIPR.Biographic
+	141, // 131: producerflow.producer.v1.Producer.NIPR.regulatory_info:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo
+	142, // 132: producerflow.producer.v1.Producer.NIPR.appointments:type_name -> producerflow.producer.v1.Producer.NIPR.Appointment
+	3,   // 133: producerflow.producer.v1.Producer.NIPR.nipr_sync_status:type_name -> producerflow.producer.v1.NIPRSyncState
+	152, // 134: producerflow.producer.v1.Producer.NIPR.nipr_sync_status_updated_at:type_name -> google.protobuf.Timestamp
+	8,   // 135: producerflow.producer.v1.Producer.NIPR.License.status:type_name -> producerflow.producer.v1.Producer.NIPR.License.LicenseStatus
+	152, // 136: producerflow.producer.v1.Producer.NIPR.License.expiration_date:type_name -> google.protobuf.Timestamp
+	155, // 137: producerflow.producer.v1.Producer.NIPR.License.expires_on:type_name -> google.type.Date
+	152, // 138: producerflow.producer.v1.Producer.NIPR.License.updated_at:type_name -> google.protobuf.Timestamp
+	143, // 139: producerflow.producer.v1.Producer.NIPR.License.lines_of_authority:type_name -> producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority
+	152, // 140: producerflow.producer.v1.Producer.NIPR.Biographic.date_of_birth:type_name -> google.protobuf.Timestamp
+	145, // 141: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.regulatory_actions_by_state:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
+	152, // 142: producerflow.producer.v1.Producer.NIPR.Appointment.status_reason_date:type_name -> google.protobuf.Timestamp
+	152, // 143: producerflow.producer.v1.Producer.NIPR.Appointment.appointment_renewal_date:type_name -> google.protobuf.Timestamp
+	152, // 144: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date:type_name -> google.protobuf.Timestamp
+	155, // 145: producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issued_on:type_name -> google.type.Date
+	152, // 146: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.date_of_action:type_name -> google.protobuf.Timestamp
+	152, // 147: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.effective_date:type_name -> google.protobuf.Timestamp
+	152, // 148: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.enter_date:type_name -> google.protobuf.Timestamp
+	144, // 149: producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry.value:type_name -> producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
+	0,   // 150: producerflow.producer.v1.UpdateContactRequest.Contact.role:type_name -> producerflow.producer.v1.ContactRole
+	10,  // 151: producerflow.producer.v1.UpdateContactRequest.Contact.address:type_name -> producerflow.producer.v1.Address
+	151, // 152: producerflow.producer.v1.UpdateContactRequest.Contact.external_metadata:type_name -> producerflow.producer.v1.UpdateContactRequest.Contact.ExternalMetadataEntry
+	11,  // 153: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:input_type -> producerflow.producer.v1.CreateAgencyOnboardingURLRequest
+	13,  // 154: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:input_type -> producerflow.producer.v1.CreateProducerOnboardingURLRequest
+	16,  // 155: producerflow.producer.v1.ProducerService.NewAgency:input_type -> producerflow.producer.v1.NewAgencyRequest
+	68,  // 156: producerflow.producer.v1.ProducerService.ListAgencies:input_type -> producerflow.producer.v1.ListAgenciesRequest
+	70,  // 157: producerflow.producer.v1.ProducerService.ListOrganizations:input_type -> producerflow.producer.v1.ListOrganizationsRequest
+	73,  // 158: producerflow.producer.v1.ProducerService.GetOrganization:input_type -> producerflow.producer.v1.GetOrganizationRequest
+	75,  // 159: producerflow.producer.v1.ProducerService.CreateOrganization:input_type -> producerflow.producer.v1.CreateOrganizationRequest
+	33,  // 160: producerflow.producer.v1.ProducerService.NewProducer:input_type -> producerflow.producer.v1.NewProducerRequest
+	35,  // 161: producerflow.producer.v1.ProducerService.NewProducers:input_type -> producerflow.producer.v1.NewProducersRequest
+	20,  // 162: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:input_type -> producerflow.producer.v1.GetAgencyAndProducersRequest
+	18,  // 163: producerflow.producer.v1.ProducerService.GetProducer:input_type -> producerflow.producer.v1.GetProducerRequest
+	22,  // 164: producerflow.producer.v1.ProducerService.GetAgencyFiles:input_type -> producerflow.producer.v1.GetAgencyFilesRequest
+	24,  // 165: producerflow.producer.v1.ProducerService.UpdateProducer:input_type -> producerflow.producer.v1.UpdateProducerRequest
+	26,  // 166: producerflow.producer.v1.ProducerService.UpdateAgency:input_type -> producerflow.producer.v1.UpdateAgencyRequest
+	38,  // 167: producerflow.producer.v1.ProducerService.NewContact:input_type -> producerflow.producer.v1.NewContactRequest
+	40,  // 168: producerflow.producer.v1.ProducerService.NewContacts:input_type -> producerflow.producer.v1.NewContactsRequest
+	43,  // 169: producerflow.producer.v1.ProducerService.ListAgencyContacts:input_type -> producerflow.producer.v1.ListAgencyContactsRequest
+	45,  // 170: producerflow.producer.v1.ProducerService.UpdateContact:input_type -> producerflow.producer.v1.UpdateContactRequest
+	47,  // 171: producerflow.producer.v1.ProducerService.SetExternalID:input_type -> producerflow.producer.v1.SetExternalIDRequest
+	49,  // 172: producerflow.producer.v1.ProducerService.ValidateProducerNPN:input_type -> producerflow.producer.v1.ValidateProducerNPNRequest
+	51,  // 173: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:input_type -> producerflow.producer.v1.ValidateAgencyNPNRequest
+	53,  // 174: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:input_type -> producerflow.producer.v1.LookupNPNByFEINRequest
+	57,  // 175: producerflow.producer.v1.ProducerService.ResyncProducer:input_type -> producerflow.producer.v1.ResyncProducerRequest
+	55,  // 176: producerflow.producer.v1.ProducerService.ResyncAgency:input_type -> producerflow.producer.v1.ResyncAgencyRequest
+	59,  // 177: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:input_type -> producerflow.producer.v1.SyncProducerWithNIPRRequest
+	61,  // 178: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:input_type -> producerflow.producer.v1.SyncAgencyWithNIPRRequest
+	63,  // 179: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:input_type -> producerflow.producer.v1.StopSyncProducerWithNIPRRequest
+	65,  // 180: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:input_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRRequest
+	77,  // 181: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:input_type -> producerflow.producer.v1.CreateProducerUploadURLRequest
+	80,  // 182: producerflow.producer.v1.ProducerService.AddAgencyLocations:input_type -> producerflow.producer.v1.AddAgencyLocationsRequest
+	83,  // 183: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:input_type -> producerflow.producer.v1.RemoveAgencyLocationsRequest
+	85,  // 184: producerflow.producer.v1.ProducerService.ListAgencyLocations:input_type -> producerflow.producer.v1.ListAgencyLocationsRequest
+	89,  // 185: producerflow.producer.v1.ProducerService.AssignProducerToLocations:input_type -> producerflow.producer.v1.AssignProducerToLocationsRequest
+	91,  // 186: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:input_type -> producerflow.producer.v1.UnassignProducerFromLocationsRequest
+	87,  // 187: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:input_type -> producerflow.producer.v1.UpdateAgencyLocationRequest
+	12,  // 188: producerflow.producer.v1.ProducerService.CreateAgencyOnboardingURL:output_type -> producerflow.producer.v1.CreateAgencyOnboardingURLResponse
+	15,  // 189: producerflow.producer.v1.ProducerService.CreateProducerOnboardingURL:output_type -> producerflow.producer.v1.CreateProducerOnboardingURLResponse
+	17,  // 190: producerflow.producer.v1.ProducerService.NewAgency:output_type -> producerflow.producer.v1.NewAgencyResponse
+	69,  // 191: producerflow.producer.v1.ProducerService.ListAgencies:output_type -> producerflow.producer.v1.ListAgenciesResponse
+	72,  // 192: producerflow.producer.v1.ProducerService.ListOrganizations:output_type -> producerflow.producer.v1.ListOrganizationsResponse
+	74,  // 193: producerflow.producer.v1.ProducerService.GetOrganization:output_type -> producerflow.producer.v1.GetOrganizationResponse
+	76,  // 194: producerflow.producer.v1.ProducerService.CreateOrganization:output_type -> producerflow.producer.v1.CreateOrganizationResponse
+	34,  // 195: producerflow.producer.v1.ProducerService.NewProducer:output_type -> producerflow.producer.v1.NewProducerResponse
+	36,  // 196: producerflow.producer.v1.ProducerService.NewProducers:output_type -> producerflow.producer.v1.NewProducersResponse
+	21,  // 197: producerflow.producer.v1.ProducerService.GetAgencyAndProducers:output_type -> producerflow.producer.v1.GetAgencyAndProducersResponse
+	19,  // 198: producerflow.producer.v1.ProducerService.GetProducer:output_type -> producerflow.producer.v1.GetProducerResponse
+	23,  // 199: producerflow.producer.v1.ProducerService.GetAgencyFiles:output_type -> producerflow.producer.v1.GetAgencyFilesResponse
+	25,  // 200: producerflow.producer.v1.ProducerService.UpdateProducer:output_type -> producerflow.producer.v1.UpdateProducerResponse
+	27,  // 201: producerflow.producer.v1.ProducerService.UpdateAgency:output_type -> producerflow.producer.v1.UpdateAgencyResponse
+	39,  // 202: producerflow.producer.v1.ProducerService.NewContact:output_type -> producerflow.producer.v1.NewContactResponse
+	41,  // 203: producerflow.producer.v1.ProducerService.NewContacts:output_type -> producerflow.producer.v1.NewContactsResponse
+	44,  // 204: producerflow.producer.v1.ProducerService.ListAgencyContacts:output_type -> producerflow.producer.v1.ListAgencyContactsResponse
+	46,  // 205: producerflow.producer.v1.ProducerService.UpdateContact:output_type -> producerflow.producer.v1.UpdateContactResponse
+	48,  // 206: producerflow.producer.v1.ProducerService.SetExternalID:output_type -> producerflow.producer.v1.SetExternalIDResponse
+	50,  // 207: producerflow.producer.v1.ProducerService.ValidateProducerNPN:output_type -> producerflow.producer.v1.ValidateProducerNPNResponse
+	52,  // 208: producerflow.producer.v1.ProducerService.ValidateAgencyNPN:output_type -> producerflow.producer.v1.ValidateAgencyNPNResponse
+	54,  // 209: producerflow.producer.v1.ProducerService.LookupNPNByFEIN:output_type -> producerflow.producer.v1.LookupNPNByFEINResponse
+	58,  // 210: producerflow.producer.v1.ProducerService.ResyncProducer:output_type -> producerflow.producer.v1.ResyncProducerResponse
+	56,  // 211: producerflow.producer.v1.ProducerService.ResyncAgency:output_type -> producerflow.producer.v1.ResyncAgencyResponse
+	60,  // 212: producerflow.producer.v1.ProducerService.SyncProducerWithNIPR:output_type -> producerflow.producer.v1.SyncProducerWithNIPRResponse
+	62,  // 213: producerflow.producer.v1.ProducerService.SyncAgencyWithNIPR:output_type -> producerflow.producer.v1.SyncAgencyWithNIPRResponse
+	64,  // 214: producerflow.producer.v1.ProducerService.StopSyncProducerWithNIPR:output_type -> producerflow.producer.v1.StopSyncProducerWithNIPRResponse
+	66,  // 215: producerflow.producer.v1.ProducerService.StopSyncAgencyWithNIPR:output_type -> producerflow.producer.v1.StopSyncAgencyWithNIPRResponse
+	78,  // 216: producerflow.producer.v1.ProducerService.CreateProducerUploadURL:output_type -> producerflow.producer.v1.CreateProducerUploadURLResponse
+	82,  // 217: producerflow.producer.v1.ProducerService.AddAgencyLocations:output_type -> producerflow.producer.v1.AddAgencyLocationsResponse
+	84,  // 218: producerflow.producer.v1.ProducerService.RemoveAgencyLocations:output_type -> producerflow.producer.v1.RemoveAgencyLocationsResponse
+	86,  // 219: producerflow.producer.v1.ProducerService.ListAgencyLocations:output_type -> producerflow.producer.v1.ListAgencyLocationsResponse
+	90,  // 220: producerflow.producer.v1.ProducerService.AssignProducerToLocations:output_type -> producerflow.producer.v1.AssignProducerToLocationsResponse
+	92,  // 221: producerflow.producer.v1.ProducerService.UnassignProducerFromLocations:output_type -> producerflow.producer.v1.UnassignProducerFromLocationsResponse
+	88,  // 222: producerflow.producer.v1.ProducerService.UpdateAgencyLocation:output_type -> producerflow.producer.v1.UpdateAgencyLocationResponse
+	188, // [188:223] is the sub-list for method output_type
+	153, // [153:188] is the sub-list for method input_type
+	153, // [153:153] is the sub-list for extension type_name
+	153, // [153:153] is the sub-list for extension extendee
+	0,   // [0:153] is the sub-list for field type_name
 }
 
 func init() { file_producerflow_producer_v1_producer_proto_init() }
@@ -12096,14 +12114,14 @@ func file_producerflow_producer_v1_producer_proto_init() {
 	file_producerflow_producer_v1_producer_proto_msgTypes[106].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[126].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[137].OneofWrappers = []any{}
-	file_producerflow_producer_v1_producer_proto_msgTypes[140].OneofWrappers = []any{}
+	file_producerflow_producer_v1_producer_proto_msgTypes[141].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_producerflow_producer_v1_producer_proto_rawDesc), len(file_producerflow_producer_v1_producer_proto_rawDesc)),
 			NumEnums:      9,
-			NumMessages:   142,
+			NumMessages:   143,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
