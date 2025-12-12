@@ -12,8 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### ProducerService
 
 - **External Metadata for Contacts** - Custom metadata support extended to contact records
-  - `external_metadata` field added to `UpdateContactRequest.Contact` message
+  - `external_metadata` field added to `Contact` message
   - Allows tenants to attach arbitrary key-value pairs to contacts for business logic, reporting, or integration needs
+  - Can be updated via `UpdateContact` endpoint and is returned by `ListAgencyContacts` endpoint
   - Update behavior: omit to preserve, empty map to clear, or provide values to replace entirely
 
 ---
