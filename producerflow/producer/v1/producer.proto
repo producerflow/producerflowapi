@@ -3500,6 +3500,12 @@ message Contact {
   // The role type of the contact as an enum.
   // This field replaces the deprecated string-based 'role' field.
   ContactRole role_type = 11;
+
+  // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+  // This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
+  // reporting, or integration needs.
+  // The map key is the metadata field name, and the value is the associated data.
+  map<string, string> external_metadata = 12;
 }
 
 // ListAgencyContactsRequest requests all contacts associated with an agency.
