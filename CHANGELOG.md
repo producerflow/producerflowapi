@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.10] - 2025-12-12
+
+### Added
+
+#### ProducerService
+
+- **External Metadata for Contacts** - Custom metadata support extended to contact records
+  - `external_metadata` field added to `UpdateContactRequest.Contact` message
+  - Allows tenants to attach arbitrary key-value pairs to contacts for business logic, reporting, or integration needs
+  - Update behavior: omit to preserve, empty map to clear, or provide values to replace entirely
+
+---
+
 ## [1.0.9] - 2025-12-10
 
 ### Changed
