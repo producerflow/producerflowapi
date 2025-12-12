@@ -198,7 +198,7 @@
     },
     "tenant_additional_questions": {
       "type": "object",
-      "description": "Custom additional questions and answers as key-value pairs collected during producer onboarding",
+      "description": "Present when producer is created with tenant additional questions during onboarding or when the tenant additional questions field is updated. Contains custom additional questions and answers as key-value pairs collected during producer onboarding",
       "additionalProperties": {
         "type": "string"
       }
