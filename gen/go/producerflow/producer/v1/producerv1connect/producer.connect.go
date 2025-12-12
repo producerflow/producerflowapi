@@ -820,6 +820,7 @@ type ProducerServiceClient interface {
 	// - Phone number
 	// - Mailing address components
 	// - Role within the agency
+	// - External metadata (for tenant-specific data)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -837,6 +838,7 @@ type ProducerServiceClient interface {
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters (state code)
 	//   - zip: If provided, must be 1-10 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
 	//
 	// Business logic validation:
 	// - contact_id: Contact must exist and belong to the authenticated tenant
@@ -2546,6 +2548,7 @@ type ProducerServiceHandler interface {
 	// - Phone number
 	// - Mailing address components
 	// - Role within the agency
+	// - External metadata (for tenant-specific data)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2563,6 +2566,7 @@ type ProducerServiceHandler interface {
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters (state code)
 	//   - zip: If provided, must be 1-10 characters
+	//   - external_metadata: Map of key-value pairs for tenant-specific data
 	//
 	// Business logic validation:
 	// - contact_id: Contact must exist and belong to the authenticated tenant

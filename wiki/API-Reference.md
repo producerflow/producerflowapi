@@ -1635,6 +1635,7 @@ Updatable Fields:
 - Phone number
 - Mailing address components
 - Role within the agency
+- External metadata (for tenant-specific data)
 
 Validation Rules:
 Proto validation (format checks):
@@ -1652,6 +1653,7 @@ Proto validation (format checks):
     - city: If provided, must be non-empty
     - state: If provided, must be exactly 2 characters (state code)
     - zip: If provided, must be 1-10 characters
+  - external_metadata: Map of key-value pairs for tenant-specific data
 
 Business logic validation:
 - contact_id: Contact must exist and belong to the authenticated tenant
@@ -4569,6 +4571,16 @@ All fields are optional, allowing partial updates.
 | `phone` | [string](#string) | optional | Phone number of the contact. If provided, must be a valid phone number format. |
 | `role` | [ContactRole](#contactrole) | optional | Role or position of the contact within the agency. If provided, must be a valid ContactRole enum value (not UNSPECIFIED). See ContactRole enum for available options. |
 | `address` | [Address](#address) | optional | Mailing address of the contact. If provided, all address fields should be included. This replaces the entire address. |
+| `external_metadata` | [UpdateContactRequest.Contact.ExternalMetadataEntry](#updatecontactrequestcontactexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
+
+#### UpdateContactRequest.Contact.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### UpdateContactResponse
 
