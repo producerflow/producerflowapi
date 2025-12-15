@@ -23,24 +23,28 @@
       "description": "When the change occurred"
     },
     "producer_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Always present. Unique identifier for the producer"
     },
     "external_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Only present if filled in by tenant. External identifier for the producer"
     },
     "agency_id": {
       "type": "string",
-      "description": "ID of the agency that the producer belongs to"
+      "description": "Always present. ID of the agency that the producer belongs to"
     },
     "external_agency_id": {
       "type": "string",
-      "description": "External ID of the agency that the producer belongs to"
+      "description": "Only present if filled in by tenant. External ID of the agency that the producer belongs to"
     },
     "npn": {
-      "type": "string"
+      "type": "string",
+      "description": "Always present. National Producer Number"
     },
     "accurate_background_check": {
       "type": "object",
+      "description": "Present when producer background check is added or updated. Contains background check information",
       "properties": {
         "accurate_order_id": {
           "type": "string"
@@ -78,6 +82,7 @@
     },
     "producer_nipr_data": {
       "type": "object",
+      "description": "Present when NIPR data is synced for the producer. Contains producer information from NIPR",
       "properties": {
         "birth_date": { "type": "string", "format": "date" },
         "business_email": { "type": "string" },
@@ -89,6 +94,7 @@
     },
     "producer_nipr_appointments": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the producer. Contains all current carrier appointments from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -107,6 +113,7 @@
     },
     "producer_nipr_licenses": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the producer. Contains all current licenses with their LOAs from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -146,6 +153,7 @@
     },
     "producer_nipr_addresses": {
       "type": "array",
+      "description": "Present when NIPR data is synced for the producer. Contains all addresses from NIPR",
       "items": {
         "type": "object",
         "properties": {
@@ -168,16 +176,16 @@
     "nipr_sync_status": {
       "type": "string",
       "enum": ["active", "failing", "pending", "disabled"],
-      "description": "NIPR synchronization status of the producer"
+      "description": "Always present. NIPR synchronization status of the producer (disabled, pending, failing, active)"
     },
     "nipr_sync_status_updated_at": {
       "type": "string",
       "format": "date-time",
-      "description": "Timestamp when the NIPR synchronization status was last updated"
+      "description": "Always present. ISO 8601 timestamp when the NIPR synchronization status was last updated"
     },
     "organization": {
       "type": "object",
-      "description": "Organization information associated with the producer",
+      "description": "Present when the producer's agency organization assignment changes. Contains organization details",
       "properties": {
         "organization_id": {
           "type": "string",
@@ -210,7 +218,7 @@
     },
     "assigned_locations": {
       "type": "array",
-      "description": "Physical locations assigned to the producer",
+      "description": "Present when producer location assignments change. Contains locations assigned to the producer",
       "items": {
         "type": "object",
         "properties": {
@@ -257,7 +265,7 @@
     "contract_status": {
       "type": "string",
       "enum": ["unsigned", "sent", "signed", "failed"],
-      "description": "Current status of the producer's contract"
+      "description": "Present when producer contract status changes. Current status of the producer's contract"
     }
   },
   "required": ["id", "timestamp", "producer_id"],
