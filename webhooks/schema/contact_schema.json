@@ -77,6 +77,13 @@
     "zip": {
       "type": "string",
       "description": "ZIP code of the contact"
+    },
+    "external_metadata": {
+      "type": "object",
+      "description": "Always present. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to contacts",
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   },
   "required": ["id", "timestamp", "contact_id"],

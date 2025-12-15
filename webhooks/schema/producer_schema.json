@@ -216,6 +216,13 @@
         "type": "string"
       }
     },
+    "external_metadata": {
+      "type": "object",
+      "description": "Always present. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to producers",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "assigned_locations": {
       "type": "array",
       "description": "Present when producer location assignments change. Contains locations assigned to the producer",

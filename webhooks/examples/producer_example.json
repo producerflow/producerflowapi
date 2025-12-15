@@ -104,6 +104,11 @@
     "has_e_and_o_coverage": "true",
     "specializes_in": "Commercial Insurance"
   },
+  "external_metadata": {
+    "employee_id": "EMP-98765",
+    "performance_tier": "platinum",
+    "sales_territory": "west_coast"
+  },
   "assigned_locations": [
     {
       "location_id": "loc_456789",

@@ -121,6 +121,11 @@
     "years_in_business": "15",
     "number_of_agents": "25"
   },
+  "external_metadata": {
+    "crm_id": "CRM-12345",
+    "tier": "gold",
+    "region": "midwest"
+  },
   "locations": [
     {
       "location_id": "loc_123456",
