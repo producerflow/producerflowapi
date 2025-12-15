@@ -189,6 +189,10 @@
         "external_id": {
           "type": "string",
           "description": "External identifier for the organization from an external system"
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address for the organization"
         }
       }
     },
