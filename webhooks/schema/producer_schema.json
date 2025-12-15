@@ -55,6 +55,7 @@
     },
     "producer_data": {
       "type": "object",
+      "description": "Present when producer is created or when any producer data field (city, email, first_name, last_name, middle_name, phone, state, street, zip, is_sole_proprietor) is updated. Contains the producer's personal and contact information",
       "properties": {
         "city": { "type": "string" },
         "email": { "type": "string" },
@@ -159,7 +160,7 @@
     },
     "requested_appointment_states": {
       "type": "array",
-      "description": "The list of requested appointment states for the producer when the producer was onboarded",
+      "description": "Present when producer is created with requested appointment states or when the requested appointment states are updated. Contains the list of appointment states requested for the producer during onboarding",
       "items": {
         "type": "string"
       }
