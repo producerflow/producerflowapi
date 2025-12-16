@@ -21,6 +21,7 @@
     {
       "address_type": "Business",
       "street": "123 Insurance Ave",
+      "address_line_2": "Suite 500",
       "city": "Chicago",
       "state": "IL",
       "zip": "60601"
@@ -131,6 +132,7 @@
       "location_id": "loc_123456",
       "name": "Chicago Main Office",
       "street": "123 Insurance Ave",
+      "address_line_2": "Suite 500",
       "city": "Chicago",
       "state": "IL",
       "zip": "60601",
@@ -142,6 +144,7 @@
       "location_id": "loc_789012",
       "name": "Springfield Branch",
       "street": "456 Capital Blvd",
+      "address_line_2": "Floor 2",
       "city": "Springfield",
       "state": "IL",
       "zip": "62701",

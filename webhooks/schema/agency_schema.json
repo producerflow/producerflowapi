@@ -61,6 +61,7 @@
         "properties": {
           "address_type": { "type": "string" },
           "street": { "type": "string" },
+          "address_line_2": { "type": "string" },
           "city": { "type": "string" },
           "state": { "type": "string" },
           "zip": { "type": "string" }
@@ -272,6 +273,10 @@
           "street": {
             "type": "string",
             "description": "Street address of this location"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Second line of the street address (e.g., apartment, suite, unit number)"
           },
           "city": {
             "type": "string",

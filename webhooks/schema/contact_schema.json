@@ -74,6 +74,10 @@
       "type": "string",
       "description": "Street address of the contact"
     },
+    "address_line_2": {
+      "type": "string",
+      "description": "Second line of the street address (e.g., apartment, suite, unit number)"
+    },
     "zip": {
       "type": "string",
       "description": "ZIP code of the contact"

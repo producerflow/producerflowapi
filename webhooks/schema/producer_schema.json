@@ -59,7 +59,7 @@
     },
     "producer_data": {
       "type": "object",
-      "description": "Present when producer is created or when any producer data field (city, email, first_name, last_name, middle_name, phone, state, street, zip, is_sole_proprietor) is updated. Contains the producer's personal and contact information",
+      "description": "Present when producer is created or when any producer data field (city, email, first_name, last_name, middle_name, phone, state, street, address_line_2, zip, is_sole_proprietor) is updated. Contains the producer's personal and contact information",
       "properties": {
         "city": { "type": "string" },
         "email": { "type": "string" },
@@ -69,6 +69,7 @@
         "phone": { "type": "string" },
         "state": { "type": "string" },
         "street": { "type": "string" },
+        "address_line_2": { "type": "string" },
         "zip": { "type": "string" },
         "is_sole_proprietor": {
           "type": "boolean",
@@ -240,6 +241,10 @@
           "street": {
             "type": "string",
             "description": "Street address"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Second line of the street address (e.g., apartment, suite, unit number)"
           },
           "city": {
             "type": "string",

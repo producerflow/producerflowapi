@@ -16,6 +16,7 @@
   "role": "Agent",
   "state": "CA",
   "street": "123 Market Street",
+  "address_line_2": "Unit 301",
   "zip": "94105",
   "external_metadata": {
     "contact_type": "primary",

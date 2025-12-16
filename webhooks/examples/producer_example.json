@@ -22,6 +22,7 @@
     "phone": "415-555-0123",
     "state": "CA",
     "street": "123 Market Street",
+    "address_line_2": "Apt 4B",
     "zip": "94105"
   },
   "producer_nipr_data": {
@@ -114,6 +115,7 @@
       "location_id": "loc_456789",
       "name": "San Francisco Main Office",
       "street": "123 Market Street",
+      "address_line_2": "Suite 200",
       "city": "San Francisco",
       "state": "CA",
       "zip": "94105",
