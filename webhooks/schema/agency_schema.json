@@ -239,6 +239,11 @@
         "principal_external_id": {
           "type": "string",
           "description": "Only present if filled in by tenant. External identifier for the principal"
+        },
+        "principal_type": {
+          "type": "string",
+          "enum": ["producer", "contact"],
+          "description": "Always present. Type of the principal: 'producer' if the principal is a licensed producer, 'contact' if the principal is an unlicensed contact"
         }
       }
     },
