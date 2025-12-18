@@ -122,6 +122,19 @@
       "phone": "415-555-0123",
       "email": "sf@business.com",
       "is_primary": true
+    },
+    {
+      "location_id": "loc_789123",
+      "name": "Oakland Branch Office",
+      "street": "456 Broadway",
+      "address_line_2": "",
+      "city": "Oakland",
+      "state": "CA",
+      "zip": "94612",
+      "phone": "510-555-0456",
+      "email": "oakland@business.com",
+      "is_primary": false,
+      "unassigned": true
     }
   ],
   "contract_status": "signed"
