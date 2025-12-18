@@ -24,67 +24,67 @@
     },
     "agency_id": {
       "type": "string",
-      "description": "ID of the agency that the contact belongs to"
-    },
-    "city": {
-      "type": "string",
-      "description": "City of the contact"
+      "description": "Always present. ID of the agency that the contact belongs to"
     },
     "contact_id": {
       "type": "string",
-      "description": "Unique identifier for the contact"
-    },
-    "email": {
-      "type": "string",
-      "description": "Email address of the contact"
-    },
-    "external_id": {
-      "type": "string",
-      "description": "External identifier for the contact"
+      "description": "Always present. Unique identifier for the contact"
     },
     "first_name": {
       "type": "string",
-      "description": "First name of the contact"
-    },
-    "last_name": {
-      "type": "string",
-      "description": "Last name of the contact"
+      "description": "Always present. First name of the contact"
     },
     "middle_name": {
       "type": "string",
-      "description": "Middle name of the contact"
+      "description": "Always present if filled in by tenant. Middle name of the contact"
     },
-    "npn": {
+    "last_name": {
       "type": "string",
-      "description": "National Producer Number"
+      "description": "Always present. Last name of the contact"
+    },
+    "email": {
+      "type": "string",
+      "description": "Always present. Email address of the contact"
     },
     "phone": {
       "type": "string",
-      "description": "Phone number of the contact"
+      "description": "Always present. Phone number of the contact"
     },
     "role": {
       "type": "string",
-      "description": "Role of the contact"
-    },
-    "state": {
-      "type": "string",
-      "description": "State of the contact"
+      "description": "Always present. Role of the contact within the agency"
     },
     "street": {
       "type": "string",
-      "description": "Street address of the contact"
+      "description": "Always present. Street address of the contact"
     },
     "address_line_2": {
       "type": "string",
-      "description": "Second line of the street address (e.g., apartment, suite, unit number)"
+      "description": "Always present if filled in by tenant. Second line of the street address (e.g., apartment, suite, unit number)"
+    },
+    "city": {
+      "type": "string",
+      "description": "Always present. City of the contact"
+    },
+    "state": {
+      "type": "string",
+      "description": "Always present. State of the contact"
     },
     "zip": {
       "type": "string",
-      "description": "ZIP code of the contact"
+      "description": "Always present. ZIP code of the contact"
+    },
+    "external_id": {
+      "type": "string",
+      "description": "Always present if filled in by tenant. External identifier for the contact"
+    },
+    "npn": {
+      "type": "string",
+      "description": "Always present if filled in by tenant. National Producer Number"
     },
     "external_metadata": {
       "type": "object",
-      "description": "Always present. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to contacts",
+      "description": "Always present if filled in by tenant. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to contacts",
       "additionalProperties": {
         "type": "string"
       }

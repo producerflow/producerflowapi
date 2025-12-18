@@ -216,7 +216,7 @@
         },
         "external_id": {
           "type": "string",
-          "description": "External identifier for the organization from an external system"
+          "description": "Always present if filled in by tenant. External identifier for the organization from an external system"
         },
         "email": {
           "type": "string",
@@ -256,7 +256,7 @@
     },
     "external_metadata": {
       "type": "object",
-      "description": "Always present. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to agencies",
+      "description": "Always present if filled in by tenant. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to agencies",
       "additionalProperties": {
         "type": "string"
       }
