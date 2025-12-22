@@ -50,6 +50,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [NewProducer](#newproducer)
   - [NewProducers](#newproducers)
   - [GetAgencyAndProducers](#getagencyandproducers)
+  - [GetAgency](#getagency)
   - [GetProducer](#getproducer)
   - [GetAgencyFiles](#getagencyfiles)
   - [UpdateProducer](#updateproducer)
@@ -1160,6 +1161,56 @@ GetAgencyAndProducersResponse contains the agency information and all associated
 |-------|------|-------|-------------|
 | `agency` | [Agency](#agency) |  | Complete agency information including contact details, principal, and bank account. |
 | `producers` | [Producer](#producer) | repeated | List of all producers associated with the specified agency. |
+
+---
+
+
+### GetAgency
+
+
+GetAgency retrieves detailed information about a specific agency.
+
+Supports two lookup methods:
+- By agency ID (UUID)
+- By tenant agency ID (external identifier)
+
+This endpoint returns complete agency details including contact information,
+addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
+
+Use this when you need full agency information without the list of associated producers.
+For agencies with their producers, use GetAgencyAndProducers instead.
+
+Validation Rules:
+Proto validation (format checks):
+Exactly one lookup method must be provided (oneof required):
+- agency_id_lookup.agency_id: Must be a valid UUID format
+- tenant_agency_id_lookup.tenant_agency_id: Must be non-empty string
+
+Returns:
+Complete agency information including all NIPR data and locations.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- PERMISSION_DENIED: Tenant doesn't have access to the agency
+
+#### Request: `GetAgencyRequest`
+
+
+GetAgencyRequest requests information about a specific agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id_lookup` | [GetAgencyRequest.AgencyIDLookup](#getagencyrequestagencyidlookup) |  | Look up agency by ID. |
+| `tenant_agency_id_lookup` | [GetAgencyRequest.AgencyTenantAgencyIDLookup](#getagencyrequestagencytenantagencyidlookup) |  | Look up agency by tenant agency ID. |
+
+#### Response: `GetAgencyResponse`
+
+
+GetAgencyResponse contains the complete agency information.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency` | [Agency](#agency) |  | Complete agency information including contact details, addresses, principal, bank account, E&O coverage, NIPR data, and locations. |
 
 ---
 
@@ -3442,6 +3493,39 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | `w9_doc_url` | [string](#string) |  | URL of the W9 form document. It's a U.S. internal revenue service form, an identification document used in the onboarding process for tax reporting purposes. |
 | `license_doc_url` | [string](#string) |  | URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. |
 | `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. |
+
+#### GetAgencyRequest
+
+GetAgencyRequest requests information about a specific agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id_lookup` | [GetAgencyRequest.AgencyIDLookup](#getagencyrequestagencyidlookup) |  | Look up agency by ID. |
+| `tenant_agency_id_lookup` | [GetAgencyRequest.AgencyTenantAgencyIDLookup](#getagencyrequestagencytenantagencyidlookup) |  | Look up agency by tenant agency ID. |
+
+#### GetAgencyRequest.AgencyIDLookup
+
+AgencyIDLookup allows looking up an agency by its unique identifier.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve. Must be a valid UUID format. |
+
+#### GetAgencyRequest.AgencyTenantAgencyIDLookup
+
+AgencyTenantAgencyIDLookup allows looking up an agency by its tenant-specific agency ID.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `tenant_agency_id` | [string](#string) |  | The tenant-specific agency ID to retrieve. Must be a non-empty string. |
+
+#### GetAgencyResponse
+
+GetAgencyResponse contains the complete agency information.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency` | [Agency](#agency) |  | Complete agency information including contact details, addresses, principal, bank account, E&O coverage, NIPR data, and locations. |
 
 #### GetOrganizationRequest
 

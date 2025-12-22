@@ -63,6 +63,9 @@ const (
 	// ProducerServiceGetAgencyAndProducersProcedure is the fully-qualified name of the
 	// ProducerService's GetAgencyAndProducers RPC.
 	ProducerServiceGetAgencyAndProducersProcedure = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
+	// ProducerServiceGetAgencyProcedure is the fully-qualified name of the ProducerService's GetAgency
+	// RPC.
+	ProducerServiceGetAgencyProcedure = "/producerflow.producer.v1.ProducerService/GetAgency"
 	// ProducerServiceGetProducerProcedure is the fully-qualified name of the ProducerService's
 	// GetProducer RPC.
 	ProducerServiceGetProducerProcedure = "/producerflow.producer.v1.ProducerService/GetProducer"
@@ -535,6 +538,31 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	// GetAgency retrieves detailed information about a specific agency.
+	//
+	// Supports two lookup methods:
+	// - By agency ID (UUID)
+	// - By tenant agency ID (external identifier)
+	//
+	// This endpoint returns complete agency details including contact information,
+	// addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
+	//
+	// Use this when you need full agency information without the list of associated producers.
+	// For agencies with their producers, use GetAgencyAndProducers instead.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - agency_id_lookup.agency_id: Must be a valid UUID format
+	// - tenant_agency_id_lookup.tenant_agency_id: Must be non-empty string
+	//
+	// Returns:
+	// Complete agency information including all NIPR data and locations.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - PERMISSION_DENIED: Tenant doesn't have access to the agency
+	GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
 	// Supports three lookup methods:
@@ -1496,6 +1524,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("GetAgencyAndProducers")),
 			connect.WithClientOptions(opts...),
 		),
+		getAgency: connect.NewClient[v1.GetAgencyRequest, v1.GetAgencyResponse](
+			httpClient,
+			baseURL+ProducerServiceGetAgencyProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("GetAgency")),
+			connect.WithClientOptions(opts...),
+		),
 		getProducer: connect.NewClient[v1.GetProducerRequest, v1.GetProducerResponse](
 			httpClient,
 			baseURL+ProducerServiceGetProducerProcedure,
@@ -1661,6 +1695,7 @@ type producerServiceClient struct {
 	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
 	newProducers                  *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
 	getAgencyAndProducers         *connect.Client[v1.GetAgencyAndProducersRequest, v1.GetAgencyAndProducersResponse]
+	getAgency                     *connect.Client[v1.GetAgencyRequest, v1.GetAgencyResponse]
 	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
 	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
 	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
@@ -1738,6 +1773,11 @@ func (c *producerServiceClient) NewProducers(ctx context.Context, req *connect.R
 // GetAgencyAndProducers calls producerflow.producer.v1.ProducerService.GetAgencyAndProducers.
 func (c *producerServiceClient) GetAgencyAndProducers(ctx context.Context, req *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error) {
 	return c.getAgencyAndProducers.CallUnary(ctx, req)
+}
+
+// GetAgency calls producerflow.producer.v1.ProducerService.GetAgency.
+func (c *producerServiceClient) GetAgency(ctx context.Context, req *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error) {
+	return c.getAgency.CallUnary(ctx, req)
 }
 
 // GetProducer calls producerflow.producer.v1.ProducerService.GetProducer.
@@ -2263,6 +2303,31 @@ type ProducerServiceHandler interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	// GetAgency retrieves detailed information about a specific agency.
+	//
+	// Supports two lookup methods:
+	// - By agency ID (UUID)
+	// - By tenant agency ID (external identifier)
+	//
+	// This endpoint returns complete agency details including contact information,
+	// addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
+	//
+	// Use this when you need full agency information without the list of associated producers.
+	// For agencies with their producers, use GetAgencyAndProducers instead.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - agency_id_lookup.agency_id: Must be a valid UUID format
+	// - tenant_agency_id_lookup.tenant_agency_id: Must be non-empty string
+	//
+	// Returns:
+	// Complete agency information including all NIPR data and locations.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	// - PERMISSION_DENIED: Tenant doesn't have access to the agency
+	GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
 	// Supports three lookup methods:
@@ -3220,6 +3285,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("GetAgencyAndProducers")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceGetAgencyHandler := connect.NewUnaryHandler(
+		ProducerServiceGetAgencyProcedure,
+		svc.GetAgency,
+		connect.WithSchema(producerServiceMethods.ByName("GetAgency")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceGetProducerHandler := connect.NewUnaryHandler(
 		ProducerServiceGetProducerProcedure,
 		svc.GetProducer,
@@ -3392,6 +3463,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceNewProducersHandler.ServeHTTP(w, r)
 		case ProducerServiceGetAgencyAndProducersProcedure:
 			producerServiceGetAgencyAndProducersHandler.ServeHTTP(w, r)
+		case ProducerServiceGetAgencyProcedure:
+			producerServiceGetAgencyHandler.ServeHTTP(w, r)
 		case ProducerServiceGetProducerProcedure:
 			producerServiceGetProducerHandler.ServeHTTP(w, r)
 		case ProducerServiceGetAgencyFilesProcedure:
@@ -3489,6 +3562,10 @@ func (UnimplementedProducerServiceHandler) NewProducers(context.Context, *connec
 
 func (UnimplementedProducerServiceHandler) GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetAgencyAndProducers is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetAgency is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) GetProducer(context.Context, *connect.Request[v1.GetProducerRequest]) (*connect.Response[v1.GetProducerResponse], error) {
