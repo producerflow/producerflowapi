@@ -3018,6 +3018,7 @@ NIPR sync operations.
 | `business_hours` | [Agency.BusinessHours](#agencybusinesshours) |  | Operating hours of the agency. |
 | `nipr` | [Agency.NIPR](#agencynipr) |  | Data synchronized from the NIPR service. Contains basic information, addresses, licenses, regulatory actions, and carrier appointments. |
 | `locations` | [Location](#location) | repeated | Locations associated with the agency. |
+| `organization` | [Organization](#organization) |  | Organization that the agency belongs to. This field contains the full organization details including id, name, and contact information. Agencies may optionally belong to an organization (such as an aggregator or agency network). |
 
 #### Agency.Address
 
