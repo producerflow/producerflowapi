@@ -2717,6 +2717,11 @@ message Agency {
 
   // Locations associated with the agency.
   repeated Location locations = 13;
+
+  // Organization that the agency belongs to.
+  // This field contains the full organization details including id, name, and contact information.
+  // Agencies may optionally belong to an organization (such as an aggregator or agency network).
+  Organization organization = 14;
 }
 
 // Producer represents an insurance producer (agent) with complete licensing
