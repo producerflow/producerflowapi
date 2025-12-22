@@ -169,7 +169,7 @@
     },
     "requested_appointment_states": {
       "type": "array",
-      "description": "Present when producer is created with requested appointment states or when the requested appointment states are updated. Contains the list of appointment states requested for the producer during onboarding",
+      "description": "Present when producer is created or when the requested appointment states are updated. Contains the list of US state codes where appointments are requested. When present, this field is always an array (never null); an empty array indicates all requested states have been cleared",
       "items": {
         "type": "string"
       }
