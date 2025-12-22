@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.11] - 2025-12-22
+
+### Added
+
+#### ProducerService
+
+- **GetAgency Endpoint** - New RPC for retrieving detailed agency information
+  - `GetAgency` RPC added to fetch agency details by agency ID or external tenant ID
+
+- **Organization Data in Agency Endpoints** - Agency responses now include organization information
+  - `organization` field added to `Agency` message
+  - Available in `GetAgency` and `GetAgencyAndProducers` endpoints
+
+---
+
 ## [1.0.10] - 2025-12-12
 
 ### Added
