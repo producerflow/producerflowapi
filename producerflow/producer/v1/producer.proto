@@ -443,6 +443,33 @@ service ProducerService {
   //
   rpc GetAgencyAndProducers(GetAgencyAndProducersRequest) returns (GetAgencyAndProducersResponse);
 
+  // GetAgency retrieves detailed information about a specific agency.
+  //
+  // Supports two lookup methods:
+  // - By agency ID (UUID)
+  // - By tenant agency ID (external identifier)
+  //
+  // This endpoint returns complete agency details including contact information,
+  // addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
+  //
+  // Use this when you need full agency information without the list of associated producers.
+  // For agencies with their producers, use GetAgencyAndProducers instead.
+  //
+  // Validation Rules:
+  // Proto validation (format checks):
+  // Exactly one lookup method must be provided (oneof required):
+  // - agency_id_lookup.agency_id: Must be a valid UUID format
+  // - tenant_agency_id_lookup.tenant_agency_id: Must be non-empty string
+  //
+  // Returns:
+  // Complete agency information including all NIPR data and locations.
+  //
+  // Common Error Codes:
+  // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+  // - PERMISSION_DENIED: Tenant doesn't have access to the agency
+  //
+  rpc GetAgency(GetAgencyRequest) returns (GetAgencyResponse);
+
   // GetProducer retrieves detailed information about a specific producer.
   //
   // Supports three lookup methods:
@@ -1927,6 +1954,43 @@ message GetProducerResponse {
   // The complete producer information including personal details, agency association,
   // and NIPR data.
   Producer producer = 1;
+}
+
+// GetAgencyRequest requests information about a specific agency.
+message GetAgencyRequest {
+  // AgencyIDLookup allows looking up an agency by its unique identifier.
+  message AgencyIDLookup {
+    // The UUID of the agency to retrieve.
+    // Must be a valid UUID format.
+    string agency_id = 1 [(buf.validate.field).string.uuid = true];
+  }
+
+  // AgencyTenantAgencyIDLookup allows looking up an agency by its tenant-specific agency ID.
+  message AgencyTenantAgencyIDLookup {
+    // The tenant-specific agency ID to retrieve.
+    // Must be a non-empty string.
+    string tenant_agency_id = 1 [(buf.validate.field).string.min_len = 1];
+  }
+
+  // Exactly one lookup method must be provided.
+  // Only one lookup method can be specified.
+  oneof lookup_method {
+    // Look up agency by ID.
+    AgencyIDLookup agency_id_lookup = 1;
+
+    // Look up agency by tenant agency ID.
+    AgencyTenantAgencyIDLookup tenant_agency_id_lookup = 2;
+
+    // This oneof is required. One of the lookup methods must be provided.
+    option (buf.validate.oneof).required = true;
+  }
+}
+
+// GetAgencyResponse contains the complete agency information.
+message GetAgencyResponse {
+  // Complete agency information including contact details, addresses, principal,
+  // bank account, E&O coverage, NIPR data, and locations.
+  Agency agency = 1;
 }
 
 // GetAgencyAndProducersRequest requests information about an agency and all associated producers.
