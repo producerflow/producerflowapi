@@ -2266,8 +2266,12 @@ type Producer struct {
 	// Producerflow and their corresponding responses. Keys are question identifiers or text,
 	// values are the answers provided.
 	TenantAdditionalQuestions map[string]string `protobuf:"bytes,42,rep,name=tenant_additional_questions,json=tenantAdditionalQuestions,proto3" json:"tenant_additional_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Tenant-provided external identifier for this producer.
+	// This ID allows tenants to map Producerflow producers back to their own system's identifiers.
+	// Set during producer creation/onboarding via the public API.
+	ExternalId    string `protobuf:"bytes,43,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Producer) Reset() {
@@ -2418,6 +2422,13 @@ func (x *Producer) GetTenantAdditionalQuestions() map[string]string {
 		return x.TenantAdditionalQuestions
 	}
 	return nil
+}
+
+func (x *Producer) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -4645,7 +4656,11 @@ type AgencySummary struct {
 	// Timestamp when the agency was created in the system.
 	// Used for sorting agencies by creation date in list views.
 	// Always in UTC timezone.
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Tenant-provided external identifier for this agency.
+	// This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+	// Set during agency creation/onboarding via the public API.
+	ExternalId    string `protobuf:"bytes,11,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4748,6 +4763,13 @@ func (x *AgencySummary) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *AgencySummary) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
 }
 
 // ListAgenciesRequest enables flexible querying of agencies with multiple filter
@@ -8148,8 +8170,12 @@ type Agency_AgencyInfo struct {
 	// Producerflow and their corresponding responses. Keys are question identifiers or text,
 	// values are the answers provided.
 	TenantAdditionalQuestions map[string]string `protobuf:"bytes,13,rep,name=tenant_additional_questions,json=tenantAdditionalQuestions,proto3" json:"tenant_additional_questions,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Tenant-provided external identifier for this agency.
+	// This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+	// Set during agency creation/onboarding via the public API.
+	ExternalId    string `protobuf:"bytes,14,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Agency_AgencyInfo) Reset() {
@@ -8272,6 +8298,13 @@ func (x *Agency_AgencyInfo) GetTenantAdditionalQuestions() map[string]string {
 		return x.TenantAdditionalQuestions
 	}
 	return nil
+}
+
+func (x *Agency_AgencyInfo) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
 }
 
 // Address is a data structure that represents a physical or mailing
@@ -11258,7 +11291,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xec4\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\x8d5\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -11275,7 +11308,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0ebusiness_hours\x18\v \x01(\v2..producerflow.producer.v1.Agency.BusinessHoursR\rbusinessHours\x129\n" +
 	"\x04nipr\x18\f \x01(\v2%.producerflow.producer.v1.Agency.NIPRR\x04nipr\x12@\n" +
 	"\tlocations\x18\r \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12J\n" +
-	"\forganization\x18\x0e \x01(\v2&.producerflow.producer.v1.OrganizationR\forganization\x1a\x93\a\n" +
+	"\forganization\x18\x0e \x01(\v2&.producerflow.producer.v1.OrganizationR\forganization\x1a\xb4\a\n" +
 	"\n" +
 	"AgencyInfo\x12#\n" +
 	"\ronboarding_id\x18\x01 \x01(\tR\fonboardingId\x120\n" +
@@ -11293,7 +11326,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	" \x01(\bR\x14pdbAlertsSyncEnabled\x12u\n" +
 	"\x12metadata_questions\x18\v \x03(\v2B.producerflow.producer.v1.Agency.AgencyInfo.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12n\n" +
 	"\x11external_metadata\x18\f \x03(\v2A.producerflow.producer.v1.Agency.AgencyInfo.ExternalMetadataEntryR\x10externalMetadata\x12\x8a\x01\n" +
-	"\x1btenant_additional_questions\x18\r \x03(\v2J.producerflow.producer.v1.Agency.AgencyInfo.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1aD\n" +
+	"\x1btenant_additional_questions\x18\r \x03(\v2J.producerflow.producer.v1.Agency.AgencyInfo.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x12\x1f\n" +
+	"\vexternal_id\x18\x0e \x01(\tR\n" +
+	"externalId\x1aD\n" +
 	"\x16MetadataQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aC\n" +
@@ -11442,7 +11477,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xa0#\n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\"\xc1#\n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -11462,7 +11497,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\tlocations\x18\x13 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12l\n" +
 	"\x12metadata_questions\x18( \x03(\v29.producerflow.producer.v1.Producer.MetadataQuestionsEntryB\x02\x18\x01R\x11metadataQuestions\x12e\n" +
 	"\x11external_metadata\x18) \x03(\v28.producerflow.producer.v1.Producer.ExternalMetadataEntryR\x10externalMetadata\x12\x81\x01\n" +
-	"\x1btenant_additional_questions\x18* \x03(\v2A.producerflow.producer.v1.Producer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x1a9\n" +
+	"\x1btenant_additional_questions\x18* \x03(\v2A.producerflow.producer.v1.Producer.TenantAdditionalQuestionsEntryR\x19tenantAdditionalQuestions\x12\x1f\n" +
+	"\vexternal_id\x18+ \x01(\tR\n" +
+	"externalId\x1a9\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x1a\x91\x18\n" +
@@ -11737,7 +11774,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x1dStopSyncAgencyWithNIPRRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12,\n" +
 	"\x12stop_all_producers\x18\x02 \x01(\bR\x10stopAllProducers\" \n" +
-	"\x1eStopSyncAgencyWithNIPRResponse\"\xe7\x02\n" +
+	"\x1eStopSyncAgencyWithNIPRResponse\"\x88\x03\n" +
 	"\rAgencySummary\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -11750,7 +11787,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12is_sole_proprietor\x18\t \x01(\bR\x10isSoleProprietor\x129\n" +
 	"\n" +
 	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\x12\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1f\n" +
+	"\vexternal_id\x18\v \x01(\tR\n" +
+	"externalIdB\x12\n" +
 	"\x10_organization_id\"\xef\x03\n" +
 	"\x13ListAgenciesRequest\x126\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\x0eorganizationId\x88\x01\x01\x12&\n" +

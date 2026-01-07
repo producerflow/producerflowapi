@@ -28743,6 +28743,15 @@ Producerflow and their corresponding responses. Keys are question identifiers or
 values are the answers provided. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Tenant-provided external identifier for this agency.
+This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+Set during agency creation/onboarding via the public API. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -29860,6 +29869,15 @@ False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY). </td>
                           <td>Timestamp when the agency was created in the system.
 Used for sorting agencies by creation date in list views.
 Always in UTC timezone. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Tenant-provided external identifier for this agency.
+This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+Set during agency creation/onboarding via the public API. </td>
                         </tr>
                       
                     </tbody>
@@ -33297,6 +33315,15 @@ The map key is the metadata field name, and the value is the associated data. </
                           <td>tenant_additional_questions contains tenant-specific custom questions configured by
 Producerflow and their corresponding responses. Keys are question identifiers or text,
 values are the answers provided. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Tenant-provided external identifier for this producer.
+This ID allows tenants to map Producerflow producers back to their own system's identifiers.
+Set during producer creation/onboarding via the public API. </td>
                         </tr>
                       
                     </tbody>
