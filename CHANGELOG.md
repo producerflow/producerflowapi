@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.12] - 2026-01-07
+
+### Added
+
+#### ProducerService
+
+- **External ID in API Responses** - External identifiers now included in agency and producer responses
+  - `external_id` field added to `Agency` message (returned by `GetAgency` and `GetAgencyAndProducers` endpoints)
+  - `external_id` field added to `Producer` message (returned by `GetProducer` and `GetAgencyAndProducers` endpoints)
+  - Enables easier correlation with external systems without additional lookups
+
+### Changed
+
+#### ProducerService
+
+- **Phone Fields Now Optional for Producers and Contacts** - Phone number fields for producers and contacts can now be omitted
+  - Affects: `Producer.phone` and `Contact.phone` fields
+  - Improves flexibility for records where phone numbers are not available or not required
+
+---
+
 ## [1.0.11] - 2025-12-22
 
 ### Added
