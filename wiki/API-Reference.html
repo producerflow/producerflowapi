@@ -33326,6 +33326,26 @@ This ID allows tenants to map Producerflow producers back to their own system's 
 Set during producer creation/onboarding via the public API. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>onboarding_status</code></td>
+                          <td><a href="#producerflow.producer.v1.OnboardingStatus">OnboardingStatus</a></td>
+                          <td></td>
+                          <td>Current onboarding status of the producer in the workflow.
+This field tracks the producer's progression through the onboarding process,
+from initial onboarding to being ready to quote.
+
+This field is only populated when the tenant has enabled the onboarding status feature.
+When the feature is disabled, this field will be ONBOARDING_STATUS_UNSPECIFIED. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>onboarding_status_updated_at</code></td>
+                          <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                          <td></td>
+                          <td>Timestamp when the onboarding status was last updated.
+This field is only populated when the tenant has enabled the onboarding status feature. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -36233,6 +36253,51 @@ by NewAgency and other direct creation endpoints.</p></td>
                       <td>COMMUNICATION_ROLE_ALL</td>
                       <td>6</td>
                       <td><p>All roles</p></td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            
+              <h3 id="producerflow.producer.v1.OnboardingStatus">OnboardingStatus</h3>
+              <div class="description-content">OnboardingStatus represents the current stage of a producer in the onboarding workflow.
+This status is used to track producer progression from initial onboarding through
+to being fully ready to quote and sell insurance products.
+
+This field is only populated when the tenant has enabled the onboarding status feature.</div>
+              <table class="enum-table">
+                <thead>
+                  <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+                </thead>
+                <tbody>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATUS_UNSPECIFIED</td>
+                      <td>0</td>
+                      <td><p>Default unspecified value. Do not use.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATUS_ONBOARDED</td>
+                      <td>1</td>
+                      <td><p>Producer has completed the initial onboarding process.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATUS_APPROVED</td>
+                      <td>2</td>
+                      <td><p>Producer has been approved and verified.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATUS_READY_TO_QUOTE</td>
+                      <td>3</td>
+                      <td><p>Producer is fully ready to quote and sell insurance products.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATUS_TERMINATED</td>
+                      <td>4</td>
+                      <td><p>Producer has been terminated and is no longer active.</p></td>
                     </tr>
                   
                 </tbody>

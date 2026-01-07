@@ -4189,6 +4189,8 @@ Use Cases:
 | `external_metadata` | [Producer.ExternalMetadataEntry](#producerexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
 | `tenant_additional_questions` | [Producer.TenantAdditionalQuestionsEntry](#producertenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 | `external_id` | [string](#string) |  | Tenant-provided external identifier for this producer. This ID allows tenants to map Producerflow producers back to their own system's identifiers. Set during producer creation/onboarding via the public API. |
+| `onboarding_status` | [OnboardingStatus](#onboardingstatus) |  | Current onboarding status of the producer in the workflow. This field tracks the producer's progression through the onboarding process, from initial onboarding to being ready to quote.  This field is only populated when the tenant has enabled the onboarding status feature. When the feature is disabled, this field will be ONBOARDING_STATUS_UNSPECIFIED. |
+| `onboarding_status_updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the onboarding status was last updated. This field is only populated when the tenant has enabled the onboarding status feature. |
 
 #### Producer.Address
 
@@ -4968,6 +4970,23 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 | `COMMUNICATION_ROLE_SALES` | 4 | Sales role |
 | `COMMUNICATION_ROLE_CUSTOMER_SERVICE` | 5 | Customer service role |
 | `COMMUNICATION_ROLE_ALL` | 6 | All roles |
+
+
+#### OnboardingStatus
+
+OnboardingStatus represents the current stage of a producer in the onboarding workflow.
+This status is used to track producer progression from initial onboarding through
+to being fully ready to quote and sell insurance products.
+
+This field is only populated when the tenant has enabled the onboarding status feature.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `ONBOARDING_STATUS_UNSPECIFIED` | 0 | Default unspecified value. Do not use. |
+| `ONBOARDING_STATUS_ONBOARDED` | 1 | Producer has completed the initial onboarding process. |
+| `ONBOARDING_STATUS_APPROVED` | 2 | Producer has been approved and verified. |
+| `ONBOARDING_STATUS_READY_TO_QUOTE` | 3 | Producer is fully ready to quote and sell insurance products. |
+| `ONBOARDING_STATUS_TERMINATED` | 4 | Producer has been terminated and is no longer active. |
 
 
 #### Producer.NIPR.License.LicenseStatus
