@@ -2338,6 +2338,11 @@ message Agency {
     // Producerflow and their corresponding responses. Keys are question identifiers or text,
     // values are the answers provided.
     map<string, string> tenant_additional_questions = 13;
+
+    // Tenant-provided external identifier for this agency.
+    // This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+    // Set during agency creation/onboarding via the public API.
+    string external_id = 14;
   }
 
   // AgencyInfo type field named agency_info
@@ -3170,6 +3175,11 @@ message Producer {
   // Producerflow and their corresponding responses. Keys are question identifiers or text,
   // values are the answers provided.
   map<string, string> tenant_additional_questions = 42;
+
+  // Tenant-provided external identifier for this producer.
+  // This ID allows tenants to map Producerflow producers back to their own system's identifiers.
+  // Set during producer creation/onboarding via the public API.
+  string external_id = 43;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -3863,6 +3873,11 @@ message AgencySummary {
   // Used for sorting agencies by creation date in list views.
   // Always in UTC timezone.
   google.protobuf.Timestamp created_at = 10;
+
+  // Tenant-provided external identifier for this agency.
+  // This ID allows tenants to map Producerflow agencies back to their own system's identifiers.
+  // Set during agency creation/onboarding via the public API.
+  string external_id = 11;
 }
 
 // ListAgenciesRequest enables flexible querying of agencies with multiple filter
