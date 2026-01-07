@@ -1526,6 +1526,24 @@ enum NIPRSyncState {
   NIPR_SYNC_STATE_DISABLED = 4;
 }
 
+// OnboardingStatus represents the current stage of a producer in the onboarding workflow.
+// This status is used to track producer progression from initial onboarding through
+// to being fully ready to quote and sell insurance products.
+//
+// This field is only populated when the tenant has enabled the onboarding status feature.
+enum OnboardingStatus {
+  // Default unspecified value. Do not use.
+  ONBOARDING_STATUS_UNSPECIFIED = 0;
+  // Producer has completed the initial onboarding process.
+  ONBOARDING_STATUS_ONBOARDED = 1;
+  // Producer has been approved and verified.
+  ONBOARDING_STATUS_APPROVED = 2;
+  // Producer is fully ready to quote and sell insurance products.
+  ONBOARDING_STATUS_READY_TO_QUOTE = 3;
+  // Producer has been terminated and is no longer active.
+  ONBOARDING_STATUS_TERMINATED = 4;
+}
+
 // Address represents a physical location with standard address components.
 // Used for mailing, physical, and invoicing addresses throughout the API.
 message Address {
@@ -3180,6 +3198,18 @@ message Producer {
   // This ID allows tenants to map Producerflow producers back to their own system's identifiers.
   // Set during producer creation/onboarding via the public API.
   string external_id = 43;
+
+  // Current onboarding status of the producer in the workflow.
+  // This field tracks the producer's progression through the onboarding process,
+  // from initial onboarding to being ready to quote.
+  //
+  // This field is only populated when the tenant has enabled the onboarding status feature.
+  // When the feature is disabled, this field will be ONBOARDING_STATUS_UNSPECIFIED.
+  OnboardingStatus onboarding_status = 44;
+
+  // Timestamp when the onboarding status was last updated.
+  // This field is only populated when the tenant has enabled the onboarding status feature.
+  google.protobuf.Timestamp onboarding_status_updated_at = 45;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
