@@ -2469,7 +2469,7 @@ type NewProducer struct {
 	// Optional field for contact purposes.
 	// If provided, must match international phone number pattern.
 	// Format: Can include country code (e.g., +1 for US)
-	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Phone *string `protobuf:"bytes,5,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	// Mailing address of the producer.
 	// Optional but recommended for complete producer profiles.
 	// This address is used for physical mail delivery and may differ
@@ -2610,8 +2610,8 @@ func (x *NewProducer) GetNpn() string {
 }
 
 func (x *NewProducer) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -2958,7 +2958,7 @@ type NewContact struct {
 	Email string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	// Phone number of the contact.
 	// Optional if default value, but if provided must match the pattern of a valid phone number.
-	Phone string `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Phone *string `protobuf:"bytes,5,opt,name=phone,proto3,oneof" json:"phone,omitempty"`
 	// Mailing address of the contact.
 	Address *Address `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
 	// Role or position of the contact within the agency.
@@ -3032,8 +3032,8 @@ func (x *NewContact) GetEmail() string {
 }
 
 func (x *NewContact) GetPhone() string {
-	if x != nil {
-		return x.Phone
+	if x != nil && x.Phone != nil {
+		return *x.Phone
 	}
 	return ""
 }
@@ -11562,7 +11562,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x92\b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa1\b\n" +
 	"\vNewProducer\x12&\n" +
 	"\n" +
 	"first_name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\tfirstName\x12$\n" +
@@ -11570,8 +11570,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\vmiddle_name\x18\a \x01(\tR\n" +
 	"middleName\x12\x1d\n" +
 	"\x05email\x18\x03 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12\x10\n" +
-	"\x03npn\x18\x04 \x01(\tR\x03npn\x122\n" +
-	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12V\n" +
+	"\x03npn\x18\x04 \x01(\tR\x03npn\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x00R\x05phone\x88\x01\x01\x12V\n" +
 	"\x0fmailing_address\x18\x06 \x01(\v2-.producerflow.producer.v1.NewProducer.AddressR\x0emailingAddress\x12(\n" +
 	"\ttenant_id\x18\b \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x122\n" +
 	"\flocation_ids\x18\n" +
@@ -11592,7 +11592,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aL\n" +
 	"\x1eTenantAdditionalQuestionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc4\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06_phone\"\xc4\x01\n" +
 	"\x12NewProducerRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12I\n" +
 	"\bproducer\x18\x02 \x01(\v2%.producerflow.producer.v1.NewProducerB\x06\xbaH\x03\xc8\x01\x01R\bproducer\x12)\n" +
@@ -11607,7 +11608,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0esync_with_nipr\x18\x03 \x01(\bH\x00R\fsyncWithNipr\x88\x01\x01B\x11\n" +
 	"\x0f_sync_with_nipr\"9\n" +
 	"\x14NewProducersResponse\x12!\n" +
-	"\fproducer_ids\x18\x01 \x03(\tR\vproducerIds\"\x9b\x03\n" +
+	"\fproducer_ids\x18\x01 \x03(\tR\vproducerIds\"\xaa\x03\n" +
 	"\n" +
 	"NewContact\x12&\n" +
 	"\n" +
@@ -11615,13 +11616,14 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\tlast_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\blastName\x12\x1f\n" +
 	"\vmiddle_name\x18\x03 \x01(\tR\n" +
 	"middleName\x12\x1d\n" +
-	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x122\n" +
-	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$R\x05phone\x12;\n" +
+	"\x05email\x18\x04 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x127\n" +
+	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x00R\x05phone\x88\x01\x01\x12;\n" +
 	"\aaddress\x18\x06 \x01(\v2!.producerflow.producer.v1.AddressR\aaddress\x12E\n" +
 	"\x04role\x18\a \x01(\x0e2%.producerflow.producer.v1.ContactRoleB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04role\x12(\n" +
 	"\ttenant_id\x18\b \x01(\tB\v\xbaH\b\xd8\x01\x02r\x03\x18\xff\x01R\btenantId\x12\x15\n" +
-	"\x03npn\x18\t \x01(\tH\x00R\x03npn\x88\x01\x01B\x06\n" +
+	"\x03npn\x18\t \x01(\tH\x01R\x03npn\x88\x01\x01B\b\n" +
+	"\x06_phoneB\x06\n" +
 	"\x04_npn\"\x82\x01\n" +
 	"\x11NewContactRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12F\n" +
@@ -12358,6 +12360,7 @@ func file_producerflow_producer_v1_producer_proto_init() {
 		(*GetAgencyRequest_TenantAgencyIdLookup)(nil),
 	}
 	file_producerflow_producer_v1_producer_proto_msgTypes[21].OneofWrappers = []any{}
+	file_producerflow_producer_v1_producer_proto_msgTypes[25].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[26].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[28].OneofWrappers = []any{}
 	file_producerflow_producer_v1_producer_proto_msgTypes[30].OneofWrappers = []any{}
