@@ -3225,7 +3225,7 @@ message NewProducer {
   // Optional field for contact purposes.
   // If provided, must match international phone number pattern.
   // Format: Can include country code (e.g., +1 for US)
-  string phone = 5 [
+  optional string phone = 5 [
     (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
     (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$"
   ];
@@ -3469,7 +3469,7 @@ message NewContact {
 
   // Phone number of the contact.
   // Optional if default value, but if provided must match the pattern of a valid phone number.
-  string phone = 5 [
+  optional string phone = 5 [
     (buf.validate.field).string.pattern = "^\\+?[1-9]\\d{1,14}$",
     (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
   ];
