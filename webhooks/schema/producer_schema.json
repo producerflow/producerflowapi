@@ -282,6 +282,16 @@
       "type": "string",
       "enum": ["unsigned", "sent", "signed", "failed"],
       "description": "Present when producer contract status changes. Current status of the producer's contract"
+    },
+    "onboarding_status": {
+      "type": "string",
+      "enum": ["ONBOARDING_STATUS_ONBOARDED", "ONBOARDING_STATUS_APPROVED", "ONBOARDING_STATUS_READY_TO_QUOTE", "ONBOARDING_STATUS_TERMINATED"],
+      "description": "Present when producer onboarding status changes. Tracks the producer's progress through the onboarding workflow"
+    },
+    "onboarding_status_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Present when producer onboarding status changes. ISO 8601 timestamp when the onboarding status was last updated"
     }
   },
   "required": ["id", "timestamp", "producer_id"],

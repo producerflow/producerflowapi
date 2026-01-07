@@ -137,5 +137,7 @@
       "unassigned": true
     }
   ],
-  "contract_status": "signed"
+  "contract_status": "signed",
+  "onboarding_status": "ONBOARDING_STATUS_APPROVED",
+  "onboarding_status_updated_at": "2024-03-20T14:00:00Z"
 }
