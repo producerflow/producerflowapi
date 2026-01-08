@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.14] - 2026-01-08
+
+### Added
+
+#### ProducerService
+
+- **Sole Proprietor Indicator for Agencies** - New field to identify agencies operating as sole proprietors
+  - `is_sole_proprietor` field added to `Agency` message (returned by `GetAgency` and `GetAgencyAndProducers` endpoints)
+  - `true`: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR)
+  - `false`: Standard agency with multiple producers (ENTITY_TYPE_AGENCY)
+  - Enables differentiation between sole proprietor agencies and standard multi-producer agencies
+
+---
+
 ## [1.0.13] - 2026-01-07
 
 ### Added
