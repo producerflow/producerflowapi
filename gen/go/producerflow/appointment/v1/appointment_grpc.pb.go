@@ -113,8 +113,8 @@ type AppointmentServiceClient interface {
 	//   - You will receive webhook notifications when the termination is processed
 	//     by NIPR.
 	//
-	// For registry states or capacity carriers (carriers without NIPR
-	// integration):
+	// For registry states, capacity carriers (carriers without NIPR
+	// integration), or synthetic appointments:
 	// - The termination is processed automatically and immediately.
 	// - Returns TERMINATED status immediately upon successful processing.
 	//
@@ -323,8 +323,8 @@ type AppointmentServiceServer interface {
 	//   - You will receive webhook notifications when the termination is processed
 	//     by NIPR.
 	//
-	// For registry states or capacity carriers (carriers without NIPR
-	// integration):
+	// For registry states, capacity carriers (carriers without NIPR
+	// integration), or synthetic appointments:
 	// - The termination is processed automatically and immediately.
 	// - Returns TERMINATED status immediately upon successful processing.
 	//
