@@ -2115,9 +2115,13 @@ type Agency struct {
 	// Organization that the agency belongs to.
 	// This field contains the full organization details including id, name, and contact information.
 	// Agencies may optionally belong to an organization (such as an aggregator or agency network).
-	Organization  *Organization `protobuf:"bytes,14,opt,name=organization,proto3" json:"organization,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Organization *Organization `protobuf:"bytes,14,opt,name=organization,proto3" json:"organization,omitempty"`
+	// Indicates whether this agency is a sole proprietor.
+	// True: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR).
+	// False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY).
+	IsSoleProprietor bool `protobuf:"varint,15,opt,name=is_sole_proprietor,json=isSoleProprietor,proto3" json:"is_sole_proprietor,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Agency) Reset() {
@@ -2246,6 +2250,13 @@ func (x *Agency) GetOrganization() *Organization {
 		return x.Organization
 	}
 	return nil
+}
+
+func (x *Agency) GetIsSoleProprietor() bool {
+	if x != nil {
+		return x.IsSoleProprietor
+	}
+	return false
 }
 
 // Producer represents an insurance producer (agent) with complete licensing
@@ -11380,7 +11391,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\x8d5\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xbb5\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -11397,7 +11408,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x0ebusiness_hours\x18\v \x01(\v2..producerflow.producer.v1.Agency.BusinessHoursR\rbusinessHours\x129\n" +
 	"\x04nipr\x18\f \x01(\v2%.producerflow.producer.v1.Agency.NIPRR\x04nipr\x12@\n" +
 	"\tlocations\x18\r \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12J\n" +
-	"\forganization\x18\x0e \x01(\v2&.producerflow.producer.v1.OrganizationR\forganization\x1a\xb4\a\n" +
+	"\forganization\x18\x0e \x01(\v2&.producerflow.producer.v1.OrganizationR\forganization\x12,\n" +
+	"\x12is_sole_proprietor\x18\x0f \x01(\bR\x10isSoleProprietor\x1a\xb4\a\n" +
 	"\n" +
 	"AgencyInfo\x12#\n" +
 	"\ronboarding_id\x18\x01 \x01(\tR\fonboardingId\x120\n" +
