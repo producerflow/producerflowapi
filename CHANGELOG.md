@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.13] - 2026-01-07
+
+### Added
+
+#### ProducerService
+
+- **Onboarding Status Tracking** - New fields to track producer progression through the onboarding workflow
+  - `onboarding_status` field added to `Producer` message (returned by `GetProducer` and `GetAgencyAndProducers` endpoints)
+  - `onboarding_status_updated_at` timestamp field for tracking status changes
+  - New `OnboardingStatus` enum with values:
+    - `ONBOARDING_STATUS_ONBOARDED` - Producer has completed the initial onboarding process
+    - `ONBOARDING_STATUS_APPROVED` - Producer has been approved and verified
+    - `ONBOARDING_STATUS_READY_TO_QUOTE` - Producer is fully ready to quote and sell insurance products
+    - `ONBOARDING_STATUS_TERMINATED` - Producer has been terminated and is no longer active
+  - Only populated when the tenant has enabled the onboarding status feature
+
+#### Webhook System
+
+- **Onboarding Status in Webhook Payloads** - Producer webhooks now include onboarding status tracking
+  - `onboarding_status` field added to producer webhook payloads
+  - `onboarding_status_updated_at` timestamp included in webhook events
+  - Enables real-time notifications when producer onboarding status changes
+
+---
+
 ## [1.0.12] - 2026-01-07
 
 ### Added
