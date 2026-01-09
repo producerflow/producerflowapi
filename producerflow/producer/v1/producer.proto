@@ -2523,7 +2523,7 @@ message Agency {
       // Business phone number.
       string business_phone = 5;
 
-      // The last time this biographic information was updated from NIPR.
+      // The time when this biographic information was last fetched from NIPR.
       google.protobuf.Timestamp updated_at = 6;
     }
     // Biographic information from NIPR
@@ -2552,10 +2552,10 @@ message Agency {
       // Country of the address.
       string country = 7;
 
-      // Date when the address was last updated.
+      // The date NIPR last updated the address in their system.
       google.protobuf.Timestamp date_updated = 8;
 
-      // The last time this address information was updated from NIPR.
+      // The time when this address information was last fetched from NIPR.
       google.protobuf.Timestamp updated_at = 9;
 
       // Primary address line.
@@ -2610,7 +2610,7 @@ message Agency {
       // Deprecated: Use last_updated_on instead.
       google.protobuf.Timestamp update_date = 10 [deprecated = true];
 
-      // The last time this license information was updated from NIPR.
+      // The time when this license information was last fetched from NIPR.
       google.protobuf.Timestamp updated_at = 11;
 
       // The date when the license will expire if not renewed.
@@ -2619,7 +2619,7 @@ message Agency {
       // The date when the license was originally issued.
       google.type.Date issued_on = 15;
 
-      // The date when the license was last updated.
+      // The date NIPR last updated the license in their system.
       google.type.Date last_updated_on = 16;
 
       // LineOfAuthority represents a specific type of insurance coverage
@@ -2885,7 +2885,7 @@ message Producer {
       // The date when the license will expire if not renewed.
       google.type.Date expires_on = 10;
 
-      // The last time this license information was updated from NIPR.
+      // The time when this license information was last fetched from NIPR.
       google.protobuf.Timestamp updated_at = 7;
 
       // LineOfAuthority (LOA) represents a specific type of insurance that a
