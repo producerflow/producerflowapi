@@ -24,7 +24,7 @@ Trusted by insurance companies of all sizes to manage onboarding, licensing, app
   - [Quickstart](#quickstart)
     - [API Endpoints](#api-endpoints)
     - [API Token Generation](#api-token-generation)
-  - [Installation \& Usage](#installation--usage)
+  - [Installation & Usage](#installation--usage)
     - [Using Protocol Buffer Files](#using-protocol-buffer-files)
     - [Using Pre-Generated Clients](#using-pre-generated-clients)
       - [Go Client](#go-client)
