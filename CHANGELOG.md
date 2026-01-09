@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.15] - 2026-01-09
+
+### Fixed
+
+#### ProducerService
+
+- **Sole Proprietor Field in GetAgencyAndProducers** - Fixed missing `is_sole_proprietor` field in response
+  - `is_sole_proprietor` field now correctly populated in `GetAgencyAndProducers` endpoint response
+
+#### AppointmentService
+
+- **Synthetic Appointment Termination Documentation** - Synthetic appointments can now be terminated via API
+  - Updated `TerminateAppointment` documentation to indicate synthetic appointments are supported
+  - Synthetic appointment terminations are processed automatically and immediately
+  - No NIPR interaction required for synthetic appointment terminations
+
+---
+
 ## [1.0.14] - 2026-01-08
 
 ### Added
