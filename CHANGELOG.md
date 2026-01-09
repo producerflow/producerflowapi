@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### AppointmentService
 
-- **Synthetic Appointment Termination Documentation** - Clarified that synthetic appointments can be terminated via API
+- **Synthetic Appointment Termination Documentation** - Synthetic appointments can now be terminated via API
   - Updated `TerminateAppointment` documentation to indicate synthetic appointments are supported
   - Synthetic appointment terminations are processed automatically and immediately
   - No NIPR interaction required for synthetic appointment terminations
