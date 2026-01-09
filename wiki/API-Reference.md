@@ -3162,8 +3162,8 @@ Address represents address information from NIPR.
 | `zip_code` | [string](#string) |  | ZIP code of the address. |
 | `city` | [string](#string) |  | City of the address. |
 | `country` | [string](#string) |  | Country of the address. |
-| `date_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the address was last updated. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this address information was updated from NIPR. |
+| `date_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date NIPR last updated the address in their system. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this address information was last fetched from NIPR. |
 | `address_line_1` | [string](#string) |  | Primary address line. |
 
 #### Agency.NIPR.Appointment
@@ -3195,7 +3195,7 @@ Biographic contains basic information from NIPR.
 | `npn` | [string](#string) |  | National Producer Number. |
 | `business_email` | [string](#string) |  | Business email address. |
 | `business_phone` | [string](#string) |  | Business phone number. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this biographic information was updated from NIPR. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this biographic information was last fetched from NIPR. |
 
 #### Agency.NIPR.License
 
@@ -3213,10 +3213,10 @@ License contains information about an insurance license.
 | `license_class_code` | [int32](#int32) |  | License class code. |
 | `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
 | `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use last_updated_on instead. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this license information was last fetched from NIPR. |
 | `expires_on` | [google.type.Date](#googletypedate) |  | The date when the license will expire if not renewed. |
 | `issued_on` | [google.type.Date](#googletypedate) |  | The date when the license was originally issued. |
-| `last_updated_on` | [google.type.Date](#googletypedate) |  | The date when the license was last updated. |
+| `last_updated_on` | [google.type.Date](#googletypedate) |  | The date NIPR last updated the license in their system. |
 | `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority associated with this license. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
 
@@ -4329,7 +4329,7 @@ Compliance Use Cases:
 | `status` | [Producer.NIPR.License.LicenseStatus](#producerniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
 | `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use expires_on instead. |
 | `expires_on` | [google.type.Date](#googletypedate) |  | The date when the license will expire if not renewed. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The last time this license information was updated from NIPR. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this license information was last fetched from NIPR. |
 | `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the producer is authorized to sell in this state. A single license typically has multiple LOAs. Always check that the producer has an active LOA matching the product type before allowing sales. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
 

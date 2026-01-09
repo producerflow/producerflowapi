@@ -9065,7 +9065,7 @@ type Agency_NIPR_Biographic struct {
 	BusinessEmail string `protobuf:"bytes,4,opt,name=business_email,json=businessEmail,proto3" json:"business_email,omitempty"`
 	// Business phone number.
 	BusinessPhone string `protobuf:"bytes,5,opt,name=business_phone,json=businessPhone,proto3" json:"business_phone,omitempty"`
-	// The last time this biographic information was updated from NIPR.
+	// The time when this biographic information was last fetched from NIPR.
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9162,9 +9162,9 @@ type Agency_NIPR_Address struct {
 	City string `protobuf:"bytes,6,opt,name=city,proto3" json:"city,omitempty"`
 	// Country of the address.
 	Country string `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
-	// Date when the address was last updated.
+	// The date NIPR last updated the address in their system.
 	DateUpdated *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=date_updated,json=dateUpdated,proto3" json:"date_updated,omitempty"`
-	// The last time this address information was updated from NIPR.
+	// The time when this address information was last fetched from NIPR.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Primary address line.
 	AddressLine_1 string `protobuf:"bytes,10,opt,name=address_line_1,json=addressLine1,proto3" json:"address_line_1,omitempty"`
@@ -9302,13 +9302,13 @@ type Agency_NIPR_License struct {
 	//
 	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	UpdateDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=update_date,json=updateDate,proto3" json:"update_date,omitempty"`
-	// The last time this license information was updated from NIPR.
+	// The time when this license information was last fetched from NIPR.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// The date when the license will expire if not renewed.
 	ExpiresOn *date.Date `protobuf:"bytes,14,opt,name=expires_on,json=expiresOn,proto3" json:"expires_on,omitempty"`
 	// The date when the license was originally issued.
 	IssuedOn *date.Date `protobuf:"bytes,15,opt,name=issued_on,json=issuedOn,proto3" json:"issued_on,omitempty"`
-	// The date when the license was last updated.
+	// The date NIPR last updated the license in their system.
 	LastUpdatedOn *date.Date `protobuf:"bytes,16,opt,name=last_updated_on,json=lastUpdatedOn,proto3" json:"last_updated_on,omitempty"`
 	// Lines of Authority associated with this license.
 	LinesOfAuthority []*Agency_NIPR_License_LineOfAuthority `protobuf:"bytes,12,rep,name=lines_of_authority,json=linesOfAuthority,proto3" json:"lines_of_authority,omitempty"`
@@ -10143,7 +10143,7 @@ type Producer_NIPR_License struct {
 	ExpirationDate *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`
 	// The date when the license will expire if not renewed.
 	ExpiresOn *date.Date `protobuf:"bytes,10,opt,name=expires_on,json=expiresOn,proto3" json:"expires_on,omitempty"`
-	// The last time this license information was updated from NIPR.
+	// The time when this license information was last fetched from NIPR.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Lines of Authority (LOAs) associated with this license.
 	//

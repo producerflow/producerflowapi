@@ -2641,7 +2641,7 @@ export type Agency_NIPR_Biographic = Message<"producerflow.producer.v1.Agency.NI
   businessPhone: string;
 
   /**
-   * The last time this biographic information was updated from NIPR.
+   * The time when this biographic information was last fetched from NIPR.
    *
    * @generated from field: google.protobuf.Timestamp updated_at = 6;
    */
@@ -2712,14 +2712,14 @@ export type Agency_NIPR_Address = Message<"producerflow.producer.v1.Agency.NIPR.
   country: string;
 
   /**
-   * Date when the address was last updated.
+   * The date NIPR last updated the address in their system.
    *
    * @generated from field: google.protobuf.Timestamp date_updated = 8;
    */
   dateUpdated?: Timestamp;
 
   /**
-   * The last time this address information was updated from NIPR.
+   * The time when this address information was last fetched from NIPR.
    *
    * @generated from field: google.protobuf.Timestamp updated_at = 9;
    */
@@ -2820,7 +2820,7 @@ export type Agency_NIPR_License = Message<"producerflow.producer.v1.Agency.NIPR.
   updateDate?: Timestamp;
 
   /**
-   * The last time this license information was updated from NIPR.
+   * The time when this license information was last fetched from NIPR.
    *
    * @generated from field: google.protobuf.Timestamp updated_at = 11;
    */
@@ -2841,7 +2841,7 @@ export type Agency_NIPR_License = Message<"producerflow.producer.v1.Agency.NIPR.
   issuedOn?: Date;
 
   /**
-   * The date when the license was last updated.
+   * The date NIPR last updated the license in their system.
    *
    * @generated from field: google.type.Date last_updated_on = 16;
    */
@@ -3533,7 +3533,7 @@ export type Producer_NIPR_License = Message<"producerflow.producer.v1.Producer.N
   expiresOn?: Date;
 
   /**
-   * The last time this license information was updated from NIPR.
+   * The time when this license information was last fetched from NIPR.
    *
    * @generated from field: google.protobuf.Timestamp updated_at = 7;
    */
