@@ -73,10 +73,10 @@ jobs:
                        -m "- Updated TypeScript client libraries" \
                        -m "- Updated Kotlin client libraries"
             
-            # Push directly to main branch
-            git push origin main
+            # Push to the branch that triggered the workflow
+            git push origin HEAD:${{ github.ref_name }}
             
-            echo "Successfully committed and pushed changes to main branch"
+            echo "Successfully committed and pushed changes to ${{ github.ref_name }}"
           else
             echo "No changes to commit"
           fi
