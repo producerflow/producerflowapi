@@ -32,6 +32,9 @@ dependencies {
     // Protobuf runtime (standard Java for server usage)
     api("com.google.protobuf:protobuf-java:4.28.3")
 
+    // Google common protos (TimeOfDay, Date, DayOfWeek, etc.)
+    api("com.google.api.grpc:proto-google-common-protos:2.49.0")
+
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
