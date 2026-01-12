@@ -35,6 +35,9 @@ dependencies {
     // Google common protos (TimeOfDay, Date, DayOfWeek, etc.)
     api("com.google.api.grpc:proto-google-common-protos:2.49.0")
 
+    // Buf protovalidate for validation annotations
+    api("build.buf:protovalidate:0.4.3")
+
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
