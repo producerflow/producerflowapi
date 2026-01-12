@@ -26,6 +26,15 @@ plugins:
       - import_extension=none
     include_imports: true
     strategy: all
+  # Kotlin plugins
+  - remote: buf.build/protocolbuffers/java:v28.3
+    out: gen/kotlin/src/main/java
+  - remote: buf.build/connectrpc/kotlin:v0.7.4
+    out: gen/kotlin/src/main/java
+    opt:
+      - generateCoroutineMethods=true
+      - generateBlockingUnaryMethods=true
+  # Documentation plugins
   - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
     out: wiki
     opt: templates/html-api.tmpl,API-Reference.html
