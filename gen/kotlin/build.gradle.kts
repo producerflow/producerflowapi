@@ -9,6 +9,10 @@ version = project.findProperty("version") ?: "0.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven {
+        name = "buf"
+        url = uri("https://buf.build/gen/maven")
+    }
 }
 
 java {
@@ -40,6 +44,9 @@ dependencies {
 
     // Kotlin coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+
+    // Protovalidate
+    implementation("build.buf.gen:bufbuild_protovalidate_grpc_kotlin:1.5.0.1.20230720203033.35806a9a8e6e")
 
     // Testing
     testImplementation(kotlin("test"))
