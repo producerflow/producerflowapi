@@ -104,6 +104,7 @@ For detailed installation and usage instructions, see the respective client libr
 
 - **[Go Client Library](/gen/go/)** - Complete Go implementation with gRPC and Connect support
 - **[TypeScript Client Library](/gen/ts/)** - Full TypeScript/JavaScript client with type definitions
+- **[Kotlin Client Library](/gen/kotlin/)** - Full Kotlin client with type definitions
 
 ### Supported Languages
 
@@ -111,6 +112,7 @@ The monorepo currently provides official support for:
 
 - **Go** (1.21+)
 - **TypeScript/JavaScript** (Node.js 18+)
+- **Kotlin** (1.9+)
 
 For other languages, use the Protocol Buffer definitions in `producerflow/` with the official Protocol Buffer compiler and language-specific plugins. Refer to the [Buf documentation](https://buf.build/docs) for comprehensive language support.
 
@@ -119,6 +121,7 @@ For other languages, use the Protocol Buffer definitions in `producerflow/` with
 - **API Definitions**: Start with `producerflow/producer/v1/producer.proto`
 - **Go Integration**: Use code in `gen/go/` directory
 - **TypeScript Integration**: Use code in `gen/ts/` directory
+- **Kotlin Integration**: Use code in `gen/kotlin/` directory
 - **Documentation**: Reference [comprehensive documentation](https://github.com/producerflow/producerflowapi/wiki) for detailed API guides
 
 ## Build/Generation Instructions
@@ -137,12 +140,14 @@ This command will:
 1. Validate all Protocol Buffer definitions
 2. Generate Go client code in `gen/go/`
 3. Generate TypeScript client code in `gen/ts/`
+4. Generate Kotlin client code in `gen/kotlin/`
 
 ### Prerequisites
 
 - [Buf CLI](https://buf.build/docs/installation) installed
 - Go 1.21+ (for Go generation)
 - Node.js 18+ (for TypeScript generation)
+- Java 17+ (for Kotlin generation)
 
 ### Custom Generation for Other Languages
 
