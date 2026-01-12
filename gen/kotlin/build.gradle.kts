@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.1.0"
     `maven-publish`
     `java-library`
 }
@@ -36,11 +36,11 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     // Kotlin coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
     // Testing
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
 }
 
 tasks.test {
@@ -99,7 +99,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
+    compilerOptions {
+        freeCompilerArgs.add("-Xjsr305=strict")
     }
 }
