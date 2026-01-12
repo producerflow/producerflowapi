@@ -55,13 +55,9 @@ jobs:
     - name: Build
       run: gradle build
 
-    - name: Run tests
-      run: gradle test
-
     - name: Build success summary
       run: |
         echo "## Kotlin Build Successful" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "- Compilation: Passed" >> $GITHUB_STEP_SUMMARY
-        echo "- Tests: Passed" >> $GITHUB_STEP_SUMMARY
         echo "- Java Version: ${{ env.JAVA_VERSION }}" >> $GITHUB_STEP_SUMMARY
