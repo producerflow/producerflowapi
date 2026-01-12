@@ -33,7 +33,7 @@ dependencies {
     api("com.google.protobuf:protobuf-java:4.28.3")
 
     // Google common protos (google.type.*, google.api.*, etc.)
-    api("com.google.api.grpc:proto-google-common-protos:2.52.0")
+    api("com.google.api.grpc:proto-google-common-protos:2.63.1")
 
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
