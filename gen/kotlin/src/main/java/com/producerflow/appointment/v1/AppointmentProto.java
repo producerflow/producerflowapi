@@ -317,7 +317,7 @@ public final class AppointmentProto {
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.buf.validate.ValidateProto.getDescriptor(),
+          build.buf.validate.ValidateProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_producerflow_appointment_v1_RequestAppointmentRequest_descriptor =
@@ -453,12 +453,12 @@ public final class AppointmentProto {
         internal_static_producerflow_appointment_v1_ListTerminationReasonsResponse_descriptor,
         new java.lang.String[] { "TerminationReasons", });
     descriptor.resolveAllFeaturesImmutable();
-    com.buf.validate.ValidateProto.getDescriptor();
+    build.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
-    registry.add(com.buf.validate.ValidateProto.field);
-    registry.add(com.buf.validate.ValidateProto.oneof);
+    registry.add(build.buf.validate.ValidateProto.field);
+    registry.add(build.buf.validate.ValidateProto.oneof);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }
