@@ -45,9 +45,6 @@ dependencies {
     // Kotlin coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
-    // Protovalidate
-    implementation("build.buf.gen:bufbuild_protovalidate_connectrpc_kotlin:0.7.4.1.20251209175733.2a1774d88802")
-
     // Testing
     testImplementation(kotlin("test"))
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
