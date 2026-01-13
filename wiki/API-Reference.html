@@ -30184,7 +30184,11 @@ this is used to identify the agency in the tenant system not in the producerflow
                           <td><code>email</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Email of the agency </td>
+                          <td>Email of the agency
+Important: For Sole Proprietor entities (entity_type = ENTITY_TYPE_SOLE_PROPRIETOR)
+or when entity_type = ENTITY_TYPE_ASK_DURING_ONBOARDING and the user later selects
+Sole Proprietor during onboarding, the principal.email will be used as the agency email,
+and this field will be ignored. </td>
                         </tr>
                       
                         <tr>

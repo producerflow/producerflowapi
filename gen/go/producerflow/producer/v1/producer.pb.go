@@ -6500,6 +6500,10 @@ type CreateAgencyOnboardingURLRequest_Agency struct {
 	// FEIN (Federal Employer Identification Number) of the agency
 	Fein string `protobuf:"bytes,5,opt,name=fein,proto3" json:"fein,omitempty"`
 	// Email of the agency
+	// Important: For Sole Proprietor entities (entity_type = ENTITY_TYPE_SOLE_PROPRIETOR)
+	// or when entity_type = ENTITY_TYPE_ASK_DURING_ONBOARDING and the user later selects
+	// Sole Proprietor during onboarding, the principal.email will be used as the agency email,
+	// and this field will be ignored.
 	Email string `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
 	// Phone of the agency
 	Phone string `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`

@@ -189,6 +189,10 @@ export type CreateAgencyOnboardingURLRequest_Agency = Message<"producerflow.prod
 
   /**
    * Email of the agency
+   * Important: For Sole Proprietor entities (entity_type = ENTITY_TYPE_SOLE_PROPRIETOR)
+   * or when entity_type = ENTITY_TYPE_ASK_DURING_ONBOARDING and the user later selects
+   * Sole Proprietor during onboarding, the principal.email will be used as the agency email,
+   * and this field will be ignored.
    *
    * @generated from field: string email = 6;
    */

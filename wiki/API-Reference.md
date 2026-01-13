@@ -3374,7 +3374,7 @@ All fields within the Agency message are also optional.
 | `tenant_agency_id` | [string](#string) |  | Tenant agency id is a unique identifier for the agency used by the tenant this is used to identify the agency in the tenant system not in the producerflow system |
 | `docusign_template_id` | [string](#string) |  | DocuSign template id is the id of the docusign template used to send the contract to the agency |
 | `fein` | [string](#string) |  | FEIN (Federal Employer Identification Number) of the agency |
-| `email` | [string](#string) |  | Email of the agency |
+| `email` | [string](#string) |  | Email of the agency Important: For Sole Proprietor entities (entity_type = ENTITY_TYPE_SOLE_PROPRIETOR) or when entity_type = ENTITY_TYPE_ASK_DURING_ONBOARDING and the user later selects Sole Proprietor during onboarding, the principal.email will be used as the agency email, and this field will be ignored. |
 | `phone` | [string](#string) |  | Phone of the agency |
 | `fax` | [string](#string) |  | Fax of the agency |
 | `website` | [string](#string) |  | Website of the agency |
