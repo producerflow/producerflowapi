@@ -115,7 +115,8 @@
   "organization": {
     "organization_id": "org_123456789",
     "name": "Agentero Insurance Organization",
-    "external_id": "ext_org_456"
+    "external_id": "ext_org_456",
+    "relationship_type": "related"
   },
   "tenant_additional_questions": {
     "preferred_contact_method": "Email",

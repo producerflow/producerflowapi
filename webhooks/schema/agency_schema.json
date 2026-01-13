@@ -222,6 +222,11 @@
           "type": "string",
           "description": "Contact email address for the organization"
         },
+        "relationship_type": {
+          "type": "string",
+          "enum": ["main", "related"],
+          "description": "Always present. Type of relationship between the agency and organization. 'main' indicates a main/sub-agency created for the organization, 'related' indicates an external agency assigned to the organization"
+        },
         "unassigned": {
           "type": "boolean",
           "description": "Only present when true, indicates the agency has been removed from this organization. When this happens, the other fields contain details about the organization to which the agency was previously assigned"
