@@ -5,8 +5,8 @@
 
 package com.google.type;
 
-public final class DayOfWeekProto {
-  private DayOfWeekProto() {}
+public final class DayofweekProto {
+  private DayofweekProto() {}
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
       com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
@@ -14,7 +14,7 @@ public final class DayOfWeekProto {
       /* minor= */ 28,
       /* patch= */ 3,
       /* suffix= */ "",
-      DayOfWeekProto.class.getName());
+      DayofweekProto.class.getName());
   }
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
@@ -38,10 +38,12 @@ public final class DayOfWeekProto {
       "pe*\204\001\n\tDayOfWeek\022\033\n\027DAY_OF_WEEK_UNSPECIF" +
       "IED\020\000\022\n\n\006MONDAY\020\001\022\013\n\007TUESDAY\020\002\022\r\n\tWEDNES" +
       "DAY\020\003\022\014\n\010THURSDAY\020\004\022\n\n\006FRIDAY\020\005\022\014\n\010SATUR" +
-      "DAY\020\006\022\n\n\006SUNDAY\020\007Bi\n\017com.google.typeB\016Da" +
-      "yOfWeekProtoP\001Z>google.golang.org/genpro" +
-      "to/googleapis/type/dayofweek;dayofweek\242\002" +
-      "\003GTPb\006proto3"
+      "DAY\020\006\022\n\n\006SUNDAY\020\007B\256\001\n\017com.google.typeB\016D" +
+      "ayofweekProtoP\001Z>google.golang.org/genpr" +
+      "oto/googleapis/type/dayofweek;dayofweek\242" +
+      "\002\003GTX\252\002\013Google.Type\312\002\013Google\\Type\342\002\027Goog" +
+      "le\\Type\\GPBMetadata\352\002\014Google::Typeb\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

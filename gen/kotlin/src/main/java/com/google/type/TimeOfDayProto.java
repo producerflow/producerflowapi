@@ -5,8 +5,8 @@
 
 package com.google.type;
 
-public final class TimeOfDayProto {
-  private TimeOfDayProto() {}
+public final class TimeofdayProto {
+  private TimeofdayProto() {}
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
       com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
@@ -14,7 +14,7 @@ public final class TimeOfDayProto {
       /* minor= */ 28,
       /* patch= */ 3,
       /* suffix= */ "",
-      TimeOfDayProto.class.getName());
+      TimeofdayProto.class.getName());
   }
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
@@ -42,10 +42,12 @@ public final class TimeOfDayProto {
       "\n\033google/type/timeofday.proto\022\013google.ty" +
       "pe\"k\n\tTimeOfDay\022\024\n\005hours\030\001 \001(\005R\005hours\022\030\n" +
       "\007minutes\030\002 \001(\005R\007minutes\022\030\n\007seconds\030\003 \001(\005" +
-      "R\007seconds\022\024\n\005nanos\030\004 \001(\005R\005nanosBl\n\017com.g" +
-      "oogle.typeB\016TimeOfDayProtoP\001Z>google.gol" +
-      "ang.org/genproto/googleapis/type/timeofd" +
-      "ay;timeofday\370\001\001\242\002\003GTPb\006proto3"
+      "R\007seconds\022\024\n\005nanos\030\004 \001(\005R\005nanosB\261\001\n\017com." +
+      "google.typeB\016TimeofdayProtoP\001Z>google.go" +
+      "lang.org/genproto/googleapis/type/timeof" +
+      "day;timeofday\370\001\001\242\002\003GTX\252\002\013Google.Type\312\002\013G" +
+      "oogle\\Type\342\002\027Google\\Type\\GPBMetadata\352\002\014G" +
+      "oogle::Typeb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

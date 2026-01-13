@@ -41,10 +41,11 @@ public final class DateProto {
     java.lang.String[] descriptorData = {
       "\n\026google/type/date.proto\022\013google.type\"B\n" +
       "\004Date\022\022\n\004year\030\001 \001(\005R\004year\022\024\n\005month\030\002 \001(\005" +
-      "R\005month\022\020\n\003day\030\003 \001(\005R\003dayB]\n\017com.google." +
-      "typeB\tDateProtoP\001Z4google.golang.org/gen" +
-      "proto/googleapis/type/date;date\370\001\001\242\002\003GTP" +
-      "b\006proto3"
+      "R\005month\022\020\n\003day\030\003 \001(\005R\003dayB\242\001\n\017com.google" +
+      ".typeB\tDateProtoP\001Z4google.golang.org/ge" +
+      "nproto/googleapis/type/date;date\370\001\001\242\002\003GT" +
+      "X\252\002\013Google.Type\312\002\013Google\\Type\342\002\027Google\\T" +
+      "ype\\GPBMetadata\352\002\014Google::Typeb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -38,13 +38,13 @@ private static final long serialVersionUID = 0L;
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.google.type.TimeOfDayProto.internal_static_google_type_TimeOfDay_descriptor;
+    return com.google.type.TimeofdayProto.internal_static_google_type_TimeOfDay_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.google.type.TimeOfDayProto.internal_static_google_type_TimeOfDay_fieldAccessorTable
+    return com.google.type.TimeofdayProto.internal_static_google_type_TimeOfDay_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.google.type.TimeOfDay.class, com.google.type.TimeOfDay.Builder.class);
   }
@@ -317,13 +317,13 @@ private static final long serialVersionUID = 0L;
       com.google.type.TimeOfDayOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.google.type.TimeOfDayProto.internal_static_google_type_TimeOfDay_descriptor;
+      return com.google.type.TimeofdayProto.internal_static_google_type_TimeOfDay_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.google.type.TimeOfDayProto.internal_static_google_type_TimeOfDay_fieldAccessorTable
+      return com.google.type.TimeofdayProto.internal_static_google_type_TimeOfDay_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.google.type.TimeOfDay.class, com.google.type.TimeOfDay.Builder.class);
     }
@@ -352,7 +352,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.google.type.TimeOfDayProto.internal_static_google_type_TimeOfDay_descriptor;
+      return com.google.type.TimeofdayProto.internal_static_google_type_TimeOfDay_descriptor;
     }
 
     @java.lang.Override

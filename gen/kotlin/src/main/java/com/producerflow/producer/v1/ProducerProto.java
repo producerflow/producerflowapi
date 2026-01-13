@@ -1708,11 +1708,11 @@ public final class ProducerProto {
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          build.buf.validate.ValidateProto.getDescriptor(),
+          com.buf.validate.ValidateProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           com.google.type.DateProto.getDescriptor(),
-          com.google.type.DayOfWeekProto.getDescriptor(),
-          com.google.type.TimeOfDayProto.getDescriptor(),
+          com.google.type.DayofweekProto.getDescriptor(),
+          com.google.type.TimeofdayProto.getDescriptor(),
         });
     internal_static_producerflow_producer_v1_Pagination_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2597,15 +2597,15 @@ public final class ProducerProto {
         internal_static_producerflow_producer_v1_UnassignProducerFromLocationsResponse_descriptor,
         new java.lang.String[] { "UnassignedLocationIds", });
     descriptor.resolveAllFeaturesImmutable();
-    build.buf.validate.ValidateProto.getDescriptor();
+    com.buf.validate.ValidateProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.type.DateProto.getDescriptor();
-    com.google.type.DayOfWeekProto.getDescriptor();
-    com.google.type.TimeOfDayProto.getDescriptor();
+    com.google.type.DayofweekProto.getDescriptor();
+    com.google.type.TimeofdayProto.getDescriptor();
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
-    registry.add(build.buf.validate.ValidateProto.field);
-    registry.add(build.buf.validate.ValidateProto.oneof);
+    registry.add(com.buf.validate.ValidateProto.field);
+    registry.add(com.buf.validate.ValidateProto.oneof);
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
   }
