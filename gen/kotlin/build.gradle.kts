@@ -39,6 +39,9 @@ dependencies {
     // Google common protos (google.type.*, google.api.*, etc.)
     api("com.google.api.grpc:proto-google-common-protos:2.63.1")
 
+    // Protovalidate runtime (buf.validate.*)
+    api("build.buf:protovalidate:0.4.0")
+
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
