@@ -37,10 +37,10 @@ dependencies {
     api("com.google.protobuf:protobuf-java:4.28.3")
 
     // Google common protos (google.type.*, google.api.*, etc.)
-    api("com.google.api.grpc:proto-google-common-protos:2.63.1")
+    api("build.buf.gen:googleapis_googleapis_protocolbuffers_java:33.4.0.1.20250303202749.751cbe31638d")
 
-    // Protovalidate runtime (buf.validate.*)
-    api("build.buf:protovalidate:0.4.0")
+    // Protovalidate protobuf classes (buf.validate.*)
+    api("build.buf.gen:bufbuild_protovalidate_protocolbuffers_java:33.4.0.1.20250307204501.0409229c3780")
 
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
