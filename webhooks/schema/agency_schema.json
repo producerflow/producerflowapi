@@ -6,10 +6,12 @@
   "properties": {
     "id": {
       "type": "string",
+      "minLength": 1,
       "description": "Unique identifier for the change"
     },
     "event_type": {
       "type": "string",
+      "minLength": 1,
       "description": "Type of event that occurred (e.g., 'agency.updated', 'agency.synced')"
     },
     "origin": {
@@ -24,6 +26,7 @@
     },
     "agency_id": {
       "type": "string",
+      "minLength": 1,
       "description": "Always present. Unique identifier for the agency"
     },
     "external_id": {
@@ -322,6 +325,6 @@
       "description": "Present when agency contract status changes. Current status of the agency's contract"
     }
   },
-  "required": ["id", "timestamp", "agency_id"],
+  "required": ["id", "event_type", "origin", "timestamp", "agency_id"],
   "additionalProperties": false
 }

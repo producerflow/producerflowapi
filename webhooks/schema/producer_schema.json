@@ -6,10 +6,12 @@
   "properties": {
     "id": {
       "type": "string",
+      "minLength": 1,
       "description": "Unique identifier for the change"
     },
     "event_type": {
       "type": "string",
+      "minLength": 1,
       "description": "Type of event that occurred (e.g., 'producer.updated', 'producer.synced')"
     },
     "origin": {
@@ -24,6 +26,7 @@
     },
     "producer_id": {
       "type": "string",
+      "minLength": 1,
       "description": "Always present. Unique identifier for the producer"
     },
     "external_id": {
@@ -294,6 +297,6 @@
       "description": "Present when producer onboarding status changes. ISO 8601 timestamp when the onboarding status was last updated"
     }
   },
-  "required": ["id", "timestamp", "producer_id"],
+  "required": ["id", "event_type", "origin", "timestamp", "producer_id"],
   "additionalProperties": false
 }

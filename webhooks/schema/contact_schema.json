@@ -6,10 +6,12 @@
   "properties": {
     "id": {
       "type": "string",
+      "minLength": 1,
       "description": "Unique identifier for the change"
     },
     "event_type": {
       "type": "string",
+      "minLength": 1,
       "description": "Type of event that occurred (e.g., 'contact.updated', 'contact.created')"
     },
     "origin": {
@@ -28,6 +30,7 @@
     },
     "contact_id": {
       "type": "string",
+      "minLength": 1,
       "description": "Always present. Unique identifier for the contact"
     },
     "first_name": {
@@ -90,6 +93,6 @@
       }
     }
   },
-  "required": ["id", "timestamp", "contact_id"],
+  "required": ["id", "event_type", "origin", "timestamp", "contact_id"],
   "additionalProperties": false
 }

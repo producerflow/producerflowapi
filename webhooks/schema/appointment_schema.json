@@ -6,10 +6,12 @@
   "properties": {
     "id": {
       "type": "string",
+      "minLength": 1,
       "description": "Unique identifier for the event"
     },
     "event_type": {
       "type": "string",
+      "minLength": 1,
       "description": "Type of event that occurred (e.g., 'appointment.updated', 'appointment.created')"
     },
     "origin": {
@@ -24,6 +26,7 @@
     },
     "appointment_id": {
       "type": "string",
+      "minLength": 1,
       "description": "Unique identifier for the appointment"
     },
     "producer_id": {
@@ -123,6 +126,6 @@
       }
     }
   },
-  "required": ["id", "timestamp", "appointment_id"],
+  "required": ["id", "event_type", "origin", "timestamp", "appointment_id"],
   "additionalProperties": false
 }
