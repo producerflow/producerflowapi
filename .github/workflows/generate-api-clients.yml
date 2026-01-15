@@ -48,6 +48,8 @@ jobs:
         run: npm i -g @connectrpc/protoc-gen-connect-es@${{ env.PROTO_GEN_CONNECT_ES_VERSION }}
       - name: Check buf version
         run: buf --version
+      - name: Prepare Kotlin output directory
+        run: mkdir -p gen/kotlin/src/main/java
       - name: Run buf generate
         run: buf generate
       - name: Commit and push changes
@@ -68,12 +70,13 @@ jobs:
                        -m "Generated from the latest protocol buffer definitions in the producerflow/ directory." \
                        -m "Changes:" \
                        -m "- Updated Go client libraries" \
-                       -m "- Updated TypeScript client libraries"
+                       -m "- Updated TypeScript client libraries" \
+                       -m "- Updated Kotlin client libraries"
             
-            # Push directly to main branch
-            git push origin main
+            # Push to the branch that triggered the workflow
+            git push origin HEAD:${{ github.ref_name }}
             
-            echo "Successfully committed and pushed changes to main branch"
+            echo "Successfully committed and pushed changes to ${{ github.ref_name }}"
           else
             echo "No changes to commit"
           fi

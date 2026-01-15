@@ -230,6 +230,10 @@ $RECYCLE.BIN/
 *.swo
 *~
 
+# Kotlin files
+.gradle/
+.kotlin/
+
 # Build artifacts
 build/
 dist/

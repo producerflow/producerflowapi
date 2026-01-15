@@ -1,0 +1,85 @@
+name: Publish Kotlin to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (leave empty to use gradle.properties version)'
+        required: false
+        type: string
+
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+  GRADLE_VERSION: '8.11.1'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    defaults:
+      run:
+        working-directory: gen/kotlin
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Set up Java
+      uses: actions/setup-java@v5
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v5
+      with:
+        gradle-version: ${{ env.GRADLE_VERSION }}
+
+    - name: Set version from input
+      if: github.event.inputs.version != ''
+      run: |
+        echo "Setting version to ${{ github.event.inputs.version }}"
+        sed -i "s/^version=.*/version=${{ github.event.inputs.version }}/" gradle.properties
+
+    - name: Set version from release tag
+      if: github.event_name == 'release'
+      run: |
+        VERSION="${{ github.event.release.tag_name }}"
+        # Remove 'v' prefix if present
+        VERSION="${VERSION#v}"
+        echo "Setting version to ${VERSION}"
+        sed -i "s/^version=.*/version=${VERSION}/" gradle.properties
+
+    - name: Build package
+      run: gradle build
+
+    - name: Publish to GitHub Packages
+      run: gradle publish
+      env:
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Get package version
+      id: package-version
+      run: |
+        VERSION=$(grep "^version=" gradle.properties | cut -d'=' -f2)
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+    - name: Create success summary
+      run: |
+        echo "## Kotlin Package Published" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Package:** com.producerflow:producerflowapi" >> $GITHUB_STEP_SUMMARY
+        echo "**Version:** ${{ steps.package-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Registry:** GitHub Packages" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Installation" >> $GITHUB_STEP_SUMMARY
+        echo '```kotlin' >> $GITHUB_STEP_SUMMARY
+        echo 'implementation("com.producerflow:producerflowapi:${{ steps.package-version.outputs.version }}")' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY

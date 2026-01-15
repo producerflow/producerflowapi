@@ -1,0 +1,63 @@
+name: Kotlin Build Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gen/kotlin/**'
+      - 'buf.gen.yaml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'gen/kotlin/**'
+      - 'buf.gen.yaml'
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+  GRADLE_VERSION: '8.11.1'
+
+jobs:
+  kotlin-build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: gen/kotlin
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Set up Java
+      uses: actions/setup-java@v5
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v5
+      with:
+        gradle-version: ${{ env.GRADLE_VERSION }}
+
+    - name: Check Kotlin generated code exists
+      run: |
+        if [ -d "src/main/java" ] && [ "$(find src/main/java -name "*.kt" -o -name "*.java" 2>/dev/null | wc -l)" -gt 0 ]; then
+          echo "Found generated Kotlin/Java files"
+          find src/main/java -name "*.kt" 2>/dev/null | head -10 || true
+          find src/main/java -name "*.java" 2>/dev/null | head -10 || true
+        else
+          echo "No generated Kotlin/Java files found in gen/kotlin/src/main/java"
+          exit 1
+        fi
+
+    - name: Build
+      run: gradle build
+
+    - name: Build success summary
+      run: |
+        echo "## Kotlin Build Successful" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- Compilation: Passed" >> $GITHUB_STEP_SUMMARY
+        echo "- Java Version: ${{ env.JAVA_VERSION }}" >> $GITHUB_STEP_SUMMARY

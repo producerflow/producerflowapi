@@ -3,6 +3,7 @@
 [![GoDoc](https://godoc.org/github.com/producerflow/producerflowapi?status.svg)](https://godoc.org/github.com/producerflow/producerflowapi)
 [![npm version](https://img.shields.io/npm/v/@producerflow/producerflowapi.svg)](https://www.npmjs.com/package/@producerflow/producerflowapi)
 [![Go Build Test](https://github.com/producerflow/producerflowapi/actions/workflows/go-build.yml/badge.svg)](https://github.com/producerflow/producerflowapi/actions/workflows/go-build.yml)
+[![Kotlin Build Test](https://github.com/producerflow/producerflowapi/actions/workflows/kotlin-build.yml/badge.svg)](https://github.com/producerflow/producerflowapi/actions/workflows/kotlin-build.yml)
 [![TypeScript Build Test](https://github.com/producerflow/producerflowapi/actions/workflows/ts-build.yml/badge.svg)](https://github.com/producerflow/producerflowapi/actions/workflows/ts-build.yml)
 [![Proto Validation](https://github.com/producerflow/producerflowapi/actions/workflows/proto-validation.yml/badge.svg)](https://github.com/producerflow/producerflowapi/actions/workflows/proto-validation.yml)
 [![SOC 2 Compliant](https://img.shields.io/badge/SOC%202-Compliant-green.svg)](https://www.producerflow.com/)
@@ -24,7 +25,7 @@ Trusted by insurance companies of all sizes to manage onboarding, licensing, app
   - [Quickstart](#quickstart)
     - [API Endpoints](#api-endpoints)
     - [API Token Generation](#api-token-generation)
-  - [Installation & Usage](#installation--usage)
+  - [Installation \& Usage](#installation--usage)
     - [Using Protocol Buffer Files](#using-protocol-buffer-files)
     - [Using Pre-Generated Clients](#using-pre-generated-clients)
       - [Go Client](#go-client)
@@ -103,6 +104,7 @@ For detailed installation and usage instructions, see the respective client libr
 
 - **[Go Client Library](/gen/go/)** - Complete Go implementation with gRPC and Connect support
 - **[TypeScript Client Library](/gen/ts/)** - Full TypeScript/JavaScript client with type definitions
+- **[Kotlin Client Library](/gen/kotlin/)** - Full Kotlin client with type definitions
 
 ### Supported Languages
 
@@ -110,6 +112,7 @@ The monorepo currently provides official support for:
 
 - **Go** (1.21+)
 - **TypeScript/JavaScript** (Node.js 18+)
+- **Kotlin** (1.9+)
 
 For other languages, use the Protocol Buffer definitions in `producerflow/` with the official Protocol Buffer compiler and language-specific plugins. Refer to the [Buf documentation](https://buf.build/docs) for comprehensive language support.
 
@@ -118,6 +121,7 @@ For other languages, use the Protocol Buffer definitions in `producerflow/` with
 - **API Definitions**: Start with `producerflow/producer/v1/producer.proto`
 - **Go Integration**: Use code in `gen/go/` directory
 - **TypeScript Integration**: Use code in `gen/ts/` directory
+- **Kotlin Integration**: Use code in `gen/kotlin/` directory
 - **Documentation**: Reference [comprehensive documentation](https://github.com/producerflow/producerflowapi/wiki) for detailed API guides
 
 ## Build/Generation Instructions
@@ -136,12 +140,14 @@ This command will:
 1. Validate all Protocol Buffer definitions
 2. Generate Go client code in `gen/go/`
 3. Generate TypeScript client code in `gen/ts/`
+4. Generate Kotlin client code in `gen/kotlin/`
 
 ### Prerequisites
 
 - [Buf CLI](https://buf.build/docs/installation) installed
 - Go 1.21+ (for Go generation)
 - Node.js 18+ (for TypeScript generation)
+- Java 17+ (for Kotlin generation)
 
 ### Custom Generation for Other Languages
 
