@@ -46,7 +46,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.producerflow:producerflowapi:1.0.15")
+    implementation("com.producerflow:producerflowapi:1.0.16")
 }
 ```
 
@@ -65,7 +65,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.producerflow:producerflowapi:1.0.15'
+    implementation 'com.producerflow:producerflowapi:1.0.16'
 }
 ```
 
@@ -97,7 +97,7 @@ Then in your `pom.xml`:
   <dependency>
     <groupId>com.producerflow</groupId>
     <artifactId>producerflowapi</artifactId>
-    <version>1.0.15</version>
+    <version>1.0.16</version>
   </dependency>
 </dependencies>
 ```

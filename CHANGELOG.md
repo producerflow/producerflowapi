@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.16] - 2026-01-16
+
+### Added
+
+#### Kotlin Client Library
+
+- **gRPC Support** - Full gRPC stub generation for traditional gRPC usage
+  - Java gRPC stubs with `BlockingStub`, `FutureStub`, and async `Stub` variants
+  - Kotlin coroutine-based gRPC stubs for async operations
+  - Stubs available for `ProducerService` and `AppointmentService`
+  - Example: `ProducerServiceGrpc.newBlockingStub(channel)`
+
+- **Kotlin Protobuf DSL Builders** - Idiomatic Kotlin syntax for building protobuf messages
+  - DSL builders for all message types
+  - Example: `producer { id = "123"; name = "John" }`
+
+- **New Dependencies** - Additional runtime dependencies for gRPC support
+  - `io.grpc:grpc-stub:1.70.0`
+  - `io.grpc:grpc-protobuf:1.70.0`
+  - `io.grpc:grpc-kotlin-stub:1.4.1`
+  - `io.grpc:grpc-netty-shaded:1.70.0` (server/JVM transport)
+  - `io.grpc:grpc-okhttp:1.70.0` (mobile/Android transport)
+  - `com.google.protobuf:protobuf-kotlin:4.28.3`
+
+### Changed
+
+#### Kotlin Client Library
+
+- **Kotlin Version** - Updated from 2.1.0 to 2.1.10
+- **Code Organization** - Reorganized generated code structure
+  - Java files now in `src/main/java`
+  - Kotlin files now in `src/main/kotlin`
+
+---
+
 ## [1.0.15] - 2026-01-09
 
 ### Fixed
