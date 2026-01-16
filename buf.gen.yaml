@@ -26,12 +26,26 @@ plugins:
       - import_extension=none
     include_imports: true
     strategy: all
-  # Kotlin plugins
+  # Kotlin/Java plugins
+  # Java protobuf messages
   - remote: buf.build/protocolbuffers/java:v28.3
     out: gen/kotlin/src/main/java
     include_imports: true
-  - remote: buf.build/connectrpc/kotlin:v0.7.4
+  # Kotlin protobuf DSL builders
+  - remote: buf.build/protocolbuffers/kotlin:v28.3
+    out: gen/kotlin/src/main/kotlin
+    include_imports: true
+  # Java gRPC stubs (BlockingStub, FutureStub, Stub)
+  - remote: buf.build/grpc/java:v1.68.1
     out: gen/kotlin/src/main/java
+    include_imports: true
+  # Kotlin gRPC stubs (coroutine-based)
+  - remote: buf.build/grpc/kotlin:v1.5.0
+    out: gen/kotlin/src/main/kotlin
+    include_imports: true
+  # Connect-RPC Kotlin (alternative to gRPC, kept for compatibility)
+  - remote: buf.build/connectrpc/kotlin:v0.7.4
+    out: gen/kotlin/src/main/kotlin
     opt:
       - generateCoroutineMethods=true
       - generateBlockingUnaryMethods=true

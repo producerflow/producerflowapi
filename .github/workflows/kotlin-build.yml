@@ -43,12 +43,21 @@ jobs:
 
     - name: Check Kotlin generated code exists
       run: |
-        if [ -d "src/main/java" ] && [ "$(find src/main/java -name "*.kt" -o -name "*.java" 2>/dev/null | wc -l)" -gt 0 ]; then
-          echo "Found generated Kotlin/Java files"
-          find src/main/java -name "*.kt" 2>/dev/null | head -10 || true
-          find src/main/java -name "*.java" 2>/dev/null | head -10 || true
+        java_count=$(find src/main/java -name "*.java" 2>/dev/null | wc -l)
+        kotlin_count=$(find src/main/kotlin -name "*.kt" 2>/dev/null | wc -l)
+
+        if [ "$java_count" -gt 0 ] || [ "$kotlin_count" -gt 0 ]; then
+          echo "Found generated files:"
+          echo "  - Java files in src/main/java: $java_count"
+          echo "  - Kotlin files in src/main/kotlin: $kotlin_count"
+          echo ""
+          echo "Sample Java files:"
+          find src/main/java -name "*.java" 2>/dev/null | head -5 || true
+          echo ""
+          echo "Sample Kotlin files:"
+          find src/main/kotlin -name "*.kt" 2>/dev/null | head -5 || true
         else
-          echo "No generated Kotlin/Java files found in gen/kotlin/src/main/java"
+          echo "No generated Kotlin/Java files found"
           exit 1
         fi
 
