@@ -48,8 +48,10 @@ jobs:
         run: npm i -g @connectrpc/protoc-gen-connect-es@${{ env.PROTO_GEN_CONNECT_ES_VERSION }}
       - name: Check buf version
         run: buf --version
-      - name: Prepare Kotlin output directory
-        run: mkdir -p gen/kotlin/src/main/java
+      - name: Prepare Kotlin output directories
+        run: |
+          mkdir -p gen/kotlin/src/main/java
+          mkdir -p gen/kotlin/src/main/kotlin
       - name: Run buf generate
         run: buf generate
       - name: Commit and push changes

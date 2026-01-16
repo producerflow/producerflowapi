@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.1.10"
     `maven-publish`
     `java-library`
 }
@@ -27,23 +27,48 @@ kotlin {
     jvmToolchain(17)
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir("src/main/java")
+        }
+        kotlin {
+            srcDir("src/main/kotlin")
+        }
+    }
+}
+
 dependencies {
-    // Connect-Kotlin runtime
+    // Connect-Kotlin runtime (alternative to gRPC)
     api("com.connectrpc:connect-kotlin:0.7.4")
     api("com.connectrpc:connect-kotlin-okhttp:0.7.4")
     api("com.connectrpc:connect-kotlin-google-java-ext:0.7.4")
 
-    // Protobuf runtime (standard Java for server usage)
+    // Protobuf runtime
     api("com.google.protobuf:protobuf-java:4.28.3")
+    api("com.google.protobuf:protobuf-kotlin:4.28.3")
+
+    // gRPC runtime
+    api("io.grpc:grpc-stub:1.70.0")
+    api("io.grpc:grpc-protobuf:1.70.0")
+    api("io.grpc:grpc-kotlin-stub:1.4.1")
+
+    // gRPC transport (choose one based on your use case)
+    implementation("io.grpc:grpc-netty-shaded:1.70.0")
+    implementation("io.grpc:grpc-okhttp:1.70.0")
 
     // Google common protos (google.type.*, google.api.*, etc.)
     api("com.google.api.grpc:proto-google-common-protos:2.63.1")
+    api("com.google.api.grpc:grpc-google-common-protos:2.63.1")
 
     // OkHttp for HTTP transport
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
-    // Kotlin coroutines
+    // Kotlin coroutines (required for gRPC-Kotlin)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+
+    // Required for gRPC generated code
+    compileOnly("org.apache.tomcat:annotations-api:6.0.53")
 
     // Testing
     testImplementation(kotlin("test"))
@@ -103,6 +128,11 @@ publishing {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+}
+
+// Handle duplicate files from multiple protobuf plugins generating the same imports
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.withType<Javadoc> {
