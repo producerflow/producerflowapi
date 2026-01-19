@@ -1230,7 +1230,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2886
+       *     See producerflow/producer/v1/producer.proto;l=2889
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1241,7 +1241,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2886
+       *     See producerflow/producer/v1/producer.proto;l=2889
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -1719,7 +1719,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2936
+         *     See producerflow/producer/v1/producer.proto;l=2939
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -1730,7 +1730,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2936
+         *     See producerflow/producer/v1/producer.proto;l=2939
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -1938,7 +1938,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2936
+         *     See producerflow/producer/v1/producer.proto;l=2939
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -1952,7 +1952,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2936
+         *     See producerflow/producer/v1/producer.proto;l=2939
          * @return The issueDate.
          */
         @java.lang.Override
@@ -2661,7 +2661,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2936
+           *     See producerflow/producer/v1/producer.proto;l=2939
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -2674,7 +2674,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2936
+           *     See producerflow/producer/v1/producer.proto;l=2939
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3234,7 +3234,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2886
+       *     See producerflow/producer/v1/producer.proto;l=2889
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3248,7 +3248,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2886
+       *     See producerflow/producer/v1/producer.proto;l=2889
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -4517,7 +4517,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2886
+         *     See producerflow/producer/v1/producer.proto;l=2889
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -4530,7 +4530,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2886
+         *     See producerflow/producer/v1/producer.proto;l=2889
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -16101,7 +16101,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3159
+     *     See producerflow/producer/v1/producer.proto;l=3162
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -16112,7 +16112,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3159
+     *     See producerflow/producer/v1/producer.proto;l=3162
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -16285,7 +16285,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3159
+     *     See producerflow/producer/v1/producer.proto;l=3162
      * @return The street.
      */
     @java.lang.Override
@@ -16308,7 +16308,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3159
+     *     See producerflow/producer/v1/producer.proto;l=3162
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -17007,7 +17007,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3159
+       *     See producerflow/producer/v1/producer.proto;l=3162
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -17029,7 +17029,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3159
+       *     See producerflow/producer/v1/producer.proto;l=3162
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -17052,7 +17052,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3159
+       *     See producerflow/producer/v1/producer.proto;l=3162
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -17071,7 +17071,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3159
+       *     See producerflow/producer/v1/producer.proto;l=3162
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -17087,7 +17087,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3159
+       *     See producerflow/producer/v1/producer.proto;l=3162
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */

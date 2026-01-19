@@ -2073,10 +2073,13 @@ Returns:
 Empty response on success.
 
 Common Error Codes:
-- NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
-- INVALID_ARGUMENT: Producer has no NPN or NPN is not registered in NIPR
+- NOT_FOUND: Producer doesn't exist, doesn't belong to tenant, or NPN could
+  not be found in NIPR. If the NPN cannot be found, the error message will
+  be "producer NPN could not be found in NIPR".
+- INVALID_ARGUMENT: Producer has no NPN.
 - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
 - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
+- INTERNAL: Unexpected error during NIPR lookup or sync process
 
 #### Request: `SyncProducerWithNIPRRequest`
 
