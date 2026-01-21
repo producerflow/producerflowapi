@@ -2170,6 +2170,11 @@ public final class ProducerServiceGrpc {
      * - Regulatory actions and disciplinary history
      * - Biographic information (name, DOB, state of domicile)
      * - Address by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Producer license data sync (if producer is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
      * Preconditions:
      * - Producer must exist and belong to the authenticated tenant
      * - Producer must have a valid NPN registered in NIPR
@@ -2213,6 +2218,12 @@ public final class ProducerServiceGrpc {
      * - Carrier appointments with status and renewal dates
      * - Regulatory actions and disciplinary history
      * - Address history by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Agency license data sync (if agency is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
+     * - When sync_all_producers is true: additional calls per producer (license sync + PDB alerts)
      * Bulk Producer Sync:
      * When sync_all_producers is set to true, the system will also sync all
      * producers associated with the agency. This extends the timeout to 10
@@ -3632,6 +3643,11 @@ public final class ProducerServiceGrpc {
      * - Regulatory actions and disciplinary history
      * - Biographic information (name, DOB, state of domicile)
      * - Address by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Producer license data sync (if producer is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
      * Preconditions:
      * - Producer must exist and belong to the authenticated tenant
      * - Producer must have a valid NPN registered in NIPR
@@ -3676,6 +3692,12 @@ public final class ProducerServiceGrpc {
      * - Carrier appointments with status and renewal dates
      * - Regulatory actions and disciplinary history
      * - Address history by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Agency license data sync (if agency is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
+     * - When sync_all_producers is true: additional calls per producer (license sync + PDB alerts)
      * Bulk Producer Sync:
      * When sync_all_producers is set to true, the system will also sync all
      * producers associated with the agency. This extends the timeout to 10
@@ -5049,6 +5071,11 @@ public final class ProducerServiceGrpc {
      * - Regulatory actions and disciplinary history
      * - Biographic information (name, DOB, state of domicile)
      * - Address by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Producer license data sync (if producer is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
      * Preconditions:
      * - Producer must exist and belong to the authenticated tenant
      * - Producer must have a valid NPN registered in NIPR
@@ -5092,6 +5119,12 @@ public final class ProducerServiceGrpc {
      * - Carrier appointments with status and renewal dates
      * - Regulatory actions and disciplinary history
      * - Address history by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Agency license data sync (if agency is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
+     * - When sync_all_producers is true: additional calls per producer (license sync + PDB alerts)
      * Bulk Producer Sync:
      * When sync_all_producers is set to true, the system will also sync all
      * producers associated with the agency. This extends the timeout to 10
@@ -6480,6 +6513,11 @@ public final class ProducerServiceGrpc {
      * - Regulatory actions and disciplinary history
      * - Biographic information (name, DOB, state of domicile)
      * - Address by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Producer license data sync (if producer is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
      * Preconditions:
      * - Producer must exist and belong to the authenticated tenant
      * - Producer must have a valid NPN registered in NIPR
@@ -6524,6 +6562,12 @@ public final class ProducerServiceGrpc {
      * - Carrier appointments with status and renewal dates
      * - Regulatory actions and disciplinary history
      * - Address history by state
+     * Billing:
+     * This operation makes external NIPR API calls that may result in charges:
+     * - NPN validation lookup
+     * - Agency license data sync (if agency is not already synced)
+     * - PDB alerts subscription (if enabled for tenant)
+     * - When sync_all_producers is true: additional calls per producer (license sync + PDB alerts)
      * Bulk Producer Sync:
      * When sync_all_producers is set to true, the system will also sync all
      * producers associated with the agency. This extends the timeout to 10
