@@ -607,6 +607,62 @@ public object UpdateAgencyRequestKt {
         .clear() {
            _builder.clearExternalMetadata()
          }
+
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * ```
+       *
+       * `.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];`
+       */
+      public var ivansAccount: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount
+        @JvmName("getIvansAccount")
+        get() = _builder.ivansAccount
+        @JvmName("setIvansAccount")
+        set(value) {
+          _builder.ivansAccount = value
+        }
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * ```
+       *
+       * `.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];`
+       */
+      public fun clearIvansAccount() {
+        _builder.clearIvansAccount()
+      }
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * ```
+       *
+       * `.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];`
+       * @return Whether the ivansAccount field is set.
+       */
+      public fun hasIvansAccount(): kotlin.Boolean {
+        return _builder.hasIvansAccount()
+      }
+      public val AgencyKt.Dsl.ivansAccountOrNull: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount?
+        get() = _builder.ivansAccountOrNull
     }
     @kotlin.jvm.JvmName("-initializeaddress")
     public inline fun address(block: com.producerflow.producer.v1.UpdateAgencyRequestKt.AgencyKt.AddressKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.Address =
@@ -868,6 +924,193 @@ public object UpdateAgencyRequestKt {
         }
       }
     }
+    @kotlin.jvm.JvmName("-initializeivansAccount")
+    public inline fun ivansAccount(block: com.producerflow.producer.v1.UpdateAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount =
+      com.producerflow.producer.v1.UpdateAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl._create(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.newBuilder()).apply { block() }._build()
+    /**
+     * ```
+     * IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+     * IVANS is used for electronic communication between insurance agencies and carriers.
+     * ```
+     *
+     * Protobuf type `producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount`
+     */
+    public object IvansAccountKt {
+      @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+      @com.google.protobuf.kotlin.ProtoDslMarker
+      public class Dsl private constructor(
+        private val _builder: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder
+      ) {
+        public companion object {
+          @kotlin.jvm.JvmSynthetic
+          @kotlin.PublishedApi
+          internal fun _create(builder: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder): Dsl = Dsl(builder)
+        }
+
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _build(): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount = _builder.build()
+
+        /**
+         * ```
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }`
+         */
+        public var accountNumber: kotlin.String
+          @JvmName("getAccountNumber")
+          get() = _builder.accountNumber
+          @JvmName("setAccountNumber")
+          set(value) {
+            _builder.accountNumber = value
+          }
+        /**
+         * ```
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAccountNumber() {
+          _builder.clearAccountNumber()
+        }
+        /**
+         * ```
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }`
+         * @return Whether the accountNumber field is set.
+         */
+        public fun hasAccountNumber(): kotlin.Boolean {
+          return _builder.hasAccountNumber()
+        }
+
+        /**
+         * ```
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }`
+         */
+        public var amsSoftware: kotlin.String
+          @JvmName("getAmsSoftware")
+          get() = _builder.amsSoftware
+          @JvmName("setAmsSoftware")
+          set(value) {
+            _builder.amsSoftware = value
+          }
+        /**
+         * ```
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAmsSoftware() {
+          _builder.clearAmsSoftware()
+        }
+        /**
+         * ```
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }`
+         * @return Whether the amsSoftware field is set.
+         */
+        public fun hasAmsSoftware(): kotlin.Boolean {
+          return _builder.hasAmsSoftware()
+        }
+
+        /**
+         * ```
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }`
+         */
+        public var amsVersion: kotlin.String
+          @JvmName("getAmsVersion")
+          get() = _builder.amsVersion
+          @JvmName("setAmsVersion")
+          set(value) {
+            _builder.amsVersion = value
+          }
+        /**
+         * ```
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAmsVersion() {
+          _builder.clearAmsVersion()
+        }
+        /**
+         * ```
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }`
+         * @return Whether the amsVersion field is set.
+         */
+        public fun hasAmsVersion(): kotlin.Boolean {
+          return _builder.hasAmsVersion()
+        }
+
+        /**
+         * ```
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }`
+         */
+        public var mailboxNumber: kotlin.String
+          @JvmName("getMailboxNumber")
+          get() = _builder.mailboxNumber
+          @JvmName("setMailboxNumber")
+          set(value) {
+            _builder.mailboxNumber = value
+          }
+        /**
+         * ```
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }`
+         */
+        public fun clearMailboxNumber() {
+          _builder.clearMailboxNumber()
+        }
+        /**
+         * ```
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * ```
+         *
+         * `optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }`
+         * @return Whether the mailboxNumber field is set.
+         */
+        public fun hasMailboxNumber(): kotlin.Boolean {
+          return _builder.hasMailboxNumber()
+        }
+      }
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
@@ -882,8 +1125,15 @@ public inline fun com.producerflow.producer.v1.UpdateAgencyRequest.Agency.copy(b
 public inline fun com.producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.copy(block: `com.producerflow.producer.v1`.UpdateAgencyRequestKt.AgencyKt.AddressKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.Address =
   `com.producerflow.producer.v1`.UpdateAgencyRequestKt.AgencyKt.AddressKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.copy(block: `com.producerflow.producer.v1`.UpdateAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount =
+  `com.producerflow.producer.v1`.UpdateAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
 public val com.producerflow.producer.v1.UpdateAgencyRequest.AgencyOrBuilder.physicalAddressOrNull: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.Address?
   get() = if (hasPhysicalAddress()) getPhysicalAddress() else null
+
+public val com.producerflow.producer.v1.UpdateAgencyRequest.AgencyOrBuilder.ivansAccountOrNull: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount?
+  get() = if (hasIvansAccount()) getIvansAccount() else null
 
 public val com.producerflow.producer.v1.UpdateAgencyRequestOrBuilder.agencyOrNull: com.producerflow.producer.v1.UpdateAgencyRequest.Agency?
   get() = if (hasAgency()) getAgency() else null

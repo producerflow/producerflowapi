@@ -381,6 +381,51 @@ java.lang.String defaultValue);
      */
     java.lang.String getExternalMetadataOrThrow(
         java.lang.String key);
+
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     * @return Whether the ivansAccount field is set.
+     */
+    boolean hasIvansAccount();
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     * @return The ivansAccount.
+     */
+    com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getIvansAccount();
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     */
+    com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder();
   }
   /**
    * <pre>
@@ -454,7 +499,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated boolean hasStreet();
@@ -465,7 +510,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -476,7 +521,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -702,7 +747,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return Whether the street field is set.
        */
       @java.lang.Override
@@ -716,7 +761,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return The street.
        */
       @java.lang.Override
@@ -739,7 +784,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2196
+       *     See producerflow/producer/v1/producer.proto;l=2214
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -1533,7 +1578,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @return Whether the street field is set.
          */
         @java.lang.Deprecated public boolean hasStreet() {
@@ -1546,7 +1591,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1568,7 +1613,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1591,7 +1636,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -1610,7 +1655,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -1626,7 +1671,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2196
+         *     See producerflow/producer/v1/producer.proto;l=2214
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -2236,6 +2281,1329 @@ java.lang.String defaultValue);
 
     }
 
+    public interface IvansAccountOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return Whether the accountNumber field is set.
+       */
+      boolean hasAccountNumber();
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return The accountNumber.
+       */
+      java.lang.String getAccountNumber();
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for accountNumber.
+       */
+      com.google.protobuf.ByteString
+          getAccountNumberBytes();
+
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return Whether the amsSoftware field is set.
+       */
+      boolean hasAmsSoftware();
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return The amsSoftware.
+       */
+      java.lang.String getAmsSoftware();
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for amsSoftware.
+       */
+      com.google.protobuf.ByteString
+          getAmsSoftwareBytes();
+
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return Whether the amsVersion field is set.
+       */
+      boolean hasAmsVersion();
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return The amsVersion.
+       */
+      java.lang.String getAmsVersion();
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for amsVersion.
+       */
+      com.google.protobuf.ByteString
+          getAmsVersionBytes();
+
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return Whether the mailboxNumber field is set.
+       */
+      boolean hasMailboxNumber();
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return The mailboxNumber.
+       */
+      java.lang.String getMailboxNumber();
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for mailboxNumber.
+       */
+      com.google.protobuf.ByteString
+          getMailboxNumberBytes();
+    }
+    /**
+     * <pre>
+     * IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+     * IVANS is used for electronic communication between insurance agencies and carriers.
+     * </pre>
+     *
+     * Protobuf type {@code producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount}
+     */
+    public static final class IvansAccount extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)
+        IvansAccountOrBuilder {
+    private static final long serialVersionUID = 0L;
+      static {
+        com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+          com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+          /* major= */ 4,
+          /* minor= */ 28,
+          /* patch= */ 3,
+          /* suffix= */ "",
+          IvansAccount.class.getName());
+      }
+      // Use IvansAccount.newBuilder() to construct.
+      private IvansAccount(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+      }
+      private IvansAccount() {
+        accountNumber_ = "";
+        amsSoftware_ = "";
+        amsVersion_ = "";
+        mailboxNumber_ = "";
+      }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_UpdateAgencyRequest_Agency_IvansAccount_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_UpdateAgencyRequest_Agency_IvansAccount_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.class, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int ACCOUNT_NUMBER_FIELD_NUMBER = 1;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object accountNumber_ = "";
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return Whether the accountNumber field is set.
+       */
+      @java.lang.Override
+      public boolean hasAccountNumber() {
+        return ((bitField0_ & 0x00000001) != 0);
+      }
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return The accountNumber.
+       */
+      @java.lang.Override
+      public java.lang.String getAccountNumber() {
+        java.lang.Object ref = accountNumber_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          accountNumber_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Account number for the IVANS service.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for accountNumber.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getAccountNumberBytes() {
+        java.lang.Object ref = accountNumber_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          accountNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int AMS_SOFTWARE_FIELD_NUMBER = 2;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object amsSoftware_ = "";
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return Whether the amsSoftware field is set.
+       */
+      @java.lang.Override
+      public boolean hasAmsSoftware() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return The amsSoftware.
+       */
+      @java.lang.Override
+      public java.lang.String getAmsSoftware() {
+        java.lang.Object ref = amsSoftware_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          amsSoftware_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Software used for IVANS communication (AMS - Agency Management System).
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for amsSoftware.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getAmsSoftwareBytes() {
+        java.lang.Object ref = amsSoftware_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          amsSoftware_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int AMS_VERSION_FIELD_NUMBER = 3;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object amsVersion_ = "";
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return Whether the amsVersion field is set.
+       */
+      @java.lang.Override
+      public boolean hasAmsVersion() {
+        return ((bitField0_ & 0x00000004) != 0);
+      }
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return The amsVersion.
+       */
+      @java.lang.Override
+      public java.lang.String getAmsVersion() {
+        java.lang.Object ref = amsVersion_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          amsVersion_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Version of the AMS software.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for amsVersion.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getAmsVersionBytes() {
+        java.lang.Object ref = amsVersion_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          amsVersion_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int MAILBOX_NUMBER_FIELD_NUMBER = 4;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object mailboxNumber_ = "";
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return Whether the mailboxNumber field is set.
+       */
+      @java.lang.Override
+      public boolean hasMailboxNumber() {
+        return ((bitField0_ & 0x00000008) != 0);
+      }
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return The mailboxNumber.
+       */
+      @java.lang.Override
+      public java.lang.String getMailboxNumber() {
+        java.lang.Object ref = mailboxNumber_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          mailboxNumber_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Mailbox number for the IVANS service.
+       * Used for routing electronic messages.
+       * If provided, must be non-empty.
+       * </pre>
+       *
+       * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for mailboxNumber.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getMailboxNumberBytes() {
+        java.lang.Object ref = mailboxNumber_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          mailboxNumber_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (((bitField0_ & 0x00000001) != 0)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 1, accountNumber_);
+        }
+        if (((bitField0_ & 0x00000002) != 0)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 2, amsSoftware_);
+        }
+        if (((bitField0_ & 0x00000004) != 0)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 3, amsVersion_);
+        }
+        if (((bitField0_ & 0x00000008) != 0)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 4, mailboxNumber_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(1, accountNumber_);
+        }
+        if (((bitField0_ & 0x00000002) != 0)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(2, amsSoftware_);
+        }
+        if (((bitField0_ & 0x00000004) != 0)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(3, amsVersion_);
+        }
+        if (((bitField0_ & 0x00000008) != 0)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(4, mailboxNumber_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)) {
+          return super.equals(obj);
+        }
+        com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount other = (com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount) obj;
+
+        if (hasAccountNumber() != other.hasAccountNumber()) return false;
+        if (hasAccountNumber()) {
+          if (!getAccountNumber()
+              .equals(other.getAccountNumber())) return false;
+        }
+        if (hasAmsSoftware() != other.hasAmsSoftware()) return false;
+        if (hasAmsSoftware()) {
+          if (!getAmsSoftware()
+              .equals(other.getAmsSoftware())) return false;
+        }
+        if (hasAmsVersion() != other.hasAmsVersion()) return false;
+        if (hasAmsVersion()) {
+          if (!getAmsVersion()
+              .equals(other.getAmsVersion())) return false;
+        }
+        if (hasMailboxNumber() != other.hasMailboxNumber()) return false;
+        if (hasMailboxNumber()) {
+          if (!getMailboxNumber()
+              .equals(other.getMailboxNumber())) return false;
+        }
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        if (hasAccountNumber()) {
+          hash = (37 * hash) + ACCOUNT_NUMBER_FIELD_NUMBER;
+          hash = (53 * hash) + getAccountNumber().hashCode();
+        }
+        if (hasAmsSoftware()) {
+          hash = (37 * hash) + AMS_SOFTWARE_FIELD_NUMBER;
+          hash = (53 * hash) + getAmsSoftware().hashCode();
+        }
+        if (hasAmsVersion()) {
+          hash = (37 * hash) + AMS_VERSION_FIELD_NUMBER;
+          hash = (53 * hash) + getAmsVersion().hashCode();
+        }
+        if (hasMailboxNumber()) {
+          hash = (37 * hash) + MAILBOX_NUMBER_FIELD_NUMBER;
+          hash = (53 * hash) + getMailboxNumber().hashCode();
+        }
+        hash = (29 * hash) + getUnknownFields().hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * <pre>
+       * IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+       * IVANS is used for electronic communication between insurance agencies and carriers.
+       * </pre>
+       *
+       * Protobuf type {@code producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_UpdateAgencyRequest_Agency_IvansAccount_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_UpdateAgencyRequest_Agency_IvansAccount_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.class, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder.class);
+        }
+
+        // Construct using com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.newBuilder()
+        private Builder() {
+
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          bitField0_ = 0;
+          accountNumber_ = "";
+          amsSoftware_ = "";
+          amsVersion_ = "";
+          mailboxNumber_ = "";
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_UpdateAgencyRequest_Agency_IvansAccount_descriptor;
+        }
+
+        @java.lang.Override
+        public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getDefaultInstanceForType() {
+          return com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount build() {
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount buildPartial() {
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount result = new com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount(this);
+          if (bitField0_ != 0) { buildPartial0(result); }
+          onBuilt();
+          return result;
+        }
+
+        private void buildPartial0(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount result) {
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) != 0)) {
+            result.accountNumber_ = accountNumber_;
+            to_bitField0_ |= 0x00000001;
+          }
+          if (((from_bitField0_ & 0x00000002) != 0)) {
+            result.amsSoftware_ = amsSoftware_;
+            to_bitField0_ |= 0x00000002;
+          }
+          if (((from_bitField0_ & 0x00000004) != 0)) {
+            result.amsVersion_ = amsVersion_;
+            to_bitField0_ |= 0x00000004;
+          }
+          if (((from_bitField0_ & 0x00000008) != 0)) {
+            result.mailboxNumber_ = mailboxNumber_;
+            to_bitField0_ |= 0x00000008;
+          }
+          result.bitField0_ |= to_bitField0_;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount) {
+            return mergeFrom((com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount other) {
+          if (other == com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance()) return this;
+          if (other.hasAccountNumber()) {
+            accountNumber_ = other.accountNumber_;
+            bitField0_ |= 0x00000001;
+            onChanged();
+          }
+          if (other.hasAmsSoftware()) {
+            amsSoftware_ = other.amsSoftware_;
+            bitField0_ |= 0x00000002;
+            onChanged();
+          }
+          if (other.hasAmsVersion()) {
+            amsVersion_ = other.amsVersion_;
+            bitField0_ |= 0x00000004;
+            onChanged();
+          }
+          if (other.hasMailboxNumber()) {
+            mailboxNumber_ = other.mailboxNumber_;
+            bitField0_ |= 0x00000008;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                case 10: {
+                  accountNumber_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000001;
+                  break;
+                } // case 10
+                case 18: {
+                  amsSoftware_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000002;
+                  break;
+                } // case 18
+                case 26: {
+                  amsVersion_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000004;
+                  break;
+                } // case 26
+                case 34: {
+                  mailboxNumber_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000008;
+                  break;
+                } // case 34
+                default: {
+                  if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                    done = true; // was an endgroup tag
+                  }
+                  break;
+                } // default:
+              } // switch (tag)
+            } // while (!done)
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.unwrapIOException();
+          } finally {
+            onChanged();
+          } // finally
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object accountNumber_ = "";
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @return Whether the accountNumber field is set.
+         */
+        public boolean hasAccountNumber() {
+          return ((bitField0_ & 0x00000001) != 0);
+        }
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @return The accountNumber.
+         */
+        public java.lang.String getAccountNumber() {
+          java.lang.Object ref = accountNumber_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            accountNumber_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @return The bytes for accountNumber.
+         */
+        public com.google.protobuf.ByteString
+            getAccountNumberBytes() {
+          java.lang.Object ref = accountNumber_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            accountNumber_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @param value The accountNumber to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAccountNumber(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          accountNumber_ = value;
+          bitField0_ |= 0x00000001;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearAccountNumber() {
+          accountNumber_ = getDefaultInstance().getAccountNumber();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Account number for the IVANS service.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }</code>
+         * @param value The bytes for accountNumber to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAccountNumberBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          accountNumber_ = value;
+          bitField0_ |= 0x00000001;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object amsSoftware_ = "";
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @return Whether the amsSoftware field is set.
+         */
+        public boolean hasAmsSoftware() {
+          return ((bitField0_ & 0x00000002) != 0);
+        }
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @return The amsSoftware.
+         */
+        public java.lang.String getAmsSoftware() {
+          java.lang.Object ref = amsSoftware_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            amsSoftware_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @return The bytes for amsSoftware.
+         */
+        public com.google.protobuf.ByteString
+            getAmsSoftwareBytes() {
+          java.lang.Object ref = amsSoftware_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            amsSoftware_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @param value The amsSoftware to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAmsSoftware(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          amsSoftware_ = value;
+          bitField0_ |= 0x00000002;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearAmsSoftware() {
+          amsSoftware_ = getDefaultInstance().getAmsSoftware();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }</code>
+         * @param value The bytes for amsSoftware to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAmsSoftwareBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          amsSoftware_ = value;
+          bitField0_ |= 0x00000002;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object amsVersion_ = "";
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @return Whether the amsVersion field is set.
+         */
+        public boolean hasAmsVersion() {
+          return ((bitField0_ & 0x00000004) != 0);
+        }
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @return The amsVersion.
+         */
+        public java.lang.String getAmsVersion() {
+          java.lang.Object ref = amsVersion_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            amsVersion_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @return The bytes for amsVersion.
+         */
+        public com.google.protobuf.ByteString
+            getAmsVersionBytes() {
+          java.lang.Object ref = amsVersion_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            amsVersion_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @param value The amsVersion to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAmsVersion(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          amsVersion_ = value;
+          bitField0_ |= 0x00000004;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearAmsVersion() {
+          amsVersion_ = getDefaultInstance().getAmsVersion();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Version of the AMS software.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }</code>
+         * @param value The bytes for amsVersion to set.
+         * @return This builder for chaining.
+         */
+        public Builder setAmsVersionBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          amsVersion_ = value;
+          bitField0_ |= 0x00000004;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object mailboxNumber_ = "";
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @return Whether the mailboxNumber field is set.
+         */
+        public boolean hasMailboxNumber() {
+          return ((bitField0_ & 0x00000008) != 0);
+        }
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @return The mailboxNumber.
+         */
+        public java.lang.String getMailboxNumber() {
+          java.lang.Object ref = mailboxNumber_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            mailboxNumber_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @return The bytes for mailboxNumber.
+         */
+        public com.google.protobuf.ByteString
+            getMailboxNumberBytes() {
+          java.lang.Object ref = mailboxNumber_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            mailboxNumber_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @param value The mailboxNumber to set.
+         * @return This builder for chaining.
+         */
+        public Builder setMailboxNumber(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          mailboxNumber_ = value;
+          bitField0_ |= 0x00000008;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearMailboxNumber() {
+          mailboxNumber_ = getDefaultInstance().getMailboxNumber();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * If provided, must be non-empty.
+         * </pre>
+         *
+         * <code>optional string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }</code>
+         * @param value The bytes for mailboxNumber to set.
+         * @return This builder for chaining.
+         */
+        public Builder setMailboxNumberBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          mailboxNumber_ = value;
+          bitField0_ |= 0x00000008;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)
+      }
+
+      // @@protoc_insertion_point(class_scope:producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount)
+      private static final com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount();
+      }
+
+      public static com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<IvansAccount>
+          PARSER = new com.google.protobuf.AbstractParser<IvansAccount>() {
+        @java.lang.Override
+        public IvansAccount parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          Builder builder = newBuilder();
+          try {
+            builder.mergeFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(builder.buildPartial());
+          } catch (com.google.protobuf.UninitializedMessageException e) {
+            throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                .setUnfinishedMessage(builder.buildPartial());
+          }
+          return builder.buildPartial();
+        }
+      };
+
+      public static com.google.protobuf.Parser<IvansAccount> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<IvansAccount> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
     private int bitField0_;
     public static final int EMAIL_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
@@ -2766,6 +4134,62 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
 
+    public static final int IVANS_ACCOUNT_FIELD_NUMBER = 9;
+    private com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivansAccount_;
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     * @return Whether the ivansAccount field is set.
+     */
+    @java.lang.Override
+    public boolean hasIvansAccount() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     * @return The ivansAccount.
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getIvansAccount() {
+      return ivansAccount_ == null ? com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
+    }
+    /**
+     * <pre>
+     * IVANS account information for electronic carrier communication.
+     * This is optional and only used if the agency uses IVANS.
+     *
+     * Update behavior:
+     * - If not provided (null): existing IVANS account is preserved unchanged
+     * - If provided with all fields: IVANS account is created or completely replaced
+     * - Partial updates are supported: only specified fields will be updated
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder() {
+      return ivansAccount_ == null ? com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -2807,6 +4231,9 @@ java.lang.String defaultValue) {
           internalGetExternalMetadata(),
           ExternalMetadataDefaultEntryHolder.defaultEntry,
           8);
+      if (((bitField0_ & 0x00000040) != 0)) {
+        output.writeMessage(9, getIvansAccount());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2852,6 +4279,10 @@ java.lang.String defaultValue) {
             .build();
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(8, externalMetadata__);
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getIvansAccount());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -2902,6 +4333,11 @@ java.lang.String defaultValue) {
       }
       if (!internalGetExternalMetadata().equals(
           other.internalGetExternalMetadata())) return false;
+      if (hasIvansAccount() != other.hasIvansAccount()) return false;
+      if (hasIvansAccount()) {
+        if (!getIvansAccount()
+            .equals(other.getIvansAccount())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -2944,6 +4380,10 @@ java.lang.String defaultValue) {
       if (!internalGetExternalMetadata().getMap().isEmpty()) {
         hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
         hash = (53 * hash) + internalGetExternalMetadata().hashCode();
+      }
+      if (hasIvansAccount()) {
+        hash = (37 * hash) + IVANS_ACCOUNT_FIELD_NUMBER;
+        hash = (53 * hash) + getIvansAccount().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -3103,6 +4543,7 @@ java.lang.String defaultValue) {
         if (com.google.protobuf.GeneratedMessage
                 .alwaysUseFieldBuilders) {
           getPhysicalAddressFieldBuilder();
+          getIvansAccountFieldBuilder();
         }
       }
       @java.lang.Override
@@ -3122,6 +4563,11 @@ java.lang.String defaultValue) {
           physicalAddressBuilder_ = null;
         }
         internalGetMutableExternalMetadata().clear();
+        ivansAccount_ = null;
+        if (ivansAccountBuilder_ != null) {
+          ivansAccountBuilder_.dispose();
+          ivansAccountBuilder_ = null;
+        }
         return this;
       }
 
@@ -3190,6 +4636,12 @@ java.lang.String defaultValue) {
           result.externalMetadata_ = internalGetExternalMetadata();
           result.externalMetadata_.makeImmutable();
         }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.ivansAccount_ = ivansAccountBuilder_ == null
+              ? ivansAccount_
+              : ivansAccountBuilder_.build();
+          to_bitField0_ |= 0x00000040;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -3246,6 +4698,9 @@ java.lang.String defaultValue) {
         internalGetMutableExternalMetadata().mergeFrom(
             other.internalGetExternalMetadata());
         bitField0_ |= 0x00000080;
+        if (other.hasIvansAccount()) {
+          mergeIvansAccount(other.getIvansAccount());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -3319,6 +4774,13 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00000080;
                 break;
               } // case 66
+              case 74: {
+                input.readMessage(
+                    getIvansAccountFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -4393,6 +5855,217 @@ java.lang.String defaultValue) {
             .putAll(values);
         bitField0_ |= 0x00000080;
         return this;
+      }
+
+      private com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivansAccount_;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder> ivansAccountBuilder_;
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       * @return Whether the ivansAccount field is set.
+       */
+      public boolean hasIvansAccount() {
+        return ((bitField0_ & 0x00000100) != 0);
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       * @return The ivansAccount.
+       */
+      public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount getIvansAccount() {
+        if (ivansAccountBuilder_ == null) {
+          return ivansAccount_ == null ? com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
+        } else {
+          return ivansAccountBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public Builder setIvansAccount(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount value) {
+        if (ivansAccountBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ivansAccount_ = value;
+        } else {
+          ivansAccountBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public Builder setIvansAccount(
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder builderForValue) {
+        if (ivansAccountBuilder_ == null) {
+          ivansAccount_ = builderForValue.build();
+        } else {
+          ivansAccountBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public Builder mergeIvansAccount(com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount value) {
+        if (ivansAccountBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) != 0) &&
+            ivansAccount_ != null &&
+            ivansAccount_ != com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance()) {
+            getIvansAccountBuilder().mergeFrom(value);
+          } else {
+            ivansAccount_ = value;
+          }
+        } else {
+          ivansAccountBuilder_.mergeFrom(value);
+        }
+        if (ivansAccount_ != null) {
+          bitField0_ |= 0x00000100;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public Builder clearIvansAccount() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        ivansAccount_ = null;
+        if (ivansAccountBuilder_ != null) {
+          ivansAccountBuilder_.dispose();
+          ivansAccountBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder getIvansAccountBuilder() {
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return getIvansAccountFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      public com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder() {
+        if (ivansAccountBuilder_ != null) {
+          return ivansAccountBuilder_.getMessageOrBuilder();
+        } else {
+          return ivansAccount_ == null ?
+              com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
+        }
+      }
+      /**
+       * <pre>
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       *
+       * Update behavior:
+       * - If not provided (null): existing IVANS account is preserved unchanged
+       * - If provided with all fields: IVANS account is created or completely replaced
+       * - Partial updates are supported: only specified fields will be updated
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder> 
+          getIvansAccountFieldBuilder() {
+        if (ivansAccountBuilder_ == null) {
+          ivansAccountBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.Builder, com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder>(
+                  getIvansAccount(),
+                  getParentForChildren(),
+                  isClean());
+          ivansAccount_ = null;
+        }
+        return ivansAccountBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.UpdateAgencyRequest.Agency)

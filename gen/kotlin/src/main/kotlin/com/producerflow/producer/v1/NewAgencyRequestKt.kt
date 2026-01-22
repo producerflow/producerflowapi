@@ -1113,6 +1113,47 @@ public object NewAgencyRequestKt {
         .clear() {
            _builder.clearTenantAdditionalQuestions()
          }
+
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       * ```
+       *
+       * `.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];`
+       */
+      public var ivansAccount: com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount
+        @JvmName("getIvansAccount")
+        get() = _builder.ivansAccount
+        @JvmName("setIvansAccount")
+        set(value) {
+          _builder.ivansAccount = value
+        }
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       * ```
+       *
+       * `.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];`
+       */
+      public fun clearIvansAccount() {
+        _builder.clearIvansAccount()
+      }
+      /**
+       * ```
+       * IVANS account information for electronic carrier communication.
+       * This is optional and only used if the agency uses IVANS.
+       * ```
+       *
+       * `.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];`
+       * @return Whether the ivansAccount field is set.
+       */
+      public fun hasIvansAccount(): kotlin.Boolean {
+        return _builder.hasIvansAccount()
+      }
+      public val AgencyKt.Dsl.ivansAccountOrNull: com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount?
+        get() = _builder.ivansAccountOrNull
     }
     @kotlin.jvm.JvmName("-initializeprincipal")
     public inline fun principal(block: com.producerflow.producer.v1.NewAgencyRequestKt.AgencyKt.PrincipalKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewAgencyRequest.Agency.Principal =
@@ -2218,6 +2259,136 @@ public object NewAgencyRequestKt {
         }
       }
     }
+    @kotlin.jvm.JvmName("-initializeivansAccount")
+    public inline fun ivansAccount(block: com.producerflow.producer.v1.NewAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount =
+      com.producerflow.producer.v1.NewAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl._create(com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.newBuilder()).apply { block() }._build()
+    /**
+     * ```
+     * IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+     * IVANS is used for electronic communication between insurance agencies and carriers.
+     * ```
+     *
+     * Protobuf type `producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount`
+     */
+    public object IvansAccountKt {
+      @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+      @com.google.protobuf.kotlin.ProtoDslMarker
+      public class Dsl private constructor(
+        private val _builder: com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.Builder
+      ) {
+        public companion object {
+          @kotlin.jvm.JvmSynthetic
+          @kotlin.PublishedApi
+          internal fun _create(builder: com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.Builder): Dsl = Dsl(builder)
+        }
+
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _build(): com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount = _builder.build()
+
+        /**
+         * ```
+         * Account number for the IVANS service.
+         * ```
+         *
+         * `string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }`
+         */
+        public var accountNumber: kotlin.String
+          @JvmName("getAccountNumber")
+          get() = _builder.accountNumber
+          @JvmName("setAccountNumber")
+          set(value) {
+            _builder.accountNumber = value
+          }
+        /**
+         * ```
+         * Account number for the IVANS service.
+         * ```
+         *
+         * `string account_number = 1 [json_name = "accountNumber", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAccountNumber() {
+          _builder.clearAccountNumber()
+        }
+
+        /**
+         * ```
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * ```
+         *
+         * `string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }`
+         */
+        public var amsSoftware: kotlin.String
+          @JvmName("getAmsSoftware")
+          get() = _builder.amsSoftware
+          @JvmName("setAmsSoftware")
+          set(value) {
+            _builder.amsSoftware = value
+          }
+        /**
+         * ```
+         * Software used for IVANS communication (AMS - Agency Management System).
+         * ```
+         *
+         * `string ams_software = 2 [json_name = "amsSoftware", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAmsSoftware() {
+          _builder.clearAmsSoftware()
+        }
+
+        /**
+         * ```
+         * Version of the AMS software.
+         * ```
+         *
+         * `string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }`
+         */
+        public var amsVersion: kotlin.String
+          @JvmName("getAmsVersion")
+          get() = _builder.amsVersion
+          @JvmName("setAmsVersion")
+          set(value) {
+            _builder.amsVersion = value
+          }
+        /**
+         * ```
+         * Version of the AMS software.
+         * ```
+         *
+         * `string ams_version = 3 [json_name = "amsVersion", (.buf.validate.field) = { ... }`
+         */
+        public fun clearAmsVersion() {
+          _builder.clearAmsVersion()
+        }
+
+        /**
+         * ```
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * ```
+         *
+         * `string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }`
+         */
+        public var mailboxNumber: kotlin.String
+          @JvmName("getMailboxNumber")
+          get() = _builder.mailboxNumber
+          @JvmName("setMailboxNumber")
+          set(value) {
+            _builder.mailboxNumber = value
+          }
+        /**
+         * ```
+         * Mailbox number for the IVANS service.
+         * Used for routing electronic messages.
+         * ```
+         *
+         * `string mailbox_number = 4 [json_name = "mailboxNumber", (.buf.validate.field) = { ... }`
+         */
+        public fun clearMailboxNumber() {
+          _builder.clearMailboxNumber()
+        }
+      }
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
@@ -2267,6 +2438,10 @@ public val com.producerflow.producer.v1.NewAgencyRequest.Agency.BusinessHours.Bu
 public inline fun com.producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact.copy(block: `com.producerflow.producer.v1`.NewAgencyRequestKt.AgencyKt.PointOfContactKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewAgencyRequest.Agency.PointOfContact =
   `com.producerflow.producer.v1`.NewAgencyRequestKt.AgencyKt.PointOfContactKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.copy(block: `com.producerflow.producer.v1`.NewAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount =
+  `com.producerflow.producer.v1`.NewAgencyRequestKt.AgencyKt.IvansAccountKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
 public val com.producerflow.producer.v1.NewAgencyRequest.AgencyOrBuilder.principalOrNull: com.producerflow.producer.v1.NewAgencyRequest.Agency.Principal?
   get() = if (hasPrincipal()) getPrincipal() else null
 
@@ -2287,6 +2462,9 @@ public val com.producerflow.producer.v1.NewAgencyRequest.AgencyOrBuilder.physica
 
 public val com.producerflow.producer.v1.NewAgencyRequest.AgencyOrBuilder.invoicingAddressOrNull: com.producerflow.producer.v1.Address?
   get() = if (hasInvoicingAddress()) getInvoicingAddress() else null
+
+public val com.producerflow.producer.v1.NewAgencyRequest.AgencyOrBuilder.ivansAccountOrNull: com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount?
+  get() = if (hasIvansAccount()) getIvansAccount() else null
 
 public val com.producerflow.producer.v1.NewAgencyRequestOrBuilder.agencyOrNull: com.producerflow.producer.v1.NewAgencyRequest.Agency?
   get() = if (hasAgency()) getAgency() else null

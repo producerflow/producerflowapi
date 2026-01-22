@@ -3827,6 +3827,7 @@ Agency contains all information about the agency to be created
 | `locations` | [LocationInput](#locationinput) | repeated | Optional field that allows specifying multiple locations during agency creation. |
 | `metadata_questions` | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#newagencyrequestagencymetadataquestionsentry) | repeated | **Deprecated.** MetadataQuestions contains custom metadata questions and answers for the agency. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
 | `tenant_additional_questions` | [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#newagencyrequestagencytenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
+| `ivans_account` | [NewAgencyRequest.Agency.IvansAccount](#newagencyrequestagencyivansaccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS. |
 
 #### NewAgencyRequest.Agency.BankAccount
 
@@ -3870,6 +3871,18 @@ EOInfo contains Errors & Omissions insurance information
 | `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit) |
 | `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will become effective |
 | `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy |
+
+#### NewAgencyRequest.Agency.IvansAccount
+
+IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+IVANS is used for electronic communication between insurance agencies and carriers.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `account_number` | [string](#string) |  | Account number for the IVANS service. |
+| `ams_software` | [string](#string) |  | Software used for IVANS communication (AMS - Agency Management System). |
+| `ams_version` | [string](#string) |  | Version of the AMS software. |
+| `mailbox_number` | [string](#string) |  | Mailbox number for the IVANS service. Used for routing electronic messages. |
 
 #### NewAgencyRequest.Agency.MetadataQuestionsEntry
 
@@ -4645,6 +4658,7 @@ All fields are optional, allowing partial updates.
 | `notes` | [string](#string) | optional |  |
 | `physical_address` | [UpdateAgencyRequest.Agency.Address](#updateagencyrequestagencyaddress) | optional | Physical address of the agency. |
 | `external_metadata` | [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#updateagencyrequestagencyexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
+| `ivans_account` | [UpdateAgencyRequest.Agency.IvansAccount](#updateagencyrequestagencyivansaccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS.  Update behavior: - If not provided (null): existing IVANS account is preserved unchanged - If provided with all fields: IVANS account is created or completely replaced - Partial updates are supported: only specified fields will be updated |
 
 #### UpdateAgencyRequest.Agency.Address
 
@@ -4669,6 +4683,18 @@ Address fields cannot be cleared - if provided, they must have valid values.
 |-------|------|-------|-------------|
 | `key` | [string](#string) |  |  |
 | `value` | [string](#string) |  |  |
+
+#### UpdateAgencyRequest.Agency.IvansAccount
+
+IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+IVANS is used for electronic communication between insurance agencies and carriers.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `account_number` | [string](#string) | optional | Account number for the IVANS service. If provided, must be non-empty. |
+| `ams_software` | [string](#string) | optional | Software used for IVANS communication (AMS - Agency Management System). If provided, must be non-empty. |
+| `ams_version` | [string](#string) | optional | Version of the AMS software. If provided, must be non-empty. |
+| `mailbox_number` | [string](#string) | optional | Mailbox number for the IVANS service. Used for routing electronic messages. If provided, must be non-empty. |
 
 #### UpdateAgencyResponse
 
