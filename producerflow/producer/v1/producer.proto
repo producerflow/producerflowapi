@@ -1923,6 +1923,24 @@ message NewAgencyRequest {
     // Producerflow and their corresponding responses. Keys are question identifiers or text,
     // values are the answers provided.
     map<string, string> tenant_additional_questions = 22;
+
+    // IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+    // IVANS is used for electronic communication between insurance agencies and carriers.
+    message IvansAccount {
+      // Account number for the IVANS service.
+      string account_number = 1 [(buf.validate.field).string.min_len = 1];
+      // Software used for IVANS communication (AMS - Agency Management System).
+      string ams_software = 2 [(buf.validate.field).string.min_len = 1];
+      // Version of the AMS software.
+      string ams_version = 3 [(buf.validate.field).string.min_len = 1];
+      // Mailbox number for the IVANS service.
+      // Used for routing electronic messages.
+      string mailbox_number = 4 [(buf.validate.field).string.min_len = 1];
+    }
+
+    // IVANS account information for electronic carrier communication.
+    // This is optional and only used if the agency uses IVANS.
+    IvansAccount ivans_account = 23;
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -2270,6 +2288,33 @@ message UpdateAgencyRequest {
     // - If provided as empty map {}: existing metadata is cleared
     // - If provided with values: existing metadata is completely replaced with the new values
     map<string, string> external_metadata = 8;
+
+    // IvansAccount contains IVANS (Insurance Value Added Network Services) account information.
+    // IVANS is used for electronic communication between insurance agencies and carriers.
+    message IvansAccount {
+      // Account number for the IVANS service.
+      // If provided, must be non-empty.
+      optional string account_number = 1 [(buf.validate.field).string.min_len = 1];
+      // Software used for IVANS communication (AMS - Agency Management System).
+      // If provided, must be non-empty.
+      optional string ams_software = 2 [(buf.validate.field).string.min_len = 1];
+      // Version of the AMS software.
+      // If provided, must be non-empty.
+      optional string ams_version = 3 [(buf.validate.field).string.min_len = 1];
+      // Mailbox number for the IVANS service.
+      // Used for routing electronic messages.
+      // If provided, must be non-empty.
+      optional string mailbox_number = 4 [(buf.validate.field).string.min_len = 1];
+    }
+
+    // IVANS account information for electronic carrier communication.
+    // This is optional and only used if the agency uses IVANS.
+    //
+    // Update behavior:
+    // - If not provided (null): existing IVANS account is preserved unchanged
+    // - If provided with all fields: IVANS account is created or completely replaced
+    // - Partial updates are supported: only specified fields will be updated
+    IvansAccount ivans_account = 9;
   }
 
   // The agency information to update.
