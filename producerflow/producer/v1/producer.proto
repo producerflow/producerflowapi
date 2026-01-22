@@ -2479,6 +2479,11 @@ message Agency {
     // Address of the principal.
     // This may differ from the agency address.
     Address address = 8;
+
+    // tenant_additional_questions contains tenant-specific custom questions configured by
+    // Producerflow and their corresponding responses. Keys are question identifiers or text,
+    // values are the answers provided.
+    map<string, string> tenant_additional_questions = 10;
   }
 
   // Information about the agency's principal.
