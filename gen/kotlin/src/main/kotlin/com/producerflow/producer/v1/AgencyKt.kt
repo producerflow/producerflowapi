@@ -2141,6 +2141,103 @@ public object AgencyKt {
       }
       public val PrincipalKt.Dsl.addressOrNull: com.producerflow.producer.v1.Agency.Address?
         get() = _builder.addressOrNull
+
+      /**
+       * An uninstantiable, behaviorless type to represent the field in
+       * generics.
+       */
+      @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+      public class TenantAdditionalQuestionsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+       public val tenantAdditionalQuestions: com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        @kotlin.jvm.JvmSynthetic
+        @JvmName("getTenantAdditionalQuestionsMap")
+        get() = com.google.protobuf.kotlin.DslMap(
+          _builder.tenantAdditionalQuestionsMap
+        )
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+      @JvmName("putTenantAdditionalQuestions")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        .put(key: kotlin.String, value: kotlin.String) {
+           _builder.putTenantAdditionalQuestions(key, value)
+         }
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("setTenantAdditionalQuestions")
+      @Suppress("NOTHING_TO_INLINE")
+      public inline operator fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        .set(key: kotlin.String, value: kotlin.String) {
+           put(key, value)
+         }
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("removeTenantAdditionalQuestions")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        .remove(key: kotlin.String) {
+           _builder.removeTenantAdditionalQuestions(key)
+         }
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("putAllTenantAdditionalQuestions")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        .putAll(map: kotlin.collections.Map<kotlin.String, kotlin.String>) {
+           _builder.putAllTenantAdditionalQuestions(map)
+         }
+      /**
+       * ```
+       * tenant_additional_questions contains tenant-specific custom questions configured by
+       * Producerflow and their corresponding responses. Keys are question identifiers or text,
+       * values are the answers provided.
+       * ```
+       *
+       * `map<string, string> tenant_additional_questions = 10 [json_name = "tenantAdditionalQuestions"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("clearTenantAdditionalQuestions")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, TenantAdditionalQuestionsProxy>
+        .clear() {
+           _builder.clearTenantAdditionalQuestions()
+         }
     }
   }
   @kotlin.jvm.JvmName("-initializeivansAccount")

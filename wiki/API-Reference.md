@@ -3290,6 +3290,16 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `npn` | [string](#string) |  | The NPN of the principal. This is used to retrieve the license information of the principal from the NIPR API. |
 | `phone` | [string](#string) |  | Phone number of the principal. Used for communication. |
 | `address` | [Agency.Address](#agencyaddress) |  | Address of the principal. This may differ from the agency address. |
+| `tenant_additional_questions` | [Agency.Principal.TenantAdditionalQuestionsEntry](#agencyprincipaltenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
+
+#### Agency.Principal.TenantAdditionalQuestionsEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### AgencySummary
 

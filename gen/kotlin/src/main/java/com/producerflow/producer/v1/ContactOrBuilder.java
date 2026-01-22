@@ -139,7 +139,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3622
+   *     See producerflow/producer/v1/producer.proto;l=3627
    * @return The role.
    */
   @java.lang.Deprecated java.lang.String getRole();
@@ -151,7 +151,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3622
+   *     See producerflow/producer/v1/producer.proto;l=3627
    * @return The bytes for role.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
