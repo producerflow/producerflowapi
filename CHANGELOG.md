@@ -5,6 +5,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.17] - 2026-01-22
+
+### Added
+
+#### ProducerService
+
+- **IVANS Account Support in Agency Creation** - New capability to provide IVANS account information when creating agencies
+  - `ivans_account` field added to `NewAgencyRequest.Agency` message
+  - Supports `account_number`, `ams_software`, `ams_version`, and `mailbox_number` fields
+  - All IVANS fields are required when providing IVANS account information
+  - Enables electronic communication setup with carriers during agency onboarding
+
+- **IVANS Account Updates** - New capability to update IVANS account information for existing agencies
+  - `ivans_account` field added to `UpdateAgencyRequest.Agency` message
+  - Supports partial updates - only specified fields are updated
+  - Update behavior:
+    - Not provided: existing IVANS account preserved unchanged
+    - Provided with all fields: IVANS account created or completely replaced
+    - Partial fields: only specified fields updated
+
+- **Principal Tenant Additional Questions** - Agency principals can now have tenant-specific custom questions
+  - `tenant_additional_questions` field added to `Agency.Principal` message
+  - Allows capturing custom onboarding questions and responses for the principal
+  - Consistent key-value format matching agency and producer custom questions
+
+### Changed
+
+#### ProducerService
+
+- **Enhanced SyncProducerWithNIPR Documentation** - Improved error handling and billing documentation
+  - Added billing information noting external NIPR API calls that may incur charges:
+    - NPN validation lookup
+    - Producer license data sync (if not already synced)
+    - PDB alerts subscription (if enabled for tenant)
+  - Refined error codes documentation:
+    - `NOT_FOUND` now clarifies when NPN cannot be found in NIPR (error message: "producer NPN could not be found in NIPR")
+    - `INVALID_ARGUMENT` simplified to only cover missing NPN cases
+    - Added `INTERNAL` error code for unexpected errors during NIPR lookup/sync
+
+- **Enhanced SyncAgencyWithNIPR Documentation** - Improved billing documentation for agency sync operations
+  - Added billing information noting external NIPR API calls that may incur charges:
+    - NPN validation lookup
+    - Agency license data sync (if not already synced)
+    - PDB alerts subscription (if enabled for tenant)
+    - Additional per-producer calls when `sync_all_producers` is true
+
+---
+
 ## [1.0.16] - 2026-01-16
 
 ### Added
