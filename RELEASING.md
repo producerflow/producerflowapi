@@ -14,7 +14,7 @@ This project uses a manual release process to publish client libraries.
 
 Client libraries are published manually via GitHub Actions workflows:
 
-- **NPM (TypeScript)**: Go to [Actions → Publish to NPM](../../actions/workflows/npm-publish.yml) → Run workflow
-- **GitHub Packages (Kotlin)**: Go to [Actions → Publish Kotlin to GitHub Packages](../../actions/workflows/kotlin-publish.yml) → Run workflow
+- **NPM (TypeScript)**: Go to [Actions → Publish to NPM](.github/workflows/npm-publish.yml) → Run workflow
+- **GitHub Packages (Kotlin)**: Go to [Actions → Publish Kotlin to GitHub Packages](.github/workflows/kotlin-publish.yml) → Run workflow
 
 Both workflows accept an optional version input. If left empty, the version from the package configuration files will be used.

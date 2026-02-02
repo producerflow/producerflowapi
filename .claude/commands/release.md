@@ -46,8 +46,8 @@ Prepare a new release for the producerflowapi client libraries.
      - Commit the changes
      - Create a GitHub release with tag `vX.Y.Z`
      - Manually trigger the publish workflows from GitHub Actions:
-       - [Publish to NPM](../../actions/workflows/npm-publish.yml)
-       - [Publish Kotlin to GitHub Packages](../../actions/workflows/kotlin-publish.yml)
+       - [Publish to NPM](.github/workflows/npm-publish.yml)
+       - [Publish Kotlin to GitHub Packages](.github/workflows/kotlin-publish.yml)
 
 ## Current Versions
 
