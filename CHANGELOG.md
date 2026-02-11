@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.18] - 2026-02-11
+
+### Changed
+
+#### ProducerService
+
+- **Onboarding Status in UpdateProducer** - Added `onboarding_status` field to `UpdateProducerRequest` to allow updating a producer's onboarding status
+  - When set, the `onboarding_status_updated_at` timestamp is automatically updated
+  - If not provided, the onboarding status remains unchanged
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.17] - 2026-01-22
 
 ### Added
