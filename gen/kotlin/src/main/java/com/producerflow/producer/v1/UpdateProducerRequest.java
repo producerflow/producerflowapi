@@ -570,6 +570,43 @@ java.lang.String defaultValue);
      */
     java.lang.String getExternalMetadataOrThrow(
         java.lang.String key);
+
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return Whether the onboardingStatus field is set.
+     */
+    boolean hasOnboardingStatus();
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return The enum numeric value on the wire for onboardingStatus.
+     */
+    int getOnboardingStatusValue();
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return The onboardingStatus.
+     */
+    com.producerflow.producer.v1.OnboardingStatus getOnboardingStatus();
   }
   /**
    * <pre>
@@ -610,6 +647,7 @@ java.lang.String defaultValue);
       city_ = "";
       state_ = "";
       zip_ = "";
+      onboardingStatus_ = 0;
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -1544,6 +1582,52 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
 
+    public static final int ONBOARDING_STATUS_FIELD_NUMBER = 15;
+    private int onboardingStatus_ = 0;
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return Whether the onboardingStatus field is set.
+     */
+    @java.lang.Override public boolean hasOnboardingStatus() {
+      return ((bitField0_ & 0x00001000) != 0);
+    }
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return The enum numeric value on the wire for onboardingStatus.
+     */
+    @java.lang.Override public int getOnboardingStatusValue() {
+      return onboardingStatus_;
+    }
+    /**
+     * <pre>
+     * The onboarding status of the producer.
+     * If provided, updates the producer's onboarding status.
+     * If not provided, the onboarding status remains unchanged.
+     * When set, the onboarding_status_updated_at timestamp is automatically updated.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+     * @return The onboardingStatus.
+     */
+    @java.lang.Override public com.producerflow.producer.v1.OnboardingStatus getOnboardingStatus() {
+      com.producerflow.producer.v1.OnboardingStatus result = com.producerflow.producer.v1.OnboardingStatus.forNumber(onboardingStatus_);
+      return result == null ? com.producerflow.producer.v1.OnboardingStatus.UNRECOGNIZED : result;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1600,6 +1684,9 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00000080) != 0)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 14, addressLine1_);
       }
+      if (((bitField0_ & 0x00001000) != 0)) {
+        output.writeEnum(15, onboardingStatus_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1654,6 +1741,10 @@ java.lang.String defaultValue) {
       }
       if (((bitField0_ & 0x00000080) != 0)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(14, addressLine1_);
+      }
+      if (((bitField0_ & 0x00001000) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(15, onboardingStatus_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1732,6 +1823,10 @@ java.lang.String defaultValue) {
       }
       if (!internalGetExternalMetadata().equals(
           other.internalGetExternalMetadata())) return false;
+      if (hasOnboardingStatus() != other.hasOnboardingStatus()) return false;
+      if (hasOnboardingStatus()) {
+        if (onboardingStatus_ != other.onboardingStatus_) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1794,6 +1889,10 @@ java.lang.String defaultValue) {
       if (!internalGetExternalMetadata().getMap().isEmpty()) {
         hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
         hash = (53 * hash) + internalGetExternalMetadata().hashCode();
+      }
+      if (hasOnboardingStatus()) {
+        hash = (37 * hash) + ONBOARDING_STATUS_FIELD_NUMBER;
+        hash = (53 * hash) + onboardingStatus_;
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -1966,6 +2065,7 @@ java.lang.String defaultValue) {
         state_ = "";
         zip_ = "";
         internalGetMutableExternalMetadata().clear();
+        onboardingStatus_ = 0;
         return this;
       }
 
@@ -2052,6 +2152,10 @@ java.lang.String defaultValue) {
           result.externalMetadata_ = internalGetExternalMetadata();
           result.externalMetadata_.makeImmutable();
         }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
+          result.onboardingStatus_ = onboardingStatus_;
+          to_bitField0_ |= 0x00001000;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -2130,6 +2234,9 @@ java.lang.String defaultValue) {
         internalGetMutableExternalMetadata().mergeFrom(
             other.internalGetExternalMetadata());
         bitField0_ |= 0x00001000;
+        if (other.hasOnboardingStatus()) {
+          setOnboardingStatus(other.getOnboardingStatus());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -2225,6 +2332,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00000080;
                 break;
               } // case 114
+              case 120: {
+                onboardingStatus_ = input.readEnum();
+                bitField0_ |= 0x00002000;
+                break;
+              } // case 120
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3823,6 +3935,108 @@ java.lang.String defaultValue) {
         internalGetMutableExternalMetadata().getMutableMap()
             .putAll(values);
         bitField0_ |= 0x00001000;
+        return this;
+      }
+
+      private int onboardingStatus_ = 0;
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @return Whether the onboardingStatus field is set.
+       */
+      @java.lang.Override public boolean hasOnboardingStatus() {
+        return ((bitField0_ & 0x00002000) != 0);
+      }
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @return The enum numeric value on the wire for onboardingStatus.
+       */
+      @java.lang.Override public int getOnboardingStatusValue() {
+        return onboardingStatus_;
+      }
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @param value The enum numeric value on the wire for onboardingStatus to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOnboardingStatusValue(int value) {
+        onboardingStatus_ = value;
+        bitField0_ |= 0x00002000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @return The onboardingStatus.
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.OnboardingStatus getOnboardingStatus() {
+        com.producerflow.producer.v1.OnboardingStatus result = com.producerflow.producer.v1.OnboardingStatus.forNumber(onboardingStatus_);
+        return result == null ? com.producerflow.producer.v1.OnboardingStatus.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @param value The onboardingStatus to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOnboardingStatus(com.producerflow.producer.v1.OnboardingStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00002000;
+        onboardingStatus_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOnboardingStatus() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onboardingStatus_ = 0;
+        onChanged();
         return this;
       }
 

@@ -762,6 +762,58 @@ public object UpdateProducerRequestKt {
         .clear() {
            _builder.clearExternalMetadata()
          }
+
+      /**
+       * ```
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`
+       */
+      public var onboardingStatus: com.producerflow.producer.v1.OnboardingStatus
+        @JvmName("getOnboardingStatus")
+        get() = _builder.onboardingStatus
+        @JvmName("setOnboardingStatus")
+        set(value) {
+          _builder.onboardingStatus = value
+        }
+      public var onboardingStatusValue: kotlin.Int
+        @JvmName("getOnboardingStatusValue")
+        get() = _builder.onboardingStatusValue
+        @JvmName("setOnboardingStatusValue")
+        set(value) {
+          _builder.onboardingStatusValue = value
+        }
+      /**
+       * ```
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`
+       */
+      public fun clearOnboardingStatus() {
+        _builder.clearOnboardingStatus()
+      }
+      /**
+       * ```
+       * The onboarding status of the producer.
+       * If provided, updates the producer's onboarding status.
+       * If not provided, the onboarding status remains unchanged.
+       * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`
+       * @return Whether the onboardingStatus field is set.
+       */
+      public fun hasOnboardingStatus(): kotlin.Boolean {
+        return _builder.hasOnboardingStatus()
+      }
     }
   }
 }
