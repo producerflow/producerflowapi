@@ -2181,6 +2181,12 @@ message UpdateProducerRequest {
     // - If provided as empty map {}: existing metadata is cleared
     // - If provided with values: existing metadata is completely replaced with the new values
     map<string, string> external_metadata = 11;
+
+    // The onboarding status of the producer.
+    // If provided, updates the producer's onboarding status.
+    // If not provided, the onboarding status remains unchanged.
+    // When set, the onboarding_status_updated_at timestamp is automatically updated.
+    optional OnboardingStatus onboarding_status = 15;
   }
 
   // The ID of the producer to update.
