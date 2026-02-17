@@ -260,13 +260,25 @@ message Carrier {
   // The name of the carrier.
   string name = 2;
 
-  // The NPN of the carrier.
+  // National Producer Number (NPN) of the carrier.
+  // A unique NAIC identifier assigned to business entities during the licensing
+  // application process and stored in the NIPR Producer Database (PDB).
+  // Format: 1-10 digit numeric string.
+  // Example: "1234567890"
+  // Reference: https://nipr.com
   string npn = 3;
 
-  // The FEIN of the carrier.
+  // Federal Employer Identification Number (FEIN) of the carrier.
+  // Format: 9-digit number assigned by the IRS for tax identification.
+  // Example: "123456789"
   string fein = 4;
 
-  // The NAIC cocode of the carrier.
+  // NAIC Company Code (CoCode) of the carrier.
+  // A unique identifier assigned by the National Association of Insurance
+  // Commissioners (NAIC) to each insurance company for regulatory reporting.
+  // Format: Typically a 5-digit numeric string.
+  // Example: "12345"
+  // Reference: https://naic.org
   string cocode = 5;
 
   // Indicates whether this carrier has NIPR integration enabled. Capacity
@@ -318,76 +330,148 @@ message AppointmentOperationalStatus {
   google.protobuf.Timestamp last_updated = 3;
 }
 
-// Represents an appointment for a license.
+// Represents a managed appointment for a license, tracked through the
+// ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+// on the Producer/Agency messages, this represents appointments that are
+// actively managed (requested, terminated) through the AppointmentService.
 message Appointment {
-  // Unique identifier for the appointment.
+  // Unique identifier for the appointment (UUID format).
   string appointment_id = 1;
 
   // Information about the license being appointed.
   License license = 2;
 
   // The license number of the license being appointed.
+  // This is a denormalized copy of license.license_number for convenience.
   string name = 3;
 
-  // The id of the agency that is appointed.
+  // The UUID of the agency that holds this appointment.
   string agency_id = 4;
 
-  // Optional. The id of the producer that is appointed, if any.
+  // Optional. The UUID of the producer that holds this appointment, if any.
+  // When empty, this is an agency-level appointment.
   optional string producer_id = 5;
 
   // The name of the carrier to which the license is appointed.
+  // Examples: "State Farm", "Allstate", "Progressive"
   string carrier = 6;
 
-  // Type of appointment (e.g., up-front, registry).
+  // Type of appointment (registry, up-front, just-in-time, or synthetic).
+  // Determines how the appointment was established and processed.
   AppointmentType appointment_type = 7;
 
-  // Processing status of the appointment (e.g., in progress, appointed).
+  // Current processing status of the appointment in the NIPR pipeline.
+  // See ProcessingStatus for the complete lifecycle documentation.
   ProcessingStatus processing_status = 8;
 
   // Optional. Comments or notes related to the appointment.
+  // May include NIPR processing notes or rejection details.
   string comments = 9;
 
-  // Timestamp of when the appointment becomes effective.
+  // Timestamp of when the appointment became or becomes effective.
   google.protobuf.Timestamp effective_date = 10;
 
-  // Optional. Timestamp of the termination of the appointment.
+  // Optional. Timestamp of when the appointment was terminated.
+  // Only populated when processing_status is TERMINATED.
   optional google.protobuf.Timestamp termination_date = 11;
 
-  // Timestamp of the last update to the appointment.
+  // Timestamp of the last update to this appointment record.
   google.protobuf.Timestamp updated_at = 12;
 
-  // Operational status information for the appointment. This field provides
-  // insight into the current operational health and any risk factors that may
-  // affect the appointment.
+  // Operational status information for the appointment. Provides insight into
+  // the current operational health and any risk factors (e.g., expired license,
+  // inactive E&O) that may affect the appointment's continued validity.
   AppointmentOperationalStatus operational_status = 13;
 
-  // The NAIC cocode of the carrier.
+  // NAIC Company Code (CoCode) of the carrier.
+  // A unique identifier assigned by the National Association of Insurance
+  // Commissioners (NAIC) for regulatory reporting.
+  // Format: Typically a 5-digit numeric string.
+  // Reference: https://naic.org
   string cocode = 14;
 
-  // Optional. The id of the parent appointment, if this is a synthetic
-  // appointment. It should be empty for non-synthetic appointments.
+  // Optional. The UUID of the parent appointment, if this is a synthetic
+  // appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+  // appointments. Synthetic appointments inherit properties from and are
+  // terminated with their parent appointment.
   string parent_appointment_id = 15;
 }
 
-// Processing status of the appointment.
+// ProcessingStatus represents the lifecycle state of an appointment as it
+// moves through the NIPR processing pipeline.
+//
+// Appointment Lifecycle:
+//
+//   RequestAppointment
+//         |
+//         v
+//   IN_PROGRESS -----> APPOINTED (active appointment)
+//         |                  |
+//         v                  v (TerminateAppointment)
+//     REJECTED         TERMINATION_REQUESTED --> TERMINATED
+//
+// For registry states or capacity carriers (no NIPR integration):
+//   RequestAppointment --> APPOINTED (immediate)
+//   TerminateAppointment --> TERMINATED (immediate)
+//
+// Reference: https://pdb.nipr.com/Gateway
 enum ProcessingStatus {
   PROCESSING_STATUS_UNSPECIFIED = 0;
+
+  // Appointment request has been submitted to NIPR and is awaiting processing.
+  // This is a transient state; the final result will be delivered via webhook.
   PROCESSING_STATUS_IN_PROGRESS = 1;
+
+  // Appointment has been approved and is active. The producer/agency can sell
+  // this carrier's products for the specified Line of Authority.
   PROCESSING_STATUS_APPOINTED = 2;
+
+  // Appointment has been terminated. The producer/agency can no longer sell
+  // this carrier's products. This is a terminal state.
   PROCESSING_STATUS_TERMINATED = 3;
+
+  // Appointment request was rejected by NIPR. Check not_eligible_reasons for
+  // details. Common reasons include: missing resident license, unmet
+  // continuing education requirements, or outstanding regulatory actions.
   PROCESSING_STATUS_REJECTED = 4;
+
+  // The license required for this appointment is missing or could not be found.
+  // The producer/agency needs to obtain the appropriate license before the
+  // appointment can be processed.
   PROCESSING_STATUS_MISSING_LICENSE = 5;
+
+  // A termination request has been submitted to NIPR and is awaiting
+  // processing. This is a transient state; the final result (TERMINATED)
+  // will be delivered via webhook.
   PROCESSING_STATUS_TERMINATION_REQUESTED = 6;
 }
 
-// Type of appointment.
+// AppointmentType categorizes how the appointment was established and
+// processed.
+//
+// The appointment type determines the processing behavior:
+// - Registry and Synthetic appointments are processed automatically
+// - Up-front appointments go through NIPR's standard processing pipeline
+// - Just-in-time appointments are created on demand when needed
 enum AppointmentType {
   APPOINTMENT_TYPE_UNSPECIFIED = 0;
+
+  // Registry appointment: Processed automatically for licenses in registry
+  // states. Registry states allow appointments without going through NIPR's
+  // standard appointment process.
   APPOINTMENT_TYPE_REGISTRY = 1;
+
+  // Up-front appointment: Standard appointment processed through NIPR.
+  // These require NIPR approval and may take time to process. The carrier
+  // pays appointment fees to NIPR/state.
   APPOINTMENT_TYPE_UP_FRONT = 2;
+
+  // Just-in-time appointment: Created on demand when a producer needs to
+  // sell a product but doesn't have a pre-existing appointment.
   APPOINTMENT_TYPE_JUST_IN_TIME = 3;
-  // Synthetic appointments are programmatically created for individual
-  // producers in states where only agency-level appointments are permitted
+
+  // Synthetic appointment: Programmatically created for individual producers
+  // in states where only agency-level appointments are permitted
   // (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
   // an agency appointment is approved and inherit properties from the parent
   // agency appointment. The parent_appointment_id field links to the parent
@@ -401,7 +485,10 @@ message License {
   // The ID of the license.
   string license_id = 1 [(buf.validate.field).string.uuid = true];
 
-  // The license number.
+  // The license number assigned by the state Department of Insurance (DOI).
+  // Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+  // Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+  // This is a state-specific identifier, not globally unique across states.
   string license_number = 2 [
     (buf.validate.field).string.min_len = 1,
     (buf.validate.field).string.max_len = 50
@@ -413,10 +500,17 @@ message License {
     string agency_id = 4 [(buf.validate.field).string.uuid = true];
   }
 
-  // The two-letter state code of the license.
+  // The two-letter US state or territory code that issued the license.
+  // Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
   string state = 5 [(buf.validate.field).string.len = 2];
 
-  // The license class.
+  // License class description as defined by the state DOI.
+  // Describes the broad category of insurance the license covers.
+  // Common classes include:
+  // - "Insurance Producer": General license to sell insurance
+  // - "Limited Lines Producer": Restricted to specific product types
+  // - "Surplus Lines Broker": Authorized for non-admitted carriers
+  // Values vary by state as each DOI defines its own license classes.
   string license_class = 6;
 
   // Indicates whether this license is in a registry state. Licenses in
@@ -445,25 +539,56 @@ message ListTerminationReasonsResponse {
 // TerminationReason represents the reason for the termination of an appointment.
 //
 // These reasons correspond to NIPR's valid termination codes and vary by
-// state. Use ListTerminationReasons to get the valid reasons for a specific
-// state before terminating an appointment.
+// state. Not all reasons are valid in every state - use ListTerminationReasons
+// to get the valid reasons for a specific state before calling
+// TerminateAppointment.
 //
 // Reference: https://pdb.nipr.com/Gateway/ValidTerms
 enum TerminationReason {
   TERMINATION_REASON_UNSPECIFIED = 0;
+
+  // Producer or agency voluntarily chose to end the appointment.
   TERMINATION_REASON_VOLUNTARY_TERMINATION = 1;
+
+  // Carrier terminated due to insufficient premium production or sales volume.
   TERMINATION_REASON_INADEQUATE_PRODUCTION = 2;
+
+  // Appointment was cancelled by the managing general agent (MGA).
   TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT = 3;
+
+  // Producer has passed away.
   TERMINATION_REASON_DEATH = 4;
+
+  // Insurance company has ceased operations or entered liquidation.
   TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION = 5;
+
+  // Producer owes money to the insurance company (e.g., unremitted premiums).
   TERMINATION_REASON_COMPANY_INDEBTEDNESS = 6;
+
+  // Carrier terminated due to poor service to policyholders.
   TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE = 7;
+
+  // Producer relocated to a different jurisdiction.
   TERMINATION_REASON_AGENT_MOVED = 8;
+
+  // Appointment was created in error and is being corrected.
   TERMINATION_REASON_APPOINTED_IN_ERROR = 9;
+
+  // General cancellation without a more specific reason.
   TERMINATION_REASON_CANCELLED = 10;
+
+  // Carrier terminated for cause (e.g., misconduct, policy violations).
   TERMINATION_REASON_CANCELLED_FOR_CAUSE = 11;
+
+  // Insurance company merged with another company.
   TERMINATION_REASON_COMPANY_MERGER = 12;
+
+  // Producer's license has been revoked by a regulatory authority.
   TERMINATION_REASON_REVOKED = 13;
+
+  // Producer's license has been suspended for compliance issues.
   TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE = 14;
+
+  // Termination is being submitted for regulatory review by the state DOI.
   TERMINATION_REASON_REQUEST_REGULATORY_REVIEW = 15;
 }
