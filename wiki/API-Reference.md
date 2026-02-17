@@ -1860,12 +1860,14 @@ in NIPR (and name matches, if provided), false otherwise.
 #### Request: `ValidateProducerNPNRequest`
 
 
-ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
+ValidateProducerNPNRequest is used to validate a producer's National Producer
+Number (NPN) against the NIPR database.
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Required and must be non-empty. |
-| `name` | [string](#string) | optional | Optional name of the producer to validate. If provided, the NPN will be validated against this name. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Format: 1-10 digit numeric string. Example: "1234567890" Required and must be non-empty. Reference: https://nipr.com |
+| `name` | [string](#string) | optional | Optional name of the producer to validate against NIPR records. If provided, both NPN existence and name match are verified. If omitted, only NPN existence is verified. |
 
 #### Response: `ValidateProducerNPNResponse`
 
@@ -1874,7 +1876,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists and is valid, false otherwise. |
+| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. |
 
 ---
 
@@ -1908,11 +1910,13 @@ exists in NIPR, false otherwise.
 #### Request: `ValidateAgencyNPNRequest`
 
 
-ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
+ValidateAgencyNPNRequest is used to validate an agency's National Producer
+Number (NPN) against the NIPR database.
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Required and must be non-empty. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Format: 1-10 digit numeric string. Example: "1234567890" Required and must be non-empty. Reference: https://nipr.com |
 
 #### Response: `ValidateAgencyNPNResponse`
 
@@ -1921,7 +1925,7 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists and is valid, false otherwise. |
+| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. |
 
 ---
 
@@ -1957,20 +1961,23 @@ Common Error Codes:
 #### Request: `LookupNPNByFEINRequest`
 
 
-LookupNPNByFEINRequest is used to look up a producer's National Producer Number by their Federal Employer Identification Number (FEIN).
+LookupNPNByFEINRequest is used to look up an agency's National Producer
+Number (NPN) by their Federal Employer Identification Number (FEIN).
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up. Required and must be exactly 9 characters. |
+| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up. Format: Exactly 9 digits, no dashes or spaces. Example: "123456789" This is the tax identification number assigned by the IRS. |
 
 #### Response: `LookupNPNByFEINResponse`
 
 
-LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
+LookupNPNByFEINResponse contains the National Producer Number (NPN)
+for the agency associated with the given FEIN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) for the producer. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) found in NIPR for the given FEIN. Format: 1-10 digit numeric string. Example: "1234567890" Empty string if no matching NPN was found. |
 
 ---
 
@@ -2758,25 +2765,28 @@ These types are used across multiple API methods.
 
 #### Appointment
 
-Represents an appointment for a license.
+Represents a managed appointment for a license, tracked through the
+ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+on the Producer/Agency messages, this represents appointments that are
+actively managed (requested, terminated) through the AppointmentService.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | Unique identifier for the appointment. |
+| `appointment_id` | [string](#string) |  | Unique identifier for the appointment (UUID format). |
 | `license` | [License](#license) |  | Information about the license being appointed. |
-| `name` | [string](#string) |  | The license number of the license being appointed. |
-| `agency_id` | [string](#string) |  | The id of the agency that is appointed. |
-| `producer_id` | [string](#string) | optional | Optional. The id of the producer that is appointed, if any. |
-| `carrier` | [string](#string) |  | The name of the carrier to which the license is appointed. |
-| `appointment_type` | [AppointmentType](#appointmenttype) |  | Type of appointment (e.g., up-front, registry). |
-| `processing_status` | [ProcessingStatus](#processingstatus) |  | Processing status of the appointment (e.g., in progress, appointed). |
-| `comments` | [string](#string) |  | Optional. Comments or notes related to the appointment. |
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of when the appointment becomes effective. |
-| `termination_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) | optional | Optional. Timestamp of the termination of the appointment. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to the appointment. |
-| `operational_status` | [AppointmentOperationalStatus](#appointmentoperationalstatus) |  | Operational status information for the appointment. This field provides insight into the current operational health and any risk factors that may affect the appointment. |
-| `cocode` | [string](#string) |  | The NAIC cocode of the carrier. |
-| `parent_appointment_id` | [string](#string) |  | Optional. The id of the parent appointment, if this is a synthetic appointment. It should be empty for non-synthetic appointments. |
+| `name` | [string](#string) |  | The license number of the license being appointed. This is a denormalized copy of license.license_number for convenience. |
+| `agency_id` | [string](#string) |  | The UUID of the agency that holds this appointment. |
+| `producer_id` | [string](#string) | optional | Optional. The UUID of the producer that holds this appointment, if any. When empty, this is an agency-level appointment. |
+| `carrier` | [string](#string) |  | The name of the carrier to which the license is appointed. Examples: "State Farm", "Allstate", "Progressive" |
+| `appointment_type` | [AppointmentType](#appointmenttype) |  | Type of appointment (registry, up-front, just-in-time, or synthetic). Determines how the appointment was established and processed. |
+| `processing_status` | [ProcessingStatus](#processingstatus) |  | Current processing status of the appointment in the NIPR pipeline. See ProcessingStatus for the complete lifecycle documentation. |
+| `comments` | [string](#string) |  | Optional. Comments or notes related to the appointment. May include NIPR processing notes or rejection details. |
+| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of when the appointment became or becomes effective. |
+| `termination_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) | optional | Optional. Timestamp of when the appointment was terminated. Only populated when processing_status is TERMINATED. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to this appointment record. |
+| `operational_status` | [AppointmentOperationalStatus](#appointmentoperationalstatus) |  | Operational status information for the appointment. Provides insight into the current operational health and any risk factors (e.g., expired license, inactive E&O) that may affect the appointment's continued validity. |
+| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) for regulatory reporting. Format: Typically a 5-digit numeric string. Reference: https://naic.org |
+| `parent_appointment_id` | [string](#string) |  | Optional. The UUID of the parent appointment, if this is a synthetic appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic appointments. Synthetic appointments inherit properties from and are terminated with their parent appointment. |
 
 #### AppointmentOperationalStatus
 
@@ -2798,9 +2808,9 @@ Represents a carrier that is available to be appointed.
 |-------|------|-------|-------------|
 | `carrier_id` | [string](#string) |  | The ID of the carrier. |
 | `name` | [string](#string) |  | The name of the carrier. |
-| `npn` | [string](#string) |  | The NPN of the carrier. |
-| `fein` | [string](#string) |  | The FEIN of the carrier. |
-| `cocode` | [string](#string) |  | The NAIC cocode of the carrier. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the carrier. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Reference: https://nipr.com |
+| `fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the carrier. Format: 9-digit number assigned by the IRS for tax identification. Example: "123456789" |
+| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) to each insurance company for regulatory reporting. Format: Typically a 5-digit numeric string. Example: "12345" Reference: https://naic.org |
 | `has_nipr_integration` | [bool](#bool) |  | Indicates whether this carrier has NIPR integration enabled. Capacity carriers (carriers without NIPR integration) process appointments and terminations automatically without going through NIPR. |
 
 #### GetAppointableCarriersRequest
@@ -2871,11 +2881,11 @@ Request to get termination fees.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `license_id` | [string](#string) |  | The ID of the license. |
-| `license_number` | [string](#string) |  | The license number. |
+| `license_number` | [string](#string) |  | The license number assigned by the state Department of Insurance (DOI). Format varies by state (e.g., numeric, alphanumeric, or with prefixes). Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL) This is a state-specific identifier, not globally unique across states. |
 | `producer_id` | [string](#string) |  |  |
 | `agency_id` | [string](#string) |  |  |
-| `state` | [string](#string) |  | The two-letter state code of the license. |
-| `license_class` | [string](#string) |  | The license class. |
+| `state` | [string](#string) |  | The two-letter US state or territory code that issued the license. Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY"). |
+| `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers Values vary by state as each DOI defines its own license classes. |
 | `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state. Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
 | `carrier_id` | [string](#string) |  | The ID of the carrier associated with this license. |
 
@@ -3036,6 +3046,7 @@ NIPR sync operations.
 | `locations` | [Location](#location) | repeated | Locations associated with the agency. |
 | `organization` | [Organization](#organization) |  | Organization that the agency belongs to. This field contains the full organization details including id, name, and contact information. Agencies may optionally belong to an organization (such as an aggregator or agency network). |
 | `is_sole_proprietor` | [bool](#bool) |  | Indicates whether this agency is a sole proprietor. True: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR). False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY). |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | The relationship of this agency with its organization.  Indicates whether the agency is the main agency or a related agency within an organization. - MAIN: The primary agency that owns or manages the organization - RELATED: An agency that is part of the organization but not the primary owner - UNSPECIFIED: Agency does not belong to any organization  This field is always populated based on the agency's actual organization membership, regardless of how the agency was queried. If the agency belongs to an organization, this will be MAIN or RELATED. If the agency is standalone (not part of any organization), this will be UNSPECIFIED. |
 
 #### Agency.Address
 
@@ -3065,7 +3076,7 @@ AgencyInfo contains contact and identification information for an agency.
 | `phone` | [string](#string) |  | Phone number for the agency. |
 | `fax` | [string](#string) |  | Fax number for the agency. |
 | `website` | [string](#string) |  | Website URL for the agency, if available. |
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency. This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC). |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Only present for standard agencies (not sole proprietors). Reference: https://nipr.com |
 | `pdb_alerts_sync_enabled` | [bool](#bool) |  | Indicates whether the agency is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR. |
 | `metadata_questions` | [Agency.AgencyInfo.MetadataQuestionsEntry](#agencyagencyinfometadataquestionsentry) | repeated | **Deprecated.** MetadataQuestions contains custom metadata questions and answers for the agency. This field stores tenant-specific questions that were collected during agency onboarding. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
 | `external_metadata` | [Agency.AgencyInfo.ExternalMetadataEntry](#agencyagencyinfoexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data. |
@@ -3162,8 +3173,8 @@ NIPR contains data synchronized from the National Insurance Producer Registry.
 | `biographic` | [Agency.NIPR.Biographic](#agencyniprbiographic) |  | Biographic information from NIPR |
 | `addresses` | [Agency.NIPR.Address](#agencynipraddress) | repeated | List of addresses from NIPR. |
 | `licenses` | [Agency.NIPR.License](#agencyniprlicense) | repeated | List of all licenses held across different states. |
-| `regulatory_info` | [Agency.NIPR.RegulatoryInfo](#agencyniprregulatoryinfo) |  | Regulatory information from NIPR |
-| `appointments` | [Agency.NIPR.Appointment](#agencyniprappointment) | repeated | List of carrier appointments held in NIPR. These represent relationships with insurance carriers. |
+| `regulatory_info` | [Agency.NIPR.RegulatoryInfo](#agencyniprregulatoryinfo) |  | Regulatory information from NIPR. |
+| `appointments` | [Agency.NIPR.Appointment](#agencyniprappointment) | repeated | List of carrier appointments held by the agency in NIPR.  Each appointment represents authorization to sell a specific carrier's products for a specific Line of Authority. An agency typically has multiple appointments across different carriers and LOAs.  Before allowing an agency to quote or sell a product: 1. Verify they have an active appointment with that carrier 2. Verify the appointment's LOA matches the product type 3. Check the appointment renewal date hasn't passed  This data is synchronized from NIPR and is read-only. |
 
 #### Agency.NIPR.Address
 
@@ -3184,21 +3195,34 @@ Address represents address information from NIPR.
 
 #### Agency.NIPR.Appointment
 
-Appointment represents a relationship with an insurance carrier.
+Appointment represents a formal relationship between an agency and an
+insurance carrier, granting the agency authority to sell that carrier's
+products. This data is sourced from NIPR's PDB (Producer Database).
+
+Appointment Lifecycle (status field values):
+1. APPOINTED: Agency is authorized to sell this carrier's products for
+   the specified Line of Authority
+2. TERMINATED: Appointment has ended (see termination_reason for details)
+
+Use Cases:
+- Verify agency is appointed before allowing them to sell a carrier's
+  products
+- Track which carriers an agency represents
+- Monitor appointment renewal dates for compliance
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `branch_id` | [string](#string) |  |  |
-| `company_name` | [string](#string) |  | Name of the insurance company for this appointment. |
-| `fein` | [string](#string) |  | Federal Employer Identification Number of the carrier. |
-| `co_code` | [string](#string) |  | Company code for the insurance carrier. |
-| `line_of_authority` | [string](#string) |  | Line of authority for this appointment (e.g., Life, Property, Casualty). Indicates what types of insurance can be sold. |
-| `loa_code` | [string](#string) |  | Code for the line of authority for this appointment. |
-| `status` | [string](#string) |  | Current status of the appointment (e.g., Active, Terminated). |
-| `termination_reason` | [string](#string) |  | Reason for termination if the appointment has been terminated. |
-| `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date associated with the current status or reason. |
-| `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. |
-| `agency_affiliations` | [string](#string) |  | Additional affiliations or roles with the agency. |
+| `branch_id` | [string](#string) |  | Branch identifier for multi-branch agencies. Links the appointment to a specific agency branch, if applicable. |
+| `company_name` | [string](#string) |  | Name of the insurance company for this appointment. Examples: "State Farm", "Allstate", "Blue Cross Blue Shield" |
+| `fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the carrier. Format: 9-digit number assigned by the IRS. This uniquely identifies the carrier company for tax purposes. |
+| `co_code` | [string](#string) |  | NAIC Company Code (CoCode) for the insurance carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) for regulatory reporting. Format: Typically a 5-digit numeric string. Reference: https://naic.org |
+| `line_of_authority` | [string](#string) |  | Line of Authority (LOA) for this appointment. Indicates what type of insurance the agency can sell for this carrier. A single carrier may have separate appointments for different LOAs.  Common LOA values: - "LIFE": Life insurance products - "HEALTH": Health insurance products - "PROPERTY": Property insurance - "CASUALTY": Casualty insurance - "PROPERTY AND CASUALTY": Combined P&C - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products  LOA names are standardized by NIPR but may vary slightly between states. |
+| `loa_code` | [string](#string) |  | Standardized code for the Line of Authority. Used for programmatic matching rather than string comparison on the line_of_authority description field. |
+| `status` | [string](#string) |  | Current status of the appointment as reported by NIPR.  Values: - "APPOINTED": Appointment is active; the agency can sell this   carrier's products for the specified Line of Authority - "TERMINATED": Appointment has ended (see termination_reason for   details)  Always check status is "APPOINTED" before allowing sales. |
+| `termination_reason` | [string](#string) |  | Reason for termination if the appointment has been terminated.  Common termination reasons include: - Voluntary termination by the agency - Carrier-initiated termination - Inadequate production - Company merger or liquidation - Regulatory or compliance issues  This field is empty if the appointment is still active. Reference: https://pdb.nipr.com/Gateway/ValidTerms |
+| `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the status or termination reason became effective. For terminated appointments, this is when the termination occurred. For active appointments, this may indicate when the current status was last confirmed. |
+| `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. Appointments typically renew annually. Monitor this date for upcoming renewals to ensure continuous authorization. |
+| `agency_affiliations` | [string](#string) |  | Additional affiliations or roles the agency has with the carrier. This may include special designations, sub-agency relationships, or other relationship details. |
 
 #### Agency.NIPR.Biographic
 
@@ -3208,7 +3232,7 @@ Biographic contains basic information from NIPR.
 |-------|------|-------|-------------|
 | `company_name` | [string](#string) |  | Company name as recorded in NIPR. |
 | `fein` | [string](#string) |  | Federal Employer Identification Number. |
-| `npn` | [string](#string) |  | National Producer Number. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Reference: https://nipr.com |
 | `business_email` | [string](#string) |  | Business email address. |
 | `business_phone` | [string](#string) |  | Business phone number. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this biographic information was last fetched from NIPR. |
@@ -3219,60 +3243,92 @@ License contains information about an insurance license.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `license_number` | [string](#string) |  | The license number assigned by the state regulatory authority. |
-| `license_state` | [string](#string) |  | The state that issued the license. |
-| `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. |
+| `license_number` | [string](#string) |  | The license number assigned by the state Department of Insurance (DOI). Format varies by state (e.g., numeric, alphanumeric, or with prefixes). Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL) This is a state-specific identifier, not globally unique across states. Reference: Each state's DOI maintains its own licensing database. |
+| `license_state` | [string](#string) |  | The two-letter US state or territory code that issued the license. Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY"). |
+| `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. Values: "Resident" (license in the producer's home/domicile state) or "Non-Resident" (license in a state other than the home state). A producer typically has one resident license and may hold multiple non-resident licenses in other states where they conduct business. |
 | `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
 | `status` | [Agency.NIPR.License.LicenseStatus](#agencyniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
 | `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use expires_on instead. |
-| `license_class` | [string](#string) |  | License class description. |
-| `license_class_code` | [int32](#int32) |  | License class code. |
+| `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers - "Managing General Agent": Underwriting authority on behalf of insurers - "Consultant": Licensed to provide insurance advice for a fee Values vary by state as each DOI defines its own license classes. |
+| `license_class_code` | [int32](#int32) |  | Numeric code corresponding to the license class. This is the NIPR-standardized numeric identifier for the license class description in the license_class field. Used for programmatic comparisons rather than string matching. |
 | `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
 | `update_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use last_updated_on instead. |
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this license information was last fetched from NIPR. |
 | `expires_on` | [google.type.Date](#googletypedate) |  | The date when the license will expire if not renewed. |
 | `issued_on` | [google.type.Date](#googletypedate) |  | The date when the license was originally issued. |
 | `last_updated_on` | [google.type.Date](#googletypedate) |  | The date NIPR last updated the license in their system. |
-| `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority associated with this license. |
+| `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the agency is authorized to transact in this state. A single license typically has multiple LOAs. Always check that the agency has an active LOA matching the product type before allowing transactions. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
 
 #### Agency.NIPR.License.LineOfAuthority
 
-LineOfAuthority represents a specific type of insurance coverage
-that is authorized under this license.
+LineOfAuthority (LOA) represents a specific type of insurance that an
+agency is authorized to transact under this license.
+
+Each license can have multiple LOAs. For example, a license might
+include:
+- LIFE
+- HEALTH
+- ACCIDENT AND HEALTH
+- PROPERTY AND CASUALTY
+- VARIABLE LIFE AND VARIABLE ANNUITY
+
+LOA Compliance:
+Before allowing an agency to sell a product, verify they have an
+active LOA that matches the product type. For example, an agency with
+only a LIFE LOA cannot sell Property & Casualty insurance.
+
+LOA names are standardized by NIPR but may vary slightly between states.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `loa` | [string](#string) |  | The Line of Authority description (e.g., "Life", "Property and Casualty", "Health"). This is typically an uppercase string that describes the insurance type. |
-| `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. |
+| `loa` | [string](#string) |  | The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY", "HEALTH").  Common LOA types: - LIFE: Life insurance products - HEALTH: Health insurance products - ACCIDENT AND HEALTH: Combined accident and health coverage - PROPERTY: Property insurance - CASUALTY: Casualty insurance - PROPERTY AND CASUALTY: Combined property and casualty - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring   securities license - PERSONAL LINES: Homeowners, auto, and personal umbrella policies - COMMERCIAL LINES: Business insurance policies  This is typically an uppercase string standardized by NIPR. |
+| `active` | [bool](#bool) |  | Whether this Line of Authority is currently active. Inactive LOAs cannot be used to transact that type of insurance. |
 | `issue_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | **Deprecated.** Deprecated: Use issued_on instead. |
-| `issued_on` | [google.type.Date](#googletypedate) |  | The date when this Line of Authority was issued. |
+| `issued_on` | [google.type.Date](#googletypedate) |  | The date when this Line of Authority was first issued. This helps track how long the agency has been authorized for this insurance type. |
 
 #### Agency.NIPR.RegulatoryInfo
 
-RegulatoryInfo contains regulatory information,
-including any regulatory actions.
+RegulatoryInfo contains regulatory information from NIPR, including any
+formal regulatory actions taken against the agency by state Departments
+of Insurance (DOIs) or other regulatory authorities.
+
+Regulatory actions are significant events that may affect an agency's
+ability to conduct business. They should be reviewed during due diligence
+and compliance checks.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `regulatory_actions` | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#agencyniprregulatoryinforegulatoryaction) | repeated | List of regulatory actions across different states. Each regulatory action includes the state code where it applies. |
+| `regulatory_actions` | [Agency.NIPR.RegulatoryInfo.RegulatoryAction](#agencyniprregulatoryinforegulatoryaction) | repeated | List of regulatory actions across different states. Each regulatory action includes the state code where it applies. An empty list indicates no regulatory actions on record in NIPR. |
 
 #### Agency.NIPR.RegulatoryInfo.RegulatoryAction
 
-RegulatoryAction represents a regulatory action.
+RegulatoryAction represents a formal regulatory action taken against
+an agency by a state Department of Insurance or other regulatory body.
+
+Common types of regulatory actions include:
+- License revocation or suspension
+- Cease and desist orders
+- Consent agreements
+- Fines and monetary penalties
+- Probationary periods
+- Administrative actions for non-compliance
+
+These records are sourced from NIPR's PDB (Producer Database) and
+reflect official regulatory proceedings.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `action_id` | [string](#string) |  | Unique identifier for the regulatory action. |
-| `state_code` | [string](#string) |  | The state code where this regulatory action applies. |
-| `reason_for_action` | [string](#string) |  | The reason why the regulatory action was taken. |
+| `action_id` | [string](#string) |  | Unique identifier for the regulatory action in NIPR's system. |
+| `state_code` | [string](#string) |  | The two-letter state code of the regulatory authority that took the action. Format: US state code (e.g., "CA", "TX", "NY"). |
+| `reason_for_action` | [string](#string) |  | The reason or cause for the regulatory action. Examples: "Misrepresentation", "Failure to Remit Premiums", "Unfair Trade Practices", "Fraud", "Non-Compliance". This is a free-text field as reasons are defined by each state DOI. |
 | `disposition` | [string](#string) |  | The outcome or resolution of the regulatory action. |
-| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was taken. |
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action became effective. |
-| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the entity entered into the regulatory action. |
-| `file_ref` | [string](#string) |  | Reference number for the regulatory action file. |
-| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties associated with the regulatory action. |
-| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. |
+| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was formally initiated or filed. |
+| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action took effect. This may differ from date_of_action if there was a delayed effective date or appeal period. |
+| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the agency entered into or acknowledged the regulatory action (e.g., signed a consent agreement). |
+| `file_ref` | [string](#string) |  | Reference number for the regulatory action file maintained by the state DOI. Can be used to look up additional details from the state's records. |
+| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties, fines, or forfeitures associated with the regulatory action. Format: Free-text, typically a dollar amount (e.g., "$5,000.00"). |
+| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. Format: Free-text describing the time period (e.g., "12 months", "Indefinite", "Until compliance"). |
 
 #### Agency.Principal
 
@@ -3287,7 +3343,7 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `last_name` | [string](#string) |  | Last name of the principal. |
 | `middle_name` | [string](#string) |  | Middle name of the principal. |
 | `email` | [string](#string) |  | Email address of the principal. Must be unique and is used for communication. |
-| `npn` | [string](#string) |  | The NPN of the principal. This is used to retrieve the license information of the principal from the NIPR API. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the principal. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Used to retrieve license information from the NIPR API. Reference: https://nipr.com |
 | `phone` | [string](#string) |  | Phone number of the principal. Used for communication. |
 | `address` | [Agency.Address](#agencyaddress) |  | Address of the principal. This may differ from the agency address. |
 | `tenant_additional_questions` | [Agency.Principal.TenantAdditionalQuestionsEntry](#agencyprincipaltenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
@@ -3320,13 +3376,14 @@ and associated producers, use the GetAgencyAndProducers RPC.
 | `name` | [string](#string) |  | The official name of the agency. This is typically the legal business name. |
 | `email` | [string](#string) |  | Primary email address for the agency. Used for general communication and must be unique within the tenant. |
 | `phone` | [string](#string) |  | Main phone number for the agency. Format may vary but typically includes country code for international numbers. |
-| `npn` | [string](#string) |  | National Producer Number (NPN) assigned by NIPR. Only present for standard agencies (not sole proprietors). Empty string if the agency doesn't have an NPN. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Only present for standard agencies (not sole proprietors). Empty string if the agency doesn't have an NPN. |
 | `fein` | [string](#string) |  | Federal Employer Identification Number (FEIN). Nine-digit number assigned by the IRS for tax purposes. May be empty for sole proprietors or agencies without FEIN. |
 | `organization_id` | [string](#string) | optional | Organization ID that the agency belongs to. References organizations like aggregators or agency networks. Optional field - null if the agency isn't part of an organization. |
 | `is_tenant_agency` | [bool](#bool) |  | Indicates whether this is an internal tenant agency. True for agencies owned/operated by the tenant. False for external/partner agencies. |
 | `is_sole_proprietor` | [bool](#bool) |  | Indicates whether this agency is a sole proprietor. True: Individual producer operating as their own agency (ENTITY_TYPE_SOLE_PROPRIETOR). False: Standard agency with multiple producers (ENTITY_TYPE_AGENCY). |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the agency was created in the system. Used for sorting agencies by creation date in list views. Always in UTC timezone. |
 | `external_id` | [string](#string) |  | Tenant-provided external identifier for this agency. This ID allows tenants to map Producerflow agencies back to their own system's identifiers. Set during agency creation/onboarding via the public API. |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | The relationship of this agency with its organization.  Indicates whether the agency is the main agency (primary owner) or a related agency within an organization. This field reflects the agency's actual organization membership, not the query context.  Values: - MAIN: The primary agency that owns or manages the organization - RELATED: An agency that is part of the organization but not the primary owner - UNSPECIFIED: Agency does not belong to any organization |
 
 #### AssignProducerToLocationsRequest
 
@@ -3360,7 +3417,7 @@ Contacts are non-producer individuals linked to the agency.
 | `phone` | [string](#string) |  | Phone number of the contact. |
 | `role` | [string](#string) |  | **Deprecated.** Role or position of the contact within the agency. Deprecated: Use role_type instead. This field will be removed in a future version. |
 | `address` | [Address](#address) |  | Mailing address of the contact. |
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the contact, if applicable. A unique NAIC identifier assigned during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Only present for contacts who are licensed insurance professionals. Reference: https://nipr.com |
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
 | `role_type` | [ContactRole](#contactrole) |  | The role type of the contact as an enum. This field replaces the deprecated string-based 'role' field. |
 | `external_metadata` | [Contact.ExternalMetadataEntry](#contactexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic, reporting, or integration needs. The map key is the metadata field name, and the value is the associated data. |
@@ -3398,17 +3455,18 @@ All fields within the Agency message are also optional.
 | `name` | [string](#string) |  | Name of the agency |
 | `entity_type` | [EntityType](#entitytype) |  | Entity type of the agency: Sole Proprietor, Agency or Ask during onboarding |
 | `tenant_agency_id` | [string](#string) |  | Tenant agency id is a unique identifier for the agency used by the tenant this is used to identify the agency in the tenant system not in the producerflow system |
-| `docusign_template_id` | [string](#string) |  | DocuSign template id is the id of the docusign template used to send the contract to the agency |
+| `docusign_template_id` | [string](#string) |  | **Deprecated.** DocuSign template id is the id of the docusign template used to send the contract to the agency Deprecated: Use signature_template_id instead. This field will be removed in a future version. |
 | `fein` | [string](#string) |  | FEIN (Federal Employer Identification Number) of the agency |
 | `email` | [string](#string) |  | Email of the agency Important: For Sole Proprietor entities (entity_type = ENTITY_TYPE_SOLE_PROPRIETOR) or when entity_type = ENTITY_TYPE_ASK_DURING_ONBOARDING and the user later selects Sole Proprietor during onboarding, the principal.email will be used as the agency email, and this field will be ignored. |
 | `phone` | [string](#string) |  | Phone of the agency |
 | `fax` | [string](#string) |  | Fax of the agency |
 | `website` | [string](#string) |  | Website of the agency |
-| `npn` | [string](#string) |  | NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Note: If the entity type is Sole Proprietor, the NPN will be ignored since sole proprietors use the principal's NPN. Reference: https://nipr.com |
 | `mailing_address` | [Address](#address) |  | Mailing address of the agency |
 | `physical_address` | [Address](#address) |  | Physical address of the agency |
 | `invoicing_address` | [Address](#address) |  | Invoicing address of the agency |
 | `organization_id` | [string](#string) |  | Organization ID of the agency. To get valid organization IDs, use the ListOrganizations RPC. |
+| `signature_template_id` | [string](#string) | optional | An optional signature template ID to be used to send the agency agreement through the configured e-signature provider (Docusign or Adobe Sign). The system will automatically detect the signature provider based on tenant configuration. |
 | `principal` | [CreateAgencyOnboardingURLRequest.Agency.Principal](#createagencyonboardingurlrequestagencyprincipal) |  |  |
 
 #### CreateAgencyOnboardingURLRequest.Agency.Principal
@@ -3424,7 +3482,7 @@ All fields within the Principal message are also optional.
 | `middle_name` | [string](#string) |  | Middle name of the principal |
 | `email` | [string](#string) |  | Email of the principal |
 | `phone` | [string](#string) |  | Phone of the principal |
-| `npn` | [string](#string) |  | NPN of the principal |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the principal. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Reference: https://nipr.com |
 | `address` | [Address](#address) |  | Address of the principal |
 
 #### CreateAgencyOnboardingURLResponse
@@ -3777,19 +3835,22 @@ LocationInput represents the input data for creating a new location.
 
 #### LookupNPNByFEINRequest
 
-LookupNPNByFEINRequest is used to look up a producer's National Producer Number by their Federal Employer Identification Number (FEIN).
+LookupNPNByFEINRequest is used to look up an agency's National Producer
+Number (NPN) by their Federal Employer Identification Number (FEIN).
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up. Required and must be exactly 9 characters. |
+| `fein` | [string](#string) |  | The Federal Employer Identification Number (FEIN) to look up. Format: Exactly 9 digits, no dashes or spaces. Example: "123456789" This is the tax identification number assigned by the IRS. |
 
 #### LookupNPNByFEINResponse
 
-LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
+LookupNPNByFEINResponse contains the National Producer Number (NPN)
+for the agency associated with the given FEIN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) for the producer. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) found in NIPR for the given FEIN. Format: 1-10 digit numeric string. Example: "1234567890" Empty string if no matching NPN was found. |
 
 #### NewAgencyRequest
 
@@ -3808,7 +3869,7 @@ Agency contains all information about the agency to be created
 |-------|------|-------|-------------|
 | `name` | [string](#string) |  | The name of the agency. |
 | `email` | [string](#string) |  | The email address of the agency. |
-| `npn` | [string](#string) |  | National Producer Number for the agency Required for ENTITY_TYPE_AGENCY if FEIN is not provided Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR |
+| `npn` | [string](#string) |  | National Producer Number (NPN) for the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Required for ENTITY_TYPE_AGENCY if FEIN is not provided. Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR (sole proprietors use the principal's NPN). Validated against NIPR's database via free NIPR NPN Lookup API. Reference: https://nipr.com |
 | `phone` | [string](#string) | optional | The phone number of the agency. |
 | `website` | [string](#string) |  | The website of the agency. |
 | `principal` | [NewAgencyRequest.Agency.Principal](#newagencyrequestagencyprincipal) |  | Information about the agency's principal. This is a required field as each agency must have a principal. |
@@ -3919,7 +3980,7 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `middle_name` | [string](#string) |  | The middle name of the principal. |
 | `email` | [string](#string) |  | The email address of the principal. |
 | `phone` | [string](#string) | optional | The phone number of the principal. |
-| `npn` | [string](#string) |  | The National Producer Number (NPN) of the principal. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the principal. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Required. Validated against NIPR's database via free NIPR NPN Lookup API. Reference: https://nipr.com |
 | `tenant_id` | [string](#string) |  | Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters. |
 | `sync_with_nipr` | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal's NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
 | `tenant_additional_questions` | [NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry](#newagencyrequestagencyprincipaltenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
@@ -3969,7 +4030,7 @@ Contacts represent non-producer individuals associated with an agency.
 | `address` | [Address](#address) |  | Mailing address of the contact. |
 | `role` | [ContactRole](#contactrole) |  | Role or position of the contact within the agency. Required and must be a valid ContactRole enum value (not UNSPECIFIED). See ContactRole enum for available options. |
 | `tenant_id` | [string](#string) |  | Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters |
-| `npn` | [string](#string) | optional | National Producer Number (NPN) of the contact. |
+| `npn` | [string](#string) | optional | National Producer Number (NPN) of the contact, if applicable. A unique NAIC identifier assigned during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Only applicable for contacts who are licensed insurance professionals. Reference: https://nipr.com |
 
 #### NewContactRequest
 
@@ -4030,7 +4091,7 @@ appointment, and regulatory information from NIPR.
 | `last_name` | [string](#string) |  | Last name of the producer. Required field that must be non-empty. Used for identification and formal communications. |
 | `middle_name` | [string](#string) |  | Middle name of the producer. Optional field for complete name identification. Important for NIPR matching when multiple producers have similar names. |
 | `email` | [string](#string) |  | Email address of the producer. Required field with email format validation. Must be unique across all producers in the tenant. Used for: - Account notifications and communications - Password resets and authentication - Unique identifier within the system |
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the producer. Optional but strongly recommended for licensed producers. This unique identifier from NAIC enables: - NIPR data synchronization (licenses, appointments, regulatory actions) - Carrier appointment verification - Compliance tracking across states If provided, must be valid in NIPR's database or creation will fail. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the producer. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Optional but strongly recommended for licensed producers. Enables: - NIPR data synchronization (licenses, appointments, regulatory actions) - Carrier appointment verification - Compliance tracking across states If provided, must be valid in NIPR's database or creation will fail. Reference: https://nipr.com |
 | `phone` | [string](#string) | optional | Phone number of the producer. Optional field for contact purposes. If provided, must match international phone number pattern. Format: Can include country code (e.g., +1 for US) |
 | `mailing_address` | [NewProducer.Address](#newproduceraddress) |  | Mailing address of the producer. Optional but recommended for complete producer profiles. This address is used for physical mail delivery and may differ from the agency's address. |
 | `tenant_id` | [string](#string) |  | External identifier for the producer in the tenant's system.  Optional field that enables bi-directional synchronization between ProducerFlow and your internal systems. This allows you to maintain your existing producer identifiers while leveraging ProducerFlow's capabilities.  Usage Guidelines: - Provide this when you have an existing identifier for the producer - Omit if you don't need to track a reference to your internal system - Can be updated later using the SetExternalID RPC - Must be unique within your tenant for meaningful lookups  Common Use Cases: - Linking to an existing CRM or AMS system producer ID - Maintaining synchronization with legacy systems - Enabling lookups from external systems back to ProducerFlow - Supporting data migration and system transitions  Format: Any string identifier meaningful in your system (e.g., "PROD-12345", UUID) Maximum length: 255 characters |
@@ -4216,7 +4277,7 @@ Use Cases:
 | `middle_name` | [string](#string) |  | Middle name of the producer. |
 | `last_name` | [string](#string) |  | Last name of the producer. |
 | `email` | [string](#string) |  | The email address of the producer. Used for communication and must be unique within the tenant. Must be a valid email format. |
-| `npn` | [string](#string) |  | The National Producer Number (NPN) of the producer. This is used to retrieve license information from the NIPR API. Must be non-empty. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the producer. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Used to retrieve license, appointment, and regulatory data from NIPR. Reference: https://nipr.com |
 | `phone` | [string](#string) |  | Phone number of the producer. |
 | `pdb_alerts_sync_enabled` | [bool](#bool) |  | Indicates whether the producer is enabled to be synchronized with NIPR API. When true, the system will regularly check for updates from NIPR using PDB Alerts, providing automatic daily updates at no extra cost. |
 | `agency` | [Producer.Agency](#produceragency) |  | Basic information about the agency this producer is associated with. |
@@ -4297,10 +4358,10 @@ company's insurance products. Having a license is not enough - the
 producer must also be appointed by each carrier whose products they want
 to sell.
 
-Appointment Lifecycle:
-1. Active: Producer can sell this carrier's products
-2. Terminated: Appointment ended (various reasons: producer left, carrier
-   terminated, etc.)
+Appointment Lifecycle (status field values):
+1. APPOINTED: Producer can sell this carrier's products
+2. TERMINATED: Appointment has ended (various reasons: producer left,
+   carrier terminated, etc.)
 
 Use Cases:
 - Verify producer is appointed before allowing them to quote/sell a
@@ -4317,7 +4378,7 @@ Use Cases:
 | `co_code` | [string](#string) |  | Company code: A standardized code identifying the insurance carrier. This is used in industry systems for carrier identification. |
 | `line_of_authority` | [string](#string) |  | Line of authority for this appointment.  This indicates what type of insurance the producer can sell for this carrier. A producer might have multiple appointments with the same carrier for different LOAs.  Examples: "LIFE", "HEALTH", "PROPERTY AND CASUALTY", "VARIABLE LIFE AND VARIABLE ANNUITY" |
 | `loa_code` | [string](#string) |  | Code for the line of authority. A standardized code representing the LOA type. |
-| `status` | [string](#string) |  | Current status of the appointment.  Common values: - "Active": Producer can sell this carrier's products - "Terminated": Appointment has ended - "Pending": Appointment is being processed  Always check status is "Active" before allowing sales. |
+| `status` | [string](#string) |  | Current status of the appointment as reported by NIPR.  Values: - "APPOINTED": Appointment is active; the producer can sell this   carrier's products for the specified Line of Authority - "TERMINATED": Appointment has ended (see termination_reason for   details)  Always check status is "APPOINTED" before allowing sales. |
 | `termination_reason` | [string](#string) |  | Reason for termination if the appointment has been terminated.  Common termination reasons: - Producer requested termination - Carrier terminated appointment - Producer left agency - Compliance or regulatory issues  This field is empty if the appointment is still active. |
 | `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the status or termination reason became effective. For terminated appointments, this is when the termination occurred. |
 | `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. Appointments typically renew annually. Monitor this date for upcoming renewals. |
@@ -4361,8 +4422,8 @@ Compliance Use Cases:
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `license_number` | [string](#string) |  | The license number assigned by the state regulatory authority. |
-| `license_state` | [string](#string) |  | The state that issued the license. Typically a two-letter state code. |
+| `license_number` | [string](#string) |  | The license number assigned by the state Department of Insurance (DOI). Format varies by state (e.g., numeric, alphanumeric, or with prefixes). Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL) This is a state-specific identifier, not globally unique across states. Reference: Each state's DOI maintains its own licensing database. |
+| `license_state` | [string](#string) |  | The two-letter US state or territory code that issued the license. Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY"). |
 | `residency_status` | [string](#string) |  | Indicates whether this is a resident or non-resident license. Values are typically "Resident" or "Non-Resident". |
 | `active` | [bool](#bool) |  | Indicates whether the license is currently active. |
 | `status` | [Producer.NIPR.License.LicenseStatus](#producerniprlicenselicensestatus) |  | The current status of the license (valid, expired, etc.). |
@@ -4402,31 +4463,50 @@ states.
 
 #### Producer.NIPR.ProducerRegulatoryInfo
 
-ProducerRegulatoryInfo contains regulatory information about a producer,
-including any regulatory actions taken against them.
+ProducerRegulatoryInfo contains regulatory information about a producer
+from NIPR, including any formal regulatory actions taken against them by
+state Departments of Insurance (DOIs) or other regulatory authorities
+(e.g., FINRA for securities-related licenses).
+
+Regulatory actions are significant events that may affect a producer's
+ability to sell insurance. They should be reviewed during hiring,
+contracting, and ongoing compliance monitoring.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `regulatory_actions_by_state` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerniprproducerregulatoryinforegulatoryactionsbystateentry) | repeated | Map of regulatory actions by state. The key is the state code, and the value is the regulatory action. |
-| `clearance_certification_info` | [string](#string) |  | Clearance certification information for the producer. |
-| `nasd_exam_details` | [string](#string) |  | Details about NASD/FINRA examinations taken by the producer. |
+| `regulatory_actions_by_state` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerniprproducerregulatoryinforegulatoryactionsbystateentry) | repeated | Map of regulatory actions keyed by two-letter state code. The key is the state code (e.g., "CA", "TX"), and the value is the regulatory action for that state. A producer may have regulatory actions in multiple states. An empty map indicates no regulatory actions on record in NIPR. |
+| `clearance_certification_info` | [string](#string) |  | Clearance certification information for the producer. Indicates whether the producer has obtained clearance from NIPR's Clearance Certification process, which verifies the producer has no outstanding regulatory issues across all states. |
+| `nasd_exam_details` | [string](#string) |  | Details about NASD/FINRA examinations taken by the producer. This includes securities-related examinations (e.g., Series 6, Series 7, Series 63, Series 66) that may be required for selling variable insurance products. Reference: https://www.finra.org |
 
 #### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
 
-RegulatoryAction represents a regulatory action taken against a producer.
+RegulatoryAction represents a formal regulatory action taken against
+a producer by a state Department of Insurance, FINRA, or other
+regulatory body.
+
+Common types of regulatory actions include:
+- License revocation or suspension
+- Cease and desist orders
+- Consent agreements
+- Fines and monetary penalties
+- Probationary periods
+- Administrative actions for non-compliance
+
+These records are sourced from NIPR's PDB (Producer Database) and
+reflect official regulatory proceedings.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `action_id` | [string](#string) |  | Unique identifier for the regulatory action. |
-| `origin_of_action` | [string](#string) |  | The regulatory body that originated the action. Typically a state insurance department or FINRA. |
-| `reason_for_action` | [string](#string) |  | The reason why the regulatory action was taken. |
-| `disposition` | [string](#string) |  | The outcome or resolution of the regulatory action. |
-| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was taken. |
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action became effective. |
-| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the producer entered into the regulatory action. |
-| `file_ref` | [string](#string) |  | Reference number for the regulatory action file. |
-| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties associated with the regulatory action. |
-| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. |
+| `action_id` | [string](#string) |  | Unique identifier for the regulatory action in NIPR's system. |
+| `origin_of_action` | [string](#string) |  | The regulatory body that originated the action. Examples: "California Department of Insurance", "FINRA", "Texas Department of Insurance". This identifies which authority initiated the regulatory proceeding. |
+| `reason_for_action` | [string](#string) |  | The reason or cause for the regulatory action. Examples: "Misrepresentation", "Failure to Remit Premiums", "Unfair Trade Practices", "Fraud", "Non-Compliance". This is a free-text field as reasons are defined by each regulatory authority. |
+| `disposition` | [string](#string) |  | The outcome or resolution of the regulatory action. Common dispositions include: - "Revoked": License permanently removed - "Suspended": License temporarily inactive - "Consent Agreement": Negotiated settlement - "Probation": Conditional continued operation - "Fine/Penalty": Monetary penalty imposed - "Dismissed": Action was dropped or resolved favorably - "Pending": Action is still being adjudicated |
+| `date_of_action` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action was formally initiated or filed. |
+| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the regulatory action took effect. This may differ from date_of_action if there was a delayed effective date or appeal period. |
+| `enter_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The date when the producer entered into or acknowledged the regulatory action (e.g., signed a consent agreement). |
+| `file_ref` | [string](#string) |  | Reference number for the regulatory action file maintained by the regulatory authority. Can be used to look up additional details from the authority's records. |
+| `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties, fines, or forfeitures associated with the regulatory action. Format: Free-text, typically a dollar amount (e.g., "$5,000.00"). |
+| `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. Format: Free-text describing the time period (e.g., "12 months", "Indefinite", "Until compliance"). |
 
 #### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
 
@@ -4452,7 +4532,7 @@ RegulatoryAction represents a regulatory action taken against a producer.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) | optional |  |
+| `npn` | [string](#string) | optional | National Producer Number (NPN) of the producer. A unique NAIC identifier assigned to individuals during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" If provided, must be between 1 and 10 characters. Note: NPN validation against NIPR occurs during onboarding, not during URL generation. Reference: https://nipr.com |
 | `first_name` | [string](#string) | optional | First name of the producer |
 | `last_name` | [string](#string) | optional | Last name of the producer |
 | `middle_name` | [string](#string) | optional | Middle name of the producer |
@@ -4789,11 +4869,13 @@ UpdateProducerResponse is the empty response returned after successfully updatin
 
 #### ValidateAgencyNPNRequest
 
-ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
+ValidateAgencyNPNRequest is used to validate an agency's National Producer
+Number (NPN) against the NIPR database.
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Required and must be non-empty. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Format: 1-10 digit numeric string. Example: "1234567890" Required and must be non-empty. Reference: https://nipr.com |
 
 #### ValidateAgencyNPNResponse
 
@@ -4801,16 +4883,18 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists and is valid, false otherwise. |
+| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. |
 
 #### ValidateProducerNPNRequest
 
-ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
+ValidateProducerNPNRequest is used to validate a producer's National Producer
+Number (NPN) against the NIPR database.
+This is a FREE operation using the NIPR NPN Lookup service.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Required and must be non-empty. |
-| `name` | [string](#string) | optional | Optional name of the producer to validate. If provided, the NPN will be validated against this name. |
+| `npn` | [string](#string) |  | The National Producer Number (NPN) to validate. Format: 1-10 digit numeric string. Example: "1234567890" Required and must be non-empty. Reference: https://nipr.com |
+| `name` | [string](#string) | optional | Optional name of the producer to validate against NIPR records. If provided, both NPN existence and name match are verified. If omitted, only NPN existence is verified. |
 
 #### ValidateProducerNPNResponse
 
@@ -4818,7 +4902,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists and is valid, false otherwise. |
+| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. |
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -4832,15 +4916,21 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
 #### AppointmentType
 
-Type of appointment.
+AppointmentType categorizes how the appointment was established and
+processed.
+
+The appointment type determines the processing behavior:
+- Registry and Synthetic appointments are processed automatically
+- Up-front appointments go through NIPR's standard processing pipeline
+- Just-in-time appointments are created on demand when needed
 
 | Name | Number | Description |
 |------|--------|-------------|
 | `APPOINTMENT_TYPE_UNSPECIFIED` | 0 |  |
-| `APPOINTMENT_TYPE_REGISTRY` | 1 |  |
-| `APPOINTMENT_TYPE_UP_FRONT` | 2 |  |
-| `APPOINTMENT_TYPE_JUST_IN_TIME` | 3 |  |
-| `APPOINTMENT_TYPE_SYNTHETIC` | 4 | Synthetic appointments are programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated. |
+| `APPOINTMENT_TYPE_REGISTRY` | 1 | Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process. |
+| `APPOINTMENT_TYPE_UP_FRONT` | 2 | Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state. |
+| `APPOINTMENT_TYPE_JUST_IN_TIME` | 3 | Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment. |
+| `APPOINTMENT_TYPE_SYNTHETIC` | 4 | Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated. |
 
 
 #### OperationalStatus
@@ -4857,17 +4947,34 @@ This indicates whether the appointment is actively functioning or at risk of ter
 
 #### ProcessingStatus
 
-Processing status of the appointment.
+ProcessingStatus represents the lifecycle state of an appointment as it
+moves through the NIPR processing pipeline.
+
+Appointment Lifecycle:
+
+  RequestAppointment
+        |
+        v
+  IN_PROGRESS -----> APPOINTED (active appointment)
+        |                  |
+        v                  v (TerminateAppointment)
+    REJECTED         TERMINATION_REQUESTED --> TERMINATED
+
+For registry states or capacity carriers (no NIPR integration):
+  RequestAppointment --> APPOINTED (immediate)
+  TerminateAppointment --> TERMINATED (immediate)
+
+Reference: https://pdb.nipr.com/Gateway
 
 | Name | Number | Description |
 |------|--------|-------------|
 | `PROCESSING_STATUS_UNSPECIFIED` | 0 |  |
-| `PROCESSING_STATUS_IN_PROGRESS` | 1 |  |
-| `PROCESSING_STATUS_APPOINTED` | 2 |  |
-| `PROCESSING_STATUS_TERMINATED` | 3 |  |
-| `PROCESSING_STATUS_REJECTED` | 4 |  |
-| `PROCESSING_STATUS_MISSING_LICENSE` | 5 |  |
-| `PROCESSING_STATUS_TERMINATION_REQUESTED` | 6 |  |
+| `PROCESSING_STATUS_IN_PROGRESS` | 1 | Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook. |
+| `PROCESSING_STATUS_APPOINTED` | 2 | Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority. |
+| `PROCESSING_STATUS_TERMINATED` | 3 | Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state. |
+| `PROCESSING_STATUS_REJECTED` | 4 | Appointment request was rejected by NIPR. Check not_eligible_reasons for details. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions. |
+| `PROCESSING_STATUS_MISSING_LICENSE` | 5 | The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed. |
+| `PROCESSING_STATUS_TERMINATION_REQUESTED` | 6 | A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook. |
 
 
 #### RiskReason
@@ -4891,29 +4998,30 @@ trigger operational status changes.
 TerminationReason represents the reason for the termination of an appointment.
 
 These reasons correspond to NIPR's valid termination codes and vary by
-state. Use ListTerminationReasons to get the valid reasons for a specific
-state before terminating an appointment.
+state. Not all reasons are valid in every state - use ListTerminationReasons
+to get the valid reasons for a specific state before calling
+TerminateAppointment.
 
 Reference: https://pdb.nipr.com/Gateway/ValidTerms
 
 | Name | Number | Description |
 |------|--------|-------------|
 | `TERMINATION_REASON_UNSPECIFIED` | 0 |  |
-| `TERMINATION_REASON_VOLUNTARY_TERMINATION` | 1 |  |
-| `TERMINATION_REASON_INADEQUATE_PRODUCTION` | 2 |  |
-| `TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT` | 3 |  |
-| `TERMINATION_REASON_DEATH` | 4 |  |
-| `TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION` | 5 |  |
-| `TERMINATION_REASON_COMPANY_INDEBTEDNESS` | 6 |  |
-| `TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE` | 7 |  |
-| `TERMINATION_REASON_AGENT_MOVED` | 8 |  |
-| `TERMINATION_REASON_APPOINTED_IN_ERROR` | 9 |  |
-| `TERMINATION_REASON_CANCELLED` | 10 |  |
-| `TERMINATION_REASON_CANCELLED_FOR_CAUSE` | 11 |  |
-| `TERMINATION_REASON_COMPANY_MERGER` | 12 |  |
-| `TERMINATION_REASON_REVOKED` | 13 |  |
-| `TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE` | 14 |  |
-| `TERMINATION_REASON_REQUEST_REGULATORY_REVIEW` | 15 |  |
+| `TERMINATION_REASON_VOLUNTARY_TERMINATION` | 1 | Producer or agency voluntarily chose to end the appointment. |
+| `TERMINATION_REASON_INADEQUATE_PRODUCTION` | 2 | Carrier terminated due to insufficient premium production or sales volume. |
+| `TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT` | 3 | Appointment was cancelled by the managing general agent (MGA). |
+| `TERMINATION_REASON_DEATH` | 4 | Producer has passed away. |
+| `TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION` | 5 | Insurance company has ceased operations or entered liquidation. |
+| `TERMINATION_REASON_COMPANY_INDEBTEDNESS` | 6 | Producer owes money to the insurance company (e.g., unremitted premiums). |
+| `TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE` | 7 | Carrier terminated due to poor service to policyholders. |
+| `TERMINATION_REASON_AGENT_MOVED` | 8 | Producer relocated to a different jurisdiction. |
+| `TERMINATION_REASON_APPOINTED_IN_ERROR` | 9 | Appointment was created in error and is being corrected. |
+| `TERMINATION_REASON_CANCELLED` | 10 | General cancellation without a more specific reason. |
+| `TERMINATION_REASON_CANCELLED_FOR_CAUSE` | 11 | Carrier terminated for cause (e.g., misconduct, policy violations). |
+| `TERMINATION_REASON_COMPANY_MERGER` | 12 | Insurance company merged with another company. |
+| `TERMINATION_REASON_REVOKED` | 13 | Producer's license has been revoked by a regulatory authority. |
+| `TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE` | 14 | Producer's license has been suspended for compliance issues. |
+| `TERMINATION_REASON_REQUEST_REGULATORY_REVIEW` | 15 | Termination is being submitted for regulatory review by the state DOI. |
 
 
 ### producerflow/producer/v1/producer.proto
@@ -4940,6 +5048,20 @@ LicenseStatus defines the possible statuses of an insurance license.
 | `LICENSE_STATUS_EXPIRED` | 1 | The license has expired and is no longer valid. |
 | `LICENSE_STATUS_VALID` | 2 | License is currently active. |
 | `LICENSE_STATUS_NOT_ACTIVE` | 3 | The license exists but is not in an active state. This could be due to suspension, revocation, or other reasons. |
+
+
+#### AgencyOrganizationRelationship
+
+AgencyOrganizationRelationship defines the relationship an agency has with an organization.
+
+If an agency belongs to an organization, this field indicates the type of relationship.
+If an agency does not belong to any organization, this field will be UNSPECIFIED.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `AGENCY_ORGANIZATION_RELATIONSHIP_UNSPECIFIED` | 0 | Default unspecified value. Used when the agency does not belong to any organization. |
+| `AGENCY_ORGANIZATION_RELATIONSHIP_MAIN` | 1 | The agency is the main/primary agency for the organization. The main agency typically owns or manages the organization. |
+| `AGENCY_ORGANIZATION_RELATIONSHIP_RELATED` | 2 | The agency is a related agency in the organization's network. Related agencies are part of the organization but not the primary owner. |
 
 
 #### AgencyType

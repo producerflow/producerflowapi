@@ -10,16 +10,52 @@ public interface ProducerDataOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return Whether the npn field is set.
    */
   boolean hasNpn();
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return The npn.
    */
   java.lang.String getNpn();
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return The bytes for npn.
    */

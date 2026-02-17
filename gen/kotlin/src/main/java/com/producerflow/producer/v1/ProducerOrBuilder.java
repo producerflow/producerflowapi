@@ -117,9 +117,13 @@ public interface ProducerOrBuilder extends
 
   /**
    * <pre>
-   * The National Producer Number (NPN) of the producer.
-   * This is used to retrieve license information from the NIPR API.
-   * Must be non-empty.
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Used to retrieve license, appointment, and regulatory data from NIPR.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>
@@ -128,9 +132,13 @@ public interface ProducerOrBuilder extends
   java.lang.String getNpn();
   /**
    * <pre>
-   * The National Producer Number (NPN) of the producer.
-   * This is used to retrieve license information from the NIPR API.
-   * Must be non-empty.
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Used to retrieve license, appointment, and regulatory data from NIPR.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>

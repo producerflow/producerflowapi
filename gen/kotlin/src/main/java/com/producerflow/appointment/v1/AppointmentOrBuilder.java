@@ -11,7 +11,7 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Unique identifier for the appointment.
+   * Unique identifier for the appointment (UUID format).
    * </pre>
    *
    * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -20,7 +20,7 @@ public interface AppointmentOrBuilder extends
   java.lang.String getAppointmentId();
   /**
    * <pre>
-   * Unique identifier for the appointment.
+   * Unique identifier for the appointment (UUID format).
    * </pre>
    *
    * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -59,6 +59,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * The license number of the license being appointed.
+   * This is a denormalized copy of license.license_number for convenience.
    * </pre>
    *
    * <code>string name = 3 [json_name = "name"];</code>
@@ -68,6 +69,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * The license number of the license being appointed.
+   * This is a denormalized copy of license.license_number for convenience.
    * </pre>
    *
    * <code>string name = 3 [json_name = "name"];</code>
@@ -78,7 +80,7 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * The id of the agency that is appointed.
+   * The UUID of the agency that holds this appointment.
    * </pre>
    *
    * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -87,7 +89,7 @@ public interface AppointmentOrBuilder extends
   java.lang.String getAgencyId();
   /**
    * <pre>
-   * The id of the agency that is appointed.
+   * The UUID of the agency that holds this appointment.
    * </pre>
    *
    * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -98,7 +100,8 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -107,7 +110,8 @@ public interface AppointmentOrBuilder extends
   boolean hasProducerId();
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -116,7 +120,8 @@ public interface AppointmentOrBuilder extends
   java.lang.String getProducerId();
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -128,6 +133,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * The name of the carrier to which the license is appointed.
+   * Examples: "State Farm", "Allstate", "Progressive"
    * </pre>
    *
    * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -137,6 +143,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * The name of the carrier to which the license is appointed.
+   * Examples: "State Farm", "Allstate", "Progressive"
    * </pre>
    *
    * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -147,7 +154,8 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Type of appointment (e.g., up-front, registry).
+   * Type of appointment (registry, up-front, just-in-time, or synthetic).
+   * Determines how the appointment was established and processed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -156,7 +164,8 @@ public interface AppointmentOrBuilder extends
   int getAppointmentTypeValue();
   /**
    * <pre>
-   * Type of appointment (e.g., up-front, registry).
+   * Type of appointment (registry, up-front, just-in-time, or synthetic).
+   * Determines how the appointment was established and processed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -166,7 +175,8 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Processing status of the appointment (e.g., in progress, appointed).
+   * Current processing status of the appointment in the NIPR pipeline.
+   * See ProcessingStatus for the complete lifecycle documentation.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -175,7 +185,8 @@ public interface AppointmentOrBuilder extends
   int getProcessingStatusValue();
   /**
    * <pre>
-   * Processing status of the appointment (e.g., in progress, appointed).
+   * Current processing status of the appointment in the NIPR pipeline.
+   * See ProcessingStatus for the complete lifecycle documentation.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -186,6 +197,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * Optional. Comments or notes related to the appointment.
+   * May include NIPR processing notes or rejection details.
    * </pre>
    *
    * <code>string comments = 9 [json_name = "comments"];</code>
@@ -195,6 +207,7 @@ public interface AppointmentOrBuilder extends
   /**
    * <pre>
    * Optional. Comments or notes related to the appointment.
+   * May include NIPR processing notes or rejection details.
    * </pre>
    *
    * <code>string comments = 9 [json_name = "comments"];</code>
@@ -205,7 +218,7 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -214,7 +227,7 @@ public interface AppointmentOrBuilder extends
   boolean hasEffectiveDate();
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -223,7 +236,7 @@ public interface AppointmentOrBuilder extends
   com.google.protobuf.Timestamp getEffectiveDate();
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -232,7 +245,8 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -241,7 +255,8 @@ public interface AppointmentOrBuilder extends
   boolean hasTerminationDate();
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -250,7 +265,8 @@ public interface AppointmentOrBuilder extends
   com.google.protobuf.Timestamp getTerminationDate();
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -259,7 +275,7 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -268,7 +284,7 @@ public interface AppointmentOrBuilder extends
   boolean hasUpdatedAt();
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -277,7 +293,7 @@ public interface AppointmentOrBuilder extends
   com.google.protobuf.Timestamp getUpdatedAt();
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -286,9 +302,9 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -297,9 +313,9 @@ public interface AppointmentOrBuilder extends
   boolean hasOperationalStatus();
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -308,9 +324,9 @@ public interface AppointmentOrBuilder extends
   com.producerflow.appointment.v1.AppointmentOperationalStatus getOperationalStatus();
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -319,7 +335,11 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -328,7 +348,11 @@ public interface AppointmentOrBuilder extends
   java.lang.String getCocode();
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -339,8 +363,10 @@ public interface AppointmentOrBuilder extends
 
   /**
    * <pre>
-   * Optional. The id of the parent appointment, if this is a synthetic
-   * appointment. It should be empty for non-synthetic appointments.
+   * Optional. The UUID of the parent appointment, if this is a synthetic
+   * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+   * appointments. Synthetic appointments inherit properties from and are
+   * terminated with their parent appointment.
    * </pre>
    *
    * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -349,8 +375,10 @@ public interface AppointmentOrBuilder extends
   java.lang.String getParentAppointmentId();
   /**
    * <pre>
-   * Optional. The id of the parent appointment, if this is a synthetic
-   * appointment. It should be empty for non-synthetic appointments.
+   * Optional. The UUID of the parent appointment, if this is a synthetic
+   * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+   * appointments. Synthetic appointments inherit properties from and are
+   * terminated with their parent appointment.
    * </pre>
    *
    * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>

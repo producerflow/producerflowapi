@@ -7,7 +7,9 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
+ * ValidateAgencyNPNRequest is used to validate an agency's National Producer
+ * Number (NPN) against the NIPR database.
+ * This is a FREE operation using the NIPR NPN Lookup service.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.ValidateAgencyNPNRequest}
@@ -53,7 +55,10 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -75,7 +80,10 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -254,7 +262,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
+   * ValidateAgencyNPNRequest is used to validate an agency's National Producer
+   * Number (NPN) against the NIPR database.
+   * This is a FREE operation using the NIPR NPN Lookup service.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.ValidateAgencyNPNRequest}
@@ -398,7 +408,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -419,7 +432,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -441,7 +457,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -459,7 +478,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -474,7 +496,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>

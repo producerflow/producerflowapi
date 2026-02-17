@@ -7,7 +7,10 @@ package com.producerflow.appointment.v1;
 
 /**
  * <pre>
- * Represents an appointment for a license.
+ * Represents a managed appointment for a license, tracked through the
+ * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+ * on the Producer/Agency messages, this represents appointments that are
+ * actively managed (requested, terminated) through the AppointmentService.
  * </pre>
  *
  * Protobuf type {@code producerflow.appointment.v1.Appointment}
@@ -62,7 +65,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object appointmentId_ = "";
   /**
    * <pre>
-   * Unique identifier for the appointment.
+   * Unique identifier for the appointment (UUID format).
    * </pre>
    *
    * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -83,7 +86,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Unique identifier for the appointment.
+   * Unique identifier for the appointment (UUID format).
    * </pre>
    *
    * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -148,6 +151,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The license number of the license being appointed.
+   * This is a denormalized copy of license.license_number for convenience.
    * </pre>
    *
    * <code>string name = 3 [json_name = "name"];</code>
@@ -169,6 +173,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The license number of the license being appointed.
+   * This is a denormalized copy of license.license_number for convenience.
    * </pre>
    *
    * <code>string name = 3 [json_name = "name"];</code>
@@ -194,7 +199,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object agencyId_ = "";
   /**
    * <pre>
-   * The id of the agency that is appointed.
+   * The UUID of the agency that holds this appointment.
    * </pre>
    *
    * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -215,7 +220,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The id of the agency that is appointed.
+   * The UUID of the agency that holds this appointment.
    * </pre>
    *
    * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -241,7 +246,8 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object producerId_ = "";
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -253,7 +259,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -274,7 +281,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    * </pre>
    *
    * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -301,6 +309,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The name of the carrier to which the license is appointed.
+   * Examples: "State Farm", "Allstate", "Progressive"
    * </pre>
    *
    * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -322,6 +331,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The name of the carrier to which the license is appointed.
+   * Examples: "State Farm", "Allstate", "Progressive"
    * </pre>
    *
    * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -346,7 +356,8 @@ private static final long serialVersionUID = 0L;
   private int appointmentType_ = 0;
   /**
    * <pre>
-   * Type of appointment (e.g., up-front, registry).
+   * Type of appointment (registry, up-front, just-in-time, or synthetic).
+   * Determines how the appointment was established and processed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -357,7 +368,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Type of appointment (e.g., up-front, registry).
+   * Type of appointment (registry, up-front, just-in-time, or synthetic).
+   * Determines how the appointment was established and processed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -372,7 +384,8 @@ private static final long serialVersionUID = 0L;
   private int processingStatus_ = 0;
   /**
    * <pre>
-   * Processing status of the appointment (e.g., in progress, appointed).
+   * Current processing status of the appointment in the NIPR pipeline.
+   * See ProcessingStatus for the complete lifecycle documentation.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -383,7 +396,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Processing status of the appointment (e.g., in progress, appointed).
+   * Current processing status of the appointment in the NIPR pipeline.
+   * See ProcessingStatus for the complete lifecycle documentation.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -400,6 +414,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Optional. Comments or notes related to the appointment.
+   * May include NIPR processing notes or rejection details.
    * </pre>
    *
    * <code>string comments = 9 [json_name = "comments"];</code>
@@ -421,6 +436,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Optional. Comments or notes related to the appointment.
+   * May include NIPR processing notes or rejection details.
    * </pre>
    *
    * <code>string comments = 9 [json_name = "comments"];</code>
@@ -445,7 +461,7 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.Timestamp effectiveDate_;
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -457,7 +473,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -469,7 +485,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -483,7 +499,8 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.Timestamp terminationDate_;
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -495,7 +512,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -507,7 +525,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    * </pre>
    *
    * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -521,7 +540,7 @@ private static final long serialVersionUID = 0L;
   private com.google.protobuf.Timestamp updatedAt_;
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -533,7 +552,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -545,7 +564,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    * </pre>
    *
    * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -559,9 +578,9 @@ private static final long serialVersionUID = 0L;
   private com.producerflow.appointment.v1.AppointmentOperationalStatus operationalStatus_;
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -573,9 +592,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -587,9 +606,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&amp;O) that may affect the appointment's continued validity.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -604,7 +623,11 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object cocode_ = "";
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -625,7 +648,11 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -651,8 +678,10 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object parentAppointmentId_ = "";
   /**
    * <pre>
-   * Optional. The id of the parent appointment, if this is a synthetic
-   * appointment. It should be empty for non-synthetic appointments.
+   * Optional. The UUID of the parent appointment, if this is a synthetic
+   * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+   * appointments. Synthetic appointments inherit properties from and are
+   * terminated with their parent appointment.
    * </pre>
    *
    * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -673,8 +702,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. The id of the parent appointment, if this is a synthetic
-   * appointment. It should be empty for non-synthetic appointments.
+   * Optional. The UUID of the parent appointment, if this is a synthetic
+   * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+   * appointments. Synthetic appointments inherit properties from and are
+   * terminated with their parent appointment.
    * </pre>
    *
    * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -1028,7 +1059,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Represents an appointment for a license.
+   * Represents a managed appointment for a license, tracked through the
+   * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+   * on the Producer/Agency messages, this represents appointments that are
+   * actively managed (requested, terminated) through the AppointmentService.
    * </pre>
    *
    * Protobuf type {@code producerflow.appointment.v1.Appointment}
@@ -1411,7 +1445,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object appointmentId_ = "";
     /**
      * <pre>
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * </pre>
      *
      * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -1431,7 +1465,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * </pre>
      *
      * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -1452,7 +1486,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * </pre>
      *
      * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -1469,7 +1503,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * </pre>
      *
      * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -1483,7 +1517,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * </pre>
      *
      * <code>string appointment_id = 1 [json_name = "appointmentId"];</code>
@@ -1661,6 +1695,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * </pre>
      *
      * <code>string name = 3 [json_name = "name"];</code>
@@ -1681,6 +1716,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * </pre>
      *
      * <code>string name = 3 [json_name = "name"];</code>
@@ -1702,6 +1738,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * </pre>
      *
      * <code>string name = 3 [json_name = "name"];</code>
@@ -1719,6 +1756,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * </pre>
      *
      * <code>string name = 3 [json_name = "name"];</code>
@@ -1733,6 +1771,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * </pre>
      *
      * <code>string name = 3 [json_name = "name"];</code>
@@ -1752,7 +1791,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object agencyId_ = "";
     /**
      * <pre>
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * </pre>
      *
      * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -1772,7 +1811,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * </pre>
      *
      * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -1793,7 +1832,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * </pre>
      *
      * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -1810,7 +1849,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * </pre>
      *
      * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -1824,7 +1863,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * </pre>
      *
      * <code>string agency_id = 4 [json_name = "agencyId"];</code>
@@ -1844,7 +1883,8 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object producerId_ = "";
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1855,7 +1895,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1875,7 +1916,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1896,7 +1938,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1913,7 +1956,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1927,7 +1971,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * </pre>
      *
      * <code>optional string producer_id = 5 [json_name = "producerId"];</code>
@@ -1948,6 +1993,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * </pre>
      *
      * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -1968,6 +2014,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * </pre>
      *
      * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -1989,6 +2036,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * </pre>
      *
      * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -2006,6 +2054,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * </pre>
      *
      * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -2020,6 +2069,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * </pre>
      *
      * <code>string carrier = 6 [json_name = "carrier"];</code>
@@ -2039,7 +2089,8 @@ private static final long serialVersionUID = 0L;
     private int appointmentType_ = 0;
     /**
      * <pre>
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -2050,7 +2101,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -2065,7 +2117,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -2078,7 +2131,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -2096,7 +2150,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];</code>
@@ -2112,7 +2167,8 @@ private static final long serialVersionUID = 0L;
     private int processingStatus_ = 0;
     /**
      * <pre>
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -2123,7 +2179,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -2138,7 +2195,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -2151,7 +2209,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -2169,7 +2228,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];</code>
@@ -2186,6 +2246,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * </pre>
      *
      * <code>string comments = 9 [json_name = "comments"];</code>
@@ -2206,6 +2267,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * </pre>
      *
      * <code>string comments = 9 [json_name = "comments"];</code>
@@ -2227,6 +2289,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * </pre>
      *
      * <code>string comments = 9 [json_name = "comments"];</code>
@@ -2244,6 +2307,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * </pre>
      *
      * <code>string comments = 9 [json_name = "comments"];</code>
@@ -2258,6 +2322,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * </pre>
      *
      * <code>string comments = 9 [json_name = "comments"];</code>
@@ -2279,7 +2344,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> effectiveDateBuilder_;
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2290,7 +2355,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2305,7 +2370,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2325,7 +2390,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2343,7 +2408,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2368,7 +2433,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2385,7 +2450,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2397,7 +2462,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2412,7 +2477,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];</code>
@@ -2436,7 +2501,8 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> terminationDateBuilder_;
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2447,7 +2513,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2462,7 +2529,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2482,7 +2550,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2500,7 +2569,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2525,7 +2595,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2542,7 +2613,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2554,7 +2626,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2569,7 +2642,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * </pre>
      *
      * <code>optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];</code>
@@ -2593,7 +2667,7 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> updatedAtBuilder_;
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2604,7 +2678,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2619,7 +2693,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2639,7 +2713,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2657,7 +2731,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2682,7 +2756,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2699,7 +2773,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2711,7 +2785,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2726,7 +2800,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * </pre>
      *
      * <code>.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];</code>
@@ -2750,9 +2824,9 @@ private static final long serialVersionUID = 0L;
         com.producerflow.appointment.v1.AppointmentOperationalStatus, com.producerflow.appointment.v1.AppointmentOperationalStatus.Builder, com.producerflow.appointment.v1.AppointmentOperationalStatusOrBuilder> operationalStatusBuilder_;
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2763,9 +2837,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2780,9 +2854,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2802,9 +2876,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2822,9 +2896,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2849,9 +2923,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2868,9 +2942,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2882,9 +2956,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2899,9 +2973,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&amp;O) that may affect the appointment's continued validity.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];</code>
@@ -2923,7 +2997,11 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object cocode_ = "";
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -2943,7 +3021,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -2964,7 +3046,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -2981,7 +3067,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -2995,7 +3085,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 14 [json_name = "cocode"];</code>
@@ -3015,8 +3109,10 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object parentAppointmentId_ = "";
     /**
      * <pre>
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * </pre>
      *
      * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -3036,8 +3132,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * </pre>
      *
      * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -3058,8 +3156,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * </pre>
      *
      * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -3076,8 +3176,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * </pre>
      *
      * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>
@@ -3091,8 +3193,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * </pre>
      *
      * <code>string parent_appointment_id = 15 [json_name = "parentAppointmentId"];</code>

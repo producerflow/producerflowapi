@@ -94,7 +94,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3361
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -105,7 +105,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3361
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -289,7 +289,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3361
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The street.
      */
     @java.lang.Override
@@ -312,7 +312,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3361
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -1022,7 +1022,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3361
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1044,7 +1044,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3361
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1067,7 +1067,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3361
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -1086,7 +1086,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3361
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -1102,7 +1102,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3361
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -1872,12 +1872,16 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * National Producer Number (NPN) of the producer.
-   * Optional but strongly recommended for licensed producers.
-   * This unique identifier from NAIC enables:
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Optional but strongly recommended for licensed producers. Enables:
    * - NIPR data synchronization (licenses, appointments, regulatory actions)
    * - Carrier appointment verification
    * - Compliance tracking across states
    * If provided, must be valid in NIPR's database or creation will fail.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>
@@ -1899,12 +1903,16 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * National Producer Number (NPN) of the producer.
-   * Optional but strongly recommended for licensed producers.
-   * This unique identifier from NAIC enables:
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Optional but strongly recommended for licensed producers. Enables:
    * - NIPR data synchronization (licenses, appointments, regulatory actions)
    * - Carrier appointment verification
    * - Compliance tracking across states
    * If provided, must be valid in NIPR's database or creation will fail.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>
@@ -3594,12 +3602,16 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -3620,12 +3632,16 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -3647,12 +3663,16 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -3670,12 +3690,16 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -3690,12 +3714,16 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>

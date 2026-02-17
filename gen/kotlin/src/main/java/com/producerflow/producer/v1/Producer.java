@@ -1132,7 +1132,11 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -1141,7 +1145,11 @@ private static final long serialVersionUID = 0L;
       java.lang.String getLicenseNumber();
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -1152,8 +1160,8 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * The state that issued the license.
-       * Typically a two-letter state code.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -1162,8 +1170,8 @@ private static final long serialVersionUID = 0L;
       java.lang.String getLicenseState();
       /**
        * <pre>
-       * The state that issued the license.
-       * Typically a two-letter state code.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -1230,7 +1238,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2958
+       *     See producerflow/producer/v1/producer.proto;l=3214
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1241,7 +1249,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2958
+       *     See producerflow/producer/v1/producer.proto;l=3214
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -1719,7 +1727,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3008
+         *     See producerflow/producer/v1/producer.proto;l=3264
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -1730,7 +1738,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3008
+         *     See producerflow/producer/v1/producer.proto;l=3264
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -1938,7 +1946,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3008
+         *     See producerflow/producer/v1/producer.proto;l=3264
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -1952,7 +1960,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3008
+         *     See producerflow/producer/v1/producer.proto;l=3264
          * @return The issueDate.
          */
         @java.lang.Override
@@ -2661,7 +2669,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3008
+           *     See producerflow/producer/v1/producer.proto;l=3264
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -2674,7 +2682,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3008
+           *     See producerflow/producer/v1/producer.proto;l=3264
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3044,7 +3052,11 @@ private static final long serialVersionUID = 0L;
       private volatile java.lang.Object licenseNumber_ = "";
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -3065,7 +3077,11 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -3091,8 +3107,8 @@ private static final long serialVersionUID = 0L;
       private volatile java.lang.Object licenseState_ = "";
       /**
        * <pre>
-       * The state that issued the license.
-       * Typically a two-letter state code.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -3113,8 +3129,8 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * The state that issued the license.
-       * Typically a two-letter state code.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -3234,7 +3250,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2958
+       *     See producerflow/producer/v1/producer.proto;l=3214
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3248,7 +3264,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2958
+       *     See producerflow/producer/v1/producer.proto;l=3214
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -4107,7 +4123,11 @@ private static final long serialVersionUID = 0L;
         private java.lang.Object licenseNumber_ = "";
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -4127,7 +4147,11 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -4148,7 +4172,11 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -4165,7 +4193,11 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -4179,7 +4211,11 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -4199,8 +4235,8 @@ private static final long serialVersionUID = 0L;
         private java.lang.Object licenseState_ = "";
         /**
          * <pre>
-         * The state that issued the license.
-         * Typically a two-letter state code.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -4220,8 +4256,8 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The state that issued the license.
-         * Typically a two-letter state code.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -4242,8 +4278,8 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The state that issued the license.
-         * Typically a two-letter state code.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -4260,8 +4296,8 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The state that issued the license.
-         * Typically a two-letter state code.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -4275,8 +4311,8 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * The state that issued the license.
-         * Typically a two-letter state code.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -4517,7 +4553,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2958
+         *     See producerflow/producer/v1/producer.proto;l=3214
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -4530,7 +4566,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2958
+         *     See producerflow/producer/v1/producer.proto;l=3214
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -7284,8 +7320,11 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -7293,8 +7332,11 @@ private static final long serialVersionUID = 0L;
       int getRegulatoryActionsByStateCount();
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -7309,8 +7351,11 @@ private static final long serialVersionUID = 0L;
       getRegulatoryActionsByState();
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -7319,8 +7364,11 @@ private static final long serialVersionUID = 0L;
       getRegulatoryActionsByStateMap();
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -7332,8 +7380,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction defaultValue);
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -7344,6 +7395,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Clearance certification information for the producer.
+       * Indicates whether the producer has obtained clearance from NIPR's
+       * Clearance Certification process, which verifies the producer has no
+       * outstanding regulatory issues across all states.
        * </pre>
        *
        * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -7353,6 +7407,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Clearance certification information for the producer.
+       * Indicates whether the producer has obtained clearance from NIPR's
+       * Clearance Certification process, which verifies the producer has no
+       * outstanding regulatory issues across all states.
        * </pre>
        *
        * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -7364,6 +7421,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Details about NASD/FINRA examinations taken by the producer.
+       * This includes securities-related examinations (e.g., Series 6,
+       * Series 7, Series 63, Series 66) that may be required for selling
+       * variable insurance products.
+       * Reference: https://www.finra.org
        * </pre>
        *
        * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -7373,6 +7434,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Details about NASD/FINRA examinations taken by the producer.
+       * This includes securities-related examinations (e.g., Series 6,
+       * Series 7, Series 63, Series 66) that may be required for selling
+       * variable insurance products.
+       * Reference: https://www.finra.org
        * </pre>
        *
        * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -7383,8 +7448,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
     }
     /**
      * <pre>
-     * ProducerRegulatoryInfo contains regulatory information about a producer,
-     * including any regulatory actions taken against them.
+     * ProducerRegulatoryInfo contains regulatory information about a producer
+     * from NIPR, including any formal regulatory actions taken against them by
+     * state Departments of Insurance (DOIs) or other regulatory authorities
+     * (e.g., FINRA for securities-related licenses).
+     *
+     * Regulatory actions are significant events that may affect a producer's
+     * ability to sell insurance. They should be reviewed during hiring,
+     * contracting, and ongoing compliance monitoring.
      * </pre>
      *
      * Protobuf type {@code producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo}
@@ -7443,7 +7514,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -7452,7 +7523,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         java.lang.String getActionId();
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -7464,7 +7535,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The regulatory body that originated the action.
-         * Typically a state insurance department or FINRA.
+         * Examples: "California Department of Insurance", "FINRA",
+         * "Texas Department of Insurance".
+         * This identifies which authority initiated the regulatory proceeding.
          * </pre>
          *
          * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -7474,7 +7547,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The regulatory body that originated the action.
-         * Typically a state insurance department or FINRA.
+         * Examples: "California Department of Insurance", "FINRA",
+         * "Texas Department of Insurance".
+         * This identifies which authority initiated the regulatory proceeding.
          * </pre>
          *
          * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -7485,7 +7560,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each regulatory
+         * authority.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -7494,7 +7573,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         java.lang.String getReasonForAction();
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each regulatory
+         * authority.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -7506,6 +7589,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The outcome or resolution of the regulatory action.
+         * Common dispositions include:
+         * - "Revoked": License permanently removed
+         * - "Suspended": License temporarily inactive
+         * - "Consent Agreement": Negotiated settlement
+         * - "Probation": Conditional continued operation
+         * - "Fine/Penalty": Monetary penalty imposed
+         * - "Dismissed": Action was dropped or resolved favorably
+         * - "Pending": Action is still being adjudicated
          * </pre>
          *
          * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -7515,6 +7606,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The outcome or resolution of the regulatory action.
+         * Common dispositions include:
+         * - "Revoked": License permanently removed
+         * - "Suspended": License temporarily inactive
+         * - "Consent Agreement": Negotiated settlement
+         * - "Probation": Conditional continued operation
+         * - "Fine/Penalty": Monetary penalty imposed
+         * - "Dismissed": Action was dropped or resolved favorably
+         * - "Pending": Action is still being adjudicated
          * </pre>
          *
          * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -7525,7 +7624,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7534,7 +7633,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         boolean hasDateOfAction();
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7543,7 +7642,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         com.google.protobuf.Timestamp getDateOfAction();
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7552,7 +7651,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7561,7 +7662,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         boolean hasEffectiveDate();
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7570,7 +7673,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         com.google.protobuf.Timestamp getEffectiveDate();
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7579,7 +7684,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -7588,7 +7694,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         boolean hasEnterDate();
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -7597,7 +7704,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         com.google.protobuf.Timestamp getEnterDate();
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -7606,7 +7714,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * regulatory authority. Can be used to look up additional details
+         * from the authority's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -7615,7 +7725,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         java.lang.String getFileRef();
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * regulatory authority. Can be used to look up additional details
+         * from the authority's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -7626,7 +7738,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -7635,7 +7749,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         java.lang.String getPenaltyFineForfeiture();
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -7647,6 +7763,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -7656,6 +7774,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -7666,7 +7786,20 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * RegulatoryAction represents a regulatory action taken against a producer.
+       * RegulatoryAction represents a formal regulatory action taken against
+       * a producer by a state Department of Insurance, FINRA, or other
+       * regulatory body.
+       *
+       * Common types of regulatory actions include:
+       * - License revocation or suspension
+       * - Cease and desist orders
+       * - Consent agreements
+       * - Fines and monetary penalties
+       * - Probationary periods
+       * - Administrative actions for non-compliance
+       *
+       * These records are sourced from NIPR's PDB (Producer Database) and
+       * reflect official regulatory proceedings.
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction}
@@ -7718,7 +7851,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private volatile java.lang.Object actionId_ = "";
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -7739,7 +7872,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -7766,7 +7899,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The regulatory body that originated the action.
-         * Typically a state insurance department or FINRA.
+         * Examples: "California Department of Insurance", "FINRA",
+         * "Texas Department of Insurance".
+         * This identifies which authority initiated the regulatory proceeding.
          * </pre>
          *
          * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -7788,7 +7923,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The regulatory body that originated the action.
-         * Typically a state insurance department or FINRA.
+         * Examples: "California Department of Insurance", "FINRA",
+         * "Texas Department of Insurance".
+         * This identifies which authority initiated the regulatory proceeding.
          * </pre>
          *
          * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -7814,7 +7951,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private volatile java.lang.Object reasonForAction_ = "";
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each regulatory
+         * authority.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -7835,7 +7976,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each regulatory
+         * authority.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -7862,6 +8007,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The outcome or resolution of the regulatory action.
+         * Common dispositions include:
+         * - "Revoked": License permanently removed
+         * - "Suspended": License temporarily inactive
+         * - "Consent Agreement": Negotiated settlement
+         * - "Probation": Conditional continued operation
+         * - "Fine/Penalty": Monetary penalty imposed
+         * - "Dismissed": Action was dropped or resolved favorably
+         * - "Pending": Action is still being adjudicated
          * </pre>
          *
          * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -7883,6 +8036,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * The outcome or resolution of the regulatory action.
+         * Common dispositions include:
+         * - "Revoked": License permanently removed
+         * - "Suspended": License temporarily inactive
+         * - "Consent Agreement": Negotiated settlement
+         * - "Probation": Conditional continued operation
+         * - "Fine/Penalty": Monetary penalty imposed
+         * - "Dismissed": Action was dropped or resolved favorably
+         * - "Pending": Action is still being adjudicated
          * </pre>
          *
          * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -7907,7 +8068,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private com.google.protobuf.Timestamp dateOfAction_;
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7919,7 +8080,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7931,7 +8092,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -7945,7 +8106,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private com.google.protobuf.Timestamp effectiveDate_;
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7957,7 +8120,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7969,7 +8134,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -7983,7 +8150,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private com.google.protobuf.Timestamp enterDate_;
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -7995,7 +8163,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -8007,7 +8176,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * The date when the producer entered into the regulatory action.
+         * The date when the producer entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -8022,7 +8192,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private volatile java.lang.Object fileRef_ = "";
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * regulatory authority. Can be used to look up additional details
+         * from the authority's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -8043,7 +8215,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * regulatory authority. Can be used to look up additional details
+         * from the authority's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -8069,7 +8243,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private volatile java.lang.Object penaltyFineForfeiture_ = "";
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -8090,7 +8266,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -8117,6 +8295,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -8138,6 +8318,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -8424,7 +8606,20 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * RegulatoryAction represents a regulatory action taken against a producer.
+         * RegulatoryAction represents a formal regulatory action taken against
+         * a producer by a state Department of Insurance, FINRA, or other
+         * regulatory body.
+         *
+         * Common types of regulatory actions include:
+         * - License revocation or suspension
+         * - Cease and desist orders
+         * - Consent agreements
+         * - Fines and monetary penalties
+         * - Probationary periods
+         * - Administrative actions for non-compliance
+         *
+         * These records are sourced from NIPR's PDB (Producer Database) and
+         * reflect official regulatory proceedings.
          * </pre>
          *
          * Protobuf type {@code producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction}
@@ -8724,7 +8919,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           private java.lang.Object actionId_ = "";
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -8744,7 +8939,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -8765,7 +8960,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -8782,7 +8977,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -8796,7 +8991,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -8817,7 +9012,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The regulatory body that originated the action.
-           * Typically a state insurance department or FINRA.
+           * Examples: "California Department of Insurance", "FINRA",
+           * "Texas Department of Insurance".
+           * This identifies which authority initiated the regulatory proceeding.
            * </pre>
            *
            * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -8838,7 +9035,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The regulatory body that originated the action.
-           * Typically a state insurance department or FINRA.
+           * Examples: "California Department of Insurance", "FINRA",
+           * "Texas Department of Insurance".
+           * This identifies which authority initiated the regulatory proceeding.
            * </pre>
            *
            * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -8860,7 +9059,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The regulatory body that originated the action.
-           * Typically a state insurance department or FINRA.
+           * Examples: "California Department of Insurance", "FINRA",
+           * "Texas Department of Insurance".
+           * This identifies which authority initiated the regulatory proceeding.
            * </pre>
            *
            * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -8878,7 +9079,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The regulatory body that originated the action.
-           * Typically a state insurance department or FINRA.
+           * Examples: "California Department of Insurance", "FINRA",
+           * "Texas Department of Insurance".
+           * This identifies which authority initiated the regulatory proceeding.
            * </pre>
            *
            * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -8893,7 +9096,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The regulatory body that originated the action.
-           * Typically a state insurance department or FINRA.
+           * Examples: "California Department of Insurance", "FINRA",
+           * "Texas Department of Insurance".
+           * This identifies which authority initiated the regulatory proceeding.
            * </pre>
            *
            * <code>string origin_of_action = 2 [json_name = "originOfAction"];</code>
@@ -8913,7 +9118,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           private java.lang.Object reasonForAction_ = "";
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each regulatory
+           * authority.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -8933,7 +9142,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each regulatory
+           * authority.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -8954,7 +9167,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each regulatory
+           * authority.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -8971,7 +9188,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each regulatory
+           * authority.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -8985,7 +9206,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each regulatory
+           * authority.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -9006,6 +9231,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The outcome or resolution of the regulatory action.
+           * Common dispositions include:
+           * - "Revoked": License permanently removed
+           * - "Suspended": License temporarily inactive
+           * - "Consent Agreement": Negotiated settlement
+           * - "Probation": Conditional continued operation
+           * - "Fine/Penalty": Monetary penalty imposed
+           * - "Dismissed": Action was dropped or resolved favorably
+           * - "Pending": Action is still being adjudicated
            * </pre>
            *
            * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -9026,6 +9259,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The outcome or resolution of the regulatory action.
+           * Common dispositions include:
+           * - "Revoked": License permanently removed
+           * - "Suspended": License temporarily inactive
+           * - "Consent Agreement": Negotiated settlement
+           * - "Probation": Conditional continued operation
+           * - "Fine/Penalty": Monetary penalty imposed
+           * - "Dismissed": Action was dropped or resolved favorably
+           * - "Pending": Action is still being adjudicated
            * </pre>
            *
            * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -9047,6 +9288,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The outcome or resolution of the regulatory action.
+           * Common dispositions include:
+           * - "Revoked": License permanently removed
+           * - "Suspended": License temporarily inactive
+           * - "Consent Agreement": Negotiated settlement
+           * - "Probation": Conditional continued operation
+           * - "Fine/Penalty": Monetary penalty imposed
+           * - "Dismissed": Action was dropped or resolved favorably
+           * - "Pending": Action is still being adjudicated
            * </pre>
            *
            * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -9064,6 +9313,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The outcome or resolution of the regulatory action.
+           * Common dispositions include:
+           * - "Revoked": License permanently removed
+           * - "Suspended": License temporarily inactive
+           * - "Consent Agreement": Negotiated settlement
+           * - "Probation": Conditional continued operation
+           * - "Fine/Penalty": Monetary penalty imposed
+           * - "Dismissed": Action was dropped or resolved favorably
+           * - "Pending": Action is still being adjudicated
            * </pre>
            *
            * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -9078,6 +9335,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * The outcome or resolution of the regulatory action.
+           * Common dispositions include:
+           * - "Revoked": License permanently removed
+           * - "Suspended": License temporarily inactive
+           * - "Consent Agreement": Negotiated settlement
+           * - "Probation": Conditional continued operation
+           * - "Fine/Penalty": Monetary penalty imposed
+           * - "Dismissed": Action was dropped or resolved favorably
+           * - "Pending": Action is still being adjudicated
            * </pre>
            *
            * <code>string disposition = 4 [json_name = "disposition"];</code>
@@ -9099,7 +9364,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> dateOfActionBuilder_;
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9110,7 +9375,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9125,7 +9390,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9145,7 +9410,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9163,7 +9428,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9188,7 +9453,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9205,7 +9470,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9217,7 +9482,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9232,7 +9497,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -9256,7 +9521,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> effectiveDateBuilder_;
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9267,7 +9534,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9282,7 +9551,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9302,7 +9573,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9320,7 +9593,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9345,7 +9620,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9362,7 +9639,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9374,7 +9653,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9389,7 +9670,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -9413,7 +9696,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> enterDateBuilder_;
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9424,7 +9708,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9439,7 +9724,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9459,7 +9745,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9477,7 +9764,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9502,7 +9790,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9519,7 +9808,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9531,7 +9821,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9546,7 +9837,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * The date when the producer entered into the regulatory action.
+           * The date when the producer entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -9568,7 +9860,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           private java.lang.Object fileRef_ = "";
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * regulatory authority. Can be used to look up additional details
+           * from the authority's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -9588,7 +9882,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * regulatory authority. Can be used to look up additional details
+           * from the authority's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -9609,7 +9905,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * regulatory authority. Can be used to look up additional details
+           * from the authority's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -9626,7 +9924,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * regulatory authority. Can be used to look up additional details
+           * from the authority's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -9640,7 +9940,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * regulatory authority. Can be used to look up additional details
+           * from the authority's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -9660,7 +9962,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           private java.lang.Object penaltyFineForfeiture_ = "";
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -9680,7 +9984,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -9701,7 +10007,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -9718,7 +10026,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -9732,7 +10042,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -9753,6 +10065,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -9773,6 +10087,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -9794,6 +10110,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -9811,6 +10129,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -9825,6 +10145,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -9920,8 +10242,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -9942,8 +10267,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -9954,8 +10282,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -9973,8 +10304,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions by state.
-       * The key is the state code, and the value is the regulatory action.
+       * Map of regulatory actions keyed by two-letter state code.
+       * The key is the state code (e.g., "CA", "TX"), and the value is the
+       * regulatory action for that state. A producer may have regulatory
+       * actions in multiple states.
+       * An empty map indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -9997,6 +10331,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Clearance certification information for the producer.
+       * Indicates whether the producer has obtained clearance from NIPR's
+       * Clearance Certification process, which verifies the producer has no
+       * outstanding regulatory issues across all states.
        * </pre>
        *
        * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10018,6 +10355,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Clearance certification information for the producer.
+       * Indicates whether the producer has obtained clearance from NIPR's
+       * Clearance Certification process, which verifies the producer has no
+       * outstanding regulatory issues across all states.
        * </pre>
        *
        * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10044,6 +10384,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Details about NASD/FINRA examinations taken by the producer.
+       * This includes securities-related examinations (e.g., Series 6,
+       * Series 7, Series 63, Series 66) that may be required for selling
+       * variable insurance products.
+       * Reference: https://www.finra.org
        * </pre>
        *
        * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10065,6 +10409,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       /**
        * <pre>
        * Details about NASD/FINRA examinations taken by the producer.
+       * This includes securities-related examinations (e.g., Series 6,
+       * Series 7, Series 63, Series 66) that may be required for selling
+       * variable insurance products.
+       * Reference: https://www.finra.org
        * </pre>
        *
        * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10275,8 +10623,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * ProducerRegulatoryInfo contains regulatory information about a producer,
-       * including any regulatory actions taken against them.
+       * ProducerRegulatoryInfo contains regulatory information about a producer
+       * from NIPR, including any formal regulatory actions taken against them by
+       * state Departments of Insurance (DOIs) or other regulatory authorities
+       * (e.g., FINRA for securities-related licenses).
+       *
+       * Regulatory actions are significant events that may affect a producer's
+       * ability to sell insurance. They should be reviewed during hiring,
+       * contracting, and ongoing compliance monitoring.
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo}
@@ -10505,8 +10859,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10527,8 +10884,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10539,8 +10899,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10557,8 +10920,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10580,8 +10946,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10604,8 +10973,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10622,8 +10994,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10642,8 +11017,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions by state.
-         * The key is the state code, and the value is the regulatory action.
+         * Map of regulatory actions keyed by two-letter state code.
+         * The key is the state code (e.g., "CA", "TX"), and the value is the
+         * regulatory action for that state. A producer may have regulatory
+         * actions in multiple states.
+         * An empty map indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
@@ -10667,6 +11045,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Clearance certification information for the producer.
+         * Indicates whether the producer has obtained clearance from NIPR's
+         * Clearance Certification process, which verifies the producer has no
+         * outstanding regulatory issues across all states.
          * </pre>
          *
          * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10687,6 +11068,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Clearance certification information for the producer.
+         * Indicates whether the producer has obtained clearance from NIPR's
+         * Clearance Certification process, which verifies the producer has no
+         * outstanding regulatory issues across all states.
          * </pre>
          *
          * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10708,6 +11092,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Clearance certification information for the producer.
+         * Indicates whether the producer has obtained clearance from NIPR's
+         * Clearance Certification process, which verifies the producer has no
+         * outstanding regulatory issues across all states.
          * </pre>
          *
          * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10725,6 +11112,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Clearance certification information for the producer.
+         * Indicates whether the producer has obtained clearance from NIPR's
+         * Clearance Certification process, which verifies the producer has no
+         * outstanding regulatory issues across all states.
          * </pre>
          *
          * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10739,6 +11129,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Clearance certification information for the producer.
+         * Indicates whether the producer has obtained clearance from NIPR's
+         * Clearance Certification process, which verifies the producer has no
+         * outstanding regulatory issues across all states.
          * </pre>
          *
          * <code>string clearance_certification_info = 2 [json_name = "clearanceCertificationInfo"];</code>
@@ -10759,6 +11152,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Details about NASD/FINRA examinations taken by the producer.
+         * This includes securities-related examinations (e.g., Series 6,
+         * Series 7, Series 63, Series 66) that may be required for selling
+         * variable insurance products.
+         * Reference: https://www.finra.org
          * </pre>
          *
          * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10779,6 +11176,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Details about NASD/FINRA examinations taken by the producer.
+         * This includes securities-related examinations (e.g., Series 6,
+         * Series 7, Series 63, Series 66) that may be required for selling
+         * variable insurance products.
+         * Reference: https://www.finra.org
          * </pre>
          *
          * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10800,6 +11201,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Details about NASD/FINRA examinations taken by the producer.
+         * This includes securities-related examinations (e.g., Series 6,
+         * Series 7, Series 63, Series 66) that may be required for selling
+         * variable insurance products.
+         * Reference: https://www.finra.org
          * </pre>
          *
          * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10817,6 +11222,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Details about NASD/FINRA examinations taken by the producer.
+         * This includes securities-related examinations (e.g., Series 6,
+         * Series 7, Series 63, Series 66) that may be required for selling
+         * variable insurance products.
+         * Reference: https://www.finra.org
          * </pre>
          *
          * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -10831,6 +11240,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         /**
          * <pre>
          * Details about NASD/FINRA examinations taken by the producer.
+         * This includes securities-related examinations (e.g., Series 6,
+         * Series 7, Series 63, Series 66) that may be required for selling
+         * variable insurance products.
+         * Reference: https://www.finra.org
          * </pre>
          *
          * <code>string nasd_exam_details = 3 [json_name = "nasdExamDetails"];</code>
@@ -11048,14 +11461,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
       /**
        * <pre>
-       * Current status of the appointment.
+       * Current status of the appointment as reported by NIPR.
        *
-       * Common values:
-       * - "Active": Producer can sell this carrier's products
-       * - "Terminated": Appointment has ended
-       * - "Pending": Appointment is being processed
+       * Values:
+       * - "APPOINTED": Appointment is active; the producer can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
        *
-       * Always check status is "Active" before allowing sales.
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -11064,14 +11478,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       java.lang.String getStatus();
       /**
        * <pre>
-       * Current status of the appointment.
+       * Current status of the appointment as reported by NIPR.
        *
-       * Common values:
-       * - "Active": Producer can sell this carrier's products
-       * - "Terminated": Appointment has ended
-       * - "Pending": Appointment is being processed
+       * Values:
+       * - "APPOINTED": Appointment is active; the producer can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
        *
-       * Always check status is "Active" before allowing sales.
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -11213,10 +11628,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      * producer must also be appointed by each carrier whose products they want
      * to sell.
      *
-     * Appointment Lifecycle:
-     * 1. Active: Producer can sell this carrier's products
-     * 2. Terminated: Appointment ended (various reasons: producer left, carrier
-     * terminated, etc.)
+     * Appointment Lifecycle (status field values):
+     * 1. APPOINTED: Producer can sell this carrier's products
+     * 2. TERMINATED: Appointment has ended (various reasons: producer left,
+     * carrier terminated, etc.)
      *
      * Use Cases:
      * - Verify producer is appointed before allowing them to quote/sell a
@@ -11583,14 +11998,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       private volatile java.lang.Object status_ = "";
       /**
        * <pre>
-       * Current status of the appointment.
+       * Current status of the appointment as reported by NIPR.
        *
-       * Common values:
-       * - "Active": Producer can sell this carrier's products
-       * - "Terminated": Appointment has ended
-       * - "Pending": Appointment is being processed
+       * Values:
+       * - "APPOINTED": Appointment is active; the producer can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
        *
-       * Always check status is "Active" before allowing sales.
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -11611,14 +12027,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Current status of the appointment.
+       * Current status of the appointment as reported by NIPR.
        *
-       * Common values:
-       * - "Active": Producer can sell this carrier's products
-       * - "Terminated": Appointment has ended
-       * - "Pending": Appointment is being processed
+       * Values:
+       * - "APPOINTED": Appointment is active; the producer can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
        *
-       * Always check status is "Active" before allowing sales.
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -12116,10 +12533,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        * producer must also be appointed by each carrier whose products they want
        * to sell.
        *
-       * Appointment Lifecycle:
-       * 1. Active: Producer can sell this carrier's products
-       * 2. Terminated: Appointment ended (various reasons: producer left, carrier
-       * terminated, etc.)
+       * Appointment Lifecycle (status field values):
+       * 1. APPOINTED: Producer can sell this carrier's products
+       * 2. TERMINATED: Appointment has ended (various reasons: producer left,
+       * carrier terminated, etc.)
        *
        * Use Cases:
        * - Verify producer is appointed before allowing them to quote/sell a
@@ -13044,14 +13461,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         private java.lang.Object status_ = "";
         /**
          * <pre>
-         * Current status of the appointment.
+         * Current status of the appointment as reported by NIPR.
          *
-         * Common values:
-         * - "Active": Producer can sell this carrier's products
-         * - "Terminated": Appointment has ended
-         * - "Pending": Appointment is being processed
+         * Values:
+         * - "APPOINTED": Appointment is active; the producer can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
          *
-         * Always check status is "Active" before allowing sales.
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -13071,14 +13489,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Current status of the appointment.
+         * Current status of the appointment as reported by NIPR.
          *
-         * Common values:
-         * - "Active": Producer can sell this carrier's products
-         * - "Terminated": Appointment has ended
-         * - "Pending": Appointment is being processed
+         * Values:
+         * - "APPOINTED": Appointment is active; the producer can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
          *
-         * Always check status is "Active" before allowing sales.
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -13099,14 +13518,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Current status of the appointment.
+         * Current status of the appointment as reported by NIPR.
          *
-         * Common values:
-         * - "Active": Producer can sell this carrier's products
-         * - "Terminated": Appointment has ended
-         * - "Pending": Appointment is being processed
+         * Values:
+         * - "APPOINTED": Appointment is active; the producer can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
          *
-         * Always check status is "Active" before allowing sales.
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -13123,14 +13543,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Current status of the appointment.
+         * Current status of the appointment as reported by NIPR.
          *
-         * Common values:
-         * - "Active": Producer can sell this carrier's products
-         * - "Terminated": Appointment has ended
-         * - "Pending": Appointment is being processed
+         * Values:
+         * - "APPOINTED": Appointment is active; the producer can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
          *
-         * Always check status is "Active" before allowing sales.
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -13144,14 +13565,15 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Current status of the appointment.
+         * Current status of the appointment as reported by NIPR.
          *
-         * Common values:
-         * - "Active": Producer can sell this carrier's products
-         * - "Terminated": Appointment has ended
-         * - "Pending": Appointment is being processed
+         * Values:
+         * - "APPOINTED": Appointment is active; the producer can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
          *
-         * Always check status is "Active" before allowing sales.
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -16101,7 +16523,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3231
+     *     See producerflow/producer/v1/producer.proto;l=3540
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -16112,7 +16534,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3231
+     *     See producerflow/producer/v1/producer.proto;l=3540
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -16285,7 +16707,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3231
+     *     See producerflow/producer/v1/producer.proto;l=3540
      * @return The street.
      */
     @java.lang.Override
@@ -16308,7 +16730,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3231
+     *     See producerflow/producer/v1/producer.proto;l=3540
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -17007,7 +17429,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3231
+       *     See producerflow/producer/v1/producer.proto;l=3540
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -17029,7 +17451,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3231
+       *     See producerflow/producer/v1/producer.proto;l=3540
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -17052,7 +17474,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3231
+       *     See producerflow/producer/v1/producer.proto;l=3540
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -17071,7 +17493,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3231
+       *     See producerflow/producer/v1/producer.proto;l=3540
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -17087,7 +17509,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3231
+       *     See producerflow/producer/v1/producer.proto;l=3540
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -17870,9 +18292,13 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
   private volatile java.lang.Object npn_ = "";
   /**
    * <pre>
-   * The National Producer Number (NPN) of the producer.
-   * This is used to retrieve license information from the NIPR API.
-   * Must be non-empty.
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Used to retrieve license, appointment, and regulatory data from NIPR.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>
@@ -17893,9 +18319,13 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
   }
   /**
    * <pre>
-   * The National Producer Number (NPN) of the producer.
-   * This is used to retrieve license information from the NIPR API.
-   * Must be non-empty.
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Used to retrieve license, appointment, and regulatory data from NIPR.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 4 [json_name = "npn"];</code>
@@ -20148,9 +20578,13 @@ java.lang.String defaultValue) {
     private java.lang.Object npn_ = "";
     /**
      * <pre>
-     * The National Producer Number (NPN) of the producer.
-     * This is used to retrieve license information from the NIPR API.
-     * Must be non-empty.
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license, appointment, and regulatory data from NIPR.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -20170,9 +20604,13 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) of the producer.
-     * This is used to retrieve license information from the NIPR API.
-     * Must be non-empty.
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license, appointment, and regulatory data from NIPR.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -20193,9 +20631,13 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) of the producer.
-     * This is used to retrieve license information from the NIPR API.
-     * Must be non-empty.
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license, appointment, and regulatory data from NIPR.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -20212,9 +20654,13 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) of the producer.
-     * This is used to retrieve license information from the NIPR API.
-     * Must be non-empty.
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license, appointment, and regulatory data from NIPR.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>
@@ -20228,9 +20674,13 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) of the producer.
-     * This is used to retrieve license information from the NIPR API.
-     * Must be non-empty.
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license, appointment, and regulatory data from NIPR.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 4 [json_name = "npn"];</code>

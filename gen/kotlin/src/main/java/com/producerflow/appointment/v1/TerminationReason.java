@@ -10,8 +10,9 @@ package com.producerflow.appointment.v1;
  * TerminationReason represents the reason for the termination of an appointment.
  *
  * These reasons correspond to NIPR's valid termination codes and vary by
- * state. Use ListTerminationReasons to get the valid reasons for a specific
- * state before terminating an appointment.
+ * state. Not all reasons are valid in every state - use ListTerminationReasons
+ * to get the valid reasons for a specific state before calling
+ * TerminateAppointment.
  *
  * Reference: https://pdb.nipr.com/Gateway/ValidTerms
  * </pre>
@@ -25,62 +26,122 @@ public enum TerminationReason
    */
   TERMINATION_REASON_UNSPECIFIED(0),
   /**
+   * <pre>
+   * Producer or agency voluntarily chose to end the appointment.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_VOLUNTARY_TERMINATION = 1;</code>
    */
   TERMINATION_REASON_VOLUNTARY_TERMINATION(1),
   /**
+   * <pre>
+   * Carrier terminated due to insufficient premium production or sales volume.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_INADEQUATE_PRODUCTION = 2;</code>
    */
   TERMINATION_REASON_INADEQUATE_PRODUCTION(2),
   /**
+   * <pre>
+   * Appointment was cancelled by the managing general agent (MGA).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT = 3;</code>
    */
   TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT(3),
   /**
+   * <pre>
+   * Producer has passed away.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_DEATH = 4;</code>
    */
   TERMINATION_REASON_DEATH(4),
   /**
+   * <pre>
+   * Insurance company has ceased operations or entered liquidation.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION = 5;</code>
    */
   TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION(5),
   /**
+   * <pre>
+   * Producer owes money to the insurance company (e.g., unremitted premiums).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_INDEBTEDNESS = 6;</code>
    */
   TERMINATION_REASON_COMPANY_INDEBTEDNESS(6),
   /**
+   * <pre>
+   * Carrier terminated due to poor service to policyholders.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE = 7;</code>
    */
   TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE(7),
   /**
+   * <pre>
+   * Producer relocated to a different jurisdiction.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_AGENT_MOVED = 8;</code>
    */
   TERMINATION_REASON_AGENT_MOVED(8),
   /**
+   * <pre>
+   * Appointment was created in error and is being corrected.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_APPOINTED_IN_ERROR = 9;</code>
    */
   TERMINATION_REASON_APPOINTED_IN_ERROR(9),
   /**
+   * <pre>
+   * General cancellation without a more specific reason.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED = 10;</code>
    */
   TERMINATION_REASON_CANCELLED(10),
   /**
+   * <pre>
+   * Carrier terminated for cause (e.g., misconduct, policy violations).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED_FOR_CAUSE = 11;</code>
    */
   TERMINATION_REASON_CANCELLED_FOR_CAUSE(11),
   /**
+   * <pre>
+   * Insurance company merged with another company.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_MERGER = 12;</code>
    */
   TERMINATION_REASON_COMPANY_MERGER(12),
   /**
+   * <pre>
+   * Producer's license has been revoked by a regulatory authority.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_REVOKED = 13;</code>
    */
   TERMINATION_REASON_REVOKED(13),
   /**
+   * <pre>
+   * Producer's license has been suspended for compliance issues.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE = 14;</code>
    */
   TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE(14),
   /**
+   * <pre>
+   * Termination is being submitted for regulatory review by the state DOI.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_REQUEST_REGULATORY_REVIEW = 15;</code>
    */
   TERMINATION_REASON_REQUEST_REGULATORY_REVIEW(15),
@@ -101,62 +162,122 @@ public enum TerminationReason
    */
   public static final int TERMINATION_REASON_UNSPECIFIED_VALUE = 0;
   /**
+   * <pre>
+   * Producer or agency voluntarily chose to end the appointment.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_VOLUNTARY_TERMINATION = 1;</code>
    */
   public static final int TERMINATION_REASON_VOLUNTARY_TERMINATION_VALUE = 1;
   /**
+   * <pre>
+   * Carrier terminated due to insufficient premium production or sales volume.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_INADEQUATE_PRODUCTION = 2;</code>
    */
   public static final int TERMINATION_REASON_INADEQUATE_PRODUCTION_VALUE = 2;
   /**
+   * <pre>
+   * Appointment was cancelled by the managing general agent (MGA).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT = 3;</code>
    */
   public static final int TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT_VALUE = 3;
   /**
+   * <pre>
+   * Producer has passed away.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_DEATH = 4;</code>
    */
   public static final int TERMINATION_REASON_DEATH_VALUE = 4;
   /**
+   * <pre>
+   * Insurance company has ceased operations or entered liquidation.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION = 5;</code>
    */
   public static final int TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION_VALUE = 5;
   /**
+   * <pre>
+   * Producer owes money to the insurance company (e.g., unremitted premiums).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_INDEBTEDNESS = 6;</code>
    */
   public static final int TERMINATION_REASON_COMPANY_INDEBTEDNESS_VALUE = 6;
   /**
+   * <pre>
+   * Carrier terminated due to poor service to policyholders.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE = 7;</code>
    */
   public static final int TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE_VALUE = 7;
   /**
+   * <pre>
+   * Producer relocated to a different jurisdiction.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_AGENT_MOVED = 8;</code>
    */
   public static final int TERMINATION_REASON_AGENT_MOVED_VALUE = 8;
   /**
+   * <pre>
+   * Appointment was created in error and is being corrected.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_APPOINTED_IN_ERROR = 9;</code>
    */
   public static final int TERMINATION_REASON_APPOINTED_IN_ERROR_VALUE = 9;
   /**
+   * <pre>
+   * General cancellation without a more specific reason.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED = 10;</code>
    */
   public static final int TERMINATION_REASON_CANCELLED_VALUE = 10;
   /**
+   * <pre>
+   * Carrier terminated for cause (e.g., misconduct, policy violations).
+   * </pre>
+   *
    * <code>TERMINATION_REASON_CANCELLED_FOR_CAUSE = 11;</code>
    */
   public static final int TERMINATION_REASON_CANCELLED_FOR_CAUSE_VALUE = 11;
   /**
+   * <pre>
+   * Insurance company merged with another company.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_COMPANY_MERGER = 12;</code>
    */
   public static final int TERMINATION_REASON_COMPANY_MERGER_VALUE = 12;
   /**
+   * <pre>
+   * Producer's license has been revoked by a regulatory authority.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_REVOKED = 13;</code>
    */
   public static final int TERMINATION_REASON_REVOKED_VALUE = 13;
   /**
+   * <pre>
+   * Producer's license has been suspended for compliance issues.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE = 14;</code>
    */
   public static final int TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE_VALUE = 14;
   /**
+   * <pre>
+   * Termination is being submitted for regulatory review by the state DOI.
+   * </pre>
+   *
    * <code>TERMINATION_REASON_REQUEST_REGULATORY_REVIEW = 15;</code>
    */
   public static final int TERMINATION_REASON_REQUEST_REGULATORY_REVIEW_VALUE = 15;

@@ -151,7 +151,11 @@ public object AgencySummaryKt {
 
     /**
      * ```
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * ```
@@ -167,7 +171,11 @@ public object AgencySummaryKt {
       }
     /**
      * ```
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * ```
@@ -378,6 +386,76 @@ public object AgencySummaryKt {
      */
     public fun clearExternalId() {
       _builder.clearExternalId()
+    }
+
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];`
+     */
+    public var organizationRelationship: com.producerflow.producer.v1.AgencyOrganizationRelationship
+      @JvmName("getOrganizationRelationship")
+      get() = _builder.organizationRelationship
+      @JvmName("setOrganizationRelationship")
+      set(value) {
+        _builder.organizationRelationship = value
+      }
+    public var organizationRelationshipValue: kotlin.Int
+      @JvmName("getOrganizationRelationshipValue")
+      get() = _builder.organizationRelationshipValue
+      @JvmName("setOrganizationRelationshipValue")
+      set(value) {
+        _builder.organizationRelationshipValue = value
+      }
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];`
+     */
+    public fun clearOrganizationRelationship() {
+      _builder.clearOrganizationRelationship()
+    }
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];`
+     * @return Whether the organizationRelationship field is set.
+     */
+    public fun hasOrganizationRelationship(): kotlin.Boolean {
+      return _builder.hasOrganizationRelationship()
     }
   }
 }

@@ -29,6 +29,18 @@ public object ProducerDataKt {
     internal fun _build(): com.producerflow.producer.v1.ProducerData = _builder.build()
 
     /**
+     * ```
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * ```
+     *
      * `optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
      */
     public var npn: kotlin.String
@@ -39,12 +51,36 @@ public object ProducerDataKt {
         _builder.npn = value
       }
     /**
+     * ```
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * ```
+     *
      * `optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
      */
     public fun clearNpn() {
       _builder.clearNpn()
     }
     /**
+     * ```
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * ```
+     *
      * `optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
      * @return Whether the npn field is set.
      */

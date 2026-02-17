@@ -203,7 +203,13 @@ public interface NewContactOrBuilder extends
 
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -212,7 +218,13 @@ public interface NewContactOrBuilder extends
   boolean hasNpn();
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -221,7 +233,13 @@ public interface NewContactOrBuilder extends
   java.lang.String getNpn();
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>

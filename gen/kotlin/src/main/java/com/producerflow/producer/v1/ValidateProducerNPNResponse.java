@@ -51,7 +51,8 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Indicates whether the NPN is valid.
-   * True if the NPN exists and is valid, false otherwise.
+   * True if the NPN exists in NIPR (and name matches, if provided).
+   * False if the NPN does not exist or the name does not match.
    * </pre>
    *
    * <code>bool valid = 1 [json_name = "valid"];</code>
@@ -364,7 +365,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Indicates whether the NPN is valid.
-     * True if the NPN exists and is valid, false otherwise.
+     * True if the NPN exists in NIPR (and name matches, if provided).
+     * False if the NPN does not exist or the name does not match.
      * </pre>
      *
      * <code>bool valid = 1 [json_name = "valid"];</code>
@@ -377,7 +379,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Indicates whether the NPN is valid.
-     * True if the NPN exists and is valid, false otherwise.
+     * True if the NPN exists in NIPR (and name matches, if provided).
+     * False if the NPN does not exist or the name does not match.
      * </pre>
      *
      * <code>bool valid = 1 [json_name = "valid"];</code>
@@ -394,7 +397,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Indicates whether the NPN is valid.
-     * True if the NPN exists and is valid, false otherwise.
+     * True if the NPN exists in NIPR (and name matches, if provided).
+     * False if the NPN does not exist or the name does not match.
      * </pre>
      *
      * <code>bool valid = 1 [json_name = "valid"];</code>

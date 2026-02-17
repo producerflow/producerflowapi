@@ -11,7 +11,10 @@ public inline fun appointment(block: com.producerflow.appointment.v1.Appointment
   com.producerflow.appointment.v1.AppointmentKt.Dsl._create(com.producerflow.appointment.v1.Appointment.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Represents an appointment for a license.
+ * Represents a managed appointment for a license, tracked through the
+ * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+ * on the Producer/Agency messages, this represents appointments that are
+ * actively managed (requested, terminated) through the AppointmentService.
  * ```
  *
  * Protobuf type `producerflow.appointment.v1.Appointment`
@@ -34,7 +37,7 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * ```
      *
      * `string appointment_id = 1 [json_name = "appointmentId"];`
@@ -48,7 +51,7 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Unique identifier for the appointment.
+     * Unique identifier for the appointment (UUID format).
      * ```
      *
      * `string appointment_id = 1 [json_name = "appointmentId"];`
@@ -98,6 +101,7 @@ public object AppointmentKt {
     /**
      * ```
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * ```
      *
      * `string name = 3 [json_name = "name"];`
@@ -112,6 +116,7 @@ public object AppointmentKt {
     /**
      * ```
      * The license number of the license being appointed.
+     * This is a denormalized copy of license.license_number for convenience.
      * ```
      *
      * `string name = 3 [json_name = "name"];`
@@ -122,7 +127,7 @@ public object AppointmentKt {
 
     /**
      * ```
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * ```
      *
      * `string agency_id = 4 [json_name = "agencyId"];`
@@ -136,7 +141,7 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * The id of the agency that is appointed.
+     * The UUID of the agency that holds this appointment.
      * ```
      *
      * `string agency_id = 4 [json_name = "agencyId"];`
@@ -147,7 +152,8 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * ```
      *
      * `optional string producer_id = 5 [json_name = "producerId"];`
@@ -161,7 +167,8 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * ```
      *
      * `optional string producer_id = 5 [json_name = "producerId"];`
@@ -171,7 +178,8 @@ public object AppointmentKt {
     }
     /**
      * ```
-     * Optional. The id of the producer that is appointed, if any.
+     * Optional. The UUID of the producer that holds this appointment, if any.
+     * When empty, this is an agency-level appointment.
      * ```
      *
      * `optional string producer_id = 5 [json_name = "producerId"];`
@@ -184,6 +192,7 @@ public object AppointmentKt {
     /**
      * ```
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * ```
      *
      * `string carrier = 6 [json_name = "carrier"];`
@@ -198,6 +207,7 @@ public object AppointmentKt {
     /**
      * ```
      * The name of the carrier to which the license is appointed.
+     * Examples: "State Farm", "Allstate", "Progressive"
      * ```
      *
      * `string carrier = 6 [json_name = "carrier"];`
@@ -208,7 +218,8 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * ```
      *
      * `.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];`
@@ -229,7 +240,8 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Type of appointment (e.g., up-front, registry).
+     * Type of appointment (registry, up-front, just-in-time, or synthetic).
+     * Determines how the appointment was established and processed.
      * ```
      *
      * `.producerflow.appointment.v1.AppointmentType appointment_type = 7 [json_name = "appointmentType"];`
@@ -240,7 +252,8 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * ```
      *
      * `.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];`
@@ -261,7 +274,8 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Processing status of the appointment (e.g., in progress, appointed).
+     * Current processing status of the appointment in the NIPR pipeline.
+     * See ProcessingStatus for the complete lifecycle documentation.
      * ```
      *
      * `.producerflow.appointment.v1.ProcessingStatus processing_status = 8 [json_name = "processingStatus"];`
@@ -273,6 +287,7 @@ public object AppointmentKt {
     /**
      * ```
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * ```
      *
      * `string comments = 9 [json_name = "comments"];`
@@ -287,6 +302,7 @@ public object AppointmentKt {
     /**
      * ```
      * Optional. Comments or notes related to the appointment.
+     * May include NIPR processing notes or rejection details.
      * ```
      *
      * `string comments = 9 [json_name = "comments"];`
@@ -297,7 +313,7 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * ```
      *
      * `.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];`
@@ -311,7 +327,7 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * ```
      *
      * `.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];`
@@ -321,7 +337,7 @@ public object AppointmentKt {
     }
     /**
      * ```
-     * Timestamp of when the appointment becomes effective.
+     * Timestamp of when the appointment became or becomes effective.
      * ```
      *
      * `.google.protobuf.Timestamp effective_date = 10 [json_name = "effectiveDate"];`
@@ -335,7 +351,8 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * ```
      *
      * `optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];`
@@ -349,7 +366,8 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * ```
      *
      * `optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];`
@@ -359,7 +377,8 @@ public object AppointmentKt {
     }
     /**
      * ```
-     * Optional. Timestamp of the termination of the appointment.
+     * Optional. Timestamp of when the appointment was terminated.
+     * Only populated when processing_status is TERMINATED.
      * ```
      *
      * `optional .google.protobuf.Timestamp termination_date = 11 [json_name = "terminationDate"];`
@@ -373,7 +392,7 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * ```
      *
      * `.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];`
@@ -387,7 +406,7 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * ```
      *
      * `.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];`
@@ -397,7 +416,7 @@ public object AppointmentKt {
     }
     /**
      * ```
-     * Timestamp of the last update to the appointment.
+     * Timestamp of the last update to this appointment record.
      * ```
      *
      * `.google.protobuf.Timestamp updated_at = 12 [json_name = "updatedAt"];`
@@ -411,9 +430,9 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&O) that may affect the appointment's continued validity.
      * ```
      *
      * `.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];`
@@ -427,9 +446,9 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&O) that may affect the appointment's continued validity.
      * ```
      *
      * `.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];`
@@ -439,9 +458,9 @@ public object AppointmentKt {
     }
     /**
      * ```
-     * Operational status information for the appointment. This field provides
-     * insight into the current operational health and any risk factors that may
-     * affect the appointment.
+     * Operational status information for the appointment. Provides insight into
+     * the current operational health and any risk factors (e.g., expired license,
+     * inactive E&O) that may affect the appointment's continued validity.
      * ```
      *
      * `.producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13 [json_name = "operationalStatus"];`
@@ -455,7 +474,11 @@ public object AppointmentKt {
 
     /**
      * ```
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * ```
      *
      * `string cocode = 14 [json_name = "cocode"];`
@@ -469,7 +492,11 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Reference: https://naic.org
      * ```
      *
      * `string cocode = 14 [json_name = "cocode"];`
@@ -480,8 +507,10 @@ public object AppointmentKt {
 
     /**
      * ```
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * ```
      *
      * `string parent_appointment_id = 15 [json_name = "parentAppointmentId"];`
@@ -495,8 +524,10 @@ public object AppointmentKt {
       }
     /**
      * ```
-     * Optional. The id of the parent appointment, if this is a synthetic
-     * appointment. It should be empty for non-synthetic appointments.
+     * Optional. The UUID of the parent appointment, if this is a synthetic
+     * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+     * appointments. Synthetic appointments inherit properties from and are
+     * terminated with their parent appointment.
      * ```
      *
      * `string parent_appointment_id = 15 [json_name = "parentAppointmentId"];`

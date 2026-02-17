@@ -437,21 +437,33 @@ export type Carrier = Message<"producerflow.appointment.v1.Carrier"> & {
   name: string;
 
   /**
-   * The NPN of the carrier.
+   * National Producer Number (NPN) of the carrier.
+   * A unique NAIC identifier assigned to business entities during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Reference: https://nipr.com
    *
    * @generated from field: string npn = 3;
    */
   npn: string;
 
   /**
-   * The FEIN of the carrier.
+   * Federal Employer Identification Number (FEIN) of the carrier.
+   * Format: 9-digit number assigned by the IRS for tax identification.
+   * Example: "123456789"
    *
    * @generated from field: string fein = 4;
    */
   fein: string;
 
   /**
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) to each insurance company for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Example: "12345"
+   * Reference: https://naic.org
    *
    * @generated from field: string cocode = 5;
    */
@@ -514,13 +526,16 @@ export const AppointmentOperationalStatusSchema: GenMessage<AppointmentOperation
   messageDesc(file_producerflow_appointment_v1_appointment, 17);
 
 /**
- * Represents an appointment for a license.
+ * Represents a managed appointment for a license, tracked through the
+ * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+ * on the Producer/Agency messages, this represents appointments that are
+ * actively managed (requested, terminated) through the AppointmentService.
  *
  * @generated from message producerflow.appointment.v1.Appointment
  */
 export type Appointment = Message<"producerflow.appointment.v1.Appointment"> & {
   /**
-   * Unique identifier for the appointment.
+   * Unique identifier for the appointment (UUID format).
    *
    * @generated from field: string appointment_id = 1;
    */
@@ -535,20 +550,22 @@ export type Appointment = Message<"producerflow.appointment.v1.Appointment"> & {
 
   /**
    * The license number of the license being appointed.
+   * This is a denormalized copy of license.license_number for convenience.
    *
    * @generated from field: string name = 3;
    */
   name: string;
 
   /**
-   * The id of the agency that is appointed.
+   * The UUID of the agency that holds this appointment.
    *
    * @generated from field: string agency_id = 4;
    */
   agencyId: string;
 
   /**
-   * Optional. The id of the producer that is appointed, if any.
+   * Optional. The UUID of the producer that holds this appointment, if any.
+   * When empty, this is an agency-level appointment.
    *
    * @generated from field: optional string producer_id = 5;
    */
@@ -556,20 +573,23 @@ export type Appointment = Message<"producerflow.appointment.v1.Appointment"> & {
 
   /**
    * The name of the carrier to which the license is appointed.
+   * Examples: "State Farm", "Allstate", "Progressive"
    *
    * @generated from field: string carrier = 6;
    */
   carrier: string;
 
   /**
-   * Type of appointment (e.g., up-front, registry).
+   * Type of appointment (registry, up-front, just-in-time, or synthetic).
+   * Determines how the appointment was established and processed.
    *
    * @generated from field: producerflow.appointment.v1.AppointmentType appointment_type = 7;
    */
   appointmentType: AppointmentType;
 
   /**
-   * Processing status of the appointment (e.g., in progress, appointed).
+   * Current processing status of the appointment in the NIPR pipeline.
+   * See ProcessingStatus for the complete lifecycle documentation.
    *
    * @generated from field: producerflow.appointment.v1.ProcessingStatus processing_status = 8;
    */
@@ -577,51 +597,59 @@ export type Appointment = Message<"producerflow.appointment.v1.Appointment"> & {
 
   /**
    * Optional. Comments or notes related to the appointment.
+   * May include NIPR processing notes or rejection details.
    *
    * @generated from field: string comments = 9;
    */
   comments: string;
 
   /**
-   * Timestamp of when the appointment becomes effective.
+   * Timestamp of when the appointment became or becomes effective.
    *
    * @generated from field: google.protobuf.Timestamp effective_date = 10;
    */
   effectiveDate?: Timestamp;
 
   /**
-   * Optional. Timestamp of the termination of the appointment.
+   * Optional. Timestamp of when the appointment was terminated.
+   * Only populated when processing_status is TERMINATED.
    *
    * @generated from field: optional google.protobuf.Timestamp termination_date = 11;
    */
   terminationDate?: Timestamp;
 
   /**
-   * Timestamp of the last update to the appointment.
+   * Timestamp of the last update to this appointment record.
    *
    * @generated from field: google.protobuf.Timestamp updated_at = 12;
    */
   updatedAt?: Timestamp;
 
   /**
-   * Operational status information for the appointment. This field provides
-   * insight into the current operational health and any risk factors that may
-   * affect the appointment.
+   * Operational status information for the appointment. Provides insight into
+   * the current operational health and any risk factors (e.g., expired license,
+   * inactive E&O) that may affect the appointment's continued validity.
    *
    * @generated from field: producerflow.appointment.v1.AppointmentOperationalStatus operational_status = 13;
    */
   operationalStatus?: AppointmentOperationalStatus;
 
   /**
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Reference: https://naic.org
    *
    * @generated from field: string cocode = 14;
    */
   cocode: string;
 
   /**
-   * Optional. The id of the parent appointment, if this is a synthetic
-   * appointment. It should be empty for non-synthetic appointments.
+   * Optional. The UUID of the parent appointment, if this is a synthetic
+   * appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+   * appointments. Synthetic appointments inherit properties from and are
+   * terminated with their parent appointment.
    *
    * @generated from field: string parent_appointment_id = 15;
    */
@@ -647,7 +675,10 @@ export type License = Message<"producerflow.appointment.v1.License"> & {
   licenseId: string;
 
   /**
-   * The license number.
+   * The license number assigned by the state Department of Insurance (DOI).
+   * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+   * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+   * This is a state-specific identifier, not globally unique across states.
    *
    * @generated from field: string license_number = 2;
    */
@@ -673,14 +704,21 @@ export type License = Message<"producerflow.appointment.v1.License"> & {
   } | { case: undefined; value?: undefined };
 
   /**
-   * The two-letter state code of the license.
+   * The two-letter US state or territory code that issued the license.
+   * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
    *
    * @generated from field: string state = 5;
    */
   state: string;
 
   /**
-   * The license class.
+   * License class description as defined by the state DOI.
+   * Describes the broad category of insurance the license covers.
+   * Common classes include:
+   * - "Insurance Producer": General license to sell insurance
+   * - "Limited Lines Producer": Restricted to specific product types
+   * - "Surplus Lines Broker": Authorized for non-admitted carriers
+   * Values vary by state as each DOI defines its own license classes.
    *
    * @generated from field: string license_class = 6;
    */
@@ -841,7 +879,24 @@ export const RiskReasonSchema: GenEnum<RiskReason> = /*@__PURE__*/
   enumDesc(file_producerflow_appointment_v1_appointment, 1);
 
 /**
- * Processing status of the appointment.
+ * ProcessingStatus represents the lifecycle state of an appointment as it
+ * moves through the NIPR processing pipeline.
+ *
+ * Appointment Lifecycle:
+ *
+ *   RequestAppointment
+ *         |
+ *         v
+ *   IN_PROGRESS -----> APPOINTED (active appointment)
+ *         |                  |
+ *         v                  v (TerminateAppointment)
+ *     REJECTED         TERMINATION_REQUESTED --> TERMINATED
+ *
+ * For registry states or capacity carriers (no NIPR integration):
+ *   RequestAppointment --> APPOINTED (immediate)
+ *   TerminateAppointment --> TERMINATED (immediate)
+ *
+ * Reference: https://pdb.nipr.com/Gateway
  *
  * @generated from enum producerflow.appointment.v1.ProcessingStatus
  */
@@ -852,31 +907,52 @@ export enum ProcessingStatus {
   UNSPECIFIED = 0,
 
   /**
+   * Appointment request has been submitted to NIPR and is awaiting processing.
+   * This is a transient state; the final result will be delivered via webhook.
+   *
    * @generated from enum value: PROCESSING_STATUS_IN_PROGRESS = 1;
    */
   IN_PROGRESS = 1,
 
   /**
+   * Appointment has been approved and is active. The producer/agency can sell
+   * this carrier's products for the specified Line of Authority.
+   *
    * @generated from enum value: PROCESSING_STATUS_APPOINTED = 2;
    */
   APPOINTED = 2,
 
   /**
+   * Appointment has been terminated. The producer/agency can no longer sell
+   * this carrier's products. This is a terminal state.
+   *
    * @generated from enum value: PROCESSING_STATUS_TERMINATED = 3;
    */
   TERMINATED = 3,
 
   /**
+   * Appointment request was rejected by NIPR. Check not_eligible_reasons for
+   * details. Common reasons include: missing resident license, unmet
+   * continuing education requirements, or outstanding regulatory actions.
+   *
    * @generated from enum value: PROCESSING_STATUS_REJECTED = 4;
    */
   REJECTED = 4,
 
   /**
+   * The license required for this appointment is missing or could not be found.
+   * The producer/agency needs to obtain the appropriate license before the
+   * appointment can be processed.
+   *
    * @generated from enum value: PROCESSING_STATUS_MISSING_LICENSE = 5;
    */
   MISSING_LICENSE = 5,
 
   /**
+   * A termination request has been submitted to NIPR and is awaiting
+   * processing. This is a transient state; the final result (TERMINATED)
+   * will be delivered via webhook.
+   *
    * @generated from enum value: PROCESSING_STATUS_TERMINATION_REQUESTED = 6;
    */
   TERMINATION_REQUESTED = 6,
@@ -889,7 +965,13 @@ export const ProcessingStatusSchema: GenEnum<ProcessingStatus> = /*@__PURE__*/
   enumDesc(file_producerflow_appointment_v1_appointment, 2);
 
 /**
- * Type of appointment.
+ * AppointmentType categorizes how the appointment was established and
+ * processed.
+ *
+ * The appointment type determines the processing behavior:
+ * - Registry and Synthetic appointments are processed automatically
+ * - Up-front appointments go through NIPR's standard processing pipeline
+ * - Just-in-time appointments are created on demand when needed
  *
  * @generated from enum producerflow.appointment.v1.AppointmentType
  */
@@ -900,23 +982,34 @@ export enum AppointmentType {
   UNSPECIFIED = 0,
 
   /**
+   * Registry appointment: Processed automatically for licenses in registry
+   * states. Registry states allow appointments without going through NIPR's
+   * standard appointment process.
+   *
    * @generated from enum value: APPOINTMENT_TYPE_REGISTRY = 1;
    */
   REGISTRY = 1,
 
   /**
+   * Up-front appointment: Standard appointment processed through NIPR.
+   * These require NIPR approval and may take time to process. The carrier
+   * pays appointment fees to NIPR/state.
+   *
    * @generated from enum value: APPOINTMENT_TYPE_UP_FRONT = 2;
    */
   UP_FRONT = 2,
 
   /**
+   * Just-in-time appointment: Created on demand when a producer needs to
+   * sell a product but doesn't have a pre-existing appointment.
+   *
    * @generated from enum value: APPOINTMENT_TYPE_JUST_IN_TIME = 3;
    */
   JUST_IN_TIME = 3,
 
   /**
-   * Synthetic appointments are programmatically created for individual
-   * producers in states where only agency-level appointments are permitted
+   * Synthetic appointment: Programmatically created for individual producers
+   * in states where only agency-level appointments are permitted
    * (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
    * an agency appointment is approved and inherit properties from the parent
    * agency appointment. The parent_appointment_id field links to the parent
@@ -939,8 +1032,9 @@ export const AppointmentTypeSchema: GenEnum<AppointmentType> = /*@__PURE__*/
  * TerminationReason represents the reason for the termination of an appointment.
  *
  * These reasons correspond to NIPR's valid termination codes and vary by
- * state. Use ListTerminationReasons to get the valid reasons for a specific
- * state before terminating an appointment.
+ * state. Not all reasons are valid in every state - use ListTerminationReasons
+ * to get the valid reasons for a specific state before calling
+ * TerminateAppointment.
  *
  * Reference: https://pdb.nipr.com/Gateway/ValidTerms
  *
@@ -953,76 +1047,106 @@ export enum TerminationReason {
   UNSPECIFIED = 0,
 
   /**
+   * Producer or agency voluntarily chose to end the appointment.
+   *
    * @generated from enum value: TERMINATION_REASON_VOLUNTARY_TERMINATION = 1;
    */
   VOLUNTARY_TERMINATION = 1,
 
   /**
+   * Carrier terminated due to insufficient premium production or sales volume.
+   *
    * @generated from enum value: TERMINATION_REASON_INADEQUATE_PRODUCTION = 2;
    */
   INADEQUATE_PRODUCTION = 2,
 
   /**
+   * Appointment was cancelled by the managing general agent (MGA).
+   *
    * @generated from enum value: TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT = 3;
    */
   CANCELLED_BY_GENERAL_AGENT = 3,
 
   /**
+   * Producer has passed away.
+   *
    * @generated from enum value: TERMINATION_REASON_DEATH = 4;
    */
   DEATH = 4,
 
   /**
+   * Insurance company has ceased operations or entered liquidation.
+   *
    * @generated from enum value: TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION = 5;
    */
   COMPANY_DEFUNCT_OR_LIQUIDATION = 5,
 
   /**
+   * Producer owes money to the insurance company (e.g., unremitted premiums).
+   *
    * @generated from enum value: TERMINATION_REASON_COMPANY_INDEBTEDNESS = 6;
    */
   COMPANY_INDEBTEDNESS = 6,
 
   /**
+   * Carrier terminated due to poor service to policyholders.
+   *
    * @generated from enum value: TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE = 7;
    */
   POOR_POLICYHOLDER_SERVICE = 7,
 
   /**
+   * Producer relocated to a different jurisdiction.
+   *
    * @generated from enum value: TERMINATION_REASON_AGENT_MOVED = 8;
    */
   AGENT_MOVED = 8,
 
   /**
+   * Appointment was created in error and is being corrected.
+   *
    * @generated from enum value: TERMINATION_REASON_APPOINTED_IN_ERROR = 9;
    */
   APPOINTED_IN_ERROR = 9,
 
   /**
+   * General cancellation without a more specific reason.
+   *
    * @generated from enum value: TERMINATION_REASON_CANCELLED = 10;
    */
   CANCELLED = 10,
 
   /**
+   * Carrier terminated for cause (e.g., misconduct, policy violations).
+   *
    * @generated from enum value: TERMINATION_REASON_CANCELLED_FOR_CAUSE = 11;
    */
   CANCELLED_FOR_CAUSE = 11,
 
   /**
+   * Insurance company merged with another company.
+   *
    * @generated from enum value: TERMINATION_REASON_COMPANY_MERGER = 12;
    */
   COMPANY_MERGER = 12,
 
   /**
+   * Producer's license has been revoked by a regulatory authority.
+   *
    * @generated from enum value: TERMINATION_REASON_REVOKED = 13;
    */
   REVOKED = 13,
 
   /**
+   * Producer's license has been suspended for compliance issues.
+   *
    * @generated from enum value: TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE = 14;
    */
   SUSPENDED_FOR_COMPLIANCE = 14,
 
   /**
+   * Termination is being submitted for regulatory review by the state DOI.
+   *
    * @generated from enum value: TERMINATION_REASON_REQUEST_REGULATORY_REVIEW = 15;
    */
   REQUEST_REGULATORY_REVIEW = 15,

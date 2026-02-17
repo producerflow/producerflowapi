@@ -171,7 +171,7 @@ public enum OnboardingStatus
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return com.producerflow.producer.v1.ProducerProto.getDescriptor().getEnumTypes().get(4);
+    return com.producerflow.producer.v1.ProducerProto.getDescriptor().getEnumTypes().get(5);
   }
 
   private static final OnboardingStatus[] VALUES = values();

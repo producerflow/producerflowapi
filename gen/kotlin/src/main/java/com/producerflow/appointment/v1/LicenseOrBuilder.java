@@ -31,7 +31,10 @@ public interface LicenseOrBuilder extends
 
   /**
    * <pre>
-   * The license number.
+   * The license number assigned by the state Department of Insurance (DOI).
+   * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+   * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+   * This is a state-specific identifier, not globally unique across states.
    * </pre>
    *
    * <code>string license_number = 2 [json_name = "licenseNumber", (.buf.validate.field) = { ... }</code>
@@ -40,7 +43,10 @@ public interface LicenseOrBuilder extends
   java.lang.String getLicenseNumber();
   /**
    * <pre>
-   * The license number.
+   * The license number assigned by the state Department of Insurance (DOI).
+   * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+   * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+   * This is a state-specific identifier, not globally unique across states.
    * </pre>
    *
    * <code>string license_number = 2 [json_name = "licenseNumber", (.buf.validate.field) = { ... }</code>
@@ -85,7 +91,8 @@ public interface LicenseOrBuilder extends
 
   /**
    * <pre>
-   * The two-letter state code of the license.
+   * The two-letter US state or territory code that issued the license.
+   * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
    * </pre>
    *
    * <code>string state = 5 [json_name = "state", (.buf.validate.field) = { ... }</code>
@@ -94,7 +101,8 @@ public interface LicenseOrBuilder extends
   java.lang.String getState();
   /**
    * <pre>
-   * The two-letter state code of the license.
+   * The two-letter US state or territory code that issued the license.
+   * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
    * </pre>
    *
    * <code>string state = 5 [json_name = "state", (.buf.validate.field) = { ... }</code>
@@ -105,7 +113,13 @@ public interface LicenseOrBuilder extends
 
   /**
    * <pre>
-   * The license class.
+   * License class description as defined by the state DOI.
+   * Describes the broad category of insurance the license covers.
+   * Common classes include:
+   * - "Insurance Producer": General license to sell insurance
+   * - "Limited Lines Producer": Restricted to specific product types
+   * - "Surplus Lines Broker": Authorized for non-admitted carriers
+   * Values vary by state as each DOI defines its own license classes.
    * </pre>
    *
    * <code>string license_class = 6 [json_name = "licenseClass"];</code>
@@ -114,7 +128,13 @@ public interface LicenseOrBuilder extends
   java.lang.String getLicenseClass();
   /**
    * <pre>
-   * The license class.
+   * License class description as defined by the state DOI.
+   * Describes the broad category of insurance the license covers.
+   * Common classes include:
+   * - "Insurance Producer": General license to sell insurance
+   * - "Limited Lines Producer": Restricted to specific product types
+   * - "Surplus Lines Broker": Authorized for non-admitted carriers
+   * Values vary by state as each DOI defines its own license classes.
    * </pre>
    *
    * <code>string license_class = 6 [json_name = "licenseClass"];</code>

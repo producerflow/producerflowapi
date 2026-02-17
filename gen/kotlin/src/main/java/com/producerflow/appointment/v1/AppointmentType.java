@@ -7,7 +7,13 @@ package com.producerflow.appointment.v1;
 
 /**
  * <pre>
- * Type of appointment.
+ * AppointmentType categorizes how the appointment was established and
+ * processed.
+ *
+ * The appointment type determines the processing behavior:
+ * - Registry and Synthetic appointments are processed automatically
+ * - Up-front appointments go through NIPR's standard processing pipeline
+ * - Just-in-time appointments are created on demand when needed
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.AppointmentType}
@@ -19,21 +25,38 @@ public enum AppointmentType
    */
   APPOINTMENT_TYPE_UNSPECIFIED(0),
   /**
+   * <pre>
+   * Registry appointment: Processed automatically for licenses in registry
+   * states. Registry states allow appointments without going through NIPR's
+   * standard appointment process.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_REGISTRY = 1;</code>
    */
   APPOINTMENT_TYPE_REGISTRY(1),
   /**
+   * <pre>
+   * Up-front appointment: Standard appointment processed through NIPR.
+   * These require NIPR approval and may take time to process. The carrier
+   * pays appointment fees to NIPR/state.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_UP_FRONT = 2;</code>
    */
   APPOINTMENT_TYPE_UP_FRONT(2),
   /**
+   * <pre>
+   * Just-in-time appointment: Created on demand when a producer needs to
+   * sell a product but doesn't have a pre-existing appointment.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_JUST_IN_TIME = 3;</code>
    */
   APPOINTMENT_TYPE_JUST_IN_TIME(3),
   /**
    * <pre>
-   * Synthetic appointments are programmatically created for individual
-   * producers in states where only agency-level appointments are permitted
+   * Synthetic appointment: Programmatically created for individual producers
+   * in states where only agency-level appointments are permitted
    * (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
    * an agency appointment is approved and inherit properties from the parent
    * agency appointment. The parent_appointment_id field links to the parent
@@ -62,21 +85,38 @@ public enum AppointmentType
    */
   public static final int APPOINTMENT_TYPE_UNSPECIFIED_VALUE = 0;
   /**
+   * <pre>
+   * Registry appointment: Processed automatically for licenses in registry
+   * states. Registry states allow appointments without going through NIPR's
+   * standard appointment process.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_REGISTRY = 1;</code>
    */
   public static final int APPOINTMENT_TYPE_REGISTRY_VALUE = 1;
   /**
+   * <pre>
+   * Up-front appointment: Standard appointment processed through NIPR.
+   * These require NIPR approval and may take time to process. The carrier
+   * pays appointment fees to NIPR/state.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_UP_FRONT = 2;</code>
    */
   public static final int APPOINTMENT_TYPE_UP_FRONT_VALUE = 2;
   /**
+   * <pre>
+   * Just-in-time appointment: Created on demand when a producer needs to
+   * sell a product but doesn't have a pre-existing appointment.
+   * </pre>
+   *
    * <code>APPOINTMENT_TYPE_JUST_IN_TIME = 3;</code>
    */
   public static final int APPOINTMENT_TYPE_JUST_IN_TIME_VALUE = 3;
   /**
    * <pre>
-   * Synthetic appointments are programmatically created for individual
-   * producers in states where only agency-level appointments are permitted
+   * Synthetic appointment: Programmatically created for individual producers
+   * in states where only agency-level appointments are permitted
    * (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
    * an agency appointment is approved and inherit properties from the parent
    * agency appointment. The parent_appointment_id field links to the parent

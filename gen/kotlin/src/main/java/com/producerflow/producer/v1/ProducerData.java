@@ -59,7 +59,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1699
+     *     See producerflow/producer/v1/producer.proto;l=1744
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -70,7 +70,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1699
+     *     See producerflow/producer/v1/producer.proto;l=1744
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -216,7 +216,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1699
+     *     See producerflow/producer/v1/producer.proto;l=1744
      * @return The street.
      */
     @java.lang.Override
@@ -239,7 +239,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1699
+     *     See producerflow/producer/v1/producer.proto;l=1744
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -961,7 +961,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1699
+       *     See producerflow/producer/v1/producer.proto;l=1744
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -983,7 +983,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1699
+       *     See producerflow/producer/v1/producer.proto;l=1744
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1006,7 +1006,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1699
+       *     See producerflow/producer/v1/producer.proto;l=1744
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -1025,7 +1025,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1699
+       *     See producerflow/producer/v1/producer.proto;l=1744
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -1041,7 +1041,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.ProducerData.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1699
+       *     See producerflow/producer/v1/producer.proto;l=1744
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -1570,6 +1570,18 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object npn_ = "";
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return Whether the npn field is set.
    */
@@ -1578,6 +1590,18 @@ private static final long serialVersionUID = 0L;
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return The npn.
    */
@@ -1595,6 +1619,18 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   * National Producer Number (NPN) of the producer.
+   * A unique NAIC identifier assigned to individuals during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * If provided, must be between 1 and 10 characters.
+   * Note: NPN validation against NIPR occurs during onboarding, not during URL
+   * generation.
+   * Reference: https://nipr.com
+   * </pre>
+   *
    * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
    * @return The bytes for npn.
    */
@@ -2443,6 +2479,18 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object npn_ = "";
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @return Whether the npn field is set.
      */
@@ -2450,6 +2498,18 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @return The npn.
      */
@@ -2466,6 +2526,18 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @return The bytes for npn.
      */
@@ -2483,6 +2555,18 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @param value The npn to set.
      * @return This builder for chaining.
@@ -2496,6 +2580,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -2506,6 +2602,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * National Producer Number (NPN) of the producer.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * If provided, must be between 1 and 10 characters.
+     * Note: NPN validation against NIPR occurs during onboarding, not during URL
+     * generation.
+     * Reference: https://nipr.com
+     * </pre>
+     *
      * <code>optional string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for npn to set.
      * @return This builder for chaining.

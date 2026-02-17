@@ -139,7 +139,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3678
+   *     See producerflow/producer/v1/producer.proto;l=3997
    * @return The role.
    */
   @java.lang.Deprecated java.lang.String getRole();
@@ -151,7 +151,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3678
+   *     See producerflow/producer/v1/producer.proto;l=3997
    * @return The bytes for role.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -187,6 +187,12 @@ public interface ContactOrBuilder extends
   /**
    * <pre>
    * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only present for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 9 [json_name = "npn"];</code>
@@ -196,6 +202,12 @@ public interface ContactOrBuilder extends
   /**
    * <pre>
    * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only present for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 9 [json_name = "npn"];</code>

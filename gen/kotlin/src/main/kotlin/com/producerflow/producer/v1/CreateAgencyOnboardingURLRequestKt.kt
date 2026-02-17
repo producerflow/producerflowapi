@@ -178,11 +178,12 @@ public object CreateAgencyOnboardingURLRequestKt {
       /**
        * ```
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * ```
        *
-       * `string docusign_template_id = 4 [json_name = "docusignTemplateId"];`
+       * `string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];`
        */
-      public var docusignTemplateId: kotlin.String
+      @kotlin.Deprecated(message = "Field docusignTemplateId is deprecated") public var docusignTemplateId: kotlin.String
         @JvmName("getDocusignTemplateId")
         get() = _builder.docusignTemplateId
         @JvmName("setDocusignTemplateId")
@@ -192,9 +193,10 @@ public object CreateAgencyOnboardingURLRequestKt {
       /**
        * ```
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * ```
        *
-       * `string docusign_template_id = 4 [json_name = "docusignTemplateId"];`
+       * `string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];`
        */
       public fun clearDocusignTemplateId() {
         _builder.clearDocusignTemplateId()
@@ -335,7 +337,15 @@ public object CreateAgencyOnboardingURLRequestKt {
 
       /**
        * ```
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 10 [json_name = "npn"];`
@@ -349,7 +359,15 @@ public object CreateAgencyOnboardingURLRequestKt {
         }
       /**
        * ```
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 10 [json_name = "npn"];`
@@ -497,6 +515,48 @@ public object CreateAgencyOnboardingURLRequestKt {
        */
       public fun clearOrganizationId() {
         _builder.clearOrganizationId()
+      }
+
+      /**
+       * ```
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * ```
+       *
+       * `optional string signature_template_id = 16 [json_name = "signatureTemplateId"];`
+       */
+      public var signatureTemplateId: kotlin.String
+        @JvmName("getSignatureTemplateId")
+        get() = _builder.signatureTemplateId
+        @JvmName("setSignatureTemplateId")
+        set(value) {
+          _builder.signatureTemplateId = value
+        }
+      /**
+       * ```
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * ```
+       *
+       * `optional string signature_template_id = 16 [json_name = "signatureTemplateId"];`
+       */
+      public fun clearSignatureTemplateId() {
+        _builder.clearSignatureTemplateId()
+      }
+      /**
+       * ```
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * ```
+       *
+       * `optional string signature_template_id = 16 [json_name = "signatureTemplateId"];`
+       * @return Whether the signatureTemplateId field is set.
+       */
+      public fun hasSignatureTemplateId(): kotlin.Boolean {
+        return _builder.hasSignatureTemplateId()
       }
 
       /**
@@ -704,7 +764,12 @@ public object CreateAgencyOnboardingURLRequestKt {
 
         /**
          * ```
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 7 [json_name = "npn"];`
@@ -718,7 +783,12 @@ public object CreateAgencyOnboardingURLRequestKt {
           }
         /**
          * ```
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 7 [json_name = "npn"];`

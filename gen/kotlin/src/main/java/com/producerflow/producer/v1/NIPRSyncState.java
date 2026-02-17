@@ -167,7 +167,7 @@ public enum NIPRSyncState
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return com.producerflow.producer.v1.ProducerProto.getDescriptor().getEnumTypes().get(3);
+    return com.producerflow.producer.v1.ProducerProto.getDescriptor().getEnumTypes().get(4);
   }
 
   private static final NIPRSyncState[] VALUES = values();

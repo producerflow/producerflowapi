@@ -48,6 +48,7 @@ private static final long serialVersionUID = 0L;
     fein_ = "";
     organizationId_ = "";
     externalId_ = "";
+    organizationRelationship_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -265,7 +266,11 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object npn_ = "";
   /**
    * <pre>
-   * National Producer Number (NPN) assigned by NIPR.
+   * National Producer Number (NPN) of the agency.
+   * A unique NAIC identifier assigned to business entities during the
+   * licensing application process and stored in the NIPR Producer Database
+   * (PDB).
+   * Format: 1-10 digit numeric string.
    * Only present for standard agencies (not sole proprietors).
    * Empty string if the agency doesn't have an NPN.
    * </pre>
@@ -288,7 +293,11 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * National Producer Number (NPN) assigned by NIPR.
+   * National Producer Number (NPN) of the agency.
+   * A unique NAIC identifier assigned to business entities during the
+   * licensing application process and stored in the NIPR Producer Database
+   * (PDB).
+   * Format: 1-10 digit numeric string.
    * Only present for standard agencies (not sole proprietors).
    * Empty string if the agency doesn't have an NPN.
    * </pre>
@@ -556,6 +565,70 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int ORGANIZATION_RELATIONSHIP_FIELD_NUMBER = 12;
+  private int organizationRelationship_ = 0;
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency (primary owner) or a related
+   * agency within an organization. This field reflects the agency's actual
+   * organization membership, not the query context.
+   *
+   * Values:
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+   * @return Whether the organizationRelationship field is set.
+   */
+  @java.lang.Override public boolean hasOrganizationRelationship() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency (primary owner) or a related
+   * agency within an organization. This field reflects the agency's actual
+   * organization membership, not the query context.
+   *
+   * Values:
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+   * @return The enum numeric value on the wire for organizationRelationship.
+   */
+  @java.lang.Override public int getOrganizationRelationshipValue() {
+    return organizationRelationship_;
+  }
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency (primary owner) or a related
+   * agency within an organization. This field reflects the agency's actual
+   * organization membership, not the query context.
+   *
+   * Values:
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+   * @return The organizationRelationship.
+   */
+  @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+    com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+    return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -603,6 +676,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 11, externalId_);
     }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeEnum(12, organizationRelationship_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -648,6 +724,10 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(11, externalId_);
     }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(12, organizationRelationship_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -691,6 +771,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!getExternalId()
         .equals(other.getExternalId())) return false;
+    if (hasOrganizationRelationship() != other.hasOrganizationRelationship()) return false;
+    if (hasOrganizationRelationship()) {
+      if (organizationRelationship_ != other.organizationRelationship_) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -730,6 +814,10 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
     hash = (53 * hash) + getExternalId().hashCode();
+    if (hasOrganizationRelationship()) {
+      hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
+      hash = (53 * hash) + organizationRelationship_;
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -895,6 +983,7 @@ private static final long serialVersionUID = 0L;
         createdAtBuilder_ = null;
       }
       externalId_ = "";
+      organizationRelationship_ = 0;
       return this;
     }
 
@@ -966,6 +1055,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.externalId_ = externalId_;
       }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.organizationRelationship_ = organizationRelationship_;
+        to_bitField0_ |= 0x00000004;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -1029,6 +1122,9 @@ private static final long serialVersionUID = 0L;
         externalId_ = other.externalId_;
         bitField0_ |= 0x00000400;
         onChanged();
+      }
+      if (other.hasOrganizationRelationship()) {
+        setOrganizationRelationship(other.getOrganizationRelationship());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1113,6 +1209,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000400;
               break;
             } // case 90
+            case 96: {
+              organizationRelationship_ = input.readEnum();
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 96
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1521,7 +1622,11 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object npn_ = "";
     /**
      * <pre>
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * </pre>
@@ -1543,7 +1648,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * </pre>
@@ -1566,7 +1675,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * </pre>
@@ -1585,7 +1698,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * </pre>
@@ -1601,7 +1718,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) assigned by NIPR.
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
      * Only present for standard agencies (not sole proprietors).
      * Empty string if the agency doesn't have an NPN.
      * </pre>
@@ -2210,6 +2331,144 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       externalId_ = value;
       bitField0_ |= 0x00000400;
+      onChanged();
+      return this;
+    }
+
+    private int organizationRelationship_ = 0;
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    @java.lang.Override public boolean hasOrganizationRelationship() {
+      return ((bitField0_ & 0x00000800) != 0);
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    @java.lang.Override public int getOrganizationRelationshipValue() {
+      return organizationRelationship_;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @param value The enum numeric value on the wire for organizationRelationship to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrganizationRelationshipValue(int value) {
+      organizationRelationship_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @return The organizationRelationship.
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+      com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+      return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @param value The organizationRelationship to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrganizationRelationship(com.producerflow.producer.v1.AgencyOrganizationRelationship value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000800;
+      organizationRelationship_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency (primary owner) or a related
+     * agency within an organization. This field reflects the agency's actual
+     * organization membership, not the query context.
+     *
+     * Values:
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 12 [json_name = "organizationRelationship"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearOrganizationRelationship() {
+      bitField0_ = (bitField0_ & ~0x00000800);
+      organizationRelationship_ = 0;
       onChanged();
       return this;
     }

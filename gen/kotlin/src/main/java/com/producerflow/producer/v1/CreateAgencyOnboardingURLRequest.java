@@ -120,21 +120,27 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * DocuSign template id is the id of the docusign template used to send the contract to the agency
+     * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
      * </pre>
      *
-     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=1629
      * @return The docusignTemplateId.
      */
-    java.lang.String getDocusignTemplateId();
+    @java.lang.Deprecated java.lang.String getDocusignTemplateId();
     /**
      * <pre>
      * DocuSign template id is the id of the docusign template used to send the contract to the agency
+     * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
      * </pre>
      *
-     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=1629
      * @return The bytes for docusignTemplateId.
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getDocusignTemplateIdBytes();
 
     /**
@@ -247,7 +253,15 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
-     * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+     * since sole proprietors use the principal's NPN.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 10 [json_name = "npn"];</code>
@@ -256,7 +270,15 @@ private static final long serialVersionUID = 0L;
     java.lang.String getNpn();
     /**
      * <pre>
-     * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+     * since sole proprietors use the principal's NPN.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 10 [json_name = "npn"];</code>
@@ -369,6 +391,41 @@ private static final long serialVersionUID = 0L;
         getOrganizationIdBytes();
 
     /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return Whether the signatureTemplateId field is set.
+     */
+    boolean hasSignatureTemplateId();
+    /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return The signatureTemplateId.
+     */
+    java.lang.String getSignatureTemplateId();
+    /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return The bytes for signatureTemplateId.
+     */
+    com.google.protobuf.ByteString
+        getSignatureTemplateIdBytes();
+
+    /**
      * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
      * @return Whether the principal field is set.
      */
@@ -421,6 +478,7 @@ private static final long serialVersionUID = 0L;
       website_ = "";
       npn_ = "";
       organizationId_ = "";
+      signatureTemplateId_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -562,7 +620,12 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * NPN of the principal
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 7 [json_name = "npn"];</code>
@@ -571,7 +634,12 @@ private static final long serialVersionUID = 0L;
       java.lang.String getNpn();
       /**
        * <pre>
-       * NPN of the principal
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 7 [json_name = "npn"];</code>
@@ -944,7 +1012,12 @@ private static final long serialVersionUID = 0L;
       private volatile java.lang.Object npn_ = "";
       /**
        * <pre>
-       * NPN of the principal
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 7 [json_name = "npn"];</code>
@@ -965,7 +1038,12 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * NPN of the principal
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2067,7 +2145,12 @@ private static final long serialVersionUID = 0L;
         private java.lang.Object npn_ = "";
         /**
          * <pre>
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2087,7 +2170,12 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2108,7 +2196,12 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2125,7 +2218,12 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2139,7 +2237,12 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * NPN of the principal
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 7 [json_name = "npn"];</code>
@@ -2493,13 +2596,16 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * DocuSign template id is the id of the docusign template used to send the contract to the agency
+     * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
      * </pre>
      *
-     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=1629
      * @return The docusignTemplateId.
      */
     @java.lang.Override
-    public java.lang.String getDocusignTemplateId() {
+    @java.lang.Deprecated public java.lang.String getDocusignTemplateId() {
       java.lang.Object ref = docusignTemplateId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -2514,13 +2620,16 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * DocuSign template id is the id of the docusign template used to send the contract to the agency
+     * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
      * </pre>
      *
-     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+     * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=1629
      * @return The bytes for docusignTemplateId.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getDocusignTemplateIdBytes() {
       java.lang.Object ref = docusignTemplateId_;
       if (ref instanceof java.lang.String) {
@@ -2782,7 +2891,15 @@ private static final long serialVersionUID = 0L;
     private volatile java.lang.Object npn_ = "";
     /**
      * <pre>
-     * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+     * since sole proprietors use the principal's NPN.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 10 [json_name = "npn"];</code>
@@ -2803,7 +2920,15 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+     * National Producer Number (NPN) of the agency.
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+     * since sole proprietors use the principal's NPN.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 10 [json_name = "npn"];</code>
@@ -2987,6 +3112,71 @@ private static final long serialVersionUID = 0L;
       }
     }
 
+    public static final int SIGNATURE_TEMPLATE_ID_FIELD_NUMBER = 16;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object signatureTemplateId_ = "";
+    /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return Whether the signatureTemplateId field is set.
+     */
+    @java.lang.Override
+    public boolean hasSignatureTemplateId() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return The signatureTemplateId.
+     */
+    @java.lang.Override
+    public java.lang.String getSignatureTemplateId() {
+      java.lang.Object ref = signatureTemplateId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        signatureTemplateId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * An optional signature template ID to be used to send the agency agreement through
+     * the configured e-signature provider (Docusign or Adobe Sign).
+     * The system will automatically detect the signature provider based on tenant configuration.
+     * </pre>
+     *
+     * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+     * @return The bytes for signatureTemplateId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getSignatureTemplateIdBytes() {
+      java.lang.Object ref = signatureTemplateId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        signatureTemplateId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int PRINCIPAL_FIELD_NUMBER = 14;
     private com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal_;
     /**
@@ -2995,7 +3185,7 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Override
     public boolean hasPrincipal() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
      * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
@@ -3066,11 +3256,14 @@ private static final long serialVersionUID = 0L;
       if (((bitField0_ & 0x00000004) != 0)) {
         output.writeMessage(13, getInvoicingAddress());
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
+      if (((bitField0_ & 0x00000010) != 0)) {
         output.writeMessage(14, getPrincipal());
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(organizationId_)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 15, organizationId_);
+      }
+      if (((bitField0_ & 0x00000008) != 0)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 16, signatureTemplateId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3124,12 +3317,15 @@ private static final long serialVersionUID = 0L;
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(13, getInvoicingAddress());
       }
-      if (((bitField0_ & 0x00000008) != 0)) {
+      if (((bitField0_ & 0x00000010) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(14, getPrincipal());
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(organizationId_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(15, organizationId_);
+      }
+      if (((bitField0_ & 0x00000008) != 0)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(16, signatureTemplateId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3182,6 +3378,11 @@ private static final long serialVersionUID = 0L;
       }
       if (!getOrganizationId()
           .equals(other.getOrganizationId())) return false;
+      if (hasSignatureTemplateId() != other.hasSignatureTemplateId()) return false;
+      if (hasSignatureTemplateId()) {
+        if (!getSignatureTemplateId()
+            .equals(other.getSignatureTemplateId())) return false;
+      }
       if (hasPrincipal() != other.hasPrincipal()) return false;
       if (hasPrincipal()) {
         if (!getPrincipal()
@@ -3232,6 +3433,10 @@ private static final long serialVersionUID = 0L;
       }
       hash = (37 * hash) + ORGANIZATION_ID_FIELD_NUMBER;
       hash = (53 * hash) + getOrganizationId().hashCode();
+      if (hasSignatureTemplateId()) {
+        hash = (37 * hash) + SIGNATURE_TEMPLATE_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getSignatureTemplateId().hashCode();
+      }
       if (hasPrincipal()) {
         hash = (37 * hash) + PRINCIPAL_FIELD_NUMBER;
         hash = (53 * hash) + getPrincipal().hashCode();
@@ -3407,6 +3612,7 @@ private static final long serialVersionUID = 0L;
           invoicingAddressBuilder_ = null;
         }
         organizationId_ = "";
+        signatureTemplateId_ = "";
         principal_ = null;
         if (principalBuilder_ != null) {
           principalBuilder_.dispose();
@@ -3498,10 +3704,14 @@ private static final long serialVersionUID = 0L;
           result.organizationId_ = organizationId_;
         }
         if (((from_bitField0_ & 0x00004000) != 0)) {
+          result.signatureTemplateId_ = signatureTemplateId_;
+          to_bitField0_ |= 0x00000008;
+        }
+        if (((from_bitField0_ & 0x00008000) != 0)) {
           result.principal_ = principalBuilder_ == null
               ? principal_
               : principalBuilder_.build();
-          to_bitField0_ |= 0x00000008;
+          to_bitField0_ |= 0x00000010;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -3578,6 +3788,11 @@ private static final long serialVersionUID = 0L;
         if (!other.getOrganizationId().isEmpty()) {
           organizationId_ = other.organizationId_;
           bitField0_ |= 0x00002000;
+          onChanged();
+        }
+        if (other.hasSignatureTemplateId()) {
+          signatureTemplateId_ = other.signatureTemplateId_;
+          bitField0_ |= 0x00004000;
           onChanged();
         }
         if (other.hasPrincipal()) {
@@ -3684,7 +3899,7 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(
                     getPrincipalFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00004000;
+                bitField0_ |= 0x00008000;
                 break;
               } // case 114
               case 122: {
@@ -3692,6 +3907,11 @@ private static final long serialVersionUID = 0L;
                 bitField0_ |= 0x00002000;
                 break;
               } // case 122
+              case 130: {
+                signatureTemplateId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00004000;
+                break;
+              } // case 130
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3975,12 +4195,15 @@ private static final long serialVersionUID = 0L;
       /**
        * <pre>
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * </pre>
        *
-       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=1629
        * @return The docusignTemplateId.
        */
-      public java.lang.String getDocusignTemplateId() {
+      @java.lang.Deprecated public java.lang.String getDocusignTemplateId() {
         java.lang.Object ref = docusignTemplateId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -3995,12 +4218,15 @@ private static final long serialVersionUID = 0L;
       /**
        * <pre>
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * </pre>
        *
-       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=1629
        * @return The bytes for docusignTemplateId.
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getDocusignTemplateIdBytes() {
         java.lang.Object ref = docusignTemplateId_;
         if (ref instanceof String) {
@@ -4016,13 +4242,16 @@ private static final long serialVersionUID = 0L;
       /**
        * <pre>
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * </pre>
        *
-       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=1629
        * @param value The docusignTemplateId to set.
        * @return This builder for chaining.
        */
-      public Builder setDocusignTemplateId(
+      @java.lang.Deprecated public Builder setDocusignTemplateId(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         docusignTemplateId_ = value;
@@ -4033,12 +4262,15 @@ private static final long serialVersionUID = 0L;
       /**
        * <pre>
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * </pre>
        *
-       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=1629
        * @return This builder for chaining.
        */
-      public Builder clearDocusignTemplateId() {
+      @java.lang.Deprecated public Builder clearDocusignTemplateId() {
         docusignTemplateId_ = getDefaultInstance().getDocusignTemplateId();
         bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
@@ -4047,13 +4279,16 @@ private static final long serialVersionUID = 0L;
       /**
        * <pre>
        * DocuSign template id is the id of the docusign template used to send the contract to the agency
+       * Deprecated: Use signature_template_id instead. This field will be removed in a future version.
        * </pre>
        *
-       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId"];</code>
+       * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=1629
        * @param value The bytes for docusignTemplateId to set.
        * @return This builder for chaining.
        */
-      public Builder setDocusignTemplateIdBytes(
+      @java.lang.Deprecated public Builder setDocusignTemplateIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
@@ -4546,7 +4781,15 @@ private static final long serialVersionUID = 0L;
       private java.lang.Object npn_ = "";
       /**
        * <pre>
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 10 [json_name = "npn"];</code>
@@ -4566,7 +4809,15 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 10 [json_name = "npn"];</code>
@@ -4587,7 +4838,15 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 10 [json_name = "npn"];</code>
@@ -4604,7 +4863,15 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 10 [json_name = "npn"];</code>
@@ -4618,7 +4885,15 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * NPN of the agency. Note that if the entity type is Sole Proprietor the NPN will be ignored
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Note: If the entity type is Sole Proprietor, the NPN will be ignored
+       * since sole proprietors use the principal's NPN.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 10 [json_name = "npn"];</code>
@@ -5203,6 +5478,121 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      private java.lang.Object signatureTemplateId_ = "";
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @return Whether the signatureTemplateId field is set.
+       */
+      public boolean hasSignatureTemplateId() {
+        return ((bitField0_ & 0x00004000) != 0);
+      }
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @return The signatureTemplateId.
+       */
+      public java.lang.String getSignatureTemplateId() {
+        java.lang.Object ref = signatureTemplateId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          signatureTemplateId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @return The bytes for signatureTemplateId.
+       */
+      public com.google.protobuf.ByteString
+          getSignatureTemplateIdBytes() {
+        java.lang.Object ref = signatureTemplateId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          signatureTemplateId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @param value The signatureTemplateId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSignatureTemplateId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        signatureTemplateId_ = value;
+        bitField0_ |= 0x00004000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSignatureTemplateId() {
+        signatureTemplateId_ = getDefaultInstance().getSignatureTemplateId();
+        bitField0_ = (bitField0_ & ~0x00004000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * An optional signature template ID to be used to send the agency agreement through
+       * the configured e-signature provider (Docusign or Adobe Sign).
+       * The system will automatically detect the signature provider based on tenant configuration.
+       * </pre>
+       *
+       * <code>optional string signature_template_id = 16 [json_name = "signatureTemplateId"];</code>
+       * @param value The bytes for signatureTemplateId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSignatureTemplateIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        signatureTemplateId_ = value;
+        bitField0_ |= 0x00004000;
+        onChanged();
+        return this;
+      }
+
       private com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal_;
       private com.google.protobuf.SingleFieldBuilder<
           com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal, com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.Builder, com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.PrincipalOrBuilder> principalBuilder_;
@@ -5211,7 +5601,7 @@ private static final long serialVersionUID = 0L;
        * @return Whether the principal field is set.
        */
       public boolean hasPrincipal() {
-        return ((bitField0_ & 0x00004000) != 0);
+        return ((bitField0_ & 0x00008000) != 0);
       }
       /**
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
@@ -5236,7 +5626,7 @@ private static final long serialVersionUID = 0L;
         } else {
           principalBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -5250,7 +5640,7 @@ private static final long serialVersionUID = 0L;
         } else {
           principalBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -5259,7 +5649,7 @@ private static final long serialVersionUID = 0L;
        */
       public Builder mergePrincipal(com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal value) {
         if (principalBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) != 0) &&
+          if (((bitField0_ & 0x00008000) != 0) &&
             principal_ != null &&
             principal_ != com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.getDefaultInstance()) {
             getPrincipalBuilder().mergeFrom(value);
@@ -5270,7 +5660,7 @@ private static final long serialVersionUID = 0L;
           principalBuilder_.mergeFrom(value);
         }
         if (principal_ != null) {
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
           onChanged();
         }
         return this;
@@ -5279,7 +5669,7 @@ private static final long serialVersionUID = 0L;
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
        */
       public Builder clearPrincipal() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         principal_ = null;
         if (principalBuilder_ != null) {
           principalBuilder_.dispose();
@@ -5292,7 +5682,7 @@ private static final long serialVersionUID = 0L;
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
        */
       public com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.Builder getPrincipalBuilder() {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return getPrincipalFieldBuilder().getBuilder();
       }

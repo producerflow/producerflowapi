@@ -11,7 +11,8 @@ public inline fun lookupNPNByFEINResponse(block: com.producerflow.producer.v1.Lo
   com.producerflow.producer.v1.LookupNPNByFEINResponseKt.Dsl._create(com.producerflow.producer.v1.LookupNPNByFEINResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
+ * LookupNPNByFEINResponse contains the National Producer Number (NPN)
+ * for the agency associated with the given FEIN.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.LookupNPNByFEINResponse`
@@ -34,7 +35,10 @@ public object LookupNPNByFEINResponseKt {
 
     /**
      * ```
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * ```
      *
      * `string npn = 1 [json_name = "npn"];`
@@ -48,7 +52,10 @@ public object LookupNPNByFEINResponseKt {
       }
     /**
      * ```
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * ```
      *
      * `string npn = 1 [json_name = "npn"];`

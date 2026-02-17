@@ -55,7 +55,10 @@ public object LicenseKt {
 
     /**
      * ```
-     * The license number.
+     * The license number assigned by the state Department of Insurance (DOI).
+     * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+     * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+     * This is a state-specific identifier, not globally unique across states.
      * ```
      *
      * `string license_number = 2 [json_name = "licenseNumber", (.buf.validate.field) = { ... }`
@@ -69,7 +72,10 @@ public object LicenseKt {
       }
     /**
      * ```
-     * The license number.
+     * The license number assigned by the state Department of Insurance (DOI).
+     * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+     * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+     * This is a state-specific identifier, not globally unique across states.
      * ```
      *
      * `string license_number = 2 [json_name = "licenseNumber", (.buf.validate.field) = { ... }`
@@ -128,7 +134,8 @@ public object LicenseKt {
 
     /**
      * ```
-     * The two-letter state code of the license.
+     * The two-letter US state or territory code that issued the license.
+     * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
      * ```
      *
      * `string state = 5 [json_name = "state", (.buf.validate.field) = { ... }`
@@ -142,7 +149,8 @@ public object LicenseKt {
       }
     /**
      * ```
-     * The two-letter state code of the license.
+     * The two-letter US state or territory code that issued the license.
+     * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
      * ```
      *
      * `string state = 5 [json_name = "state", (.buf.validate.field) = { ... }`
@@ -153,7 +161,13 @@ public object LicenseKt {
 
     /**
      * ```
-     * The license class.
+     * License class description as defined by the state DOI.
+     * Describes the broad category of insurance the license covers.
+     * Common classes include:
+     * - "Insurance Producer": General license to sell insurance
+     * - "Limited Lines Producer": Restricted to specific product types
+     * - "Surplus Lines Broker": Authorized for non-admitted carriers
+     * Values vary by state as each DOI defines its own license classes.
      * ```
      *
      * `string license_class = 6 [json_name = "licenseClass"];`
@@ -167,7 +181,13 @@ public object LicenseKt {
       }
     /**
      * ```
-     * The license class.
+     * License class description as defined by the state DOI.
+     * Describes the broad category of insurance the license covers.
+     * Common classes include:
+     * - "Insurance Producer": General license to sell insurance
+     * - "Limited Lines Producer": Restricted to specific product types
+     * - "Surplus Lines Broker": Authorized for non-admitted carriers
+     * Values vary by state as each DOI defines its own license classes.
      * ```
      *
      * `string license_class = 6 [json_name = "licenseClass"];`

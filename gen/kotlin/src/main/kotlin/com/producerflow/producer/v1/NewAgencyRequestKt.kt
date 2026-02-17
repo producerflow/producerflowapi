@@ -178,9 +178,17 @@ public object NewAgencyRequestKt {
 
       /**
        * ```
-       * National Producer Number for the agency
-       * Required for ENTITY_TYPE_AGENCY if FEIN is not provided
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * National Producer Number (NPN) for the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Required for ENTITY_TYPE_AGENCY if FEIN is not provided.
+       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR (sole proprietors use the
+       * principal's NPN).
+       * Validated against NIPR's database via free NIPR NPN Lookup API.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 3 [json_name = "npn"];`
@@ -194,9 +202,17 @@ public object NewAgencyRequestKt {
         }
       /**
        * ```
-       * National Producer Number for the agency
-       * Required for ENTITY_TYPE_AGENCY if FEIN is not provided
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * National Producer Number (NPN) for the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Required for ENTITY_TYPE_AGENCY if FEIN is not provided.
+       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR (sole proprietors use the
+       * principal's NPN).
+       * Validated against NIPR's database via free NIPR NPN Lookup API.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 3 [json_name = "npn"];`
@@ -1321,7 +1337,13 @@ public object NewAgencyRequestKt {
 
         /**
          * ```
-         * The National Producer Number (NPN) of the principal.
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Required. Validated against NIPR's database via free NIPR NPN Lookup API.
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 5 [json_name = "npn", (.buf.validate.field) = { ... }`
@@ -1335,7 +1357,13 @@ public object NewAgencyRequestKt {
           }
         /**
          * ```
-         * The National Producer Number (NPN) of the principal.
+         * National Producer Number (NPN) of the principal.
+         * A unique NAIC identifier assigned to individuals during the licensing
+         * application process and stored in the NIPR Producer Database (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Required. Validated against NIPR's database via free NIPR NPN Lookup API.
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 5 [json_name = "npn", (.buf.validate.field) = { ... }`

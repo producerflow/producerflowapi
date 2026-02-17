@@ -12,7 +12,9 @@ public interface LookupNPNByFEINRequestOrBuilder extends
   /**
    * <pre>
    * The Federal Employer Identification Number (FEIN) to look up.
-   * Required and must be exactly 9 characters.
+   * Format: Exactly 9 digits, no dashes or spaces.
+   * Example: "123456789"
+   * This is the tax identification number assigned by the IRS.
    * </pre>
    *
    * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -22,7 +24,9 @@ public interface LookupNPNByFEINRequestOrBuilder extends
   /**
    * <pre>
    * The Federal Employer Identification Number (FEIN) to look up.
-   * Required and must be exactly 9 characters.
+   * Format: Exactly 9 digits, no dashes or spaces.
+   * Example: "123456789"
+   * This is the tax identification number assigned by the IRS.
    * </pre>
    *
    * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>

@@ -7,7 +7,8 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
+ * LookupNPNByFEINResponse contains the National Producer Number (NPN)
+ * for the agency associated with the given FEIN.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.LookupNPNByFEINResponse}
@@ -52,7 +53,10 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object npn_ = "";
   /**
    * <pre>
-   * The National Producer Number (NPN) for the producer.
+   * The National Producer Number (NPN) found in NIPR for the given FEIN.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Empty string if no matching NPN was found.
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn"];</code>
@@ -73,7 +77,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The National Producer Number (NPN) for the producer.
+   * The National Producer Number (NPN) found in NIPR for the given FEIN.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Empty string if no matching NPN was found.
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn"];</code>
@@ -252,7 +259,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * LookupNPNByFEINResponse contains the National Producer Number (NPN) for the producer associated with the given FEIN.
+   * LookupNPNByFEINResponse contains the National Producer Number (NPN)
+   * for the agency associated with the given FEIN.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.LookupNPNByFEINResponse}
@@ -395,7 +403,10 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object npn_ = "";
     /**
      * <pre>
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn"];</code>
@@ -415,7 +426,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn"];</code>
@@ -436,7 +450,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn"];</code>
@@ -453,7 +470,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn"];</code>
@@ -467,7 +487,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The National Producer Number (NPN) for the producer.
+     * The National Producer Number (NPN) found in NIPR for the given FEIN.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Empty string if no matching NPN was found.
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn"];</code>

@@ -11,7 +11,10 @@ public interface LookupNPNByFEINResponseOrBuilder extends
 
   /**
    * <pre>
-   * The National Producer Number (NPN) for the producer.
+   * The National Producer Number (NPN) found in NIPR for the given FEIN.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Empty string if no matching NPN was found.
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn"];</code>
@@ -20,7 +23,10 @@ public interface LookupNPNByFEINResponseOrBuilder extends
   java.lang.String getNpn();
   /**
    * <pre>
-   * The National Producer Number (NPN) for the producer.
+   * The National Producer Number (NPN) found in NIPR for the given FEIN.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Empty string if no matching NPN was found.
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn"];</code>

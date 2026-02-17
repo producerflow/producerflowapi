@@ -11,7 +11,9 @@ public inline fun validateAgencyNPNRequest(block: com.producerflow.producer.v1.V
   com.producerflow.producer.v1.ValidateAgencyNPNRequestKt.Dsl._create(com.producerflow.producer.v1.ValidateAgencyNPNRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * ValidateAgencyNPNRequest is used to validate an agency's National Producer Number.
+ * ValidateAgencyNPNRequest is used to validate an agency's National Producer
+ * Number (NPN) against the NIPR database.
+ * This is a FREE operation using the NIPR NPN Lookup service.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.ValidateAgencyNPNRequest`
@@ -35,7 +37,10 @@ public object ValidateAgencyNPNRequestKt {
     /**
      * ```
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
@@ -50,7 +55,10 @@ public object ValidateAgencyNPNRequestKt {
     /**
      * ```
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`

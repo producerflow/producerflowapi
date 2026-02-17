@@ -12,7 +12,10 @@ public interface ValidateProducerNPNRequestOrBuilder extends
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -22,7 +25,10 @@ public interface ValidateProducerNPNRequestOrBuilder extends
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -33,8 +39,9 @@ public interface ValidateProducerNPNRequestOrBuilder extends
 
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>
@@ -43,8 +50,9 @@ public interface ValidateProducerNPNRequestOrBuilder extends
   boolean hasName();
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>
@@ -53,8 +61,9 @@ public interface ValidateProducerNPNRequestOrBuilder extends
   java.lang.String getName();
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>

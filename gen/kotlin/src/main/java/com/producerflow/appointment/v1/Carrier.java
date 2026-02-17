@@ -150,7 +150,12 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object npn_ = "";
   /**
    * <pre>
-   * The NPN of the carrier.
+   * National Producer Number (NPN) of the carrier.
+   * A unique NAIC identifier assigned to business entities during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 3 [json_name = "npn"];</code>
@@ -171,7 +176,12 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The NPN of the carrier.
+   * National Producer Number (NPN) of the carrier.
+   * A unique NAIC identifier assigned to business entities during the licensing
+   * application process and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 3 [json_name = "npn"];</code>
@@ -197,7 +207,9 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object fein_ = "";
   /**
    * <pre>
-   * The FEIN of the carrier.
+   * Federal Employer Identification Number (FEIN) of the carrier.
+   * Format: 9-digit number assigned by the IRS for tax identification.
+   * Example: "123456789"
    * </pre>
    *
    * <code>string fein = 4 [json_name = "fein"];</code>
@@ -218,7 +230,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The FEIN of the carrier.
+   * Federal Employer Identification Number (FEIN) of the carrier.
+   * Format: 9-digit number assigned by the IRS for tax identification.
+   * Example: "123456789"
    * </pre>
    *
    * <code>string fein = 4 [json_name = "fein"];</code>
@@ -244,7 +258,12 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object cocode_ = "";
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) to each insurance company for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Example: "12345"
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -265,7 +284,12 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The NAIC cocode of the carrier.
+   * NAIC Company Code (CoCode) of the carrier.
+   * A unique identifier assigned by the National Association of Insurance
+   * Commissioners (NAIC) to each insurance company for regulatory reporting.
+   * Format: Typically a 5-digit numeric string.
+   * Example: "12345"
+   * Reference: https://naic.org
    * </pre>
    *
    * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -908,7 +932,12 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object npn_ = "";
     /**
      * <pre>
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 3 [json_name = "npn"];</code>
@@ -928,7 +957,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 3 [json_name = "npn"];</code>
@@ -949,7 +983,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 3 [json_name = "npn"];</code>
@@ -966,7 +1005,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 3 [json_name = "npn"];</code>
@@ -980,7 +1024,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 3 [json_name = "npn"];</code>
@@ -1000,7 +1049,9 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object fein_ = "";
     /**
      * <pre>
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * </pre>
      *
      * <code>string fein = 4 [json_name = "fein"];</code>
@@ -1020,7 +1071,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * </pre>
      *
      * <code>string fein = 4 [json_name = "fein"];</code>
@@ -1041,7 +1094,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * </pre>
      *
      * <code>string fein = 4 [json_name = "fein"];</code>
@@ -1058,7 +1113,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * </pre>
      *
      * <code>string fein = 4 [json_name = "fein"];</code>
@@ -1072,7 +1129,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * </pre>
      *
      * <code>string fein = 4 [json_name = "fein"];</code>
@@ -1092,7 +1151,12 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object cocode_ = "";
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -1112,7 +1176,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -1133,7 +1202,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -1150,7 +1224,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 5 [json_name = "cocode"];</code>
@@ -1164,7 +1243,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * </pre>
      *
      * <code>string cocode = 5 [json_name = "cocode"];</code>

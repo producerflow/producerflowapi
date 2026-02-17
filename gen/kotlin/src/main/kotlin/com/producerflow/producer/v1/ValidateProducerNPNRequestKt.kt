@@ -11,7 +11,9 @@ public inline fun validateProducerNPNRequest(block: com.producerflow.producer.v1
   com.producerflow.producer.v1.ValidateProducerNPNRequestKt.Dsl._create(com.producerflow.producer.v1.ValidateProducerNPNRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
+ * ValidateProducerNPNRequest is used to validate a producer's National Producer
+ * Number (NPN) against the NIPR database.
+ * This is a FREE operation using the NIPR NPN Lookup service.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.ValidateProducerNPNRequest`
@@ -35,7 +37,10 @@ public object ValidateProducerNPNRequestKt {
     /**
      * ```
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
@@ -50,7 +55,10 @@ public object ValidateProducerNPNRequestKt {
     /**
      * ```
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }`
@@ -61,8 +69,9 @@ public object ValidateProducerNPNRequestKt {
 
     /**
      * ```
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * ```
      *
      * `optional string name = 2 [json_name = "name"];`
@@ -76,8 +85,9 @@ public object ValidateProducerNPNRequestKt {
       }
     /**
      * ```
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * ```
      *
      * `optional string name = 2 [json_name = "name"];`
@@ -87,8 +97,9 @@ public object ValidateProducerNPNRequestKt {
     }
     /**
      * ```
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * ```
      *
      * `optional string name = 2 [json_name = "name"];`

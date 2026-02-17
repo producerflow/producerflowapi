@@ -7,7 +7,9 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * LookupNPNByFEINRequest is used to look up a producer's National Producer Number by their Federal Employer Identification Number (FEIN).
+ * LookupNPNByFEINRequest is used to look up an agency's National Producer
+ * Number (NPN) by their Federal Employer Identification Number (FEIN).
+ * This is a FREE operation using the NIPR NPN Lookup service.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.LookupNPNByFEINRequest}
@@ -53,7 +55,9 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The Federal Employer Identification Number (FEIN) to look up.
-   * Required and must be exactly 9 characters.
+   * Format: Exactly 9 digits, no dashes or spaces.
+   * Example: "123456789"
+   * This is the tax identification number assigned by the IRS.
    * </pre>
    *
    * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -75,7 +79,9 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The Federal Employer Identification Number (FEIN) to look up.
-   * Required and must be exactly 9 characters.
+   * Format: Exactly 9 digits, no dashes or spaces.
+   * Example: "123456789"
+   * This is the tax identification number assigned by the IRS.
    * </pre>
    *
    * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -254,7 +260,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * LookupNPNByFEINRequest is used to look up a producer's National Producer Number by their Federal Employer Identification Number (FEIN).
+   * LookupNPNByFEINRequest is used to look up an agency's National Producer
+   * Number (NPN) by their Federal Employer Identification Number (FEIN).
+   * This is a FREE operation using the NIPR NPN Lookup service.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.LookupNPNByFEINRequest}
@@ -398,7 +406,9 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The Federal Employer Identification Number (FEIN) to look up.
-     * Required and must be exactly 9 characters.
+     * Format: Exactly 9 digits, no dashes or spaces.
+     * Example: "123456789"
+     * This is the tax identification number assigned by the IRS.
      * </pre>
      *
      * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -419,7 +429,9 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The Federal Employer Identification Number (FEIN) to look up.
-     * Required and must be exactly 9 characters.
+     * Format: Exactly 9 digits, no dashes or spaces.
+     * Example: "123456789"
+     * This is the tax identification number assigned by the IRS.
      * </pre>
      *
      * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -441,7 +453,9 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The Federal Employer Identification Number (FEIN) to look up.
-     * Required and must be exactly 9 characters.
+     * Format: Exactly 9 digits, no dashes or spaces.
+     * Example: "123456789"
+     * This is the tax identification number assigned by the IRS.
      * </pre>
      *
      * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -459,7 +473,9 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The Federal Employer Identification Number (FEIN) to look up.
-     * Required and must be exactly 9 characters.
+     * Format: Exactly 9 digits, no dashes or spaces.
+     * Example: "123456789"
+     * This is the tax identification number assigned by the IRS.
      * </pre>
      *
      * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -474,7 +490,9 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The Federal Employer Identification Number (FEIN) to look up.
-     * Required and must be exactly 9 characters.
+     * Format: Exactly 9 digits, no dashes or spaces.
+     * Example: "123456789"
+     * This is the tax identification number assigned by the IRS.
      * </pre>
      *
      * <code>string fein = 1 [json_name = "fein", (.buf.validate.field) = { ... }</code>

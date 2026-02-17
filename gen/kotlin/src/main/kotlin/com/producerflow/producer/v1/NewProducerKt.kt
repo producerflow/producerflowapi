@@ -173,12 +173,16 @@ public object NewProducerKt {
     /**
      * ```
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 4 [json_name = "npn"];`
@@ -193,12 +197,16 @@ public object NewProducerKt {
     /**
      * ```
      * National Producer Number (NPN) of the producer.
-     * Optional but strongly recommended for licensed producers.
-     * This unique identifier from NAIC enables:
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Optional but strongly recommended for licensed producers. Enables:
      * - NIPR data synchronization (licenses, appointments, regulatory actions)
      * - Carrier appointment verification
      * - Compliance tracking across states
      * If provided, must be valid in NIPR's database or creation will fail.
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 4 [json_name = "npn"];`

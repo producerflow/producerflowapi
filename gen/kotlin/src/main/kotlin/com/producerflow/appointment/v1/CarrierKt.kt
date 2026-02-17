@@ -84,7 +84,12 @@ public object CarrierKt {
 
     /**
      * ```
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 3 [json_name = "npn"];`
@@ -98,7 +103,12 @@ public object CarrierKt {
       }
     /**
      * ```
-     * The NPN of the carrier.
+     * National Producer Number (NPN) of the carrier.
+     * A unique NAIC identifier assigned to business entities during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Reference: https://nipr.com
      * ```
      *
      * `string npn = 3 [json_name = "npn"];`
@@ -109,7 +119,9 @@ public object CarrierKt {
 
     /**
      * ```
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * ```
      *
      * `string fein = 4 [json_name = "fein"];`
@@ -123,7 +135,9 @@ public object CarrierKt {
       }
     /**
      * ```
-     * The FEIN of the carrier.
+     * Federal Employer Identification Number (FEIN) of the carrier.
+     * Format: 9-digit number assigned by the IRS for tax identification.
+     * Example: "123456789"
      * ```
      *
      * `string fein = 4 [json_name = "fein"];`
@@ -134,7 +148,12 @@ public object CarrierKt {
 
     /**
      * ```
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * ```
      *
      * `string cocode = 5 [json_name = "cocode"];`
@@ -148,7 +167,12 @@ public object CarrierKt {
       }
     /**
      * ```
-     * The NAIC cocode of the carrier.
+     * NAIC Company Code (CoCode) of the carrier.
+     * A unique identifier assigned by the National Association of Insurance
+     * Commissioners (NAIC) to each insurance company for regulatory reporting.
+     * Format: Typically a 5-digit numeric string.
+     * Example: "12345"
+     * Reference: https://naic.org
      * ```
      *
      * `string cocode = 5 [json_name = "cocode"];`

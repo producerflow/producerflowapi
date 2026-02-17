@@ -433,4 +433,65 @@ public interface AgencyOrBuilder extends
    * @return The isSoleProprietor.
    */
   boolean getIsSoleProprietor();
+
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return Whether the organizationRelationship field is set.
+   */
+  boolean hasOrganizationRelationship();
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return The enum numeric value on the wire for organizationRelationship.
+   */
+  int getOrganizationRelationshipValue();
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return The organizationRelationship.
+   */
+  com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship();
 }

@@ -7,7 +7,9 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
+ * ValidateProducerNPNRequest is used to validate a producer's National Producer
+ * Number (NPN) against the NIPR database.
+ * This is a FREE operation using the NIPR NPN Lookup service.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.ValidateProducerNPNRequest}
@@ -55,7 +57,10 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -77,7 +82,10 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -103,8 +111,9 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object name_ = "";
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>
@@ -116,8 +125,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>
@@ -138,8 +148,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional name of the producer to validate.
-   * If provided, the NPN will be validated against this name.
+   * Optional name of the producer to validate against NIPR records.
+   * If provided, both NPN existence and name match are verified.
+   * If omitted, only NPN existence is verified.
    * </pre>
    *
    * <code>optional string name = 2 [json_name = "name"];</code>
@@ -333,7 +344,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * ValidateProducerNPNRequest is used to validate a producer's National Producer Number.
+   * ValidateProducerNPNRequest is used to validate a producer's National Producer
+   * Number (NPN) against the NIPR database.
+   * This is a FREE operation using the NIPR NPN Lookup service.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.ValidateProducerNPNRequest}
@@ -494,7 +507,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -515,7 +531,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -537,7 +556,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -555,7 +577,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -570,7 +595,10 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * The National Producer Number (NPN) to validate.
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
      * Required and must be non-empty.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -590,8 +618,9 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object name_ = "";
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>
@@ -602,8 +631,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>
@@ -623,8 +653,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>
@@ -645,8 +676,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>
@@ -663,8 +695,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>
@@ -678,8 +711,9 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional name of the producer to validate.
-     * If provided, the NPN will be validated against this name.
+     * Optional name of the producer to validate against NIPR records.
+     * If provided, both NPN existence and name match are verified.
+     * If omitted, only NPN existence is verified.
      * </pre>
      *
      * <code>optional string name = 2 [json_name = "name"];</code>

@@ -48,6 +48,7 @@ private static final long serialVersionUID = 0L;
     requestedAppointments_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
     locations_ = java.util.Collections.emptyList();
+    organizationRelationship_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -246,7 +247,13 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * National Producer Number (NPN) of the agency.
-     * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for standard agencies (not sole proprietors).
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -256,7 +263,13 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * National Producer Number (NPN) of the agency.
-     * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for standard agencies (not sole proprietors).
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -992,7 +1005,13 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * National Producer Number (NPN) of the agency.
-     * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for standard agencies (not sole proprietors).
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -1014,7 +1033,13 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * National Producer Number (NPN) of the agency.
-     * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+     * A unique NAIC identifier assigned to business entities during the
+     * licensing application process and stored in the NIPR Producer Database
+     * (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for standard agencies (not sole proprietors).
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2904,7 +2929,13 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2925,7 +2956,13 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2947,7 +2984,13 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2965,7 +3008,13 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2980,7 +3029,13 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 9 [json_name = "npn"];</code>
@@ -3764,7 +3819,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2443
+     *     See producerflow/producer/v1/producer.proto;l=2508
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -3775,7 +3830,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2443
+     *     See producerflow/producer/v1/producer.proto;l=2508
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -3949,7 +4004,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2443
+     *     See producerflow/producer/v1/producer.proto;l=2508
      * @return The street.
      */
     @java.lang.Override
@@ -3972,7 +4027,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2443
+     *     See producerflow/producer/v1/producer.proto;l=2508
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -4672,7 +4727,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2443
+       *     See producerflow/producer/v1/producer.proto;l=2508
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -4694,7 +4749,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2443
+       *     See producerflow/producer/v1/producer.proto;l=2508
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -4717,7 +4772,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2443
+       *     See producerflow/producer/v1/producer.proto;l=2508
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -4736,7 +4791,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2443
+       *     See producerflow/producer/v1/producer.proto;l=2508
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -4752,7 +4807,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2443
+       *     See producerflow/producer/v1/producer.proto;l=2508
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -8081,9 +8136,13 @@ java.lang.String defaultValue) {
 
     /**
      * <pre>
-     * The NPN of the principal. This is used to
-     * retrieve the license information
-     * of the principal from the NIPR API.
+     * National Producer Number (NPN) of the principal.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license information from the NIPR API.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 5 [json_name = "npn"];</code>
@@ -8092,9 +8151,13 @@ java.lang.String defaultValue) {
     java.lang.String getNpn();
     /**
      * <pre>
-     * The NPN of the principal. This is used to
-     * retrieve the license information
-     * of the principal from the NIPR API.
+     * National Producer Number (NPN) of the principal.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license information from the NIPR API.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 5 [json_name = "npn"];</code>
@@ -8524,9 +8587,13 @@ java.lang.String defaultValue);
     private volatile java.lang.Object npn_ = "";
     /**
      * <pre>
-     * The NPN of the principal. This is used to
-     * retrieve the license information
-     * of the principal from the NIPR API.
+     * National Producer Number (NPN) of the principal.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license information from the NIPR API.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 5 [json_name = "npn"];</code>
@@ -8547,9 +8614,13 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * The NPN of the principal. This is used to
-     * retrieve the license information
-     * of the principal from the NIPR API.
+     * National Producer Number (NPN) of the principal.
+     * A unique NAIC identifier assigned to individuals during the licensing
+     * application process and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Used to retrieve license information from the NIPR API.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 5 [json_name = "npn"];</code>
@@ -9781,9 +9852,13 @@ java.lang.String defaultValue) {
       private java.lang.Object npn_ = "";
       /**
        * <pre>
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 5 [json_name = "npn"];</code>
@@ -9803,9 +9878,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 5 [json_name = "npn"];</code>
@@ -9826,9 +9905,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 5 [json_name = "npn"];</code>
@@ -9845,9 +9928,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 5 [json_name = "npn"];</code>
@@ -9861,9 +9948,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 5 [json_name = "npn"];</code>
@@ -13922,7 +14013,7 @@ java.lang.String defaultValue) {
 
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -13931,7 +14022,7 @@ java.lang.String defaultValue) {
     boolean hasRegulatoryInfo();
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -13940,7 +14031,7 @@ java.lang.String defaultValue) {
     com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo getRegulatoryInfo();
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -13949,8 +14040,18 @@ java.lang.String defaultValue) {
 
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -13959,8 +14060,18 @@ java.lang.String defaultValue) {
         getAppointmentsList();
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -13968,8 +14079,18 @@ java.lang.String defaultValue) {
     com.producerflow.producer.v1.Agency.NIPR.Appointment getAppointments(int index);
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -13977,8 +14098,18 @@ java.lang.String defaultValue) {
     int getAppointmentsCount();
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -13987,8 +14118,18 @@ java.lang.String defaultValue) {
         getAppointmentsOrBuilderList();
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -14086,7 +14227,13 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * National Producer Number.
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 3 [json_name = "npn"];</code>
@@ -14095,7 +14242,13 @@ java.lang.String defaultValue) {
       java.lang.String getNpn();
       /**
        * <pre>
-       * National Producer Number.
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 3 [json_name = "npn"];</code>
@@ -14317,7 +14470,13 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object npn_ = "";
       /**
        * <pre>
-       * National Producer Number.
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 3 [json_name = "npn"];</code>
@@ -14338,7 +14497,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * National Producer Number.
+       * National Producer Number (NPN) of the agency.
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Reference: https://nipr.com
        * </pre>
        *
        * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15117,7 +15282,13 @@ java.lang.String defaultValue) {
         private java.lang.Object npn_ = "";
         /**
          * <pre>
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15137,7 +15308,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15158,7 +15335,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15175,7 +15358,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15189,7 +15378,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * </pre>
          *
          * <code>string npn = 3 [json_name = "npn"];</code>
@@ -15669,7 +15864,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2619
+       *     See producerflow/producer/v1/producer.proto;l=2694
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -15680,7 +15875,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2619
+       *     See producerflow/producer/v1/producer.proto;l=2694
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -16021,7 +16216,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2619
+       *     See producerflow/producer/v1/producer.proto;l=2694
        * @return The street.
        */
       @java.lang.Override
@@ -16044,7 +16239,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2619
+       *     See producerflow/producer/v1/producer.proto;l=2694
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -17159,7 +17354,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2619
+         *     See producerflow/producer/v1/producer.proto;l=2694
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -17181,7 +17376,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2619
+         *     See producerflow/producer/v1/producer.proto;l=2694
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -17204,7 +17399,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2619
+         *     See producerflow/producer/v1/producer.proto;l=2694
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -17223,7 +17418,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2619
+         *     See producerflow/producer/v1/producer.proto;l=2694
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -17239,7 +17434,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2619
+         *     See producerflow/producer/v1/producer.proto;l=2694
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -17992,7 +18187,11 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -18001,7 +18200,11 @@ java.lang.String defaultValue) {
       java.lang.String getLicenseNumber();
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -18012,7 +18215,8 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * The state that issued the license.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -18021,7 +18225,8 @@ java.lang.String defaultValue) {
       java.lang.String getLicenseState();
       /**
        * <pre>
-       * The state that issued the license.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -18033,6 +18238,10 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
+       * Values: "Resident" (license in the producer's home/domicile state) or
+       * "Non-Resident" (license in a state other than the home state).
+       * A producer typically has one resident license and may hold multiple
+       * non-resident licenses in other states where they conduct business.
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -18042,6 +18251,10 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
+       * Values: "Resident" (license in the producer's home/domicile state) or
+       * "Non-Resident" (license in a state other than the home state).
+       * A producer typically has one resident license and may hold multiple
+       * non-resident licenses in other states where they conduct business.
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -18086,7 +18299,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2674
+       *     See producerflow/producer/v1/producer.proto;l=2758
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -18097,7 +18310,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2674
+       *     See producerflow/producer/v1/producer.proto;l=2758
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -18112,7 +18325,15 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * License class description.
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
        * </pre>
        *
        * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -18121,7 +18342,15 @@ java.lang.String defaultValue) {
       java.lang.String getLicenseClass();
       /**
        * <pre>
-       * License class description.
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
        * </pre>
        *
        * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -18132,7 +18361,10 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * License class code.
+       * Numeric code corresponding to the license class.
+       * This is the NIPR-standardized numeric identifier for the license class
+       * description in the license_class field.
+       * Used for programmatic comparisons rather than string matching.
        * </pre>
        *
        * <code>int32 license_class_code = 8 [json_name = "licenseClassCode"];</code>
@@ -18147,7 +18379,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2683
+       *     See producerflow/producer/v1/producer.proto;l=2778
        * @return Whether the issueDate field is set.
        */
       @java.lang.Deprecated boolean hasIssueDate();
@@ -18158,7 +18390,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2683
+       *     See producerflow/producer/v1/producer.proto;l=2778
        * @return The issueDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -18178,7 +18410,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2686
+       *     See producerflow/producer/v1/producer.proto;l=2781
        * @return Whether the updateDate field is set.
        */
       @java.lang.Deprecated boolean hasUpdateDate();
@@ -18189,7 +18421,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2686
+       *     See producerflow/producer/v1/producer.proto;l=2781
        * @return The updateDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getUpdateDate();
@@ -18312,7 +18544,12 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -18321,7 +18558,12 @@ java.lang.String defaultValue) {
           getLinesOfAuthorityList();
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -18329,7 +18571,12 @@ java.lang.String defaultValue) {
       com.producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority getLinesOfAuthority(int index);
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -18337,7 +18584,12 @@ java.lang.String defaultValue) {
       int getLinesOfAuthorityCount();
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -18346,7 +18598,12 @@ java.lang.String defaultValue) {
           getLinesOfAuthorityOrBuilderList();
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -18601,8 +18858,22 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-         * This is typically an uppercase string that describes the insurance type.
+         * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+         * "HEALTH").
+         *
+         * Common LOA types:
+         * - LIFE: Life insurance products
+         * - HEALTH: Health insurance products
+         * - ACCIDENT AND HEALTH: Combined accident and health coverage
+         * - PROPERTY: Property insurance
+         * - CASUALTY: Casualty insurance
+         * - PROPERTY AND CASUALTY: Combined property and casualty
+         * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+         * securities license
+         * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+         * - COMMERCIAL LINES: Business insurance policies
+         *
+         * This is typically an uppercase string standardized by NIPR.
          * </pre>
          *
          * <code>string loa = 1 [json_name = "loa"];</code>
@@ -18611,8 +18882,22 @@ java.lang.String defaultValue) {
         java.lang.String getLoa();
         /**
          * <pre>
-         * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-         * This is typically an uppercase string that describes the insurance type.
+         * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+         * "HEALTH").
+         *
+         * Common LOA types:
+         * - LIFE: Life insurance products
+         * - HEALTH: Health insurance products
+         * - ACCIDENT AND HEALTH: Combined accident and health coverage
+         * - PROPERTY: Property insurance
+         * - CASUALTY: Casualty insurance
+         * - PROPERTY AND CASUALTY: Combined property and casualty
+         * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+         * securities license
+         * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+         * - COMMERCIAL LINES: Business insurance policies
+         *
+         * This is typically an uppercase string standardized by NIPR.
          * </pre>
          *
          * <code>string loa = 1 [json_name = "loa"];</code>
@@ -18624,6 +18909,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Whether this Line of Authority is currently active.
+         * Inactive LOAs cannot be used to transact that type of insurance.
          * </pre>
          *
          * <code>bool active = 2 [json_name = "active"];</code>
@@ -18638,7 +18924,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2711
+         *     See producerflow/producer/v1/producer.proto;l=2836
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -18649,7 +18935,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2711
+         *     See producerflow/producer/v1/producer.proto;l=2836
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -18664,7 +18950,9 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -18673,7 +18961,9 @@ java.lang.String defaultValue) {
         boolean hasIssuedOn();
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -18682,7 +18972,9 @@ java.lang.String defaultValue) {
         com.google.type.Date getIssuedOn();
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -18691,8 +18983,23 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * LineOfAuthority represents a specific type of insurance coverage
-       * that is authorized under this license.
+       * LineOfAuthority (LOA) represents a specific type of insurance that an
+       * agency is authorized to transact under this license.
+       *
+       * Each license can have multiple LOAs. For example, a license might
+       * include:
+       * - LIFE
+       * - HEALTH
+       * - ACCIDENT AND HEALTH
+       * - PROPERTY AND CASUALTY
+       * - VARIABLE LIFE AND VARIABLE ANNUITY
+       *
+       * LOA Compliance:
+       * Before allowing an agency to sell a product, verify they have an
+       * active LOA that matches the product type. For example, an agency with
+       * only a LIFE LOA cannot sell Property &amp; Casualty insurance.
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority}
@@ -18738,8 +19045,22 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object loa_ = "";
         /**
          * <pre>
-         * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-         * This is typically an uppercase string that describes the insurance type.
+         * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+         * "HEALTH").
+         *
+         * Common LOA types:
+         * - LIFE: Life insurance products
+         * - HEALTH: Health insurance products
+         * - ACCIDENT AND HEALTH: Combined accident and health coverage
+         * - PROPERTY: Property insurance
+         * - CASUALTY: Casualty insurance
+         * - PROPERTY AND CASUALTY: Combined property and casualty
+         * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+         * securities license
+         * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+         * - COMMERCIAL LINES: Business insurance policies
+         *
+         * This is typically an uppercase string standardized by NIPR.
          * </pre>
          *
          * <code>string loa = 1 [json_name = "loa"];</code>
@@ -18760,8 +19081,22 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-         * This is typically an uppercase string that describes the insurance type.
+         * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+         * "HEALTH").
+         *
+         * Common LOA types:
+         * - LIFE: Life insurance products
+         * - HEALTH: Health insurance products
+         * - ACCIDENT AND HEALTH: Combined accident and health coverage
+         * - PROPERTY: Property insurance
+         * - CASUALTY: Casualty insurance
+         * - PROPERTY AND CASUALTY: Combined property and casualty
+         * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+         * securities license
+         * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+         * - COMMERCIAL LINES: Business insurance policies
+         *
+         * This is typically an uppercase string standardized by NIPR.
          * </pre>
          *
          * <code>string loa = 1 [json_name = "loa"];</code>
@@ -18787,6 +19122,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Whether this Line of Authority is currently active.
+         * Inactive LOAs cannot be used to transact that type of insurance.
          * </pre>
          *
          * <code>bool active = 2 [json_name = "active"];</code>
@@ -18806,7 +19142,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2711
+         *     See producerflow/producer/v1/producer.proto;l=2836
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -18820,7 +19156,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2711
+         *     See producerflow/producer/v1/producer.proto;l=2836
          * @return The issueDate.
          */
         @java.lang.Override
@@ -18843,7 +19179,9 @@ java.lang.String defaultValue) {
         private com.google.type.Date issuedOn_;
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -18855,7 +19193,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -18867,7 +19207,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when this Line of Authority was issued.
+         * The date when this Line of Authority was first issued.
+         * This helps track how long the agency has been authorized for this
+         * insurance type.
          * </pre>
          *
          * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19079,8 +19421,23 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * LineOfAuthority represents a specific type of insurance coverage
-         * that is authorized under this license.
+         * LineOfAuthority (LOA) represents a specific type of insurance that an
+         * agency is authorized to transact under this license.
+         *
+         * Each license can have multiple LOAs. For example, a license might
+         * include:
+         * - LIFE
+         * - HEALTH
+         * - ACCIDENT AND HEALTH
+         * - PROPERTY AND CASUALTY
+         * - VARIABLE LIFE AND VARIABLE ANNUITY
+         *
+         * LOA Compliance:
+         * Before allowing an agency to sell a product, verify they have an
+         * active LOA that matches the product type. For example, an agency with
+         * only a LIFE LOA cannot sell Property &amp; Casualty insurance.
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority}
@@ -19286,8 +19643,22 @@ java.lang.String defaultValue) {
           private java.lang.Object loa_ = "";
           /**
            * <pre>
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * </pre>
            *
            * <code>string loa = 1 [json_name = "loa"];</code>
@@ -19307,8 +19678,22 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * </pre>
            *
            * <code>string loa = 1 [json_name = "loa"];</code>
@@ -19329,8 +19714,22 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * </pre>
            *
            * <code>string loa = 1 [json_name = "loa"];</code>
@@ -19347,8 +19746,22 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * </pre>
            *
            * <code>string loa = 1 [json_name = "loa"];</code>
@@ -19362,8 +19775,22 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * </pre>
            *
            * <code>string loa = 1 [json_name = "loa"];</code>
@@ -19384,6 +19811,7 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Whether this Line of Authority is currently active.
+           * Inactive LOAs cannot be used to transact that type of insurance.
            * </pre>
            *
            * <code>bool active = 2 [json_name = "active"];</code>
@@ -19396,6 +19824,7 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Whether this Line of Authority is currently active.
+           * Inactive LOAs cannot be used to transact that type of insurance.
            * </pre>
            *
            * <code>bool active = 2 [json_name = "active"];</code>
@@ -19412,6 +19841,7 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Whether this Line of Authority is currently active.
+           * Inactive LOAs cannot be used to transact that type of insurance.
            * </pre>
            *
            * <code>bool active = 2 [json_name = "active"];</code>
@@ -19434,7 +19864,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2711
+           *     See producerflow/producer/v1/producer.proto;l=2836
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -19447,7 +19877,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2711
+           *     See producerflow/producer/v1/producer.proto;l=2836
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -19590,7 +20020,9 @@ java.lang.String defaultValue) {
               com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> issuedOnBuilder_;
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19601,7 +20033,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19616,7 +20050,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19636,7 +20072,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19654,7 +20092,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19679,7 +20119,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19696,7 +20138,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19708,7 +20152,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19723,7 +20169,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * </pre>
            *
            * <code>.google.type.Date issued_on = 4 [json_name = "issuedOn"];</code>
@@ -19799,7 +20247,11 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object licenseNumber_ = "";
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -19820,7 +20272,11 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The license number assigned by the state regulatory authority.
+       * The license number assigned by the state Department of Insurance (DOI).
+       * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+       * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+       * This is a state-specific identifier, not globally unique across states.
+       * Reference: Each state's DOI maintains its own licensing database.
        * </pre>
        *
        * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -19846,7 +20302,8 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object licenseState_ = "";
       /**
        * <pre>
-       * The state that issued the license.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -19867,7 +20324,8 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The state that issued the license.
+       * The two-letter US state or territory code that issued the license.
+       * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
        * </pre>
        *
        * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -19894,6 +20352,10 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
+       * Values: "Resident" (license in the producer's home/domicile state) or
+       * "Non-Resident" (license in a state other than the home state).
+       * A producer typically has one resident license and may hold multiple
+       * non-resident licenses in other states where they conduct business.
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -19915,6 +20377,10 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
+       * Values: "Resident" (license in the producer's home/domicile state) or
+       * "Non-Resident" (license in a state other than the home state).
+       * A producer typically has one resident license and may hold multiple
+       * non-resident licenses in other states where they conduct business.
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -19985,7 +20451,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2674
+       *     See producerflow/producer/v1/producer.proto;l=2758
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -19999,7 +20465,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2674
+       *     See producerflow/producer/v1/producer.proto;l=2758
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -20023,7 +20489,15 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object licenseClass_ = "";
       /**
        * <pre>
-       * License class description.
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
        * </pre>
        *
        * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -20044,7 +20518,15 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * License class description.
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
        * </pre>
        *
        * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -20069,7 +20551,10 @@ java.lang.String defaultValue) {
       private int licenseClassCode_ = 0;
       /**
        * <pre>
-       * License class code.
+       * Numeric code corresponding to the license class.
+       * This is the NIPR-standardized numeric identifier for the license class
+       * description in the license_class field.
+       * Used for programmatic comparisons rather than string matching.
        * </pre>
        *
        * <code>int32 license_class_code = 8 [json_name = "licenseClassCode"];</code>
@@ -20089,7 +20574,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2683
+       *     See producerflow/producer/v1/producer.proto;l=2778
        * @return Whether the issueDate field is set.
        */
       @java.lang.Override
@@ -20103,7 +20588,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2683
+       *     See producerflow/producer/v1/producer.proto;l=2778
        * @return The issueDate.
        */
       @java.lang.Override
@@ -20131,7 +20616,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2686
+       *     See producerflow/producer/v1/producer.proto;l=2781
        * @return Whether the updateDate field is set.
        */
       @java.lang.Override
@@ -20145,7 +20630,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2686
+       *     See producerflow/producer/v1/producer.proto;l=2781
        * @return The updateDate.
        */
       @java.lang.Override
@@ -20321,7 +20806,12 @@ java.lang.String defaultValue) {
       private java.util.List<com.producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority> linesOfAuthority_;
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -20332,7 +20822,12 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -20344,7 +20839,12 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -20355,7 +20855,12 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -20366,7 +20871,12 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Lines of Authority associated with this license.
+       * Lines of Authority (LOAs) associated with this license.
+       *
+       * These define what types of insurance the agency is authorized to
+       * transact in this state. A single license typically has multiple LOAs.
+       * Always check that the agency has an active LOA matching the product
+       * type before allowing transactions.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -21236,7 +21746,11 @@ java.lang.String defaultValue) {
         private java.lang.Object licenseNumber_ = "";
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -21256,7 +21770,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -21277,7 +21795,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -21294,7 +21816,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -21308,7 +21834,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * </pre>
          *
          * <code>string license_number = 1 [json_name = "licenseNumber"];</code>
@@ -21328,7 +21858,8 @@ java.lang.String defaultValue) {
         private java.lang.Object licenseState_ = "";
         /**
          * <pre>
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -21348,7 +21879,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -21369,7 +21901,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -21386,7 +21919,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -21400,7 +21934,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string license_state = 2 [json_name = "licenseState"];</code>
@@ -21421,6 +21956,10 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -21441,6 +21980,10 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -21462,6 +22005,10 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -21479,6 +22026,10 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -21493,6 +22044,10 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -21636,7 +22191,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2674
+         *     See producerflow/producer/v1/producer.proto;l=2758
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -21649,7 +22204,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2674
+         *     See producerflow/producer/v1/producer.proto;l=2758
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -21790,7 +22345,15 @@ java.lang.String defaultValue) {
         private java.lang.Object licenseClass_ = "";
         /**
          * <pre>
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * </pre>
          *
          * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -21810,7 +22373,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * </pre>
          *
          * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -21831,7 +22402,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * </pre>
          *
          * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -21848,7 +22427,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * </pre>
          *
          * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -21862,7 +22449,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * </pre>
          *
          * <code>string license_class = 7 [json_name = "licenseClass"];</code>
@@ -21882,7 +22477,10 @@ java.lang.String defaultValue) {
         private int licenseClassCode_ ;
         /**
          * <pre>
-         * License class code.
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
          * </pre>
          *
          * <code>int32 license_class_code = 8 [json_name = "licenseClassCode"];</code>
@@ -21894,7 +22492,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class code.
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
          * </pre>
          *
          * <code>int32 license_class_code = 8 [json_name = "licenseClassCode"];</code>
@@ -21910,7 +22511,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * License class code.
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
          * </pre>
          *
          * <code>int32 license_class_code = 8 [json_name = "licenseClassCode"];</code>
@@ -21933,7 +22537,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2683
+         *     See producerflow/producer/v1/producer.proto;l=2778
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated public boolean hasIssueDate() {
@@ -21946,7 +22550,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2683
+         *     See producerflow/producer/v1/producer.proto;l=2778
          * @return The issueDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -22094,7 +22698,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2686
+         *     See producerflow/producer/v1/producer.proto;l=2781
          * @return Whether the updateDate field is set.
          */
         @java.lang.Deprecated public boolean hasUpdateDate() {
@@ -22107,7 +22711,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2686
+         *     See producerflow/producer/v1/producer.proto;l=2781
          * @return The updateDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getUpdateDate() {
@@ -22887,7 +23491,12 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22901,7 +23510,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22915,7 +23529,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22929,7 +23548,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22950,7 +23574,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22968,7 +23597,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -22988,7 +23622,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23009,7 +23648,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23027,7 +23671,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23045,7 +23694,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23064,7 +23718,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23081,7 +23740,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23098,7 +23762,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23109,7 +23778,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23123,7 +23797,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23138,7 +23817,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23149,7 +23833,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23161,7 +23850,12 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];</code>
@@ -23336,6 +24030,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -23346,6 +24041,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -23355,6 +24051,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -23364,6 +24061,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -23374,6 +24072,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -23383,8 +24082,13 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * RegulatoryInfo contains regulatory information,
-     * including any regulatory actions.
+     * RegulatoryInfo contains regulatory information from NIPR, including any
+     * formal regulatory actions taken against the agency by state Departments
+     * of Insurance (DOIs) or other regulatory authorities.
+     *
+     * Regulatory actions are significant events that may affect an agency's
+     * ability to conduct business. They should be reviewed during due diligence
+     * and compliance checks.
      * </pre>
      *
      * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.RegulatoryInfo}
@@ -23430,7 +24134,7 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -23439,7 +24143,7 @@ java.lang.String defaultValue) {
         java.lang.String getActionId();
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -23450,7 +24154,9 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The state code where this regulatory action applies.
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -23459,7 +24165,9 @@ java.lang.String defaultValue) {
         java.lang.String getStateCode();
         /**
          * <pre>
-         * The state code where this regulatory action applies.
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -23470,7 +24178,10 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each state DOI.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -23479,7 +24190,10 @@ java.lang.String defaultValue) {
         java.lang.String getReasonForAction();
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each state DOI.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -23510,7 +24224,7 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23519,7 +24233,7 @@ java.lang.String defaultValue) {
         boolean hasDateOfAction();
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23528,7 +24242,7 @@ java.lang.String defaultValue) {
         com.google.protobuf.Timestamp getDateOfAction();
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23537,7 +24251,9 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23546,7 +24262,9 @@ java.lang.String defaultValue) {
         boolean hasEffectiveDate();
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23555,7 +24273,9 @@ java.lang.String defaultValue) {
         com.google.protobuf.Timestamp getEffectiveDate();
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23564,7 +24284,8 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -23573,7 +24294,8 @@ java.lang.String defaultValue) {
         boolean hasEnterDate();
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -23582,7 +24304,8 @@ java.lang.String defaultValue) {
         com.google.protobuf.Timestamp getEnterDate();
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -23591,7 +24314,9 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * state DOI. Can be used to look up additional details from the
+         * state's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -23600,7 +24325,9 @@ java.lang.String defaultValue) {
         java.lang.String getFileRef();
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * state DOI. Can be used to look up additional details from the
+         * state's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -23611,7 +24338,9 @@ java.lang.String defaultValue) {
 
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -23620,7 +24349,9 @@ java.lang.String defaultValue) {
         java.lang.String getPenaltyFineForfeiture();
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -23632,6 +24363,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -23641,6 +24374,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -23651,7 +24386,19 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * RegulatoryAction represents a regulatory action.
+       * RegulatoryAction represents a formal regulatory action taken against
+       * an agency by a state Department of Insurance or other regulatory body.
+       *
+       * Common types of regulatory actions include:
+       * - License revocation or suspension
+       * - Cease and desist orders
+       * - Consent agreements
+       * - Fines and monetary penalties
+       * - Probationary periods
+       * - Administrative actions for non-compliance
+       *
+       * These records are sourced from NIPR's PDB (Producer Database) and
+       * reflect official regulatory proceedings.
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction}
@@ -23703,7 +24450,7 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object actionId_ = "";
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -23724,7 +24471,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Unique identifier for the regulatory action.
+         * Unique identifier for the regulatory action in NIPR's system.
          * </pre>
          *
          * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -23750,7 +24497,9 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object stateCode_ = "";
         /**
          * <pre>
-         * The state code where this regulatory action applies.
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -23771,7 +24520,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The state code where this regulatory action applies.
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
          * </pre>
          *
          * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -23797,7 +24548,10 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object reasonForAction_ = "";
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each state DOI.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -23818,7 +24572,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The reason why the regulatory action was taken.
+         * The reason or cause for the regulatory action.
+         * Examples: "Misrepresentation", "Failure to Remit Premiums",
+         * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+         * This is a free-text field as reasons are defined by each state DOI.
          * </pre>
          *
          * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -23890,7 +24647,7 @@ java.lang.String defaultValue) {
         private com.google.protobuf.Timestamp dateOfAction_;
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23902,7 +24659,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23914,7 +24671,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the regulatory action was taken.
+         * The date when the regulatory action was formally initiated or filed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -23928,7 +24685,9 @@ java.lang.String defaultValue) {
         private com.google.protobuf.Timestamp effectiveDate_;
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23940,7 +24699,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23952,7 +24713,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the regulatory action became effective.
+         * The date when the regulatory action took effect.
+         * This may differ from date_of_action if there was a delayed
+         * effective date or appeal period.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -23966,7 +24729,8 @@ java.lang.String defaultValue) {
         private com.google.protobuf.Timestamp enterDate_;
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -23978,7 +24742,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -23990,7 +24755,8 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * The date when the entity entered into the regulatory action.
+         * The date when the agency entered into or acknowledged the
+         * regulatory action (e.g., signed a consent agreement).
          * </pre>
          *
          * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -24005,7 +24771,9 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object fileRef_ = "";
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * state DOI. Can be used to look up additional details from the
+         * state's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -24026,7 +24794,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Reference number for the regulatory action file.
+         * Reference number for the regulatory action file maintained by the
+         * state DOI. Can be used to look up additional details from the
+         * state's records.
          * </pre>
          *
          * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -24052,7 +24822,9 @@ java.lang.String defaultValue) {
         private volatile java.lang.Object penaltyFineForfeiture_ = "";
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -24073,7 +24845,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Any financial penalties associated with the regulatory action.
+         * Any financial penalties, fines, or forfeitures associated with
+         * the regulatory action.
+         * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
          * </pre>
          *
          * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -24100,6 +24874,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -24121,6 +24897,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Duration of any orders associated with the regulatory action.
+         * Format: Free-text describing the time period (e.g., "12 months",
+         * "Indefinite", "Until compliance").
          * </pre>
          *
          * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -24407,7 +25185,19 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * RegulatoryAction represents a regulatory action.
+         * RegulatoryAction represents a formal regulatory action taken against
+         * an agency by a state Department of Insurance or other regulatory body.
+         *
+         * Common types of regulatory actions include:
+         * - License revocation or suspension
+         * - Cease and desist orders
+         * - Consent agreements
+         * - Fines and monetary penalties
+         * - Probationary periods
+         * - Administrative actions for non-compliance
+         *
+         * These records are sourced from NIPR's PDB (Producer Database) and
+         * reflect official regulatory proceedings.
          * </pre>
          *
          * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction}
@@ -24707,7 +25497,7 @@ java.lang.String defaultValue) {
           private java.lang.Object actionId_ = "";
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -24727,7 +25517,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -24748,7 +25538,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -24765,7 +25555,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -24779,7 +25569,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * </pre>
            *
            * <code>string action_id = 1 [json_name = "actionId"];</code>
@@ -24799,7 +25589,9 @@ java.lang.String defaultValue) {
           private java.lang.Object stateCode_ = "";
           /**
            * <pre>
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * </pre>
            *
            * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -24819,7 +25611,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * </pre>
            *
            * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -24840,7 +25634,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * </pre>
            *
            * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -24857,7 +25653,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * </pre>
            *
            * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -24871,7 +25669,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * </pre>
            *
            * <code>string state_code = 2 [json_name = "stateCode"];</code>
@@ -24891,7 +25691,10 @@ java.lang.String defaultValue) {
           private java.lang.Object reasonForAction_ = "";
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -24911,7 +25714,10 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -24932,7 +25738,10 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -24949,7 +25758,10 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -24963,7 +25775,10 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * </pre>
            *
            * <code>string reason_for_action = 3 [json_name = "reasonForAction"];</code>
@@ -25077,7 +25892,7 @@ java.lang.String defaultValue) {
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> dateOfActionBuilder_;
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25088,7 +25903,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25103,7 +25918,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25123,7 +25938,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25141,7 +25956,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25166,7 +25981,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25183,7 +25998,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25195,7 +26010,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25210,7 +26025,7 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];</code>
@@ -25234,7 +26049,9 @@ java.lang.String defaultValue) {
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> effectiveDateBuilder_;
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25245,7 +26062,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25260,7 +26079,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25280,7 +26101,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25298,7 +26121,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25323,7 +26148,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25340,7 +26167,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25352,7 +26181,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25367,7 +26198,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * </pre>
            *
            * <code>.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];</code>
@@ -25391,7 +26224,8 @@ java.lang.String defaultValue) {
               com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> enterDateBuilder_;
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25402,7 +26236,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25417,7 +26252,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25437,7 +26273,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25455,7 +26292,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25480,7 +26318,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25497,7 +26336,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25509,7 +26349,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25524,7 +26365,8 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * </pre>
            *
            * <code>.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];</code>
@@ -25546,7 +26388,9 @@ java.lang.String defaultValue) {
           private java.lang.Object fileRef_ = "";
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -25566,7 +26410,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -25587,7 +26433,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -25604,7 +26452,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -25618,7 +26468,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * </pre>
            *
            * <code>string file_ref = 8 [json_name = "fileRef"];</code>
@@ -25638,7 +26490,9 @@ java.lang.String defaultValue) {
           private java.lang.Object penaltyFineForfeiture_ = "";
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -25658,7 +26512,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -25679,7 +26535,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -25696,7 +26554,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -25710,7 +26570,9 @@ java.lang.String defaultValue) {
           }
           /**
            * <pre>
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * </pre>
            *
            * <code>string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];</code>
@@ -25731,6 +26593,8 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -25751,6 +26615,8 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -25772,6 +26638,8 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -25789,6 +26657,8 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -25803,6 +26673,8 @@ java.lang.String defaultValue) {
           /**
            * <pre>
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * </pre>
            *
            * <code>string length_of_order = 10 [json_name = "lengthOfOrder"];</code>
@@ -25877,6 +26749,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -25889,6 +26762,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -25902,6 +26776,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -25914,6 +26789,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -25926,6 +26802,7 @@ java.lang.String defaultValue) {
        * <pre>
        * List of regulatory actions across different states.
        * Each regulatory action includes the state code where it applies.
+       * An empty list indicates no regulatory actions on record in NIPR.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26097,8 +26974,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * RegulatoryInfo contains regulatory information,
-       * including any regulatory actions.
+       * RegulatoryInfo contains regulatory information from NIPR, including any
+       * formal regulatory actions taken against the agency by state Departments
+       * of Insurance (DOIs) or other regulatory authorities.
+       *
+       * Regulatory actions are significant events that may affect an agency's
+       * ability to conduct business. They should be reviewed during due diligence
+       * and compliance checks.
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.RegulatoryInfo}
@@ -26299,6 +27181,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26314,6 +27197,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26329,6 +27213,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26344,6 +27229,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26366,6 +27252,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26385,6 +27272,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26406,6 +27294,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26428,6 +27317,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26447,6 +27337,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26466,6 +27357,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26486,6 +27378,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26504,6 +27397,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26522,6 +27416,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26534,6 +27429,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26549,6 +27445,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26565,6 +27462,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26577,6 +27475,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26590,6 +27489,7 @@ java.lang.String defaultValue) {
          * <pre>
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * </pre>
          *
          * <code>repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];</code>
@@ -26669,11 +27569,21 @@ java.lang.String defaultValue) {
         com.google.protobuf.MessageOrBuilder {
 
       /**
+       * <pre>
+       * Branch identifier for multi-branch agencies.
+       * Links the appointment to a specific agency branch, if applicable.
+       * </pre>
+       *
        * <code>string branch_id = 1 [json_name = "branchId"];</code>
        * @return The branchId.
        */
       java.lang.String getBranchId();
       /**
+       * <pre>
+       * Branch identifier for multi-branch agencies.
+       * Links the appointment to a specific agency branch, if applicable.
+       * </pre>
+       *
        * <code>string branch_id = 1 [json_name = "branchId"];</code>
        * @return The bytes for branchId.
        */
@@ -26683,6 +27593,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Name of the insurance company for this appointment.
+       * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
        * </pre>
        *
        * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -26692,6 +27603,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Name of the insurance company for this appointment.
+       * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
        * </pre>
        *
        * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -26702,7 +27614,9 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Federal Employer Identification Number of the carrier.
+       * Federal Employer Identification Number (FEIN) of the carrier.
+       * Format: 9-digit number assigned by the IRS.
+       * This uniquely identifies the carrier company for tax purposes.
        * </pre>
        *
        * <code>string fein = 3 [json_name = "fein"];</code>
@@ -26711,7 +27625,9 @@ java.lang.String defaultValue) {
       java.lang.String getFein();
       /**
        * <pre>
-       * Federal Employer Identification Number of the carrier.
+       * Federal Employer Identification Number (FEIN) of the carrier.
+       * Format: 9-digit number assigned by the IRS.
+       * This uniquely identifies the carrier company for tax purposes.
        * </pre>
        *
        * <code>string fein = 3 [json_name = "fein"];</code>
@@ -26722,7 +27638,11 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Company code for the insurance carrier.
+       * NAIC Company Code (CoCode) for the insurance carrier.
+       * A unique identifier assigned by the National Association of Insurance
+       * Commissioners (NAIC) for regulatory reporting.
+       * Format: Typically a 5-digit numeric string.
+       * Reference: https://naic.org
        * </pre>
        *
        * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -26731,7 +27651,11 @@ java.lang.String defaultValue) {
       java.lang.String getCoCode();
       /**
        * <pre>
-       * Company code for the insurance carrier.
+       * NAIC Company Code (CoCode) for the insurance carrier.
+       * A unique identifier assigned by the National Association of Insurance
+       * Commissioners (NAIC) for regulatory reporting.
+       * Format: Typically a 5-digit numeric string.
+       * Reference: https://naic.org
        * </pre>
        *
        * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -26742,8 +27666,19 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Line of authority for this appointment (e.g., Life, Property, Casualty).
-       * Indicates what types of insurance can be sold.
+       * Line of Authority (LOA) for this appointment.
+       * Indicates what type of insurance the agency can sell for this carrier.
+       * A single carrier may have separate appointments for different LOAs.
+       *
+       * Common LOA values:
+       * - "LIFE": Life insurance products
+       * - "HEALTH": Health insurance products
+       * - "PROPERTY": Property insurance
+       * - "CASUALTY": Casualty insurance
+       * - "PROPERTY AND CASUALTY": Combined P&amp;C
+       * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * </pre>
        *
        * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -26752,8 +27687,19 @@ java.lang.String defaultValue) {
       java.lang.String getLineOfAuthority();
       /**
        * <pre>
-       * Line of authority for this appointment (e.g., Life, Property, Casualty).
-       * Indicates what types of insurance can be sold.
+       * Line of Authority (LOA) for this appointment.
+       * Indicates what type of insurance the agency can sell for this carrier.
+       * A single carrier may have separate appointments for different LOAs.
+       *
+       * Common LOA values:
+       * - "LIFE": Life insurance products
+       * - "HEALTH": Health insurance products
+       * - "PROPERTY": Property insurance
+       * - "CASUALTY": Casualty insurance
+       * - "PROPERTY AND CASUALTY": Combined P&amp;C
+       * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * </pre>
        *
        * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -26764,7 +27710,9 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Code for the line of authority for this appointment.
+       * Standardized code for the Line of Authority.
+       * Used for programmatic matching rather than string comparison on the
+       * line_of_authority description field.
        * </pre>
        *
        * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -26773,7 +27721,9 @@ java.lang.String defaultValue) {
       java.lang.String getLoaCode();
       /**
        * <pre>
-       * Code for the line of authority for this appointment.
+       * Standardized code for the Line of Authority.
+       * Used for programmatic matching rather than string comparison on the
+       * line_of_authority description field.
        * </pre>
        *
        * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -26784,7 +27734,15 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Current status of the appointment (e.g., Active, Terminated).
+       * Current status of the appointment as reported by NIPR.
+       *
+       * Values:
+       * - "APPOINTED": Appointment is active; the agency can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
+       *
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -26793,7 +27751,15 @@ java.lang.String defaultValue) {
       java.lang.String getStatus();
       /**
        * <pre>
-       * Current status of the appointment (e.g., Active, Terminated).
+       * Current status of the appointment as reported by NIPR.
+       *
+       * Values:
+       * - "APPOINTED": Appointment is active; the agency can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
+       *
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -26805,6 +27771,16 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Reason for termination if the appointment has been terminated.
+       *
+       * Common termination reasons include:
+       * - Voluntary termination by the agency
+       * - Carrier-initiated termination
+       * - Inadequate production
+       * - Company merger or liquidation
+       * - Regulatory or compliance issues
+       *
+       * This field is empty if the appointment is still active.
+       * Reference: https://pdb.nipr.com/Gateway/ValidTerms
        * </pre>
        *
        * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -26814,6 +27790,16 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Reason for termination if the appointment has been terminated.
+       *
+       * Common termination reasons include:
+       * - Voluntary termination by the agency
+       * - Carrier-initiated termination
+       * - Inadequate production
+       * - Company merger or liquidation
+       * - Regulatory or compliance issues
+       *
+       * This field is empty if the appointment is still active.
+       * Reference: https://pdb.nipr.com/Gateway/ValidTerms
        * </pre>
        *
        * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -26824,7 +27810,10 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -26833,7 +27822,10 @@ java.lang.String defaultValue) {
       boolean hasStatusReasonDate();
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -26842,7 +27834,10 @@ java.lang.String defaultValue) {
       com.google.protobuf.Timestamp getStatusReasonDate();
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -26852,6 +27847,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -26861,6 +27858,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -26870,6 +27869,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -26878,7 +27879,9 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Additional affiliations or roles with the agency.
+       * Additional affiliations or roles the agency has with the carrier.
+       * This may include special designations, sub-agency relationships,
+       * or other relationship details.
        * </pre>
        *
        * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -26887,7 +27890,9 @@ java.lang.String defaultValue) {
       java.lang.String getAgencyAffiliations();
       /**
        * <pre>
-       * Additional affiliations or roles with the agency.
+       * Additional affiliations or roles the agency has with the carrier.
+       * This may include special designations, sub-agency relationships,
+       * or other relationship details.
        * </pre>
        *
        * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -26898,7 +27903,20 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * Appointment represents a relationship with an insurance carrier.
+     * Appointment represents a formal relationship between an agency and an
+     * insurance carrier, granting the agency authority to sell that carrier's
+     * products. This data is sourced from NIPR's PDB (Producer Database).
+     *
+     * Appointment Lifecycle (status field values):
+     * 1. APPOINTED: Agency is authorized to sell this carrier's products for
+     * the specified Line of Authority
+     * 2. TERMINATED: Appointment has ended (see termination_reason for details)
+     *
+     * Use Cases:
+     * - Verify agency is appointed before allowing them to sell a carrier's
+     * products
+     * - Track which carriers an agency represents
+     * - Monitor appointment renewal dates for compliance
      * </pre>
      *
      * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.Appointment}
@@ -26951,6 +27969,11 @@ java.lang.String defaultValue) {
       @SuppressWarnings("serial")
       private volatile java.lang.Object branchId_ = "";
       /**
+       * <pre>
+       * Branch identifier for multi-branch agencies.
+       * Links the appointment to a specific agency branch, if applicable.
+       * </pre>
+       *
        * <code>string branch_id = 1 [json_name = "branchId"];</code>
        * @return The branchId.
        */
@@ -26968,6 +27991,11 @@ java.lang.String defaultValue) {
         }
       }
       /**
+       * <pre>
+       * Branch identifier for multi-branch agencies.
+       * Links the appointment to a specific agency branch, if applicable.
+       * </pre>
+       *
        * <code>string branch_id = 1 [json_name = "branchId"];</code>
        * @return The bytes for branchId.
        */
@@ -26992,6 +28020,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Name of the insurance company for this appointment.
+       * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
        * </pre>
        *
        * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -27013,6 +28042,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Name of the insurance company for this appointment.
+       * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
        * </pre>
        *
        * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -27038,7 +28068,9 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object fein_ = "";
       /**
        * <pre>
-       * Federal Employer Identification Number of the carrier.
+       * Federal Employer Identification Number (FEIN) of the carrier.
+       * Format: 9-digit number assigned by the IRS.
+       * This uniquely identifies the carrier company for tax purposes.
        * </pre>
        *
        * <code>string fein = 3 [json_name = "fein"];</code>
@@ -27059,7 +28091,9 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Federal Employer Identification Number of the carrier.
+       * Federal Employer Identification Number (FEIN) of the carrier.
+       * Format: 9-digit number assigned by the IRS.
+       * This uniquely identifies the carrier company for tax purposes.
        * </pre>
        *
        * <code>string fein = 3 [json_name = "fein"];</code>
@@ -27085,7 +28119,11 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object coCode_ = "";
       /**
        * <pre>
-       * Company code for the insurance carrier.
+       * NAIC Company Code (CoCode) for the insurance carrier.
+       * A unique identifier assigned by the National Association of Insurance
+       * Commissioners (NAIC) for regulatory reporting.
+       * Format: Typically a 5-digit numeric string.
+       * Reference: https://naic.org
        * </pre>
        *
        * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -27106,7 +28144,11 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Company code for the insurance carrier.
+       * NAIC Company Code (CoCode) for the insurance carrier.
+       * A unique identifier assigned by the National Association of Insurance
+       * Commissioners (NAIC) for regulatory reporting.
+       * Format: Typically a 5-digit numeric string.
+       * Reference: https://naic.org
        * </pre>
        *
        * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -27132,8 +28174,19 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object lineOfAuthority_ = "";
       /**
        * <pre>
-       * Line of authority for this appointment (e.g., Life, Property, Casualty).
-       * Indicates what types of insurance can be sold.
+       * Line of Authority (LOA) for this appointment.
+       * Indicates what type of insurance the agency can sell for this carrier.
+       * A single carrier may have separate appointments for different LOAs.
+       *
+       * Common LOA values:
+       * - "LIFE": Life insurance products
+       * - "HEALTH": Health insurance products
+       * - "PROPERTY": Property insurance
+       * - "CASUALTY": Casualty insurance
+       * - "PROPERTY AND CASUALTY": Combined P&amp;C
+       * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * </pre>
        *
        * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -27154,8 +28207,19 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Line of authority for this appointment (e.g., Life, Property, Casualty).
-       * Indicates what types of insurance can be sold.
+       * Line of Authority (LOA) for this appointment.
+       * Indicates what type of insurance the agency can sell for this carrier.
+       * A single carrier may have separate appointments for different LOAs.
+       *
+       * Common LOA values:
+       * - "LIFE": Life insurance products
+       * - "HEALTH": Health insurance products
+       * - "PROPERTY": Property insurance
+       * - "CASUALTY": Casualty insurance
+       * - "PROPERTY AND CASUALTY": Combined P&amp;C
+       * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * </pre>
        *
        * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -27181,7 +28245,9 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object loaCode_ = "";
       /**
        * <pre>
-       * Code for the line of authority for this appointment.
+       * Standardized code for the Line of Authority.
+       * Used for programmatic matching rather than string comparison on the
+       * line_of_authority description field.
        * </pre>
        *
        * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -27202,7 +28268,9 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Code for the line of authority for this appointment.
+       * Standardized code for the Line of Authority.
+       * Used for programmatic matching rather than string comparison on the
+       * line_of_authority description field.
        * </pre>
        *
        * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -27228,7 +28296,15 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object status_ = "";
       /**
        * <pre>
-       * Current status of the appointment (e.g., Active, Terminated).
+       * Current status of the appointment as reported by NIPR.
+       *
+       * Values:
+       * - "APPOINTED": Appointment is active; the agency can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
+       *
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -27249,7 +28325,15 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Current status of the appointment (e.g., Active, Terminated).
+       * Current status of the appointment as reported by NIPR.
+       *
+       * Values:
+       * - "APPOINTED": Appointment is active; the agency can sell this
+       * carrier's products for the specified Line of Authority
+       * - "TERMINATED": Appointment has ended (see termination_reason for
+       * details)
+       *
+       * Always check status is "APPOINTED" before allowing sales.
        * </pre>
        *
        * <code>string status = 7 [json_name = "status"];</code>
@@ -27276,6 +28360,16 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Reason for termination if the appointment has been terminated.
+       *
+       * Common termination reasons include:
+       * - Voluntary termination by the agency
+       * - Carrier-initiated termination
+       * - Inadequate production
+       * - Company merger or liquidation
+       * - Regulatory or compliance issues
+       *
+       * This field is empty if the appointment is still active.
+       * Reference: https://pdb.nipr.com/Gateway/ValidTerms
        * </pre>
        *
        * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -27297,6 +28391,16 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Reason for termination if the appointment has been terminated.
+       *
+       * Common termination reasons include:
+       * - Voluntary termination by the agency
+       * - Carrier-initiated termination
+       * - Inadequate production
+       * - Company merger or liquidation
+       * - Regulatory or compliance issues
+       *
+       * This field is empty if the appointment is still active.
+       * Reference: https://pdb.nipr.com/Gateway/ValidTerms
        * </pre>
        *
        * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -27321,7 +28425,10 @@ java.lang.String defaultValue) {
       private com.google.protobuf.Timestamp statusReasonDate_;
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -27333,7 +28440,10 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -27345,7 +28455,10 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Date associated with the current status or reason.
+       * Date when the status or termination reason became effective.
+       * For terminated appointments, this is when the termination occurred.
+       * For active appointments, this may indicate when the current status
+       * was last confirmed.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -27360,6 +28473,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -27372,6 +28487,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -27384,6 +28501,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Date when the appointment will renew.
+       * Appointments typically renew annually. Monitor this date for upcoming
+       * renewals to ensure continuous authorization.
        * </pre>
        *
        * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -27398,7 +28517,9 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object agencyAffiliations_ = "";
       /**
        * <pre>
-       * Additional affiliations or roles with the agency.
+       * Additional affiliations or roles the agency has with the carrier.
+       * This may include special designations, sub-agency relationships,
+       * or other relationship details.
        * </pre>
        *
        * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -27419,7 +28540,9 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Additional affiliations or roles with the agency.
+       * Additional affiliations or roles the agency has with the carrier.
+       * This may include special designations, sub-agency relationships,
+       * or other relationship details.
        * </pre>
        *
        * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -27710,7 +28833,20 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Appointment represents a relationship with an insurance carrier.
+       * Appointment represents a formal relationship between an agency and an
+       * insurance carrier, granting the agency authority to sell that carrier's
+       * products. This data is sourced from NIPR's PDB (Producer Database).
+       *
+       * Appointment Lifecycle (status field values):
+       * 1. APPOINTED: Agency is authorized to sell this carrier's products for
+       * the specified Line of Authority
+       * 2. TERMINATED: Appointment has ended (see termination_reason for details)
+       *
+       * Use Cases:
+       * - Verify agency is appointed before allowing them to sell a carrier's
+       * products
+       * - Track which carriers an agency represents
+       * - Monitor appointment renewal dates for compliance
        * </pre>
        *
        * Protobuf type {@code producerflow.producer.v1.Agency.NIPR.Appointment}
@@ -28015,6 +29151,11 @@ java.lang.String defaultValue) {
 
         private java.lang.Object branchId_ = "";
         /**
+         * <pre>
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * </pre>
+         *
          * <code>string branch_id = 1 [json_name = "branchId"];</code>
          * @return The branchId.
          */
@@ -28031,6 +29172,11 @@ java.lang.String defaultValue) {
           }
         }
         /**
+         * <pre>
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * </pre>
+         *
          * <code>string branch_id = 1 [json_name = "branchId"];</code>
          * @return The bytes for branchId.
          */
@@ -28048,6 +29194,11 @@ java.lang.String defaultValue) {
           }
         }
         /**
+         * <pre>
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * </pre>
+         *
          * <code>string branch_id = 1 [json_name = "branchId"];</code>
          * @param value The branchId to set.
          * @return This builder for chaining.
@@ -28061,6 +29212,11 @@ java.lang.String defaultValue) {
           return this;
         }
         /**
+         * <pre>
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * </pre>
+         *
          * <code>string branch_id = 1 [json_name = "branchId"];</code>
          * @return This builder for chaining.
          */
@@ -28071,6 +29227,11 @@ java.lang.String defaultValue) {
           return this;
         }
         /**
+         * <pre>
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * </pre>
+         *
          * <code>string branch_id = 1 [json_name = "branchId"];</code>
          * @param value The bytes for branchId to set.
          * @return This builder for chaining.
@@ -28089,6 +29250,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * </pre>
          *
          * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -28109,6 +29271,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * </pre>
          *
          * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -28130,6 +29293,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * </pre>
          *
          * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -28147,6 +29311,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * </pre>
          *
          * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -28161,6 +29326,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * </pre>
          *
          * <code>string company_name = 2 [json_name = "companyName"];</code>
@@ -28180,7 +29346,9 @@ java.lang.String defaultValue) {
         private java.lang.Object fein_ = "";
         /**
          * <pre>
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * </pre>
          *
          * <code>string fein = 3 [json_name = "fein"];</code>
@@ -28200,7 +29368,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * </pre>
          *
          * <code>string fein = 3 [json_name = "fein"];</code>
@@ -28221,7 +29391,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * </pre>
          *
          * <code>string fein = 3 [json_name = "fein"];</code>
@@ -28238,7 +29410,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * </pre>
          *
          * <code>string fein = 3 [json_name = "fein"];</code>
@@ -28252,7 +29426,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * </pre>
          *
          * <code>string fein = 3 [json_name = "fein"];</code>
@@ -28272,7 +29448,11 @@ java.lang.String defaultValue) {
         private java.lang.Object coCode_ = "";
         /**
          * <pre>
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * </pre>
          *
          * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -28292,7 +29472,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * </pre>
          *
          * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -28313,7 +29497,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * </pre>
          *
          * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -28330,7 +29518,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * </pre>
          *
          * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -28344,7 +29536,11 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * </pre>
          *
          * <code>string co_code = 4 [json_name = "coCode"];</code>
@@ -28364,8 +29560,19 @@ java.lang.String defaultValue) {
         private java.lang.Object lineOfAuthority_ = "";
         /**
          * <pre>
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&amp;C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -28385,8 +29592,19 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&amp;C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -28407,8 +29625,19 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&amp;C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -28425,8 +29654,19 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&amp;C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -28440,8 +29680,19 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&amp;C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * </pre>
          *
          * <code>string line_of_authority = 5 [json_name = "lineOfAuthority"];</code>
@@ -28461,7 +29712,9 @@ java.lang.String defaultValue) {
         private java.lang.Object loaCode_ = "";
         /**
          * <pre>
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * </pre>
          *
          * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -28481,7 +29734,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * </pre>
          *
          * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -28502,7 +29757,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * </pre>
          *
          * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -28519,7 +29776,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * </pre>
          *
          * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -28533,7 +29792,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * </pre>
          *
          * <code>string loa_code = 6 [json_name = "loaCode"];</code>
@@ -28553,7 +29814,15 @@ java.lang.String defaultValue) {
         private java.lang.Object status_ = "";
         /**
          * <pre>
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -28573,7 +29842,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -28594,7 +29871,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -28611,7 +29896,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -28625,7 +29918,15 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * </pre>
          *
          * <code>string status = 7 [json_name = "status"];</code>
@@ -28646,6 +29947,16 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * </pre>
          *
          * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -28666,6 +29977,16 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * </pre>
          *
          * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -28687,6 +30008,16 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * </pre>
          *
          * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -28704,6 +30035,16 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * </pre>
          *
          * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -28718,6 +30059,16 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * </pre>
          *
          * <code>string termination_reason = 8 [json_name = "terminationReason"];</code>
@@ -28739,7 +30090,10 @@ java.lang.String defaultValue) {
             com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> statusReasonDateBuilder_;
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28750,7 +30104,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28765,7 +30122,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28785,7 +30145,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28803,7 +30166,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28828,7 +30194,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28845,7 +30214,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28857,7 +30229,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28872,7 +30247,10 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];</code>
@@ -28897,6 +30275,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -28908,6 +30288,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -28923,6 +30305,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -28943,6 +30327,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -28961,6 +30347,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -28986,6 +30374,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -29003,6 +30393,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -29015,6 +30407,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -29030,6 +30424,8 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * </pre>
          *
          * <code>.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];</code>
@@ -29051,7 +30447,9 @@ java.lang.String defaultValue) {
         private java.lang.Object agencyAffiliations_ = "";
         /**
          * <pre>
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * </pre>
          *
          * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -29071,7 +30469,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * </pre>
          *
          * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -29092,7 +30492,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * </pre>
          *
          * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -29109,7 +30511,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * </pre>
          *
          * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -29123,7 +30527,9 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * </pre>
          *
          * <code>string agency_affiliations = 11 [json_name = "agencyAffiliations"];</code>
@@ -29356,7 +30762,7 @@ java.lang.String defaultValue) {
     private com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatoryInfo_;
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -29368,7 +30774,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -29380,7 +30786,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * Regulatory information from NIPR
+     * Regulatory information from NIPR.
      * </pre>
      *
      * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -29395,8 +30801,18 @@ java.lang.String defaultValue) {
     private java.util.List<com.producerflow.producer.v1.Agency.NIPR.Appointment> appointments_;
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -29407,8 +30823,18 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -29420,8 +30846,18 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -29432,8 +30868,18 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -29444,8 +30890,18 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * List of carrier appointments held in NIPR.
-     * These represent relationships with insurance carriers.
+     * List of carrier appointments held by the agency in NIPR.
+     *
+     * Each appointment represents authorization to sell a specific carrier's
+     * products for a specific Line of Authority. An agency typically has
+     * multiple appointments across different carriers and LOAs.
+     *
+     * Before allowing an agency to quote or sell a product:
+     * 1. Verify they have an active appointment with that carrier
+     * 2. Verify the appointment's LOA matches the product type
+     * 3. Check the appointment renewal date hasn't passed
+     *
+     * This data is synchronized from NIPR and is read-only.
      * </pre>
      *
      * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -30810,7 +32266,7 @@ java.lang.String defaultValue) {
           com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo, com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.Builder, com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfoOrBuilder> regulatoryInfoBuilder_;
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30821,7 +32277,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30836,7 +32292,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30856,7 +32312,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30874,7 +32330,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30899,7 +32355,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30916,7 +32372,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30928,7 +32384,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30943,7 +32399,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * </pre>
        *
        * <code>.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];</code>
@@ -30976,8 +32432,18 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -30991,8 +32457,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31006,8 +32482,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31021,8 +32507,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31043,8 +32539,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31062,8 +32568,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31083,8 +32599,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31105,8 +32631,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31124,8 +32660,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31143,8 +32689,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31163,8 +32719,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31181,8 +32747,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31199,8 +32775,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31211,8 +32797,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31226,8 +32822,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31242,8 +32848,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31254,8 +32870,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31267,8 +32893,18 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * </pre>
        *
        * <code>repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];</code>
@@ -31951,6 +33587,76 @@ java.lang.String defaultValue) {
     return isSoleProprietor_;
   }
 
+  public static final int ORGANIZATION_RELATIONSHIP_FIELD_NUMBER = 16;
+  private int organizationRelationship_ = 0;
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return Whether the organizationRelationship field is set.
+   */
+  @java.lang.Override public boolean hasOrganizationRelationship() {
+    return ((bitField0_ & 0x00000800) != 0);
+  }
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return The enum numeric value on the wire for organizationRelationship.
+   */
+  @java.lang.Override public int getOrganizationRelationshipValue() {
+    return organizationRelationship_;
+  }
+  /**
+   * <pre>
+   * The relationship of this agency with its organization.
+   *
+   * Indicates whether the agency is the main agency or a related agency within
+   * an organization.
+   * - MAIN: The primary agency that owns or manages the organization
+   * - RELATED: An agency that is part of the organization but not the primary owner
+   * - UNSPECIFIED: Agency does not belong to any organization
+   *
+   * This field is always populated based on the agency's actual organization
+   * membership, regardless of how the agency was queried. If the agency belongs
+   * to an organization, this will be MAIN or RELATED. If the agency is standalone
+   * (not part of any organization), this will be UNSPECIFIED.
+   * </pre>
+   *
+   * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+   * @return The organizationRelationship.
+   */
+  @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+    com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+    return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -32009,6 +33715,9 @@ java.lang.String defaultValue) {
     }
     if (isSoleProprietor_ != false) {
       output.writeBool(15, isSoleProprietor_);
+    }
+    if (((bitField0_ & 0x00000800) != 0)) {
+      output.writeEnum(16, organizationRelationship_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -32081,6 +33790,10 @@ java.lang.String defaultValue) {
     if (isSoleProprietor_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(15, isSoleProprietor_);
+    }
+    if (((bitField0_ & 0x00000800) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(16, organizationRelationship_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -32160,6 +33873,10 @@ java.lang.String defaultValue) {
     }
     if (getIsSoleProprietor()
         != other.getIsSoleProprietor()) return false;
+    if (hasOrganizationRelationship() != other.hasOrganizationRelationship()) return false;
+    if (hasOrganizationRelationship()) {
+      if (organizationRelationship_ != other.organizationRelationship_) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -32228,6 +33945,10 @@ java.lang.String defaultValue) {
     hash = (37 * hash) + IS_SOLE_PROPRIETOR_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getIsSoleProprietor());
+    if (hasOrganizationRelationship()) {
+      hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
+      hash = (53 * hash) + organizationRelationship_;
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -32459,6 +34180,7 @@ java.lang.String defaultValue) {
         organizationBuilder_ = null;
       }
       isSoleProprietor_ = false;
+      organizationRelationship_ = 0;
       return this;
     }
 
@@ -32582,6 +34304,10 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00004000) != 0)) {
         result.isSoleProprietor_ = isSoleProprietor_;
       }
+      if (((from_bitField0_ & 0x00008000) != 0)) {
+        result.organizationRelationship_ = organizationRelationship_;
+        to_bitField0_ |= 0x00000800;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -32673,6 +34399,9 @@ java.lang.String defaultValue) {
       }
       if (other.getIsSoleProprietor() != false) {
         setIsSoleProprietor(other.getIsSoleProprietor());
+      }
+      if (other.hasOrganizationRelationship()) {
+        setOrganizationRelationship(other.getOrganizationRelationship());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -32806,6 +34535,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00004000;
               break;
             } // case 120
+            case 128: {
+              organizationRelationship_ = input.readEnum();
+              bitField0_ |= 0x00008000;
+              break;
+            } // case 128
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -35179,6 +36913,156 @@ java.lang.String defaultValue) {
     public Builder clearIsSoleProprietor() {
       bitField0_ = (bitField0_ & ~0x00004000);
       isSoleProprietor_ = false;
+      onChanged();
+      return this;
+    }
+
+    private int organizationRelationship_ = 0;
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    @java.lang.Override public boolean hasOrganizationRelationship() {
+      return ((bitField0_ & 0x00008000) != 0);
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    @java.lang.Override public int getOrganizationRelationshipValue() {
+      return organizationRelationship_;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @param value The enum numeric value on the wire for organizationRelationship to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrganizationRelationshipValue(int value) {
+      organizationRelationship_ = value;
+      bitField0_ |= 0x00008000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @return The organizationRelationship.
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+      com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+      return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @param value The organizationRelationship to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrganizationRelationship(com.producerflow.producer.v1.AgencyOrganizationRelationship value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00008000;
+      organizationRelationship_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearOrganizationRelationship() {
+      bitField0_ = (bitField0_ & ~0x00008000);
+      organizationRelationship_ = 0;
       onChanged();
       return this;
     }

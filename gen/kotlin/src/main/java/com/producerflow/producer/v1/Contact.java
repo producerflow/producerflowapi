@@ -364,7 +364,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3678
+   *     See producerflow/producer/v1/producer.proto;l=3997
    * @return The role.
    */
   @java.lang.Override
@@ -388,7 +388,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=3678
+   *     See producerflow/producer/v1/producer.proto;l=3997
    * @return The bytes for role.
    */
   @java.lang.Override
@@ -450,6 +450,12 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only present for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 9 [json_name = "npn"];</code>
@@ -471,6 +477,12 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only present for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 9 [json_name = "npn"];</code>
@@ -1863,7 +1875,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3678
+     *     See producerflow/producer/v1/producer.proto;l=3997
      * @return The role.
      */
     @java.lang.Deprecated public java.lang.String getRole() {
@@ -1886,7 +1898,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3678
+     *     See producerflow/producer/v1/producer.proto;l=3997
      * @return The bytes for role.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1910,7 +1922,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3678
+     *     See producerflow/producer/v1/producer.proto;l=3997
      * @param value The role to set.
      * @return This builder for chaining.
      */
@@ -1930,7 +1942,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3678
+     *     See producerflow/producer/v1/producer.proto;l=3997
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearRole() {
@@ -1947,7 +1959,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3678
+     *     See producerflow/producer/v1/producer.proto;l=3997
      * @param value The bytes for role to set.
      * @return This builder for chaining.
      */
@@ -2122,6 +2134,12 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2142,6 +2160,12 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2163,6 +2187,12 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2180,6 +2210,12 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>
@@ -2194,6 +2230,12 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only present for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>string npn = 9 [json_name = "npn"];</code>

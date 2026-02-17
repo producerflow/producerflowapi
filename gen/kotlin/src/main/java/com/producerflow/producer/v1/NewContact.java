@@ -436,7 +436,13 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object npn_ = "";
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -448,7 +454,13 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -469,7 +481,13 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * National Producer Number (NPN) of the contact.
+   * National Producer Number (NPN) of the contact, if applicable.
+   * A unique NAIC identifier assigned during the licensing application process
+   * and stored in the NIPR Producer Database (PDB).
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
+   * Only applicable for contacts who are licensed insurance professionals.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1849,7 +1867,13 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object npn_ = "";
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1860,7 +1884,13 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1880,7 +1910,13 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1901,7 +1937,13 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1918,7 +1960,13 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>
@@ -1932,7 +1980,13 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * National Producer Number (NPN) of the contact.
+     * National Producer Number (NPN) of the contact, if applicable.
+     * A unique NAIC identifier assigned during the licensing application process
+     * and stored in the NIPR Producer Database (PDB).
+     * Format: 1-10 digit numeric string.
+     * Example: "1234567890"
+     * Only applicable for contacts who are licensed insurance professionals.
+     * Reference: https://nipr.com
      * </pre>
      *
      * <code>optional string npn = 9 [json_name = "npn"];</code>

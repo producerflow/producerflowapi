@@ -142,16 +142,49 @@ func (RiskReason) EnumDescriptor() ([]byte, []int) {
 	return file_producerflow_appointment_v1_appointment_proto_rawDescGZIP(), []int{1}
 }
 
-// Processing status of the appointment.
+// ProcessingStatus represents the lifecycle state of an appointment as it
+// moves through the NIPR processing pipeline.
+//
+// Appointment Lifecycle:
+//
+//	RequestAppointment
+//	      |
+//	      v
+//	IN_PROGRESS -----> APPOINTED (active appointment)
+//	      |                  |
+//	      v                  v (TerminateAppointment)
+//	  REJECTED         TERMINATION_REQUESTED --> TERMINATED
+//
+// For registry states or capacity carriers (no NIPR integration):
+//
+//	RequestAppointment --> APPOINTED (immediate)
+//	TerminateAppointment --> TERMINATED (immediate)
+//
+// Reference: https://pdb.nipr.com/Gateway
 type ProcessingStatus int32
 
 const (
-	ProcessingStatus_PROCESSING_STATUS_UNSPECIFIED           ProcessingStatus = 0
-	ProcessingStatus_PROCESSING_STATUS_IN_PROGRESS           ProcessingStatus = 1
-	ProcessingStatus_PROCESSING_STATUS_APPOINTED             ProcessingStatus = 2
-	ProcessingStatus_PROCESSING_STATUS_TERMINATED            ProcessingStatus = 3
-	ProcessingStatus_PROCESSING_STATUS_REJECTED              ProcessingStatus = 4
-	ProcessingStatus_PROCESSING_STATUS_MISSING_LICENSE       ProcessingStatus = 5
+	ProcessingStatus_PROCESSING_STATUS_UNSPECIFIED ProcessingStatus = 0
+	// Appointment request has been submitted to NIPR and is awaiting processing.
+	// This is a transient state; the final result will be delivered via webhook.
+	ProcessingStatus_PROCESSING_STATUS_IN_PROGRESS ProcessingStatus = 1
+	// Appointment has been approved and is active. The producer/agency can sell
+	// this carrier's products for the specified Line of Authority.
+	ProcessingStatus_PROCESSING_STATUS_APPOINTED ProcessingStatus = 2
+	// Appointment has been terminated. The producer/agency can no longer sell
+	// this carrier's products. This is a terminal state.
+	ProcessingStatus_PROCESSING_STATUS_TERMINATED ProcessingStatus = 3
+	// Appointment request was rejected by NIPR. Check not_eligible_reasons for
+	// details. Common reasons include: missing resident license, unmet
+	// continuing education requirements, or outstanding regulatory actions.
+	ProcessingStatus_PROCESSING_STATUS_REJECTED ProcessingStatus = 4
+	// The license required for this appointment is missing or could not be found.
+	// The producer/agency needs to obtain the appropriate license before the
+	// appointment can be processed.
+	ProcessingStatus_PROCESSING_STATUS_MISSING_LICENSE ProcessingStatus = 5
+	// A termination request has been submitted to NIPR and is awaiting
+	// processing. This is a transient state; the final result (TERMINATED)
+	// will be delivered via webhook.
 	ProcessingStatus_PROCESSING_STATUS_TERMINATION_REQUESTED ProcessingStatus = 6
 )
 
@@ -204,16 +237,30 @@ func (ProcessingStatus) EnumDescriptor() ([]byte, []int) {
 	return file_producerflow_appointment_v1_appointment_proto_rawDescGZIP(), []int{2}
 }
 
-// Type of appointment.
+// AppointmentType categorizes how the appointment was established and
+// processed.
+//
+// The appointment type determines the processing behavior:
+// - Registry and Synthetic appointments are processed automatically
+// - Up-front appointments go through NIPR's standard processing pipeline
+// - Just-in-time appointments are created on demand when needed
 type AppointmentType int32
 
 const (
-	AppointmentType_APPOINTMENT_TYPE_UNSPECIFIED  AppointmentType = 0
-	AppointmentType_APPOINTMENT_TYPE_REGISTRY     AppointmentType = 1
-	AppointmentType_APPOINTMENT_TYPE_UP_FRONT     AppointmentType = 2
+	AppointmentType_APPOINTMENT_TYPE_UNSPECIFIED AppointmentType = 0
+	// Registry appointment: Processed automatically for licenses in registry
+	// states. Registry states allow appointments without going through NIPR's
+	// standard appointment process.
+	AppointmentType_APPOINTMENT_TYPE_REGISTRY AppointmentType = 1
+	// Up-front appointment: Standard appointment processed through NIPR.
+	// These require NIPR approval and may take time to process. The carrier
+	// pays appointment fees to NIPR/state.
+	AppointmentType_APPOINTMENT_TYPE_UP_FRONT AppointmentType = 2
+	// Just-in-time appointment: Created on demand when a producer needs to
+	// sell a product but doesn't have a pre-existing appointment.
 	AppointmentType_APPOINTMENT_TYPE_JUST_IN_TIME AppointmentType = 3
-	// Synthetic appointments are programmatically created for individual
-	// producers in states where only agency-level appointments are permitted
+	// Synthetic appointment: Programmatically created for individual producers
+	// in states where only agency-level appointments are permitted
 	// (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when
 	// an agency appointment is approved and inherit properties from the parent
 	// agency appointment. The parent_appointment_id field links to the parent
@@ -271,29 +318,45 @@ func (AppointmentType) EnumDescriptor() ([]byte, []int) {
 // TerminationReason represents the reason for the termination of an appointment.
 //
 // These reasons correspond to NIPR's valid termination codes and vary by
-// state. Use ListTerminationReasons to get the valid reasons for a specific
-// state before terminating an appointment.
+// state. Not all reasons are valid in every state - use ListTerminationReasons
+// to get the valid reasons for a specific state before calling
+// TerminateAppointment.
 //
 // Reference: https://pdb.nipr.com/Gateway/ValidTerms
 type TerminationReason int32
 
 const (
-	TerminationReason_TERMINATION_REASON_UNSPECIFIED                    TerminationReason = 0
-	TerminationReason_TERMINATION_REASON_VOLUNTARY_TERMINATION          TerminationReason = 1
-	TerminationReason_TERMINATION_REASON_INADEQUATE_PRODUCTION          TerminationReason = 2
-	TerminationReason_TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT     TerminationReason = 3
-	TerminationReason_TERMINATION_REASON_DEATH                          TerminationReason = 4
+	TerminationReason_TERMINATION_REASON_UNSPECIFIED TerminationReason = 0
+	// Producer or agency voluntarily chose to end the appointment.
+	TerminationReason_TERMINATION_REASON_VOLUNTARY_TERMINATION TerminationReason = 1
+	// Carrier terminated due to insufficient premium production or sales volume.
+	TerminationReason_TERMINATION_REASON_INADEQUATE_PRODUCTION TerminationReason = 2
+	// Appointment was cancelled by the managing general agent (MGA).
+	TerminationReason_TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT TerminationReason = 3
+	// Producer has passed away.
+	TerminationReason_TERMINATION_REASON_DEATH TerminationReason = 4
+	// Insurance company has ceased operations or entered liquidation.
 	TerminationReason_TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION TerminationReason = 5
-	TerminationReason_TERMINATION_REASON_COMPANY_INDEBTEDNESS           TerminationReason = 6
-	TerminationReason_TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE      TerminationReason = 7
-	TerminationReason_TERMINATION_REASON_AGENT_MOVED                    TerminationReason = 8
-	TerminationReason_TERMINATION_REASON_APPOINTED_IN_ERROR             TerminationReason = 9
-	TerminationReason_TERMINATION_REASON_CANCELLED                      TerminationReason = 10
-	TerminationReason_TERMINATION_REASON_CANCELLED_FOR_CAUSE            TerminationReason = 11
-	TerminationReason_TERMINATION_REASON_COMPANY_MERGER                 TerminationReason = 12
-	TerminationReason_TERMINATION_REASON_REVOKED                        TerminationReason = 13
-	TerminationReason_TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE       TerminationReason = 14
-	TerminationReason_TERMINATION_REASON_REQUEST_REGULATORY_REVIEW      TerminationReason = 15
+	// Producer owes money to the insurance company (e.g., unremitted premiums).
+	TerminationReason_TERMINATION_REASON_COMPANY_INDEBTEDNESS TerminationReason = 6
+	// Carrier terminated due to poor service to policyholders.
+	TerminationReason_TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE TerminationReason = 7
+	// Producer relocated to a different jurisdiction.
+	TerminationReason_TERMINATION_REASON_AGENT_MOVED TerminationReason = 8
+	// Appointment was created in error and is being corrected.
+	TerminationReason_TERMINATION_REASON_APPOINTED_IN_ERROR TerminationReason = 9
+	// General cancellation without a more specific reason.
+	TerminationReason_TERMINATION_REASON_CANCELLED TerminationReason = 10
+	// Carrier terminated for cause (e.g., misconduct, policy violations).
+	TerminationReason_TERMINATION_REASON_CANCELLED_FOR_CAUSE TerminationReason = 11
+	// Insurance company merged with another company.
+	TerminationReason_TERMINATION_REASON_COMPANY_MERGER TerminationReason = 12
+	// Producer's license has been revoked by a regulatory authority.
+	TerminationReason_TERMINATION_REASON_REVOKED TerminationReason = 13
+	// Producer's license has been suspended for compliance issues.
+	TerminationReason_TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE TerminationReason = 14
+	// Termination is being submitted for regulatory review by the state DOI.
+	TerminationReason_TERMINATION_REASON_REQUEST_REGULATORY_REVIEW TerminationReason = 15
 )
 
 // Enum value maps for TerminationReason.
@@ -1241,11 +1304,23 @@ type Carrier struct {
 	CarrierId string `protobuf:"bytes,1,opt,name=carrier_id,json=carrierId,proto3" json:"carrier_id,omitempty"`
 	// The name of the carrier.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// The NPN of the carrier.
+	// National Producer Number (NPN) of the carrier.
+	// A unique NAIC identifier assigned to business entities during the licensing
+	// application process and stored in the NIPR Producer Database (PDB).
+	// Format: 1-10 digit numeric string.
+	// Example: "1234567890"
+	// Reference: https://nipr.com
 	Npn string `protobuf:"bytes,3,opt,name=npn,proto3" json:"npn,omitempty"`
-	// The FEIN of the carrier.
+	// Federal Employer Identification Number (FEIN) of the carrier.
+	// Format: 9-digit number assigned by the IRS for tax identification.
+	// Example: "123456789"
 	Fein string `protobuf:"bytes,4,opt,name=fein,proto3" json:"fein,omitempty"`
-	// The NAIC cocode of the carrier.
+	// NAIC Company Code (CoCode) of the carrier.
+	// A unique identifier assigned by the National Association of Insurance
+	// Commissioners (NAIC) to each insurance company for regulatory reporting.
+	// Format: Typically a 5-digit numeric string.
+	// Example: "12345"
+	// Reference: https://naic.org
 	Cocode string `protobuf:"bytes,5,opt,name=cocode,proto3" json:"cocode,omitempty"`
 	// Indicates whether this carrier has NIPR integration enabled. Capacity
 	// carriers (carriers without NIPR integration) process appointments and
@@ -1395,41 +1470,57 @@ func (x *AppointmentOperationalStatus) GetLastUpdated() *timestamppb.Timestamp {
 	return nil
 }
 
-// Represents an appointment for a license.
+// Represents a managed appointment for a license, tracked through the
+// ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+// on the Producer/Agency messages, this represents appointments that are
+// actively managed (requested, terminated) through the AppointmentService.
 type Appointment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier for the appointment.
+	// Unique identifier for the appointment (UUID format).
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
 	// Information about the license being appointed.
 	License *License `protobuf:"bytes,2,opt,name=license,proto3" json:"license,omitempty"`
 	// The license number of the license being appointed.
+	// This is a denormalized copy of license.license_number for convenience.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// The id of the agency that is appointed.
+	// The UUID of the agency that holds this appointment.
 	AgencyId string `protobuf:"bytes,4,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
-	// Optional. The id of the producer that is appointed, if any.
+	// Optional. The UUID of the producer that holds this appointment, if any.
+	// When empty, this is an agency-level appointment.
 	ProducerId *string `protobuf:"bytes,5,opt,name=producer_id,json=producerId,proto3,oneof" json:"producer_id,omitempty"`
 	// The name of the carrier to which the license is appointed.
+	// Examples: "State Farm", "Allstate", "Progressive"
 	Carrier string `protobuf:"bytes,6,opt,name=carrier,proto3" json:"carrier,omitempty"`
-	// Type of appointment (e.g., up-front, registry).
+	// Type of appointment (registry, up-front, just-in-time, or synthetic).
+	// Determines how the appointment was established and processed.
 	AppointmentType AppointmentType `protobuf:"varint,7,opt,name=appointment_type,json=appointmentType,proto3,enum=producerflow.appointment.v1.AppointmentType" json:"appointment_type,omitempty"`
-	// Processing status of the appointment (e.g., in progress, appointed).
+	// Current processing status of the appointment in the NIPR pipeline.
+	// See ProcessingStatus for the complete lifecycle documentation.
 	ProcessingStatus ProcessingStatus `protobuf:"varint,8,opt,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
 	// Optional. Comments or notes related to the appointment.
+	// May include NIPR processing notes or rejection details.
 	Comments string `protobuf:"bytes,9,opt,name=comments,proto3" json:"comments,omitempty"`
-	// Timestamp of when the appointment becomes effective.
+	// Timestamp of when the appointment became or becomes effective.
 	EffectiveDate *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=effective_date,json=effectiveDate,proto3" json:"effective_date,omitempty"`
-	// Optional. Timestamp of the termination of the appointment.
+	// Optional. Timestamp of when the appointment was terminated.
+	// Only populated when processing_status is TERMINATED.
 	TerminationDate *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=termination_date,json=terminationDate,proto3,oneof" json:"termination_date,omitempty"`
-	// Timestamp of the last update to the appointment.
+	// Timestamp of the last update to this appointment record.
 	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Operational status information for the appointment. This field provides
-	// insight into the current operational health and any risk factors that may
-	// affect the appointment.
+	// Operational status information for the appointment. Provides insight into
+	// the current operational health and any risk factors (e.g., expired license,
+	// inactive E&O) that may affect the appointment's continued validity.
 	OperationalStatus *AppointmentOperationalStatus `protobuf:"bytes,13,opt,name=operational_status,json=operationalStatus,proto3" json:"operational_status,omitempty"`
-	// The NAIC cocode of the carrier.
+	// NAIC Company Code (CoCode) of the carrier.
+	// A unique identifier assigned by the National Association of Insurance
+	// Commissioners (NAIC) for regulatory reporting.
+	// Format: Typically a 5-digit numeric string.
+	// Reference: https://naic.org
 	Cocode string `protobuf:"bytes,14,opt,name=cocode,proto3" json:"cocode,omitempty"`
-	// Optional. The id of the parent appointment, if this is a synthetic
-	// appointment. It should be empty for non-synthetic appointments.
+	// Optional. The UUID of the parent appointment, if this is a synthetic
+	// appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic
+	// appointments. Synthetic appointments inherit properties from and are
+	// terminated with their parent appointment.
 	ParentAppointmentId string `protobuf:"bytes,15,opt,name=parent_appointment_id,json=parentAppointmentId,proto3" json:"parent_appointment_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1574,7 +1665,10 @@ type License struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the license.
 	LicenseId string `protobuf:"bytes,1,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
-	// The license number.
+	// The license number assigned by the state Department of Insurance (DOI).
+	// Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+	// Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+	// This is a state-specific identifier, not globally unique across states.
 	LicenseNumber string `protobuf:"bytes,2,opt,name=license_number,json=licenseNumber,proto3" json:"license_number,omitempty"`
 	// The owner of the license, it can be an agency or a producer.
 	//
@@ -1583,9 +1677,16 @@ type License struct {
 	//	*License_ProducerId
 	//	*License_AgencyId
 	LicenseOwner isLicense_LicenseOwner `protobuf_oneof:"license_owner"`
-	// The two-letter state code of the license.
+	// The two-letter US state or territory code that issued the license.
+	// Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
 	State string `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`
-	// The license class.
+	// License class description as defined by the state DOI.
+	// Describes the broad category of insurance the license covers.
+	// Common classes include:
+	// - "Insurance Producer": General license to sell insurance
+	// - "Limited Lines Producer": Restricted to specific product types
+	// - "Surplus Lines Broker": Authorized for non-admitted carriers
+	// Values vary by state as each DOI defines its own license classes.
 	LicenseClass string `protobuf:"bytes,6,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
 	// Indicates whether this license is in a registry state. Licenses in
 	// registry states and capacity carriers are processed automatically without

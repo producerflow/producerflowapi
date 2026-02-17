@@ -12,7 +12,10 @@ public interface ValidateAgencyNPNRequestOrBuilder extends
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>
@@ -22,7 +25,10 @@ public interface ValidateAgencyNPNRequestOrBuilder extends
   /**
    * <pre>
    * The National Producer Number (NPN) to validate.
+   * Format: 1-10 digit numeric string.
+   * Example: "1234567890"
    * Required and must be non-empty.
+   * Reference: https://nipr.com
    * </pre>
    *
    * <code>string npn = 1 [json_name = "npn", (.buf.validate.field) = { ... }</code>

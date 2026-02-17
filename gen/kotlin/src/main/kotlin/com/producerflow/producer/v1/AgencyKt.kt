@@ -725,6 +725,82 @@ public object AgencyKt {
     public fun clearIsSoleProprietor() {
       _builder.clearIsSoleProprietor()
     }
+
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];`
+     */
+    public var organizationRelationship: com.producerflow.producer.v1.AgencyOrganizationRelationship
+      @JvmName("getOrganizationRelationship")
+      get() = _builder.organizationRelationship
+      @JvmName("setOrganizationRelationship")
+      set(value) {
+        _builder.organizationRelationship = value
+      }
+    public var organizationRelationshipValue: kotlin.Int
+      @JvmName("getOrganizationRelationshipValue")
+      get() = _builder.organizationRelationshipValue
+      @JvmName("setOrganizationRelationshipValue")
+      set(value) {
+        _builder.organizationRelationshipValue = value
+      }
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];`
+     */
+    public fun clearOrganizationRelationship() {
+      _builder.clearOrganizationRelationship()
+    }
+    /**
+     * ```
+     * The relationship of this agency with its organization.
+     *
+     * Indicates whether the agency is the main agency or a related agency within
+     * an organization.
+     * - MAIN: The primary agency that owns or manages the organization
+     * - RELATED: An agency that is part of the organization but not the primary owner
+     * - UNSPECIFIED: Agency does not belong to any organization
+     *
+     * This field is always populated based on the agency's actual organization
+     * membership, regardless of how the agency was queried. If the agency belongs
+     * to an organization, this will be MAIN or RELATED. If the agency is standalone
+     * (not part of any organization), this will be UNSPECIFIED.
+     * ```
+     *
+     * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 16 [json_name = "organizationRelationship"];`
+     * @return Whether the organizationRelationship field is set.
+     */
+    public fun hasOrganizationRelationship(): kotlin.Boolean {
+      return _builder.hasOrganizationRelationship()
+    }
   }
   @kotlin.jvm.JvmName("-initializeagencyInfo")
   public inline fun agencyInfo(block: com.producerflow.producer.v1.AgencyKt.AgencyInfoKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Agency.AgencyInfo =
@@ -971,7 +1047,13 @@ public object AgencyKt {
       /**
        * ```
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 9 [json_name = "npn"];`
@@ -986,7 +1068,13 @@ public object AgencyKt {
       /**
        * ```
        * National Producer Number (NPN) of the agency.
-       * This is a unique identifier assigned by the National Association of Insurance Commissioners (NAIC).
+       * A unique NAIC identifier assigned to business entities during the
+       * licensing application process and stored in the NIPR Producer Database
+       * (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Only present for standard agencies (not sole proprietors).
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 9 [json_name = "npn"];`
@@ -2047,9 +2135,13 @@ public object AgencyKt {
 
       /**
        * ```
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 5 [json_name = "npn"];`
@@ -2063,9 +2155,13 @@ public object AgencyKt {
         }
       /**
        * ```
-       * The NPN of the principal. This is used to
-       * retrieve the license information
-       * of the principal from the NIPR API.
+       * National Producer Number (NPN) of the principal.
+       * A unique NAIC identifier assigned to individuals during the licensing
+       * application process and stored in the NIPR Producer Database (PDB).
+       * Format: 1-10 digit numeric string.
+       * Example: "1234567890"
+       * Used to retrieve license information from the NIPR API.
+       * Reference: https://nipr.com
        * ```
        *
        * `string npn = 5 [json_name = "npn"];`
@@ -2984,7 +3080,7 @@ public object AgencyKt {
 
       /**
        * ```
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * ```
        *
        * `.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];`
@@ -2998,7 +3094,7 @@ public object AgencyKt {
         }
       /**
        * ```
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * ```
        *
        * `.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];`
@@ -3008,7 +3104,7 @@ public object AgencyKt {
       }
       /**
        * ```
-       * Regulatory information from NIPR
+       * Regulatory information from NIPR.
        * ```
        *
        * `.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo regulatory_info = 4 [json_name = "regulatoryInfo"];`
@@ -3028,8 +3124,18 @@ public object AgencyKt {
       public class AppointmentsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3041,8 +3147,18 @@ public object AgencyKt {
         )
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3055,8 +3171,18 @@ public object AgencyKt {
       }
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3070,8 +3196,18 @@ public object AgencyKt {
       }
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3084,8 +3220,18 @@ public object AgencyKt {
       }
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3099,8 +3245,18 @@ public object AgencyKt {
       }
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3114,8 +3270,18 @@ public object AgencyKt {
       }
       /**
        * ```
-       * List of carrier appointments held in NIPR.
-       * These represent relationships with insurance carriers.
+       * List of carrier appointments held by the agency in NIPR.
+       *
+       * Each appointment represents authorization to sell a specific carrier's
+       * products for a specific Line of Authority. An agency typically has
+       * multiple appointments across different carriers and LOAs.
+       *
+       * Before allowing an agency to quote or sell a product:
+       * 1. Verify they have an active appointment with that carrier
+       * 2. Verify the appointment's LOA matches the product type
+       * 3. Check the appointment renewal date hasn't passed
+       *
+       * This data is synchronized from NIPR and is read-only.
        * ```
        *
        * `repeated .producerflow.producer.v1.Agency.NIPR.Appointment appointments = 5 [json_name = "appointments"];`
@@ -3205,7 +3371,13 @@ public object AgencyKt {
 
         /**
          * ```
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 3 [json_name = "npn"];`
@@ -3219,7 +3391,13 @@ public object AgencyKt {
           }
         /**
          * ```
-         * National Producer Number.
+         * National Producer Number (NPN) of the agency.
+         * A unique NAIC identifier assigned to business entities during the
+         * licensing application process and stored in the NIPR Producer Database
+         * (PDB).
+         * Format: 1-10 digit numeric string.
+         * Example: "1234567890"
+         * Reference: https://nipr.com
          * ```
          *
          * `string npn = 3 [json_name = "npn"];`
@@ -3648,7 +3826,11 @@ public object AgencyKt {
 
         /**
          * ```
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * ```
          *
          * `string license_number = 1 [json_name = "licenseNumber"];`
@@ -3662,7 +3844,11 @@ public object AgencyKt {
           }
         /**
          * ```
-         * The license number assigned by the state regulatory authority.
+         * The license number assigned by the state Department of Insurance (DOI).
+         * Format varies by state (e.g., numeric, alphanumeric, or with prefixes).
+         * Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL)
+         * This is a state-specific identifier, not globally unique across states.
+         * Reference: Each state's DOI maintains its own licensing database.
          * ```
          *
          * `string license_number = 1 [json_name = "licenseNumber"];`
@@ -3673,7 +3859,8 @@ public object AgencyKt {
 
         /**
          * ```
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * ```
          *
          * `string license_state = 2 [json_name = "licenseState"];`
@@ -3687,7 +3874,8 @@ public object AgencyKt {
           }
         /**
          * ```
-         * The state that issued the license.
+         * The two-letter US state or territory code that issued the license.
+         * Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY").
          * ```
          *
          * `string license_state = 2 [json_name = "licenseState"];`
@@ -3699,6 +3887,10 @@ public object AgencyKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * ```
          *
          * `string residency_status = 3 [json_name = "residencyStatus"];`
@@ -3713,6 +3905,10 @@ public object AgencyKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
+         * Values: "Resident" (license in the producer's home/domicile state) or
+         * "Non-Resident" (license in a state other than the home state).
+         * A producer typically has one resident license and may hold multiple
+         * non-resident licenses in other states where they conduct business.
          * ```
          *
          * `string residency_status = 3 [json_name = "residencyStatus"];`
@@ -3818,7 +4014,15 @@ public object AgencyKt {
 
         /**
          * ```
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * ```
          *
          * `string license_class = 7 [json_name = "licenseClass"];`
@@ -3832,7 +4036,15 @@ public object AgencyKt {
           }
         /**
          * ```
-         * License class description.
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
          * ```
          *
          * `string license_class = 7 [json_name = "licenseClass"];`
@@ -3843,7 +4055,10 @@ public object AgencyKt {
 
         /**
          * ```
-         * License class code.
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
          * ```
          *
          * `int32 license_class_code = 8 [json_name = "licenseClassCode"];`
@@ -3857,7 +4072,10 @@ public object AgencyKt {
           }
         /**
          * ```
-         * License class code.
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
          * ```
          *
          * `int32 license_class_code = 8 [json_name = "licenseClassCode"];`
@@ -4102,7 +4320,12 @@ public object AgencyKt {
         public class LinesOfAuthorityProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4114,7 +4337,12 @@ public object AgencyKt {
           )
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4127,7 +4355,12 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4141,7 +4374,12 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4154,7 +4392,12 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4168,7 +4411,12 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4182,7 +4430,12 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Lines of Authority associated with this license.
+         * Lines of Authority (LOAs) associated with this license.
+         *
+         * These define what types of insurance the agency is authorized to
+         * transact in this state. A single license typically has multiple LOAs.
+         * Always check that the agency has an active LOA matching the product
+         * type before allowing transactions.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority lines_of_authority = 12 [json_name = "linesOfAuthority"];`
@@ -4224,8 +4477,23 @@ public object AgencyKt {
         com.producerflow.producer.v1.AgencyKt.NIPRKt.LicenseKt.LineOfAuthorityKt.Dsl._create(com.producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.newBuilder()).apply { block() }._build()
       /**
        * ```
-       * LineOfAuthority represents a specific type of insurance coverage
-       * that is authorized under this license.
+       * LineOfAuthority (LOA) represents a specific type of insurance that an
+       * agency is authorized to transact under this license.
+       *
+       * Each license can have multiple LOAs. For example, a license might
+       * include:
+       * - LIFE
+       * - HEALTH
+       * - ACCIDENT AND HEALTH
+       * - PROPERTY AND CASUALTY
+       * - VARIABLE LIFE AND VARIABLE ANNUITY
+       *
+       * LOA Compliance:
+       * Before allowing an agency to sell a product, verify they have an
+       * active LOA that matches the product type. For example, an agency with
+       * only a LIFE LOA cannot sell Property & Casualty insurance.
+       *
+       * LOA names are standardized by NIPR but may vary slightly between states.
        * ```
        *
        * Protobuf type `producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority`
@@ -4248,8 +4516,22 @@ public object AgencyKt {
 
           /**
            * ```
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * ```
            *
            * `string loa = 1 [json_name = "loa"];`
@@ -4263,8 +4545,22 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The Line of Authority description (e.g., "Life", "Property and Casualty", "Health").
-           * This is typically an uppercase string that describes the insurance type.
+           * The Line of Authority name (e.g., "LIFE", "PROPERTY AND CASUALTY",
+           * "HEALTH").
+           *
+           * Common LOA types:
+           * - LIFE: Life insurance products
+           * - HEALTH: Health insurance products
+           * - ACCIDENT AND HEALTH: Combined accident and health coverage
+           * - PROPERTY: Property insurance
+           * - CASUALTY: Casualty insurance
+           * - PROPERTY AND CASUALTY: Combined property and casualty
+           * - VARIABLE LIFE AND VARIABLE ANNUITY: Variable products requiring
+           * securities license
+           * - PERSONAL LINES: Homeowners, auto, and personal umbrella policies
+           * - COMMERCIAL LINES: Business insurance policies
+           *
+           * This is typically an uppercase string standardized by NIPR.
            * ```
            *
            * `string loa = 1 [json_name = "loa"];`
@@ -4276,6 +4572,7 @@ public object AgencyKt {
           /**
            * ```
            * Whether this Line of Authority is currently active.
+           * Inactive LOAs cannot be used to transact that type of insurance.
            * ```
            *
            * `bool active = 2 [json_name = "active"];`
@@ -4290,6 +4587,7 @@ public object AgencyKt {
           /**
            * ```
            * Whether this Line of Authority is currently active.
+           * Inactive LOAs cannot be used to transact that type of insurance.
            * ```
            *
            * `bool active = 2 [json_name = "active"];`
@@ -4338,7 +4636,9 @@ public object AgencyKt {
 
           /**
            * ```
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * ```
            *
            * `.google.type.Date issued_on = 4 [json_name = "issuedOn"];`
@@ -4352,7 +4652,9 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * ```
            *
            * `.google.type.Date issued_on = 4 [json_name = "issuedOn"];`
@@ -4362,7 +4664,9 @@ public object AgencyKt {
           }
           /**
            * ```
-           * The date when this Line of Authority was issued.
+           * The date when this Line of Authority was first issued.
+           * This helps track how long the agency has been authorized for this
+           * insurance type.
            * ```
            *
            * `.google.type.Date issued_on = 4 [json_name = "issuedOn"];`
@@ -4381,8 +4685,13 @@ public object AgencyKt {
       com.producerflow.producer.v1.AgencyKt.NIPRKt.RegulatoryInfoKt.Dsl._create(com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.newBuilder()).apply { block() }._build()
     /**
      * ```
-     * RegulatoryInfo contains regulatory information,
-     * including any regulatory actions.
+     * RegulatoryInfo contains regulatory information from NIPR, including any
+     * formal regulatory actions taken against the agency by state Departments
+     * of Insurance (DOIs) or other regulatory authorities.
+     *
+     * Regulatory actions are significant events that may affect an agency's
+     * ability to conduct business. They should be reviewed during due diligence
+     * and compliance checks.
      * ```
      *
      * Protobuf type `producerflow.producer.v1.Agency.NIPR.RegulatoryInfo`
@@ -4413,6 +4722,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4426,6 +4736,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4440,6 +4751,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4455,6 +4767,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4469,6 +4782,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4484,6 +4798,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4499,6 +4814,7 @@ public object AgencyKt {
          * ```
          * List of regulatory actions across different states.
          * Each regulatory action includes the state code where it applies.
+         * An empty list indicates no regulatory actions on record in NIPR.
          * ```
          *
          * `repeated .producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction regulatory_actions = 1 [json_name = "regulatoryActions"];`
@@ -4515,7 +4831,19 @@ public object AgencyKt {
         com.producerflow.producer.v1.AgencyKt.NIPRKt.RegulatoryInfoKt.RegulatoryActionKt.Dsl._create(com.producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction.newBuilder()).apply { block() }._build()
       /**
        * ```
-       * RegulatoryAction represents a regulatory action.
+       * RegulatoryAction represents a formal regulatory action taken against
+       * an agency by a state Department of Insurance or other regulatory body.
+       *
+       * Common types of regulatory actions include:
+       * - License revocation or suspension
+       * - Cease and desist orders
+       * - Consent agreements
+       * - Fines and monetary penalties
+       * - Probationary periods
+       * - Administrative actions for non-compliance
+       *
+       * These records are sourced from NIPR's PDB (Producer Database) and
+       * reflect official regulatory proceedings.
        * ```
        *
        * Protobuf type `producerflow.producer.v1.Agency.NIPR.RegulatoryInfo.RegulatoryAction`
@@ -4538,7 +4866,7 @@ public object AgencyKt {
 
           /**
            * ```
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * ```
            *
            * `string action_id = 1 [json_name = "actionId"];`
@@ -4552,7 +4880,7 @@ public object AgencyKt {
             }
           /**
            * ```
-           * Unique identifier for the regulatory action.
+           * Unique identifier for the regulatory action in NIPR's system.
            * ```
            *
            * `string action_id = 1 [json_name = "actionId"];`
@@ -4563,7 +4891,9 @@ public object AgencyKt {
 
           /**
            * ```
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * ```
            *
            * `string state_code = 2 [json_name = "stateCode"];`
@@ -4577,7 +4907,9 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The state code where this regulatory action applies.
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
            * ```
            *
            * `string state_code = 2 [json_name = "stateCode"];`
@@ -4588,7 +4920,10 @@ public object AgencyKt {
 
           /**
            * ```
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * ```
            *
            * `string reason_for_action = 3 [json_name = "reasonForAction"];`
@@ -4602,7 +4937,10 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The reason why the regulatory action was taken.
+           * The reason or cause for the regulatory action.
+           * Examples: "Misrepresentation", "Failure to Remit Premiums",
+           * "Unfair Trade Practices", "Fraud", "Non-Compliance".
+           * This is a free-text field as reasons are defined by each state DOI.
            * ```
            *
            * `string reason_for_action = 3 [json_name = "reasonForAction"];`
@@ -4638,7 +4976,7 @@ public object AgencyKt {
 
           /**
            * ```
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * ```
            *
            * `.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];`
@@ -4652,7 +4990,7 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * ```
            *
            * `.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];`
@@ -4662,7 +5000,7 @@ public object AgencyKt {
           }
           /**
            * ```
-           * The date when the regulatory action was taken.
+           * The date when the regulatory action was formally initiated or filed.
            * ```
            *
            * `.google.protobuf.Timestamp date_of_action = 5 [json_name = "dateOfAction"];`
@@ -4676,7 +5014,9 @@ public object AgencyKt {
 
           /**
            * ```
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * ```
            *
            * `.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];`
@@ -4690,7 +5030,9 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * ```
            *
            * `.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];`
@@ -4700,7 +5042,9 @@ public object AgencyKt {
           }
           /**
            * ```
-           * The date when the regulatory action became effective.
+           * The date when the regulatory action took effect.
+           * This may differ from date_of_action if there was a delayed
+           * effective date or appeal period.
            * ```
            *
            * `.google.protobuf.Timestamp effective_date = 6 [json_name = "effectiveDate"];`
@@ -4714,7 +5058,8 @@ public object AgencyKt {
 
           /**
            * ```
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * ```
            *
            * `.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];`
@@ -4728,7 +5073,8 @@ public object AgencyKt {
             }
           /**
            * ```
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * ```
            *
            * `.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];`
@@ -4738,7 +5084,8 @@ public object AgencyKt {
           }
           /**
            * ```
-           * The date when the entity entered into the regulatory action.
+           * The date when the agency entered into or acknowledged the
+           * regulatory action (e.g., signed a consent agreement).
            * ```
            *
            * `.google.protobuf.Timestamp enter_date = 7 [json_name = "enterDate"];`
@@ -4752,7 +5099,9 @@ public object AgencyKt {
 
           /**
            * ```
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * ```
            *
            * `string file_ref = 8 [json_name = "fileRef"];`
@@ -4766,7 +5115,9 @@ public object AgencyKt {
             }
           /**
            * ```
-           * Reference number for the regulatory action file.
+           * Reference number for the regulatory action file maintained by the
+           * state DOI. Can be used to look up additional details from the
+           * state's records.
            * ```
            *
            * `string file_ref = 8 [json_name = "fileRef"];`
@@ -4777,7 +5128,9 @@ public object AgencyKt {
 
           /**
            * ```
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * ```
            *
            * `string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];`
@@ -4791,7 +5144,9 @@ public object AgencyKt {
             }
           /**
            * ```
-           * Any financial penalties associated with the regulatory action.
+           * Any financial penalties, fines, or forfeitures associated with
+           * the regulatory action.
+           * Format: Free-text, typically a dollar amount (e.g., "$5,000.00").
            * ```
            *
            * `string penalty_fine_forfeiture = 9 [json_name = "penaltyFineForfeiture"];`
@@ -4803,6 +5158,8 @@ public object AgencyKt {
           /**
            * ```
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * ```
            *
            * `string length_of_order = 10 [json_name = "lengthOfOrder"];`
@@ -4817,6 +5174,8 @@ public object AgencyKt {
           /**
            * ```
            * Duration of any orders associated with the regulatory action.
+           * Format: Free-text describing the time period (e.g., "12 months",
+           * "Indefinite", "Until compliance").
            * ```
            *
            * `string length_of_order = 10 [json_name = "lengthOfOrder"];`
@@ -4832,7 +5191,20 @@ public object AgencyKt {
       com.producerflow.producer.v1.AgencyKt.NIPRKt.AppointmentKt.Dsl._create(com.producerflow.producer.v1.Agency.NIPR.Appointment.newBuilder()).apply { block() }._build()
     /**
      * ```
-     * Appointment represents a relationship with an insurance carrier.
+     * Appointment represents a formal relationship between an agency and an
+     * insurance carrier, granting the agency authority to sell that carrier's
+     * products. This data is sourced from NIPR's PDB (Producer Database).
+     *
+     * Appointment Lifecycle (status field values):
+     * 1. APPOINTED: Agency is authorized to sell this carrier's products for
+     * the specified Line of Authority
+     * 2. TERMINATED: Appointment has ended (see termination_reason for details)
+     *
+     * Use Cases:
+     * - Verify agency is appointed before allowing them to sell a carrier's
+     * products
+     * - Track which carriers an agency represents
+     * - Monitor appointment renewal dates for compliance
      * ```
      *
      * Protobuf type `producerflow.producer.v1.Agency.NIPR.Appointment`
@@ -4854,6 +5226,11 @@ public object AgencyKt {
         internal fun _build(): com.producerflow.producer.v1.Agency.NIPR.Appointment = _builder.build()
 
         /**
+         * ```
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * ```
+         *
          * `string branch_id = 1 [json_name = "branchId"];`
          */
         public var branchId: kotlin.String
@@ -4864,6 +5241,11 @@ public object AgencyKt {
             _builder.branchId = value
           }
         /**
+         * ```
+         * Branch identifier for multi-branch agencies.
+         * Links the appointment to a specific agency branch, if applicable.
+         * ```
+         *
          * `string branch_id = 1 [json_name = "branchId"];`
          */
         public fun clearBranchId() {
@@ -4873,6 +5255,7 @@ public object AgencyKt {
         /**
          * ```
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * ```
          *
          * `string company_name = 2 [json_name = "companyName"];`
@@ -4887,6 +5270,7 @@ public object AgencyKt {
         /**
          * ```
          * Name of the insurance company for this appointment.
+         * Examples: "State Farm", "Allstate", "Blue Cross Blue Shield"
          * ```
          *
          * `string company_name = 2 [json_name = "companyName"];`
@@ -4897,7 +5281,9 @@ public object AgencyKt {
 
         /**
          * ```
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * ```
          *
          * `string fein = 3 [json_name = "fein"];`
@@ -4911,7 +5297,9 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Federal Employer Identification Number of the carrier.
+         * Federal Employer Identification Number (FEIN) of the carrier.
+         * Format: 9-digit number assigned by the IRS.
+         * This uniquely identifies the carrier company for tax purposes.
          * ```
          *
          * `string fein = 3 [json_name = "fein"];`
@@ -4922,7 +5310,11 @@ public object AgencyKt {
 
         /**
          * ```
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * ```
          *
          * `string co_code = 4 [json_name = "coCode"];`
@@ -4936,7 +5328,11 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Company code for the insurance carrier.
+         * NAIC Company Code (CoCode) for the insurance carrier.
+         * A unique identifier assigned by the National Association of Insurance
+         * Commissioners (NAIC) for regulatory reporting.
+         * Format: Typically a 5-digit numeric string.
+         * Reference: https://naic.org
          * ```
          *
          * `string co_code = 4 [json_name = "coCode"];`
@@ -4947,8 +5343,19 @@ public object AgencyKt {
 
         /**
          * ```
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * ```
          *
          * `string line_of_authority = 5 [json_name = "lineOfAuthority"];`
@@ -4962,8 +5369,19 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Line of authority for this appointment (e.g., Life, Property, Casualty).
-         * Indicates what types of insurance can be sold.
+         * Line of Authority (LOA) for this appointment.
+         * Indicates what type of insurance the agency can sell for this carrier.
+         * A single carrier may have separate appointments for different LOAs.
+         *
+         * Common LOA values:
+         * - "LIFE": Life insurance products
+         * - "HEALTH": Health insurance products
+         * - "PROPERTY": Property insurance
+         * - "CASUALTY": Casualty insurance
+         * - "PROPERTY AND CASUALTY": Combined P&C
+         * - "VARIABLE LIFE AND VARIABLE ANNUITY": Variable products
+         *
+         * LOA names are standardized by NIPR but may vary slightly between states.
          * ```
          *
          * `string line_of_authority = 5 [json_name = "lineOfAuthority"];`
@@ -4974,7 +5392,9 @@ public object AgencyKt {
 
         /**
          * ```
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * ```
          *
          * `string loa_code = 6 [json_name = "loaCode"];`
@@ -4988,7 +5408,9 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Code for the line of authority for this appointment.
+         * Standardized code for the Line of Authority.
+         * Used for programmatic matching rather than string comparison on the
+         * line_of_authority description field.
          * ```
          *
          * `string loa_code = 6 [json_name = "loaCode"];`
@@ -4999,7 +5421,15 @@ public object AgencyKt {
 
         /**
          * ```
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * ```
          *
          * `string status = 7 [json_name = "status"];`
@@ -5013,7 +5443,15 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Current status of the appointment (e.g., Active, Terminated).
+         * Current status of the appointment as reported by NIPR.
+         *
+         * Values:
+         * - "APPOINTED": Appointment is active; the agency can sell this
+         * carrier's products for the specified Line of Authority
+         * - "TERMINATED": Appointment has ended (see termination_reason for
+         * details)
+         *
+         * Always check status is "APPOINTED" before allowing sales.
          * ```
          *
          * `string status = 7 [json_name = "status"];`
@@ -5025,6 +5463,16 @@ public object AgencyKt {
         /**
          * ```
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * ```
          *
          * `string termination_reason = 8 [json_name = "terminationReason"];`
@@ -5039,6 +5487,16 @@ public object AgencyKt {
         /**
          * ```
          * Reason for termination if the appointment has been terminated.
+         *
+         * Common termination reasons include:
+         * - Voluntary termination by the agency
+         * - Carrier-initiated termination
+         * - Inadequate production
+         * - Company merger or liquidation
+         * - Regulatory or compliance issues
+         *
+         * This field is empty if the appointment is still active.
+         * Reference: https://pdb.nipr.com/Gateway/ValidTerms
          * ```
          *
          * `string termination_reason = 8 [json_name = "terminationReason"];`
@@ -5049,7 +5507,10 @@ public object AgencyKt {
 
         /**
          * ```
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * ```
          *
          * `.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];`
@@ -5063,7 +5524,10 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * ```
          *
          * `.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];`
@@ -5073,7 +5537,10 @@ public object AgencyKt {
         }
         /**
          * ```
-         * Date associated with the current status or reason.
+         * Date when the status or termination reason became effective.
+         * For terminated appointments, this is when the termination occurred.
+         * For active appointments, this may indicate when the current status
+         * was last confirmed.
          * ```
          *
          * `.google.protobuf.Timestamp status_reason_date = 9 [json_name = "statusReasonDate"];`
@@ -5088,6 +5555,8 @@ public object AgencyKt {
         /**
          * ```
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * ```
          *
          * `.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];`
@@ -5102,6 +5571,8 @@ public object AgencyKt {
         /**
          * ```
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * ```
          *
          * `.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];`
@@ -5112,6 +5583,8 @@ public object AgencyKt {
         /**
          * ```
          * Date when the appointment will renew.
+         * Appointments typically renew annually. Monitor this date for upcoming
+         * renewals to ensure continuous authorization.
          * ```
          *
          * `.google.protobuf.Timestamp appointment_renewal_date = 10 [json_name = "appointmentRenewalDate"];`
@@ -5125,7 +5598,9 @@ public object AgencyKt {
 
         /**
          * ```
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * ```
          *
          * `string agency_affiliations = 11 [json_name = "agencyAffiliations"];`
@@ -5139,7 +5614,9 @@ public object AgencyKt {
           }
         /**
          * ```
-         * Additional affiliations or roles with the agency.
+         * Additional affiliations or roles the agency has with the carrier.
+         * This may include special designations, sub-agency relationships,
+         * or other relationship details.
          * ```
          *
          * `string agency_affiliations = 11 [json_name = "agencyAffiliations"];`
