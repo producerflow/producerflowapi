@@ -8610,10 +8610,10 @@ type Agency_AgencyInfo struct {
 	// The unique identifier for the onboarding process.
 	// Used to track the agency through the onboarding flow.
 	OnboardingId string `protobuf:"bytes,1,opt,name=onboarding_id,json=onboardingId,proto3" json:"onboarding_id,omitempty"`
-	// The organization ID represents the ID of the root organization that the agency belongs to.
-	// An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-	// We currently don't support multiple levels of organizations or agencies.
-	// Agencies are not always part of an organization, so this field is optional.
+	// Deprecated: Use the top-level `organization` field instead, which provides the full
+	// organization object including id, name, external_id, and email.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	RootOrganizationId string `protobuf:"bytes,2,opt,name=root_organization_id,json=rootOrganizationId,proto3" json:"root_organization_id,omitempty"`
 	// The official name of the agency.
 	// This is typically the legal name of the entity.
@@ -8709,6 +8709,7 @@ func (x *Agency_AgencyInfo) GetOnboardingId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *Agency_AgencyInfo) GetRootOrganizationId() string {
 	if x != nil {
 		return x.RootOrganizationId
@@ -12044,7 +12045,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xaf8\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xb38\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -12063,11 +12064,11 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\tlocations\x18\r \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\x12J\n" +
 	"\forganization\x18\x0e \x01(\v2&.producerflow.producer.v1.OrganizationR\forganization\x12,\n" +
 	"\x12is_sole_proprietor\x18\x0f \x01(\bR\x10isSoleProprietor\x12z\n" +
-	"\x19organization_relationship\x18\x10 \x01(\x0e28.producerflow.producer.v1.AgencyOrganizationRelationshipH\x00R\x18organizationRelationship\x88\x01\x01\x1a\xb4\a\n" +
+	"\x19organization_relationship\x18\x10 \x01(\x0e28.producerflow.producer.v1.AgencyOrganizationRelationshipH\x00R\x18organizationRelationship\x88\x01\x01\x1a\xb8\a\n" +
 	"\n" +
 	"AgencyInfo\x12#\n" +
-	"\ronboarding_id\x18\x01 \x01(\tR\fonboardingId\x120\n" +
-	"\x14root_organization_id\x18\x02 \x01(\tR\x12rootOrganizationId\x12\x1f\n" +
+	"\ronboarding_id\x18\x01 \x01(\tR\fonboardingId\x124\n" +
+	"\x14root_organization_id\x18\x02 \x01(\tB\x02\x18\x01R\x12rootOrganizationId\x12\x1f\n" +
 	"\vagency_name\x18\x03 \x01(\tR\n" +
 	"agencyName\x12\x1f\n" +
 	"\vagency_fein\x18\x04 \x01(\tR\n" +

@@ -857,15 +857,13 @@ public object AgencyKt {
 
       /**
        * ```
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * ```
        *
-       * `string root_organization_id = 2 [json_name = "rootOrganizationId"];`
+       * `string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];`
        */
-      public var rootOrganizationId: kotlin.String
+      @kotlin.Deprecated(message = "Field rootOrganizationId is deprecated") public var rootOrganizationId: kotlin.String
         @JvmName("getRootOrganizationId")
         get() = _builder.rootOrganizationId
         @JvmName("setRootOrganizationId")
@@ -874,13 +872,11 @@ public object AgencyKt {
         }
       /**
        * ```
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * ```
        *
-       * `string root_organization_id = 2 [json_name = "rootOrganizationId"];`
+       * `string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];`
        */
       public fun clearRootOrganizationId() {
         _builder.clearRootOrganizationId()

@@ -3069,7 +3069,7 @@ AgencyInfo contains contact and identification information for an agency.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `onboarding_id` | [string](#string) |  | The unique identifier for the onboarding process. Used to track the agency through the onboarding flow. |
-| `root_organization_id` | [string](#string) |  | The organization ID represents the ID of the root organization that the agency belongs to. An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network. We currently don't support multiple levels of organizations or agencies. Agencies are not always part of an organization, so this field is optional. |
+| `root_organization_id` | [string](#string) |  | **Deprecated.** Deprecated: Use the top-level `organization` field instead, which provides the full organization object including id, name, external_id, and email. |
 | `agency_name` | [string](#string) |  | The official name of the agency. This is typically the legal name of the entity. |
 | `agency_fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the agency. This is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to businesses operating in the United States. |
 | `email` | [string](#string) |  | Primary email address for the agency. Used for communication and must be unique. |

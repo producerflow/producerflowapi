@@ -29175,10 +29175,8 @@ Used to track the agency through the onboarding flow. </td>
                           <td><code>root_organization_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>The organization ID represents the ID of the root organization that the agency belongs to.
-An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-We currently don't support multiple levels of organizations or agencies.
-Agencies are not always part of an organization, so this field is optional. </td>
+                          <td><strong>Deprecated.</strong> Deprecated: Use the top-level `organization` field instead, which provides the full
+organization object including id, name, external_id, and email. </td>
                         </tr>
                       
                         <tr>

@@ -92,28 +92,28 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
-     * The organization ID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-     * We currently don't support multiple levels of organizations or agencies.
-     * Agencies are not always part of an organization, so this field is optional.
+     * Deprecated: Use the top-level `organization` field instead, which provides the full
+     * organization object including id, name, external_id, and email.
      * </pre>
      *
-     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2433
      * @return The rootOrganizationId.
      */
-    java.lang.String getRootOrganizationId();
+    @java.lang.Deprecated java.lang.String getRootOrganizationId();
     /**
      * <pre>
-     * The organization ID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-     * We currently don't support multiple levels of organizations or agencies.
-     * Agencies are not always part of an organization, so this field is optional.
+     * Deprecated: Use the top-level `organization` field instead, which provides the full
+     * organization object including id, name, external_id, and email.
      * </pre>
      *
-     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2433
      * @return The bytes for rootOrganizationId.
      */
-    com.google.protobuf.ByteString
+    @java.lang.Deprecated com.google.protobuf.ByteString
         getRootOrganizationIdBytes();
 
     /**
@@ -661,17 +661,17 @@ java.lang.String defaultValue);
     private volatile java.lang.Object rootOrganizationId_ = "";
     /**
      * <pre>
-     * The organization ID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-     * We currently don't support multiple levels of organizations or agencies.
-     * Agencies are not always part of an organization, so this field is optional.
+     * Deprecated: Use the top-level `organization` field instead, which provides the full
+     * organization object including id, name, external_id, and email.
      * </pre>
      *
-     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2433
      * @return The rootOrganizationId.
      */
     @java.lang.Override
-    public java.lang.String getRootOrganizationId() {
+    @java.lang.Deprecated public java.lang.String getRootOrganizationId() {
       java.lang.Object ref = rootOrganizationId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
@@ -685,17 +685,17 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * The organization ID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-     * We currently don't support multiple levels of organizations or agencies.
-     * Agencies are not always part of an organization, so this field is optional.
+     * Deprecated: Use the top-level `organization` field instead, which provides the full
+     * organization object including id, name, external_id, and email.
      * </pre>
      *
-     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+     * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2433
      * @return The bytes for rootOrganizationId.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getRootOrganizationIdBytes() {
       java.lang.Object ref = rootOrganizationId_;
       if (ref instanceof java.lang.String) {
@@ -2249,16 +2249,16 @@ java.lang.String defaultValue) {
       private java.lang.Object rootOrganizationId_ = "";
       /**
        * <pre>
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * </pre>
        *
-       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=2433
        * @return The rootOrganizationId.
        */
-      public java.lang.String getRootOrganizationId() {
+      @java.lang.Deprecated public java.lang.String getRootOrganizationId() {
         java.lang.Object ref = rootOrganizationId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
@@ -2272,16 +2272,16 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * </pre>
        *
-       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=2433
        * @return The bytes for rootOrganizationId.
        */
-      public com.google.protobuf.ByteString
+      @java.lang.Deprecated public com.google.protobuf.ByteString
           getRootOrganizationIdBytes() {
         java.lang.Object ref = rootOrganizationId_;
         if (ref instanceof String) {
@@ -2296,17 +2296,17 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * </pre>
        *
-       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=2433
        * @param value The rootOrganizationId to set.
        * @return This builder for chaining.
        */
-      public Builder setRootOrganizationId(
+      @java.lang.Deprecated public Builder setRootOrganizationId(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         rootOrganizationId_ = value;
@@ -2316,16 +2316,16 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * </pre>
        *
-       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=2433
        * @return This builder for chaining.
        */
-      public Builder clearRootOrganizationId() {
+      @java.lang.Deprecated public Builder clearRootOrganizationId() {
         rootOrganizationId_ = getDefaultInstance().getRootOrganizationId();
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
@@ -2333,17 +2333,17 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The organization ID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-       * We currently don't support multiple levels of organizations or agencies.
-       * Agencies are not always part of an organization, so this field is optional.
+       * Deprecated: Use the top-level `organization` field instead, which provides the full
+       * organization object including id, name, external_id, and email.
        * </pre>
        *
-       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId"];</code>
+       * <code>string root_organization_id = 2 [json_name = "rootOrganizationId", deprecated = true];</code>
+       * @deprecated producerflow.producer.v1.Agency.AgencyInfo.root_organization_id is deprecated.
+       *     See producerflow/producer/v1/producer.proto;l=2433
        * @param value The bytes for rootOrganizationId to set.
        * @return This builder for chaining.
        */
-      public Builder setRootOrganizationIdBytes(
+      @java.lang.Deprecated public Builder setRootOrganizationIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
@@ -3819,7 +3819,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2508
+     *     See producerflow/producer/v1/producer.proto;l=2506
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -3830,7 +3830,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2508
+     *     See producerflow/producer/v1/producer.proto;l=2506
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -4004,7 +4004,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2508
+     *     See producerflow/producer/v1/producer.proto;l=2506
      * @return The street.
      */
     @java.lang.Override
@@ -4027,7 +4027,7 @@ java.lang.String defaultValue) {
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2508
+     *     See producerflow/producer/v1/producer.proto;l=2506
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -4727,7 +4727,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2508
+       *     See producerflow/producer/v1/producer.proto;l=2506
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -4749,7 +4749,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2508
+       *     See producerflow/producer/v1/producer.proto;l=2506
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -4772,7 +4772,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2508
+       *     See producerflow/producer/v1/producer.proto;l=2506
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -4791,7 +4791,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2508
+       *     See producerflow/producer/v1/producer.proto;l=2506
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -4807,7 +4807,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2508
+       *     See producerflow/producer/v1/producer.proto;l=2506
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -15864,7 +15864,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2694
+       *     See producerflow/producer/v1/producer.proto;l=2692
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -15875,7 +15875,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2694
+       *     See producerflow/producer/v1/producer.proto;l=2692
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -16216,7 +16216,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2694
+       *     See producerflow/producer/v1/producer.proto;l=2692
        * @return The street.
        */
       @java.lang.Override
@@ -16239,7 +16239,7 @@ java.lang.String defaultValue) {
        *
        * <code>string street = 4 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2694
+       *     See producerflow/producer/v1/producer.proto;l=2692
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -17354,7 +17354,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2694
+         *     See producerflow/producer/v1/producer.proto;l=2692
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -17376,7 +17376,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2694
+         *     See producerflow/producer/v1/producer.proto;l=2692
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -17399,7 +17399,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2694
+         *     See producerflow/producer/v1/producer.proto;l=2692
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -17418,7 +17418,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2694
+         *     See producerflow/producer/v1/producer.proto;l=2692
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -17434,7 +17434,7 @@ java.lang.String defaultValue) {
          *
          * <code>string street = 4 [json_name = "street", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2694
+         *     See producerflow/producer/v1/producer.proto;l=2692
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -18299,7 +18299,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2758
+       *     See producerflow/producer/v1/producer.proto;l=2756
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -18310,7 +18310,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2758
+       *     See producerflow/producer/v1/producer.proto;l=2756
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -18379,7 +18379,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2778
+       *     See producerflow/producer/v1/producer.proto;l=2776
        * @return Whether the issueDate field is set.
        */
       @java.lang.Deprecated boolean hasIssueDate();
@@ -18390,7 +18390,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2778
+       *     See producerflow/producer/v1/producer.proto;l=2776
        * @return The issueDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -18410,7 +18410,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2781
+       *     See producerflow/producer/v1/producer.proto;l=2779
        * @return Whether the updateDate field is set.
        */
       @java.lang.Deprecated boolean hasUpdateDate();
@@ -18421,7 +18421,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2781
+       *     See producerflow/producer/v1/producer.proto;l=2779
        * @return The updateDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getUpdateDate();
@@ -18924,7 +18924,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2836
+         *     See producerflow/producer/v1/producer.proto;l=2834
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -18935,7 +18935,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2836
+         *     See producerflow/producer/v1/producer.proto;l=2834
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -19142,7 +19142,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2836
+         *     See producerflow/producer/v1/producer.proto;l=2834
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -19156,7 +19156,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2836
+         *     See producerflow/producer/v1/producer.proto;l=2834
          * @return The issueDate.
          */
         @java.lang.Override
@@ -19864,7 +19864,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2836
+           *     See producerflow/producer/v1/producer.proto;l=2834
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -19877,7 +19877,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Agency.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=2836
+           *     See producerflow/producer/v1/producer.proto;l=2834
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -20451,7 +20451,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2758
+       *     See producerflow/producer/v1/producer.proto;l=2756
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -20465,7 +20465,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2758
+       *     See producerflow/producer/v1/producer.proto;l=2756
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -20574,7 +20574,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2778
+       *     See producerflow/producer/v1/producer.proto;l=2776
        * @return Whether the issueDate field is set.
        */
       @java.lang.Override
@@ -20588,7 +20588,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2778
+       *     See producerflow/producer/v1/producer.proto;l=2776
        * @return The issueDate.
        */
       @java.lang.Override
@@ -20616,7 +20616,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2781
+       *     See producerflow/producer/v1/producer.proto;l=2779
        * @return Whether the updateDate field is set.
        */
       @java.lang.Override
@@ -20630,7 +20630,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2781
+       *     See producerflow/producer/v1/producer.proto;l=2779
        * @return The updateDate.
        */
       @java.lang.Override
@@ -22191,7 +22191,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2758
+         *     See producerflow/producer/v1/producer.proto;l=2756
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -22204,7 +22204,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2758
+         *     See producerflow/producer/v1/producer.proto;l=2756
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -22537,7 +22537,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2778
+         *     See producerflow/producer/v1/producer.proto;l=2776
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated public boolean hasIssueDate() {
@@ -22550,7 +22550,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 9 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2778
+         *     See producerflow/producer/v1/producer.proto;l=2776
          * @return The issueDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -22698,7 +22698,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2781
+         *     See producerflow/producer/v1/producer.proto;l=2779
          * @return Whether the updateDate field is set.
          */
         @java.lang.Deprecated public boolean hasUpdateDate() {
@@ -22711,7 +22711,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp update_date = 10 [json_name = "updateDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Agency.NIPR.License.update_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2781
+         *     See producerflow/producer/v1/producer.proto;l=2779
          * @return The updateDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getUpdateDate() {
