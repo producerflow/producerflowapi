@@ -2429,11 +2429,9 @@ message Agency {
     // Used to track the agency through the onboarding flow.
     string onboarding_id = 1;
 
-    // The organization ID represents the ID of the root organization that the agency belongs to.
-    // An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
-    // We currently don't support multiple levels of organizations or agencies.
-    // Agencies are not always part of an organization, so this field is optional.
-    string root_organization_id = 2;
+    // Deprecated: Use the top-level `organization` field instead, which provides the full
+    // organization object including id, name, external_id, and email.
+    string root_organization_id = 2 [deprecated = true];
 
     // The official name of the agency.
     // This is typically the legal name of the entity.
