@@ -11,8 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### ProducerService
 
-- **Biographic data missing in `GetAgencyAndProducers`** - `Producer.NIPR.Biographic` was always empty in `GetAgencyAndProducers` responses even when NIPR data existed
+- **Biographic data missing in `GetProducer` and `GetAgencyAndProducers`** - `Producer.NIPR.Biographic` was always empty in responses even when NIPR data existed
   - `first_name`, `last_name`, `middle_name`, and `date_of_birth` are now correctly populated from NIPR for producers with an active NIPR sync status
+- **`address_line_1` missing in `GetProducer` and `GetAgencyAndProducers`** - `Producer.Address.address_line_1` was not being mapped and always returned empty; it is now correctly populated
 
 ### Deprecated
 
