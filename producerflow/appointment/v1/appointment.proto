@@ -4,6 +4,7 @@ package producerflow.appointment.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/type/date.proto";
 
 // AppointmentService manages license appointments through NIPR.
 //
@@ -520,6 +521,12 @@ message License {
 
   // The ID of the carrier associated with this license.
   string carrier_id = 8 [(buf.validate.field).string.uuid = true];
+
+  // The date the license expires.
+  google.type.Date expiration_date = 9;
+
+  // The date the license was issued.
+  google.type.Date issue_date = 10;
 }
 
 message ListTerminationReasonsRequest {
