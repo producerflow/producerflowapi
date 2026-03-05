@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.20] - 2026-03-05
+
+### Fixed
+
+#### ProducerService
+
+- **Biographic data missing in `GetAgencyAndProducers`** - `Producer.NIPR.Biographic` was always empty in `GetAgencyAndProducers` responses even when NIPR data existed
+  - `first_name`, `last_name`, `middle_name`, and `date_of_birth` are now correctly populated from NIPR for producers with an active NIPR sync status
+
+### Deprecated
+
+#### ProducerService
+
+- **`fein`, `company_name`, `state_domicile` in `Producer.NIPR.Biographic`** - These fields are deprecated and will always be empty
+  - Producers in ProducerFlow are always individual agents. NIPR does not return FEIN, company name, or state of domicile for individual agents — only for firm/agency entities.
+  - These fields were defined in the proto but never populated. They are now formally marked `deprecated = true` to make this explicit.
+  - No migration needed; the fields were always empty and their removal has no impact on existing integrations.
+
 ## [1.0.19] - 2026-02-19
 
 ### Added
