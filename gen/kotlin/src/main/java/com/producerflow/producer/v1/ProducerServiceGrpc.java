@@ -1664,10 +1664,11 @@ public final class ProducerServiceGrpc {
     /**
      * <pre>
      * GetProducer retrieves detailed information about a specific producer.
-     * Supports three lookup methods:
+     * Supports four lookup methods:
      * - By producer ID (UUID)
      * - By NPN (National Producer Number)
      * - By email address
+     * - By external ID (tenant-defined identifier set via SetExternalID)
      * The response includes:
      * - Producer contact information (name, email, phone, address)
      * - Associated agency information
@@ -1683,13 +1684,12 @@ public final class ProducerServiceGrpc {
      * - producer_id_lookup.producer_id: Must be a valid UUID format
      * - npn_lookup.producer_npn: Must be non-empty string
      * - email_lookup.email: Must be a valid email format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
      * Returns:
      * Complete producer information including all NIPR data.
      * Common Error Codes:
      * - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
      *   associated agency not found
-     * - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-     *   lookups are implemented)
      * </pre>
      */
     default void getProducer(com.producerflow.producer.v1.GetProducerRequest request,
@@ -3123,10 +3123,11 @@ public final class ProducerServiceGrpc {
     /**
      * <pre>
      * GetProducer retrieves detailed information about a specific producer.
-     * Supports three lookup methods:
+     * Supports four lookup methods:
      * - By producer ID (UUID)
      * - By NPN (National Producer Number)
      * - By email address
+     * - By external ID (tenant-defined identifier set via SetExternalID)
      * The response includes:
      * - Producer contact information (name, email, phone, address)
      * - Associated agency information
@@ -3142,13 +3143,12 @@ public final class ProducerServiceGrpc {
      * - producer_id_lookup.producer_id: Must be a valid UUID format
      * - npn_lookup.producer_npn: Must be non-empty string
      * - email_lookup.email: Must be a valid email format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
      * Returns:
      * Complete producer information including all NIPR data.
      * Common Error Codes:
      * - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
      *   associated agency not found
-     * - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-     *   lookups are implemented)
      * </pre>
      */
     public void getProducer(com.producerflow.producer.v1.GetProducerRequest request,
@@ -4565,10 +4565,11 @@ public final class ProducerServiceGrpc {
     /**
      * <pre>
      * GetProducer retrieves detailed information about a specific producer.
-     * Supports three lookup methods:
+     * Supports four lookup methods:
      * - By producer ID (UUID)
      * - By NPN (National Producer Number)
      * - By email address
+     * - By external ID (tenant-defined identifier set via SetExternalID)
      * The response includes:
      * - Producer contact information (name, email, phone, address)
      * - Associated agency information
@@ -4584,13 +4585,12 @@ public final class ProducerServiceGrpc {
      * - producer_id_lookup.producer_id: Must be a valid UUID format
      * - npn_lookup.producer_npn: Must be non-empty string
      * - email_lookup.email: Must be a valid email format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
      * Returns:
      * Complete producer information including all NIPR data.
      * Common Error Codes:
      * - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
      *   associated agency not found
-     * - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-     *   lookups are implemented)
      * </pre>
      */
     public com.producerflow.producer.v1.GetProducerResponse getProducer(com.producerflow.producer.v1.GetProducerRequest request) {
@@ -5993,10 +5993,11 @@ public final class ProducerServiceGrpc {
     /**
      * <pre>
      * GetProducer retrieves detailed information about a specific producer.
-     * Supports three lookup methods:
+     * Supports four lookup methods:
      * - By producer ID (UUID)
      * - By NPN (National Producer Number)
      * - By email address
+     * - By external ID (tenant-defined identifier set via SetExternalID)
      * The response includes:
      * - Producer contact information (name, email, phone, address)
      * - Associated agency information
@@ -6012,13 +6013,12 @@ public final class ProducerServiceGrpc {
      * - producer_id_lookup.producer_id: Must be a valid UUID format
      * - npn_lookup.producer_npn: Must be non-empty string
      * - email_lookup.email: Must be a valid email format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
      * Returns:
      * Complete producer information including all NIPR data.
      * Common Error Codes:
      * - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
      *   associated agency not found
-     * - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-     *   lookups are implemented)
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.GetProducerResponse> getProducer(

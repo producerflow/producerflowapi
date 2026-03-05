@@ -7,8 +7,8 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * GetProducerRequest allows retrieving producer information through one of three
- * possible lookup methods: by ID, by NPN, or by email address.
+ * GetProducerRequest allows retrieving producer information through one of four
+ * possible lookup methods: by ID, by NPN, by email address, or by external ID.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.GetProducerRequest}
@@ -1736,6 +1736,580 @@ private static final long serialVersionUID = 0L;
 
   }
 
+  public interface ExternalIDLookupOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The external identifier associated with the producer in the tenant's system.
+     * This corresponds to the value set via the SetExternalID RPC.
+     * Must be a non-empty string with maximum 255 characters.
+     * </pre>
+     *
+     * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+     * @return The externalId.
+     */
+    java.lang.String getExternalId();
+    /**
+     * <pre>
+     * The external identifier associated with the producer in the tenant's system.
+     * This corresponds to the value set via the SetExternalID RPC.
+     * Must be a non-empty string with maximum 255 characters.
+     * </pre>
+     *
+     * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for externalId.
+     */
+    com.google.protobuf.ByteString
+        getExternalIdBytes();
+  }
+  /**
+   * <pre>
+   * ExternalIDLookup allows looking up a producer by the external identifier
+   * previously set via the SetExternalID RPC.
+   * </pre>
+   *
+   * Protobuf type {@code producerflow.producer.v1.GetProducerRequest.ExternalIDLookup}
+   */
+  public static final class ExternalIDLookup extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)
+      ExternalIDLookupOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 3,
+        /* suffix= */ "",
+        ExternalIDLookup.class.getName());
+    }
+    // Use ExternalIDLookup.newBuilder() to construct.
+    private ExternalIDLookup(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private ExternalIDLookup() {
+      externalId_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetProducerRequest_ExternalIDLookup_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetProducerRequest_ExternalIDLookup_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.class, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder.class);
+    }
+
+    public static final int EXTERNAL_ID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object externalId_ = "";
+    /**
+     * <pre>
+     * The external identifier associated with the producer in the tenant's system.
+     * This corresponds to the value set via the SetExternalID RPC.
+     * Must be a non-empty string with maximum 255 characters.
+     * </pre>
+     *
+     * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+     * @return The externalId.
+     */
+    @java.lang.Override
+    public java.lang.String getExternalId() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        externalId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * The external identifier associated with the producer in the tenant's system.
+     * This corresponds to the value set via the SetExternalID RPC.
+     * Must be a non-empty string with maximum 255 characters.
+     * </pre>
+     *
+     * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for externalId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExternalIdBytes() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        externalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, externalId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, externalId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)) {
+        return super.equals(obj);
+      }
+      com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup other = (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) obj;
+
+      if (!getExternalId()
+          .equals(other.getExternalId())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getExternalId().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * ExternalIDLookup allows looking up a producer by the external identifier
+     * previously set via the SetExternalID RPC.
+     * </pre>
+     *
+     * Protobuf type {@code producerflow.producer.v1.GetProducerRequest.ExternalIDLookup}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetProducerRequest_ExternalIDLookup_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetProducerRequest_ExternalIDLookup_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.class, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder.class);
+      }
+
+      // Construct using com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        externalId_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetProducerRequest_ExternalIDLookup_descriptor;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getDefaultInstanceForType() {
+        return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup build() {
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup buildPartial() {
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup result = new com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.externalId_ = externalId_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) {
+          return mergeFrom((com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup other) {
+        if (other == com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance()) return this;
+        if (!other.getExternalId().isEmpty()) {
+          externalId_ = other.externalId_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                externalId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object externalId_ = "";
+      /**
+       * <pre>
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * </pre>
+       *
+       * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+       * @return The externalId.
+       */
+      public java.lang.String getExternalId() {
+        java.lang.Object ref = externalId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          externalId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * </pre>
+       *
+       * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for externalId.
+       */
+      public com.google.protobuf.ByteString
+          getExternalIdBytes() {
+        java.lang.Object ref = externalId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          externalId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * </pre>
+       *
+       * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+       * @param value The externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        externalId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * </pre>
+       *
+       * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExternalId() {
+        externalId_ = getDefaultInstance().getExternalId();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * </pre>
+       *
+       * <code>string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }</code>
+       * @param value The bytes for externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        externalId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)
+    }
+
+    // @@protoc_insertion_point(class_scope:producerflow.producer.v1.GetProducerRequest.ExternalIDLookup)
+    private static final com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup();
+    }
+
+    public static com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ExternalIDLookup>
+        PARSER = new com.google.protobuf.AbstractParser<ExternalIDLookup>() {
+      @java.lang.Override
+      public ExternalIDLookup parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ExternalIDLookup> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ExternalIDLookup> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private int lookupMethodCase_ = 0;
   @SuppressWarnings("serial")
   private java.lang.Object lookupMethod_;
@@ -1745,6 +2319,7 @@ private static final long serialVersionUID = 0L;
     PRODUCER_ID_LOOKUP(1),
     NPN_LOOKUP(2),
     EMAIL_LOOKUP(3),
+    EXTERNAL_ID_LOOKUP(4),
     LOOKUPMETHOD_NOT_SET(0);
     private final int value;
     private LookupMethodCase(int value) {
@@ -1765,6 +2340,7 @@ private static final long serialVersionUID = 0L;
         case 1: return PRODUCER_ID_LOOKUP;
         case 2: return NPN_LOOKUP;
         case 3: return EMAIL_LOOKUP;
+        case 4: return EXTERNAL_ID_LOOKUP;
         case 0: return LOOKUPMETHOD_NOT_SET;
         default: return null;
       }
@@ -1909,6 +2485,49 @@ private static final long serialVersionUID = 0L;
     return com.producerflow.producer.v1.GetProducerRequest.EmailLookup.getDefaultInstance();
   }
 
+  public static final int EXTERNAL_ID_LOOKUP_FIELD_NUMBER = 4;
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   * @return Whether the externalIdLookup field is set.
+   */
+  @java.lang.Override
+  public boolean hasExternalIdLookup() {
+    return lookupMethodCase_ == 4;
+  }
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   * @return The externalIdLookup.
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getExternalIdLookup() {
+    if (lookupMethodCase_ == 4) {
+       return (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_;
+    }
+    return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+  }
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder getExternalIdLookupOrBuilder() {
+    if (lookupMethodCase_ == 4) {
+       return (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_;
+    }
+    return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -1932,6 +2551,9 @@ private static final long serialVersionUID = 0L;
     if (lookupMethodCase_ == 3) {
       output.writeMessage(3, (com.producerflow.producer.v1.GetProducerRequest.EmailLookup) lookupMethod_);
     }
+    if (lookupMethodCase_ == 4) {
+      output.writeMessage(4, (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -1952,6 +2574,10 @@ private static final long serialVersionUID = 0L;
     if (lookupMethodCase_ == 3) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(3, (com.producerflow.producer.v1.GetProducerRequest.EmailLookup) lookupMethod_);
+    }
+    if (lookupMethodCase_ == 4) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(4, (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -1982,6 +2608,10 @@ private static final long serialVersionUID = 0L;
         if (!getEmailLookup()
             .equals(other.getEmailLookup())) return false;
         break;
+      case 4:
+        if (!getExternalIdLookup()
+            .equals(other.getExternalIdLookup())) return false;
+        break;
       case 0:
       default:
     }
@@ -2008,6 +2638,10 @@ private static final long serialVersionUID = 0L;
       case 3:
         hash = (37 * hash) + EMAIL_LOOKUP_FIELD_NUMBER;
         hash = (53 * hash) + getEmailLookup().hashCode();
+        break;
+      case 4:
+        hash = (37 * hash) + EXTERNAL_ID_LOOKUP_FIELD_NUMBER;
+        hash = (53 * hash) + getExternalIdLookup().hashCode();
         break;
       case 0:
       default:
@@ -2111,8 +2745,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * GetProducerRequest allows retrieving producer information through one of three
-   * possible lookup methods: by ID, by NPN, or by email address.
+   * GetProducerRequest allows retrieving producer information through one of four
+   * possible lookup methods: by ID, by NPN, by email address, or by external ID.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.GetProducerRequest}
@@ -2156,6 +2790,9 @@ private static final long serialVersionUID = 0L;
       }
       if (emailLookupBuilder_ != null) {
         emailLookupBuilder_.clear();
+      }
+      if (externalIdLookupBuilder_ != null) {
+        externalIdLookupBuilder_.clear();
       }
       lookupMethodCase_ = 0;
       lookupMethod_ = null;
@@ -2210,6 +2847,10 @@ private static final long serialVersionUID = 0L;
           emailLookupBuilder_ != null) {
         result.lookupMethod_ = emailLookupBuilder_.build();
       }
+      if (lookupMethodCase_ == 4 &&
+          externalIdLookupBuilder_ != null) {
+        result.lookupMethod_ = externalIdLookupBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -2235,6 +2876,10 @@ private static final long serialVersionUID = 0L;
         }
         case EMAIL_LOOKUP: {
           mergeEmailLookup(other.getEmailLookup());
+          break;
+        }
+        case EXTERNAL_ID_LOOKUP: {
+          mergeExternalIdLookup(other.getExternalIdLookup());
           break;
         }
         case LOOKUPMETHOD_NOT_SET: {
@@ -2288,6 +2933,13 @@ private static final long serialVersionUID = 0L;
               lookupMethodCase_ = 3;
               break;
             } // case 26
+            case 34: {
+              input.readMessage(
+                  getExternalIdLookupFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              lookupMethodCase_ = 4;
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2852,6 +3504,184 @@ private static final long serialVersionUID = 0L;
       lookupMethodCase_ = 3;
       onChanged();
       return emailLookupBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder> externalIdLookupBuilder_;
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     * @return Whether the externalIdLookup field is set.
+     */
+    @java.lang.Override
+    public boolean hasExternalIdLookup() {
+      return lookupMethodCase_ == 4;
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     * @return The externalIdLookup.
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getExternalIdLookup() {
+      if (externalIdLookupBuilder_ == null) {
+        if (lookupMethodCase_ == 4) {
+          return (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_;
+        }
+        return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+      } else {
+        if (lookupMethodCase_ == 4) {
+          return externalIdLookupBuilder_.getMessage();
+        }
+        return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+      }
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    public Builder setExternalIdLookup(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup value) {
+      if (externalIdLookupBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        lookupMethod_ = value;
+        onChanged();
+      } else {
+        externalIdLookupBuilder_.setMessage(value);
+      }
+      lookupMethodCase_ = 4;
+      return this;
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    public Builder setExternalIdLookup(
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder builderForValue) {
+      if (externalIdLookupBuilder_ == null) {
+        lookupMethod_ = builderForValue.build();
+        onChanged();
+      } else {
+        externalIdLookupBuilder_.setMessage(builderForValue.build());
+      }
+      lookupMethodCase_ = 4;
+      return this;
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    public Builder mergeExternalIdLookup(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup value) {
+      if (externalIdLookupBuilder_ == null) {
+        if (lookupMethodCase_ == 4 &&
+            lookupMethod_ != com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance()) {
+          lookupMethod_ = com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.newBuilder((com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          lookupMethod_ = value;
+        }
+        onChanged();
+      } else {
+        if (lookupMethodCase_ == 4) {
+          externalIdLookupBuilder_.mergeFrom(value);
+        } else {
+          externalIdLookupBuilder_.setMessage(value);
+        }
+      }
+      lookupMethodCase_ = 4;
+      return this;
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    public Builder clearExternalIdLookup() {
+      if (externalIdLookupBuilder_ == null) {
+        if (lookupMethodCase_ == 4) {
+          lookupMethodCase_ = 0;
+          lookupMethod_ = null;
+          onChanged();
+        }
+      } else {
+        if (lookupMethodCase_ == 4) {
+          lookupMethodCase_ = 0;
+          lookupMethod_ = null;
+        }
+        externalIdLookupBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder getExternalIdLookupBuilder() {
+      return getExternalIdLookupFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder getExternalIdLookupOrBuilder() {
+      if ((lookupMethodCase_ == 4) && (externalIdLookupBuilder_ != null)) {
+        return externalIdLookupBuilder_.getMessageOrBuilder();
+      } else {
+        if (lookupMethodCase_ == 4) {
+          return (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_;
+        }
+        return com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+      }
+    }
+    /**
+     * <pre>
+     * Look up producer by external ID set via SetExternalID.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder> 
+        getExternalIdLookupFieldBuilder() {
+      if (externalIdLookupBuilder_ == null) {
+        if (!(lookupMethodCase_ == 4)) {
+          lookupMethod_ = com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.getDefaultInstance();
+        }
+        externalIdLookupBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder, com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder>(
+                (com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup) lookupMethod_,
+                getParentForChildren(),
+                isClean());
+        lookupMethod_ = null;
+      }
+      lookupMethodCase_ = 4;
+      onChanged();
+      return externalIdLookupBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetProducerRequest)

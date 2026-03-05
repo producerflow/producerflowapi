@@ -503,10 +503,11 @@ type ProducerServiceClient interface {
 	GetAgency(ctx context.Context, in *GetAgencyRequest, opts ...grpc.CallOption) (*GetAgencyResponse, error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
-	// Supports three lookup methods:
+	// Supports four lookup methods:
 	// - By producer ID (UUID)
 	// - By NPN (National Producer Number)
 	// - By email address
+	// - By external ID (tenant-defined identifier set via SetExternalID)
 	//
 	// The response includes:
 	// - Producer contact information (name, email, phone, address)
@@ -525,6 +526,7 @@ type ProducerServiceClient interface {
 	// - producer_id_lookup.producer_id: Must be a valid UUID format
 	// - npn_lookup.producer_npn: Must be non-empty string
 	// - email_lookup.email: Must be a valid email format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
 	//
 	// Returns:
 	// Complete producer information including all NIPR data.
@@ -532,8 +534,6 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
-	//   - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-	//     lookups are implemented)
 	GetProducer(ctx context.Context, in *GetProducerRequest, opts ...grpc.CallOption) (*GetProducerResponse, error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//
@@ -2221,10 +2221,11 @@ type ProducerServiceServer interface {
 	GetAgency(context.Context, *GetAgencyRequest) (*GetAgencyResponse, error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
-	// Supports three lookup methods:
+	// Supports four lookup methods:
 	// - By producer ID (UUID)
 	// - By NPN (National Producer Number)
 	// - By email address
+	// - By external ID (tenant-defined identifier set via SetExternalID)
 	//
 	// The response includes:
 	// - Producer contact information (name, email, phone, address)
@@ -2243,6 +2244,7 @@ type ProducerServiceServer interface {
 	// - producer_id_lookup.producer_id: Must be a valid UUID format
 	// - npn_lookup.producer_npn: Must be non-empty string
 	// - email_lookup.email: Must be a valid email format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
 	//
 	// Returns:
 	// Complete producer information including all NIPR data.
@@ -2250,8 +2252,6 @@ type ProducerServiceServer interface {
 	// Common Error Codes:
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
-	//   - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-	//     lookups are implemented)
 	GetProducer(context.Context, *GetProducerRequest) (*GetProducerResponse, error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//

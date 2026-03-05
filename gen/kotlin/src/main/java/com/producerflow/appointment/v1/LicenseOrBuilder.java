@@ -175,5 +175,59 @@ public interface LicenseOrBuilder extends
   com.google.protobuf.ByteString
       getCarrierIdBytes();
 
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   * @return Whether the expirationDate field is set.
+   */
+  boolean hasExpirationDate();
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   * @return The expirationDate.
+   */
+  com.google.type.Date getExpirationDate();
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   */
+  com.google.type.DateOrBuilder getExpirationDateOrBuilder();
+
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   * @return Whether the issueDate field is set.
+   */
+  boolean hasIssueDate();
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   * @return The issueDate.
+   */
+  com.google.type.Date getIssueDate();
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   */
+  com.google.type.DateOrBuilder getIssueDateOrBuilder();
+
   com.producerflow.appointment.v1.License.LicenseOwnerCase getLicenseOwnerCase();
 }

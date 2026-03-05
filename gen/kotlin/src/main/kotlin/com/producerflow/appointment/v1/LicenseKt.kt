@@ -249,6 +249,82 @@ public object LicenseKt {
     public fun clearCarrierId() {
       _builder.clearCarrierId()
     }
+
+    /**
+     * ```
+     * The date the license expires.
+     * ```
+     *
+     * `.google.type.Date expiration_date = 9 [json_name = "expirationDate"];`
+     */
+    public var expirationDate: com.google.type.Date
+      @JvmName("getExpirationDate")
+      get() = _builder.expirationDate
+      @JvmName("setExpirationDate")
+      set(value) {
+        _builder.expirationDate = value
+      }
+    /**
+     * ```
+     * The date the license expires.
+     * ```
+     *
+     * `.google.type.Date expiration_date = 9 [json_name = "expirationDate"];`
+     */
+    public fun clearExpirationDate() {
+      _builder.clearExpirationDate()
+    }
+    /**
+     * ```
+     * The date the license expires.
+     * ```
+     *
+     * `.google.type.Date expiration_date = 9 [json_name = "expirationDate"];`
+     * @return Whether the expirationDate field is set.
+     */
+    public fun hasExpirationDate(): kotlin.Boolean {
+      return _builder.hasExpirationDate()
+    }
+    public val LicenseKt.Dsl.expirationDateOrNull: com.google.type.Date?
+      get() = _builder.expirationDateOrNull
+
+    /**
+     * ```
+     * The date the license was issued.
+     * ```
+     *
+     * `.google.type.Date issue_date = 10 [json_name = "issueDate"];`
+     */
+    public var issueDate: com.google.type.Date
+      @JvmName("getIssueDate")
+      get() = _builder.issueDate
+      @JvmName("setIssueDate")
+      set(value) {
+        _builder.issueDate = value
+      }
+    /**
+     * ```
+     * The date the license was issued.
+     * ```
+     *
+     * `.google.type.Date issue_date = 10 [json_name = "issueDate"];`
+     */
+    public fun clearIssueDate() {
+      _builder.clearIssueDate()
+    }
+    /**
+     * ```
+     * The date the license was issued.
+     * ```
+     *
+     * `.google.type.Date issue_date = 10 [json_name = "issueDate"];`
+     * @return Whether the issueDate field is set.
+     */
+    public fun hasIssueDate(): kotlin.Boolean {
+      return _builder.hasIssueDate()
+    }
+    public val LicenseKt.Dsl.issueDateOrNull: com.google.type.Date?
+      get() = _builder.issueDateOrNull
     public val licenseOwnerCase: com.producerflow.appointment.v1.License.LicenseOwnerCase
       @JvmName("getLicenseOwnerCase")
       get() = _builder.getLicenseOwnerCase()
@@ -261,4 +337,10 @@ public object LicenseKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.appointment.v1.License.copy(block: `com.producerflow.appointment.v1`.LicenseKt.Dsl.() -> kotlin.Unit): com.producerflow.appointment.v1.License =
   `com.producerflow.appointment.v1`.LicenseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val com.producerflow.appointment.v1.LicenseOrBuilder.expirationDateOrNull: com.google.type.Date?
+  get() = if (hasExpirationDate()) getExpirationDate() else null
+
+public val com.producerflow.appointment.v1.LicenseOrBuilder.issueDateOrNull: com.google.type.Date?
+  get() = if (hasIssueDate()) getIssueDate() else null
 

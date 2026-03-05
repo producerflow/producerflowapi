@@ -2405,12 +2405,13 @@ public object ProducerKt {
 
         /**
          * ```
-         * Federal Employer Identification Number if the producer is a business entity.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return FEIN for individual agents; this field will always be empty.
          * ```
          *
-         * `string fein = 7 [json_name = "fein"];`
+         * `string fein = 7 [json_name = "fein", deprecated = true];`
          */
-        public var fein: kotlin.String
+        @kotlin.Deprecated(message = "Field fein is deprecated") public var fein: kotlin.String
           @JvmName("getFein")
           get() = _builder.fein
           @JvmName("setFein")
@@ -2419,10 +2420,11 @@ public object ProducerKt {
           }
         /**
          * ```
-         * Federal Employer Identification Number if the producer is a business entity.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return FEIN for individual agents; this field will always be empty.
          * ```
          *
-         * `string fein = 7 [json_name = "fein"];`
+         * `string fein = 7 [json_name = "fein", deprecated = true];`
          */
         public fun clearFein() {
           _builder.clearFein()
@@ -2430,12 +2432,13 @@ public object ProducerKt {
 
         /**
          * ```
-         * Company name if the producer is a business entity.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return a company name for individual agents; this field will always be empty.
          * ```
          *
-         * `string company_name = 8 [json_name = "companyName"];`
+         * `string company_name = 8 [json_name = "companyName", deprecated = true];`
          */
-        public var companyName: kotlin.String
+        @kotlin.Deprecated(message = "Field companyName is deprecated") public var companyName: kotlin.String
           @JvmName("getCompanyName")
           get() = _builder.companyName
           @JvmName("setCompanyName")
@@ -2444,10 +2447,11 @@ public object ProducerKt {
           }
         /**
          * ```
-         * Company name if the producer is a business entity.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return a company name for individual agents; this field will always be empty.
          * ```
          *
-         * `string company_name = 8 [json_name = "companyName"];`
+         * `string company_name = 8 [json_name = "companyName", deprecated = true];`
          */
         public fun clearCompanyName() {
           _builder.clearCompanyName()
@@ -2455,13 +2459,13 @@ public object ProducerKt {
 
         /**
          * ```
-         * State of domicile (resident state) for the producer.
-         * This is the state where the producer is primarily located.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return state of domicile for individual agents; this field will always be empty.
          * ```
          *
-         * `string state_domicile = 9 [json_name = "stateDomicile"];`
+         * `string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];`
          */
-        public var stateDomicile: kotlin.String
+        @kotlin.Deprecated(message = "Field stateDomicile is deprecated") public var stateDomicile: kotlin.String
           @JvmName("getStateDomicile")
           get() = _builder.stateDomicile
           @JvmName("setStateDomicile")
@@ -2470,11 +2474,11 @@ public object ProducerKt {
           }
         /**
          * ```
-         * State of domicile (resident state) for the producer.
-         * This is the state where the producer is primarily located.
+         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * return state of domicile for individual agents; this field will always be empty.
          * ```
          *
-         * `string state_domicile = 9 [json_name = "stateDomicile"];`
+         * `string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];`
          */
         public fun clearStateDomicile() {
           _builder.clearStateDomicile()

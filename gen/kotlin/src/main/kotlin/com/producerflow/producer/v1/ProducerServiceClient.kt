@@ -1158,10 +1158,11 @@ public class ProducerServiceClient(
   /**
    *  GetProducer retrieves detailed information about a specific producer.
    *
-   *  Supports three lookup methods:
+   *  Supports four lookup methods:
    *  - By producer ID (UUID)
    *  - By NPN (National Producer Number)
    *  - By email address
+   *  - By external ID (tenant-defined identifier set via SetExternalID)
    *
    *  The response includes:
    *  - Producer contact information (name, email, phone, address)
@@ -1179,6 +1180,7 @@ public class ProducerServiceClient(
    *  - producer_id_lookup.producer_id: Must be a valid UUID format
    *  - npn_lookup.producer_npn: Must be non-empty string
    *  - email_lookup.email: Must be a valid email format
+   *  - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
    *
    *  Returns:
    *  Complete producer information including all NIPR data.
@@ -1186,8 +1188,6 @@ public class ProducerServiceClient(
    *  Common Error Codes:
    *  - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
    *    associated agency not found
-   *  - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-   *    lookups are implemented)
    */
   override suspend fun getProducer(request: GetProducerRequest, headers: Headers): ResponseMessage<GetProducerResponse> = client.unary(
     request,
@@ -1204,10 +1204,11 @@ public class ProducerServiceClient(
   /**
    *  GetProducer retrieves detailed information about a specific producer.
    *
-   *  Supports three lookup methods:
+   *  Supports four lookup methods:
    *  - By producer ID (UUID)
    *  - By NPN (National Producer Number)
    *  - By email address
+   *  - By external ID (tenant-defined identifier set via SetExternalID)
    *
    *  The response includes:
    *  - Producer contact information (name, email, phone, address)
@@ -1225,6 +1226,7 @@ public class ProducerServiceClient(
    *  - producer_id_lookup.producer_id: Must be a valid UUID format
    *  - npn_lookup.producer_npn: Must be non-empty string
    *  - email_lookup.email: Must be a valid email format
+   *  - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
    *
    *  Returns:
    *  Complete producer information including all NIPR data.
@@ -1232,8 +1234,6 @@ public class ProducerServiceClient(
    *  Common Error Codes:
    *  - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
    *    associated agency not found
-   *  - UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-   *    lookups are implemented)
    */
   override fun getProducerBlocking(request: GetProducerRequest, headers: Headers): UnaryBlockingCall<GetProducerResponse> = client.unaryBlocking(
     request,

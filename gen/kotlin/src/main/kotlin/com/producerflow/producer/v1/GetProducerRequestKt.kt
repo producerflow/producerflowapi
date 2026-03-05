@@ -11,8 +11,8 @@ public inline fun getProducerRequest(block: com.producerflow.producer.v1.GetProd
   com.producerflow.producer.v1.GetProducerRequestKt.Dsl._create(com.producerflow.producer.v1.GetProducerRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * GetProducerRequest allows retrieving producer information through one of three
- * possible lookup methods: by ID, by NPN, or by email address.
+ * GetProducerRequest allows retrieving producer information through one of four
+ * possible lookup methods: by ID, by NPN, by email address, or by external ID.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.GetProducerRequest`
@@ -139,6 +139,42 @@ public object GetProducerRequestKt {
      */
     public fun hasEmailLookup(): kotlin.Boolean {
       return _builder.hasEmailLookup()
+    }
+
+    /**
+     * ```
+     * Look up producer by external ID set via SetExternalID.
+     * ```
+     *
+     * `.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];`
+     */
+    public var externalIdLookup: com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup
+      @JvmName("getExternalIdLookup")
+      get() = _builder.externalIdLookup
+      @JvmName("setExternalIdLookup")
+      set(value) {
+        _builder.externalIdLookup = value
+      }
+    /**
+     * ```
+     * Look up producer by external ID set via SetExternalID.
+     * ```
+     *
+     * `.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];`
+     */
+    public fun clearExternalIdLookup() {
+      _builder.clearExternalIdLookup()
+    }
+    /**
+     * ```
+     * Look up producer by external ID set via SetExternalID.
+     * ```
+     *
+     * `.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];`
+     * @return Whether the externalIdLookup field is set.
+     */
+    public fun hasExternalIdLookup(): kotlin.Boolean {
+      return _builder.hasExternalIdLookup()
     }
     public val lookupMethodCase: com.producerflow.producer.v1.GetProducerRequest.LookupMethodCase
       @JvmName("getLookupMethodCase")
@@ -310,6 +346,63 @@ public object GetProducerRequestKt {
       }
     }
   }
+  @kotlin.jvm.JvmName("-initializeexternalIDLookup")
+  public inline fun externalIDLookup(block: com.producerflow.producer.v1.GetProducerRequestKt.ExternalIDLookupKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup =
+    com.producerflow.producer.v1.GetProducerRequestKt.ExternalIDLookupKt.Dsl._create(com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.newBuilder()).apply { block() }._build()
+  /**
+   * ```
+   * ExternalIDLookup allows looking up a producer by the external identifier
+   * previously set via the SetExternalID RPC.
+   * ```
+   *
+   * Protobuf type `producerflow.producer.v1.GetProducerRequest.ExternalIDLookup`
+   */
+  public object ExternalIDLookupKt {
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    @com.google.protobuf.kotlin.ProtoDslMarker
+    public class Dsl private constructor(
+      private val _builder: com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder
+    ) {
+      public companion object {
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _create(builder: com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.Builder): Dsl = Dsl(builder)
+      }
+
+      @kotlin.jvm.JvmSynthetic
+      @kotlin.PublishedApi
+      internal fun _build(): com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup = _builder.build()
+
+      /**
+       * ```
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * ```
+       *
+       * `string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }`
+       */
+      public var externalId: kotlin.String
+        @JvmName("getExternalId")
+        get() = _builder.externalId
+        @JvmName("setExternalId")
+        set(value) {
+          _builder.externalId = value
+        }
+      /**
+       * ```
+       * The external identifier associated with the producer in the tenant's system.
+       * This corresponds to the value set via the SetExternalID RPC.
+       * Must be a non-empty string with maximum 255 characters.
+       * ```
+       *
+       * `string external_id = 1 [json_name = "externalId", (.buf.validate.field) = { ... }`
+       */
+      public fun clearExternalId() {
+        _builder.clearExternalId()
+      }
+    }
+  }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.producer.v1.GetProducerRequest.copy(block: `com.producerflow.producer.v1`.GetProducerRequestKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetProducerRequest =
@@ -327,6 +420,10 @@ public inline fun com.producerflow.producer.v1.GetProducerRequest.ProducerNPNLoo
 public inline fun com.producerflow.producer.v1.GetProducerRequest.EmailLookup.copy(block: `com.producerflow.producer.v1`.GetProducerRequestKt.EmailLookupKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetProducerRequest.EmailLookup =
   `com.producerflow.producer.v1`.GetProducerRequestKt.EmailLookupKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup.copy(block: `com.producerflow.producer.v1`.GetProducerRequestKt.ExternalIDLookupKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup =
+  `com.producerflow.producer.v1`.GetProducerRequestKt.ExternalIDLookupKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
 public val com.producerflow.producer.v1.GetProducerRequestOrBuilder.producerIdLookupOrNull: com.producerflow.producer.v1.GetProducerRequest.ProducerIDLookup?
   get() = if (hasProducerIdLookup()) getProducerIdLookup() else null
 
@@ -335,4 +432,7 @@ public val com.producerflow.producer.v1.GetProducerRequestOrBuilder.npnLookupOrN
 
 public val com.producerflow.producer.v1.GetProducerRequestOrBuilder.emailLookupOrNull: com.producerflow.producer.v1.GetProducerRequest.EmailLookup?
   get() = if (hasEmailLookup()) getEmailLookup() else null
+
+public val com.producerflow.producer.v1.GetProducerRequestOrBuilder.externalIdLookupOrNull: com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup?
+  get() = if (hasExternalIdLookup()) getExternalIdLookup() else null
 

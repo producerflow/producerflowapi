@@ -47,6 +47,7 @@ private static final long serialVersionUID = 0L;
             com.producerflow.appointment.v1.License.class, com.producerflow.appointment.v1.License.Builder.class);
   }
 
+  private int bitField0_;
   private int licenseOwnerCase_ = 0;
   @SuppressWarnings("serial")
   private java.lang.Object licenseOwner_;
@@ -465,6 +466,82 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int EXPIRATION_DATE_FIELD_NUMBER = 9;
+  private com.google.type.Date expirationDate_;
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   * @return Whether the expirationDate field is set.
+   */
+  @java.lang.Override
+  public boolean hasExpirationDate() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   * @return The expirationDate.
+   */
+  @java.lang.Override
+  public com.google.type.Date getExpirationDate() {
+    return expirationDate_ == null ? com.google.type.Date.getDefaultInstance() : expirationDate_;
+  }
+  /**
+   * <pre>
+   * The date the license expires.
+   * </pre>
+   *
+   * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+   */
+  @java.lang.Override
+  public com.google.type.DateOrBuilder getExpirationDateOrBuilder() {
+    return expirationDate_ == null ? com.google.type.Date.getDefaultInstance() : expirationDate_;
+  }
+
+  public static final int ISSUE_DATE_FIELD_NUMBER = 10;
+  private com.google.type.Date issueDate_;
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   * @return Whether the issueDate field is set.
+   */
+  @java.lang.Override
+  public boolean hasIssueDate() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   * @return The issueDate.
+   */
+  @java.lang.Override
+  public com.google.type.Date getIssueDate() {
+    return issueDate_ == null ? com.google.type.Date.getDefaultInstance() : issueDate_;
+  }
+  /**
+   * <pre>
+   * The date the license was issued.
+   * </pre>
+   *
+   * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+   */
+  @java.lang.Override
+  public com.google.type.DateOrBuilder getIssueDateOrBuilder() {
+    return issueDate_ == null ? com.google.type.Date.getDefaultInstance() : issueDate_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -503,6 +580,12 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(carrierId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 8, carrierId_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(9, getExpirationDate());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(10, getIssueDate());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -537,6 +620,14 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(carrierId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(8, carrierId_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(9, getExpirationDate());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(10, getIssueDate());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -564,6 +655,16 @@ private static final long serialVersionUID = 0L;
         != other.getIsRegistryState()) return false;
     if (!getCarrierId()
         .equals(other.getCarrierId())) return false;
+    if (hasExpirationDate() != other.hasExpirationDate()) return false;
+    if (hasExpirationDate()) {
+      if (!getExpirationDate()
+          .equals(other.getExpirationDate())) return false;
+    }
+    if (hasIssueDate() != other.hasIssueDate()) return false;
+    if (hasIssueDate()) {
+      if (!getIssueDate()
+          .equals(other.getIssueDate())) return false;
+    }
     if (!getLicenseOwnerCase().equals(other.getLicenseOwnerCase())) return false;
     switch (licenseOwnerCase_) {
       case 3:
@@ -601,6 +702,14 @@ private static final long serialVersionUID = 0L;
         getIsRegistryState());
     hash = (37 * hash) + CARRIER_ID_FIELD_NUMBER;
     hash = (53 * hash) + getCarrierId().hashCode();
+    if (hasExpirationDate()) {
+      hash = (37 * hash) + EXPIRATION_DATE_FIELD_NUMBER;
+      hash = (53 * hash) + getExpirationDate().hashCode();
+    }
+    if (hasIssueDate()) {
+      hash = (37 * hash) + ISSUE_DATE_FIELD_NUMBER;
+      hash = (53 * hash) + getIssueDate().hashCode();
+    }
     switch (licenseOwnerCase_) {
       case 3:
         hash = (37 * hash) + PRODUCER_ID_FIELD_NUMBER;
@@ -732,13 +841,20 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.producerflow.appointment.v1.License.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        getExpirationDateFieldBuilder();
+        getIssueDateFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -750,6 +866,16 @@ private static final long serialVersionUID = 0L;
       licenseClass_ = "";
       isRegistryState_ = false;
       carrierId_ = "";
+      expirationDate_ = null;
+      if (expirationDateBuilder_ != null) {
+        expirationDateBuilder_.dispose();
+        expirationDateBuilder_ = null;
+      }
+      issueDate_ = null;
+      if (issueDateBuilder_ != null) {
+        issueDateBuilder_.dispose();
+        issueDateBuilder_ = null;
+      }
       licenseOwnerCase_ = 0;
       licenseOwner_ = null;
       return this;
@@ -804,6 +930,20 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000080) != 0)) {
         result.carrierId_ = carrierId_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.expirationDate_ = expirationDateBuilder_ == null
+            ? expirationDate_
+            : expirationDateBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.issueDate_ = issueDateBuilder_ == null
+            ? issueDate_
+            : issueDateBuilder_.build();
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     private void buildPartialOneofs(com.producerflow.appointment.v1.License result) {
@@ -850,6 +990,12 @@ private static final long serialVersionUID = 0L;
         carrierId_ = other.carrierId_;
         bitField0_ |= 0x00000080;
         onChanged();
+      }
+      if (other.hasExpirationDate()) {
+        mergeExpirationDate(other.getExpirationDate());
+      }
+      if (other.hasIssueDate()) {
+        mergeIssueDate(other.getIssueDate());
       }
       switch (other.getLicenseOwnerCase()) {
         case PRODUCER_ID: {
@@ -936,6 +1082,20 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000080;
               break;
             } // case 66
+            case 74: {
+              input.readMessage(
+                  getExpirationDateFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 74
+            case 82: {
+              input.readMessage(
+                  getIssueDateFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 82
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1712,6 +1872,320 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000080;
       onChanged();
       return this;
+    }
+
+    private com.google.type.Date expirationDate_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> expirationDateBuilder_;
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     * @return Whether the expirationDate field is set.
+     */
+    public boolean hasExpirationDate() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     * @return The expirationDate.
+     */
+    public com.google.type.Date getExpirationDate() {
+      if (expirationDateBuilder_ == null) {
+        return expirationDate_ == null ? com.google.type.Date.getDefaultInstance() : expirationDate_;
+      } else {
+        return expirationDateBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public Builder setExpirationDate(com.google.type.Date value) {
+      if (expirationDateBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        expirationDate_ = value;
+      } else {
+        expirationDateBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public Builder setExpirationDate(
+        com.google.type.Date.Builder builderForValue) {
+      if (expirationDateBuilder_ == null) {
+        expirationDate_ = builderForValue.build();
+      } else {
+        expirationDateBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public Builder mergeExpirationDate(com.google.type.Date value) {
+      if (expirationDateBuilder_ == null) {
+        if (((bitField0_ & 0x00000100) != 0) &&
+          expirationDate_ != null &&
+          expirationDate_ != com.google.type.Date.getDefaultInstance()) {
+          getExpirationDateBuilder().mergeFrom(value);
+        } else {
+          expirationDate_ = value;
+        }
+      } else {
+        expirationDateBuilder_.mergeFrom(value);
+      }
+      if (expirationDate_ != null) {
+        bitField0_ |= 0x00000100;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public Builder clearExpirationDate() {
+      bitField0_ = (bitField0_ & ~0x00000100);
+      expirationDate_ = null;
+      if (expirationDateBuilder_ != null) {
+        expirationDateBuilder_.dispose();
+        expirationDateBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public com.google.type.Date.Builder getExpirationDateBuilder() {
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return getExpirationDateFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    public com.google.type.DateOrBuilder getExpirationDateOrBuilder() {
+      if (expirationDateBuilder_ != null) {
+        return expirationDateBuilder_.getMessageOrBuilder();
+      } else {
+        return expirationDate_ == null ?
+            com.google.type.Date.getDefaultInstance() : expirationDate_;
+      }
+    }
+    /**
+     * <pre>
+     * The date the license expires.
+     * </pre>
+     *
+     * <code>.google.type.Date expiration_date = 9 [json_name = "expirationDate"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> 
+        getExpirationDateFieldBuilder() {
+      if (expirationDateBuilder_ == null) {
+        expirationDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder>(
+                getExpirationDate(),
+                getParentForChildren(),
+                isClean());
+        expirationDate_ = null;
+      }
+      return expirationDateBuilder_;
+    }
+
+    private com.google.type.Date issueDate_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> issueDateBuilder_;
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     * @return Whether the issueDate field is set.
+     */
+    public boolean hasIssueDate() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     * @return The issueDate.
+     */
+    public com.google.type.Date getIssueDate() {
+      if (issueDateBuilder_ == null) {
+        return issueDate_ == null ? com.google.type.Date.getDefaultInstance() : issueDate_;
+      } else {
+        return issueDateBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public Builder setIssueDate(com.google.type.Date value) {
+      if (issueDateBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        issueDate_ = value;
+      } else {
+        issueDateBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public Builder setIssueDate(
+        com.google.type.Date.Builder builderForValue) {
+      if (issueDateBuilder_ == null) {
+        issueDate_ = builderForValue.build();
+      } else {
+        issueDateBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public Builder mergeIssueDate(com.google.type.Date value) {
+      if (issueDateBuilder_ == null) {
+        if (((bitField0_ & 0x00000200) != 0) &&
+          issueDate_ != null &&
+          issueDate_ != com.google.type.Date.getDefaultInstance()) {
+          getIssueDateBuilder().mergeFrom(value);
+        } else {
+          issueDate_ = value;
+        }
+      } else {
+        issueDateBuilder_.mergeFrom(value);
+      }
+      if (issueDate_ != null) {
+        bitField0_ |= 0x00000200;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public Builder clearIssueDate() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      issueDate_ = null;
+      if (issueDateBuilder_ != null) {
+        issueDateBuilder_.dispose();
+        issueDateBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public com.google.type.Date.Builder getIssueDateBuilder() {
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return getIssueDateFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    public com.google.type.DateOrBuilder getIssueDateOrBuilder() {
+      if (issueDateBuilder_ != null) {
+        return issueDateBuilder_.getMessageOrBuilder();
+      } else {
+        return issueDate_ == null ?
+            com.google.type.Date.getDefaultInstance() : issueDate_;
+      }
+    }
+    /**
+     * <pre>
+     * The date the license was issued.
+     * </pre>
+     *
+     * <code>.google.type.Date issue_date = 10 [json_name = "issueDate"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> 
+        getIssueDateFieldBuilder() {
+      if (issueDateBuilder_ == null) {
+        issueDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder>(
+                getIssueDate(),
+                getParentForChildren(),
+                isClean());
+        issueDate_ = null;
+      }
+      return issueDateBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.appointment.v1.License)

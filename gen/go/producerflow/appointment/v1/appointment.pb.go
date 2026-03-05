@@ -8,6 +8,7 @@ package appointmentv1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	date "google.golang.org/genproto/googleapis/type/date"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -1693,7 +1694,11 @@ type License struct {
 	// going through NIPR.
 	IsRegistryState bool `protobuf:"varint,7,opt,name=is_registry_state,json=isRegistryState,proto3" json:"is_registry_state,omitempty"`
 	// The ID of the carrier associated with this license.
-	CarrierId     string `protobuf:"bytes,8,opt,name=carrier_id,json=carrierId,proto3" json:"carrier_id,omitempty"`
+	CarrierId string `protobuf:"bytes,8,opt,name=carrier_id,json=carrierId,proto3" json:"carrier_id,omitempty"`
+	// The date the license expires.
+	ExpirationDate *date.Date `protobuf:"bytes,9,opt,name=expiration_date,json=expirationDate,proto3" json:"expiration_date,omitempty"`
+	// The date the license was issued.
+	IssueDate     *date.Date `protobuf:"bytes,10,opt,name=issue_date,json=issueDate,proto3" json:"issue_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1793,6 +1798,20 @@ func (x *License) GetCarrierId() string {
 		return x.CarrierId
 	}
 	return ""
+}
+
+func (x *License) GetExpirationDate() *date.Date {
+	if x != nil {
+		return x.ExpirationDate
+	}
+	return nil
+}
+
+func (x *License) GetIssueDate() *date.Date {
+	if x != nil {
+		return x.IssueDate
+	}
+	return nil
 }
 
 type isLicense_LicenseOwner interface {
@@ -1909,7 +1928,7 @@ var File_producerflow_appointment_v1_appointment_proto protoreflect.FileDescript
 
 const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\n" +
-	"-producerflow/appointment/v1/appointment.proto\x12\x1bproducerflow.appointment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"m\n" +
+	"-producerflow/appointment/v1/appointment.proto\x12\x1bproducerflow.appointment.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16google/type/date.proto\"m\n" +
 	"\x19RequestAppointmentRequest\x12'\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x12'\n" +
@@ -1991,7 +2010,7 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x06cocode\x18\x0e \x01(\tR\x06cocode\x122\n" +
 	"\x15parent_appointment_id\x18\x0f \x01(\tR\x13parentAppointmentIdB\x0e\n" +
 	"\f_producer_idB\x13\n" +
-	"\x11_termination_date\"\xe5\x02\n" +
+	"\x11_termination_date\"\xd3\x03\n" +
 	"\aLicense\x12'\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x120\n" +
@@ -2003,7 +2022,11 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12*\n" +
 	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryState\x12'\n" +
 	"\n" +
-	"carrier_id\x18\b \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierIdB\x0f\n" +
+	"carrier_id\x18\b \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierId\x12:\n" +
+	"\x0fexpiration_date\x18\t \x01(\v2\x11.google.type.DateR\x0eexpirationDate\x120\n" +
+	"\n" +
+	"issue_date\x18\n" +
+	" \x01(\v2\x11.google.type.DateR\tissueDateB\x0f\n" +
 	"\rlicense_owner\"?\n" +
 	"\x1dListTerminationReasonsRequest\x12\x1e\n" +
 	"\x05state\x18\x01 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\"\x81\x01\n" +
@@ -2108,6 +2131,7 @@ var file_producerflow_appointment_v1_appointment_proto_goTypes = []any{
 	(*ListTerminationReasonsRequest)(nil),  // 25: producerflow.appointment.v1.ListTerminationReasonsRequest
 	(*ListTerminationReasonsResponse)(nil), // 26: producerflow.appointment.v1.ListTerminationReasonsResponse
 	(*timestamppb.Timestamp)(nil),          // 27: google.protobuf.Timestamp
+	(*date.Date)(nil),                      // 28: google.type.Date
 }
 var file_producerflow_appointment_v1_appointment_proto_depIdxs = []int32{
 	2,  // 0: producerflow.appointment.v1.RequestAppointmentResponse.processing_status:type_name -> producerflow.appointment.v1.ProcessingStatus
@@ -2127,30 +2151,32 @@ var file_producerflow_appointment_v1_appointment_proto_depIdxs = []int32{
 	27, // 14: producerflow.appointment.v1.Appointment.termination_date:type_name -> google.protobuf.Timestamp
 	27, // 15: producerflow.appointment.v1.Appointment.updated_at:type_name -> google.protobuf.Timestamp
 	22, // 16: producerflow.appointment.v1.Appointment.operational_status:type_name -> producerflow.appointment.v1.AppointmentOperationalStatus
-	4,  // 17: producerflow.appointment.v1.ListTerminationReasonsResponse.termination_reasons:type_name -> producerflow.appointment.v1.TerminationReason
-	7,  // 18: producerflow.appointment.v1.AppointmentService.GetAppointment:input_type -> producerflow.appointment.v1.GetAppointmentRequest
-	15, // 19: producerflow.appointment.v1.AppointmentService.GetAppointmentFees:input_type -> producerflow.appointment.v1.GetAppointmentFeesRequest
-	19, // 20: producerflow.appointment.v1.AppointmentService.GetAppointableCarriers:input_type -> producerflow.appointment.v1.GetAppointableCarriersRequest
-	17, // 21: producerflow.appointment.v1.AppointmentService.GetTerminationFees:input_type -> producerflow.appointment.v1.GetTerminationFeesRequest
-	9,  // 22: producerflow.appointment.v1.AppointmentService.ListAppointments:input_type -> producerflow.appointment.v1.ListAppointmentsRequest
-	13, // 23: producerflow.appointment.v1.AppointmentService.ListEligibleLicenses:input_type -> producerflow.appointment.v1.ListEligibleLicensesRequest
-	5,  // 24: producerflow.appointment.v1.AppointmentService.RequestAppointment:input_type -> producerflow.appointment.v1.RequestAppointmentRequest
-	11, // 25: producerflow.appointment.v1.AppointmentService.TerminateAppointment:input_type -> producerflow.appointment.v1.TerminateAppointmentRequest
-	25, // 26: producerflow.appointment.v1.AppointmentService.ListTerminationReasons:input_type -> producerflow.appointment.v1.ListTerminationReasonsRequest
-	8,  // 27: producerflow.appointment.v1.AppointmentService.GetAppointment:output_type -> producerflow.appointment.v1.GetAppointmentResponse
-	16, // 28: producerflow.appointment.v1.AppointmentService.GetAppointmentFees:output_type -> producerflow.appointment.v1.GetAppointmentFeesResponse
-	20, // 29: producerflow.appointment.v1.AppointmentService.GetAppointableCarriers:output_type -> producerflow.appointment.v1.GetAppointableCarriersResponse
-	18, // 30: producerflow.appointment.v1.AppointmentService.GetTerminationFees:output_type -> producerflow.appointment.v1.GetTerminationFeesResponse
-	10, // 31: producerflow.appointment.v1.AppointmentService.ListAppointments:output_type -> producerflow.appointment.v1.ListAppointmentsResponse
-	14, // 32: producerflow.appointment.v1.AppointmentService.ListEligibleLicenses:output_type -> producerflow.appointment.v1.ListEligibleLicensesResponse
-	6,  // 33: producerflow.appointment.v1.AppointmentService.RequestAppointment:output_type -> producerflow.appointment.v1.RequestAppointmentResponse
-	12, // 34: producerflow.appointment.v1.AppointmentService.TerminateAppointment:output_type -> producerflow.appointment.v1.TerminateAppointmentResponse
-	26, // 35: producerflow.appointment.v1.AppointmentService.ListTerminationReasons:output_type -> producerflow.appointment.v1.ListTerminationReasonsResponse
-	27, // [27:36] is the sub-list for method output_type
-	18, // [18:27] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	28, // 17: producerflow.appointment.v1.License.expiration_date:type_name -> google.type.Date
+	28, // 18: producerflow.appointment.v1.License.issue_date:type_name -> google.type.Date
+	4,  // 19: producerflow.appointment.v1.ListTerminationReasonsResponse.termination_reasons:type_name -> producerflow.appointment.v1.TerminationReason
+	7,  // 20: producerflow.appointment.v1.AppointmentService.GetAppointment:input_type -> producerflow.appointment.v1.GetAppointmentRequest
+	15, // 21: producerflow.appointment.v1.AppointmentService.GetAppointmentFees:input_type -> producerflow.appointment.v1.GetAppointmentFeesRequest
+	19, // 22: producerflow.appointment.v1.AppointmentService.GetAppointableCarriers:input_type -> producerflow.appointment.v1.GetAppointableCarriersRequest
+	17, // 23: producerflow.appointment.v1.AppointmentService.GetTerminationFees:input_type -> producerflow.appointment.v1.GetTerminationFeesRequest
+	9,  // 24: producerflow.appointment.v1.AppointmentService.ListAppointments:input_type -> producerflow.appointment.v1.ListAppointmentsRequest
+	13, // 25: producerflow.appointment.v1.AppointmentService.ListEligibleLicenses:input_type -> producerflow.appointment.v1.ListEligibleLicensesRequest
+	5,  // 26: producerflow.appointment.v1.AppointmentService.RequestAppointment:input_type -> producerflow.appointment.v1.RequestAppointmentRequest
+	11, // 27: producerflow.appointment.v1.AppointmentService.TerminateAppointment:input_type -> producerflow.appointment.v1.TerminateAppointmentRequest
+	25, // 28: producerflow.appointment.v1.AppointmentService.ListTerminationReasons:input_type -> producerflow.appointment.v1.ListTerminationReasonsRequest
+	8,  // 29: producerflow.appointment.v1.AppointmentService.GetAppointment:output_type -> producerflow.appointment.v1.GetAppointmentResponse
+	16, // 30: producerflow.appointment.v1.AppointmentService.GetAppointmentFees:output_type -> producerflow.appointment.v1.GetAppointmentFeesResponse
+	20, // 31: producerflow.appointment.v1.AppointmentService.GetAppointableCarriers:output_type -> producerflow.appointment.v1.GetAppointableCarriersResponse
+	18, // 32: producerflow.appointment.v1.AppointmentService.GetTerminationFees:output_type -> producerflow.appointment.v1.GetTerminationFeesResponse
+	10, // 33: producerflow.appointment.v1.AppointmentService.ListAppointments:output_type -> producerflow.appointment.v1.ListAppointmentsResponse
+	14, // 34: producerflow.appointment.v1.AppointmentService.ListEligibleLicenses:output_type -> producerflow.appointment.v1.ListEligibleLicensesResponse
+	6,  // 35: producerflow.appointment.v1.AppointmentService.RequestAppointment:output_type -> producerflow.appointment.v1.RequestAppointmentResponse
+	12, // 36: producerflow.appointment.v1.AppointmentService.TerminateAppointment:output_type -> producerflow.appointment.v1.TerminateAppointmentResponse
+	26, // 37: producerflow.appointment.v1.AppointmentService.ListTerminationReasons:output_type -> producerflow.appointment.v1.ListTerminationReasonsResponse
+	29, // [29:38] is the sub-list for method output_type
+	20, // [20:29] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_producerflow_appointment_v1_appointment_proto_init() }

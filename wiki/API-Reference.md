@@ -1220,10 +1220,11 @@ GetAgencyResponse contains the complete agency information.
 
 GetProducer retrieves detailed information about a specific producer.
 
-Supports three lookup methods:
+Supports four lookup methods:
 - By producer ID (UUID)
 - By NPN (National Producer Number)
 - By email address
+- By external ID (tenant-defined identifier set via SetExternalID)
 
 The response includes:
 - Producer contact information (name, email, phone, address)
@@ -1241,6 +1242,7 @@ Exactly one lookup method must be provided (oneof required):
 - producer_id_lookup.producer_id: Must be a valid UUID format
 - npn_lookup.producer_npn: Must be non-empty string
 - email_lookup.email: Must be a valid email format
+- external_id_lookup.external_id: Must be a non-empty string, max 255 characters
 
 Returns:
 Complete producer information including all NIPR data.
@@ -1248,20 +1250,19 @@ Complete producer information including all NIPR data.
 Common Error Codes:
 - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
   associated agency not found
-- UNIMPLEMENTED: Lookup method not supported (only producer_id, npn, and email
-  lookups are implemented)
 
 #### Request: `GetProducerRequest`
 
 
-GetProducerRequest allows retrieving producer information through one of three
-possible lookup methods: by ID, by NPN, or by email address.
+GetProducerRequest allows retrieving producer information through one of four
+possible lookup methods: by ID, by NPN, by email address, or by external ID.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_id_lookup` | [GetProducerRequest.ProducerIDLookup](#getproducerrequestproduceridlookup) |  | Look up producer by ID. |
 | `npn_lookup` | [GetProducerRequest.ProducerNPNLookup](#getproducerrequestproducernpnlookup) |  | Look up producer by NPN. |
 | `email_lookup` | [GetProducerRequest.EmailLookup](#getproducerrequestemaillookup) |  | Look up producer by email. |
+| `external_id_lookup` | [GetProducerRequest.ExternalIDLookup](#getproducerrequestexternalidlookup) |  | Look up producer by external ID set via SetExternalID. |
 
 #### Response: `GetProducerResponse`
 
@@ -2888,6 +2889,8 @@ Request to get termination fees.
 | `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers Values vary by state as each DOI defines its own license classes. |
 | `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state. Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
 | `carrier_id` | [string](#string) |  | The ID of the carrier associated with this license. |
+| `expiration_date` | [google.type.Date](#googletypedate) |  | The date the license expires. |
+| `issue_date` | [google.type.Date](#googletypedate) |  | The date the license was issued. |
 
 #### ListAppointmentsRequest
 
@@ -3636,14 +3639,15 @@ GetOrganizationResponse contains details about the requested organization.
 
 #### GetProducerRequest
 
-GetProducerRequest allows retrieving producer information through one of three
-possible lookup methods: by ID, by NPN, or by email address.
+GetProducerRequest allows retrieving producer information through one of four
+possible lookup methods: by ID, by NPN, by email address, or by external ID.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_id_lookup` | [GetProducerRequest.ProducerIDLookup](#getproducerrequestproduceridlookup) |  | Look up producer by ID. |
 | `npn_lookup` | [GetProducerRequest.ProducerNPNLookup](#getproducerrequestproducernpnlookup) |  | Look up producer by NPN. |
 | `email_lookup` | [GetProducerRequest.EmailLookup](#getproducerrequestemaillookup) |  | Look up producer by email. |
+| `external_id_lookup` | [GetProducerRequest.ExternalIDLookup](#getproducerrequestexternalidlookup) |  | Look up producer by external ID set via SetExternalID. |
 
 #### GetProducerRequest.EmailLookup
 
@@ -3652,6 +3656,15 @@ EmailLookup allows looking up a producer by their email address.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `email` | [string](#string) |  | The email address of the producer to retrieve. Must be a valid email format. |
+
+#### GetProducerRequest.ExternalIDLookup
+
+ExternalIDLookup allows looking up a producer by the external identifier
+previously set via the SetExternalID RPC.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `external_id` | [string](#string) |  | The external identifier associated with the producer in the tenant's system. This corresponds to the value set via the SetExternalID RPC. Must be a non-empty string with maximum 255 characters. |
 
 #### GetProducerRequest.ProducerIDLookup
 
@@ -4394,9 +4407,9 @@ Biographic contains personal and identifying information about the producer.
 | `first_name` | [string](#string) |  | First name of the producer as recorded in NIPR. |
 | `middle_name` | [string](#string) |  | Middle name of the producer as recorded in NIPR. |
 | `date_of_birth` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date of birth of the producer. |
-| `fein` | [string](#string) |  | Federal Employer Identification Number if the producer is a business entity. |
-| `company_name` | [string](#string) |  | Company name if the producer is a business entity. |
-| `state_domicile` | [string](#string) |  | State of domicile (resident state) for the producer. This is the state where the producer is primarily located. |
+| `fein` | [string](#string) |  | **Deprecated.** Deprecated: producers in ProducerFlow are always individuals. NIPR does not return FEIN for individual agents; this field will always be empty. |
+| `company_name` | [string](#string) |  | **Deprecated.** Deprecated: producers in ProducerFlow are always individuals. NIPR does not return a company name for individual agents; this field will always be empty. |
+| `state_domicile` | [string](#string) |  | **Deprecated.** Deprecated: producers in ProducerFlow are always individuals. NIPR does not return state of domicile for individual agents; this field will always be empty. |
 
 #### Producer.NIPR.License
 

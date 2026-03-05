@@ -90,5 +90,32 @@ public interface GetProducerRequestOrBuilder extends
    */
   com.producerflow.producer.v1.GetProducerRequest.EmailLookupOrBuilder getEmailLookupOrBuilder();
 
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   * @return Whether the externalIdLookup field is set.
+   */
+  boolean hasExternalIdLookup();
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   * @return The externalIdLookup.
+   */
+  com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup getExternalIdLookup();
+  /**
+   * <pre>
+   * Look up producer by external ID set via SetExternalID.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.GetProducerRequest.ExternalIDLookup external_id_lookup = 4 [json_name = "externalIdLookup"];</code>
+   */
+  com.producerflow.producer.v1.GetProducerRequest.ExternalIDLookupOrBuilder getExternalIdLookupOrBuilder();
+
   com.producerflow.producer.v1.GetProducerRequest.LookupMethodCase getLookupMethodCase();
 }
