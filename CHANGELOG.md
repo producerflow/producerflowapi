@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.21] - 2026-04-06
+
+### Added
+
+#### ProducerService
+
+- **New RPC: `GetAgencyProducers`** — returns all producers for an agency with pagination, without the overhead of fetching full agency details
+  - Each producer includes basic info, NIPR data (licenses, appointments, biographic), location assignments, and onboarding status
+  - Accepts `agency_id` (required, UUID) and standard pagination parameters
+- **New enum value: `NIPR_SYNC_STATE_IN_PROGRESS`** — added to `NIPRSyncState` (value `5`) to represent an active synchronization in progress
+- **New enum value: `NIPR_SYNC_STATE_STOPPING`** — added to `NIPRSyncState` (value `6`) to represent a synchronization that is being stopped
+- **New filters in `ListAgencies`** — two new optional filter fields for state-based agency queries
+  - `resident_states`: filter agencies by resident license state (OR logic for multiple values)
+  - `licensed_states`: filter agencies by any active license state, resident or non-resident (OR logic for multiple values)
+
+#### Webhooks
+
+- **Bank account data in location events** — each location in the `locations` array now includes a `bank_account` object when a bank account is associated with that location
+  - Fields: `bank_account_id`, `account_number`, `routing_number`, `account_type`, `account_holder_name` (all optional)
+  - Triggered by changes to both locations and their associated bank accounts
+- **New HTTP headers on webhook delivery** — `X-Event-Type`, `X-Event-Resource`, and `X-Event-Action` headers are now included on all webhook requests, enabling consumers to route and filter events without parsing the JSON body
+- **`designated_home_state` in NIPR license data** — new field in `agency_nipr_licenses` and `producer_nipr_licenses` representing the Designated Home State (ADHS) for adjuster licenses
+
+### Fixed
+
+#### ProducerService
+
+- **Deprecated `GetAgencyAndProducers`** — use `GetAgency` + `GetAgencyProducers` instead
+
+#### Webhooks
+
+- **Empty `locations` array on full removal** — when all locations are removed from an agency, the event now correctly sends `"locations": []` instead of omitting the field
+
+### Changed
+
+#### ProducerService
+
+- **`AddAgencyLocations` error codes** — duplicate location name errors are now split into two distinct codes:
+  - `INVALID_ARGUMENT`: duplicate location names within the same request
+  - `ALREADY_EXISTS`: a location with the same name already exists in the agency
+- Regenerated client libraries with latest proto changes
+
 ## [1.0.20] - 2026-03-05
 
 ### Fixed
