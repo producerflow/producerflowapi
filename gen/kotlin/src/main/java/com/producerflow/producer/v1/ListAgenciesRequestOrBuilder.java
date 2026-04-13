@@ -260,4 +260,102 @@ public interface ListAgenciesRequestOrBuilder extends
    * @return The enum numeric value on the wire of niprSyncStatuses at the given index.
    */
   int getNiprSyncStatusesValue(int index);
+
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @return A list containing the residentStates.
+   */
+  java.util.List<java.lang.String>
+      getResidentStatesList();
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @return The count of residentStates.
+   */
+  int getResidentStatesCount();
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @param index The index of the element to return.
+   * @return The residentStates at the given index.
+   */
+  java.lang.String getResidentStates(int index);
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the residentStates at the given index.
+   */
+  com.google.protobuf.ByteString
+      getResidentStatesBytes(int index);
+
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @return A list containing the licensedStates.
+   */
+  java.util.List<java.lang.String>
+      getLicensedStatesList();
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @return The count of licensedStates.
+   */
+  int getLicensedStatesCount();
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @param index The index of the element to return.
+   * @return The licensedStates at the given index.
+   */
+  java.lang.String getLicensedStates(int index);
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the licensedStates at the given index.
+   */
+  com.google.protobuf.ByteString
+      getLicensedStatesBytes(int index);
 }

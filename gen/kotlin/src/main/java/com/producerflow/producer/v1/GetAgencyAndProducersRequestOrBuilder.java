@@ -5,26 +5,16 @@
 
 package com.producerflow.producer.v1;
 
-public interface GetAgencyAndProducersRequestOrBuilder extends
+@java.lang.Deprecated public interface GetAgencyAndProducersRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.GetAgencyAndProducersRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <pre>
-   * The UUID of the agency to retrieve information for.
-   * Must be a valid UUID format.
-   * </pre>
-   *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
    * @return The agencyId.
    */
   java.lang.String getAgencyId();
   /**
-   * <pre>
-   * The UUID of the agency to retrieve information for.
-   * Must be a valid UUID format.
-   * </pre>
-   *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for agencyId.
    */

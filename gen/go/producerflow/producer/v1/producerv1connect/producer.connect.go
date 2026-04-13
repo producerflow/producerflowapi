@@ -63,6 +63,9 @@ const (
 	// ProducerServiceGetAgencyAndProducersProcedure is the fully-qualified name of the
 	// ProducerService's GetAgencyAndProducers RPC.
 	ProducerServiceGetAgencyAndProducersProcedure = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
+	// ProducerServiceGetAgencyProducersProcedure is the fully-qualified name of the ProducerService's
+	// GetAgencyProducers RPC.
+	ProducerServiceGetAgencyProducersProcedure = "/producerflow.producer.v1.ProducerService/GetAgencyProducers"
 	// ProducerServiceGetAgencyProcedure is the fully-qualified name of the ProducerService's GetAgency
 	// RPC.
 	ProducerServiceGetAgencyProcedure = "/producerflow.producer.v1.ProducerService/GetAgency"
@@ -515,29 +518,40 @@ type ProducerServiceClient interface {
 	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(context.Context, *connect.Request[v1.NewProducersRequest]) (*connect.Response[v1.NewProducersResponse], error)
-	// GetAgencyAndProducers retrieves complete information for an agency and all
-	// its producers.
+	// Deprecated: Use GetAgency and GetAgencyProducers instead.
 	//
-	// This endpoint returns comprehensive agency details including:
-	// - Agency contact information and business details
-	// - Principal producer information
-	// - Bank account for commission payments
-	// - Errors & Omissions insurance details
-	// - Business hours and contact points
-	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-	// - All associated producers with their NIPR data
-	// - Agency locations
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers. This endpoint is deprecated because it returns too much data
+	// in a single call. Use GetAgency to retrieve agency details and
+	// GetAgencyProducers to retrieve the list of producers separately.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//
+	// Deprecated: do not use.
+	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	//
+	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
+	// only the producer data without the full agency details. Use this when you
+	// only need producer information.
+	//
+	// Each producer includes:
+	// - Basic information (name, email, phone, NPN)
+	// - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+	// - Location assignments
+	// - Onboarding status (if enabled for the tenant)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Agency object with complete NIPR data and list of all associated producers.
+	// List of all producers associated with the specified agency.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	GetAgencyProducers(context.Context, *connect.Request[v1.GetAgencyProducersRequest]) (*connect.Response[v1.GetAgencyProducersResponse], error)
 	// GetAgency retrieves detailed information about a specific agency.
 	//
 	// Supports two lookup methods:
@@ -1286,8 +1300,9 @@ type ProducerServiceClient interface {
 	// This ordering guarantee allows you to map request entries to their created IDs.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-	//     location names, or location with name already exists in agency
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+	//     location names within the request
+	//   - ALREADY_EXISTS: A location with the same name already exists in the agency
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
@@ -1540,6 +1555,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("GetAgencyAndProducers")),
 			connect.WithClientOptions(opts...),
 		),
+		getAgencyProducers: connect.NewClient[v1.GetAgencyProducersRequest, v1.GetAgencyProducersResponse](
+			httpClient,
+			baseURL+ProducerServiceGetAgencyProducersProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("GetAgencyProducers")),
+			connect.WithClientOptions(opts...),
+		),
 		getAgency: connect.NewClient[v1.GetAgencyRequest, v1.GetAgencyResponse](
 			httpClient,
 			baseURL+ProducerServiceGetAgencyProcedure,
@@ -1711,6 +1732,7 @@ type producerServiceClient struct {
 	newProducer                   *connect.Client[v1.NewProducerRequest, v1.NewProducerResponse]
 	newProducers                  *connect.Client[v1.NewProducersRequest, v1.NewProducersResponse]
 	getAgencyAndProducers         *connect.Client[v1.GetAgencyAndProducersRequest, v1.GetAgencyAndProducersResponse]
+	getAgencyProducers            *connect.Client[v1.GetAgencyProducersRequest, v1.GetAgencyProducersResponse]
 	getAgency                     *connect.Client[v1.GetAgencyRequest, v1.GetAgencyResponse]
 	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
 	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
@@ -1787,8 +1809,15 @@ func (c *producerServiceClient) NewProducers(ctx context.Context, req *connect.R
 }
 
 // GetAgencyAndProducers calls producerflow.producer.v1.ProducerService.GetAgencyAndProducers.
+//
+// Deprecated: do not use.
 func (c *producerServiceClient) GetAgencyAndProducers(ctx context.Context, req *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error) {
 	return c.getAgencyAndProducers.CallUnary(ctx, req)
+}
+
+// GetAgencyProducers calls producerflow.producer.v1.ProducerService.GetAgencyProducers.
+func (c *producerServiceClient) GetAgencyProducers(ctx context.Context, req *connect.Request[v1.GetAgencyProducersRequest]) (*connect.Response[v1.GetAgencyProducersResponse], error) {
+	return c.getAgencyProducers.CallUnary(ctx, req)
 }
 
 // GetAgency calls producerflow.producer.v1.ProducerService.GetAgency.
@@ -2296,29 +2325,40 @@ type ProducerServiceHandler interface {
 	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(context.Context, *connect.Request[v1.NewProducersRequest]) (*connect.Response[v1.NewProducersResponse], error)
-	// GetAgencyAndProducers retrieves complete information for an agency and all
-	// its producers.
+	// Deprecated: Use GetAgency and GetAgencyProducers instead.
 	//
-	// This endpoint returns comprehensive agency details including:
-	// - Agency contact information and business details
-	// - Principal producer information
-	// - Bank account for commission payments
-	// - Errors & Omissions insurance details
-	// - Business hours and contact points
-	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-	// - All associated producers with their NIPR data
-	// - Agency locations
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers. This endpoint is deprecated because it returns too much data
+	// in a single call. Use GetAgency to retrieve agency details and
+	// GetAgencyProducers to retrieve the list of producers separately.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//
+	// Deprecated: do not use.
+	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	//
+	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
+	// only the producer data without the full agency details. Use this when you
+	// only need producer information.
+	//
+	// Each producer includes:
+	// - Basic information (name, email, phone, NPN)
+	// - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+	// - Location assignments
+	// - Onboarding status (if enabled for the tenant)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Agency object with complete NIPR data and list of all associated producers.
+	// List of all producers associated with the specified agency.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
+	GetAgencyProducers(context.Context, *connect.Request[v1.GetAgencyProducersRequest]) (*connect.Response[v1.GetAgencyProducersResponse], error)
 	// GetAgency retrieves detailed information about a specific agency.
 	//
 	// Supports two lookup methods:
@@ -3067,8 +3107,9 @@ type ProducerServiceHandler interface {
 	// This ordering guarantee allows you to map request entries to their created IDs.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-	//     location names, or location with name already exists in agency
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+	//     location names within the request
+	//   - ALREADY_EXISTS: A location with the same name already exists in the agency
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(context.Context, *connect.Request[v1.AddAgencyLocationsRequest]) (*connect.Response[v1.AddAgencyLocationsResponse], error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
@@ -3317,6 +3358,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("GetAgencyAndProducers")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceGetAgencyProducersHandler := connect.NewUnaryHandler(
+		ProducerServiceGetAgencyProducersProcedure,
+		svc.GetAgencyProducers,
+		connect.WithSchema(producerServiceMethods.ByName("GetAgencyProducers")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceGetAgencyHandler := connect.NewUnaryHandler(
 		ProducerServiceGetAgencyProcedure,
 		svc.GetAgency,
@@ -3495,6 +3542,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceNewProducersHandler.ServeHTTP(w, r)
 		case ProducerServiceGetAgencyAndProducersProcedure:
 			producerServiceGetAgencyAndProducersHandler.ServeHTTP(w, r)
+		case ProducerServiceGetAgencyProducersProcedure:
+			producerServiceGetAgencyProducersHandler.ServeHTTP(w, r)
 		case ProducerServiceGetAgencyProcedure:
 			producerServiceGetAgencyHandler.ServeHTTP(w, r)
 		case ProducerServiceGetProducerProcedure:
@@ -3594,6 +3643,10 @@ func (UnimplementedProducerServiceHandler) NewProducers(context.Context, *connec
 
 func (UnimplementedProducerServiceHandler) GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetAgencyAndProducers is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) GetAgencyProducers(context.Context, *connect.Request[v1.GetAgencyProducersRequest]) (*connect.Response[v1.GetAgencyProducersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetAgencyProducers is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error) {

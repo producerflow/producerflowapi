@@ -11,7 +11,7 @@ public inline fun getAgencyAndProducersRequest(block: com.producerflow.producer.
   com.producerflow.producer.v1.GetAgencyAndProducersRequestKt.Dsl._create(com.producerflow.producer.v1.GetAgencyAndProducersRequest.newBuilder()).apply { block() }._build()
 /**
  * ```
- * GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+ * Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.GetAgencyAndProducersRequest`
@@ -33,11 +33,6 @@ public object GetAgencyAndProducersRequestKt {
     internal fun _build(): com.producerflow.producer.v1.GetAgencyAndProducersRequest = _builder.build()
 
     /**
-     * ```
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * ```
-     *
      * `string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }`
      */
     public var agencyId: kotlin.String
@@ -48,11 +43,6 @@ public object GetAgencyAndProducersRequestKt {
         _builder.agencyId = value
       }
     /**
-     * ```
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * ```
-     *
      * `string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }`
      */
     public fun clearAgencyId() {

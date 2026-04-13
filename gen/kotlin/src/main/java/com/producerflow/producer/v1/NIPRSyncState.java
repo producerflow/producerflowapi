@@ -54,6 +54,22 @@ public enum NIPRSyncState
    * <code>NIPR_SYNC_STATE_DISABLED = 4;</code>
    */
   NIPR_SYNC_STATE_DISABLED(4),
+  /**
+   * <pre>
+   * Synchronization is in progress.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_IN_PROGRESS = 5;</code>
+   */
+  NIPR_SYNC_STATE_IN_PROGRESS(5),
+  /**
+   * <pre>
+   * Synchronization is being stopped.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_STOPPING = 6;</code>
+   */
+  NIPR_SYNC_STATE_STOPPING(6),
   UNRECOGNIZED(-1),
   ;
 
@@ -106,6 +122,22 @@ public enum NIPRSyncState
    * <code>NIPR_SYNC_STATE_DISABLED = 4;</code>
    */
   public static final int NIPR_SYNC_STATE_DISABLED_VALUE = 4;
+  /**
+   * <pre>
+   * Synchronization is in progress.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_IN_PROGRESS = 5;</code>
+   */
+  public static final int NIPR_SYNC_STATE_IN_PROGRESS_VALUE = 5;
+  /**
+   * <pre>
+   * Synchronization is being stopped.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_STOPPING = 6;</code>
+   */
+  public static final int NIPR_SYNC_STATE_STOPPING_VALUE = 6;
 
 
   public final int getNumber() {
@@ -137,6 +169,8 @@ public enum NIPRSyncState
       case 2: return NIPR_SYNC_STATE_FAILING;
       case 3: return NIPR_SYNC_STATE_PENDING;
       case 4: return NIPR_SYNC_STATE_DISABLED;
+      case 5: return NIPR_SYNC_STATE_IN_PROGRESS;
+      case 6: return NIPR_SYNC_STATE_STOPPING;
       default: return null;
     }
   }

@@ -16,6 +16,7 @@ import io.grpc.kotlin.AbstractCoroutineStub
 import io.grpc.kotlin.ClientCalls.unaryRpc
 import io.grpc.kotlin.ServerCalls.unaryServerMethodDefinition
 import io.grpc.kotlin.StubFor
+import kotlin.Deprecated
 import kotlin.String
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -77,6 +78,11 @@ public object ProducerServiceGrpcKt {
       MethodDescriptor<GetAgencyAndProducersRequest, GetAgencyAndProducersResponse>
     @JvmStatic
     get() = ProducerServiceGrpc.getGetAgencyAndProducersMethod()
+
+  public val getAgencyProducersMethod:
+      MethodDescriptor<GetAgencyProducersRequest, GetAgencyProducersResponse>
+    @JvmStatic
+    get() = ProducerServiceGrpc.getGetAgencyProducersMethod()
 
   public val getAgencyMethod: MethodDescriptor<GetAgencyRequest, GetAgencyResponse>
     @JvmStatic
@@ -399,9 +405,30 @@ public object ProducerServiceGrpcKt {
      *
      * @return The single response from the server.
      */
+    @Deprecated("The underlying service method is marked deprecated.")
     public suspend fun getAgencyAndProducers(request: GetAgencyAndProducersRequest, headers: Metadata = Metadata()): GetAgencyAndProducersResponse = unaryRpc(
       channel,
       ProducerServiceGrpc.getGetAgencyAndProducersMethod(),
+      request,
+      callOptions,
+      headers
+    )
+
+    /**
+     * Executes this RPC and returns the response message, suspending until the RPC completes
+     * with [`Status.OK`][io.grpc.Status].  If the RPC completes with another status, a corresponding
+     * [StatusException] is thrown.  If this coroutine is cancelled, the RPC is also cancelled
+     * with the corresponding exception as a cause.
+     *
+     * @param request The request message to send to the server.
+     *
+     * @param headers Metadata to attach to the request.  Most users will not need this.
+     *
+     * @return The single response from the server.
+     */
+    public suspend fun getAgencyProducers(request: GetAgencyProducersRequest, headers: Metadata = Metadata()): GetAgencyProducersResponse = unaryRpc(
+      channel,
+      ProducerServiceGrpc.getGetAgencyProducersMethod(),
       request,
       callOptions,
       headers
@@ -1052,7 +1079,20 @@ public object ProducerServiceGrpcKt {
      *
      * @param request The request from the client.
      */
+    @Deprecated("The underlying service method is marked deprecated.")
     public open suspend fun getAgencyAndProducers(request: GetAgencyAndProducersRequest): GetAgencyAndProducersResponse = throw StatusException(UNIMPLEMENTED.withDescription("Method producerflow.producer.v1.ProducerService.GetAgencyAndProducers is unimplemented"))
+
+    /**
+     * Returns the response to an RPC for producerflow.producer.v1.ProducerService.GetAgencyProducers.
+     *
+     * If this method fails with a [StatusException], the RPC will fail with the corresponding
+     * [io.grpc.Status].  If this method fails with a [java.util.concurrent.CancellationException], the RPC will fail
+     * with status `Status.CANCELLED`.  If this method fails for any other reason, the RPC will
+     * fail with `Status.UNKNOWN` with the exception as a cause.
+     *
+     * @param request The request from the client.
+     */
+    public open suspend fun getAgencyProducers(request: GetAgencyProducersRequest): GetAgencyProducersResponse = throw StatusException(UNIMPLEMENTED.withDescription("Method producerflow.producer.v1.ProducerService.GetAgencyProducers is unimplemented"))
 
     /**
      * Returns the response to an RPC for producerflow.producer.v1.ProducerService.GetAgency.
@@ -1416,6 +1456,11 @@ public object ProducerServiceGrpcKt {
       context = this.context,
       descriptor = ProducerServiceGrpc.getGetAgencyAndProducersMethod(),
       implementation = ::getAgencyAndProducers
+    ))
+      .addMethod(unaryServerMethodDefinition(
+      context = this.context,
+      descriptor = ProducerServiceGrpc.getGetAgencyProducersMethod(),
+      implementation = ::getAgencyProducers
     ))
       .addMethod(unaryServerMethodDefinition(
       context = this.context,

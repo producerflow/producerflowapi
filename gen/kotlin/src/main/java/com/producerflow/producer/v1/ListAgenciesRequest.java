@@ -48,6 +48,10 @@ private static final long serialVersionUID = 0L;
     agencyType_ = 0;
     entityType_ = 0;
     niprSyncStatuses_ = emptyIntList();
+    residentStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    licensedStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -434,6 +438,128 @@ private static final long serialVersionUID = 0L;
   }
   private int niprSyncStatusesMemoizedSerializedSize;
 
+  public static final int RESIDENT_STATES_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList residentStates_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @return A list containing the residentStates.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getResidentStatesList() {
+    return residentStates_;
+  }
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @return The count of residentStates.
+   */
+  public int getResidentStatesCount() {
+    return residentStates_.size();
+  }
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @param index The index of the element to return.
+   * @return The residentStates at the given index.
+   */
+  public java.lang.String getResidentStates(int index) {
+    return residentStates_.get(index);
+  }
+  /**
+   * <pre>
+   * Optional. Filter by resident license state.
+   * Returns agencies whose resident license is in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the residentStates at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getResidentStatesBytes(int index) {
+    return residentStates_.getByteString(index);
+  }
+
+  public static final int LICENSED_STATES_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.LazyStringArrayList licensedStates_ =
+      com.google.protobuf.LazyStringArrayList.emptyList();
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @return A list containing the licensedStates.
+   */
+  public com.google.protobuf.ProtocolStringList
+      getLicensedStatesList() {
+    return licensedStates_;
+  }
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @return The count of licensedStates.
+   */
+  public int getLicensedStatesCount() {
+    return licensedStates_.size();
+  }
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @param index The index of the element to return.
+   * @return The licensedStates at the given index.
+   */
+  public java.lang.String getLicensedStates(int index) {
+    return licensedStates_.get(index);
+  }
+  /**
+   * <pre>
+   * Optional. Filter by any active license state.
+   * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+   * Multiple states can be specified (OR logic within this filter).
+   * </pre>
+   *
+   * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the licensedStates at the given index.
+   */
+  public com.google.protobuf.ByteString
+      getLicensedStatesBytes(int index) {
+    return licensedStates_.getByteString(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -470,6 +596,12 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < niprSyncStatuses_.size(); i++) {
       output.writeEnumNoTag(niprSyncStatuses_.getInt(i));
+    }
+    for (int i = 0; i < residentStates_.size(); i++) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 7, residentStates_.getRaw(i));
+    }
+    for (int i = 0; i < licensedStates_.size(); i++) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, licensedStates_.getRaw(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -510,6 +642,22 @@ private static final long serialVersionUID = 0L;
           .computeUInt32SizeNoTag(dataSize);
       }niprSyncStatusesMemoizedSerializedSize = dataSize;
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < residentStates_.size(); i++) {
+        dataSize += computeStringSizeNoTag(residentStates_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getResidentStatesList().size();
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < licensedStates_.size(); i++) {
+        dataSize += computeStringSizeNoTag(licensedStates_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getLicensedStatesList().size();
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -549,6 +697,10 @@ private static final long serialVersionUID = 0L;
       if (entityType_ != other.entityType_) return false;
     }
     if (!niprSyncStatuses_.equals(other.niprSyncStatuses_)) return false;
+    if (!getResidentStatesList()
+        .equals(other.getResidentStatesList())) return false;
+    if (!getLicensedStatesList()
+        .equals(other.getLicensedStatesList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -583,6 +735,14 @@ private static final long serialVersionUID = 0L;
     if (getNiprSyncStatusesCount() > 0) {
       hash = (37 * hash) + NIPR_SYNC_STATUSES_FIELD_NUMBER;
       hash = (53 * hash) + niprSyncStatuses_.hashCode();
+    }
+    if (getResidentStatesCount() > 0) {
+      hash = (37 * hash) + RESIDENT_STATES_FIELD_NUMBER;
+      hash = (53 * hash) + getResidentStatesList().hashCode();
+    }
+    if (getLicensedStatesCount() > 0) {
+      hash = (37 * hash) + LICENSED_STATES_FIELD_NUMBER;
+      hash = (53 * hash) + getLicensedStatesList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -748,6 +908,10 @@ private static final long serialVersionUID = 0L;
       entityType_ = 0;
       niprSyncStatuses_ = emptyIntList();
       bitField0_ = (bitField0_ & ~0x00000020);
+      residentStates_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
+      licensedStates_ =
+          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -813,6 +977,14 @@ private static final long serialVersionUID = 0L;
         result.entityType_ = entityType_;
         to_bitField0_ |= 0x00000010;
       }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        residentStates_.makeImmutable();
+        result.residentStates_ = residentStates_;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        licensedStates_.makeImmutable();
+        result.licensedStates_ = licensedStates_;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -854,6 +1026,26 @@ private static final long serialVersionUID = 0L;
         } else {
           ensureNiprSyncStatusesIsMutable();
           niprSyncStatuses_.addAll(other.niprSyncStatuses_);
+        }
+        onChanged();
+      }
+      if (!other.residentStates_.isEmpty()) {
+        if (residentStates_.isEmpty()) {
+          residentStates_ = other.residentStates_;
+          bitField0_ |= 0x00000040;
+        } else {
+          ensureResidentStatesIsMutable();
+          residentStates_.addAll(other.residentStates_);
+        }
+        onChanged();
+      }
+      if (!other.licensedStates_.isEmpty()) {
+        if (licensedStates_.isEmpty()) {
+          licensedStates_ = other.licensedStates_;
+          bitField0_ |= 0x00000080;
+        } else {
+          ensureLicensedStatesIsMutable();
+          licensedStates_.addAll(other.licensedStates_);
         }
         onChanged();
       }
@@ -927,6 +1119,18 @@ private static final long serialVersionUID = 0L;
               input.popLimit(oldLimit);
               break;
             } // case 50
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureResidentStatesIsMutable();
+              residentStates_.add(s);
+              break;
+            } // case 58
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+              ensureLicensedStatesIsMutable();
+              licensedStates_.add(s);
+              break;
+            } // case 66
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1797,6 +2001,336 @@ private static final long serialVersionUID = 0L;
       for (int value : values) {
         niprSyncStatuses_.addInt(value);
       }
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList residentStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureResidentStatesIsMutable() {
+      if (!residentStates_.isModifiable()) {
+        residentStates_ = new com.google.protobuf.LazyStringArrayList(residentStates_);
+      }
+      bitField0_ |= 0x00000040;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @return A list containing the residentStates.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getResidentStatesList() {
+      residentStates_.makeImmutable();
+      return residentStates_;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @return The count of residentStates.
+     */
+    public int getResidentStatesCount() {
+      return residentStates_.size();
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param index The index of the element to return.
+     * @return The residentStates at the given index.
+     */
+    public java.lang.String getResidentStates(int index) {
+      return residentStates_.get(index);
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the residentStates at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getResidentStatesBytes(int index) {
+      return residentStates_.getByteString(index);
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param index The index to set the value at.
+     * @param value The residentStates to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResidentStates(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureResidentStatesIsMutable();
+      residentStates_.set(index, value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param value The residentStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addResidentStates(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureResidentStatesIsMutable();
+      residentStates_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param values The residentStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllResidentStates(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureResidentStatesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, residentStates_);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearResidentStates() {
+      residentStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000040);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string resident_states = 7 [json_name = "residentStates"];</code>
+     * @param value The bytes of the residentStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addResidentStatesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureResidentStatesIsMutable();
+      residentStates_.add(value);
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringArrayList licensedStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+    private void ensureLicensedStatesIsMutable() {
+      if (!licensedStates_.isModifiable()) {
+        licensedStates_ = new com.google.protobuf.LazyStringArrayList(licensedStates_);
+      }
+      bitField0_ |= 0x00000080;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @return A list containing the licensedStates.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getLicensedStatesList() {
+      licensedStates_.makeImmutable();
+      return licensedStates_;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @return The count of licensedStates.
+     */
+    public int getLicensedStatesCount() {
+      return licensedStates_.size();
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param index The index of the element to return.
+     * @return The licensedStates at the given index.
+     */
+    public java.lang.String getLicensedStates(int index) {
+      return licensedStates_.get(index);
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the licensedStates at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getLicensedStatesBytes(int index) {
+      return licensedStates_.getByteString(index);
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param index The index to set the value at.
+     * @param value The licensedStates to set.
+     * @return This builder for chaining.
+     */
+    public Builder setLicensedStates(
+        int index, java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureLicensedStatesIsMutable();
+      licensedStates_.set(index, value);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param value The licensedStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLicensedStates(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ensureLicensedStatesIsMutable();
+      licensedStates_.add(value);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param values The licensedStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllLicensedStates(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureLicensedStatesIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, licensedStates_);
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearLicensedStates() {
+      licensedStates_ =
+        com.google.protobuf.LazyStringArrayList.emptyList();
+      bitField0_ = (bitField0_ & ~0x00000080);;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * </pre>
+     *
+     * <code>repeated string licensed_states = 8 [json_name = "licensedStates"];</code>
+     * @param value The bytes of the licensedStates to add.
+     * @return This builder for chaining.
+     */
+    public Builder addLicensedStatesBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ensureLicensedStatesIsMutable();
+      licensedStates_.add(value);
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }

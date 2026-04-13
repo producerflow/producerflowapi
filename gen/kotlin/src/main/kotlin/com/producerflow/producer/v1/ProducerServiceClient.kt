@@ -2,6 +2,8 @@
 //
 // Source: producerflow/producer/v1/producer.proto
 //
+@file:Suppress("DEPRECATION")
+
 package com.producerflow.producer.v1
 
 import com.connectrpc.Headers
@@ -10,6 +12,8 @@ import com.connectrpc.ProtocolClientInterface
 import com.connectrpc.ResponseMessage
 import com.connectrpc.StreamType
 import com.connectrpc.UnaryBlockingCall
+import kotlin.Deprecated
+import kotlin.Suppress
 
 /**
  *  ProducerService provides a comprehensive API for managing insurance
@@ -1008,29 +1012,17 @@ public class ProducerServiceClient(
 
 
   /**
+   *  Deprecated: Use GetAgency and GetAgencyProducers instead.
+   *
    *  GetAgencyAndProducers retrieves complete information for an agency and all
-   *  its producers.
-   *
-   *  This endpoint returns comprehensive agency details including:
-   *  - Agency contact information and business details
-   *  - Principal producer information
-   *  - Bank account for commission payments
-   *  - Errors & Omissions insurance details
-   *  - Business hours and contact points
-   *  - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-   *  - All associated producers with their NIPR data
-   *  - Agency locations
-   *
-   *  Validation Rules:
-   *  Proto validation (format checks):
-   *  - agency_id: Required, must be a valid UUID format
-   *
-   *  Returns:
-   *  Agency object with complete NIPR data and list of all associated producers.
+   *  its producers. This endpoint is deprecated because it returns too much data
+   *  in a single call. Use GetAgency to retrieve agency details and
+   *  GetAgencyProducers to retrieve the list of producers separately.
    *
    *  Common Error Codes:
    *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
    */
+  @Deprecated("The method is deprecated in the Protobuf source file.")
   override suspend fun getAgencyAndProducers(request: GetAgencyAndProducersRequest, headers: Headers): ResponseMessage<GetAgencyAndProducersResponse> = client.unary(
     request,
     headers,
@@ -1044,25 +1036,12 @@ public class ProducerServiceClient(
 
 
   /**
+   *  Deprecated: Use GetAgency and GetAgencyProducers instead.
+   *
    *  GetAgencyAndProducers retrieves complete information for an agency and all
-   *  its producers.
-   *
-   *  This endpoint returns comprehensive agency details including:
-   *  - Agency contact information and business details
-   *  - Principal producer information
-   *  - Bank account for commission payments
-   *  - Errors & Omissions insurance details
-   *  - Business hours and contact points
-   *  - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-   *  - All associated producers with their NIPR data
-   *  - Agency locations
-   *
-   *  Validation Rules:
-   *  Proto validation (format checks):
-   *  - agency_id: Required, must be a valid UUID format
-   *
-   *  Returns:
-   *  Agency object with complete NIPR data and list of all associated producers.
+   *  its producers. This endpoint is deprecated because it returns too much data
+   *  in a single call. Use GetAgency to retrieve agency details and
+   *  GetAgencyProducers to retrieve the list of producers separately.
    *
    *  Common Error Codes:
    *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
@@ -1074,6 +1053,76 @@ public class ProducerServiceClient(
     "producerflow.producer.v1.ProducerService/GetAgencyAndProducers",
       com.producerflow.producer.v1.GetAgencyAndProducersRequest::class,
       com.producerflow.producer.v1.GetAgencyAndProducersResponse::class,
+      StreamType.UNARY,
+    ),
+  )
+
+
+  /**
+   *  GetAgencyProducers retrieves all producers associated with a specific agency.
+   *
+   *  This is a lighter-weight alternative to GetAgencyAndProducers that returns
+   *  only the producer data without the full agency details. Use this when you
+   *  only need producer information.
+   *
+   *  Each producer includes:
+   *  - Basic information (name, email, phone, NPN)
+   *  - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+   *  - Location assignments
+   *  - Onboarding status (if enabled for the tenant)
+   *
+   *  Validation Rules:
+   *  Proto validation (format checks):
+   *  - agency_id: Required, must be a valid UUID format
+   *
+   *  Returns:
+   *  List of all producers associated with the specified agency.
+   *
+   *  Common Error Codes:
+   *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+   */
+  override suspend fun getAgencyProducers(request: GetAgencyProducersRequest, headers: Headers): ResponseMessage<GetAgencyProducersResponse> = client.unary(
+    request,
+    headers,
+    MethodSpec(
+    "producerflow.producer.v1.ProducerService/GetAgencyProducers",
+      com.producerflow.producer.v1.GetAgencyProducersRequest::class,
+      com.producerflow.producer.v1.GetAgencyProducersResponse::class,
+      StreamType.UNARY,
+    ),
+  )
+
+
+  /**
+   *  GetAgencyProducers retrieves all producers associated with a specific agency.
+   *
+   *  This is a lighter-weight alternative to GetAgencyAndProducers that returns
+   *  only the producer data without the full agency details. Use this when you
+   *  only need producer information.
+   *
+   *  Each producer includes:
+   *  - Basic information (name, email, phone, NPN)
+   *  - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+   *  - Location assignments
+   *  - Onboarding status (if enabled for the tenant)
+   *
+   *  Validation Rules:
+   *  Proto validation (format checks):
+   *  - agency_id: Required, must be a valid UUID format
+   *
+   *  Returns:
+   *  List of all producers associated with the specified agency.
+   *
+   *  Common Error Codes:
+   *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+   */
+  override fun getAgencyProducersBlocking(request: GetAgencyProducersRequest, headers: Headers): UnaryBlockingCall<GetAgencyProducersResponse> = client.unaryBlocking(
+    request,
+    headers,
+    MethodSpec(
+    "producerflow.producer.v1.ProducerService/GetAgencyProducers",
+      com.producerflow.producer.v1.GetAgencyProducersRequest::class,
+      com.producerflow.producer.v1.GetAgencyProducersResponse::class,
       StreamType.UNARY,
     ),
   )
@@ -3053,8 +3102,9 @@ public class ProducerServiceClient(
    *  This ordering guarantee allows you to map request entries to their created IDs.
    *
    *  Common Error Codes:
-   *  - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-   *    location names, or location with name already exists in agency
+   *  - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+   *    location names within the request
+   *  - ALREADY_EXISTS: A location with the same name already exists in the agency
    *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
    */
   override suspend fun addAgencyLocations(request: AddAgencyLocationsRequest, headers: Headers): ResponseMessage<AddAgencyLocationsResponse> = client.unary(
@@ -3113,8 +3163,9 @@ public class ProducerServiceClient(
    *  This ordering guarantee allows you to map request entries to their created IDs.
    *
    *  Common Error Codes:
-   *  - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-   *    location names, or location with name already exists in agency
+   *  - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+   *    location names within the request
+   *  - ALREADY_EXISTS: A location with the same name already exists in the agency
    *  - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
    */
   override fun addAgencyLocationsBlocking(request: AddAgencyLocationsRequest, headers: Headers): UnaryBlockingCall<AddAgencyLocationsResponse> = client.unaryBlocking(

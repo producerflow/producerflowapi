@@ -7,12 +7,12 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+ * Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.GetAgencyAndProducersRequest}
  */
-public final class GetAgencyAndProducersRequest extends
+@java.lang.Deprecated public final class GetAgencyAndProducersRequest extends
     com.google.protobuf.GeneratedMessage implements
     // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetAgencyAndProducersRequest)
     GetAgencyAndProducersRequestOrBuilder {
@@ -51,11 +51,6 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object agencyId_ = "";
   /**
-   * <pre>
-   * The UUID of the agency to retrieve information for.
-   * Must be a valid UUID format.
-   * </pre>
-   *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
    * @return The agencyId.
    */
@@ -73,11 +68,6 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <pre>
-   * The UUID of the agency to retrieve information for.
-   * Must be a valid UUID format.
-   * </pre>
-   *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
    * @return The bytes for agencyId.
    */
@@ -254,7 +244,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+   * Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.GetAgencyAndProducersRequest}
@@ -396,11 +386,6 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object agencyId_ = "";
     /**
-     * <pre>
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * </pre>
-     *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
      * @return The agencyId.
      */
@@ -417,11 +402,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * </pre>
-     *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
      * @return The bytes for agencyId.
      */
@@ -439,11 +419,6 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <pre>
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * </pre>
-     *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
      * @param value The agencyId to set.
      * @return This builder for chaining.
@@ -457,11 +432,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * </pre>
-     *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
      * @return This builder for chaining.
      */
@@ -472,11 +442,6 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <pre>
-     * The UUID of the agency to retrieve information for.
-     * Must be a valid UUID format.
-     * </pre>
-     *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
      * @param value The bytes for agencyId to set.
      * @return This builder for chaining.

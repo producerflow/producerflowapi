@@ -16,7 +16,7 @@ public interface AddressOrBuilder extends
    *
    * <code>string street = 1 [json_name = "street", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Address.street is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=1584
+   *     See producerflow/producer/v1/producer.proto;l=1602
    * @return The street.
    */
   @java.lang.Deprecated java.lang.String getStreet();
@@ -27,7 +27,7 @@ public interface AddressOrBuilder extends
    *
    * <code>string street = 1 [json_name = "street", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Address.street is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=1584
+   *     See producerflow/producer/v1/producer.proto;l=1602
    * @return The bytes for street.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString

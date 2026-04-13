@@ -6,57 +6,31 @@
 @file:Suppress("DEPRECATION")
 package com.producerflow.producer.v1;
 
-@kotlin.jvm.JvmName("-initializegetAgencyAndProducersResponse")
-public inline fun getAgencyAndProducersResponse(block: com.producerflow.producer.v1.GetAgencyAndProducersResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyAndProducersResponse =
-  com.producerflow.producer.v1.GetAgencyAndProducersResponseKt.Dsl._create(com.producerflow.producer.v1.GetAgencyAndProducersResponse.newBuilder()).apply { block() }._build()
+@kotlin.jvm.JvmName("-initializegetAgencyProducersResponse")
+public inline fun getAgencyProducersResponse(block: com.producerflow.producer.v1.GetAgencyProducersResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyProducersResponse =
+  com.producerflow.producer.v1.GetAgencyProducersResponseKt.Dsl._create(com.producerflow.producer.v1.GetAgencyProducersResponse.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
+ * GetAgencyProducersResponse contains producers associated with the specified agency.
  * ```
  *
- * Protobuf type `producerflow.producer.v1.GetAgencyAndProducersResponse`
+ * Protobuf type `producerflow.producer.v1.GetAgencyProducersResponse`
  */
-public object GetAgencyAndProducersResponseKt {
+public object GetAgencyProducersResponseKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   public class Dsl private constructor(
-    private val _builder: com.producerflow.producer.v1.GetAgencyAndProducersResponse.Builder
+    private val _builder: com.producerflow.producer.v1.GetAgencyProducersResponse.Builder
   ) {
     public companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: com.producerflow.producer.v1.GetAgencyAndProducersResponse.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: com.producerflow.producer.v1.GetAgencyProducersResponse.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): com.producerflow.producer.v1.GetAgencyAndProducersResponse = _builder.build()
-
-    /**
-     * `.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];`
-     */
-    public var agency: com.producerflow.producer.v1.Agency
-      @JvmName("getAgency")
-      get() = _builder.agency
-      @JvmName("setAgency")
-      set(value) {
-        _builder.agency = value
-      }
-    /**
-     * `.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];`
-     */
-    public fun clearAgency() {
-      _builder.clearAgency()
-    }
-    /**
-     * `.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];`
-     * @return Whether the agency field is set.
-     */
-    public fun hasAgency(): kotlin.Boolean {
-      return _builder.hasAgency()
-    }
-    public val GetAgencyAndProducersResponseKt.Dsl.agencyOrNull: com.producerflow.producer.v1.Agency?
-      get() = _builder.agencyOrNull
+    internal fun _build(): com.producerflow.producer.v1.GetAgencyProducersResponse = _builder.build()
 
     /**
      * An uninstantiable, behaviorless type to represent the field in
@@ -65,7 +39,11 @@ public object GetAgencyAndProducersResponseKt {
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     public class ProducersProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      */
      public val producers: com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer, ProducersProxy>
       @kotlin.jvm.JvmSynthetic
@@ -73,7 +51,11 @@ public object GetAgencyAndProducersResponseKt {
         _builder.producersList
       )
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      * @param value The producers to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -82,7 +64,11 @@ public object GetAgencyAndProducersResponseKt {
       _builder.addProducers(value)
     }
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      * @param value The producers to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -92,7 +78,11 @@ public object GetAgencyAndProducersResponseKt {
       add(value)
     }
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      * @param values The producers to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -101,7 +91,11 @@ public object GetAgencyAndProducersResponseKt {
       _builder.addAllProducers(values)
     }
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      * @param values The producers to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -111,7 +105,11 @@ public object GetAgencyAndProducersResponseKt {
       addAll(values)
     }
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      * @param index The index to set the value at.
      * @param value The producers to set.
      */
@@ -121,7 +119,11 @@ public object GetAgencyAndProducersResponseKt {
       _builder.setProducers(index, value)
     }
     /**
-     * `repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];`
+     * ```
+     * List of producers for the current page.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearProducers")
@@ -129,12 +131,36 @@ public object GetAgencyAndProducersResponseKt {
       _builder.clearProducers()
     }
 
+
+    /**
+     * ```
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * ```
+     *
+     * `string next_page_token = 2 [json_name = "nextPageToken"];`
+     */
+    public var nextPageToken: kotlin.String
+      @JvmName("getNextPageToken")
+      get() = _builder.nextPageToken
+      @JvmName("setNextPageToken")
+      set(value) {
+        _builder.nextPageToken = value
+      }
+    /**
+     * ```
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * ```
+     *
+     * `string next_page_token = 2 [json_name = "nextPageToken"];`
+     */
+    public fun clearNextPageToken() {
+      _builder.clearNextPageToken()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun com.producerflow.producer.v1.GetAgencyAndProducersResponse.copy(block: `com.producerflow.producer.v1`.GetAgencyAndProducersResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyAndProducersResponse =
-  `com.producerflow.producer.v1`.GetAgencyAndProducersResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
-
-public val com.producerflow.producer.v1.GetAgencyAndProducersResponseOrBuilder.agencyOrNull: com.producerflow.producer.v1.Agency?
-  get() = if (hasAgency()) getAgency() else null
+public inline fun com.producerflow.producer.v1.GetAgencyProducersResponse.copy(block: `com.producerflow.producer.v1`.GetAgencyProducersResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyProducersResponse =
+  `com.producerflow.producer.v1`.GetAgencyProducersResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 

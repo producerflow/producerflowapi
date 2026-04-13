@@ -7,15 +7,15 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
+ * GetAgencyProducersResponse contains producers associated with the specified agency.
  * </pre>
  *
- * Protobuf type {@code producerflow.producer.v1.GetAgencyAndProducersResponse}
+ * Protobuf type {@code producerflow.producer.v1.GetAgencyProducersResponse}
  */
-@java.lang.Deprecated public final class GetAgencyAndProducersResponse extends
+public final class GetAgencyProducersResponse extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetAgencyAndProducersResponse)
-    GetAgencyAndProducersResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetAgencyProducersResponse)
+    GetAgencyProducersResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -24,68 +24,50 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 28,
       /* patch= */ 3,
       /* suffix= */ "",
-      GetAgencyAndProducersResponse.class.getName());
+      GetAgencyProducersResponse.class.getName());
   }
-  // Use GetAgencyAndProducersResponse.newBuilder() to construct.
-  private GetAgencyAndProducersResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use GetAgencyProducersResponse.newBuilder() to construct.
+  private GetAgencyProducersResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GetAgencyAndProducersResponse() {
+  private GetAgencyProducersResponse() {
     producers_ = java.util.Collections.emptyList();
+    nextPageToken_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyAndProducersResponse_descriptor;
+    return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyProducersResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyAndProducersResponse_fieldAccessorTable
+    return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyProducersResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.producerflow.producer.v1.GetAgencyAndProducersResponse.class, com.producerflow.producer.v1.GetAgencyAndProducersResponse.Builder.class);
+            com.producerflow.producer.v1.GetAgencyProducersResponse.class, com.producerflow.producer.v1.GetAgencyProducersResponse.Builder.class);
   }
 
-  private int bitField0_;
-  public static final int AGENCY_FIELD_NUMBER = 1;
-  private com.producerflow.producer.v1.Agency agency_;
-  /**
-   * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-   * @return Whether the agency field is set.
-   */
-  @java.lang.Override
-  public boolean hasAgency() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-   * @return The agency.
-   */
-  @java.lang.Override
-  public com.producerflow.producer.v1.Agency getAgency() {
-    return agency_ == null ? com.producerflow.producer.v1.Agency.getDefaultInstance() : agency_;
-  }
-  /**
-   * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-   */
-  @java.lang.Override
-  public com.producerflow.producer.v1.AgencyOrBuilder getAgencyOrBuilder() {
-    return agency_ == null ? com.producerflow.producer.v1.Agency.getDefaultInstance() : agency_;
-  }
-
-  public static final int PRODUCERS_FIELD_NUMBER = 2;
+  public static final int PRODUCERS_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private java.util.List<com.producerflow.producer.v1.Producer> producers_;
   /**
-   * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+   * <pre>
+   * List of producers for the current page.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
    */
   @java.lang.Override
   public java.util.List<com.producerflow.producer.v1.Producer> getProducersList() {
     return producers_;
   }
   /**
-   * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+   * <pre>
+   * List of producers for the current page.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
    */
   @java.lang.Override
   public java.util.List<? extends com.producerflow.producer.v1.ProducerOrBuilder> 
@@ -93,26 +75,87 @@ private static final long serialVersionUID = 0L;
     return producers_;
   }
   /**
-   * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+   * <pre>
+   * List of producers for the current page.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
    */
   @java.lang.Override
   public int getProducersCount() {
     return producers_.size();
   }
   /**
-   * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+   * <pre>
+   * List of producers for the current page.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
    */
   @java.lang.Override
   public com.producerflow.producer.v1.Producer getProducers(int index) {
     return producers_.get(index);
   }
   /**
-   * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+   * <pre>
+   * List of producers for the current page.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
    */
   @java.lang.Override
   public com.producerflow.producer.v1.ProducerOrBuilder getProducersOrBuilder(
       int index) {
     return producers_.get(index);
+  }
+
+  public static final int NEXT_PAGE_TOKEN_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object nextPageToken_ = "";
+  /**
+   * <pre>
+   * Token for retrieving the next page of results.
+   * Empty when there are no more results.
+   * </pre>
+   *
+   * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+   * @return The nextPageToken.
+   */
+  @java.lang.Override
+  public java.lang.String getNextPageToken() {
+    java.lang.Object ref = nextPageToken_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      nextPageToken_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Token for retrieving the next page of results.
+   * Empty when there are no more results.
+   * </pre>
+   *
+   * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+   * @return The bytes for nextPageToken.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getNextPageTokenBytes() {
+    java.lang.Object ref = nextPageToken_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      nextPageToken_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,11 +172,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(1, getAgency());
-    }
     for (int i = 0; i < producers_.size(); i++) {
-      output.writeMessage(2, producers_.get(i));
+      output.writeMessage(1, producers_.get(i));
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(nextPageToken_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, nextPageToken_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -144,13 +187,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getAgency());
-    }
     for (int i = 0; i < producers_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, producers_.get(i));
+        .computeMessageSize(1, producers_.get(i));
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(nextPageToken_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, nextPageToken_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -162,18 +204,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.producerflow.producer.v1.GetAgencyAndProducersResponse)) {
+    if (!(obj instanceof com.producerflow.producer.v1.GetAgencyProducersResponse)) {
       return super.equals(obj);
     }
-    com.producerflow.producer.v1.GetAgencyAndProducersResponse other = (com.producerflow.producer.v1.GetAgencyAndProducersResponse) obj;
+    com.producerflow.producer.v1.GetAgencyProducersResponse other = (com.producerflow.producer.v1.GetAgencyProducersResponse) obj;
 
-    if (hasAgency() != other.hasAgency()) return false;
-    if (hasAgency()) {
-      if (!getAgency()
-          .equals(other.getAgency())) return false;
-    }
     if (!getProducersList()
         .equals(other.getProducersList())) return false;
+    if (!getNextPageToken()
+        .equals(other.getNextPageToken())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -185,57 +224,55 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasAgency()) {
-      hash = (37 * hash) + AGENCY_FIELD_NUMBER;
-      hash = (53 * hash) + getAgency().hashCode();
-    }
     if (getProducersCount() > 0) {
       hash = (37 * hash) + PRODUCERS_FIELD_NUMBER;
       hash = (53 * hash) + getProducersList().hashCode();
     }
+    hash = (37 * hash) + NEXT_PAGE_TOKEN_FIELD_NUMBER;
+    hash = (53 * hash) + getNextPageToken().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(byte[] data)
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(java.io.InputStream input)
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -243,26 +280,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseDelimitedFrom(java.io.InputStream input)
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseDelimitedFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse parseFrom(
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -275,7 +312,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.producerflow.producer.v1.GetAgencyAndProducersResponse prototype) {
+  public static Builder newBuilder(com.producerflow.producer.v1.GetAgencyProducersResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -292,78 +329,67 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
+   * GetAgencyProducersResponse contains producers associated with the specified agency.
    * </pre>
    *
-   * Protobuf type {@code producerflow.producer.v1.GetAgencyAndProducersResponse}
+   * Protobuf type {@code producerflow.producer.v1.GetAgencyProducersResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.GetAgencyAndProducersResponse)
-      com.producerflow.producer.v1.GetAgencyAndProducersResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.GetAgencyProducersResponse)
+      com.producerflow.producer.v1.GetAgencyProducersResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyAndProducersResponse_descriptor;
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyProducersResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyAndProducersResponse_fieldAccessorTable
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyProducersResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.producerflow.producer.v1.GetAgencyAndProducersResponse.class, com.producerflow.producer.v1.GetAgencyAndProducersResponse.Builder.class);
+              com.producerflow.producer.v1.GetAgencyProducersResponse.class, com.producerflow.producer.v1.GetAgencyProducersResponse.Builder.class);
     }
 
-    // Construct using com.producerflow.producer.v1.GetAgencyAndProducersResponse.newBuilder()
+    // Construct using com.producerflow.producer.v1.GetAgencyProducersResponse.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessage
-              .alwaysUseFieldBuilders) {
-        getAgencyFieldBuilder();
-        getProducersFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      agency_ = null;
-      if (agencyBuilder_ != null) {
-        agencyBuilder_.dispose();
-        agencyBuilder_ = null;
-      }
       if (producersBuilder_ == null) {
         producers_ = java.util.Collections.emptyList();
       } else {
         producers_ = null;
         producersBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
+      nextPageToken_ = "";
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyAndProducersResponse_descriptor;
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyProducersResponse_descriptor;
     }
 
     @java.lang.Override
-    public com.producerflow.producer.v1.GetAgencyAndProducersResponse getDefaultInstanceForType() {
-      return com.producerflow.producer.v1.GetAgencyAndProducersResponse.getDefaultInstance();
+    public com.producerflow.producer.v1.GetAgencyProducersResponse getDefaultInstanceForType() {
+      return com.producerflow.producer.v1.GetAgencyProducersResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.producerflow.producer.v1.GetAgencyAndProducersResponse build() {
-      com.producerflow.producer.v1.GetAgencyAndProducersResponse result = buildPartial();
+    public com.producerflow.producer.v1.GetAgencyProducersResponse build() {
+      com.producerflow.producer.v1.GetAgencyProducersResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -371,19 +397,19 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.producerflow.producer.v1.GetAgencyAndProducersResponse buildPartial() {
-      com.producerflow.producer.v1.GetAgencyAndProducersResponse result = new com.producerflow.producer.v1.GetAgencyAndProducersResponse(this);
+    public com.producerflow.producer.v1.GetAgencyProducersResponse buildPartial() {
+      com.producerflow.producer.v1.GetAgencyProducersResponse result = new com.producerflow.producer.v1.GetAgencyProducersResponse(this);
       buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartialRepeatedFields(com.producerflow.producer.v1.GetAgencyAndProducersResponse result) {
+    private void buildPartialRepeatedFields(com.producerflow.producer.v1.GetAgencyProducersResponse result) {
       if (producersBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           producers_ = java.util.Collections.unmodifiableList(producers_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.producers_ = producers_;
       } else {
@@ -391,38 +417,30 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    private void buildPartial0(com.producerflow.producer.v1.GetAgencyAndProducersResponse result) {
+    private void buildPartial0(com.producerflow.producer.v1.GetAgencyProducersResponse result) {
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.agency_ = agencyBuilder_ == null
-            ? agency_
-            : agencyBuilder_.build();
-        to_bitField0_ |= 0x00000001;
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.nextPageToken_ = nextPageToken_;
       }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.producerflow.producer.v1.GetAgencyAndProducersResponse) {
-        return mergeFrom((com.producerflow.producer.v1.GetAgencyAndProducersResponse)other);
+      if (other instanceof com.producerflow.producer.v1.GetAgencyProducersResponse) {
+        return mergeFrom((com.producerflow.producer.v1.GetAgencyProducersResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.producerflow.producer.v1.GetAgencyAndProducersResponse other) {
-      if (other == com.producerflow.producer.v1.GetAgencyAndProducersResponse.getDefaultInstance()) return this;
-      if (other.hasAgency()) {
-        mergeAgency(other.getAgency());
-      }
+    public Builder mergeFrom(com.producerflow.producer.v1.GetAgencyProducersResponse other) {
+      if (other == com.producerflow.producer.v1.GetAgencyProducersResponse.getDefaultInstance()) return this;
       if (producersBuilder_ == null) {
         if (!other.producers_.isEmpty()) {
           if (producers_.isEmpty()) {
             producers_ = other.producers_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureProducersIsMutable();
             producers_.addAll(other.producers_);
@@ -435,7 +453,7 @@ private static final long serialVersionUID = 0L;
             producersBuilder_.dispose();
             producersBuilder_ = null;
             producers_ = other.producers_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
             producersBuilder_ = 
               com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                  getProducersFieldBuilder() : null;
@@ -443,6 +461,11 @@ private static final long serialVersionUID = 0L;
             producersBuilder_.addAllMessages(other.producers_);
           }
         }
+      }
+      if (!other.getNextPageToken().isEmpty()) {
+        nextPageToken_ = other.nextPageToken_;
+        bitField0_ |= 0x00000002;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -471,13 +494,6 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              input.readMessage(
-                  getAgencyFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              bitField0_ |= 0x00000001;
-              break;
-            } // case 10
-            case 18: {
               com.producerflow.producer.v1.Producer m =
                   input.readMessage(
                       com.producerflow.producer.v1.Producer.parser(),
@@ -488,6 +504,11 @@ private static final long serialVersionUID = 0L;
               } else {
                 producersBuilder_.addMessage(m);
               }
+              break;
+            } // case 10
+            case 18: {
+              nextPageToken_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
               break;
             } // case 18
             default: {
@@ -507,133 +528,12 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private com.producerflow.producer.v1.Agency agency_;
-    private com.google.protobuf.SingleFieldBuilder<
-        com.producerflow.producer.v1.Agency, com.producerflow.producer.v1.Agency.Builder, com.producerflow.producer.v1.AgencyOrBuilder> agencyBuilder_;
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     * @return Whether the agency field is set.
-     */
-    public boolean hasAgency() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     * @return The agency.
-     */
-    public com.producerflow.producer.v1.Agency getAgency() {
-      if (agencyBuilder_ == null) {
-        return agency_ == null ? com.producerflow.producer.v1.Agency.getDefaultInstance() : agency_;
-      } else {
-        return agencyBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public Builder setAgency(com.producerflow.producer.v1.Agency value) {
-      if (agencyBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        agency_ = value;
-      } else {
-        agencyBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public Builder setAgency(
-        com.producerflow.producer.v1.Agency.Builder builderForValue) {
-      if (agencyBuilder_ == null) {
-        agency_ = builderForValue.build();
-      } else {
-        agencyBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public Builder mergeAgency(com.producerflow.producer.v1.Agency value) {
-      if (agencyBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0) &&
-          agency_ != null &&
-          agency_ != com.producerflow.producer.v1.Agency.getDefaultInstance()) {
-          getAgencyBuilder().mergeFrom(value);
-        } else {
-          agency_ = value;
-        }
-      } else {
-        agencyBuilder_.mergeFrom(value);
-      }
-      if (agency_ != null) {
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public Builder clearAgency() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      agency_ = null;
-      if (agencyBuilder_ != null) {
-        agencyBuilder_.dispose();
-        agencyBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public com.producerflow.producer.v1.Agency.Builder getAgencyBuilder() {
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return getAgencyFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    public com.producerflow.producer.v1.AgencyOrBuilder getAgencyOrBuilder() {
-      if (agencyBuilder_ != null) {
-        return agencyBuilder_.getMessageOrBuilder();
-      } else {
-        return agency_ == null ?
-            com.producerflow.producer.v1.Agency.getDefaultInstance() : agency_;
-      }
-    }
-    /**
-     * <code>.producerflow.producer.v1.Agency agency = 1 [json_name = "agency"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilder<
-        com.producerflow.producer.v1.Agency, com.producerflow.producer.v1.Agency.Builder, com.producerflow.producer.v1.AgencyOrBuilder> 
-        getAgencyFieldBuilder() {
-      if (agencyBuilder_ == null) {
-        agencyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-            com.producerflow.producer.v1.Agency, com.producerflow.producer.v1.Agency.Builder, com.producerflow.producer.v1.AgencyOrBuilder>(
-                getAgency(),
-                getParentForChildren(),
-                isClean());
-        agency_ = null;
-      }
-      return agencyBuilder_;
-    }
-
     private java.util.List<com.producerflow.producer.v1.Producer> producers_ =
       java.util.Collections.emptyList();
     private void ensureProducersIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         producers_ = new java.util.ArrayList<com.producerflow.producer.v1.Producer>(producers_);
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
        }
     }
 
@@ -641,7 +541,11 @@ private static final long serialVersionUID = 0L;
         com.producerflow.producer.v1.Producer, com.producerflow.producer.v1.Producer.Builder, com.producerflow.producer.v1.ProducerOrBuilder> producersBuilder_;
 
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public java.util.List<com.producerflow.producer.v1.Producer> getProducersList() {
       if (producersBuilder_ == null) {
@@ -651,7 +555,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public int getProducersCount() {
       if (producersBuilder_ == null) {
@@ -661,7 +569,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public com.producerflow.producer.v1.Producer getProducers(int index) {
       if (producersBuilder_ == null) {
@@ -671,7 +583,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder setProducers(
         int index, com.producerflow.producer.v1.Producer value) {
@@ -688,7 +604,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder setProducers(
         int index, com.producerflow.producer.v1.Producer.Builder builderForValue) {
@@ -702,7 +622,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder addProducers(com.producerflow.producer.v1.Producer value) {
       if (producersBuilder_ == null) {
@@ -718,7 +642,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder addProducers(
         int index, com.producerflow.producer.v1.Producer value) {
@@ -735,7 +663,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder addProducers(
         com.producerflow.producer.v1.Producer.Builder builderForValue) {
@@ -749,7 +681,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder addProducers(
         int index, com.producerflow.producer.v1.Producer.Builder builderForValue) {
@@ -763,7 +699,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder addAllProducers(
         java.lang.Iterable<? extends com.producerflow.producer.v1.Producer> values) {
@@ -778,12 +718,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder clearProducers() {
       if (producersBuilder_ == null) {
         producers_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
       } else {
         producersBuilder_.clear();
@@ -791,7 +735,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public Builder removeProducers(int index) {
       if (producersBuilder_ == null) {
@@ -804,14 +752,22 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public com.producerflow.producer.v1.Producer.Builder getProducersBuilder(
         int index) {
       return getProducersFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public com.producerflow.producer.v1.ProducerOrBuilder getProducersOrBuilder(
         int index) {
@@ -821,7 +777,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public java.util.List<? extends com.producerflow.producer.v1.ProducerOrBuilder> 
          getProducersOrBuilderList() {
@@ -832,14 +792,22 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public com.producerflow.producer.v1.Producer.Builder addProducersBuilder() {
       return getProducersFieldBuilder().addBuilder(
           com.producerflow.producer.v1.Producer.getDefaultInstance());
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public com.producerflow.producer.v1.Producer.Builder addProducersBuilder(
         int index) {
@@ -847,7 +815,11 @@ private static final long serialVersionUID = 0L;
           index, com.producerflow.producer.v1.Producer.getDefaultInstance());
     }
     /**
-     * <code>repeated .producerflow.producer.v1.Producer producers = 2 [json_name = "producers"];</code>
+     * <pre>
+     * List of producers for the current page.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.Producer producers = 1 [json_name = "producers"];</code>
      */
     public java.util.List<com.producerflow.producer.v1.Producer.Builder> 
          getProducersBuilderList() {
@@ -860,7 +832,7 @@ private static final long serialVersionUID = 0L;
         producersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
             com.producerflow.producer.v1.Producer, com.producerflow.producer.v1.Producer.Builder, com.producerflow.producer.v1.ProducerOrBuilder>(
                 producers_,
-                ((bitField0_ & 0x00000002) != 0),
+                ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
         producers_ = null;
@@ -868,23 +840,120 @@ private static final long serialVersionUID = 0L;
       return producersBuilder_;
     }
 
-    // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetAgencyAndProducersResponse)
+    private java.lang.Object nextPageToken_ = "";
+    /**
+     * <pre>
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * </pre>
+     *
+     * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+     * @return The nextPageToken.
+     */
+    public java.lang.String getNextPageToken() {
+      java.lang.Object ref = nextPageToken_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        nextPageToken_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * </pre>
+     *
+     * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+     * @return The bytes for nextPageToken.
+     */
+    public com.google.protobuf.ByteString
+        getNextPageTokenBytes() {
+      java.lang.Object ref = nextPageToken_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nextPageToken_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * </pre>
+     *
+     * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+     * @param value The nextPageToken to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNextPageToken(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      nextPageToken_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * </pre>
+     *
+     * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearNextPageToken() {
+      nextPageToken_ = getDefaultInstance().getNextPageToken();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Token for retrieving the next page of results.
+     * Empty when there are no more results.
+     * </pre>
+     *
+     * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
+     * @param value The bytes for nextPageToken to set.
+     * @return This builder for chaining.
+     */
+    public Builder setNextPageTokenBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      nextPageToken_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
+    // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetAgencyProducersResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:producerflow.producer.v1.GetAgencyAndProducersResponse)
-  private static final com.producerflow.producer.v1.GetAgencyAndProducersResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:producerflow.producer.v1.GetAgencyProducersResponse)
+  private static final com.producerflow.producer.v1.GetAgencyProducersResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.producerflow.producer.v1.GetAgencyAndProducersResponse();
+    DEFAULT_INSTANCE = new com.producerflow.producer.v1.GetAgencyProducersResponse();
   }
 
-  public static com.producerflow.producer.v1.GetAgencyAndProducersResponse getDefaultInstance() {
+  public static com.producerflow.producer.v1.GetAgencyProducersResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GetAgencyAndProducersResponse>
-      PARSER = new com.google.protobuf.AbstractParser<GetAgencyAndProducersResponse>() {
+  private static final com.google.protobuf.Parser<GetAgencyProducersResponse>
+      PARSER = new com.google.protobuf.AbstractParser<GetAgencyProducersResponse>() {
     @java.lang.Override
-    public GetAgencyAndProducersResponse parsePartialFrom(
+    public GetAgencyProducersResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -903,17 +972,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GetAgencyAndProducersResponse> parser() {
+  public static com.google.protobuf.Parser<GetAgencyProducersResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GetAgencyAndProducersResponse> getParserForType() {
+  public com.google.protobuf.Parser<GetAgencyProducersResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.producerflow.producer.v1.GetAgencyAndProducersResponse getDefaultInstanceForType() {
+  public com.producerflow.producer.v1.GetAgencyProducersResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
