@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Each producer includes basic info, NIPR data (licenses, appointments, biographic), location assignments, and onboarding status
   - Accepts `agency_id` (required, UUID) and standard pagination parameters
 - **New enum value: `NIPR_SYNC_STATE_IN_PROGRESS`** — added to `NIPRSyncState` (value `5`) to represent an active synchronization in progress
+- **New enum value: `NIPR_SYNC_STATE_STOPPING`** — added to `NIPRSyncState` (value `6`) to represent a synchronization that is being stopped
+- **New filters in `ListAgencies`** — two new optional filter fields for state-based agency queries
+  - `resident_states`: filter agencies by resident license state (OR logic for multiple values)
+  - `licensed_states`: filter agencies by any active license state, resident or non-resident (OR logic for multiple values)
 
 #### Webhooks
 
@@ -33,6 +37,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Webhooks
 
 - **Empty `locations` array on full removal** — when all locations are removed from an agency, the event now correctly sends `"locations": []` instead of omitting the field
+
+### Changed
+
+#### ProducerService
+
+- **`AddAgencyLocations` error codes** — duplicate location name errors are now split into two distinct codes:
+  - `INVALID_ARGUMENT`: duplicate location names within the same request
+  - `ALREADY_EXISTS`: a location with the same name already exists in the agency
+- Regenerated client libraries with latest proto changes
 
 ## [1.0.20] - 2026-03-05
 
