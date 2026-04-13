@@ -418,30 +418,43 @@ service ProducerService {
   //
   rpc NewProducers(NewProducersRequest) returns (NewProducersResponse) {}
 
-  // GetAgencyAndProducers retrieves complete information for an agency and all
-  // its producers.
+  // Deprecated: Use GetAgency and GetAgencyProducers instead.
   //
-  // This endpoint returns comprehensive agency details including:
-  // - Agency contact information and business details
-  // - Principal producer information
-  // - Bank account for commission payments
-  // - Errors & Omissions insurance details
-  // - Business hours and contact points
-  // - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-  // - All associated producers with their NIPR data
-  // - Agency locations
+  // GetAgencyAndProducers retrieves complete information for an agency and all
+  // its producers. This endpoint is deprecated because it returns too much data
+  // in a single call. Use GetAgency to retrieve agency details and
+  // GetAgencyProducers to retrieve the list of producers separately.
+  //
+  // Common Error Codes:
+  // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+  //
+  rpc GetAgencyAndProducers(GetAgencyAndProducersRequest) returns (GetAgencyAndProducersResponse) {
+    option deprecated = true;
+  }
+
+  // GetAgencyProducers retrieves all producers associated with a specific agency.
+  //
+  // This is a lighter-weight alternative to GetAgencyAndProducers that returns
+  // only the producer data without the full agency details. Use this when you
+  // only need producer information.
+  //
+  // Each producer includes:
+  // - Basic information (name, email, phone, NPN)
+  // - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+  // - Location assignments
+  // - Onboarding status (if enabled for the tenant)
   //
   // Validation Rules:
   // Proto validation (format checks):
   // - agency_id: Required, must be a valid UUID format
   //
   // Returns:
-  // Agency object with complete NIPR data and list of all associated producers.
+  // List of all producers associated with the specified agency.
   //
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
-  rpc GetAgencyAndProducers(GetAgencyAndProducersRequest) returns (GetAgencyAndProducersResponse);
+  rpc GetAgencyProducers(GetAgencyProducersRequest) returns (GetAgencyProducersResponse);
 
   // GetAgency retrieves detailed information about a specific agency.
   //
@@ -1231,8 +1244,9 @@ service ProducerService {
   // This ordering guarantee allows you to map request entries to their created IDs.
   //
   // Common Error Codes:
-  // - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-  //   location names, or location with name already exists in agency
+  // - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+  //   location names within the request
+  // - ALREADY_EXISTS: A location with the same name already exists in the agency
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
   rpc AddAgencyLocations(AddAgencyLocationsRequest) returns (AddAgencyLocationsResponse) {}
@@ -1558,6 +1572,10 @@ enum NIPRSyncState {
   NIPR_SYNC_STATE_PENDING = 3;
   // Synchronization has been disabled.
   NIPR_SYNC_STATE_DISABLED = 4;
+  // Synchronization is in progress.
+  NIPR_SYNC_STATE_IN_PROGRESS = 5;
+  // Synchronization is being stopped.
+  NIPR_SYNC_STATE_STOPPING = 6;
 }
 
 // OnboardingStatus represents the current stage of a producer in the onboarding workflow.
@@ -2124,20 +2142,40 @@ message GetAgencyResponse {
   Agency agency = 1;
 }
 
-// GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+// Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
 message GetAgencyAndProducersRequest {
-  // The UUID of the agency to retrieve information for.
-  // Must be a valid UUID format.
+  option deprecated = true;
+
   string agency_id = 1 [(buf.validate.field).string.uuid = true];
 }
 
-// GetAgencyAndProducersResponse contains the agency information and all associated producers.
+// Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
 message GetAgencyAndProducersResponse {
-  // Complete agency information including contact details, principal, and bank account.
-  Agency agency = 1;
+  option deprecated = true;
 
-  // List of all producers associated with the specified agency.
+  Agency agency = 1;
   repeated Producer producers = 2;
+}
+
+// GetAgencyProducersRequest requests all producers associated with an agency.
+message GetAgencyProducersRequest {
+  // The UUID of the agency to retrieve producers for.
+  // Must be a valid UUID format.
+  string agency_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Optional. Pagination parameters for controlling result set size and navigation.
+  // If not provided, defaults to page_size=50. Maximum page_size is 200.
+  Pagination pagination = 2;
+}
+
+// GetAgencyProducersResponse contains producers associated with the specified agency.
+message GetAgencyProducersResponse {
+  // List of producers for the current page.
+  repeated Producer producers = 1;
+
+  // Token for retrieving the next page of results.
+  // Empty when there are no more results.
+  string next_page_token = 2;
 }
 
 // GetAgencyFilesRequest requests URLs for files associated with an agency.
@@ -2866,6 +2904,9 @@ message Agency {
 
       // The unique identifier for this license.
       string license_id = 13;
+
+      // The designated home state for adjuster licenses (ADHS).
+      string designated_home_state = 17;
     }
 
     // List of all licenses held across different states.
@@ -3294,6 +3335,9 @@ message Producer {
 
       // The unique identifier for this license.
       string license_id = 9;
+
+      // The designated home state for adjuster licenses (ADHS).
+      string designated_home_state = 11;
     }
 
     // List of all licenses held by the producer across different states.
@@ -4418,6 +4462,16 @@ message ListAgenciesRequest {
   // Valid values: ACTIVE, FAILING, PENDING, DISABLED
   // If empty, returns agencies in all sync states.
   repeated NIPRSyncState nipr_sync_statuses = 6;
+
+  // Optional. Filter by resident license state.
+  // Returns agencies whose resident license is in the selected state(s).
+  // Multiple states can be specified (OR logic within this filter).
+  repeated string resident_states = 7;
+
+  // Optional. Filter by any active license state.
+  // Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+  // Multiple states can be specified (OR logic within this filter).
+  repeated string licensed_states = 8;
 }
 
 // ListAgenciesResponse provides paginated agency results with metadata for
