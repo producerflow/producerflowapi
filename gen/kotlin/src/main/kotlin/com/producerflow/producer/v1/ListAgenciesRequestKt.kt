@@ -402,6 +402,230 @@ public object ListAgenciesRequestKt {
     @kotlin.jvm.JvmName("clearNiprSyncStatuses")
     public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NIPRSyncState, NiprSyncStatusesProxy>.clear() {
       _builder.clearNiprSyncStatuses()
+    }
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class ResidentStatesProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @return A list containing the residentStates.
+     */
+    public val residentStates: com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.residentStatesList
+      )
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @param value The residentStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addResidentStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.add(value: kotlin.String) {
+      _builder.addResidentStates(value)
+    }
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @param value The residentStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignResidentStates")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.plusAssign(value: kotlin.String) {
+      add(value)
+    }
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @param values The residentStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllResidentStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllResidentStates(values)
+    }
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @param values The residentStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllResidentStates")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(values)
+    }
+    /**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     * @param index The index to set the value at.
+     * @param value The residentStates to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setResidentStates")
+    public operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.set(index: kotlin.Int, value: kotlin.String) {
+      _builder.setResidentStates(index, value)
+    }/**
+     * ```
+     * Optional. Filter by resident license state.
+     * Returns agencies whose resident license is in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string resident_states = 7 [json_name = "residentStates"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearResidentStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, ResidentStatesProxy>.clear() {
+      _builder.clearResidentStates()
+    }
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class LicensedStatesProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @return A list containing the licensedStates.
+     */
+    public val licensedStates: com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.licensedStatesList
+      )
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @param value The licensedStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addLicensedStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.add(value: kotlin.String) {
+      _builder.addLicensedStates(value)
+    }
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @param value The licensedStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignLicensedStates")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.plusAssign(value: kotlin.String) {
+      add(value)
+    }
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @param values The licensedStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllLicensedStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllLicensedStates(values)
+    }
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @param values The licensedStates to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllLicensedStates")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(values)
+    }
+    /**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     * @param index The index to set the value at.
+     * @param value The licensedStates to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setLicensedStates")
+    public operator fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.set(index: kotlin.Int, value: kotlin.String) {
+      _builder.setLicensedStates(index, value)
+    }/**
+     * ```
+     * Optional. Filter by any active license state.
+     * Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+     * Multiple states can be specified (OR logic within this filter).
+     * ```
+     *
+     * `repeated string licensed_states = 8 [json_name = "licensedStates"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearLicensedStates")
+    public fun com.google.protobuf.kotlin.DslList<kotlin.String, LicensedStatesProxy>.clear() {
+      _builder.clearLicensedStates()
     }}
 }
 @kotlin.jvm.JvmSynthetic

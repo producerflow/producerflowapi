@@ -498,6 +498,8 @@
                 
                   <li><a href="#producerflow.producer.v1.ProducerService.GetAgencyAndProducers">GetAgencyAndProducers</a></li>
                 
+                  <li><a href="#producerflow.producer.v1.ProducerService.GetAgencyProducers">GetAgencyProducers</a></li>
+                
                   <li><a href="#producerflow.producer.v1.ProducerService.GetAgency">GetAgency</a></li>
                 
                   <li><a href="#producerflow.producer.v1.ProducerService.GetProducer">GetProducer</a></li>
@@ -2533,6 +2535,10 @@ from the user during the onboarding process through the generated URL.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -2626,6 +2632,10 @@ from the user during the onboarding process through the generated URL.</p>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -3246,6 +3256,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -3347,6 +3361,10 @@ Common Error Codes:
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -3815,6 +3833,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewAgencyRequest contains complete information for creating a new agency</p>
                       
                         <table class="field-table">
@@ -4015,6 +4037,10 @@ If specified, this value takes precedence over the tenant's default behavior. </
                     <span class="message-type-name" id="producerflow.producer.v1.NewAgencyResponse">NewAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -4521,6 +4547,10 @@ agency details including NIPR data.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ListAgenciesRequest enables flexible querying of agencies with multiple filter
 options and pagination support.
 
@@ -4599,6 +4629,24 @@ Multiple statuses can be specified to match agencies in any of those states.
 Useful for monitoring sync health and identifying agencies needing attention.
 Valid values: ACTIVE, FAILING, PENDING, DISABLED
 If empty, returns agencies in all sync states. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>resident_states</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td>repeated</td>
+                                <td>Optional. Filter by resident license state.
+Returns agencies whose resident license is in the selected state(s).
+Multiple states can be specified (OR logic within this filter). </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>licensed_states</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td>repeated</td>
+                                <td>Optional. Filter by any active license state.
+Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+Multiple states can be specified (OR logic within this filter). </td>
                               </tr>
                             
                           </tbody>
@@ -4805,6 +4853,10 @@ If empty, returns agencies in all sync states. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ListAgenciesResponse">ListAgenciesResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -5327,6 +5379,10 @@ returned in alphabetical order by name for consistent presentation.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ListOrganizationsRequest requests a list of all organizations associated with
 the authenticated tenant.
 
@@ -5550,6 +5606,10 @@ If omitted, returns the first 50 organizations. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ListOrganizationsResponse">ListOrganizationsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -6053,6 +6113,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">GetOrganizationRequest specifies which organization to retrieve detailed information for.
 
 Use this request to fetch comprehensive details about a specific organization,
@@ -6301,6 +6365,10 @@ Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                     <span class="message-type-name" id="producerflow.producer.v1.GetOrganizationResponse">GetOrganizationResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -6999,6 +7067,10 @@ This is the identifier used by the tenant's system to identify the organization.
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -7096,6 +7168,10 @@ This is the identifier used by the tenant's system to identify the organization.
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -7581,6 +7657,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewProducerRequest is used to create a new producer and associate it with an agency.
 This will trigger a call to the NIPR API to retrieve license information of the producer.</p>
                       
@@ -7747,6 +7827,10 @@ If specified, this value takes precedence over the tenant's default behavior. </
                     <span class="message-type-name" id="producerflow.producer.v1.NewProducerResponse">NewProducerResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -8336,6 +8420,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewProducersRequest creates multiple producers and associates them with a single agency.
 
 This request supports bulk creation of producers, which is more efficient than making
@@ -8723,6 +8811,10 @@ or when you plan to sync later via SyncProducerWithNIPR. </td>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewProducersResponse contains the IDs of all successfully created producers.
 
 The response provides a list of producer IDs that directly corresponds to the
@@ -8886,25 +8978,12 @@ Order is guaranteed to match the request's producer array order. </td>
                 
               </summary>
               <div class="details-content">
-                <p class="method-description">GetAgencyAndProducers retrieves complete information for an agency and all
-its producers.
+                <p class="method-description">Deprecated: Use GetAgency and GetAgencyProducers instead.
 
-This endpoint returns comprehensive agency details including:
-- Agency contact information and business details
-- Principal producer information
-- Bank account for commission payments
-- Errors & Omissions insurance details
-- Business hours and contact points
-- NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-- All associated producers with their NIPR data
-- Agency locations
-
-Validation Rules:
-Proto validation (format checks):
-- agency_id: Required, must be a valid UUID format
-
-Returns:
-Agency object with complete NIPR data and list of all associated producers.
+GetAgencyAndProducers retrieves complete information for an agency and all
+its producers. This endpoint is deprecated because it returns too much data
+in a single call. Use GetAgency to retrieve agency details and
+GetAgencyProducers to retrieve the list of producers separately.
 
 Common Error Codes:
 - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
@@ -8995,7 +9074,7 @@ Common Error Codes:
                     
                   
                     
-                      <p class="message-description">GetAgencyAndProducersRequest requests information about an agency and all associated producers.</p>
+                      <p class="message-description">Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -9007,13 +9086,16 @@ Common Error Codes:
                                 <td><code>agency_id</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>The UUID of the agency to retrieve information for.
-Must be a valid UUID format. </td>
+                                <td> </td>
                               </tr>
                             
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -9329,7 +9411,7 @@ Must be a valid UUID format. </td>
                     
                   
                     
-                      <p class="message-description">GetAgencyAndProducersResponse contains the agency information and all associated producers.</p>
+                      <p class="message-description">Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.</p>
                       
                         <table class="field-table">
                           <thead>
@@ -9341,14 +9423,14 @@ Must be a valid UUID format. </td>
                                 <td><code>agency</code></td>
                                 <td><a href="#producerflow.producer.v1.Agency">Agency</a></td>
                                 <td></td>
-                                <td>Complete agency information including contact details, principal, and bank account. </td>
+                                <td> </td>
                               </tr>
                             
                               <tr>
                                 <td><code>producers</code></td>
                                 <td><a href="#producerflow.producer.v1.Producer">Producer</a></td>
                                 <td>repeated</td>
-                                <td>List of all producers associated with the specified agency. </td>
+                                <td> </td>
                               </tr>
                             
                           </tbody>
@@ -9358,6 +9440,726 @@ Must be a valid UUID format. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+              </div>
+            </details>
+          
+            <details class="method-details" id="producerflow.producer.v1.ProducerService.GetAgencyProducers">
+              <summary>
+                <span class="method-name">GetAgencyProducers</span>
+                
+              </summary>
+              <div class="details-content">
+                <p class="method-description">GetAgencyProducers retrieves all producers associated with a specific agency.
+
+This is a lighter-weight alternative to GetAgencyAndProducers that returns
+only the producer data without the full agency details. Use this when you
+only need producer information.
+
+Each producer includes:
+- Basic information (name, email, phone, NPN)
+- NIPR data (licenses with LOAs, appointments, biographic data) if synced
+- Location assignments
+- Onboarding status (if enabled for the tenant)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+List of all producers associated with the specified agency.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label request-label">Request</span>
+                    <span class="message-type-name" id="producerflow.producer.v1.GetAgencyProducersRequest">GetAgencyProducersRequest</span>
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">GetAgencyProducersRequest requests all producers associated with an agency.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>agency_id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>The UUID of the agency to retrieve producers for.
+Must be a valid UUID format. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>pagination</code></td>
+                                <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
+                                <td></td>
+                                <td>Optional. Pagination parameters for controlling result set size and navigation.
+If not provided, defaults to page_size=50. Maximum page_size is 200. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label response-label">Response</span>
+                    <span class="message-type-name" id="producerflow.producer.v1.GetAgencyProducersResponse">GetAgencyProducersResponse</span>
+                    
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">GetAgencyProducersResponse contains producers associated with the specified agency.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>producers</code></td>
+                                <td><a href="#producerflow.producer.v1.Producer">Producer</a></td>
+                                <td>repeated</td>
+                                <td>List of producers for the current page. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>next_page_token</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>Token for retrieving the next page of results.
+Empty when there are no more results. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
                     
                   
                     
@@ -9705,6 +10507,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">GetAgencyRequest requests information about a specific agency.</p>
                       
                         <table class="field-table">
@@ -9955,6 +10761,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.GetAgencyResponse">GetAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -10427,6 +11237,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">GetProducerRequest allows retrieving producer information through one of four
 possible lookup methods: by ID, by NPN, by email address, or by external ID.</p>
                       
@@ -10680,6 +11494,10 @@ possible lookup methods: by ID, by NPN, by email address, or by external ID.</p>
                     <span class="message-type-name" id="producerflow.producer.v1.GetProducerResponse">GetProducerResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -11364,6 +12182,10 @@ Must be a valid UUID format. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -11513,6 +12335,10 @@ providing financial security for clients. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -12078,6 +12904,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateProducerRequest contains the fields that can be updated in a producer record.
 Only information collected during the onboarding process can be updated.
 Information from NIPR and other third-party sources cannot be updated directly.</p>
@@ -12132,6 +12962,10 @@ The field is required. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateProducerResponse">UpdateProducerResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -12777,6 +13611,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateAgencyRequest contains the fields that can be updated in an agency record.
 Only information collected during the onboarding process can be updated.
 Information from NIPR and other third-party sources cannot be updated directly.
@@ -12851,6 +13689,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateAgencyResponse">UpdateAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -13387,6 +14229,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewContactRequest is used to create a new contact and associate it with an agency.</p>
                       
                         <table class="field-table">
@@ -13558,6 +14404,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.NewContactResponse">NewContactResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -14122,6 +14972,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">NewContactsRequest is used to create multiple contacts in a single request.
 All contacts will be associated with the specified agency.</p>
                       
@@ -14291,6 +15145,10 @@ This field is required and must contain at least one contact. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.NewContactsResponse">NewContactsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -14771,6 +15629,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ListAgencyContactsRequest requests all contacts associated with an agency.</p>
                       
                         <table class="field-table">
@@ -14987,6 +15849,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ListAgencyContactsResponse">ListAgencyContactsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -15655,6 +16521,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateContactRequest is used to update an existing contact's information.</p>
                       
                         <table class="field-table">
@@ -15715,6 +16585,10 @@ The field is required. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateContactResponse">UpdateContactResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -16328,6 +17202,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">SetExternalIDRequest is used to associate an external identifier with a producer, agency, or contact.
 This allows integration with external systems that use different ID schemes.
 
@@ -16450,6 +17328,10 @@ Only one entity type can be specified.</p>
                     <span class="message-type-name" id="producerflow.producer.v1.SetExternalIDResponse">SetExternalIDResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -17104,6 +17986,10 @@ in NIPR (and name matches, if provided), false otherwise.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ValidateProducerNPNRequest is used to validate a producer's National Producer
 Number (NPN) against the NIPR database.
 This is a FREE operation using the NIPR NPN Lookup service.</p>
@@ -17150,6 +18036,10 @@ If omitted, only NPN existence is verified. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ValidateProducerNPNResponse">ValidateProducerNPNResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -17809,6 +18699,10 @@ exists in NIPR, false otherwise.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ValidateAgencyNPNRequest is used to validate an agency's National Producer
 Number (NPN) against the NIPR database.
 This is a FREE operation using the NIPR NPN Lookup service.</p>
@@ -17850,6 +18744,10 @@ Reference: https://nipr.com </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ValidateAgencyNPNResponse">ValidateAgencyNPNResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -18351,6 +19249,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">LookupNPNByFEINRequest is used to look up an agency's National Producer
 Number (NPN) by their Federal Employer Identification Number (FEIN).
 This is a FREE operation using the NIPR NPN Lookup service.</p>
@@ -18551,6 +19453,10 @@ This is the tax identification number assigned by the IRS. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.LookupNPNByFEINResponse">LookupNPNByFEINResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -19136,6 +20042,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ResyncProducerRequest is used to trigger a manual resynchronization of producer data.</p>
                       
                         <table class="field-table">
@@ -19232,6 +20142,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ResyncProducerResponse">ResyncProducerResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -19794,6 +20708,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ResyncAgencyRequest is used to trigger a manual resynchronization of agency data.
 This will re-fetch all data from the NIPR API for the agency and all associated producers.</p>
                       
@@ -19895,6 +20813,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ResyncAgencyResponse">ResyncAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -20524,6 +21446,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">SyncProducerWithNIPRRequest is used to synchronize a producer's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -20600,6 +21526,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.SyncProducerWithNIPRResponse">SyncProducerWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -21230,6 +22160,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">SyncAgencyWithNIPRRequest is used to synchronize an agency's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -21318,6 +22252,10 @@ If false, only the agency will be synchronized. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.SyncAgencyWithNIPRResponse">SyncAgencyWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -21919,6 +22857,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">StopSyncProducerWithNIPRRequest is used to stop synchronizing a producer's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -22003,6 +22945,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.StopSyncProducerWithNIPRResponse">StopSyncProducerWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -22608,6 +23554,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">StopSyncAgencyWithNIPRRequest is used to stop synchronizing an agency's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -22704,6 +23654,10 @@ If false, only the agency will be stopped from synchronizing. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.StopSyncAgencyWithNIPRResponse">StopSyncAgencyWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -23400,6 +24354,10 @@ Required and must be a valid NPN format (numeric string between 2-10 digits). </
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -23732,6 +24690,10 @@ The URL is time-limited and includes necessary security tokens. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -23785,8 +24747,9 @@ List of UUIDs for all created locations in the same order as the request.
 This ordering guarantee allows you to map request entries to their created IDs.
 
 Common Error Codes:
-- INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-  location names, or location with name already exists in agency
+- INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+  location names within the request
+- ALREADY_EXISTS: A location with the same name already exists in the agency
 - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant</p>
 
                 
@@ -23822,6 +24785,10 @@ Common Error Codes:
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -24455,6 +25422,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -24504,6 +25475,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.RemoveAgencyLocationsRequest">RemoveAgencyLocationsRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -25072,6 +26047,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">RemoveAgencyLocationsResponse contains the results of removing locations.</p>
                       
                         <table class="field-table">
@@ -25204,6 +26183,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.ListAgencyLocationsRequest">ListAgencyLocationsRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -25535,6 +26518,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.ListAgencyLocationsResponse">ListAgencyLocationsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -26242,6 +27229,10 @@ These locations must belong to the same agency as the producer. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -26323,6 +27314,10 @@ These locations must belong to the same agency as the producer. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -26882,6 +27877,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UnassignProducerFromLocationsRequest removes location assignments from a producer.</p>
                       
                         <table class="field-table">
@@ -26960,6 +27959,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.UnassignProducerFromLocationsResponse">UnassignProducerFromLocationsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -27609,6 +28612,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateAgencyLocationRequest updates an existing agency location.</p>
                       
                         <table class="field-table">
@@ -27718,6 +28725,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateAgencyLocationResponse">UpdateAgencyLocationResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -30312,6 +31323,13 @@ type before allowing transactions. </td>
                           <td>The unique identifier for this license. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>designated_home_state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>The designated home state for adjuster licenses (ADHS). </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -31502,7 +32520,7 @@ The URL is time-limited and includes necessary security tokens. </td>
               
               
                 <h3 id="producerflow.producer.v1.GetAgencyAndProducersRequest">GetAgencyAndProducersRequest</h3>
-                <div class="description-content">GetAgencyAndProducersRequest requests information about an agency and all associated producers.</div>
+                <div class="description-content">Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.</div>
 
                 
                   <table class="field-table">
@@ -31515,8 +32533,7 @@ The URL is time-limited and includes necessary security tokens. </td>
                           <td><code>agency_id</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>The UUID of the agency to retrieve information for.
-Must be a valid UUID format. </td>
+                          <td> </td>
                         </tr>
                       
                     </tbody>
@@ -31529,7 +32546,7 @@ Must be a valid UUID format. </td>
               
               
                 <h3 id="producerflow.producer.v1.GetAgencyAndProducersResponse">GetAgencyAndProducersResponse</h3>
-                <div class="description-content">GetAgencyAndProducersResponse contains the agency information and all associated producers.</div>
+                <div class="description-content">Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.</div>
 
                 
                   <table class="field-table">
@@ -31542,14 +32559,14 @@ Must be a valid UUID format. </td>
                           <td><code>agency</code></td>
                           <td><a href="#producerflow.producer.v1.Agency">Agency</a></td>
                           <td></td>
-                          <td>Complete agency information including contact details, principal, and bank account. </td>
+                          <td> </td>
                         </tr>
                       
                         <tr>
                           <td><code>producers</code></td>
                           <td><a href="#producerflow.producer.v1.Producer">Producer</a></td>
                           <td>repeated</td>
-                          <td>List of all producers associated with the specified agency. </td>
+                          <td> </td>
                         </tr>
                       
                     </tbody>
@@ -31639,6 +32656,75 @@ is licensed to carry out its operations in the relevant jurisdictions. </td>
                           <td>URL of the broker bond document.
 It's a surety bond that a broker needs to operate legally,
 providing financial security for clients. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.producer.v1.GetAgencyProducersRequest">GetAgencyProducersRequest</h3>
+                <div class="description-content">GetAgencyProducersRequest requests all producers associated with an agency.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>agency_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>The UUID of the agency to retrieve producers for.
+Must be a valid UUID format. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>pagination</code></td>
+                          <td><a href="#producerflow.producer.v1.Pagination">Pagination</a></td>
+                          <td></td>
+                          <td>Optional. Pagination parameters for controlling result set size and navigation.
+If not provided, defaults to page_size=50. Maximum page_size is 200. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.producer.v1.GetAgencyProducersResponse">GetAgencyProducersResponse</h3>
+                <div class="description-content">GetAgencyProducersResponse contains producers associated with the specified agency.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>producers</code></td>
+                          <td><a href="#producerflow.producer.v1.Producer">Producer</a></td>
+                          <td>repeated</td>
+                          <td>List of producers for the current page. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>next_page_token</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Token for retrieving the next page of results.
+Empty when there are no more results. </td>
                         </tr>
                       
                     </tbody>
@@ -32094,6 +33180,24 @@ Multiple statuses can be specified to match agencies in any of those states.
 Useful for monitoring sync health and identifying agencies needing attention.
 Valid values: ACTIVE, FAILING, PENDING, DISABLED
 If empty, returns agencies in all sync states. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>resident_states</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>repeated</td>
+                          <td>Optional. Filter by resident license state.
+Returns agencies whose resident license is in the selected state(s).
+Multiple states can be specified (OR logic within this filter). </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>licensed_states</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>repeated</td>
+                          <td>Optional. Filter by any active license state.
+Returns agencies that hold any active license (resident or non-resident) in the selected state(s).
+Multiple states can be specified (OR logic within this filter). </td>
                         </tr>
                       
                     </tbody>
@@ -35011,6 +36115,13 @@ before allowing sales. </td>
                           <td>The unique identifier for this license. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>designated_home_state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>The designated home state for adjuster licenses (ADHS). </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -37495,6 +38606,18 @@ by NewAgency and other direct creation endpoints.</p></td>
                       <td>NIPR_SYNC_STATE_DISABLED</td>
                       <td>4</td>
                       <td><p>Synchronization has been disabled.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>NIPR_SYNC_STATE_IN_PROGRESS</td>
+                      <td>5</td>
+                      <td><p>Synchronization is in progress.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>NIPR_SYNC_STATE_STOPPING</td>
+                      <td>6</td>
+                      <td><p>Synchronization is being stopped.</p></td>
                     </tr>
                   
                 </tbody>

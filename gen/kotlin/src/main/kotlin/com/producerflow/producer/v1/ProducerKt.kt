@@ -2054,6 +2054,31 @@ public object ProducerKt {
         public fun clearLicenseId() {
           _builder.clearLicenseId()
         }
+
+        /**
+         * ```
+         * The designated home state for adjuster licenses (ADHS).
+         * ```
+         *
+         * `string designated_home_state = 11 [json_name = "designatedHomeState"];`
+         */
+        public var designatedHomeState: kotlin.String
+          @JvmName("getDesignatedHomeState")
+          get() = _builder.designatedHomeState
+          @JvmName("setDesignatedHomeState")
+          set(value) {
+            _builder.designatedHomeState = value
+          }
+        /**
+         * ```
+         * The designated home state for adjuster licenses (ADHS).
+         * ```
+         *
+         * `string designated_home_state = 11 [json_name = "designatedHomeState"];`
+         */
+        public fun clearDesignatedHomeState() {
+          _builder.clearDesignatedHomeState()
+        }
       }
       @kotlin.jvm.JvmName("-initializelineOfAuthority")
       public inline fun lineOfAuthority(block: com.producerflow.producer.v1.ProducerKt.NIPRKt.LicenseKt.LineOfAuthorityKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority =

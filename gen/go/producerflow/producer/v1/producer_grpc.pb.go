@@ -29,6 +29,7 @@ const (
 	ProducerService_NewProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewProducer"
 	ProducerService_NewProducers_FullMethodName                  = "/producerflow.producer.v1.ProducerService/NewProducers"
 	ProducerService_GetAgencyAndProducers_FullMethodName         = "/producerflow.producer.v1.ProducerService/GetAgencyAndProducers"
+	ProducerService_GetAgencyProducers_FullMethodName            = "/producerflow.producer.v1.ProducerService/GetAgencyProducers"
 	ProducerService_GetAgency_FullMethodName                     = "/producerflow.producer.v1.ProducerService/GetAgency"
 	ProducerService_GetProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/GetProducer"
 	ProducerService_GetAgencyFiles_FullMethodName                = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
@@ -453,29 +454,39 @@ type ProducerServiceClient interface {
 	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(ctx context.Context, in *NewProducersRequest, opts ...grpc.CallOption) (*NewProducersResponse, error)
-	// GetAgencyAndProducers retrieves complete information for an agency and all
-	// its producers.
+	// Deprecated: Do not use.
+	// Deprecated: Use GetAgency and GetAgencyProducers instead.
 	//
-	// This endpoint returns comprehensive agency details including:
-	// - Agency contact information and business details
-	// - Principal producer information
-	// - Bank account for commission payments
-	// - Errors & Omissions insurance details
-	// - Business hours and contact points
-	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-	// - All associated producers with their NIPR data
-	// - Agency locations
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers. This endpoint is deprecated because it returns too much data
+	// in a single call. Use GetAgency to retrieve agency details and
+	// GetAgencyProducers to retrieve the list of producers separately.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	GetAgencyAndProducers(ctx context.Context, in *GetAgencyAndProducersRequest, opts ...grpc.CallOption) (*GetAgencyAndProducersResponse, error)
+	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	//
+	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
+	// only the producer data without the full agency details. Use this when you
+	// only need producer information.
+	//
+	// Each producer includes:
+	// - Basic information (name, email, phone, NPN)
+	// - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+	// - Location assignments
+	// - Onboarding status (if enabled for the tenant)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Agency object with complete NIPR data and list of all associated producers.
+	// List of all producers associated with the specified agency.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	GetAgencyAndProducers(ctx context.Context, in *GetAgencyAndProducersRequest, opts ...grpc.CallOption) (*GetAgencyAndProducersResponse, error)
+	GetAgencyProducers(ctx context.Context, in *GetAgencyProducersRequest, opts ...grpc.CallOption) (*GetAgencyProducersResponse, error)
 	// GetAgency retrieves detailed information about a specific agency.
 	//
 	// Supports two lookup methods:
@@ -1224,8 +1235,9 @@ type ProducerServiceClient interface {
 	// This ordering guarantee allows you to map request entries to their created IDs.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-	//     location names, or location with name already exists in agency
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+	//     location names within the request
+	//   - ALREADY_EXISTS: A location with the same name already exists in the agency
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(ctx context.Context, in *AddAgencyLocationsRequest, opts ...grpc.CallOption) (*AddAgencyLocationsResponse, error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
@@ -1505,10 +1517,21 @@ func (c *producerServiceClient) NewProducers(ctx context.Context, in *NewProduce
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *producerServiceClient) GetAgencyAndProducers(ctx context.Context, in *GetAgencyAndProducersRequest, opts ...grpc.CallOption) (*GetAgencyAndProducersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAgencyAndProducersResponse)
 	err := c.cc.Invoke(ctx, ProducerService_GetAgencyAndProducers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) GetAgencyProducers(ctx context.Context, in *GetAgencyProducersRequest, opts ...grpc.CallOption) (*GetAgencyProducersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgencyProducersResponse)
+	err := c.cc.Invoke(ctx, ProducerService_GetAgencyProducers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2171,29 +2194,39 @@ type ProducerServiceServer interface {
 	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
 	// - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
 	NewProducers(context.Context, *NewProducersRequest) (*NewProducersResponse, error)
-	// GetAgencyAndProducers retrieves complete information for an agency and all
-	// its producers.
+	// Deprecated: Do not use.
+	// Deprecated: Use GetAgency and GetAgencyProducers instead.
 	//
-	// This endpoint returns comprehensive agency details including:
-	// - Agency contact information and business details
-	// - Principal producer information
-	// - Bank account for commission payments
-	// - Errors & Omissions insurance details
-	// - Business hours and contact points
-	// - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-	// - All associated producers with their NIPR data
-	// - Agency locations
+	// GetAgencyAndProducers retrieves complete information for an agency and all
+	// its producers. This endpoint is deprecated because it returns too much data
+	// in a single call. Use GetAgency to retrieve agency details and
+	// GetAgencyProducers to retrieve the list of producers separately.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	GetAgencyAndProducers(context.Context, *GetAgencyAndProducersRequest) (*GetAgencyAndProducersResponse, error)
+	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	//
+	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
+	// only the producer data without the full agency details. Use this when you
+	// only need producer information.
+	//
+	// Each producer includes:
+	// - Basic information (name, email, phone, NPN)
+	// - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+	// - Location assignments
+	// - Onboarding status (if enabled for the tenant)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Agency object with complete NIPR data and list of all associated producers.
+	// List of all producers associated with the specified agency.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	GetAgencyAndProducers(context.Context, *GetAgencyAndProducersRequest) (*GetAgencyAndProducersResponse, error)
+	GetAgencyProducers(context.Context, *GetAgencyProducersRequest) (*GetAgencyProducersResponse, error)
 	// GetAgency retrieves detailed information about a specific agency.
 	//
 	// Supports two lookup methods:
@@ -2942,8 +2975,9 @@ type ProducerServiceServer interface {
 	// This ordering guarantee allows you to map request entries to their created IDs.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-	//     location names, or location with name already exists in agency
+	//   - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+	//     location names within the request
+	//   - ALREADY_EXISTS: A location with the same name already exists in the agency
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	AddAgencyLocations(context.Context, *AddAgencyLocationsRequest) (*AddAgencyLocationsResponse, error)
 	// RemoveAgencyLocations removes one or more locations from an agency.
@@ -3162,6 +3196,9 @@ func (UnimplementedProducerServiceServer) NewProducers(context.Context, *NewProd
 }
 func (UnimplementedProducerServiceServer) GetAgencyAndProducers(context.Context, *GetAgencyAndProducersRequest) (*GetAgencyAndProducersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgencyAndProducers not implemented")
+}
+func (UnimplementedProducerServiceServer) GetAgencyProducers(context.Context, *GetAgencyProducersRequest) (*GetAgencyProducersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAgencyProducers not implemented")
 }
 func (UnimplementedProducerServiceServer) GetAgency(context.Context, *GetAgencyRequest) (*GetAgencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgency not implemented")
@@ -3438,6 +3475,24 @@ func _ProducerService_GetAgencyAndProducers_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).GetAgencyAndProducers(ctx, req.(*GetAgencyAndProducersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_GetAgencyProducers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgencyProducersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).GetAgencyProducers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_GetAgencyProducers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).GetAgencyProducers(ctx, req.(*GetAgencyProducersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3956,6 +4011,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAgencyAndProducers",
 			Handler:    _ProducerService_GetAgencyAndProducers_Handler,
+		},
+		{
+			MethodName: "GetAgencyProducers",
+			Handler:    _ProducerService_GetAgencyProducers_Handler,
 		},
 		{
 			MethodName: "GetAgency",

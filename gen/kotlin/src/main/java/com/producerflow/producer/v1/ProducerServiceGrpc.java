@@ -345,6 +345,37 @@ public final class ProducerServiceGrpc {
     return getGetAgencyAndProducersMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetAgencyProducersRequest,
+      com.producerflow.producer.v1.GetAgencyProducersResponse> getGetAgencyProducersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAgencyProducers",
+      requestType = com.producerflow.producer.v1.GetAgencyProducersRequest.class,
+      responseType = com.producerflow.producer.v1.GetAgencyProducersResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetAgencyProducersRequest,
+      com.producerflow.producer.v1.GetAgencyProducersResponse> getGetAgencyProducersMethod() {
+    io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetAgencyProducersRequest, com.producerflow.producer.v1.GetAgencyProducersResponse> getGetAgencyProducersMethod;
+    if ((getGetAgencyProducersMethod = ProducerServiceGrpc.getGetAgencyProducersMethod) == null) {
+      synchronized (ProducerServiceGrpc.class) {
+        if ((getGetAgencyProducersMethod = ProducerServiceGrpc.getGetAgencyProducersMethod) == null) {
+          ProducerServiceGrpc.getGetAgencyProducersMethod = getGetAgencyProducersMethod =
+              io.grpc.MethodDescriptor.<com.producerflow.producer.v1.GetAgencyProducersRequest, com.producerflow.producer.v1.GetAgencyProducersResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAgencyProducers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.GetAgencyProducersRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.GetAgencyProducersResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProducerServiceMethodDescriptorSupplier("GetAgencyProducers"))
+              .build();
+        }
+      }
+    }
+    return getGetAgencyProducersMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetAgencyRequest,
       com.producerflow.producer.v1.GetAgencyResponse> getGetAgencyMethod;
 
@@ -1609,29 +1640,44 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * Deprecated: Use GetAgency and GetAgencyProducers instead.
      * GetAgencyAndProducers retrieves complete information for an agency and all
-     * its producers.
-     * This endpoint returns comprehensive agency details including:
-     * - Agency contact information and business details
-     * - Principal producer information
-     * - Bank account for commission payments
-     * - Errors &amp; Omissions insurance details
-     * - Business hours and contact points
-     * - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-     * - All associated producers with their NIPR data
-     * - Agency locations
-     * Validation Rules:
-     * Proto validation (format checks):
-     * - agency_id: Required, must be a valid UUID format
-     * Returns:
-     * Agency object with complete NIPR data and list of all associated producers.
+     * its producers. This endpoint is deprecated because it returns too much data
+     * in a single call. Use GetAgency to retrieve agency details and
+     * GetAgencyProducers to retrieve the list of producers separately.
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
+    @java.lang.Deprecated
     default void getAgencyAndProducers(com.producerflow.producer.v1.GetAgencyAndProducersRequest request,
         io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyAndProducersResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAgencyAndProducersMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * GetAgencyProducers retrieves all producers associated with a specific agency.
+     * This is a lighter-weight alternative to GetAgencyAndProducers that returns
+     * only the producer data without the full agency details. Use this when you
+     * only need producer information.
+     * Each producer includes:
+     * - Basic information (name, email, phone, NPN)
+     * - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+     * - Location assignments
+     * - Onboarding status (if enabled for the tenant)
+     * Validation Rules:
+     * Proto validation (format checks):
+     * - agency_id: Required, must be a valid UUID format
+     * Returns:
+     * List of all producers associated with the specified agency.
+     * Common Error Codes:
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    default void getAgencyProducers(com.producerflow.producer.v1.GetAgencyProducersRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyProducersResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAgencyProducersMethod(), responseObserver);
     }
 
     /**
@@ -2409,8 +2455,9 @@ public final class ProducerServiceGrpc {
      * List of UUIDs for all created locations in the same order as the request.
      * This ordering guarantee allows you to map request entries to their created IDs.
      * Common Error Codes:
-     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-     *   location names, or location with name already exists in agency
+     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+     *   location names within the request
+     * - ALREADY_EXISTS: A location with the same name already exists in the agency
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
@@ -3066,30 +3113,46 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * Deprecated: Use GetAgency and GetAgencyProducers instead.
      * GetAgencyAndProducers retrieves complete information for an agency and all
-     * its producers.
-     * This endpoint returns comprehensive agency details including:
-     * - Agency contact information and business details
-     * - Principal producer information
-     * - Bank account for commission payments
-     * - Errors &amp; Omissions insurance details
-     * - Business hours and contact points
-     * - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-     * - All associated producers with their NIPR data
-     * - Agency locations
-     * Validation Rules:
-     * Proto validation (format checks):
-     * - agency_id: Required, must be a valid UUID format
-     * Returns:
-     * Agency object with complete NIPR data and list of all associated producers.
+     * its producers. This endpoint is deprecated because it returns too much data
+     * in a single call. Use GetAgency to retrieve agency details and
+     * GetAgencyProducers to retrieve the list of producers separately.
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
+    @java.lang.Deprecated
     public void getAgencyAndProducers(com.producerflow.producer.v1.GetAgencyAndProducersRequest request,
         io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyAndProducersResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAgencyAndProducersMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * GetAgencyProducers retrieves all producers associated with a specific agency.
+     * This is a lighter-weight alternative to GetAgencyAndProducers that returns
+     * only the producer data without the full agency details. Use this when you
+     * only need producer information.
+     * Each producer includes:
+     * - Basic information (name, email, phone, NPN)
+     * - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+     * - Location assignments
+     * - Onboarding status (if enabled for the tenant)
+     * Validation Rules:
+     * Proto validation (format checks):
+     * - agency_id: Required, must be a valid UUID format
+     * Returns:
+     * List of all producers associated with the specified agency.
+     * Common Error Codes:
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public void getAgencyProducers(com.producerflow.producer.v1.GetAgencyProducersRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyProducersResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetAgencyProducersMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
@@ -3887,8 +3950,9 @@ public final class ProducerServiceGrpc {
      * List of UUIDs for all created locations in the same order as the request.
      * This ordering guarantee allows you to map request entries to their created IDs.
      * Common Error Codes:
-     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-     *   location names, or location with name already exists in agency
+     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+     *   location names within the request
+     * - ALREADY_EXISTS: A location with the same name already exists in the agency
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
@@ -4510,29 +4574,44 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * Deprecated: Use GetAgency and GetAgencyProducers instead.
      * GetAgencyAndProducers retrieves complete information for an agency and all
-     * its producers.
-     * This endpoint returns comprehensive agency details including:
-     * - Agency contact information and business details
-     * - Principal producer information
-     * - Bank account for commission payments
-     * - Errors &amp; Omissions insurance details
-     * - Business hours and contact points
-     * - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-     * - All associated producers with their NIPR data
-     * - Agency locations
-     * Validation Rules:
-     * Proto validation (format checks):
-     * - agency_id: Required, must be a valid UUID format
-     * Returns:
-     * Agency object with complete NIPR data and list of all associated producers.
+     * its producers. This endpoint is deprecated because it returns too much data
+     * in a single call. Use GetAgency to retrieve agency details and
+     * GetAgencyProducers to retrieve the list of producers separately.
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
+    @java.lang.Deprecated
     public com.producerflow.producer.v1.GetAgencyAndProducersResponse getAgencyAndProducers(com.producerflow.producer.v1.GetAgencyAndProducersRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAgencyAndProducersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * GetAgencyProducers retrieves all producers associated with a specific agency.
+     * This is a lighter-weight alternative to GetAgencyAndProducers that returns
+     * only the producer data without the full agency details. Use this when you
+     * only need producer information.
+     * Each producer includes:
+     * - Basic information (name, email, phone, NPN)
+     * - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+     * - Location assignments
+     * - Onboarding status (if enabled for the tenant)
+     * Validation Rules:
+     * Proto validation (format checks):
+     * - agency_id: Required, must be a valid UUID format
+     * Returns:
+     * List of all producers associated with the specified agency.
+     * Common Error Codes:
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public com.producerflow.producer.v1.GetAgencyProducersResponse getAgencyProducers(com.producerflow.producer.v1.GetAgencyProducersRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetAgencyProducersMethod(), getCallOptions(), request);
     }
 
     /**
@@ -5310,8 +5389,9 @@ public final class ProducerServiceGrpc {
      * List of UUIDs for all created locations in the same order as the request.
      * This ordering guarantee allows you to map request entries to their created IDs.
      * Common Error Codes:
-     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-     *   location names, or location with name already exists in agency
+     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+     *   location names within the request
+     * - ALREADY_EXISTS: A location with the same name already exists in the agency
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
@@ -5936,30 +6016,46 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * Deprecated: Use GetAgency and GetAgencyProducers instead.
      * GetAgencyAndProducers retrieves complete information for an agency and all
-     * its producers.
-     * This endpoint returns comprehensive agency details including:
-     * - Agency contact information and business details
-     * - Principal producer information
-     * - Bank account for commission payments
-     * - Errors &amp; Omissions insurance details
-     * - Business hours and contact points
-     * - NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-     * - All associated producers with their NIPR data
-     * - Agency locations
-     * Validation Rules:
-     * Proto validation (format checks):
-     * - agency_id: Required, must be a valid UUID format
-     * Returns:
-     * Agency object with complete NIPR data and list of all associated producers.
+     * its producers. This endpoint is deprecated because it returns too much data
+     * in a single call. Use GetAgency to retrieve agency details and
+     * GetAgencyProducers to retrieve the list of producers separately.
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
+    @java.lang.Deprecated
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.GetAgencyAndProducersResponse> getAgencyAndProducers(
         com.producerflow.producer.v1.GetAgencyAndProducersRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAgencyAndProducersMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * GetAgencyProducers retrieves all producers associated with a specific agency.
+     * This is a lighter-weight alternative to GetAgencyAndProducers that returns
+     * only the producer data without the full agency details. Use this when you
+     * only need producer information.
+     * Each producer includes:
+     * - Basic information (name, email, phone, NPN)
+     * - NIPR data (licenses with LOAs, appointments, biographic data) if synced
+     * - Location assignments
+     * - Onboarding status (if enabled for the tenant)
+     * Validation Rules:
+     * Proto validation (format checks):
+     * - agency_id: Required, must be a valid UUID format
+     * Returns:
+     * List of all producers associated with the specified agency.
+     * Common Error Codes:
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.GetAgencyProducersResponse> getAgencyProducers(
+        com.producerflow.producer.v1.GetAgencyProducersRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetAgencyProducersMethod(), getCallOptions()), request);
     }
 
     /**
@@ -6757,8 +6853,9 @@ public final class ProducerServiceGrpc {
      * List of UUIDs for all created locations in the same order as the request.
      * This ordering guarantee allows you to map request entries to their created IDs.
      * Common Error Codes:
-     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-     *   location names, or location with name already exists in agency
+     * - INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+     *   location names within the request
+     * - ALREADY_EXISTS: A location with the same name already exists in the agency
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * </pre>
      */
@@ -6964,32 +7061,33 @@ public final class ProducerServiceGrpc {
   private static final int METHODID_NEW_PRODUCER = 7;
   private static final int METHODID_NEW_PRODUCERS = 8;
   private static final int METHODID_GET_AGENCY_AND_PRODUCERS = 9;
-  private static final int METHODID_GET_AGENCY = 10;
-  private static final int METHODID_GET_PRODUCER = 11;
-  private static final int METHODID_GET_AGENCY_FILES = 12;
-  private static final int METHODID_UPDATE_PRODUCER = 13;
-  private static final int METHODID_UPDATE_AGENCY = 14;
-  private static final int METHODID_NEW_CONTACT = 15;
-  private static final int METHODID_NEW_CONTACTS = 16;
-  private static final int METHODID_LIST_AGENCY_CONTACTS = 17;
-  private static final int METHODID_UPDATE_CONTACT = 18;
-  private static final int METHODID_SET_EXTERNAL_ID = 19;
-  private static final int METHODID_VALIDATE_PRODUCER_NPN = 20;
-  private static final int METHODID_VALIDATE_AGENCY_NPN = 21;
-  private static final int METHODID_LOOKUP_NPNBY_FEIN = 22;
-  private static final int METHODID_RESYNC_PRODUCER = 23;
-  private static final int METHODID_RESYNC_AGENCY = 24;
-  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 25;
-  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 26;
-  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 27;
-  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 28;
-  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 29;
-  private static final int METHODID_ADD_AGENCY_LOCATIONS = 30;
-  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 31;
-  private static final int METHODID_LIST_AGENCY_LOCATIONS = 32;
-  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 33;
-  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 34;
-  private static final int METHODID_UPDATE_AGENCY_LOCATION = 35;
+  private static final int METHODID_GET_AGENCY_PRODUCERS = 10;
+  private static final int METHODID_GET_AGENCY = 11;
+  private static final int METHODID_GET_PRODUCER = 12;
+  private static final int METHODID_GET_AGENCY_FILES = 13;
+  private static final int METHODID_UPDATE_PRODUCER = 14;
+  private static final int METHODID_UPDATE_AGENCY = 15;
+  private static final int METHODID_NEW_CONTACT = 16;
+  private static final int METHODID_NEW_CONTACTS = 17;
+  private static final int METHODID_LIST_AGENCY_CONTACTS = 18;
+  private static final int METHODID_UPDATE_CONTACT = 19;
+  private static final int METHODID_SET_EXTERNAL_ID = 20;
+  private static final int METHODID_VALIDATE_PRODUCER_NPN = 21;
+  private static final int METHODID_VALIDATE_AGENCY_NPN = 22;
+  private static final int METHODID_LOOKUP_NPNBY_FEIN = 23;
+  private static final int METHODID_RESYNC_PRODUCER = 24;
+  private static final int METHODID_RESYNC_AGENCY = 25;
+  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 26;
+  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 27;
+  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 28;
+  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 29;
+  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 30;
+  private static final int METHODID_ADD_AGENCY_LOCATIONS = 31;
+  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 32;
+  private static final int METHODID_LIST_AGENCY_LOCATIONS = 33;
+  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 34;
+  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 35;
+  private static final int METHODID_UPDATE_AGENCY_LOCATION = 36;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -7047,6 +7145,10 @@ public final class ProducerServiceGrpc {
         case METHODID_GET_AGENCY_AND_PRODUCERS:
           serviceImpl.getAgencyAndProducers((com.producerflow.producer.v1.GetAgencyAndProducersRequest) request,
               (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyAndProducersResponse>) responseObserver);
+          break;
+        case METHODID_GET_AGENCY_PRODUCERS:
+          serviceImpl.getAgencyProducers((com.producerflow.producer.v1.GetAgencyProducersRequest) request,
+              (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetAgencyProducersResponse>) responseObserver);
           break;
         case METHODID_GET_AGENCY:
           serviceImpl.getAgency((com.producerflow.producer.v1.GetAgencyRequest) request,
@@ -7240,6 +7342,13 @@ public final class ProducerServiceGrpc {
               com.producerflow.producer.v1.GetAgencyAndProducersRequest,
               com.producerflow.producer.v1.GetAgencyAndProducersResponse>(
                 service, METHODID_GET_AGENCY_AND_PRODUCERS)))
+        .addMethod(
+          getGetAgencyProducersMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.producerflow.producer.v1.GetAgencyProducersRequest,
+              com.producerflow.producer.v1.GetAgencyProducersResponse>(
+                service, METHODID_GET_AGENCY_PRODUCERS)))
         .addMethod(
           getGetAgencyMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -7480,6 +7589,7 @@ public final class ProducerServiceGrpc {
               .addMethod(getNewProducerMethod())
               .addMethod(getNewProducersMethod())
               .addMethod(getGetAgencyAndProducersMethod())
+              .addMethod(getGetAgencyProducersMethod())
               .addMethod(getGetAgencyMethod())
               .addMethod(getGetProducerMethod())
               .addMethod(getGetAgencyFilesMethod())

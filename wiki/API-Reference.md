@@ -50,6 +50,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [NewProducer](#newproducer)
   - [NewProducers](#newproducers)
   - [GetAgencyAndProducers](#getagencyandproducers)
+  - [GetAgencyProducers](#getagencyproducers)
   - [GetAgency](#getagency)
   - [GetProducer](#getproducer)
   - [GetAgencyFiles](#getagencyfiles)
@@ -720,6 +721,8 @@ Example Use Cases:
 | `agency_type` | [AgencyType](#agencytype) | optional | Optional. Filter by agency classification (internal vs external). - AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant - AGENCY_TYPE_EXTERNAL: Partner or third-party agencies If not specified, returns both internal and external agencies. |
 | `entity_type` | [EntityType](#entitytype) | optional | Optional. Filter by business entity structure. - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies - ENTITY_TYPE_AGENCY: Standard multi-producer agencies If not specified, returns both sole proprietors and standard agencies. |
 | `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. Valid values: ACTIVE, FAILING, PENDING, DISABLED If empty, returns agencies in all sync states. |
+| `resident_states` | [string](#string) | repeated | Optional. Filter by resident license state. Returns agencies whose resident license is in the selected state(s). Multiple states can be specified (OR logic within this filter). |
+| `licensed_states` | [string](#string) | repeated | Optional. Filter by any active license state. Returns agencies that hold any active license (resident or non-resident) in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 
 #### Response: `ListAgenciesResponse`
 
@@ -1120,25 +1123,12 @@ After receiving this response, you can:
 ### GetAgencyAndProducers
 
 
+Deprecated: Use GetAgency and GetAgencyProducers instead.
+
 GetAgencyAndProducers retrieves complete information for an agency and all
-its producers.
-
-This endpoint returns comprehensive agency details including:
-- Agency contact information and business details
-- Principal producer information
-- Bank account for commission payments
-- Errors & Omissions insurance details
-- Business hours and contact points
-- NIPR synchronized data (licenses, appointments, regulatory actions, addresses)
-- All associated producers with their NIPR data
-- Agency locations
-
-Validation Rules:
-Proto validation (format checks):
-- agency_id: Required, must be a valid UUID format
-
-Returns:
-Agency object with complete NIPR data and list of all associated producers.
+its producers. This endpoint is deprecated because it returns too much data
+in a single call. Use GetAgency to retrieve agency details and
+GetAgencyProducers to retrieve the list of producers separately.
 
 Common Error Codes:
 - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
@@ -1146,21 +1136,69 @@ Common Error Codes:
 #### Request: `GetAgencyAndProducersRequest`
 
 
-GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve information for. Must be a valid UUID format. |
+| `agency_id` | [string](#string) |  |  |
 
 #### Response: `GetAgencyAndProducersResponse`
 
 
-GetAgencyAndProducersResponse contains the agency information and all associated producers.
+Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `agency` | [Agency](#agency) |  | Complete agency information including contact details, principal, and bank account. |
-| `producers` | [Producer](#producer) | repeated | List of all producers associated with the specified agency. |
+| `agency` | [Agency](#agency) |  |  |
+| `producers` | [Producer](#producer) | repeated |  |
+
+---
+
+
+### GetAgencyProducers
+
+
+GetAgencyProducers retrieves all producers associated with a specific agency.
+
+This is a lighter-weight alternative to GetAgencyAndProducers that returns
+only the producer data without the full agency details. Use this when you
+only need producer information.
+
+Each producer includes:
+- Basic information (name, email, phone, NPN)
+- NIPR data (licenses with LOAs, appointments, biographic data) if synced
+- Location assignments
+- Onboarding status (if enabled for the tenant)
+
+Validation Rules:
+Proto validation (format checks):
+- agency_id: Required, must be a valid UUID format
+
+Returns:
+List of all producers associated with the specified agency.
+
+Common Error Codes:
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+
+#### Request: `GetAgencyProducersRequest`
+
+
+GetAgencyProducersRequest requests all producers associated with an agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve producers for. Must be a valid UUID format. |
+| `pagination` | [Pagination](#pagination) |  | Optional. Pagination parameters for controlling result set size and navigation. If not provided, defaults to page_size=50. Maximum page_size is 200. |
+
+#### Response: `GetAgencyProducersResponse`
+
+
+GetAgencyProducersResponse contains producers associated with the specified agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `producers` | [Producer](#producer) | repeated | List of producers for the current page. |
+| `next_page_token` | [string](#string) |  | Token for retrieving the next page of results. Empty when there are no more results. |
 
 ---
 
@@ -2425,8 +2463,9 @@ List of UUIDs for all created locations in the same order as the request.
 This ordering guarantee allows you to map request entries to their created IDs.
 
 Common Error Codes:
-- INVALID_ARGUMENT: Missing agency_id, no locations provided, duplicate
-  location names, or location with name already exists in agency
+- INVALID_ARGUMENT: Missing agency_id, no locations provided, or duplicate
+  location names within the request
+- ALREADY_EXISTS: A location with the same name already exists in the agency
 - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 
 #### Request: `AddAgencyLocationsRequest`
@@ -3262,6 +3301,7 @@ License contains information about an insurance license.
 | `last_updated_on` | [google.type.Date](#googletypedate) |  | The date NIPR last updated the license in their system. |
 | `lines_of_authority` | [Agency.NIPR.License.LineOfAuthority](#agencyniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the agency is authorized to transact in this state. A single license typically has multiple LOAs. Always check that the agency has an active LOA matching the product type before allowing transactions. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
+| `designated_home_state` | [string](#string) |  | The designated home state for adjuster licenses (ADHS). |
 
 #### Agency.NIPR.License.LineOfAuthority
 
@@ -3550,20 +3590,20 @@ CreateProducerUploadURLResponse contains the generated URL for producer uploads
 
 #### GetAgencyAndProducersRequest
 
-GetAgencyAndProducersRequest requests information about an agency and all associated producers.
+Deprecated: Use GetAgencyRequest/GetAgencyProducersRequest instead.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve information for. Must be a valid UUID format. |
+| `agency_id` | [string](#string) |  |  |
 
 #### GetAgencyAndProducersResponse
 
-GetAgencyAndProducersResponse contains the agency information and all associated producers.
+Deprecated: Use GetAgencyResponse/GetAgencyProducersResponse instead.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `agency` | [Agency](#agency) |  | Complete agency information including contact details, principal, and bank account. |
-| `producers` | [Producer](#producer) | repeated | List of all producers associated with the specified agency. |
+| `agency` | [Agency](#agency) |  |  |
+| `producers` | [Producer](#producer) | repeated |  |
 
 #### GetAgencyFilesRequest
 
@@ -3584,6 +3624,24 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | `w9_doc_url` | [string](#string) |  | URL of the W9 form document. It's a U.S. internal revenue service form, an identification document used in the onboarding process for tax reporting purposes. |
 | `license_doc_url` | [string](#string) |  | URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. |
 | `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. |
+
+#### GetAgencyProducersRequest
+
+GetAgencyProducersRequest requests all producers associated with an agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | The UUID of the agency to retrieve producers for. Must be a valid UUID format. |
+| `pagination` | [Pagination](#pagination) |  | Optional. Pagination parameters for controlling result set size and navigation. If not provided, defaults to page_size=50. Maximum page_size is 200. |
+
+#### GetAgencyProducersResponse
+
+GetAgencyProducersResponse contains producers associated with the specified agency.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `producers` | [Producer](#producer) | repeated | List of producers for the current page. |
+| `next_page_token` | [string](#string) |  | Token for retrieving the next page of results. Empty when there are no more results. |
 
 #### GetAgencyRequest
 
@@ -3714,6 +3772,8 @@ Example Use Cases:
 | `agency_type` | [AgencyType](#agencytype) | optional | Optional. Filter by agency classification (internal vs external). - AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant - AGENCY_TYPE_EXTERNAL: Partner or third-party agencies If not specified, returns both internal and external agencies. |
 | `entity_type` | [EntityType](#entitytype) | optional | Optional. Filter by business entity structure. - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies - ENTITY_TYPE_AGENCY: Standard multi-producer agencies If not specified, returns both sole proprietors and standard agencies. |
 | `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. Valid values: ACTIVE, FAILING, PENDING, DISABLED If empty, returns agencies in all sync states. |
+| `resident_states` | [string](#string) | repeated | Optional. Filter by resident license state. Returns agencies whose resident license is in the selected state(s). Multiple states can be specified (OR logic within this filter). |
+| `licensed_states` | [string](#string) | repeated | Optional. Filter by any active license state. Returns agencies that hold any active license (resident or non-resident) in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 
 #### ListAgenciesResponse
 
@@ -4445,6 +4505,7 @@ Compliance Use Cases:
 | `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | The time when this license information was last fetched from NIPR. |
 | `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the producer is authorized to sell in this state. A single license typically has multiple LOAs. Always check that the producer has an active LOA matching the product type before allowing sales. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
+| `designated_home_state` | [string](#string) |  | The designated home state for adjuster licenses (ADHS). |
 
 #### Producer.NIPR.License.LineOfAuthority
 
@@ -5133,6 +5194,8 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 | `NIPR_SYNC_STATE_FAILING` | 2 | Synchronization is failing due to errors. |
 | `NIPR_SYNC_STATE_PENDING` | 3 | Synchronization is pending and has not started yet. |
 | `NIPR_SYNC_STATE_DISABLED` | 4 | Synchronization has been disabled. |
+| `NIPR_SYNC_STATE_IN_PROGRESS` | 5 | Synchronization is in progress. |
+| `NIPR_SYNC_STATE_STOPPING` | 6 | Synchronization is being stopped. |
 
 
 #### NewAgencyRequest.Agency.BankAccount.AccountType
