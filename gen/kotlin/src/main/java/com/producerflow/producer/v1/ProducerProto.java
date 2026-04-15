@@ -1286,7 +1286,7 @@ public final class ProducerProto {
       "te\030\n \001(\0132\032.google.protobuf.TimestampR\026ap" +
       "pointmentRenewalDate\022/\n\023agency_affiliati" +
       "ons\030\013 \001(\tR\022agencyAffiliationsB\034\n\032_organi" +
-      "zation_relationship\"\267%\n\010Producer\022\016\n\002id\030\001" +
+      "zation_relationship\"\212&\n\010Producer\022\016\n\002id\030\001" +
       " \001(\tR\002id\022\035\n\nfirst_name\030\017 \001(\tR\tfirstName\022" +
       "\037\n\013middle_name\030\020 \001(\tR\nmiddleName\022\033\n\tlast" +
       "_name\030\021 \001(\tR\010lastName\022\024\n\005email\030\003 \001(\tR\005em" +
@@ -1316,7 +1316,7 @@ public final class ProducerProto {
       "[\n\034onboarding_status_updated_at\030- \001(\0132\032." +
       "google.protobuf.TimestampR\031onboardingSta" +
       "tusUpdatedAt\0329\n\006Agency\022\033\n\tagency_id\030\001 \001(" +
-      "\tR\010agencyId\022\022\n\004name\030\002 \001(\tR\004name\032\321\030\n\004NIPR" +
+      "\tR\010agencyId\022\022\n\004name\030\002 \001(\tR\004name\032\244\031\n\004NIPR" +
       "\022K\n\010licenses\030\006 \003(\0132/.producerflow.produc" +
       "er.v1.Producer.NIPR.LicenseR\010licenses\022R\n" +
       "\nbiographic\030\010 \001(\01322.producerflow.produce" +
@@ -1330,7 +1330,7 @@ public final class ProducerProto {
       "ducer.v1.NIPRSyncStateR\016niprSyncStatus\022X" +
       "\n\033nipr_sync_status_updated_at\030\014 \001(\0132\032.go" +
       "ogle.protobuf.TimestampR\027niprSyncStatusU" +
-      "pdatedAt\032\233\007\n\007License\022%\n\016license_number\030\001" +
+      "pdatedAt\032\356\007\n\007License\022%\n\016license_number\030\001" +
       " \001(\tR\rlicenseNumber\022#\n\rlicense_state\030\002 \001" +
       "(\tR\014licenseState\022)\n\020residency_status\030\003 \001" +
       "(\tR\017residencyStatus\022\026\n\006active\030\004 \001(\010R\006act" +
@@ -1345,457 +1345,461 @@ public final class ProducerProto {
       "ucer.v1.Producer.NIPR.License.LineOfAuth" +
       "orityR\020linesOfAuthority\022\035\n\nlicense_id\030\t " +
       "\001(\tR\tlicenseId\0222\n\025designated_home_state\030" +
-      "\013 \001(\tR\023designatedHomeState\032\252\001\n\017LineOfAut" +
-      "hority\022\020\n\003loa\030\001 \001(\tR\003loa\022\026\n\006active\030\002 \001(\010" +
-      "R\006active\022=\n\nissue_date\030\003 \001(\0132\032.google.pr" +
-      "otobuf.TimestampB\002\030\001R\tissueDate\022.\n\tissue" +
-      "d_on\030\004 \001(\0132\021.google.type.DateR\010issuedOn\"" +
-      "\204\001\n\rLicenseStatus\022\036\n\032LICENSE_STATUS_UNSP" +
-      "ECIFIED\020\000\022\032\n\026LICENSE_STATUS_EXPIRED\020\001\022\030\n" +
-      "\024LICENSE_STATUS_VALID\020\002\022\035\n\031LICENSE_STATU" +
-      "S_NOT_ACTIVE\020\003\032\223\002\n\nBiographic\022\033\n\tlast_na" +
-      "me\030\001 \001(\tR\010lastName\022\035\n\nfirst_name\030\002 \001(\tR\t" +
-      "firstName\022\037\n\013middle_name\030\003 \001(\tR\nmiddleNa" +
-      "me\022>\n\rdate_of_birth\030\004 \001(\0132\032.google.proto" +
-      "buf.TimestampR\013dateOfBirth\022\026\n\004fein\030\007 \001(\t" +
-      "B\002\030\001R\004fein\022%\n\014company_name\030\010 \001(\tB\002\030\001R\013co" +
-      "mpanyName\022)\n\016state_domicile\030\t \001(\tB\002\030\001R\rs" +
-      "tateDomicile\032\250\007\n\026ProducerRegulatoryInfo\022" +
-      "\233\001\n\033regulatory_actions_by_state\030\001 \003(\0132\\." +
-      "producerflow.producer.v1.Producer.NIPR.P" +
-      "roducerRegulatoryInfo.RegulatoryActionsB" +
-      "yStateEntryR\030regulatoryActionsByState\022@\n" +
-      "\034clearance_certification_info\030\002 \001(\tR\032cle" +
-      "aranceCertificationInfo\022*\n\021nasd_exam_det" +
-      "ails\030\003 \001(\tR\017nasdExamDetails\032\342\003\n\020Regulato" +
-      "ryAction\022\033\n\taction_id\030\001 \001(\tR\010actionId\022(\n" +
-      "\020origin_of_action\030\002 \001(\tR\016originOfAction\022" +
-      "*\n\021reason_for_action\030\003 \001(\tR\017reasonForAct" +
-      "ion\022 \n\013disposition\030\004 \001(\tR\013disposition\022@\n" +
-      "\016date_of_action\030\005 \001(\0132\032.google.protobuf." +
-      "TimestampR\014dateOfAction\022A\n\016effective_dat" +
-      "e\030\006 \001(\0132\032.google.protobuf.TimestampR\reff" +
-      "ectiveDate\0229\n\nenter_date\030\007 \001(\0132\032.google." +
-      "protobuf.TimestampR\tenterDate\022\031\n\010file_re" +
-      "f\030\010 \001(\tR\007fileRef\0226\n\027penalty_fine_forfeit" +
-      "ure\030\t \001(\tR\025penaltyFineForfeiture\022&\n\017leng" +
-      "th_of_order\030\n \001(\tR\rlengthOfOrder\032\234\001\n\035Reg" +
-      "ulatoryActionsByStateEntry\022\020\n\003key\030\001 \001(\tR" +
-      "\003key\022e\n\005value\030\002 \001(\0132O.producerflow.produ" +
-      "cer.v1.Producer.NIPR.ProducerRegulatoryI" +
-      "nfo.RegulatoryActionR\005value:\0028\001\032\331\003\n\013Appo" +
-      "intment\022\033\n\tbranch_id\030\001 \001(\tR\010branchId\022!\n\014" +
-      "company_name\030\002 \001(\tR\013companyName\022\022\n\004fein\030" +
-      "\003 \001(\tR\004fein\022\027\n\007co_code\030\004 \001(\tR\006coCode\022*\n\021" +
-      "line_of_authority\030\005 \001(\tR\017lineOfAuthority" +
-      "\022\031\n\010loa_code\030\006 \001(\tR\007loaCode\022\026\n\006status\030\007 " +
-      "\001(\tR\006status\022-\n\022termination_reason\030\010 \001(\tR" +
-      "\021terminationReason\022H\n\022status_reason_date" +
-      "\030\t \001(\0132\032.google.protobuf.TimestampR\020stat" +
-      "usReasonDate\022T\n\030appointment_renewal_date" +
-      "\030\n \001(\0132\032.google.protobuf.TimestampR\026appo" +
-      "intmentRenewalDate\022/\n\023agency_affiliation" +
-      "s\030\013 \001(\tR\022agencyAffiliations\032\316\001\n\007Address\022" +
-      "\032\n\006street\030\001 \001(\tB\002\030\001R\006street\022\022\n\004city\030\002 \001(" +
-      "\tR\004city\022\024\n\005state\030\003 \001(\tR\005state\022\020\n\003zip\030\004 \001" +
-      "(\tR\003zip\0222\n\016address_line_2\030\r \001(\tB\007\272H\004r\002\020\001" +
-      "H\000R\014addressLine2\210\001\001\022$\n\016address_line_1\030\016 " +
-      "\001(\tR\014addressLine1B\021\n\017_address_line_2\032D\n\026" +
-      "MetadataQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003key" +
-      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032C\n\025ExternalMe" +
-      "tadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002" +
-      " \001(\tR\005value:\0028\001\032L\n\036TenantAdditionalQuest" +
-      "ionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001" +
-      "(\tR\005value:\0028\001\"\241\010\n\013NewProducer\022&\n\nfirst_n" +
-      "ame\030\001 \001(\tB\007\272H\004r\002\020\001R\tfirstName\022$\n\tlast_na" +
-      "me\030\002 \001(\tB\007\272H\004r\002\020\001R\010lastName\022\037\n\013middle_na" +
-      "me\030\007 \001(\tR\nmiddleName\022\035\n\005email\030\003 \001(\tB\007\272H\004" +
-      "r\002`\001R\005email\022\020\n\003npn\030\004 \001(\tR\003npn\0227\n\005phone\030\005" +
-      " \001(\tB\034\272H\031r\0242\022^\\+?[1-9]\\d{1,14}$\330\001\002H\000R\005ph" +
-      "one\210\001\001\022V\n\017mailing_address\030\006 \001(\0132-.produc" +
-      "erflow.producer.v1.NewProducer.AddressR\016" +
-      "mailingAddress\022(\n\ttenant_id\030\010 \001(\tB\013\272H\010r\003" +
-      "\030\377\001\330\001\002R\010tenantId\0222\n\014location_ids\030\n \003(\tB\017" +
-      "\272H\014\222\001\t\020d\"\005r\003\260\001\001R\013locationIds\022o\n\022metadata" +
-      "_questions\030\013 \003(\0132<.producerflow.producer" +
-      ".v1.NewProducer.MetadataQuestionsEntryB\002" +
-      "\030\001R\021metadataQuestions\022\204\001\n\033tenant_additio" +
-      "nal_questions\030\014 \003(\0132D.producerflow.produ" +
-      "cer.v1.NewProducer.TenantAdditionalQuest" +
-      "ionsEntryR\031tenantAdditionalQuestions\032\354\001\n" +
-      "\007Address\022\032\n\006street\030\001 \001(\tB\002\030\001R\006street\022\033\n\004" +
-      "city\030\002 \001(\tB\007\272H\004r\002\020\001R\004city\022\036\n\005state\030\003 \001(\t" +
-      "B\010\272H\005r\003\230\001\002R\005state\022\033\n\003zip\030\004 \001(\tB\t\272H\006r\004\020\001\030" +
-      "\nR\003zip\0222\n\016address_line_2\030\005 \001(\tB\007\272H\004r\002\020\001H" +
-      "\000R\014addressLine2\210\001\001\022$\n\016address_line_1\030\006 \001" +
-      "(\tR\014addressLine1B\021\n\017_address_line_2\032D\n\026M" +
-      "etadataQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022" +
-      "\024\n\005value\030\002 \001(\tR\005value:\0028\001\032L\n\036TenantAddit" +
-      "ionalQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n" +
-      "\005value\030\002 \001(\tR\005value:\0028\001B\010\n\006_phone\"\304\001\n\022Ne" +
-      "wProducerRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005" +
-      "r\003\260\001\001R\010agencyId\022I\n\010producer\030\002 \001(\0132%.prod" +
-      "ucerflow.producer.v1.NewProducerB\006\272H\003\310\001\001" +
-      "R\010producer\022)\n\016sync_with_nipr\030\003 \001(\010H\000R\014sy" +
-      "ncWithNipr\210\001\001B\021\n\017_sync_with_nipr\"@\n\023NewP" +
-      "roducerResponse\022)\n\013producer_id\030\001 \001(\tB\010\272H" +
-      "\005r\003\260\001\001R\nproducerId\"\311\001\n\023NewProducersReque" +
-      "st\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyI" +
-      "d\022M\n\tproducers\030\002 \003(\0132%.producerflow.prod" +
-      "ucer.v1.NewProducerB\010\272H\005\222\001\002\010\001R\tproducers" +
-      "\022)\n\016sync_with_nipr\030\003 \001(\010H\000R\014syncWithNipr" +
-      "\210\001\001B\021\n\017_sync_with_nipr\"9\n\024NewProducersRe" +
-      "sponse\022!\n\014producer_ids\030\001 \003(\tR\013producerId" +
-      "s\"\252\003\n\nNewContact\022&\n\nfirst_name\030\001 \001(\tB\007\272H" +
-      "\004r\002\020\001R\tfirstName\022$\n\tlast_name\030\002 \001(\tB\007\272H\004" +
-      "r\002\020\001R\010lastName\022\037\n\013middle_name\030\003 \001(\tR\nmid" +
-      "dleName\022\035\n\005email\030\004 \001(\tB\007\272H\004r\002`\001R\005email\0227" +
-      "\n\005phone\030\005 \001(\tB\034\272H\031r\0242\022^\\+?[1-9]\\d{1,14}$" +
-      "\330\001\002H\000R\005phone\210\001\001\022;\n\007address\030\006 \001(\0132!.produ" +
-      "cerflow.producer.v1.AddressR\007address\022E\n\004" +
-      "role\030\007 \001(\0162%.producerflow.producer.v1.Co" +
-      "ntactRoleB\n\272H\007\202\001\004\020\001 \000R\004role\022(\n\ttenant_id" +
-      "\030\010 \001(\tB\013\272H\010r\003\030\377\001\330\001\002R\010tenantId\022\025\n\003npn\030\t \001" +
-      "(\tH\001R\003npn\210\001\001B\010\n\006_phoneB\006\n\004_npn\"\202\001\n\021NewCo" +
-      "ntactRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001" +
-      "\001R\010agencyId\022F\n\007contact\030\002 \001(\0132$.producerf" +
-      "low.producer.v1.NewContactB\006\272H\003\310\001\001R\007cont" +
-      "act\"=\n\022NewContactResponse\022\'\n\ncontact_id\030" +
-      "\001 \001(\tB\010\272H\005r\003\260\001\001R\tcontactId\"\207\001\n\022NewContac" +
-      "tsRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010" +
-      "agencyId\022J\n\010contacts\030\002 \003(\0132$.producerflo" +
-      "w.producer.v1.NewContactB\010\272H\005\222\001\002\010\001R\010cont" +
-      "acts\"6\n\023NewContactsResponse\022\037\n\013contact_i" +
-      "ds\030\001 \003(\tR\ncontactIds\"\263\004\n\007Contact\022\016\n\002id\030\001" +
-      " \001(\tR\002id\022\035\n\nfirst_name\030\002 \001(\tR\tfirstName\022" +
-      "\037\n\013middle_name\030\003 \001(\tR\nmiddleName\022\033\n\tlast" +
-      "_name\030\004 \001(\tR\010lastName\022\024\n\005email\030\005 \001(\tR\005em" +
-      "ail\022\024\n\005phone\030\006 \001(\tR\005phone\022\026\n\004role\030\007 \001(\tB" +
-      "\002\030\001R\004role\022;\n\007address\030\010 \001(\0132!.producerflo" +
-      "w.producer.v1.AddressR\007address\022\020\n\003npn\030\t " +
-      "\001(\tR\003npn\0229\n\ncreated_at\030\n \001(\0132\032.google.pr" +
-      "otobuf.TimestampR\tcreatedAt\022B\n\trole_type" +
-      "\030\013 \001(\0162%.producerflow.producer.v1.Contac" +
-      "tRoleR\010roleType\022d\n\021external_metadata\030\014 \003" +
-      "(\01327.producerflow.producer.v1.Contact.Ex" +
-      "ternalMetadataEntryR\020externalMetadata\032C\n" +
-      "\025ExternalMetadataEntry\022\020\n\003key\030\001 \001(\tR\003key" +
-      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"B\n\031ListAgency" +
-      "ContactsRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r" +
-      "\003\260\001\001R\010agencyId\"[\n\032ListAgencyContactsResp" +
-      "onse\022=\n\010contacts\030\001 \003(\0132!.producerflow.pr" +
-      "oducer.v1.ContactR\010contacts\"\255\006\n\024UpdateCo" +
-      "ntactRequest\022\'\n\ncontact_id\030\001 \001(\tB\010\272H\005r\003\260" +
-      "\001\001R\tcontactId\022X\n\007contact\030\002 \001(\01326.produce" +
-      "rflow.producer.v1.UpdateContactRequest.C" +
-      "ontactB\006\272H\003\310\001\001R\007contact\032\221\005\n\007Contact\022+\n\nf" +
-      "irst_name\030\001 \001(\tB\007\272H\004r\002\020\001H\000R\tfirstName\210\001\001" +
-      "\022)\n\tlast_name\030\002 \001(\tB\007\272H\004r\002\020\001H\001R\010lastName" +
-      "\210\001\001\022-\n\013middle_name\030\003 \001(\tB\007\272H\004r\002\020\001H\002R\nmid" +
-      "dleName\210\001\001\022\"\n\005email\030\004 \001(\tB\007\272H\004r\002`\001H\003R\005em" +
-      "ail\210\001\001\0227\n\005phone\030\005 \001(\tB\034\272H\031r\0242\022^\\+?[1-9]\\" +
-      "d{1,14}$\330\001\002H\004R\005phone\210\001\001\022J\n\004role\030\006 \001(\0162%." +
-      "producerflow.producer.v1.ContactRoleB\n\272H" +
-      "\007\202\001\004\020\001 \000H\005R\004role\210\001\001\022@\n\007address\030\007 \001(\0132!.p" +
-      "roducerflow.producer.v1.AddressH\006R\007addre" +
-      "ss\210\001\001\022y\n\021external_metadata\030\010 \003(\0132L.produ" +
-      "cerflow.producer.v1.UpdateContactRequest" +
-      ".Contact.ExternalMetadataEntryR\020external" +
-      "Metadata\032C\n\025ExternalMetadataEntry\022\020\n\003key" +
-      "\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\r\n" +
-      "\013_first_nameB\014\n\n_last_nameB\016\n\014_middle_na" +
-      "meB\010\n\006_emailB\010\n\006_phoneB\007\n\005_roleB\n\n\010_addr" +
-      "ess\"\027\n\025UpdateContactResponse\"\211\002\n\024SetExte" +
-      "rnalIDRequest\022+\n\013producer_id\030\001 \001(\tB\010\272H\005r" +
-      "\003\260\001\001H\000R\nproducerId\022\'\n\tagency_id\030\002 \001(\tB\010\272" +
-      "H\005r\003\260\001\001H\000R\010agencyId\022)\n\ncontact_id\030\003 \001(\tB" +
-      "\010\272H\005r\003\260\001\001H\000R\tcontactId\0223\n\017organization_i" +
-      "d\030\005 \001(\tB\010\272H\005r\003\260\001\001H\000R\016organizationId\022\'\n\tt" +
-      "enant_id\030\004 \001(\tB\n\272H\007r\005\020\001\030\377\001R\010tenantIdB\022\n\t" +
-      "entity_id\022\005\272H\002\010\001\"\027\n\025SetExternalIDRespons" +
-      "e\"Y\n\032ValidateProducerNPNRequest\022\031\n\003npn\030\001" +
-      " \001(\tB\007\272H\004r\002\020\001R\003npn\022\027\n\004name\030\002 \001(\tH\000R\004name" +
-      "\210\001\001B\007\n\005_name\"3\n\033ValidateProducerNPNRespo" +
-      "nse\022\024\n\005valid\030\001 \001(\010R\005valid\"5\n\030ValidateAge" +
-      "ncyNPNRequest\022\031\n\003npn\030\001 \001(\tB\007\272H\004r\002\020\001R\003npn" +
-      "\"1\n\031ValidateAgencyNPNResponse\022\024\n\005valid\030\001" +
-      " \001(\010R\005valid\"6\n\026LookupNPNByFEINRequest\022\034\n" +
-      "\004fein\030\001 \001(\tB\010\272H\005r\003\230\001\tR\004fein\"+\n\027LookupNPN" +
-      "ByFEINResponse\022\020\n\003npn\030\001 \001(\tR\003npn\"<\n\023Resy" +
-      "ncAgencyRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r" +
-      "\003\260\001\001R\010agencyId\"\026\n\024ResyncAgencyResponse\"B" +
-      "\n\025ResyncProducerRequest\022)\n\013producer_id\030\001" +
-      " \001(\tB\010\272H\005r\003\260\001\001R\nproducerId\"\030\n\026ResyncProd" +
-      "ucerResponse\"H\n\033SyncProducerWithNIPRRequ" +
-      "est\022)\n\013producer_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\nprod" +
-      "ucerId\"\036\n\034SyncProducerWithNIPRResponse\"p" +
-      "\n\031SyncAgencyWithNIPRRequest\022%\n\tagency_id" +
-      "\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\022,\n\022sync_all_p" +
-      "roducers\030\002 \001(\010R\020syncAllProducers\"\034\n\032Sync" +
-      "AgencyWithNIPRResponse\"L\n\037StopSyncProduc" +
-      "erWithNIPRRequest\022)\n\013producer_id\030\001 \001(\tB\010" +
-      "\272H\005r\003\260\001\001R\nproducerId\"\"\n StopSyncProducer" +
-      "WithNIPRResponse\"t\n\035StopSyncAgencyWithNI" +
-      "PRRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010" +
-      "agencyId\022,\n\022stop_all_producers\030\002 \001(\010R\020st" +
-      "opAllProducers\" \n\036StopSyncAgencyWithNIPR" +
-      "Response\"\242\004\n\rAgencySummary\022\033\n\tagency_id\030" +
-      "\001 \001(\tR\010agencyId\022\022\n\004name\030\002 \001(\tR\004name\022\024\n\005e" +
-      "mail\030\003 \001(\tR\005email\022\024\n\005phone\030\004 \001(\tR\005phone\022" +
-      "\020\n\003npn\030\005 \001(\tR\003npn\022\022\n\004fein\030\006 \001(\tR\004fein\022,\n" +
-      "\017organization_id\030\007 \001(\tH\000R\016organizationId" +
-      "\210\001\001\022(\n\020is_tenant_agency\030\010 \001(\010R\016isTenantA" +
-      "gency\022,\n\022is_sole_proprietor\030\t \001(\010R\020isSol" +
-      "eProprietor\0229\n\ncreated_at\030\n \001(\0132\032.google" +
-      ".protobuf.TimestampR\tcreatedAt\022\037\n\013extern" +
-      "al_id\030\013 \001(\tR\nexternalId\022z\n\031organization_" +
-      "relationship\030\014 \001(\01628.producerflow.produc" +
-      "er.v1.AgencyOrganizationRelationshipH\001R\030" +
-      "organizationRelationship\210\001\001B\022\n\020_organiza" +
-      "tion_idB\034\n\032_organization_relationship\"\301\004" +
-      "\n\023ListAgenciesRequest\0226\n\017organization_id" +
-      "\030\001 \001(\tB\010\272H\005r\003\260\001\001H\000R\016organizationId\210\001\001\022&\n" +
-      "\014search_query\030\002 \001(\tH\001R\013searchQuery\210\001\001\022D\n" +
-      "\npagination\030\003 \001(\0132$.producerflow.produce" +
-      "r.v1.PaginationR\npagination\022J\n\013agency_ty" +
-      "pe\030\004 \001(\0162$.producerflow.producer.v1.Agen" +
-      "cyTypeH\002R\nagencyType\210\001\001\022J\n\013entity_type\030\005" +
-      " \001(\0162$.producerflow.producer.v1.EntityTy" +
-      "peH\003R\nentityType\210\001\001\022U\n\022nipr_sync_statuse" +
-      "s\030\006 \003(\0162\'.producerflow.producer.v1.NIPRS" +
-      "yncStateR\020niprSyncStatuses\022\'\n\017resident_s" +
-      "tates\030\007 \003(\tR\016residentStates\022\'\n\017licensed_" +
-      "states\030\010 \003(\tR\016licensedStatesB\022\n\020_organiz" +
-      "ation_idB\017\n\r_search_queryB\016\n\014_agency_typ" +
-      "eB\016\n\014_entity_type\"\244\001\n\024ListAgenciesRespon" +
-      "se\022C\n\010agencies\030\001 \003(\0132\'.producerflow.prod" +
-      "ucer.v1.AgencySummaryR\010agencies\022&\n\017next_" +
-      "page_token\030\002 \001(\tR\rnextPageToken\022\037\n\013total" +
-      "_count\030\003 \001(\005R\ntotalCount\"`\n\030ListOrganiza" +
-      "tionsRequest\022D\n\npagination\030\001 \001(\0132$.produ" +
-      "cerflow.producer.v1.PaginationR\npaginati" +
-      "on\"i\n\014Organization\022\016\n\002id\030\001 \001(\tR\002id\022\022\n\004na" +
-      "me\030\002 \001(\tR\004name\022\037\n\013external_id\030\003 \001(\tR\next" +
-      "ernalId\022\024\n\005email\030\004 \001(\tR\005email\"\262\001\n\031ListOr" +
-      "ganizationsResponse\022L\n\rorganizations\030\001 \003" +
-      "(\0132&.producerflow.producer.v1.Organizati" +
-      "onR\rorganizations\022&\n\017next_page_token\030\002 \001" +
-      "(\tR\rnextPageToken\022\037\n\013total_count\030\003 \001(\005R\n" +
-      "totalCount\"K\n\026GetOrganizationRequest\0221\n\017" +
-      "organization_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\016organiz" +
-      "ationId\"e\n\027GetOrganizationResponse\022J\n\014or" +
-      "ganization\030\001 \001(\0132&.producerflow.producer" +
-      ".v1.OrganizationR\014organization\"o\n\031Create" +
-      "OrganizationRequest\022\033\n\004name\030\001 \001(\tB\007\272H\004r\002" +
-      "\020\001R\004name\022\037\n\013external_id\030\002 \001(\tR\nexternalI" +
-      "d\022\024\n\005email\030\003 \001(\tR\005email\"E\n\032CreateOrganiz" +
-      "ationResponse\022\'\n\017organization_id\030\001 \001(\tR\016" +
-      "organizationId\"T\n\036CreateProducerUploadUR" +
-      "LRequest\0222\n\nagency_npn\030\001 \001(\tB\023\272H\020r\016\020\002\030\n2" +
-      "\010^[0-9]+$R\tagencyNpn\"3\n\037CreateProducerUp" +
-      "loadURLResponse\022\020\n\003url\030\001 \001(\tR\003url\"\307\001\n\010Lo" +
-      "cation\022\016\n\002id\030\001 \001(\tR\002id\022\033\n\004name\030\002 \001(\tB\007\272H" +
-      "\004r\002\020\001R\004name\022C\n\007address\030\003 \001(\0132!.producerf" +
-      "low.producer.v1.AddressB\006\272H\003\310\001\001R\007address" +
-      "\022\024\n\005phone\030\004 \001(\tR\005phone\022\024\n\005email\030\005 \001(\tR\005e" +
-      "mail\022\035\n\nis_primary\030\006 \001(\010R\tisPrimary\"\225\001\n\031",
-      "AddAgencyLocationsRequest\022%\n\tagency_id\030\001" +
-      " \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\022Q\n\tlocations\030\002 " +
-      "\003(\0132\'.producerflow.producer.v1.LocationI" +
-      "nputB\n\272H\007\222\001\004\010\001\020dR\tlocations\"\340\001\n\rLocation" +
-      "Input\022\033\n\004name\030\001 \001(\tB\007\272H\004r\002\020\001R\004name\022C\n\007ad" +
-      "dress\030\002 \001(\0132!.producerflow.producer.v1.A" +
-      "ddressB\006\272H\003\310\001\001R\007address\022/\n\005phone\030\003 \001(\tB\031" +
-      "\272H\026r\0242\022^\\+?[1-9]\\d{1,14}$R\005phone\022\035\n\005emai" +
-      "l\030\004 \001(\tB\007\272H\004r\002`\001R\005email\022\035\n\nis_primary\030\005 " +
-      "\001(\010R\tisPrimary\"?\n\032AddAgencyLocationsResp" +
-      "onse\022!\n\014location_ids\030\001 \003(\tR\013locationIds\"" +
-      "{\n\034RemoveAgencyLocationsRequest\022%\n\tagenc" +
-      "y_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\0224\n\014locati" +
-      "on_ids\030\002 \003(\tB\021\272H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R\013locatio" +
-      "nIds\"Q\n\035RemoveAgencyLocationsResponse\0220\n" +
-      "\024removed_location_ids\030\001 \003(\tR\022removedLoca" +
-      "tionIds\"C\n\032ListAgencyLocationsRequest\022%\n" +
-      "\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\"_\n\033" +
-      "ListAgencyLocationsResponse\022@\n\tlocations" +
-      "\030\001 \003(\0132\".producerflow.producer.v1.Locati" +
-      "onR\tlocations\"\214\003\n\033UpdateAgencyLocationRe" +
+      "\013 \001(\tR\023designatedHomeState\022#\n\rlicense_cl" +
+      "ass\030\014 \001(\tR\014licenseClass\022,\n\022license_class" +
+      "_code\030\r \001(\005R\020licenseClassCode\032\252\001\n\017LineOf" +
+      "Authority\022\020\n\003loa\030\001 \001(\tR\003loa\022\026\n\006active\030\002 " +
+      "\001(\010R\006active\022=\n\nissue_date\030\003 \001(\0132\032.google" +
+      ".protobuf.TimestampB\002\030\001R\tissueDate\022.\n\tis" +
+      "sued_on\030\004 \001(\0132\021.google.type.DateR\010issued" +
+      "On\"\204\001\n\rLicenseStatus\022\036\n\032LICENSE_STATUS_U" +
+      "NSPECIFIED\020\000\022\032\n\026LICENSE_STATUS_EXPIRED\020\001" +
+      "\022\030\n\024LICENSE_STATUS_VALID\020\002\022\035\n\031LICENSE_ST" +
+      "ATUS_NOT_ACTIVE\020\003\032\223\002\n\nBiographic\022\033\n\tlast" +
+      "_name\030\001 \001(\tR\010lastName\022\035\n\nfirst_name\030\002 \001(" +
+      "\tR\tfirstName\022\037\n\013middle_name\030\003 \001(\tR\nmiddl" +
+      "eName\022>\n\rdate_of_birth\030\004 \001(\0132\032.google.pr" +
+      "otobuf.TimestampR\013dateOfBirth\022\026\n\004fein\030\007 " +
+      "\001(\tB\002\030\001R\004fein\022%\n\014company_name\030\010 \001(\tB\002\030\001R" +
+      "\013companyName\022)\n\016state_domicile\030\t \001(\tB\002\030\001" +
+      "R\rstateDomicile\032\250\007\n\026ProducerRegulatoryIn" +
+      "fo\022\233\001\n\033regulatory_actions_by_state\030\001 \003(\013" +
+      "2\\.producerflow.producer.v1.Producer.NIP" +
+      "R.ProducerRegulatoryInfo.RegulatoryActio" +
+      "nsByStateEntryR\030regulatoryActionsByState" +
+      "\022@\n\034clearance_certification_info\030\002 \001(\tR\032" +
+      "clearanceCertificationInfo\022*\n\021nasd_exam_" +
+      "details\030\003 \001(\tR\017nasdExamDetails\032\342\003\n\020Regul" +
+      "atoryAction\022\033\n\taction_id\030\001 \001(\tR\010actionId" +
+      "\022(\n\020origin_of_action\030\002 \001(\tR\016originOfActi" +
+      "on\022*\n\021reason_for_action\030\003 \001(\tR\017reasonFor" +
+      "Action\022 \n\013disposition\030\004 \001(\tR\013disposition" +
+      "\022@\n\016date_of_action\030\005 \001(\0132\032.google.protob" +
+      "uf.TimestampR\014dateOfAction\022A\n\016effective_" +
+      "date\030\006 \001(\0132\032.google.protobuf.TimestampR\r" +
+      "effectiveDate\0229\n\nenter_date\030\007 \001(\0132\032.goog" +
+      "le.protobuf.TimestampR\tenterDate\022\031\n\010file" +
+      "_ref\030\010 \001(\tR\007fileRef\0226\n\027penalty_fine_forf" +
+      "eiture\030\t \001(\tR\025penaltyFineForfeiture\022&\n\017l" +
+      "ength_of_order\030\n \001(\tR\rlengthOfOrder\032\234\001\n\035" +
+      "RegulatoryActionsByStateEntry\022\020\n\003key\030\001 \001" +
+      "(\tR\003key\022e\n\005value\030\002 \001(\0132O.producerflow.pr" +
+      "oducer.v1.Producer.NIPR.ProducerRegulato" +
+      "ryInfo.RegulatoryActionR\005value:\0028\001\032\331\003\n\013A" +
+      "ppointment\022\033\n\tbranch_id\030\001 \001(\tR\010branchId\022" +
+      "!\n\014company_name\030\002 \001(\tR\013companyName\022\022\n\004fe" +
+      "in\030\003 \001(\tR\004fein\022\027\n\007co_code\030\004 \001(\tR\006coCode\022" +
+      "*\n\021line_of_authority\030\005 \001(\tR\017lineOfAuthor" +
+      "ity\022\031\n\010loa_code\030\006 \001(\tR\007loaCode\022\026\n\006status" +
+      "\030\007 \001(\tR\006status\022-\n\022termination_reason\030\010 \001" +
+      "(\tR\021terminationReason\022H\n\022status_reason_d" +
+      "ate\030\t \001(\0132\032.google.protobuf.TimestampR\020s" +
+      "tatusReasonDate\022T\n\030appointment_renewal_d" +
+      "ate\030\n \001(\0132\032.google.protobuf.TimestampR\026a" +
+      "ppointmentRenewalDate\022/\n\023agency_affiliat" +
+      "ions\030\013 \001(\tR\022agencyAffiliations\032\316\001\n\007Addre" +
+      "ss\022\032\n\006street\030\001 \001(\tB\002\030\001R\006street\022\022\n\004city\030\002" +
+      " \001(\tR\004city\022\024\n\005state\030\003 \001(\tR\005state\022\020\n\003zip\030" +
+      "\004 \001(\tR\003zip\0222\n\016address_line_2\030\r \001(\tB\007\272H\004r" +
+      "\002\020\001H\000R\014addressLine2\210\001\001\022$\n\016address_line_1" +
+      "\030\016 \001(\tR\014addressLine1B\021\n\017_address_line_2\032" +
+      "D\n\026MetadataQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003" +
+      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032C\n\025Externa" +
+      "lMetadataEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005valu" +
+      "e\030\002 \001(\tR\005value:\0028\001\032L\n\036TenantAdditionalQu" +
+      "estionsEntry\022\020\n\003key\030\001 \001(\tR\003key\022\024\n\005value\030" +
+      "\002 \001(\tR\005value:\0028\001\"\241\010\n\013NewProducer\022&\n\nfirs" +
+      "t_name\030\001 \001(\tB\007\272H\004r\002\020\001R\tfirstName\022$\n\tlast" +
+      "_name\030\002 \001(\tB\007\272H\004r\002\020\001R\010lastName\022\037\n\013middle" +
+      "_name\030\007 \001(\tR\nmiddleName\022\035\n\005email\030\003 \001(\tB\007" +
+      "\272H\004r\002`\001R\005email\022\020\n\003npn\030\004 \001(\tR\003npn\0227\n\005phon" +
+      "e\030\005 \001(\tB\034\272H\031r\0242\022^\\+?[1-9]\\d{1,14}$\330\001\002H\000R" +
+      "\005phone\210\001\001\022V\n\017mailing_address\030\006 \001(\0132-.pro" +
+      "ducerflow.producer.v1.NewProducer.Addres" +
+      "sR\016mailingAddress\022(\n\ttenant_id\030\010 \001(\tB\013\272H" +
+      "\010r\003\030\377\001\330\001\002R\010tenantId\0222\n\014location_ids\030\n \003(" +
+      "\tB\017\272H\014\222\001\t\020d\"\005r\003\260\001\001R\013locationIds\022o\n\022metad" +
+      "ata_questions\030\013 \003(\0132<.producerflow.produ" +
+      "cer.v1.NewProducer.MetadataQuestionsEntr" +
+      "yB\002\030\001R\021metadataQuestions\022\204\001\n\033tenant_addi" +
+      "tional_questions\030\014 \003(\0132D.producerflow.pr" +
+      "oducer.v1.NewProducer.TenantAdditionalQu" +
+      "estionsEntryR\031tenantAdditionalQuestions\032" +
+      "\354\001\n\007Address\022\032\n\006street\030\001 \001(\tB\002\030\001R\006street\022" +
+      "\033\n\004city\030\002 \001(\tB\007\272H\004r\002\020\001R\004city\022\036\n\005state\030\003 " +
+      "\001(\tB\010\272H\005r\003\230\001\002R\005state\022\033\n\003zip\030\004 \001(\tB\t\272H\006r\004" +
+      "\020\001\030\nR\003zip\0222\n\016address_line_2\030\005 \001(\tB\007\272H\004r\002" +
+      "\020\001H\000R\014addressLine2\210\001\001\022$\n\016address_line_1\030" +
+      "\006 \001(\tR\014addressLine1B\021\n\017_address_line_2\032D" +
+      "\n\026MetadataQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003k" +
+      "ey\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\032L\n\036TenantAd" +
+      "ditionalQuestionsEntry\022\020\n\003key\030\001 \001(\tR\003key" +
+      "\022\024\n\005value\030\002 \001(\tR\005value:\0028\001B\010\n\006_phone\"\304\001\n" +
+      "\022NewProducerRequest\022%\n\tagency_id\030\001 \001(\tB\010" +
+      "\272H\005r\003\260\001\001R\010agencyId\022I\n\010producer\030\002 \001(\0132%.p" +
+      "roducerflow.producer.v1.NewProducerB\006\272H\003" +
+      "\310\001\001R\010producer\022)\n\016sync_with_nipr\030\003 \001(\010H\000R" +
+      "\014syncWithNipr\210\001\001B\021\n\017_sync_with_nipr\"@\n\023N" +
+      "ewProducerResponse\022)\n\013producer_id\030\001 \001(\tB" +
+      "\010\272H\005r\003\260\001\001R\nproducerId\"\311\001\n\023NewProducersRe" +
       "quest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agen" +
-      "cyId\022)\n\013location_id\030\002 \001(\tB\010\272H\005r\003\260\001\001R\nloc" +
-      "ationId\022 \n\004name\030\003 \001(\tB\007\272H\004r\002\020\001H\000R\004name\210\001" +
-      "\001\022@\n\007address\030\004 \001(\0132!.producerflow.produc" +
-      "er.v1.AddressH\001R\007address\210\001\001\0227\n\005phone\030\005 \001" +
-      "(\tB\034\272H\031r\0242\022^\\+?[1-9]\\d{1,14}$\330\001\002H\002R\005phon" +
-      "e\210\001\001\022\"\n\005email\030\006 \001(\tB\007\272H\004r\002`\001H\003R\005email\210\001\001" +
-      "\022\"\n\nis_primary\030\007 \001(\010H\004R\tisPrimary\210\001\001B\007\n\005" +
-      "_nameB\n\n\010_addressB\010\n\006_phoneB\010\n\006_emailB\r\n" +
-      "\013_is_primary\"^\n\034UpdateAgencyLocationResp" +
-      "onse\022>\n\010location\030\001 \001(\0132\".producerflow.pr" +
-      "oducer.v1.LocationR\010location\"\203\001\n AssignP" +
-      "roducerToLocationsRequest\022)\n\013producer_id" +
-      "\030\001 \001(\tB\010\272H\005r\003\260\001\001R\nproducerId\0224\n\014location" +
-      "_ids\030\002 \003(\tB\021\272H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R\013locationI" +
-      "ds\"W\n!AssignProducerToLocationsResponse\022" +
-      "2\n\025assigned_location_ids\030\001 \003(\tR\023assigned" +
-      "LocationIds\"\207\001\n$UnassignProducerFromLoca" +
-      "tionsRequest\022)\n\013producer_id\030\001 \001(\tB\010\272H\005r\003" +
-      "\260\001\001R\nproducerId\0224\n\014location_ids\030\002 \003(\tB\021\272" +
-      "H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R\013locationIds\"_\n%Unassig" +
-      "nProducerFromLocationsResponse\0226\n\027unassi" +
-      "gned_location_ids\030\001 \003(\tR\025unassignedLocat" +
-      "ionIds*\347\001\n\013ContactRole\022\034\n\030CONTACT_ROLE_U" +
-      "NSPECIFIED\020\000\022%\n!CONTACT_ROLE_AGENCY_ADMI" +
-      "NISTRATOR\020\001\022\026\n\022CONTACT_ROLE_OTHER\020\002\022\024\n\020C" +
-      "ONTACT_ROLE_CSR\020\003\022$\n CONTACT_ROLE_UNLICE" +
-      "NSED_PRODUCER\020\004\022#\n\037CONTACT_ROLE_UNLICENS" +
-      "ED_SERVICE\020\005\022\032\n\026CONTACT_ROLE_PRINCIPAL\020\006" +
-      "*\211\001\n\nEntityType\022\033\n\027ENTITY_TYPE_UNSPECIFI" +
-      "ED\020\000\022\037\n\033ENTITY_TYPE_SOLE_PROPRIETOR\020\001\022\026\n" +
-      "\022ENTITY_TYPE_AGENCY\020\002\022%\n!ENTITY_TYPE_ASK" +
-      "_DURING_ONBOARDING\020\003*]\n\nAgencyType\022\033\n\027AG" +
-      "ENCY_TYPE_UNSPECIFIED\020\000\022\030\n\024AGENCY_TYPE_I" +
-      "NTERNAL\020\001\022\030\n\024AGENCY_TYPE_EXTERNAL\020\002*\253\001\n\036" +
-      "AgencyOrganizationRelationship\0220\n,AGENCY" +
-      "_ORGANIZATION_RELATIONSHIP_UNSPECIFIED\020\000" +
-      "\022)\n%AGENCY_ORGANIZATION_RELATIONSHIP_MAI" +
-      "N\020\001\022,\n(AGENCY_ORGANIZATION_RELATIONSHIP_" +
-      "RELATED\020\002*\343\001\n\rNIPRSyncState\022\037\n\033NIPR_SYNC" +
-      "_STATE_UNSPECIFIED\020\000\022\032\n\026NIPR_SYNC_STATE_" +
-      "ACTIVE\020\001\022\033\n\027NIPR_SYNC_STATE_FAILING\020\002\022\033\n" +
-      "\027NIPR_SYNC_STATE_PENDING\020\003\022\034\n\030NIPR_SYNC_" +
-      "STATE_DISABLED\020\004\022\037\n\033NIPR_SYNC_STATE_IN_P" +
-      "ROGRESS\020\005\022\034\n\030NIPR_SYNC_STATE_STOPPING\020\006*" +
-      "\276\001\n\020OnboardingStatus\022!\n\035ONBOARDING_STATU" +
-      "S_UNSPECIFIED\020\000\022\037\n\033ONBOARDING_STATUS_ONB" +
-      "OARDED\020\001\022\036\n\032ONBOARDING_STATUS_APPROVED\020\002" +
-      "\022$\n ONBOARDING_STATUS_READY_TO_QUOTE\020\003\022 " +
-      "\n\034ONBOARDING_STATUS_TERMINATED\020\0042\202%\n\017Pro" +
-      "ducerService\022\226\001\n\031CreateAgencyOnboardingU" +
-      "RL\022:.producerflow.producer.v1.CreateAgen" +
-      "cyOnboardingURLRequest\032;.producerflow.pr" +
-      "oducer.v1.CreateAgencyOnboardingURLRespo" +
-      "nse\"\000\022\234\001\n\033CreateProducerOnboardingURL\022<." +
-      "producerflow.producer.v1.CreateProducerO" +
-      "nboardingURLRequest\032=.producerflow.produ" +
-      "cer.v1.CreateProducerOnboardingURLRespon" +
-      "se\"\000\022f\n\tNewAgency\022*.producerflow.produce" +
-      "r.v1.NewAgencyRequest\032+.producerflow.pro" +
-      "ducer.v1.NewAgencyResponse\"\000\022o\n\014ListAgen" +
-      "cies\022-.producerflow.producer.v1.ListAgen" +
-      "ciesRequest\032..producerflow.producer.v1.L" +
-      "istAgenciesResponse\"\000\022|\n\021ListOrganizatio" +
-      "ns\0222.producerflow.producer.v1.ListOrgani" +
-      "zationsRequest\0323.producerflow.producer.v" +
-      "1.ListOrganizationsResponse\022v\n\017GetOrgani" +
-      "zation\0220.producerflow.producer.v1.GetOrg" +
-      "anizationRequest\0321.producerflow.producer" +
-      ".v1.GetOrganizationResponse\022\177\n\022CreateOrg" +
-      "anization\0223.producerflow.producer.v1.Cre" +
-      "ateOrganizationRequest\0324.producerflow.pr" +
-      "oducer.v1.CreateOrganizationResponse\022l\n\013" +
-      "NewProducer\022,.producerflow.producer.v1.N" +
-      "ewProducerRequest\032-.producerflow.produce" +
-      "r.v1.NewProducerResponse\"\000\022o\n\014NewProduce" +
-      "rs\022-.producerflow.producer.v1.NewProduce" +
-      "rsRequest\032..producerflow.producer.v1.New" +
-      "ProducersResponse\"\000\022\215\001\n\025GetAgencyAndProd" +
-      "ucers\0226.producerflow.producer.v1.GetAgen" +
-      "cyAndProducersRequest\0327.producerflow.pro" +
-      "ducer.v1.GetAgencyAndProducersResponse\"\003" +
-      "\210\002\001\022\177\n\022GetAgencyProducers\0223.producerflow" +
-      ".producer.v1.GetAgencyProducersRequest\0324" +
-      ".producerflow.producer.v1.GetAgencyProdu" +
-      "cersResponse\022d\n\tGetAgency\022*.producerflow" +
-      ".producer.v1.GetAgencyRequest\032+.producer" +
-      "flow.producer.v1.GetAgencyResponse\022j\n\013Ge" +
-      "tProducer\022,.producerflow.producer.v1.Get" +
-      "ProducerRequest\032-.producerflow.producer." +
-      "v1.GetProducerResponse\022s\n\016GetAgencyFiles" +
-      "\022/.producerflow.producer.v1.GetAgencyFil" +
-      "esRequest\0320.producerflow.producer.v1.Get" +
-      "AgencyFilesResponse\022u\n\016UpdateProducer\022/." +
-      "producerflow.producer.v1.UpdateProducerR" +
-      "equest\0320.producerflow.producer.v1.Update" +
-      "ProducerResponse\"\000\022o\n\014UpdateAgency\022-.pro" +
-      "ducerflow.producer.v1.UpdateAgencyReques" +
-      "t\032..producerflow.producer.v1.UpdateAgenc" +
-      "yResponse\"\000\022i\n\nNewContact\022+.producerflow" +
-      ".producer.v1.NewContactRequest\032,.produce" +
-      "rflow.producer.v1.NewContactResponse\"\000\022l" +
-      "\n\013NewContacts\022,.producerflow.producer.v1" +
-      ".NewContactsRequest\032-.producerflow.produ" +
-      "cer.v1.NewContactsResponse\"\000\022\177\n\022ListAgen" +
-      "cyContacts\0223.producerflow.producer.v1.Li" +
-      "stAgencyContactsRequest\0324.producerflow.p" +
-      "roducer.v1.ListAgencyContactsResponse\022r\n" +
-      "\rUpdateContact\022..producerflow.producer.v" +
-      "1.UpdateContactRequest\032/.producerflow.pr" +
-      "oducer.v1.UpdateContactResponse\"\000\022r\n\rSet" +
-      "ExternalID\022..producerflow.producer.v1.Se" +
-      "tExternalIDRequest\032/.producerflow.produc" +
-      "er.v1.SetExternalIDResponse\"\000\022\202\001\n\023Valida" +
-      "teProducerNPN\0224.producerflow.producer.v1" +
-      ".ValidateProducerNPNRequest\0325.producerfl" +
-      "ow.producer.v1.ValidateProducerNPNRespon" +
-      "se\022|\n\021ValidateAgencyNPN\0222.producerflow.p" +
-      "roducer.v1.ValidateAgencyNPNRequest\0323.pr" +
-      "oducerflow.producer.v1.ValidateAgencyNPN" +
-      "Response\022v\n\017LookupNPNByFEIN\0220.producerfl" +
-      "ow.producer.v1.LookupNPNByFEINRequest\0321." +
+      "cyId\022M\n\tproducers\030\002 \003(\0132%.producerflow.p" +
+      "roducer.v1.NewProducerB\010\272H\005\222\001\002\010\001R\tproduc" +
+      "ers\022)\n\016sync_with_nipr\030\003 \001(\010H\000R\014syncWithN" +
+      "ipr\210\001\001B\021\n\017_sync_with_nipr\"9\n\024NewProducer" +
+      "sResponse\022!\n\014producer_ids\030\001 \003(\tR\013produce" +
+      "rIds\"\252\003\n\nNewContact\022&\n\nfirst_name\030\001 \001(\tB" +
+      "\007\272H\004r\002\020\001R\tfirstName\022$\n\tlast_name\030\002 \001(\tB\007" +
+      "\272H\004r\002\020\001R\010lastName\022\037\n\013middle_name\030\003 \001(\tR\n" +
+      "middleName\022\035\n\005email\030\004 \001(\tB\007\272H\004r\002`\001R\005emai" +
+      "l\0227\n\005phone\030\005 \001(\tB\034\272H\031r\0242\022^\\+?[1-9]\\d{1,1" +
+      "4}$\330\001\002H\000R\005phone\210\001\001\022;\n\007address\030\006 \001(\0132!.pr" +
+      "oducerflow.producer.v1.AddressR\007address\022" +
+      "E\n\004role\030\007 \001(\0162%.producerflow.producer.v1" +
+      ".ContactRoleB\n\272H\007\202\001\004\020\001 \000R\004role\022(\n\ttenant" +
+      "_id\030\010 \001(\tB\013\272H\010r\003\030\377\001\330\001\002R\010tenantId\022\025\n\003npn\030" +
+      "\t \001(\tH\001R\003npn\210\001\001B\010\n\006_phoneB\006\n\004_npn\"\202\001\n\021Ne" +
+      "wContactRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r" +
+      "\003\260\001\001R\010agencyId\022F\n\007contact\030\002 \001(\0132$.produc" +
+      "erflow.producer.v1.NewContactB\006\272H\003\310\001\001R\007c" +
+      "ontact\"=\n\022NewContactResponse\022\'\n\ncontact_" +
+      "id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\tcontactId\"\207\001\n\022NewCon" +
+      "tactsRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001" +
+      "\001R\010agencyId\022J\n\010contacts\030\002 \003(\0132$.producer" +
+      "flow.producer.v1.NewContactB\010\272H\005\222\001\002\010\001R\010c" +
+      "ontacts\"6\n\023NewContactsResponse\022\037\n\013contac" +
+      "t_ids\030\001 \003(\tR\ncontactIds\"\263\004\n\007Contact\022\016\n\002i" +
+      "d\030\001 \001(\tR\002id\022\035\n\nfirst_name\030\002 \001(\tR\tfirstNa" +
+      "me\022\037\n\013middle_name\030\003 \001(\tR\nmiddleName\022\033\n\tl" +
+      "ast_name\030\004 \001(\tR\010lastName\022\024\n\005email\030\005 \001(\tR" +
+      "\005email\022\024\n\005phone\030\006 \001(\tR\005phone\022\026\n\004role\030\007 \001" +
+      "(\tB\002\030\001R\004role\022;\n\007address\030\010 \001(\0132!.producer" +
+      "flow.producer.v1.AddressR\007address\022\020\n\003npn" +
+      "\030\t \001(\tR\003npn\0229\n\ncreated_at\030\n \001(\0132\032.google" +
+      ".protobuf.TimestampR\tcreatedAt\022B\n\trole_t" +
+      "ype\030\013 \001(\0162%.producerflow.producer.v1.Con" +
+      "tactRoleR\010roleType\022d\n\021external_metadata\030" +
+      "\014 \003(\01327.producerflow.producer.v1.Contact" +
+      ".ExternalMetadataEntryR\020externalMetadata" +
+      "\032C\n\025ExternalMetadataEntry\022\020\n\003key\030\001 \001(\tR\003" +
+      "key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001\"B\n\031ListAge" +
+      "ncyContactsRequest\022%\n\tagency_id\030\001 \001(\tB\010\272" +
+      "H\005r\003\260\001\001R\010agencyId\"[\n\032ListAgencyContactsR" +
+      "esponse\022=\n\010contacts\030\001 \003(\0132!.producerflow" +
+      ".producer.v1.ContactR\010contacts\"\255\006\n\024Updat" +
+      "eContactRequest\022\'\n\ncontact_id\030\001 \001(\tB\010\272H\005" +
+      "r\003\260\001\001R\tcontactId\022X\n\007contact\030\002 \001(\01326.prod" +
+      "ucerflow.producer.v1.UpdateContactReques" +
+      "t.ContactB\006\272H\003\310\001\001R\007contact\032\221\005\n\007Contact\022+" +
+      "\n\nfirst_name\030\001 \001(\tB\007\272H\004r\002\020\001H\000R\tfirstName" +
+      "\210\001\001\022)\n\tlast_name\030\002 \001(\tB\007\272H\004r\002\020\001H\001R\010lastN" +
+      "ame\210\001\001\022-\n\013middle_name\030\003 \001(\tB\007\272H\004r\002\020\001H\002R\n" +
+      "middleName\210\001\001\022\"\n\005email\030\004 \001(\tB\007\272H\004r\002`\001H\003R" +
+      "\005email\210\001\001\0227\n\005phone\030\005 \001(\tB\034\272H\031r\0242\022^\\+?[1-" +
+      "9]\\d{1,14}$\330\001\002H\004R\005phone\210\001\001\022J\n\004role\030\006 \001(\016" +
+      "2%.producerflow.producer.v1.ContactRoleB" +
+      "\n\272H\007\202\001\004\020\001 \000H\005R\004role\210\001\001\022@\n\007address\030\007 \001(\0132" +
+      "!.producerflow.producer.v1.AddressH\006R\007ad" +
+      "dress\210\001\001\022y\n\021external_metadata\030\010 \003(\0132L.pr" +
+      "oducerflow.producer.v1.UpdateContactRequ" +
+      "est.Contact.ExternalMetadataEntryR\020exter" +
+      "nalMetadata\032C\n\025ExternalMetadataEntry\022\020\n\003" +
+      "key\030\001 \001(\tR\003key\022\024\n\005value\030\002 \001(\tR\005value:\0028\001" +
+      "B\r\n\013_first_nameB\014\n\n_last_nameB\016\n\014_middle" +
+      "_nameB\010\n\006_emailB\010\n\006_phoneB\007\n\005_roleB\n\n\010_a" +
+      "ddress\"\027\n\025UpdateContactResponse\"\211\002\n\024SetE" +
+      "xternalIDRequest\022+\n\013producer_id\030\001 \001(\tB\010\272" +
+      "H\005r\003\260\001\001H\000R\nproducerId\022\'\n\tagency_id\030\002 \001(\t" +
+      "B\010\272H\005r\003\260\001\001H\000R\010agencyId\022)\n\ncontact_id\030\003 \001" +
+      "(\tB\010\272H\005r\003\260\001\001H\000R\tcontactId\0223\n\017organizatio" +
+      "n_id\030\005 \001(\tB\010\272H\005r\003\260\001\001H\000R\016organizationId\022\'" +
+      "\n\ttenant_id\030\004 \001(\tB\n\272H\007r\005\020\001\030\377\001R\010tenantIdB" +
+      "\022\n\tentity_id\022\005\272H\002\010\001\"\027\n\025SetExternalIDResp" +
+      "onse\"Y\n\032ValidateProducerNPNRequest\022\031\n\003np" +
+      "n\030\001 \001(\tB\007\272H\004r\002\020\001R\003npn\022\027\n\004name\030\002 \001(\tH\000R\004n" +
+      "ame\210\001\001B\007\n\005_name\"3\n\033ValidateProducerNPNRe" +
+      "sponse\022\024\n\005valid\030\001 \001(\010R\005valid\"5\n\030Validate" +
+      "AgencyNPNRequest\022\031\n\003npn\030\001 \001(\tB\007\272H\004r\002\020\001R\003" +
+      "npn\"1\n\031ValidateAgencyNPNResponse\022\024\n\005vali" +
+      "d\030\001 \001(\010R\005valid\"6\n\026LookupNPNByFEINRequest" +
+      "\022\034\n\004fein\030\001 \001(\tB\010\272H\005r\003\230\001\tR\004fein\"+\n\027Lookup" +
+      "NPNByFEINResponse\022\020\n\003npn\030\001 \001(\tR\003npn\"<\n\023R" +
+      "esyncAgencyRequest\022%\n\tagency_id\030\001 \001(\tB\010\272" +
+      "H\005r\003\260\001\001R\010agencyId\"\026\n\024ResyncAgencyRespons" +
+      "e\"B\n\025ResyncProducerRequest\022)\n\013producer_i" +
+      "d\030\001 \001(\tB\010\272H\005r\003\260\001\001R\nproducerId\"\030\n\026ResyncP" +
+      "roducerResponse\"H\n\033SyncProducerWithNIPRR" +
+      "equest\022)\n\013producer_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\np" +
+      "roducerId\"\036\n\034SyncProducerWithNIPRRespons" +
+      "e\"p\n\031SyncAgencyWithNIPRRequest\022%\n\tagency" +
+      "_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\022,\n\022sync_al" +
+      "l_producers\030\002 \001(\010R\020syncAllProducers\"\034\n\032S" +
+      "yncAgencyWithNIPRResponse\"L\n\037StopSyncPro" +
+      "ducerWithNIPRRequest\022)\n\013producer_id\030\001 \001(" +
+      "\tB\010\272H\005r\003\260\001\001R\nproducerId\"\"\n StopSyncProdu" +
+      "cerWithNIPRResponse\"t\n\035StopSyncAgencyWit" +
+      "hNIPRRequest\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001" +
+      "\001R\010agencyId\022,\n\022stop_all_producers\030\002 \001(\010R" +
+      "\020stopAllProducers\" \n\036StopSyncAgencyWithN" +
+      "IPRResponse\"\242\004\n\rAgencySummary\022\033\n\tagency_" +
+      "id\030\001 \001(\tR\010agencyId\022\022\n\004name\030\002 \001(\tR\004name\022\024" +
+      "\n\005email\030\003 \001(\tR\005email\022\024\n\005phone\030\004 \001(\tR\005pho" +
+      "ne\022\020\n\003npn\030\005 \001(\tR\003npn\022\022\n\004fein\030\006 \001(\tR\004fein" +
+      "\022,\n\017organization_id\030\007 \001(\tH\000R\016organizatio" +
+      "nId\210\001\001\022(\n\020is_tenant_agency\030\010 \001(\010R\016isTena" +
+      "ntAgency\022,\n\022is_sole_proprietor\030\t \001(\010R\020is" +
+      "SoleProprietor\0229\n\ncreated_at\030\n \001(\0132\032.goo" +
+      "gle.protobuf.TimestampR\tcreatedAt\022\037\n\013ext" +
+      "ernal_id\030\013 \001(\tR\nexternalId\022z\n\031organizati" +
+      "on_relationship\030\014 \001(\01628.producerflow.pro" +
+      "ducer.v1.AgencyOrganizationRelationshipH" +
+      "\001R\030organizationRelationship\210\001\001B\022\n\020_organ" +
+      "ization_idB\034\n\032_organization_relationship" +
+      "\"\301\004\n\023ListAgenciesRequest\0226\n\017organization" +
+      "_id\030\001 \001(\tB\010\272H\005r\003\260\001\001H\000R\016organizationId\210\001\001" +
+      "\022&\n\014search_query\030\002 \001(\tH\001R\013searchQuery\210\001\001" +
+      "\022D\n\npagination\030\003 \001(\0132$.producerflow.prod" +
+      "ucer.v1.PaginationR\npagination\022J\n\013agency" +
+      "_type\030\004 \001(\0162$.producerflow.producer.v1.A" +
+      "gencyTypeH\002R\nagencyType\210\001\001\022J\n\013entity_typ" +
+      "e\030\005 \001(\0162$.producerflow.producer.v1.Entit" +
+      "yTypeH\003R\nentityType\210\001\001\022U\n\022nipr_sync_stat" +
+      "uses\030\006 \003(\0162\'.producerflow.producer.v1.NI" +
+      "PRSyncStateR\020niprSyncStatuses\022\'\n\017residen" +
+      "t_states\030\007 \003(\tR\016residentStates\022\'\n\017licens" +
+      "ed_states\030\010 \003(\tR\016licensedStatesB\022\n\020_orga" +
+      "nization_idB\017\n\r_search_queryB\016\n\014_agency_" +
+      "typeB\016\n\014_entity_type\"\244\001\n\024ListAgenciesRes" +
+      "ponse\022C\n\010agencies\030\001 \003(\0132\'.producerflow.p" +
+      "roducer.v1.AgencySummaryR\010agencies\022&\n\017ne" +
+      "xt_page_token\030\002 \001(\tR\rnextPageToken\022\037\n\013to" +
+      "tal_count\030\003 \001(\005R\ntotalCount\"`\n\030ListOrgan" +
+      "izationsRequest\022D\n\npagination\030\001 \001(\0132$.pr" +
+      "oducerflow.producer.v1.PaginationR\npagin" +
+      "ation\"i\n\014Organization\022\016\n\002id\030\001 \001(\tR\002id\022\022\n" +
+      "\004name\030\002 \001(\tR\004name\022\037\n\013external_id\030\003 \001(\tR\n" +
+      "externalId\022\024\n\005email\030\004 \001(\tR\005email\"\262\001\n\031Lis" +
+      "tOrganizationsResponse\022L\n\rorganizations\030" +
+      "\001 \003(\0132&.producerflow.producer.v1.Organiz" +
+      "ationR\rorganizations\022&\n\017next_page_token\030" +
+      "\002 \001(\tR\rnextPageToken\022\037\n\013total_count\030\003 \001(" +
+      "\005R\ntotalCount\"K\n\026GetOrganizationRequest\022" +
+      "1\n\017organization_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\016orga" +
+      "nizationId\"e\n\027GetOrganizationResponse\022J\n" +
+      "\014organization\030\001 \001(\0132&.producerflow.produ" +
+      "cer.v1.OrganizationR\014organization\"o\n\031Cre" +
+      "ateOrganizationRequest\022\033\n\004name\030\001 \001(\tB\007\272H" +
+      "\004r\002\020\001R\004name\022\037\n\013external_id\030\002 \001(\tR\nextern" +
+      "alId\022\024\n\005email\030\003 \001(\tR\005email\"E\n\032CreateOrga" +
+      "nizationResponse\022\'\n\017organization_id\030\001 \001(" +
+      "\tR\016organizationId\"T\n\036CreateProducerUploa" +
+      "dURLRequest\0222\n\nagency_npn\030\001 \001(\tB\023\272H\020r\016\020\002" +
+      "\030\n2\010^[0-9]+$R\tagencyNpn\"3\n\037CreateProduce" +
+      "rUploadURLResponse\022\020\n\003url\030\001 \001(\tR\003url\"\350\001\n" +
+      "\010Location\022\016\n\002id\030\001 \001(\tR\002id\022\033\n\004name\030\002 \001(\tB" +
+      "\007\272H\004r\002\020\001R\004name\022C\n\007address\030\003 \001(\0132!.produc" +
+      "erflow.producer.v1.AddressB\006\272H\003\310\001\001R\007addr",
+      "ess\022\024\n\005phone\030\004 \001(\tR\005phone\022\024\n\005email\030\005 \001(\t" +
+      "R\005email\022\035\n\nis_primary\030\006 \001(\010R\tisPrimary\022\037" +
+      "\n\013external_id\030\007 \001(\tR\nexternalId\"\225\001\n\031AddA" +
+      "gencyLocationsRequest\022%\n\tagency_id\030\001 \001(\t" +
+      "B\010\272H\005r\003\260\001\001R\010agencyId\022Q\n\tlocations\030\002 \003(\0132" +
+      "\'.producerflow.producer.v1.LocationInput" +
+      "B\n\272H\007\222\001\004\010\001\020dR\tlocations\"\340\001\n\rLocationInpu" +
+      "t\022\033\n\004name\030\001 \001(\tB\007\272H\004r\002\020\001R\004name\022C\n\007addres" +
+      "s\030\002 \001(\0132!.producerflow.producer.v1.Addre" +
+      "ssB\006\272H\003\310\001\001R\007address\022/\n\005phone\030\003 \001(\tB\031\272H\026r" +
+      "\0242\022^\\+?[1-9]\\d{1,14}$R\005phone\022\035\n\005email\030\004 " +
+      "\001(\tB\007\272H\004r\002`\001R\005email\022\035\n\nis_primary\030\005 \001(\010R" +
+      "\tisPrimary\"?\n\032AddAgencyLocationsResponse" +
+      "\022!\n\014location_ids\030\001 \003(\tR\013locationIds\"{\n\034R" +
+      "emoveAgencyLocationsRequest\022%\n\tagency_id" +
+      "\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\0224\n\014location_i" +
+      "ds\030\002 \003(\tB\021\272H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R\013locationIds" +
+      "\"Q\n\035RemoveAgencyLocationsResponse\0220\n\024rem" +
+      "oved_location_ids\030\001 \003(\tR\022removedLocation" +
+      "Ids\"C\n\032ListAgencyLocationsRequest\022%\n\tage" +
+      "ncy_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId\"_\n\033List" +
+      "AgencyLocationsResponse\022@\n\tlocations\030\001 \003" +
+      "(\0132\".producerflow.producer.v1.LocationR\t" +
+      "locations\"\302\003\n\033UpdateAgencyLocationReques" +
+      "t\022%\n\tagency_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\010agencyId" +
+      "\022)\n\013location_id\030\002 \001(\tB\010\272H\005r\003\260\001\001R\nlocatio" +
+      "nId\022 \n\004name\030\003 \001(\tB\007\272H\004r\002\020\001H\000R\004name\210\001\001\022@\n" +
+      "\007address\030\004 \001(\0132!.producerflow.producer.v" +
+      "1.AddressH\001R\007address\210\001\001\0227\n\005phone\030\005 \001(\tB\034" +
+      "\272H\031r\0242\022^\\+?[1-9]\\d{1,14}$\330\001\002H\002R\005phone\210\001\001" +
+      "\022\"\n\005email\030\006 \001(\tB\007\272H\004r\002`\001H\003R\005email\210\001\001\022\"\n\n" +
+      "is_primary\030\007 \001(\010H\004R\tisPrimary\210\001\001\022$\n\013exte" +
+      "rnal_id\030\010 \001(\tH\005R\nexternalId\210\001\001B\007\n\005_nameB" +
+      "\n\n\010_addressB\010\n\006_phoneB\010\n\006_emailB\r\n\013_is_p" +
+      "rimaryB\016\n\014_external_id\"^\n\034UpdateAgencyLo" +
+      "cationResponse\022>\n\010location\030\001 \001(\0132\".produ" +
+      "cerflow.producer.v1.LocationR\010location\"\203" +
+      "\001\n AssignProducerToLocationsRequest\022)\n\013p" +
+      "roducer_id\030\001 \001(\tB\010\272H\005r\003\260\001\001R\nproducerId\0224" +
+      "\n\014location_ids\030\002 \003(\tB\021\272H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R" +
+      "\013locationIds\"W\n!AssignProducerToLocation" +
+      "sResponse\0222\n\025assigned_location_ids\030\001 \003(\t" +
+      "R\023assignedLocationIds\"\207\001\n$UnassignProduc" +
+      "erFromLocationsRequest\022)\n\013producer_id\030\001 " +
+      "\001(\tB\010\272H\005r\003\260\001\001R\nproducerId\0224\n\014location_id" +
+      "s\030\002 \003(\tB\021\272H\016\222\001\013\010\001\020d\"\005r\003\260\001\001R\013locationIds\"" +
+      "_\n%UnassignProducerFromLocationsResponse" +
+      "\0226\n\027unassigned_location_ids\030\001 \003(\tR\025unass" +
+      "ignedLocationIds*\347\001\n\013ContactRole\022\034\n\030CONT" +
+      "ACT_ROLE_UNSPECIFIED\020\000\022%\n!CONTACT_ROLE_A" +
+      "GENCY_ADMINISTRATOR\020\001\022\026\n\022CONTACT_ROLE_OT" +
+      "HER\020\002\022\024\n\020CONTACT_ROLE_CSR\020\003\022$\n CONTACT_R" +
+      "OLE_UNLICENSED_PRODUCER\020\004\022#\n\037CONTACT_ROL" +
+      "E_UNLICENSED_SERVICE\020\005\022\032\n\026CONTACT_ROLE_P" +
+      "RINCIPAL\020\006*\211\001\n\nEntityType\022\033\n\027ENTITY_TYPE" +
+      "_UNSPECIFIED\020\000\022\037\n\033ENTITY_TYPE_SOLE_PROPR" +
+      "IETOR\020\001\022\026\n\022ENTITY_TYPE_AGENCY\020\002\022%\n!ENTIT" +
+      "Y_TYPE_ASK_DURING_ONBOARDING\020\003*]\n\nAgency" +
+      "Type\022\033\n\027AGENCY_TYPE_UNSPECIFIED\020\000\022\030\n\024AGE" +
+      "NCY_TYPE_INTERNAL\020\001\022\030\n\024AGENCY_TYPE_EXTER" +
+      "NAL\020\002*\253\001\n\036AgencyOrganizationRelationship" +
+      "\0220\n,AGENCY_ORGANIZATION_RELATIONSHIP_UNS" +
+      "PECIFIED\020\000\022)\n%AGENCY_ORGANIZATION_RELATI" +
+      "ONSHIP_MAIN\020\001\022,\n(AGENCY_ORGANIZATION_REL" +
+      "ATIONSHIP_RELATED\020\002*\343\001\n\rNIPRSyncState\022\037\n" +
+      "\033NIPR_SYNC_STATE_UNSPECIFIED\020\000\022\032\n\026NIPR_S" +
+      "YNC_STATE_ACTIVE\020\001\022\033\n\027NIPR_SYNC_STATE_FA" +
+      "ILING\020\002\022\033\n\027NIPR_SYNC_STATE_PENDING\020\003\022\034\n\030" +
+      "NIPR_SYNC_STATE_DISABLED\020\004\022\037\n\033NIPR_SYNC_" +
+      "STATE_IN_PROGRESS\020\005\022\034\n\030NIPR_SYNC_STATE_S" +
+      "TOPPING\020\006*\276\001\n\020OnboardingStatus\022!\n\035ONBOAR" +
+      "DING_STATUS_UNSPECIFIED\020\000\022\037\n\033ONBOARDING_" +
+      "STATUS_ONBOARDED\020\001\022\036\n\032ONBOARDING_STATUS_" +
+      "APPROVED\020\002\022$\n ONBOARDING_STATUS_READY_TO" +
+      "_QUOTE\020\003\022 \n\034ONBOARDING_STATUS_TERMINATED" +
+      "\020\0042\202%\n\017ProducerService\022\226\001\n\031CreateAgencyO" +
+      "nboardingURL\022:.producerflow.producer.v1." +
+      "CreateAgencyOnboardingURLRequest\032;.produ" +
+      "cerflow.producer.v1.CreateAgencyOnboardi" +
+      "ngURLResponse\"\000\022\234\001\n\033CreateProducerOnboar" +
+      "dingURL\022<.producerflow.producer.v1.Creat" +
+      "eProducerOnboardingURLRequest\032=.producer" +
+      "flow.producer.v1.CreateProducerOnboardin" +
+      "gURLResponse\"\000\022f\n\tNewAgency\022*.producerfl" +
+      "ow.producer.v1.NewAgencyRequest\032+.produc" +
+      "erflow.producer.v1.NewAgencyResponse\"\000\022o" +
+      "\n\014ListAgencies\022-.producerflow.producer.v" +
+      "1.ListAgenciesRequest\032..producerflow.pro" +
+      "ducer.v1.ListAgenciesResponse\"\000\022|\n\021ListO" +
+      "rganizations\0222.producerflow.producer.v1." +
+      "ListOrganizationsRequest\0323.producerflow." +
+      "producer.v1.ListOrganizationsResponse\022v\n" +
+      "\017GetOrganization\0220.producerflow.producer" +
+      ".v1.GetOrganizationRequest\0321.producerflo" +
+      "w.producer.v1.GetOrganizationResponse\022\177\n" +
+      "\022CreateOrganization\0223.producerflow.produ" +
+      "cer.v1.CreateOrganizationRequest\0324.produ" +
+      "cerflow.producer.v1.CreateOrganizationRe" +
+      "sponse\022l\n\013NewProducer\022,.producerflow.pro" +
+      "ducer.v1.NewProducerRequest\032-.producerfl" +
+      "ow.producer.v1.NewProducerResponse\"\000\022o\n\014" +
+      "NewProducers\022-.producerflow.producer.v1." +
+      "NewProducersRequest\032..producerflow.produ" +
+      "cer.v1.NewProducersResponse\"\000\022\215\001\n\025GetAge" +
+      "ncyAndProducers\0226.producerflow.producer." +
+      "v1.GetAgencyAndProducersRequest\0327.produc" +
+      "erflow.producer.v1.GetAgencyAndProducers" +
+      "Response\"\003\210\002\001\022\177\n\022GetAgencyProducers\0223.pr" +
+      "oducerflow.producer.v1.GetAgencyProducer" +
+      "sRequest\0324.producerflow.producer.v1.GetA" +
+      "gencyProducersResponse\022d\n\tGetAgency\022*.pr" +
+      "oducerflow.producer.v1.GetAgencyRequest\032" +
+      "+.producerflow.producer.v1.GetAgencyResp" +
+      "onse\022j\n\013GetProducer\022,.producerflow.produ" +
+      "cer.v1.GetProducerRequest\032-.producerflow" +
+      ".producer.v1.GetProducerResponse\022s\n\016GetA" +
+      "gencyFiles\022/.producerflow.producer.v1.Ge" +
+      "tAgencyFilesRequest\0320.producerflow.produ" +
+      "cer.v1.GetAgencyFilesResponse\022u\n\016UpdateP" +
+      "roducer\022/.producerflow.producer.v1.Updat" +
+      "eProducerRequest\0320.producerflow.producer" +
+      ".v1.UpdateProducerResponse\"\000\022o\n\014UpdateAg" +
+      "ency\022-.producerflow.producer.v1.UpdateAg" +
+      "encyRequest\032..producerflow.producer.v1.U" +
+      "pdateAgencyResponse\"\000\022i\n\nNewContact\022+.pr" +
+      "oducerflow.producer.v1.NewContactRequest" +
+      "\032,.producerflow.producer.v1.NewContactRe" +
+      "sponse\"\000\022l\n\013NewContacts\022,.producerflow.p" +
+      "roducer.v1.NewContactsRequest\032-.producer" +
+      "flow.producer.v1.NewContactsResponse\"\000\022\177" +
+      "\n\022ListAgencyContacts\0223.producerflow.prod" +
+      "ucer.v1.ListAgencyContactsRequest\0324.prod" +
+      "ucerflow.producer.v1.ListAgencyContactsR" +
+      "esponse\022r\n\rUpdateContact\022..producerflow." +
+      "producer.v1.UpdateContactRequest\032/.produ" +
+      "cerflow.producer.v1.UpdateContactRespons" +
+      "e\"\000\022r\n\rSetExternalID\022..producerflow.prod" +
+      "ucer.v1.SetExternalIDRequest\032/.producerf" +
+      "low.producer.v1.SetExternalIDResponse\"\000\022" +
+      "\202\001\n\023ValidateProducerNPN\0224.producerflow.p" +
+      "roducer.v1.ValidateProducerNPNRequest\0325." +
+      "producerflow.producer.v1.ValidateProduce" +
+      "rNPNResponse\022|\n\021ValidateAgencyNPN\0222.prod" +
+      "ucerflow.producer.v1.ValidateAgencyNPNRe" +
+      "quest\0323.producerflow.producer.v1.Validat" +
+      "eAgencyNPNResponse\022v\n\017LookupNPNByFEIN\0220." +
       "producerflow.producer.v1.LookupNPNByFEIN" +
-      "Response\022u\n\016ResyncProducer\022/.producerflo" +
-      "w.producer.v1.ResyncProducerRequest\0320.pr" +
-      "oducerflow.producer.v1.ResyncProducerRes" +
-      "ponse\"\000\022o\n\014ResyncAgency\022-.producerflow.p" +
-      "roducer.v1.ResyncAgencyRequest\032..produce" +
-      "rflow.producer.v1.ResyncAgencyResponse\"\000" +
-      "\022\207\001\n\024SyncProducerWithNIPR\0225.producerflow" +
-      ".producer.v1.SyncProducerWithNIPRRequest" +
-      "\0326.producerflow.producer.v1.SyncProducer" +
-      "WithNIPRResponse\"\000\022\201\001\n\022SyncAgencyWithNIP" +
-      "R\0223.producerflow.producer.v1.SyncAgencyW" +
-      "ithNIPRRequest\0324.producerflow.producer.v" +
-      "1.SyncAgencyWithNIPRResponse\"\000\022\223\001\n\030StopS" +
-      "yncProducerWithNIPR\0229.producerflow.produ" +
-      "cer.v1.StopSyncProducerWithNIPRRequest\032:" +
-      ".producerflow.producer.v1.StopSyncProduc" +
-      "erWithNIPRResponse\"\000\022\215\001\n\026StopSyncAgencyW" +
-      "ithNIPR\0227.producerflow.producer.v1.StopS" +
-      "yncAgencyWithNIPRRequest\0328.producerflow." +
-      "producer.v1.StopSyncAgencyWithNIPRRespon" +
-      "se\"\000\022\220\001\n\027CreateProducerUploadURL\0228.produ" +
-      "cerflow.producer.v1.CreateProducerUpload" +
-      "URLRequest\0329.producerflow.producer.v1.Cr" +
-      "eateProducerUploadURLResponse\"\000\022\201\001\n\022AddA" +
-      "gencyLocations\0223.producerflow.producer.v" +
-      "1.AddAgencyLocationsRequest\0324.producerfl" +
-      "ow.producer.v1.AddAgencyLocationsRespons" +
-      "e\"\000\022\212\001\n\025RemoveAgencyLocations\0226.producer" +
-      "flow.producer.v1.RemoveAgencyLocationsRe" +
-      "quest\0327.producerflow.producer.v1.RemoveA" +
-      "gencyLocationsResponse\"\000\022\202\001\n\023ListAgencyL" +
-      "ocations\0224.producerflow.producer.v1.List" +
-      "AgencyLocationsRequest\0325.producerflow.pr" +
-      "oducer.v1.ListAgencyLocationsResponse\022\226\001" +
-      "\n\031AssignProducerToLocations\022:.producerfl" +
-      "ow.producer.v1.AssignProducerToLocations" +
-      "Request\032;.producerflow.producer.v1.Assig" +
-      "nProducerToLocationsResponse\"\000\022\242\001\n\035Unass" +
-      "ignProducerFromLocations\022>.producerflow." +
-      "producer.v1.UnassignProducerFromLocation" +
-      "sRequest\032?.producerflow.producer.v1.Unas" +
-      "signProducerFromLocationsResponse\"\000\022\207\001\n\024" +
-      "UpdateAgencyLocation\0225.producerflow.prod" +
-      "ucer.v1.UpdateAgencyLocationRequest\0326.pr" +
-      "oducerflow.producer.v1.UpdateAgencyLocat" +
-      "ionResponse\"\000B\203\002\n\034com.producerflow.produ" +
-      "cer.v1B\rProducerProtoP\001ZRgithub.com/prod" +
-      "ucerflow/producerflowapi/gen/go/producer" +
-      "flow/producer/v1;producerv1\242\002\003PPX\252\002\030Prod" +
-      "ucerflow.Producer.V1\312\002\030Producerflow\\Prod" +
-      "ucer\\V1\342\002$Producerflow\\Producer\\V1\\GPBMe" +
-      "tadata\352\002\032Producerflow::Producer::V1b\006pro" +
-      "to3"
+      "Request\0321.producerflow.producer.v1.Looku" +
+      "pNPNByFEINResponse\022u\n\016ResyncProducer\022/.p" +
+      "roducerflow.producer.v1.ResyncProducerRe" +
+      "quest\0320.producerflow.producer.v1.ResyncP" +
+      "roducerResponse\"\000\022o\n\014ResyncAgency\022-.prod" +
+      "ucerflow.producer.v1.ResyncAgencyRequest" +
+      "\032..producerflow.producer.v1.ResyncAgency" +
+      "Response\"\000\022\207\001\n\024SyncProducerWithNIPR\0225.pr" +
+      "oducerflow.producer.v1.SyncProducerWithN" +
+      "IPRRequest\0326.producerflow.producer.v1.Sy" +
+      "ncProducerWithNIPRResponse\"\000\022\201\001\n\022SyncAge" +
+      "ncyWithNIPR\0223.producerflow.producer.v1.S" +
+      "yncAgencyWithNIPRRequest\0324.producerflow." +
+      "producer.v1.SyncAgencyWithNIPRResponse\"\000" +
+      "\022\223\001\n\030StopSyncProducerWithNIPR\0229.producer" +
+      "flow.producer.v1.StopSyncProducerWithNIP" +
+      "RRequest\032:.producerflow.producer.v1.Stop" +
+      "SyncProducerWithNIPRResponse\"\000\022\215\001\n\026StopS" +
+      "yncAgencyWithNIPR\0227.producerflow.produce" +
+      "r.v1.StopSyncAgencyWithNIPRRequest\0328.pro" +
+      "ducerflow.producer.v1.StopSyncAgencyWith" +
+      "NIPRResponse\"\000\022\220\001\n\027CreateProducerUploadU" +
+      "RL\0228.producerflow.producer.v1.CreateProd" +
+      "ucerUploadURLRequest\0329.producerflow.prod" +
+      "ucer.v1.CreateProducerUploadURLResponse\"" +
+      "\000\022\201\001\n\022AddAgencyLocations\0223.producerflow." +
+      "producer.v1.AddAgencyLocationsRequest\0324." +
+      "producerflow.producer.v1.AddAgencyLocati" +
+      "onsResponse\"\000\022\212\001\n\025RemoveAgencyLocations\022" +
+      "6.producerflow.producer.v1.RemoveAgencyL" +
+      "ocationsRequest\0327.producerflow.producer." +
+      "v1.RemoveAgencyLocationsResponse\"\000\022\202\001\n\023L" +
+      "istAgencyLocations\0224.producerflow.produc" +
+      "er.v1.ListAgencyLocationsRequest\0325.produ" +
+      "cerflow.producer.v1.ListAgencyLocationsR" +
+      "esponse\022\226\001\n\031AssignProducerToLocations\022:." +
+      "producerflow.producer.v1.AssignProducerT" +
+      "oLocationsRequest\032;.producerflow.produce" +
+      "r.v1.AssignProducerToLocationsResponse\"\000" +
+      "\022\242\001\n\035UnassignProducerFromLocations\022>.pro" +
+      "ducerflow.producer.v1.UnassignProducerFr" +
+      "omLocationsRequest\032?.producerflow.produc" +
+      "er.v1.UnassignProducerFromLocationsRespo" +
+      "nse\"\000\022\207\001\n\024UpdateAgencyLocation\0225.produce" +
+      "rflow.producer.v1.UpdateAgencyLocationRe" +
+      "quest\0326.producerflow.producer.v1.UpdateA" +
+      "gencyLocationResponse\"\000B\203\002\n\034com.producer" +
+      "flow.producer.v1B\rProducerProtoP\001ZRgithu" +
+      "b.com/producerflow/producerflowapi/gen/g" +
+      "o/producerflow/producer/v1;producerv1\242\002\003" +
+      "PPX\252\002\030Producerflow.Producer.V1\312\002\030Produce" +
+      "rflow\\Producer\\V1\342\002$Producerflow\\Produce" +
+      "r\\V1\\GPBMetadata\352\002\032Producerflow::Produce" +
+      "r::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2261,7 +2265,7 @@ public final class ProducerProto {
     internal_static_producerflow_producer_v1_Producer_NIPR_License_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_producerflow_producer_v1_Producer_NIPR_License_descriptor,
-        new java.lang.String[] { "LicenseNumber", "LicenseState", "ResidencyStatus", "Active", "Status", "ExpirationDate", "ExpiresOn", "UpdatedAt", "LinesOfAuthority", "LicenseId", "DesignatedHomeState", });
+        new java.lang.String[] { "LicenseNumber", "LicenseState", "ResidencyStatus", "Active", "Status", "ExpirationDate", "ExpiresOn", "UpdatedAt", "LinesOfAuthority", "LicenseId", "DesignatedHomeState", "LicenseClass", "LicenseClassCode", });
     internal_static_producerflow_producer_v1_Producer_NIPR_License_LineOfAuthority_descriptor =
       internal_static_producerflow_producer_v1_Producer_NIPR_License_descriptor.getNestedTypes().get(0);
     internal_static_producerflow_producer_v1_Producer_NIPR_License_LineOfAuthority_fieldAccessorTable = new
@@ -2645,7 +2649,7 @@ public final class ProducerProto {
     internal_static_producerflow_producer_v1_Location_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_producerflow_producer_v1_Location_descriptor,
-        new java.lang.String[] { "Id", "Name", "Address", "Phone", "Email", "IsPrimary", });
+        new java.lang.String[] { "Id", "Name", "Address", "Phone", "Email", "IsPrimary", "ExternalId", });
     internal_static_producerflow_producer_v1_AddAgencyLocationsRequest_descriptor =
       getDescriptor().getMessageTypes().get(75);
     internal_static_producerflow_producer_v1_AddAgencyLocationsRequest_fieldAccessorTable = new
@@ -2693,7 +2697,7 @@ public final class ProducerProto {
     internal_static_producerflow_producer_v1_UpdateAgencyLocationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_producerflow_producer_v1_UpdateAgencyLocationRequest_descriptor,
-        new java.lang.String[] { "AgencyId", "LocationId", "Name", "Address", "Phone", "Email", "IsPrimary", });
+        new java.lang.String[] { "AgencyId", "LocationId", "Name", "Address", "Phone", "Email", "IsPrimary", "ExternalId", });
     internal_static_producerflow_producer_v1_UpdateAgencyLocationResponse_descriptor =
       getDescriptor().getMessageTypes().get(83);
     internal_static_producerflow_producer_v1_UpdateAgencyLocationResponse_fieldAccessorTable = new

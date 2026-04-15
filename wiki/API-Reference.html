@@ -28673,6 +28673,14 @@ Common Error Codes:
                                 <td>Optional. Whether this should be the primary location. </td>
                               </tr>
                             
+                              <tr>
+                                <td><code>external_id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td>optional</td>
+                                <td>Optional. Carrier-specific external ID for this location.
+Must be unique within the tenant when set. Pass an empty string to clear it. </td>
+                              </tr>
+                            
                           </tbody>
                         </table>
                       
@@ -33604,6 +33612,13 @@ Each location includes address information and optional contact details.</div>
                           <td>Whether this is the primary location for the agency. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Tenant-specific external ID for this location. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -36122,6 +36137,31 @@ before allowing sales. </td>
                           <td>The designated home state for adjuster licenses (ADHS). </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>license_class</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>License class description as defined by the state DOI.
+Describes the broad category of insurance the license covers.
+Common classes include:
+- "Insurance Producer": General license to sell insurance
+- "Limited Lines Producer": Restricted to specific product types
+- "Surplus Lines Broker": Authorized for non-admitted carriers
+- "Managing General Agent": Underwriting authority on behalf of insurers
+- "Consultant": Licensed to provide insurance advice for a fee
+Values vary by state as each DOI defines its own license classes. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>license_class_code</code></td>
+                          <td><a href="#int32">int32</a></td>
+                          <td></td>
+                          <td>Numeric code corresponding to the license class.
+This is the NIPR-standardized numeric identifier for the license class
+description in the license_class field.
+Used for programmatic comparisons rather than string matching. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -37088,6 +37128,14 @@ Must be a valid UUID format. </td>
                           <td><a href="#bool">bool</a></td>
                           <td>optional</td>
                           <td>Optional. Whether this should be the primary location. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td>optional</td>
+                          <td>Optional. Carrier-specific external ID for this location.
+Must be unique within the tenant when set. Pass an empty string to clear it. </td>
                         </tr>
                       
                     </tbody>

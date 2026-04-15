@@ -2079,6 +2079,78 @@ public object ProducerKt {
         public fun clearDesignatedHomeState() {
           _builder.clearDesignatedHomeState()
         }
+
+        /**
+         * ```
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * ```
+         *
+         * `string license_class = 12 [json_name = "licenseClass"];`
+         */
+        public var licenseClass: kotlin.String
+          @JvmName("getLicenseClass")
+          get() = _builder.licenseClass
+          @JvmName("setLicenseClass")
+          set(value) {
+            _builder.licenseClass = value
+          }
+        /**
+         * ```
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * ```
+         *
+         * `string license_class = 12 [json_name = "licenseClass"];`
+         */
+        public fun clearLicenseClass() {
+          _builder.clearLicenseClass()
+        }
+
+        /**
+         * ```
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
+         * ```
+         *
+         * `int32 license_class_code = 13 [json_name = "licenseClassCode"];`
+         */
+        public var licenseClassCode: kotlin.Int
+          @JvmName("getLicenseClassCode")
+          get() = _builder.licenseClassCode
+          @JvmName("setLicenseClassCode")
+          set(value) {
+            _builder.licenseClassCode = value
+          }
+        /**
+         * ```
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
+         * ```
+         *
+         * `int32 license_class_code = 13 [json_name = "licenseClassCode"];`
+         */
+        public fun clearLicenseClassCode() {
+          _builder.clearLicenseClassCode()
+        }
       }
       @kotlin.jvm.JvmName("-initializelineOfAuthority")
       public inline fun lineOfAuthority(block: com.producerflow.producer.v1.ProducerKt.NIPRKt.LicenseKt.LineOfAuthorityKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority =

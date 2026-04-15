@@ -2782,6 +2782,7 @@ UpdateAgencyLocationRequest updates an existing agency location.
 | `phone` | [string](#string) | optional | Optional. New phone number. Must be in E.164 format. |
 | `email` | [string](#string) | optional | Optional. New email address. |
 | `is_primary` | [bool](#bool) | optional | Optional. Whether this should be the primary location. |
+| `external_id` | [string](#string) | optional | Optional. Carrier-specific external ID for this location. Must be unique within the tenant when set. Pass an empty string to clear it. |
 
 #### Response: `UpdateAgencyLocationResponse`
 
@@ -3893,6 +3894,7 @@ Each location includes address information and optional contact details.
 | `phone` | [string](#string) |  | Required. Phone number for the location. |
 | `email` | [string](#string) |  | Required. Email address for the location. |
 | `is_primary` | [bool](#bool) |  | Whether this is the primary location for the agency. |
+| `external_id` | [string](#string) |  | Tenant-specific external ID for this location. |
 
 #### LocationInput
 
@@ -4506,6 +4508,8 @@ Compliance Use Cases:
 | `lines_of_authority` | [Producer.NIPR.License.LineOfAuthority](#producerniprlicenselineofauthority) | repeated | Lines of Authority (LOAs) associated with this license.  These define what types of insurance the producer is authorized to sell in this state. A single license typically has multiple LOAs. Always check that the producer has an active LOA matching the product type before allowing sales. |
 | `license_id` | [string](#string) |  | The unique identifier for this license. |
 | `designated_home_state` | [string](#string) |  | The designated home state for adjuster licenses (ADHS). |
+| `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers - "Managing General Agent": Underwriting authority on behalf of insurers - "Consultant": Licensed to provide insurance advice for a fee Values vary by state as each DOI defines its own license classes. |
+| `license_class_code` | [int32](#int32) |  | Numeric code corresponding to the license class. This is the NIPR-standardized numeric identifier for the license class description in the license_class field. Used for programmatic comparisons rather than string matching. |
 
 #### Producer.NIPR.License.LineOfAuthority
 
@@ -4776,6 +4780,7 @@ UpdateAgencyLocationRequest updates an existing agency location.
 | `phone` | [string](#string) | optional | Optional. New phone number. Must be in E.164 format. |
 | `email` | [string](#string) | optional | Optional. New email address. |
 | `is_primary` | [bool](#bool) | optional | Optional. Whether this should be the primary location. |
+| `external_id` | [string](#string) | optional | Optional. Carrier-specific external ID for this location. Must be unique within the tenant when set. Pass an empty string to clear it. |
 
 #### UpdateAgencyLocationResponse
 

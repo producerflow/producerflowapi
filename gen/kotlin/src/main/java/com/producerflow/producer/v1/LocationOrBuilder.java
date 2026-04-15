@@ -125,4 +125,24 @@ public interface LocationOrBuilder extends
    * @return The isPrimary.
    */
   boolean getIsPrimary();
+
+  /**
+   * <pre>
+   * Tenant-specific external ID for this location.
+   * </pre>
+   *
+   * <code>string external_id = 7 [json_name = "externalId"];</code>
+   * @return The externalId.
+   */
+  java.lang.String getExternalId();
+  /**
+   * <pre>
+   * Tenant-specific external ID for this location.
+   * </pre>
+   *
+   * <code>string external_id = 7 [json_name = "externalId"];</code>
+   * @return The bytes for externalId.
+   */
+  com.google.protobuf.ByteString
+      getExternalIdBytes();
 }

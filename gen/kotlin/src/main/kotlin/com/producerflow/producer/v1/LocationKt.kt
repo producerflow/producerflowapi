@@ -195,6 +195,31 @@ public object LocationKt {
     public fun clearIsPrimary() {
       _builder.clearIsPrimary()
     }
+
+    /**
+     * ```
+     * Tenant-specific external ID for this location.
+     * ```
+     *
+     * `string external_id = 7 [json_name = "externalId"];`
+     */
+    public var externalId: kotlin.String
+      @JvmName("getExternalId")
+      get() = _builder.externalId
+      @JvmName("setExternalId")
+      set(value) {
+        _builder.externalId = value
+      }
+    /**
+     * ```
+     * Tenant-specific external ID for this location.
+     * ```
+     *
+     * `string external_id = 7 [json_name = "externalId"];`
+     */
+    public fun clearExternalId() {
+      _builder.clearExternalId()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

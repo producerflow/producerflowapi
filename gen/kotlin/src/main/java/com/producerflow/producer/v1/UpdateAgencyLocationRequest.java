@@ -36,6 +36,7 @@ private static final long serialVersionUID = 0L;
     name_ = "";
     phone_ = "";
     email_ = "";
+    externalId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -388,6 +389,68 @@ private static final long serialVersionUID = 0L;
     return isPrimary_;
   }
 
+  public static final int EXTERNAL_ID_FIELD_NUMBER = 8;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object externalId_ = "";
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return Whether the externalId field is set.
+   */
+  @java.lang.Override
+  public boolean hasExternalId() {
+    return ((bitField0_ & 0x00000020) != 0);
+  }
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return The externalId.
+   */
+  @java.lang.Override
+  public java.lang.String getExternalId() {
+    java.lang.Object ref = externalId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      externalId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return The bytes for externalId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getExternalIdBytes() {
+    java.lang.Object ref = externalId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      externalId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -423,6 +486,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000010) != 0)) {
       output.writeBool(7, isPrimary_);
     }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 8, externalId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -454,6 +520,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000010) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(7, isPrimary_);
+    }
+    if (((bitField0_ & 0x00000020) != 0)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(8, externalId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -499,6 +568,11 @@ private static final long serialVersionUID = 0L;
       if (getIsPrimary()
           != other.getIsPrimary()) return false;
     }
+    if (hasExternalId() != other.hasExternalId()) return false;
+    if (hasExternalId()) {
+      if (!getExternalId()
+          .equals(other.getExternalId())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -534,6 +608,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + IS_PRIMARY_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getIsPrimary());
+    }
+    if (hasExternalId()) {
+      hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getExternalId().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -687,6 +765,7 @@ private static final long serialVersionUID = 0L;
       phone_ = "";
       email_ = "";
       isPrimary_ = false;
+      externalId_ = "";
       return this;
     }
 
@@ -749,6 +828,10 @@ private static final long serialVersionUID = 0L;
         result.isPrimary_ = isPrimary_;
         to_bitField0_ |= 0x00000010;
       }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.externalId_ = externalId_;
+        to_bitField0_ |= 0x00000020;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -794,6 +877,11 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasIsPrimary()) {
         setIsPrimary(other.getIsPrimary());
+      }
+      if (other.hasExternalId()) {
+        externalId_ = other.externalId_;
+        bitField0_ |= 0x00000080;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -858,6 +946,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000040;
               break;
             } // case 56
+            case 66: {
+              externalId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 66
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1577,6 +1670,115 @@ private static final long serialVersionUID = 0L;
     public Builder clearIsPrimary() {
       bitField0_ = (bitField0_ & ~0x00000040);
       isPrimary_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object externalId_ = "";
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @return Whether the externalId field is set.
+     */
+    public boolean hasExternalId() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    public java.lang.String getExternalId() {
+      java.lang.Object ref = externalId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        externalId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    public com.google.protobuf.ByteString
+        getExternalIdBytes() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        externalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @param value The externalId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExternalId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      externalId_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearExternalId() {
+      externalId_ = getDefaultInstance().getExternalId();
+      bitField0_ = (bitField0_ & ~0x00000080);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * </pre>
+     *
+     * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+     * @param value The bytes for externalId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExternalIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      externalId_ = value;
+      bitField0_ |= 0x00000080;
       onChanged();
       return this;
     }

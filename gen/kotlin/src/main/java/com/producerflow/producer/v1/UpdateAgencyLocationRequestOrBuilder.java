@@ -181,4 +181,36 @@ public interface UpdateAgencyLocationRequestOrBuilder extends
    * @return The isPrimary.
    */
   boolean getIsPrimary();
+
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return Whether the externalId field is set.
+   */
+  boolean hasExternalId();
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return The externalId.
+   */
+  java.lang.String getExternalId();
+  /**
+   * <pre>
+   * Optional. Carrier-specific external ID for this location.
+   * Must be unique within the tenant when set. Pass an empty string to clear it.
+   * </pre>
+   *
+   * <code>optional string external_id = 8 [json_name = "externalId"];</code>
+   * @return The bytes for externalId.
+   */
+  com.google.protobuf.ByteString
+      getExternalIdBytes();
 }

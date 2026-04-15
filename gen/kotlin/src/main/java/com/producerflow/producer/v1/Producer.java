@@ -1424,6 +1424,55 @@ private static final long serialVersionUID = 0L;
        */
       com.google.protobuf.ByteString
           getDesignatedHomeStateBytes();
+
+      /**
+       * <pre>
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
+       * </pre>
+       *
+       * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+       * @return The licenseClass.
+       */
+      java.lang.String getLicenseClass();
+      /**
+       * <pre>
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
+       * </pre>
+       *
+       * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+       * @return The bytes for licenseClass.
+       */
+      com.google.protobuf.ByteString
+          getLicenseClassBytes();
+
+      /**
+       * <pre>
+       * Numeric code corresponding to the license class.
+       * This is the NIPR-standardized numeric identifier for the license class
+       * description in the license_class field.
+       * Used for programmatic comparisons rather than string matching.
+       * </pre>
+       *
+       * <code>int32 license_class_code = 13 [json_name = "licenseClassCode"];</code>
+       * @return The licenseClassCode.
+       */
+      int getLicenseClassCode();
     }
     /**
      * <pre>
@@ -1476,6 +1525,7 @@ private static final long serialVersionUID = 0L;
         linesOfAuthority_ = java.util.Collections.emptyList();
         licenseId_ = "";
         designatedHomeState_ = "";
+        licenseClass_ = "";
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -3560,6 +3610,87 @@ private static final long serialVersionUID = 0L;
         }
       }
 
+      public static final int LICENSE_CLASS_FIELD_NUMBER = 12;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object licenseClass_ = "";
+      /**
+       * <pre>
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
+       * </pre>
+       *
+       * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+       * @return The licenseClass.
+       */
+      @java.lang.Override
+      public java.lang.String getLicenseClass() {
+        java.lang.Object ref = licenseClass_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          licenseClass_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * License class description as defined by the state DOI.
+       * Describes the broad category of insurance the license covers.
+       * Common classes include:
+       * - "Insurance Producer": General license to sell insurance
+       * - "Limited Lines Producer": Restricted to specific product types
+       * - "Surplus Lines Broker": Authorized for non-admitted carriers
+       * - "Managing General Agent": Underwriting authority on behalf of insurers
+       * - "Consultant": Licensed to provide insurance advice for a fee
+       * Values vary by state as each DOI defines its own license classes.
+       * </pre>
+       *
+       * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+       * @return The bytes for licenseClass.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getLicenseClassBytes() {
+        java.lang.Object ref = licenseClass_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          licenseClass_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int LICENSE_CLASS_CODE_FIELD_NUMBER = 13;
+      private int licenseClassCode_ = 0;
+      /**
+       * <pre>
+       * Numeric code corresponding to the license class.
+       * This is the NIPR-standardized numeric identifier for the license class
+       * description in the license_class field.
+       * Used for programmatic comparisons rather than string matching.
+       * </pre>
+       *
+       * <code>int32 license_class_code = 13 [json_name = "licenseClassCode"];</code>
+       * @return The licenseClassCode.
+       */
+      @java.lang.Override
+      public int getLicenseClassCode() {
+        return licenseClassCode_;
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -3606,6 +3737,12 @@ private static final long serialVersionUID = 0L;
         }
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(designatedHomeState_)) {
           com.google.protobuf.GeneratedMessage.writeString(output, 11, designatedHomeState_);
+        }
+        if (!com.google.protobuf.GeneratedMessage.isStringEmpty(licenseClass_)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 12, licenseClass_);
+        }
+        if (licenseClassCode_ != 0) {
+          output.writeInt32(13, licenseClassCode_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -3655,6 +3792,13 @@ private static final long serialVersionUID = 0L;
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(designatedHomeState_)) {
           size += com.google.protobuf.GeneratedMessage.computeStringSize(11, designatedHomeState_);
         }
+        if (!com.google.protobuf.GeneratedMessage.isStringEmpty(licenseClass_)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(12, licenseClass_);
+        }
+        if (licenseClassCode_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(13, licenseClassCode_);
+        }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
@@ -3700,6 +3844,10 @@ private static final long serialVersionUID = 0L;
             .equals(other.getLicenseId())) return false;
         if (!getDesignatedHomeState()
             .equals(other.getDesignatedHomeState())) return false;
+        if (!getLicenseClass()
+            .equals(other.getLicenseClass())) return false;
+        if (getLicenseClassCode()
+            != other.getLicenseClassCode()) return false;
         if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
@@ -3742,6 +3890,10 @@ private static final long serialVersionUID = 0L;
         hash = (53 * hash) + getLicenseId().hashCode();
         hash = (37 * hash) + DESIGNATED_HOME_STATE_FIELD_NUMBER;
         hash = (53 * hash) + getDesignatedHomeState().hashCode();
+        hash = (37 * hash) + LICENSE_CLASS_FIELD_NUMBER;
+        hash = (53 * hash) + getLicenseClass().hashCode();
+        hash = (37 * hash) + LICENSE_CLASS_CODE_FIELD_NUMBER;
+        hash = (53 * hash) + getLicenseClassCode();
         hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -3933,6 +4085,8 @@ private static final long serialVersionUID = 0L;
           bitField0_ = (bitField0_ & ~0x00000100);
           licenseId_ = "";
           designatedHomeState_ = "";
+          licenseClass_ = "";
+          licenseClassCode_ = 0;
           return this;
         }
 
@@ -4019,6 +4173,12 @@ private static final long serialVersionUID = 0L;
           if (((from_bitField0_ & 0x00000400) != 0)) {
             result.designatedHomeState_ = designatedHomeState_;
           }
+          if (((from_bitField0_ & 0x00000800) != 0)) {
+            result.licenseClass_ = licenseClass_;
+          }
+          if (((from_bitField0_ & 0x00001000) != 0)) {
+            result.licenseClassCode_ = licenseClassCode_;
+          }
           result.bitField0_ |= to_bitField0_;
         }
 
@@ -4099,6 +4259,14 @@ private static final long serialVersionUID = 0L;
             designatedHomeState_ = other.designatedHomeState_;
             bitField0_ |= 0x00000400;
             onChanged();
+          }
+          if (!other.getLicenseClass().isEmpty()) {
+            licenseClass_ = other.licenseClass_;
+            bitField0_ |= 0x00000800;
+            onChanged();
+          }
+          if (other.getLicenseClassCode() != 0) {
+            setLicenseClassCode(other.getLicenseClassCode());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
@@ -4195,6 +4363,16 @@ private static final long serialVersionUID = 0L;
                   bitField0_ |= 0x00000400;
                   break;
                 } // case 90
+                case 98: {
+                  licenseClass_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000800;
+                  break;
+                } // case 98
+                case 104: {
+                  licenseClassCode_ = input.readInt32();
+                  bitField0_ |= 0x00001000;
+                  break;
+                } // case 104
                 default: {
                   if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                     done = true; // was an endgroup tag
@@ -5696,6 +5874,191 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        private java.lang.Object licenseClass_ = "";
+        /**
+         * <pre>
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * </pre>
+         *
+         * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+         * @return The licenseClass.
+         */
+        public java.lang.String getLicenseClass() {
+          java.lang.Object ref = licenseClass_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            licenseClass_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * </pre>
+         *
+         * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+         * @return The bytes for licenseClass.
+         */
+        public com.google.protobuf.ByteString
+            getLicenseClassBytes() {
+          java.lang.Object ref = licenseClass_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            licenseClass_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * </pre>
+         *
+         * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+         * @param value The licenseClass to set.
+         * @return This builder for chaining.
+         */
+        public Builder setLicenseClass(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          licenseClass_ = value;
+          bitField0_ |= 0x00000800;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * </pre>
+         *
+         * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearLicenseClass() {
+          licenseClass_ = getDefaultInstance().getLicenseClass();
+          bitField0_ = (bitField0_ & ~0x00000800);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * License class description as defined by the state DOI.
+         * Describes the broad category of insurance the license covers.
+         * Common classes include:
+         * - "Insurance Producer": General license to sell insurance
+         * - "Limited Lines Producer": Restricted to specific product types
+         * - "Surplus Lines Broker": Authorized for non-admitted carriers
+         * - "Managing General Agent": Underwriting authority on behalf of insurers
+         * - "Consultant": Licensed to provide insurance advice for a fee
+         * Values vary by state as each DOI defines its own license classes.
+         * </pre>
+         *
+         * <code>string license_class = 12 [json_name = "licenseClass"];</code>
+         * @param value The bytes for licenseClass to set.
+         * @return This builder for chaining.
+         */
+        public Builder setLicenseClassBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          licenseClass_ = value;
+          bitField0_ |= 0x00000800;
+          onChanged();
+          return this;
+        }
+
+        private int licenseClassCode_ ;
+        /**
+         * <pre>
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
+         * </pre>
+         *
+         * <code>int32 license_class_code = 13 [json_name = "licenseClassCode"];</code>
+         * @return The licenseClassCode.
+         */
+        @java.lang.Override
+        public int getLicenseClassCode() {
+          return licenseClassCode_;
+        }
+        /**
+         * <pre>
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
+         * </pre>
+         *
+         * <code>int32 license_class_code = 13 [json_name = "licenseClassCode"];</code>
+         * @param value The licenseClassCode to set.
+         * @return This builder for chaining.
+         */
+        public Builder setLicenseClassCode(int value) {
+
+          licenseClassCode_ = value;
+          bitField0_ |= 0x00001000;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Numeric code corresponding to the license class.
+         * This is the NIPR-standardized numeric identifier for the license class
+         * description in the license_class field.
+         * Used for programmatic comparisons rather than string matching.
+         * </pre>
+         *
+         * <code>int32 license_class_code = 13 [json_name = "licenseClassCode"];</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearLicenseClassCode() {
+          bitField0_ = (bitField0_ & ~0x00001000);
+          licenseClassCode_ = 0;
+          onChanged();
+          return this;
+        }
+
         // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Producer.NIPR.License)
       }
 
@@ -5846,7 +6209,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3360
+       *     See producerflow/producer/v1/producer.proto;l=3377
        * @return The fein.
        */
       @java.lang.Deprecated java.lang.String getFein();
@@ -5858,7 +6221,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3360
+       *     See producerflow/producer/v1/producer.proto;l=3377
        * @return The bytes for fein.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -5872,7 +6235,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3364
+       *     See producerflow/producer/v1/producer.proto;l=3381
        * @return The companyName.
        */
       @java.lang.Deprecated java.lang.String getCompanyName();
@@ -5884,7 +6247,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3364
+       *     See producerflow/producer/v1/producer.proto;l=3381
        * @return The bytes for companyName.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -5898,7 +6261,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3368
+       *     See producerflow/producer/v1/producer.proto;l=3385
        * @return The stateDomicile.
        */
       @java.lang.Deprecated java.lang.String getStateDomicile();
@@ -5910,7 +6273,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3368
+       *     See producerflow/producer/v1/producer.proto;l=3385
        * @return The bytes for stateDomicile.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6154,7 +6517,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3360
+       *     See producerflow/producer/v1/producer.proto;l=3377
        * @return The fein.
        */
       @java.lang.Override
@@ -6178,7 +6541,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3360
+       *     See producerflow/producer/v1/producer.proto;l=3377
        * @return The bytes for fein.
        */
       @java.lang.Override
@@ -6207,7 +6570,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3364
+       *     See producerflow/producer/v1/producer.proto;l=3381
        * @return The companyName.
        */
       @java.lang.Override
@@ -6231,7 +6594,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3364
+       *     See producerflow/producer/v1/producer.proto;l=3381
        * @return The bytes for companyName.
        */
       @java.lang.Override
@@ -6260,7 +6623,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3368
+       *     See producerflow/producer/v1/producer.proto;l=3385
        * @return The stateDomicile.
        */
       @java.lang.Override
@@ -6284,7 +6647,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3368
+       *     See producerflow/producer/v1/producer.proto;l=3385
        * @return The bytes for stateDomicile.
        */
       @java.lang.Override
@@ -7207,7 +7570,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3360
+         *     See producerflow/producer/v1/producer.proto;l=3377
          * @return The fein.
          */
         @java.lang.Deprecated public java.lang.String getFein() {
@@ -7230,7 +7593,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3360
+         *     See producerflow/producer/v1/producer.proto;l=3377
          * @return The bytes for fein.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7254,7 +7617,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3360
+         *     See producerflow/producer/v1/producer.proto;l=3377
          * @param value The fein to set.
          * @return This builder for chaining.
          */
@@ -7274,7 +7637,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3360
+         *     See producerflow/producer/v1/producer.proto;l=3377
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearFein() {
@@ -7291,7 +7654,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3360
+         *     See producerflow/producer/v1/producer.proto;l=3377
          * @param value The bytes for fein to set.
          * @return This builder for chaining.
          */
@@ -7314,7 +7677,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3364
+         *     See producerflow/producer/v1/producer.proto;l=3381
          * @return The companyName.
          */
         @java.lang.Deprecated public java.lang.String getCompanyName() {
@@ -7337,7 +7700,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3364
+         *     See producerflow/producer/v1/producer.proto;l=3381
          * @return The bytes for companyName.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7361,7 +7724,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3364
+         *     See producerflow/producer/v1/producer.proto;l=3381
          * @param value The companyName to set.
          * @return This builder for chaining.
          */
@@ -7381,7 +7744,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3364
+         *     See producerflow/producer/v1/producer.proto;l=3381
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearCompanyName() {
@@ -7398,7 +7761,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3364
+         *     See producerflow/producer/v1/producer.proto;l=3381
          * @param value The bytes for companyName to set.
          * @return This builder for chaining.
          */
@@ -7421,7 +7784,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3368
+         *     See producerflow/producer/v1/producer.proto;l=3385
          * @return The stateDomicile.
          */
         @java.lang.Deprecated public java.lang.String getStateDomicile() {
@@ -7444,7 +7807,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3368
+         *     See producerflow/producer/v1/producer.proto;l=3385
          * @return The bytes for stateDomicile.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7468,7 +7831,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3368
+         *     See producerflow/producer/v1/producer.proto;l=3385
          * @param value The stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -7488,7 +7851,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3368
+         *     See producerflow/producer/v1/producer.proto;l=3385
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStateDomicile() {
@@ -7505,7 +7868,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3368
+         *     See producerflow/producer/v1/producer.proto;l=3385
          * @param value The bytes for stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -16779,7 +17142,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3600
+     *     See producerflow/producer/v1/producer.proto;l=3617
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -16790,7 +17153,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3600
+     *     See producerflow/producer/v1/producer.proto;l=3617
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -16963,7 +17326,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3600
+     *     See producerflow/producer/v1/producer.proto;l=3617
      * @return The street.
      */
     @java.lang.Override
@@ -16986,7 +17349,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3600
+     *     See producerflow/producer/v1/producer.proto;l=3617
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -17685,7 +18048,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3600
+       *     See producerflow/producer/v1/producer.proto;l=3617
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -17707,7 +18070,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3600
+       *     See producerflow/producer/v1/producer.proto;l=3617
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -17730,7 +18093,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3600
+       *     See producerflow/producer/v1/producer.proto;l=3617
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -17749,7 +18112,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3600
+       *     See producerflow/producer/v1/producer.proto;l=3617
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -17765,7 +18128,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3600
+       *     See producerflow/producer/v1/producer.proto;l=3617
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */

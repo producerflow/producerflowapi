@@ -263,6 +263,45 @@ public object UpdateAgencyLocationRequestKt {
     public fun hasIsPrimary(): kotlin.Boolean {
       return _builder.hasIsPrimary()
     }
+
+    /**
+     * ```
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * ```
+     *
+     * `optional string external_id = 8 [json_name = "externalId"];`
+     */
+    public var externalId: kotlin.String
+      @JvmName("getExternalId")
+      get() = _builder.externalId
+      @JvmName("setExternalId")
+      set(value) {
+        _builder.externalId = value
+      }
+    /**
+     * ```
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * ```
+     *
+     * `optional string external_id = 8 [json_name = "externalId"];`
+     */
+    public fun clearExternalId() {
+      _builder.clearExternalId()
+    }
+    /**
+     * ```
+     * Optional. Carrier-specific external ID for this location.
+     * Must be unique within the tenant when set. Pass an empty string to clear it.
+     * ```
+     *
+     * `optional string external_id = 8 [json_name = "externalId"];`
+     * @return Whether the externalId field is set.
+     */
+    public fun hasExternalId(): kotlin.Boolean {
+      return _builder.hasExternalId()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

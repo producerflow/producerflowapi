@@ -5993,7 +5993,9 @@ type Location struct {
 	// Required. Email address for the location.
 	Email string `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	// Whether this is the primary location for the agency.
-	IsPrimary     bool `protobuf:"varint,6,opt,name=is_primary,json=isPrimary,proto3" json:"is_primary,omitempty"`
+	IsPrimary bool `protobuf:"varint,6,opt,name=is_primary,json=isPrimary,proto3" json:"is_primary,omitempty"`
+	// Tenant-specific external ID for this location.
+	ExternalId    string `protobuf:"bytes,7,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6068,6 +6070,13 @@ func (x *Location) GetIsPrimary() bool {
 		return x.IsPrimary
 	}
 	return false
+}
+
+func (x *Location) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
 }
 
 // AddAgencyLocationsRequest adds new locations to an agency.
@@ -6462,7 +6471,10 @@ type UpdateAgencyLocationRequest struct {
 	// Optional. New email address.
 	Email *string `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	// Optional. Whether this should be the primary location.
-	IsPrimary     *bool `protobuf:"varint,7,opt,name=is_primary,json=isPrimary,proto3,oneof" json:"is_primary,omitempty"`
+	IsPrimary *bool `protobuf:"varint,7,opt,name=is_primary,json=isPrimary,proto3,oneof" json:"is_primary,omitempty"`
+	// Optional. Carrier-specific external ID for this location.
+	// Must be unique within the tenant when set. Pass an empty string to clear it.
+	ExternalId    *string `protobuf:"bytes,8,opt,name=external_id,json=externalId,proto3,oneof" json:"external_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6544,6 +6556,13 @@ func (x *UpdateAgencyLocationRequest) GetIsPrimary() bool {
 		return *x.IsPrimary
 	}
 	return false
+}
+
+func (x *UpdateAgencyLocationRequest) GetExternalId() string {
+	if x != nil && x.ExternalId != nil {
+		return *x.ExternalId
+	}
+	return ""
 }
 
 // UpdateAgencyLocationResponse contains the updated location details.
@@ -10953,8 +10972,23 @@ type Producer_NIPR_License struct {
 	LicenseId string `protobuf:"bytes,9,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
 	// The designated home state for adjuster licenses (ADHS).
 	DesignatedHomeState string `protobuf:"bytes,11,opt,name=designated_home_state,json=designatedHomeState,proto3" json:"designated_home_state,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// License class description as defined by the state DOI.
+	// Describes the broad category of insurance the license covers.
+	// Common classes include:
+	// - "Insurance Producer": General license to sell insurance
+	// - "Limited Lines Producer": Restricted to specific product types
+	// - "Surplus Lines Broker": Authorized for non-admitted carriers
+	// - "Managing General Agent": Underwriting authority on behalf of insurers
+	// - "Consultant": Licensed to provide insurance advice for a fee
+	// Values vary by state as each DOI defines its own license classes.
+	LicenseClass string `protobuf:"bytes,12,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
+	// Numeric code corresponding to the license class.
+	// This is the NIPR-standardized numeric identifier for the license class
+	// description in the license_class field.
+	// Used for programmatic comparisons rather than string matching.
+	LicenseClassCode int32 `protobuf:"varint,13,opt,name=license_class_code,json=licenseClassCode,proto3" json:"license_class_code,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Producer_NIPR_License) Reset() {
@@ -11063,6 +11097,20 @@ func (x *Producer_NIPR_License) GetDesignatedHomeState() string {
 		return x.DesignatedHomeState
 	}
 	return ""
+}
+
+func (x *Producer_NIPR_License) GetLicenseClass() string {
+	if x != nil {
+		return x.LicenseClass
+	}
+	return ""
+}
+
+func (x *Producer_NIPR_License) GetLicenseClassCode() int32 {
+	if x != nil {
+		return x.LicenseClassCode
+	}
+	return 0
 }
 
 // Biographic contains personal and identifying information about the producer.
@@ -12491,7 +12539,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
 	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliationsB\x1c\n" +
-	"\x1a_organization_relationship\"\xb7%\n" +
+	"\x1a_organization_relationship\"\x8a&\n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -12518,7 +12566,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x1conboarding_status_updated_at\x18- \x01(\v2\x1a.google.protobuf.TimestampR\x19onboardingStatusUpdatedAt\x1a9\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x1a\xd1\x18\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x1a\xa4\x19\n" +
 	"\x04NIPR\x12K\n" +
 	"\blicenses\x18\x06 \x03(\v2/.producerflow.producer.v1.Producer.NIPR.LicenseR\blicenses\x12R\n" +
 	"\n" +
@@ -12528,7 +12576,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fappointments\x18\n" +
 	" \x03(\v23.producerflow.producer.v1.Producer.NIPR.AppointmentR\fappointments\x12Q\n" +
 	"\x10nipr_sync_status\x18\v \x01(\x0e2'.producerflow.producer.v1.NIPRSyncStateR\x0eniprSyncStatus\x12X\n" +
-	"\x1bnipr_sync_status_updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\x17niprSyncStatusUpdatedAt\x1a\x9b\a\n" +
+	"\x1bnipr_sync_status_updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\x17niprSyncStatusUpdatedAt\x1a\xee\a\n" +
 	"\aLicense\x12%\n" +
 	"\x0elicense_number\x18\x01 \x01(\tR\rlicenseNumber\x12#\n" +
 	"\rlicense_state\x18\x02 \x01(\tR\flicenseState\x12)\n" +
@@ -12544,7 +12592,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12lines_of_authority\x18\b \x03(\v2?.producerflow.producer.v1.Producer.NIPR.License.LineOfAuthorityR\x10linesOfAuthority\x12\x1d\n" +
 	"\n" +
 	"license_id\x18\t \x01(\tR\tlicenseId\x122\n" +
-	"\x15designated_home_state\x18\v \x01(\tR\x13designatedHomeState\x1a\xaa\x01\n" +
+	"\x15designated_home_state\x18\v \x01(\tR\x13designatedHomeState\x12#\n" +
+	"\rlicense_class\x18\f \x01(\tR\flicenseClass\x12,\n" +
+	"\x12license_class_code\x18\r \x01(\x05R\x10licenseClassCode\x1a\xaa\x01\n" +
 	"\x0fLineOfAuthority\x12\x10\n" +
 	"\x03loa\x18\x01 \x01(\tR\x03loa\x12\x16\n" +
 	"\x06active\x18\x02 \x01(\bR\x06active\x12=\n" +
@@ -12863,7 +12913,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"agency_npn\x18\x01 \x01(\tB\x13\xbaH\x10r\x0e\x10\x02\x18\n" +
 	"2\b^[0-9]+$R\tagencyNpn\"3\n" +
 	"\x1fCreateProducerUploadURLResponse\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"\xc7\x01\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"\xe8\x01\n" +
 	"\bLocation\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12C\n" +
@@ -12871,7 +12921,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05phone\x18\x04 \x01(\tR\x05phone\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x1d\n" +
 	"\n" +
-	"is_primary\x18\x06 \x01(\bR\tisPrimary\"\x95\x01\n" +
+	"is_primary\x18\x06 \x01(\bR\tisPrimary\x12\x1f\n" +
+	"\vexternal_id\x18\a \x01(\tR\n" +
+	"externalId\"\x95\x01\n" +
 	"\x19AddAgencyLocationsRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12Q\n" +
 	"\tlocations\x18\x02 \x03(\v2'.producerflow.producer.v1.LocationInputB\n" +
@@ -12893,7 +12945,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x1aListAgencyLocationsRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"_\n" +
 	"\x1bListAgencyLocationsResponse\x12@\n" +
-	"\tlocations\x18\x01 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\"\x8c\x03\n" +
+	"\tlocations\x18\x01 \x03(\v2\".producerflow.producer.v1.LocationR\tlocations\"\xc2\x03\n" +
 	"\x1bUpdateAgencyLocationRequest\x12%\n" +
 	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\x12)\n" +
 	"\vlocation_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
@@ -12903,13 +12955,16 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x05phone\x18\x05 \x01(\tB\x1c\xbaH\x19\xd8\x01\x02r\x142\x12^\\+?[1-9]\\d{1,14}$H\x02R\x05phone\x88\x01\x01\x12\"\n" +
 	"\x05email\x18\x06 \x01(\tB\a\xbaH\x04r\x02`\x01H\x03R\x05email\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"is_primary\x18\a \x01(\bH\x04R\tisPrimary\x88\x01\x01B\a\n" +
+	"is_primary\x18\a \x01(\bH\x04R\tisPrimary\x88\x01\x01\x12$\n" +
+	"\vexternal_id\x18\b \x01(\tH\x05R\n" +
+	"externalId\x88\x01\x01B\a\n" +
 	"\x05_nameB\n" +
 	"\n" +
 	"\b_addressB\b\n" +
 	"\x06_phoneB\b\n" +
 	"\x06_emailB\r\n" +
-	"\v_is_primary\"^\n" +
+	"\v_is_primaryB\x0e\n" +
+	"\f_external_id\"^\n" +
 	"\x1cUpdateAgencyLocationResponse\x12>\n" +
 	"\blocation\x18\x01 \x01(\v2\".producerflow.producer.v1.LocationR\blocation\"\x83\x01\n" +
 	" AssignProducerToLocationsRequest\x12)\n" +
