@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.22] - 2026-04-15
+
+### Added
+
+#### ProducerService
+
+- **New fields in NIPR license data: `license_class` and `license_class_code`** — each license now includes the state DOI license class description (e.g., "Insurance Producer", "Surplus Lines Broker") and its corresponding NIPR-standardized numeric code for programmatic matching
+- **`external_id` on `Location`** — locations now expose a tenant-specific external identifier, readable via all location RPCs (`GetAgency`, `GetAgencyLocation`, `GetAgencyLocations`)
+- **`external_id` on `UpdateAgencyLocationRequest`** — the external ID can be set or cleared when updating a location
+
+#### Webhooks
+
+- **`external_id` in location webhook events** — each location object in agency webhook payloads now includes the `external_id` field when set by the tenant
+- **`designated_home_state` in producer NIPR license data** — added to producer webhook schema and examples, matching the field already present in agency webhooks
+
+### Changed
+
+#### Webhooks
+
+- **Clarified `tenant_additional_questions` and `external_metadata` presence semantics** — these fields are now documented as present only when they change; an empty object (`{}`) means the field was cleared, and absence means no change in this event (applies to agency, producer, and contact schemas)
+- **Clarified `locations` array presence semantics** — the `locations` field is now documented as absent when locations were not updated; an empty array (`[]`) means all locations have been removed
+- Regenerated client libraries with latest proto changes
+
 ## [1.0.21] - 2026-04-06
 
 ### Added
