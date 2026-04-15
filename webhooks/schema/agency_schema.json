@@ -152,6 +152,7 @@
           "npn": { "type": "string" },
           "license_number": { "type": "string" },
           "residency_status": { "type": "string" },
+          "designated_home_state": { "type": "string" },
           "license_state": { "type": "string" },
           "loas": {
             "type": "array",
@@ -257,27 +258,31 @@
     },
     "tenant_additional_questions": {
       "type": "object",
-      "description": "Present when agency is created with tenant additional questions during onboarding or when the tenant additional questions field is updated. Contains custom additional questions and answers as key-value pairs collected during agency onboarding",
+      "description": "Present when the tenant_additional_questions field changes. An empty object ({}) means the field was cleared; absent means the field was not changed in this event. Contains custom additional questions and answers as key-value pairs collected during agency onboarding",
       "additionalProperties": {
         "type": "string"
       }
     },
     "external_metadata": {
       "type": "object",
-      "description": "Always present if filled in by tenant. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to agencies",
+      "description": "Present when the external_metadata field changes. An empty object ({}) means the field was cleared; absent means the field was not changed in this event. Contains tenant-specific metadata as key-value pairs allowing tenants to attach their own business attributes, computed values, or derived data to agencies",
       "additionalProperties": {
         "type": "string"
       }
     },
     "locations": {
       "type": "array",
-      "description": "Present when agency is created or when agency locations change. Contains all current locations for the agency",
+      "description": "Present when agency is created or when agency locations change. Contains all current locations for the agency. An empty array ([]) means all locations have been removed; absent field means locations were not updated.",
       "items": {
         "type": "object",
         "properties": {
           "location_id": {
             "type": "string",
             "description": "Unique identifier for the location"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "Only present if filled in by tenant. External identifier for this location from an external system"
           },
           "name": {
             "type": "string",
@@ -315,6 +320,32 @@
           "is_primary": {
             "type": "boolean",
             "description": "Whether this is the primary location for the agency"
+          },
+          "bank_account": {
+            "type": "object",
+            "description": "Optional bank account associated with this location. Present only when the location has bank account information.",
+            "properties": {
+              "bank_account_id": {
+                "type": "string",
+                "description": "Unique identifier for the bank account"
+              },
+              "account_number": {
+                "type": "string",
+                "description": "Bank account number"
+              },
+              "routing_number": {
+                "type": "string",
+                "description": "ABA routing number"
+              },
+              "account_type": {
+                "type": "string",
+                "description": "Type of bank account (e.g., checking, savings)"
+              },
+              "account_holder_name": {
+                "type": "string",
+                "description": "Name of the account holder"
+              }
+            }
           }
         }
       }

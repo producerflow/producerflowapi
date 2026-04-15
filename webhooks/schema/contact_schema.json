@@ -87,7 +87,7 @@
     },
     "external_metadata": {
       "type": "object",
-      "description": "Always present if filled in by tenant. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to contacts",
+      "description": "Present when the contact has external metadata. Absent when the field is NULL. Contains tenant-specific metadata as key-value pairs allowing tenants to attach their own business attributes, computed values, or derived data to contacts",
       "additionalProperties": {
         "type": "string"
       }

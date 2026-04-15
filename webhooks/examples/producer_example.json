@@ -58,6 +58,7 @@
       "npn": "12345678",
       "license_number": "LIC987654",
       "residency_status": "Resident",
+      "designated_home_state": "",
       "license_state": "CA",
       "loas": [
         {

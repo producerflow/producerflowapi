@@ -136,6 +136,7 @@
           "npn": { "type": "string" },
           "license_number": { "type": "string" },
           "residency_status": { "type": "string" },
+          "designated_home_state": { "type": "string" },
           "license_state": { "type": "string" },
           "loas": {
             "type": "array",
@@ -217,14 +218,14 @@
     },
     "tenant_additional_questions": {
       "type": "object",
-      "description": "Present when producer is created with tenant additional questions during onboarding or when the tenant additional questions field is updated. Contains custom additional questions and answers as key-value pairs collected during producer onboarding",
+      "description": "Present when the tenant_additional_questions field changes. An empty object ({}) means the field was cleared; absent means the field was not changed in this event. Contains custom additional questions and answers as key-value pairs collected during producer onboarding",
       "additionalProperties": {
         "type": "string"
       }
     },
     "external_metadata": {
       "type": "object",
-      "description": "Always present if filled in by tenant. Contains tenant-specific metadata as key-value pairs. This field allows tenants to attach their own business attributes, computed values, or derived data to producers",
+      "description": "Present when the external_metadata field changes. An empty object ({}) means the field was cleared; absent means the field was not changed in this event. Contains tenant-specific metadata as key-value pairs allowing tenants to attach their own business attributes, computed values, or derived data to producers",
       "additionalProperties": {
         "type": "string"
       }

@@ -83,6 +83,7 @@
       "npn": "1234567",
       "license_number": "987654",
       "residency_status": "Resident",
+      "designated_home_state": "",
       "license_state": "IL",
       "loas": [
         {
@@ -131,6 +132,7 @@
   "locations": [
     {
       "location_id": "loc_123456",
+      "external_id": "ext_loc_001",
       "name": "Chicago Main Office",
       "street": "123 Insurance Ave",
       "address_line_2": "Suite 500",
@@ -139,7 +141,14 @@
       "zip": "60601",
       "phone": "555-987-6543",
       "email": "chicago@insuranceagency.com",
-      "is_primary": true
+      "is_primary": true,
+      "bank_account": {
+        "bank_account_id": "ba_abc123",
+        "account_number": "123456789",
+        "routing_number": "021000021",
+        "account_type": "checking",
+        "account_holder_name": "Chicago Insurance Agency LLC"
+      }
     },
     {
       "location_id": "loc_789012",
