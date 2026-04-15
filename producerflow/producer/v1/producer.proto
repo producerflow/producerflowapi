@@ -3338,6 +3338,23 @@ message Producer {
 
       // The designated home state for adjuster licenses (ADHS).
       string designated_home_state = 11;
+
+      // License class description as defined by the state DOI.
+      // Describes the broad category of insurance the license covers.
+      // Common classes include:
+      // - "Insurance Producer": General license to sell insurance
+      // - "Limited Lines Producer": Restricted to specific product types
+      // - "Surplus Lines Broker": Authorized for non-admitted carriers
+      // - "Managing General Agent": Underwriting authority on behalf of insurers
+      // - "Consultant": Licensed to provide insurance advice for a fee
+      // Values vary by state as each DOI defines its own license classes.
+      string license_class = 12;
+
+      // Numeric code corresponding to the license class.
+      // This is the NIPR-standardized numeric identifier for the license class
+      // description in the license_class field.
+      // Used for programmatic comparisons rather than string matching.
+      int32 license_class_code = 13;
     }
 
     // List of all licenses held by the producer across different states.
@@ -4719,6 +4736,9 @@ message Location {
 
   // Whether this is the primary location for the agency.
   bool is_primary = 6;
+
+  // Tenant-specific external ID for this location.
+  string external_id = 7;
 }
 
 // AddAgencyLocationsRequest adds new locations to an agency.
@@ -4815,6 +4835,10 @@ message UpdateAgencyLocationRequest {
 
   // Optional. Whether this should be the primary location.
   optional bool is_primary = 7;
+
+  // Optional. Carrier-specific external ID for this location.
+  // Must be unique within the tenant when set. Pass an empty string to clear it.
+  optional string external_id = 8;
 }
 
 // UpdateAgencyLocationResponse contains the updated location details.
