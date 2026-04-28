@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.23] - 2026-04-28
+
+### Changed
+
+#### ProducerService
+
+- **`SyncAgencyWithNIPR` rejects sole proprietor agencies** — sole proprietor agencies can no longer be synced via this RPC; sync the underlying producer instead
+  - New precondition documented: agency must not be a sole proprietor
+  - Returns `FAILED_PRECONDITION` when called for a sole proprietor agency
+- Regenerated client libraries with latest proto changes
+
 ## [1.0.22] - 2026-04-15
 
 ### Added
