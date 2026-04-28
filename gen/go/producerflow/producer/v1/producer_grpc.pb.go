@@ -1054,6 +1054,7 @@ type ProducerServiceClient interface {
 	// - Agency must exist and belong to the authenticated tenant
 	// - Agency must have a valid NPN registered in NIPR
 	// - Agency must not already be in active sync state
+	// - Agency must not be a sole proprietor (sync the underlying producer instead)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -1073,10 +1074,11 @@ type ProducerServiceClient interface {
 	// Empty response on success.
 	//
 	// Common Error Codes:
-	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	// - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-	// - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
-	// - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
+	//   - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+	//     or the agency is a sole proprietor (sync the underlying producer instead)
+	//   - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
 	SyncAgencyWithNIPR(ctx context.Context, in *SyncAgencyWithNIPRRequest, opts ...grpc.CallOption) (*SyncAgencyWithNIPRResponse, error)
 	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
 	//
@@ -2794,6 +2796,7 @@ type ProducerServiceServer interface {
 	// - Agency must exist and belong to the authenticated tenant
 	// - Agency must have a valid NPN registered in NIPR
 	// - Agency must not already be in active sync state
+	// - Agency must not be a sole proprietor (sync the underlying producer instead)
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2813,10 +2816,11 @@ type ProducerServiceServer interface {
 	// Empty response on success.
 	//
 	// Common Error Codes:
-	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	// - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-	// - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
-	// - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
+	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+	//   - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
+	//   - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+	//     or the agency is a sole proprietor (sync the underlying producer instead)
+	//   - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
 	SyncAgencyWithNIPR(context.Context, *SyncAgencyWithNIPRRequest) (*SyncAgencyWithNIPRResponse, error)
 	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
 	//

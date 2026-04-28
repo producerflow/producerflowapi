@@ -2279,6 +2279,7 @@ public final class ProducerServiceGrpc {
      * - Agency must exist and belong to the authenticated tenant
      * - Agency must have a valid NPN registered in NIPR
      * - Agency must not already be in active sync state
+     * - Agency must not be a sole proprietor (sync the underlying producer instead)
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -2295,7 +2296,8 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+     *   or the agency is a sole proprietor (sync the underlying producer instead)
      * - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
      * </pre>
      */
@@ -3770,6 +3772,7 @@ public final class ProducerServiceGrpc {
      * - Agency must exist and belong to the authenticated tenant
      * - Agency must have a valid NPN registered in NIPR
      * - Agency must not already be in active sync state
+     * - Agency must not be a sole proprietor (sync the underlying producer instead)
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -3786,7 +3789,8 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+     *   or the agency is a sole proprietor (sync the underlying producer instead)
      * - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
      * </pre>
      */
@@ -5213,6 +5217,7 @@ public final class ProducerServiceGrpc {
      * - Agency must exist and belong to the authenticated tenant
      * - Agency must have a valid NPN registered in NIPR
      * - Agency must not already be in active sync state
+     * - Agency must not be a sole proprietor (sync the underlying producer instead)
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -5229,7 +5234,8 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+     *   or the agency is a sole proprietor (sync the underlying producer instead)
      * - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
      * </pre>
      */
@@ -6673,6 +6679,7 @@ public final class ProducerServiceGrpc {
      * - Agency must exist and belong to the authenticated tenant
      * - Agency must have a valid NPN registered in NIPR
      * - Agency must not already be in active sync state
+     * - Agency must not be a sole proprietor (sync the underlying producer instead)
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -6689,7 +6696,8 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
      * - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state)
+     * - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
+     *   or the agency is a sole proprietor (sync the underlying producer instead)
      * - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
      * </pre>
      */
