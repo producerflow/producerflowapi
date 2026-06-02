@@ -161,6 +161,7 @@ message ListAppointmentsRequest {
     string producer_id = 2;
     string agency_id = 3;
   }
+  repeated OperationalStatus operational_status = 4; // Optional filter
 }
 ```
 
@@ -343,7 +344,7 @@ A: Resolution depends on the specific risk reason:
 A: Operational status information is included when it's part of the change that triggered the webhook. Status-specific changes will always include the operational status details.
 
 **Q: Can I filter appointments by operational status via the API?**
-A: While there's no direct operational status filter in the current API, you can retrieve all appointments and filter by operational status in your application logic.
+A: Yes. `ListAppointments` accepts an optional `operational_status` filter. Pass one or more `OperationalStatus` values (e.g. `OPERATIONAL_STATUS_ACTIVE`, `OPERATIONAL_STATUS_AT_RISK`) to return only appointments in those operational states. Omit it to return appointments regardless of operational status.
 
 **Q: What's the difference between processing status and operational status?**
 A: Processing status relates to the appointment's lifecycle (in_progress, appointed, terminated, etc.), while operational status relates to ongoing compliance and business viability (active, at_risk).
