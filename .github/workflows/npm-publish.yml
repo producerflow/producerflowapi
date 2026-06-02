@@ -62,9 +62,7 @@ jobs:
     - name: Publish to NPM
       run: |
         cd gen/ts
-        npm publish --provenance --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        npm publish --access public # Trusted Publishing (OIDC)
 
     - name: Get package version
       id: package-version
