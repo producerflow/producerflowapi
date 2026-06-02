@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.24] - 2026-05-29
+
+### Added
+
+#### AppointmentService
+
+- **`operational_status` filter on `ListAppointments`** — filter appointments by operational status (`OPERATIONAL_STATUS_ACTIVE`, `OPERATIONAL_STATUS_AT_RISK`); omit to return appointments regardless of operational status
+
+#### ProducerService
+
+- **New `ListProducerRoles` RPC** — returns the producer role labels configured for the authenticated tenant; use it to populate role pickers, validate role inputs, or detect whether the per-tenant producer-role feature is enabled (an empty list means no role should be sent)
+- **`role` field on `Producer`, `NewProducer`, and `UpdateProducerRequest`** — tenant-defined producer role label (e.g. "Licensed Producer", "CSR", "Agency Principal"). On create/update the value must match a role configured in the tenant's settings or the request is rejected with `INVALID_ARGUMENT`; on update, omit to preserve the existing role or send an empty string to clear it
+- **`regulatory_actions` list and `RegulatoryAction.state_code`** — producers can now expose multiple regulatory actions per state via the new repeated `regulatory_actions` field, each carrying its own `state_code`
+- Regenerated client libraries with latest proto changes
+
+### Deprecated
+
+#### ProducerService
+
+- **`CONTACT_ROLE_UNLICENSED_PRODUCER`** — requests carrying this value are still accepted for backward compatibility and stored as `CONTACT_ROLE_UNLICENSED_SERVICE`
+- **`regulatory_actions_by_state` map** — deprecated in favor of the new `regulatory_actions` list; the map carries only one action per state and is populated for backward compatibility only
+
 ## [1.0.23] - 2026-04-28
 
 ### Changed
