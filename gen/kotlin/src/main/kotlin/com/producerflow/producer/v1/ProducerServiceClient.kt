@@ -1297,6 +1297,66 @@ public class ProducerServiceClient(
 
 
   /**
+   *  ListProducerRoles returns the producer role labels configured for the
+   *  authenticated tenant.
+   *
+   *  These role labels are the valid values for the `role` field on
+   *  NewProducer / UpdateProducer requests, and the values that may appear in
+   *  the `role` field of a Producer response. The list is configured per-tenant
+   *  and may be empty if the tenant has not enabled the producer-role feature —
+   *  callers should treat an empty list as "no role should be sent".
+   *
+   *  Use this endpoint to populate role pickers, validate role inputs
+   *  client-side, or discover whether the feature is enabled for the tenant.
+   *
+   *  Returns:
+   *  The list of role labels available for the authenticated tenant, in the
+   *  order they were configured. Empty when the tenant has not configured any
+   *  roles.
+   */
+  override suspend fun listProducerRoles(request: ListProducerRolesRequest, headers: Headers): ResponseMessage<ListProducerRolesResponse> = client.unary(
+    request,
+    headers,
+    MethodSpec(
+    "producerflow.producer.v1.ProducerService/ListProducerRoles",
+      com.producerflow.producer.v1.ListProducerRolesRequest::class,
+      com.producerflow.producer.v1.ListProducerRolesResponse::class,
+      StreamType.UNARY,
+    ),
+  )
+
+
+  /**
+   *  ListProducerRoles returns the producer role labels configured for the
+   *  authenticated tenant.
+   *
+   *  These role labels are the valid values for the `role` field on
+   *  NewProducer / UpdateProducer requests, and the values that may appear in
+   *  the `role` field of a Producer response. The list is configured per-tenant
+   *  and may be empty if the tenant has not enabled the producer-role feature —
+   *  callers should treat an empty list as "no role should be sent".
+   *
+   *  Use this endpoint to populate role pickers, validate role inputs
+   *  client-side, or discover whether the feature is enabled for the tenant.
+   *
+   *  Returns:
+   *  The list of role labels available for the authenticated tenant, in the
+   *  order they were configured. Empty when the tenant has not configured any
+   *  roles.
+   */
+  override fun listProducerRolesBlocking(request: ListProducerRolesRequest, headers: Headers): UnaryBlockingCall<ListProducerRolesResponse> = client.unaryBlocking(
+    request,
+    headers,
+    MethodSpec(
+    "producerflow.producer.v1.ProducerService/ListProducerRoles",
+      com.producerflow.producer.v1.ListProducerRolesRequest::class,
+      com.producerflow.producer.v1.ListProducerRolesResponse::class,
+      StreamType.UNARY,
+    ),
+  )
+
+
+  /**
    *  GetAgencyFiles retrieves signed URLs for accessing agency documents.
    *
    *  Returns pre-signed URLs for the following document types:

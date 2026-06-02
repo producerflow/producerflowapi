@@ -1064,6 +1064,41 @@ public object ProducerKt {
     }
     public val ProducerKt.Dsl.onboardingStatusUpdatedAtOrNull: com.google.protobuf.Timestamp?
       get() = _builder.onboardingStatusUpdatedAtOrNull
+
+    /**
+     * ```
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * ```
+     *
+     * `string role = 46 [json_name = "role"];`
+     */
+    public var role: kotlin.String
+      @JvmName("getRole")
+      get() = _builder.role
+      @JvmName("setRole")
+      set(value) {
+        _builder.role = value
+      }
+    /**
+     * ```
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * ```
+     *
+     * `string role = 46 [json_name = "role"];`
+     */
+    public fun clearRole() {
+      _builder.clearRole()
+    }
   }
   @kotlin.jvm.JvmName("-initializeagency")
   public inline fun agency(block: com.producerflow.producer.v1.ProducerKt.AgencyKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Producer.Agency =
@@ -2623,16 +2658,16 @@ public object ProducerKt {
         public class RegulatoryActionsByStateProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
-         public val regulatoryActionsByState: com.google.protobuf.kotlin.DslMap<kotlin.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsByStateProxy>
+        @kotlin.Deprecated(message = "Field regulatoryActionsByState is deprecated")  public val regulatoryActionsByState: com.google.protobuf.kotlin.DslMap<kotlin.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsByStateProxy>
           @kotlin.jvm.JvmSynthetic
           @JvmName("getRegulatoryActionsByStateMap")
           get() = com.google.protobuf.kotlin.DslMap(
@@ -2640,14 +2675,14 @@ public object ProducerKt {
           )
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
         @JvmName("putRegulatoryActionsByState")
         public fun com.google.protobuf.kotlin.DslMap<kotlin.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsByStateProxy>
@@ -2656,14 +2691,14 @@ public object ProducerKt {
            }
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
         @kotlin.jvm.JvmSynthetic
         @JvmName("setRegulatoryActionsByState")
@@ -2674,14 +2709,14 @@ public object ProducerKt {
            }
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
         @kotlin.jvm.JvmSynthetic
         @JvmName("removeRegulatoryActionsByState")
@@ -2691,14 +2726,14 @@ public object ProducerKt {
            }
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
         @kotlin.jvm.JvmSynthetic
         @JvmName("putAllRegulatoryActionsByState")
@@ -2708,14 +2743,14 @@ public object ProducerKt {
            }
         /**
          * ```
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * ```
          *
-         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];`
+         * `map<string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];`
          */
         @kotlin.jvm.JvmSynthetic
         @JvmName("clearRegulatoryActionsByState")
@@ -2787,6 +2822,127 @@ public object ProducerKt {
         public fun clearNasdExamDetails() {
           _builder.clearNasdExamDetails()
         }
+
+        /**
+         * An uninstantiable, behaviorless type to represent the field in
+         * generics.
+         */
+        @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+        public class RegulatoryActionsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         */
+         public val regulatoryActions: com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>
+          @kotlin.jvm.JvmSynthetic
+          get() = com.google.protobuf.kotlin.DslList(
+            _builder.regulatoryActionsList
+          )
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         * @param value The regulatoryActions to add.
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("addRegulatoryActions")
+        public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.add(value: com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction) {
+          _builder.addRegulatoryActions(value)
+        }
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         * @param value The regulatoryActions to add.
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("plusAssignRegulatoryActions")
+        @Suppress("NOTHING_TO_INLINE")
+        public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.plusAssign(value: com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction) {
+          add(value)
+        }
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         * @param values The regulatoryActions to add.
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("addAllRegulatoryActions")
+        public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.addAll(values: kotlin.collections.Iterable<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction>) {
+          _builder.addAllRegulatoryActions(values)
+        }
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         * @param values The regulatoryActions to add.
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("plusAssignAllRegulatoryActions")
+        @Suppress("NOTHING_TO_INLINE")
+        public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.plusAssign(values: kotlin.collections.Iterable<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction>) {
+          addAll(values)
+        }
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         * @param index The index to set the value at.
+         * @param value The regulatoryActions to set.
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("setRegulatoryActions")
+        public operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.set(index: kotlin.Int, value: com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction) {
+          _builder.setRegulatoryActions(index, value)
+        }
+        /**
+         * ```
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * ```
+         *
+         * `repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];`
+         */
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.jvm.JvmName("clearRegulatoryActions")
+        public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, RegulatoryActionsProxy>.clear() {
+          _builder.clearRegulatoryActions()
+        }
+
       }
       @kotlin.jvm.JvmName("-initializeregulatoryAction")
       public inline fun regulatoryAction(block: com.producerflow.producer.v1.ProducerKt.NIPRKt.ProducerRegulatoryInfoKt.RegulatoryActionKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction =
@@ -3165,6 +3321,35 @@ public object ProducerKt {
            */
           public fun clearLengthOfOrder() {
             _builder.clearLengthOfOrder()
+          }
+
+          /**
+           * ```
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * ```
+           *
+           * `string state_code = 11 [json_name = "stateCode"];`
+           */
+          public var stateCode: kotlin.String
+            @JvmName("getStateCode")
+            get() = _builder.stateCode
+            @JvmName("setStateCode")
+            set(value) {
+              _builder.stateCode = value
+            }
+          /**
+           * ```
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * ```
+           *
+           * `string state_code = 11 [json_name = "stateCode"];`
+           */
+          public fun clearStateCode() {
+            _builder.clearStateCode()
           }
         }
       }

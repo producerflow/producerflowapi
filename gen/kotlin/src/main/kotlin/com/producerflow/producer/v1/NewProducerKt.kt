@@ -868,6 +868,60 @@ public object NewProducerKt {
       .clear() {
          _builder.clearTenantAdditionalQuestions()
        }
+
+    /**
+     * ```
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * ```
+     *
+     * `optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }`
+     */
+    public var role: kotlin.String
+      @JvmName("getRole")
+      get() = _builder.role
+      @JvmName("setRole")
+      set(value) {
+        _builder.role = value
+      }
+    /**
+     * ```
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * ```
+     *
+     * `optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }`
+     */
+    public fun clearRole() {
+      _builder.clearRole()
+    }
+    /**
+     * ```
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * ```
+     *
+     * `optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }`
+     * @return Whether the role field is set.
+     */
+    public fun hasRole(): kotlin.Boolean {
+      return _builder.hasRole()
+    }
   }
   @kotlin.jvm.JvmName("-initializeaddress")
   public inline fun address(block: com.producerflow.producer.v1.NewProducerKt.AddressKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewProducer.Address =

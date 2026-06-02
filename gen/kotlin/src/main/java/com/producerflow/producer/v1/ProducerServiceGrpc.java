@@ -438,6 +438,37 @@ public final class ProducerServiceGrpc {
     return getGetProducerMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.ListProducerRolesRequest,
+      com.producerflow.producer.v1.ListProducerRolesResponse> getListProducerRolesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListProducerRoles",
+      requestType = com.producerflow.producer.v1.ListProducerRolesRequest.class,
+      responseType = com.producerflow.producer.v1.ListProducerRolesResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.producerflow.producer.v1.ListProducerRolesRequest,
+      com.producerflow.producer.v1.ListProducerRolesResponse> getListProducerRolesMethod() {
+    io.grpc.MethodDescriptor<com.producerflow.producer.v1.ListProducerRolesRequest, com.producerflow.producer.v1.ListProducerRolesResponse> getListProducerRolesMethod;
+    if ((getListProducerRolesMethod = ProducerServiceGrpc.getListProducerRolesMethod) == null) {
+      synchronized (ProducerServiceGrpc.class) {
+        if ((getListProducerRolesMethod = ProducerServiceGrpc.getListProducerRolesMethod) == null) {
+          ProducerServiceGrpc.getListProducerRolesMethod = getListProducerRolesMethod =
+              io.grpc.MethodDescriptor.<com.producerflow.producer.v1.ListProducerRolesRequest, com.producerflow.producer.v1.ListProducerRolesResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListProducerRoles"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.ListProducerRolesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.ListProducerRolesResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProducerServiceMethodDescriptorSupplier("ListProducerRoles"))
+              .build();
+        }
+      }
+    }
+    return getListProducerRolesMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetAgencyFilesRequest,
       com.producerflow.producer.v1.GetAgencyFilesResponse> getGetAgencyFilesMethod;
 
@@ -1741,6 +1772,28 @@ public final class ProducerServiceGrpc {
     default void getProducer(com.producerflow.producer.v1.GetProducerRequest request,
         io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetProducerResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetProducerMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * ListProducerRoles returns the producer role labels configured for the
+     * authenticated tenant.
+     * These role labels are the valid values for the `role` field on
+     * NewProducer / UpdateProducer requests, and the values that may appear in
+     * the `role` field of a Producer response. The list is configured per-tenant
+     * and may be empty if the tenant has not enabled the producer-role feature —
+     * callers should treat an empty list as "no role should be sent".
+     * Use this endpoint to populate role pickers, validate role inputs
+     * client-side, or discover whether the feature is enabled for the tenant.
+     * Returns:
+     * The list of role labels available for the authenticated tenant, in the
+     * order they were configured. Empty when the tenant has not configured any
+     * roles.
+     * </pre>
+     */
+    default void listProducerRoles(com.producerflow.producer.v1.ListProducerRolesRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.ListProducerRolesResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListProducerRolesMethod(), responseObserver);
     }
 
     /**
@@ -3224,6 +3277,29 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * ListProducerRoles returns the producer role labels configured for the
+     * authenticated tenant.
+     * These role labels are the valid values for the `role` field on
+     * NewProducer / UpdateProducer requests, and the values that may appear in
+     * the `role` field of a Producer response. The list is configured per-tenant
+     * and may be empty if the tenant has not enabled the producer-role feature —
+     * callers should treat an empty list as "no role should be sent".
+     * Use this endpoint to populate role pickers, validate role inputs
+     * client-side, or discover whether the feature is enabled for the tenant.
+     * Returns:
+     * The list of role labels available for the authenticated tenant, in the
+     * order they were configured. Empty when the tenant has not configured any
+     * roles.
+     * </pre>
+     */
+    public void listProducerRoles(com.producerflow.producer.v1.ListProducerRolesRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.ListProducerRolesResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getListProducerRolesMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * GetAgencyFiles retrieves signed URLs for accessing agency documents.
      * Returns pre-signed URLs for the following document types:
      * - Errors &amp; Omissions (E&amp;O) insurance certificate
@@ -4683,6 +4759,28 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * ListProducerRoles returns the producer role labels configured for the
+     * authenticated tenant.
+     * These role labels are the valid values for the `role` field on
+     * NewProducer / UpdateProducer requests, and the values that may appear in
+     * the `role` field of a Producer response. The list is configured per-tenant
+     * and may be empty if the tenant has not enabled the producer-role feature —
+     * callers should treat an empty list as "no role should be sent".
+     * Use this endpoint to populate role pickers, validate role inputs
+     * client-side, or discover whether the feature is enabled for the tenant.
+     * Returns:
+     * The list of role labels available for the authenticated tenant, in the
+     * order they were configured. Empty when the tenant has not configured any
+     * roles.
+     * </pre>
+     */
+    public com.producerflow.producer.v1.ListProducerRolesResponse listProducerRoles(com.producerflow.producer.v1.ListProducerRolesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getListProducerRolesMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
      * GetAgencyFiles retrieves signed URLs for accessing agency documents.
      * Returns pre-signed URLs for the following document types:
      * - Errors &amp; Omissions (E&amp;O) insurance certificate
@@ -6131,6 +6229,29 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * ListProducerRoles returns the producer role labels configured for the
+     * authenticated tenant.
+     * These role labels are the valid values for the `role` field on
+     * NewProducer / UpdateProducer requests, and the values that may appear in
+     * the `role` field of a Producer response. The list is configured per-tenant
+     * and may be empty if the tenant has not enabled the producer-role feature —
+     * callers should treat an empty list as "no role should be sent".
+     * Use this endpoint to populate role pickers, validate role inputs
+     * client-side, or discover whether the feature is enabled for the tenant.
+     * Returns:
+     * The list of role labels available for the authenticated tenant, in the
+     * order they were configured. Empty when the tenant has not configured any
+     * roles.
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.ListProducerRolesResponse> listProducerRoles(
+        com.producerflow.producer.v1.ListProducerRolesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getListProducerRolesMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * GetAgencyFiles retrieves signed URLs for accessing agency documents.
      * Returns pre-signed URLs for the following document types:
      * - Errors &amp; Omissions (E&amp;O) insurance certificate
@@ -7072,30 +7193,31 @@ public final class ProducerServiceGrpc {
   private static final int METHODID_GET_AGENCY_PRODUCERS = 10;
   private static final int METHODID_GET_AGENCY = 11;
   private static final int METHODID_GET_PRODUCER = 12;
-  private static final int METHODID_GET_AGENCY_FILES = 13;
-  private static final int METHODID_UPDATE_PRODUCER = 14;
-  private static final int METHODID_UPDATE_AGENCY = 15;
-  private static final int METHODID_NEW_CONTACT = 16;
-  private static final int METHODID_NEW_CONTACTS = 17;
-  private static final int METHODID_LIST_AGENCY_CONTACTS = 18;
-  private static final int METHODID_UPDATE_CONTACT = 19;
-  private static final int METHODID_SET_EXTERNAL_ID = 20;
-  private static final int METHODID_VALIDATE_PRODUCER_NPN = 21;
-  private static final int METHODID_VALIDATE_AGENCY_NPN = 22;
-  private static final int METHODID_LOOKUP_NPNBY_FEIN = 23;
-  private static final int METHODID_RESYNC_PRODUCER = 24;
-  private static final int METHODID_RESYNC_AGENCY = 25;
-  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 26;
-  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 27;
-  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 28;
-  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 29;
-  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 30;
-  private static final int METHODID_ADD_AGENCY_LOCATIONS = 31;
-  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 32;
-  private static final int METHODID_LIST_AGENCY_LOCATIONS = 33;
-  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 34;
-  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 35;
-  private static final int METHODID_UPDATE_AGENCY_LOCATION = 36;
+  private static final int METHODID_LIST_PRODUCER_ROLES = 13;
+  private static final int METHODID_GET_AGENCY_FILES = 14;
+  private static final int METHODID_UPDATE_PRODUCER = 15;
+  private static final int METHODID_UPDATE_AGENCY = 16;
+  private static final int METHODID_NEW_CONTACT = 17;
+  private static final int METHODID_NEW_CONTACTS = 18;
+  private static final int METHODID_LIST_AGENCY_CONTACTS = 19;
+  private static final int METHODID_UPDATE_CONTACT = 20;
+  private static final int METHODID_SET_EXTERNAL_ID = 21;
+  private static final int METHODID_VALIDATE_PRODUCER_NPN = 22;
+  private static final int METHODID_VALIDATE_AGENCY_NPN = 23;
+  private static final int METHODID_LOOKUP_NPNBY_FEIN = 24;
+  private static final int METHODID_RESYNC_PRODUCER = 25;
+  private static final int METHODID_RESYNC_AGENCY = 26;
+  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 27;
+  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 28;
+  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 29;
+  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 30;
+  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 31;
+  private static final int METHODID_ADD_AGENCY_LOCATIONS = 32;
+  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 33;
+  private static final int METHODID_LIST_AGENCY_LOCATIONS = 34;
+  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 35;
+  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 36;
+  private static final int METHODID_UPDATE_AGENCY_LOCATION = 37;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -7165,6 +7287,10 @@ public final class ProducerServiceGrpc {
         case METHODID_GET_PRODUCER:
           serviceImpl.getProducer((com.producerflow.producer.v1.GetProducerRequest) request,
               (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetProducerResponse>) responseObserver);
+          break;
+        case METHODID_LIST_PRODUCER_ROLES:
+          serviceImpl.listProducerRoles((com.producerflow.producer.v1.ListProducerRolesRequest) request,
+              (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.ListProducerRolesResponse>) responseObserver);
           break;
         case METHODID_GET_AGENCY_FILES:
           serviceImpl.getAgencyFiles((com.producerflow.producer.v1.GetAgencyFilesRequest) request,
@@ -7371,6 +7497,13 @@ public final class ProducerServiceGrpc {
               com.producerflow.producer.v1.GetProducerRequest,
               com.producerflow.producer.v1.GetProducerResponse>(
                 service, METHODID_GET_PRODUCER)))
+        .addMethod(
+          getListProducerRolesMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.producerflow.producer.v1.ListProducerRolesRequest,
+              com.producerflow.producer.v1.ListProducerRolesResponse>(
+                service, METHODID_LIST_PRODUCER_ROLES)))
         .addMethod(
           getGetAgencyFilesMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -7600,6 +7733,7 @@ public final class ProducerServiceGrpc {
               .addMethod(getGetAgencyProducersMethod())
               .addMethod(getGetAgencyMethod())
               .addMethod(getGetProducerMethod())
+              .addMethod(getListProducerRolesMethod())
               .addMethod(getGetAgencyFilesMethod())
               .addMethod(getUpdateProducerMethod())
               .addMethod(getUpdateAgencyMethod())

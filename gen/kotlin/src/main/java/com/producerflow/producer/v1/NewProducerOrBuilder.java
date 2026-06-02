@@ -598,4 +598,51 @@ java.lang.String defaultValue);
    */
   java.lang.String getTenantAdditionalQuestionsOrThrow(
       java.lang.String key);
+
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return Whether the role field is set.
+   */
+  boolean hasRole();
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return The role.
+   */
+  java.lang.String getRole();
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for role.
+   */
+  com.google.protobuf.ByteString
+      getRoleBytes();
 }

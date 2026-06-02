@@ -32,6 +32,7 @@ private static final long serialVersionUID = 0L;
   }
   private ListAppointmentsRequest() {
     processingStatus_ = emptyIntList();
+    operationalStatus_ = emptyIntList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -271,6 +272,84 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int OPERATIONAL_STATUS_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.Internal.IntList operationalStatus_;
+  private static final com.google.protobuf.Internal.IntListAdapter.IntConverter<
+      com.producerflow.appointment.v1.OperationalStatus> operationalStatus_converter_ =
+          new com.google.protobuf.Internal.IntListAdapter.IntConverter<
+              com.producerflow.appointment.v1.OperationalStatus>() {
+            public com.producerflow.appointment.v1.OperationalStatus convert(int from) {
+              com.producerflow.appointment.v1.OperationalStatus result = com.producerflow.appointment.v1.OperationalStatus.forNumber(from);
+              return result == null ? com.producerflow.appointment.v1.OperationalStatus.UNRECOGNIZED : result;
+            }
+          };
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return A list containing the operationalStatus.
+   */
+  @java.lang.Override
+  public java.util.List<com.producerflow.appointment.v1.OperationalStatus> getOperationalStatusList() {
+    return new com.google.protobuf.Internal.IntListAdapter<
+        com.producerflow.appointment.v1.OperationalStatus>(operationalStatus_, operationalStatus_converter_);
+  }
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return The count of operationalStatus.
+   */
+  @java.lang.Override
+  public int getOperationalStatusCount() {
+    return operationalStatus_.size();
+  }
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @param index The index of the element to return.
+   * @return The operationalStatus at the given index.
+   */
+  @java.lang.Override
+  public com.producerflow.appointment.v1.OperationalStatus getOperationalStatus(int index) {
+    return operationalStatus_converter_.convert(operationalStatus_.getInt(index));
+  }
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return A list containing the enum numeric values on the wire for operationalStatus.
+   */
+  @java.lang.Override
+  public java.util.List<java.lang.Integer>
+  getOperationalStatusValueList() {
+    return operationalStatus_;
+  }
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @param index The index of the value to return.
+   * @return The enum numeric value on the wire of operationalStatus at the given index.
+   */
+  @java.lang.Override
+  public int getOperationalStatusValue(int index) {
+    return operationalStatus_.getInt(index);
+  }
+  private int operationalStatusMemoizedSerializedSize;
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -299,6 +378,13 @@ private static final long serialVersionUID = 0L;
     if (licenseOwnerCase_ == 3) {
       com.google.protobuf.GeneratedMessage.writeString(output, 3, licenseOwner_);
     }
+    if (getOperationalStatusList().size() > 0) {
+      output.writeUInt32NoTag(34);
+      output.writeUInt32NoTag(operationalStatusMemoizedSerializedSize);
+    }
+    for (int i = 0; i < operationalStatus_.size(); i++) {
+      output.writeEnumNoTag(operationalStatus_.getInt(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -326,6 +412,18 @@ private static final long serialVersionUID = 0L;
     if (licenseOwnerCase_ == 3) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(3, licenseOwner_);
     }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < operationalStatus_.size(); i++) {
+        dataSize += com.google.protobuf.CodedOutputStream
+          .computeEnumSizeNoTag(operationalStatus_.getInt(i));
+      }
+      size += dataSize;
+      if (!getOperationalStatusList().isEmpty()) {  size += 1;
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32SizeNoTag(dataSize);
+      }operationalStatusMemoizedSerializedSize = dataSize;
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -342,6 +440,7 @@ private static final long serialVersionUID = 0L;
     com.producerflow.appointment.v1.ListAppointmentsRequest other = (com.producerflow.appointment.v1.ListAppointmentsRequest) obj;
 
     if (!processingStatus_.equals(other.processingStatus_)) return false;
+    if (!operationalStatus_.equals(other.operationalStatus_)) return false;
     if (!getLicenseOwnerCase().equals(other.getLicenseOwnerCase())) return false;
     switch (licenseOwnerCase_) {
       case 2:
@@ -369,6 +468,10 @@ private static final long serialVersionUID = 0L;
     if (getProcessingStatusCount() > 0) {
       hash = (37 * hash) + PROCESSING_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + processingStatus_.hashCode();
+    }
+    if (getOperationalStatusCount() > 0) {
+      hash = (37 * hash) + OPERATIONAL_STATUS_FIELD_NUMBER;
+      hash = (53 * hash) + operationalStatus_.hashCode();
     }
     switch (licenseOwnerCase_) {
       case 2:
@@ -519,6 +622,8 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       processingStatus_ = emptyIntList();
       bitField0_ = (bitField0_ & ~0x00000001);
+      operationalStatus_ = emptyIntList();
+      bitField0_ = (bitField0_ & ~0x00000008);
       licenseOwnerCase_ = 0;
       licenseOwner_ = null;
       return this;
@@ -560,6 +665,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.processingStatus_ = processingStatus_;
+      if (((bitField0_ & 0x00000008) != 0)) {
+        operationalStatus_.makeImmutable();
+        bitField0_ = (bitField0_ & ~0x00000008);
+      }
+      result.operationalStatus_ = operationalStatus_;
     }
 
     private void buildPartial0(com.producerflow.appointment.v1.ListAppointmentsRequest result) {
@@ -590,6 +700,16 @@ private static final long serialVersionUID = 0L;
         } else {
           ensureProcessingStatusIsMutable();
           processingStatus_.addAll(other.processingStatus_);
+        }
+        onChanged();
+      }
+      if (!other.operationalStatus_.isEmpty()) {
+        if (operationalStatus_.isEmpty()) {
+          operationalStatus_ = other.operationalStatus_;
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          ensureOperationalStatusIsMutable();
+          operationalStatus_.addAll(other.operationalStatus_);
         }
         onChanged();
       }
@@ -665,6 +785,23 @@ private static final long serialVersionUID = 0L;
               licenseOwner_ = s;
               break;
             } // case 26
+            case 32: {
+              int tmpRaw = input.readEnum();
+              ensureOperationalStatusIsMutable();
+              operationalStatus_.addInt(tmpRaw);
+              break;
+            } // case 32
+            case 34: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int tmpRaw = input.readEnum();
+                ensureOperationalStatusIsMutable();
+                operationalStatus_.addInt(tmpRaw);
+              }
+              input.popLimit(oldLimit);
+              break;
+            } // case 34
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1067,6 +1204,194 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       licenseOwnerCase_ = 3;
       licenseOwner_ = value;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.Internal.IntList operationalStatus_ =
+      emptyIntList();
+    private void ensureOperationalStatusIsMutable() {
+      if (!((bitField0_ & 0x00000008) != 0)) {
+        operationalStatus_ = makeMutableCopy(operationalStatus_);
+        bitField0_ |= 0x00000008;
+      }
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @return A list containing the operationalStatus.
+     */
+    public java.util.List<com.producerflow.appointment.v1.OperationalStatus> getOperationalStatusList() {
+      return new com.google.protobuf.Internal.IntListAdapter<
+          com.producerflow.appointment.v1.OperationalStatus>(operationalStatus_, operationalStatus_converter_);
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @return The count of operationalStatus.
+     */
+    public int getOperationalStatusCount() {
+      return operationalStatus_.size();
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param index The index of the element to return.
+     * @return The operationalStatus at the given index.
+     */
+    public com.producerflow.appointment.v1.OperationalStatus getOperationalStatus(int index) {
+      return operationalStatus_converter_.convert(operationalStatus_.getInt(index));
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param index The index to set the value at.
+     * @param value The operationalStatus to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOperationalStatus(
+        int index, com.producerflow.appointment.v1.OperationalStatus value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureOperationalStatusIsMutable();
+      operationalStatus_.setInt(index, value.getNumber());
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param value The operationalStatus to add.
+     * @return This builder for chaining.
+     */
+    public Builder addOperationalStatus(com.producerflow.appointment.v1.OperationalStatus value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      ensureOperationalStatusIsMutable();
+      operationalStatus_.addInt(value.getNumber());
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param values The operationalStatus to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllOperationalStatus(
+        java.lang.Iterable<? extends com.producerflow.appointment.v1.OperationalStatus> values) {
+      ensureOperationalStatusIsMutable();
+      for (com.producerflow.appointment.v1.OperationalStatus value : values) {
+        operationalStatus_.addInt(value.getNumber());
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearOperationalStatus() {
+      operationalStatus_ = emptyIntList();
+      bitField0_ = (bitField0_ & ~0x00000008);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @return A list containing the enum numeric values on the wire for operationalStatus.
+     */
+    public java.util.List<java.lang.Integer>
+    getOperationalStatusValueList() {
+      return java.util.Collections.unmodifiableList(operationalStatus_);
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param index The index of the value to return.
+     * @return The enum numeric value on the wire of operationalStatus at the given index.
+     */
+    public int getOperationalStatusValue(int index) {
+      return operationalStatus_.getInt(index);
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param index The index to set the value at.
+     * @param value The enum numeric value on the wire for operationalStatus to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOperationalStatusValue(
+        int index, int value) {
+      ensureOperationalStatusIsMutable();
+      operationalStatus_.setInt(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param value The enum numeric value on the wire for operationalStatus to add.
+     * @return This builder for chaining.
+     */
+    public Builder addOperationalStatusValue(int value) {
+      ensureOperationalStatusIsMutable();
+      operationalStatus_.addInt(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Filter results by operational status.
+     * </pre>
+     *
+     * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+     * @param values The enum numeric values on the wire for operationalStatus to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllOperationalStatusValue(
+        java.lang.Iterable<java.lang.Integer> values) {
+      ensureOperationalStatusIsMutable();
+      for (int value : values) {
+        operationalStatus_.addInt(value);
+      }
       onChanged();
       return this;
     }

@@ -53,6 +53,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [GetAgencyProducers](#getagencyproducers)
   - [GetAgency](#getagency)
   - [GetProducer](#getproducer)
+  - [ListProducerRoles](#listproducerroles)
   - [GetAgencyFiles](#getagencyfiles)
   - [UpdateProducer](#updateproducer)
   - [UpdateAgency](#updateagency)
@@ -222,6 +223,7 @@ Request to list appointments, optionally filtered by processing status.
 | `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
 | `producer_id` | [string](#string) |  |  |
 | `agency_id` | [string](#string) |  |  |
+| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
 
 #### Response: `ListAppointmentsResponse`
 
@@ -1310,6 +1312,48 @@ GetProducerResponse contains the producer information retrieved by the GetProduc
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer` | [Producer](#producer) |  | The complete producer information including personal details, agency association, and NIPR data. |
+
+---
+
+
+### ListProducerRoles
+
+
+ListProducerRoles returns the producer role labels configured for the
+authenticated tenant.
+
+These role labels are the valid values for the `role` field on
+NewProducer / UpdateProducer requests, and the values that may appear in
+the `role` field of a Producer response. The list is configured per-tenant
+and may be empty if the tenant has not enabled the producer-role feature —
+callers should treat an empty list as "no role should be sent".
+
+Use this endpoint to populate role pickers, validate role inputs
+client-side, or discover whether the feature is enabled for the tenant.
+
+Returns:
+The list of role labels available for the authenticated tenant, in the
+order they were configured. Empty when the tenant has not configured any
+roles.
+
+#### Request: `ListProducerRolesRequest`
+
+
+ListProducerRolesRequest is the empty request for the ListProducerRoles RPC.
+The tenant is determined from the authenticated API key.
+
+
+*This message has no fields.*
+
+#### Response: `ListProducerRolesResponse`
+
+
+ListProducerRolesResponse contains the producer role labels configured for
+the authenticated tenant.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `roles` | [string](#string) | repeated | The list of producer role labels available for the authenticated tenant, in the order they were configured. Empty when the tenant has not configured any roles. |
 
 ---
 
@@ -2943,6 +2987,7 @@ Request to list appointments, optionally filtered by processing status.
 | `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
 | `producer_id` | [string](#string) |  |  |
 | `agency_id` | [string](#string) |  |  |
+| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
 
 #### ListAppointmentsResponse
 
@@ -3883,6 +3928,21 @@ performance and reasonable response sizes.
 | `next_page_token` | [string](#string) |  | Pagination token for retrieving the next page of results.  When present, indicates more organizations are available. Pass this token as the page_token in the next ListOrganizationsRequest to retrieve the subsequent page.  Empty string or omitted field indicates this is the last page.  Important: Tokens are opaque and may expire. Don't store tokens long-term; retrieve fresh data when needed. |
 | `total_count` | [int32](#int32) |  | Total count of organizations matching the filter criteria.  This count represents the total number of organizations available to your tenant, regardless of pagination. Use this to: - Display result counts in user interfaces ("Showing 1-50 of 237") - Calculate the number of pages available - Determine if pagination is needed  The count remains consistent across paginated requests unless organizations are added or removed between calls. |
 
+#### ListProducerRolesRequest
+
+ListProducerRolesRequest is the empty request for the ListProducerRoles RPC.
+The tenant is determined from the authenticated API key.
+
+
+#### ListProducerRolesResponse
+
+ListProducerRolesResponse contains the producer role labels configured for
+the authenticated tenant.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `roles` | [string](#string) | repeated | The list of producer role labels available for the authenticated tenant, in the order they were configured. Empty when the tenant has not configured any roles. |
+
 #### Location
 
 Location represents a physical or virtual location where an agency operates.
@@ -4175,6 +4235,7 @@ appointment, and regulatory information from NIPR.
 | `location_ids` | [string](#string) | repeated | Location IDs to assign to the producer during creation.  Optional field for associating the producer with specific agency locations. This is useful for multi-location agencies where producers work from or service specific offices.  Validation: - All location IDs must be valid UUIDs - All locations must exist and belong to the specified agency - Maximum of 100 locations per producer - Invalid location IDs will cause the entire creation to fail  Post-Creation Management: - Use AssignProducerToLocations to add more locations later - Use UnassignProducerFromLocations to remove locations - Use ListAgencyLocations to see available locations for an agency |
 | `metadata_questions` | [NewProducer.MetadataQuestionsEntry](#newproducermetadataquestionsentry) | repeated | **Deprecated.** Custom metadata questions and answers for the producer.  Optional field for storing tenant-specific information collected during producer onboarding. This allows tenants to capture additional data points that are important for their business processes but not part of the standard producer fields.  Structure: - Key: Question identifier or the question text itself - Value: The producer's answer or response  Common Use Cases: - Compliance questionnaires (e.g., "Have you ever had a license revoked?") - Business preferences (e.g., "Preferred carrier partners") - Specializations (e.g., "Areas of expertise") - Internal classifications (e.g., "Producer tier", "Region")  Note: This data is stored but not validated by ProducerFlow. Ensure your application handles any necessary validation of the responses. Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release. |
 | `tenant_additional_questions` | [NewProducer.TenantAdditionalQuestionsEntry](#newproducertenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
+| `role` | [string](#string) | optional | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Optional. When set, the value must match one of the role labels configured for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.  Tenants that have not configured any roles should leave this empty. |
 
 #### NewProducer.Address
 
@@ -4369,6 +4430,7 @@ Use Cases:
 | `external_id` | [string](#string) |  | Tenant-provided external identifier for this producer. This ID allows tenants to map Producerflow producers back to their own system's identifiers. Set during producer creation/onboarding via the public API. |
 | `onboarding_status` | [OnboardingStatus](#onboardingstatus) |  | Current onboarding status of the producer in the workflow. This field tracks the producer's progression through the onboarding process, from initial onboarding to being ready to quote.  This field is only populated when the tenant has enabled the onboarding status feature. When the feature is disabled, this field will be ONBOARDING_STATUS_UNSPECIFIED. |
 | `onboarding_status_updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the onboarding status was last updated. This field is only populated when the tenant has enabled the onboarding status feature. |
+| `role` | [string](#string) |  | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Reflects the role assigned during NewProducer / onboarding or via UpdateProducer. Empty when the producer has no role assigned, or when the tenant has not configured any role labels. |
 
 #### Producer.Address
 
@@ -4554,9 +4616,10 @@ contracting, and ongoing compliance monitoring.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `regulatory_actions_by_state` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerniprproducerregulatoryinforegulatoryactionsbystateentry) | repeated | Map of regulatory actions keyed by two-letter state code. The key is the state code (e.g., "CA", "TX"), and the value is the regulatory action for that state. A producer may have regulatory actions in multiple states. An empty map indicates no regulatory actions on record in NIPR. |
+| `regulatory_actions_by_state` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry](#producerniprproducerregulatoryinforegulatoryactionsbystateentry) | repeated | **Deprecated.** Deprecated: use regulatory_actions instead. Map of regulatory actions keyed by two-letter state code. A producer may have multiple regulatory actions in the same state, but this map can only carry one per state — additional actions are dropped. Populated for backwards compatibility only. |
 | `clearance_certification_info` | [string](#string) |  | Clearance certification information for the producer. Indicates whether the producer has obtained clearance from NIPR's Clearance Certification process, which verifies the producer has no outstanding regulatory issues across all states. |
 | `nasd_exam_details` | [string](#string) |  | Details about NASD/FINRA examinations taken by the producer. This includes securities-related examinations (e.g., Series 6, Series 7, Series 63, Series 66) that may be required for selling variable insurance products. Reference: https://www.finra.org |
+| `regulatory_actions` | [Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction](#producerniprproducerregulatoryinforegulatoryaction) | repeated | All regulatory actions on record for this producer, including multiple actions in the same state. Each action carries its own state_code. An empty list indicates no regulatory actions on record in NIPR. |
 
 #### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction
 
@@ -4587,6 +4650,7 @@ reflect official regulatory proceedings.
 | `file_ref` | [string](#string) |  | Reference number for the regulatory action file maintained by the regulatory authority. Can be used to look up additional details from the authority's records. |
 | `penalty_fine_forfeiture` | [string](#string) |  | Any financial penalties, fines, or forfeitures associated with the regulatory action. Format: Free-text, typically a dollar amount (e.g., "$5,000.00"). |
 | `length_of_order` | [string](#string) |  | Duration of any orders associated with the regulatory action. Format: Free-text describing the time period (e.g., "12 months", "Indefinite", "Until compliance"). |
+| `state_code` | [string](#string) |  | The two-letter state code of the regulatory authority that took the action. Format: US state code (e.g., "CA", "TX", "NY"). |
 
 #### Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionsByStateEntry
 
@@ -4933,6 +4997,7 @@ All fields are optional, allowing partial updates.
 | `zip` | [string](#string) | optional | ZIP code of the producer's address. If provided, must be at least 5 characters. |
 | `external_metadata` | [UpdateProducerRequest.Producer.ExternalMetadataEntry](#updateproducerrequestproducerexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
 | `onboarding_status` | [OnboardingStatus](#onboardingstatus) | optional | The onboarding status of the producer. If provided, updates the producer's onboarding status. If not provided, the onboarding status remains unchanged. When set, the onboarding_status_updated_at timestamp is automatically updated. |
+| `role` | [string](#string) | optional | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Update behavior: - If not provided (null): the existing role is preserved unchanged. - If provided as empty string: the role is cleared. - If provided with a value: the value must match one of the role labels   configured in the tenant's settings; otherwise the request is rejected   with INVALID_ARGUMENT. |
 
 #### UpdateProducerRequest.Producer.ExternalMetadataEntry
 
@@ -5170,7 +5235,7 @@ responsibilities and access levels.
 | `CONTACT_ROLE_AGENCY_ADMINISTRATOR` | 1 | Agency Administrator: A contact with administrative responsibilities. Typically has elevated permissions and manages agency operations. |
 | `CONTACT_ROLE_OTHER` | 2 | Other: A contact role that doesn't fit into predefined categories. Use this for flexible role assignment. |
 | `CONTACT_ROLE_CSR` | 3 | Customer Service Representative (CSR): A contact who handles customer inquiries and support. Does not hold an insurance producer license. |
-| `CONTACT_ROLE_UNLICENSED_PRODUCER` | 4 | Unlicensed Producer: An individual working in a producer-like capacity but who does not hold an active insurance producer license. |
+| `CONTACT_ROLE_UNLICENSED_PRODUCER` | 4 | Deprecated: Use CONTACT_ROLE_UNLICENSED_SERVICE instead. Requests carrying this value are accepted for backward compatibility and stored as CONTACT_ROLE_UNLICENSED_SERVICE. |
 | `CONTACT_ROLE_UNLICENSED_SERVICE` | 5 | Unlicensed Service: A contact providing services to the agency without requiring an insurance license. |
 | `CONTACT_ROLE_PRINCIPAL` | 6 | Principal: The principal owner of the agency who does not hold an active insurance producer license. This role is system-assigned during onboarding and cannot be set via API. |
 

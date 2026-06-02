@@ -814,6 +814,66 @@ public object UpdateProducerRequestKt {
       public fun hasOnboardingStatus(): kotlin.Boolean {
         return _builder.hasOnboardingStatus()
       }
+
+      /**
+       * ```
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * ```
+       *
+       * `optional string role = 16 [json_name = "role"];`
+       */
+      public var role: kotlin.String
+        @JvmName("getRole")
+        get() = _builder.role
+        @JvmName("setRole")
+        set(value) {
+          _builder.role = value
+        }
+      /**
+       * ```
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * ```
+       *
+       * `optional string role = 16 [json_name = "role"];`
+       */
+      public fun clearRole() {
+        _builder.clearRole()
+      }
+      /**
+       * ```
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * ```
+       *
+       * `optional string role = 16 [json_name = "role"];`
+       * @return Whether the role field is set.
+       */
+      public fun hasRole(): kotlin.Boolean {
+        return _builder.hasRole()
+      }
     }
   }
 }

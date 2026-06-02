@@ -364,7 +364,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4076
+   *     See producerflow/producer/v1/producer.proto;l=4151
    * @return The role.
    */
   @java.lang.Override
@@ -388,7 +388,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4076
+   *     See producerflow/producer/v1/producer.proto;l=4151
    * @return The bytes for role.
    */
   @java.lang.Override
@@ -1875,7 +1875,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4076
+     *     See producerflow/producer/v1/producer.proto;l=4151
      * @return The role.
      */
     @java.lang.Deprecated public java.lang.String getRole() {
@@ -1898,7 +1898,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4076
+     *     See producerflow/producer/v1/producer.proto;l=4151
      * @return The bytes for role.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1922,7 +1922,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4076
+     *     See producerflow/producer/v1/producer.proto;l=4151
      * @param value The role to set.
      * @return This builder for chaining.
      */
@@ -1942,7 +1942,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4076
+     *     See producerflow/producer/v1/producer.proto;l=4151
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearRole() {
@@ -1959,7 +1959,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4076
+     *     See producerflow/producer/v1/producer.proto;l=4151
      * @param value The bytes for role to set.
      * @return This builder for chaining.
      */

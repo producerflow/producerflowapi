@@ -193,7 +193,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return Whether the npn field is set.
      */
     @java.lang.Deprecated boolean hasNpn();
@@ -206,7 +206,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return The npn.
      */
     @java.lang.Deprecated java.lang.String getNpn();
@@ -219,7 +219,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return The bytes for npn.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -264,7 +264,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return Whether the street field is set.
      */
     @java.lang.Deprecated boolean hasStreet();
@@ -275,7 +275,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -286,7 +286,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -607,6 +607,59 @@ java.lang.String defaultValue);
      * @return The onboardingStatus.
      */
     com.producerflow.producer.v1.OnboardingStatus getOnboardingStatus();
+
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return Whether the role field is set.
+     */
+    boolean hasRole();
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return The role.
+     */
+    java.lang.String getRole();
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return The bytes for role.
+     */
+    com.google.protobuf.ByteString
+        getRoleBytes();
   }
   /**
    * <pre>
@@ -648,6 +701,7 @@ java.lang.String defaultValue);
       state_ = "";
       zip_ = "";
       onboardingStatus_ = 0;
+      role_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -939,7 +993,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return Whether the npn field is set.
      */
     @java.lang.Override
@@ -955,7 +1009,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return The npn.
      */
     @java.lang.Override
@@ -980,7 +1034,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2245
+     *     See producerflow/producer/v1/producer.proto;l=2278
      * @return The bytes for npn.
      */
     @java.lang.Override
@@ -1070,7 +1124,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return Whether the street field is set.
      */
     @java.lang.Override
@@ -1084,7 +1138,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return The street.
      */
     @java.lang.Override
@@ -1107,7 +1161,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2258
+     *     See producerflow/producer/v1/producer.proto;l=2291
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -1628,6 +1682,89 @@ java.lang.String defaultValue) {
       return result == null ? com.producerflow.producer.v1.OnboardingStatus.UNRECOGNIZED : result;
     }
 
+    public static final int ROLE_FIELD_NUMBER = 16;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object role_ = "";
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return Whether the role field is set.
+     */
+    @java.lang.Override
+    public boolean hasRole() {
+      return ((bitField0_ & 0x00002000) != 0);
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return The role.
+     */
+    @java.lang.Override
+    public java.lang.String getRole() {
+      java.lang.Object ref = role_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        role_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Update behavior:
+     * - If not provided (null): the existing role is preserved unchanged.
+     * - If provided as empty string: the role is cleared.
+     * - If provided with a value: the value must match one of the role labels
+     * configured in the tenant's settings; otherwise the request is rejected
+     * with INVALID_ARGUMENT.
+     * </pre>
+     *
+     * <code>optional string role = 16 [json_name = "role"];</code>
+     * @return The bytes for role.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getRoleBytes() {
+      java.lang.Object ref = role_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        role_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1687,6 +1824,9 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00001000) != 0)) {
         output.writeEnum(15, onboardingStatus_);
       }
+      if (((bitField0_ & 0x00002000) != 0)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 16, role_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1745,6 +1885,9 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00001000) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(15, onboardingStatus_);
+      }
+      if (((bitField0_ & 0x00002000) != 0)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(16, role_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -1827,6 +1970,11 @@ java.lang.String defaultValue) {
       if (hasOnboardingStatus()) {
         if (onboardingStatus_ != other.onboardingStatus_) return false;
       }
+      if (hasRole() != other.hasRole()) return false;
+      if (hasRole()) {
+        if (!getRole()
+            .equals(other.getRole())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -1893,6 +2041,10 @@ java.lang.String defaultValue) {
       if (hasOnboardingStatus()) {
         hash = (37 * hash) + ONBOARDING_STATUS_FIELD_NUMBER;
         hash = (53 * hash) + onboardingStatus_;
+      }
+      if (hasRole()) {
+        hash = (37 * hash) + ROLE_FIELD_NUMBER;
+        hash = (53 * hash) + getRole().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -2066,6 +2218,7 @@ java.lang.String defaultValue) {
         zip_ = "";
         internalGetMutableExternalMetadata().clear();
         onboardingStatus_ = 0;
+        role_ = "";
         return this;
       }
 
@@ -2156,6 +2309,10 @@ java.lang.String defaultValue) {
           result.onboardingStatus_ = onboardingStatus_;
           to_bitField0_ |= 0x00001000;
         }
+        if (((from_bitField0_ & 0x00004000) != 0)) {
+          result.role_ = role_;
+          to_bitField0_ |= 0x00002000;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -2236,6 +2393,11 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00001000;
         if (other.hasOnboardingStatus()) {
           setOnboardingStatus(other.getOnboardingStatus());
+        }
+        if (other.hasRole()) {
+          role_ = other.role_;
+          bitField0_ |= 0x00004000;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -2337,6 +2499,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00002000;
                 break;
               } // case 120
+              case 130: {
+                role_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00004000;
+                break;
+              } // case 130
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2806,7 +2973,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @return Whether the npn field is set.
        */
       @java.lang.Deprecated public boolean hasNpn() {
@@ -2821,7 +2988,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @return The npn.
        */
       @java.lang.Deprecated public java.lang.String getNpn() {
@@ -2845,7 +3012,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @return The bytes for npn.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -2870,7 +3037,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @param value The npn to set.
        * @return This builder for chaining.
        */
@@ -2891,7 +3058,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearNpn() {
@@ -2909,7 +3076,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2245
+       *     See producerflow/producer/v1/producer.proto;l=2278
        * @param value The bytes for npn to set.
        * @return This builder for chaining.
        */
@@ -3040,7 +3207,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated public boolean hasStreet() {
@@ -3053,7 +3220,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -3075,7 +3242,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -3098,7 +3265,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -3117,7 +3284,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -3133,7 +3300,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2258
+       *     See producerflow/producer/v1/producer.proto;l=2291
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -4036,6 +4203,157 @@ java.lang.String defaultValue) {
       public Builder clearOnboardingStatus() {
         bitField0_ = (bitField0_ & ~0x00002000);
         onboardingStatus_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object role_ = "";
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @return Whether the role field is set.
+       */
+      public boolean hasRole() {
+        return ((bitField0_ & 0x00004000) != 0);
+      }
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @return The role.
+       */
+      public java.lang.String getRole() {
+        java.lang.Object ref = role_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          role_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @return The bytes for role.
+       */
+      public com.google.protobuf.ByteString
+          getRoleBytes() {
+        java.lang.Object ref = role_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          role_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @param value The role to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRole(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        role_ = value;
+        bitField0_ |= 0x00004000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRole() {
+        role_ = getDefaultInstance().getRole();
+        bitField0_ = (bitField0_ & ~0x00004000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+       * "CSR", "Agency Principal").
+       *
+       * Update behavior:
+       * - If not provided (null): the existing role is preserved unchanged.
+       * - If provided as empty string: the role is cleared.
+       * - If provided with a value: the value must match one of the role labels
+       * configured in the tenant's settings; otherwise the request is rejected
+       * with INVALID_ARGUMENT.
+       * </pre>
+       *
+       * <code>optional string role = 16 [json_name = "role"];</code>
+       * @param value The bytes for role to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRoleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        role_ = value;
+        bitField0_ |= 0x00004000;
         onChanged();
         return this;
       }

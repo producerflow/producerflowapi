@@ -92,6 +92,11 @@ public object ProducerServiceGrpcKt {
     @JvmStatic
     get() = ProducerServiceGrpc.getGetProducerMethod()
 
+  public val listProducerRolesMethod:
+      MethodDescriptor<ListProducerRolesRequest, ListProducerRolesResponse>
+    @JvmStatic
+    get() = ProducerServiceGrpc.getListProducerRolesMethod()
+
   public val getAgencyFilesMethod: MethodDescriptor<GetAgencyFilesRequest, GetAgencyFilesResponse>
     @JvmStatic
     get() = ProducerServiceGrpc.getGetAgencyFilesMethod()
@@ -469,6 +474,26 @@ public object ProducerServiceGrpcKt {
     public suspend fun getProducer(request: GetProducerRequest, headers: Metadata = Metadata()): GetProducerResponse = unaryRpc(
       channel,
       ProducerServiceGrpc.getGetProducerMethod(),
+      request,
+      callOptions,
+      headers
+    )
+
+    /**
+     * Executes this RPC and returns the response message, suspending until the RPC completes
+     * with [`Status.OK`][io.grpc.Status].  If the RPC completes with another status, a corresponding
+     * [StatusException] is thrown.  If this coroutine is cancelled, the RPC is also cancelled
+     * with the corresponding exception as a cause.
+     *
+     * @param request The request message to send to the server.
+     *
+     * @param headers Metadata to attach to the request.  Most users will not need this.
+     *
+     * @return The single response from the server.
+     */
+    public suspend fun listProducerRoles(request: ListProducerRolesRequest, headers: Metadata = Metadata()): ListProducerRolesResponse = unaryRpc(
+      channel,
+      ProducerServiceGrpc.getListProducerRolesMethod(),
       request,
       callOptions,
       headers
@@ -1119,6 +1144,18 @@ public object ProducerServiceGrpcKt {
     public open suspend fun getProducer(request: GetProducerRequest): GetProducerResponse = throw StatusException(UNIMPLEMENTED.withDescription("Method producerflow.producer.v1.ProducerService.GetProducer is unimplemented"))
 
     /**
+     * Returns the response to an RPC for producerflow.producer.v1.ProducerService.ListProducerRoles.
+     *
+     * If this method fails with a [StatusException], the RPC will fail with the corresponding
+     * [io.grpc.Status].  If this method fails with a [java.util.concurrent.CancellationException], the RPC will fail
+     * with status `Status.CANCELLED`.  If this method fails for any other reason, the RPC will
+     * fail with `Status.UNKNOWN` with the exception as a cause.
+     *
+     * @param request The request from the client.
+     */
+    public open suspend fun listProducerRoles(request: ListProducerRolesRequest): ListProducerRolesResponse = throw StatusException(UNIMPLEMENTED.withDescription("Method producerflow.producer.v1.ProducerService.ListProducerRoles is unimplemented"))
+
+    /**
      * Returns the response to an RPC for producerflow.producer.v1.ProducerService.GetAgencyFiles.
      *
      * If this method fails with a [StatusException], the RPC will fail with the corresponding
@@ -1471,6 +1508,11 @@ public object ProducerServiceGrpcKt {
       context = this.context,
       descriptor = ProducerServiceGrpc.getGetProducerMethod(),
       implementation = ::getProducer
+    ))
+      .addMethod(unaryServerMethodDefinition(
+      context = this.context,
+      descriptor = ProducerServiceGrpc.getListProducerRolesMethod(),
+      implementation = ::listProducerRoles
     ))
       .addMethod(unaryServerMethodDefinition(
       context = this.context,

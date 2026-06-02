@@ -172,7 +172,100 @@ public object ListAppointmentsRequestKt {
     public fun hasAgencyId(): kotlin.Boolean {
       return _builder.hasAgencyId()
     }
-    public val licenseOwnerCase: com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase
+
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class OperationalStatusProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     */
+    public val operationalStatus: com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.operationalStatusList
+      )
+    /**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     * @param value The operationalStatus to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addOperationalStatus")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.add(value: com.producerflow.appointment.v1.OperationalStatus) {
+      _builder.addOperationalStatus(value)
+    }/**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     * @param value The operationalStatus to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignOperationalStatus")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.plusAssign(value: com.producerflow.appointment.v1.OperationalStatus) {
+      add(value)
+    }/**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     * @param values The operationalStatus to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllOperationalStatus")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.addAll(values: kotlin.collections.Iterable<com.producerflow.appointment.v1.OperationalStatus>) {
+      _builder.addAllOperationalStatus(values)
+    }/**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     * @param values The operationalStatus to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllOperationalStatus")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.plusAssign(values: kotlin.collections.Iterable<com.producerflow.appointment.v1.OperationalStatus>) {
+      addAll(values)
+    }/**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     * @param index The index to set the value at.
+     * @param value The operationalStatus to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setOperationalStatus")
+    public operator fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.set(index: kotlin.Int, value: com.producerflow.appointment.v1.OperationalStatus) {
+      _builder.setOperationalStatus(index, value)
+    }/**
+     * ```
+     * Optional. Filter results by operational status.
+     * ```
+     *
+     * `repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearOperationalStatus")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.clear() {
+      _builder.clearOperationalStatus()
+    }public val licenseOwnerCase: com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase
       @JvmName("getLicenseOwnerCase")
       get() = _builder.getLicenseOwnerCase()
 

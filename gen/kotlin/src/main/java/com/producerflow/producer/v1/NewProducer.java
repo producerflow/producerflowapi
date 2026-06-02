@@ -54,6 +54,7 @@ private static final long serialVersionUID = 0L;
     tenantId_ = "";
     locationIds_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    role_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -94,7 +95,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3753
+     *     See producerflow/producer/v1/producer.proto;l=3816
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -105,7 +106,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3753
+     *     See producerflow/producer/v1/producer.proto;l=3816
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -289,7 +290,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3753
+     *     See producerflow/producer/v1/producer.proto;l=3816
      * @return The street.
      */
     @java.lang.Override
@@ -312,7 +313,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3753
+     *     See producerflow/producer/v1/producer.proto;l=3816
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -1022,7 +1023,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3753
+       *     See producerflow/producer/v1/producer.proto;l=3816
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1044,7 +1045,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3753
+       *     See producerflow/producer/v1/producer.proto;l=3816
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1067,7 +1068,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3753
+       *     See producerflow/producer/v1/producer.proto;l=3816
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -1086,7 +1087,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3753
+       *     See producerflow/producer/v1/producer.proto;l=3816
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -1102,7 +1103,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.NewProducer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3753
+       *     See producerflow/producer/v1/producer.proto;l=3816
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -2520,6 +2521,83 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int ROLE_FIELD_NUMBER = 13;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object role_ = "";
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return Whether the role field is set.
+   */
+  @java.lang.Override
+  public boolean hasRole() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return The role.
+   */
+  @java.lang.Override
+  public java.lang.String getRole() {
+    java.lang.Object ref = role_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      role_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Optional. When set, the value must match one of the role labels configured
+   * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+   *
+   * Tenants that have not configured any roles should leave this empty.
+   * </pre>
+   *
+   * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+   * @return The bytes for role.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRoleBytes() {
+    java.lang.Object ref = role_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      role_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -2573,6 +2651,9 @@ java.lang.String defaultValue) {
         internalGetTenantAdditionalQuestions(),
         TenantAdditionalQuestionsDefaultEntryHolder.defaultEntry,
         12);
+    if (((bitField0_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 13, role_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -2635,6 +2716,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, tenantAdditionalQuestions__);
     }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(13, role_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -2678,6 +2762,11 @@ java.lang.String defaultValue) {
         other.internalGetMetadataQuestions())) return false;
     if (!internalGetTenantAdditionalQuestions().equals(
         other.internalGetTenantAdditionalQuestions())) return false;
+    if (hasRole() != other.hasRole()) return false;
+    if (hasRole()) {
+      if (!getRole()
+          .equals(other.getRole())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -2720,6 +2809,10 @@ java.lang.String defaultValue) {
     if (!internalGetTenantAdditionalQuestions().getMap().isEmpty()) {
       hash = (37 * hash) + TENANT_ADDITIONAL_QUESTIONS_FIELD_NUMBER;
       hash = (53 * hash) + internalGetTenantAdditionalQuestions().hashCode();
+    }
+    if (hasRole()) {
+      hash = (37 * hash) + ROLE_FIELD_NUMBER;
+      hash = (53 * hash) + getRole().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -2918,6 +3011,7 @@ java.lang.String defaultValue) {
           com.google.protobuf.LazyStringArrayList.emptyList();
       internalGetMutableMetadataQuestions().clear();
       internalGetMutableTenantAdditionalQuestions().clear();
+      role_ = "";
       return this;
     }
 
@@ -2992,6 +3086,10 @@ java.lang.String defaultValue) {
         result.tenantAdditionalQuestions_ = internalGetTenantAdditionalQuestions();
         result.tenantAdditionalQuestions_.makeImmutable();
       }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.role_ = role_;
+        to_bitField0_ |= 0x00000004;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -3061,6 +3159,11 @@ java.lang.String defaultValue) {
       internalGetMutableTenantAdditionalQuestions().mergeFrom(
           other.internalGetTenantAdditionalQuestions());
       bitField0_ |= 0x00000400;
+      if (other.hasRole()) {
+        role_ = other.role_;
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -3153,6 +3256,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000400;
               break;
             } // case 98
+            case 106: {
+              role_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 106
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -4968,6 +5076,145 @@ java.lang.String defaultValue) {
       internalGetMutableTenantAdditionalQuestions().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000400;
+      return this;
+    }
+
+    private java.lang.Object role_ = "";
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @return Whether the role field is set.
+     */
+    public boolean hasRole() {
+      return ((bitField0_ & 0x00000800) != 0);
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @return The role.
+     */
+    public java.lang.String getRole() {
+      java.lang.Object ref = role_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        role_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for role.
+     */
+    public com.google.protobuf.ByteString
+        getRoleBytes() {
+      java.lang.Object ref = role_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        role_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @param value The role to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRole(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      role_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRole() {
+      role_ = getDefaultInstance().getRole();
+      bitField0_ = (bitField0_ & ~0x00000800);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Optional. When set, the value must match one of the role labels configured
+     * for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+     *
+     * Tenants that have not configured any roles should leave this empty.
+     * </pre>
+     *
+     * <code>optional string role = 13 [json_name = "role", (.buf.validate.field) = { ... }</code>
+     * @param value The bytes for role to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRoleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      role_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
       return this;
     }
 

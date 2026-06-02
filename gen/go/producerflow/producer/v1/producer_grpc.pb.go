@@ -32,6 +32,7 @@ const (
 	ProducerService_GetAgencyProducers_FullMethodName            = "/producerflow.producer.v1.ProducerService/GetAgencyProducers"
 	ProducerService_GetAgency_FullMethodName                     = "/producerflow.producer.v1.ProducerService/GetAgency"
 	ProducerService_GetProducer_FullMethodName                   = "/producerflow.producer.v1.ProducerService/GetProducer"
+	ProducerService_ListProducerRoles_FullMethodName             = "/producerflow.producer.v1.ProducerService/ListProducerRoles"
 	ProducerService_GetAgencyFiles_FullMethodName                = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
 	ProducerService_UpdateProducer_FullMethodName                = "/producerflow.producer.v1.ProducerService/UpdateProducer"
 	ProducerService_UpdateAgency_FullMethodName                  = "/producerflow.producer.v1.ProducerService/UpdateAgency"
@@ -546,6 +547,23 @@ type ProducerServiceClient interface {
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
 	GetProducer(ctx context.Context, in *GetProducerRequest, opts ...grpc.CallOption) (*GetProducerResponse, error)
+	// ListProducerRoles returns the producer role labels configured for the
+	// authenticated tenant.
+	//
+	// These role labels are the valid values for the `role` field on
+	// NewProducer / UpdateProducer requests, and the values that may appear in
+	// the `role` field of a Producer response. The list is configured per-tenant
+	// and may be empty if the tenant has not enabled the producer-role feature —
+	// callers should treat an empty list as "no role should be sent".
+	//
+	// Use this endpoint to populate role pickers, validate role inputs
+	// client-side, or discover whether the feature is enabled for the tenant.
+	//
+	// Returns:
+	// The list of role labels available for the authenticated tenant, in the
+	// order they were configured. Empty when the tenant has not configured any
+	// roles.
+	ListProducerRoles(ctx context.Context, in *ListProducerRolesRequest, opts ...grpc.CallOption) (*ListProducerRolesResponse, error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//
 	// Returns pre-signed URLs for the following document types:
@@ -1560,6 +1578,16 @@ func (c *producerServiceClient) GetProducer(ctx context.Context, in *GetProducer
 	return out, nil
 }
 
+func (c *producerServiceClient) ListProducerRoles(ctx context.Context, in *ListProducerRolesRequest, opts ...grpc.CallOption) (*ListProducerRolesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProducerRolesResponse)
+	err := c.cc.Invoke(ctx, ProducerService_ListProducerRoles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *producerServiceClient) GetAgencyFiles(ctx context.Context, in *GetAgencyFilesRequest, opts ...grpc.CallOption) (*GetAgencyFilesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAgencyFilesResponse)
@@ -2288,6 +2316,23 @@ type ProducerServiceServer interface {
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
 	GetProducer(context.Context, *GetProducerRequest) (*GetProducerResponse, error)
+	// ListProducerRoles returns the producer role labels configured for the
+	// authenticated tenant.
+	//
+	// These role labels are the valid values for the `role` field on
+	// NewProducer / UpdateProducer requests, and the values that may appear in
+	// the `role` field of a Producer response. The list is configured per-tenant
+	// and may be empty if the tenant has not enabled the producer-role feature —
+	// callers should treat an empty list as "no role should be sent".
+	//
+	// Use this endpoint to populate role pickers, validate role inputs
+	// client-side, or discover whether the feature is enabled for the tenant.
+	//
+	// Returns:
+	// The list of role labels available for the authenticated tenant, in the
+	// order they were configured. Empty when the tenant has not configured any
+	// roles.
+	ListProducerRoles(context.Context, *ListProducerRolesRequest) (*ListProducerRolesResponse, error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//
 	// Returns pre-signed URLs for the following document types:
@@ -3210,6 +3255,9 @@ func (UnimplementedProducerServiceServer) GetAgency(context.Context, *GetAgencyR
 func (UnimplementedProducerServiceServer) GetProducer(context.Context, *GetProducerRequest) (*GetProducerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProducer not implemented")
 }
+func (UnimplementedProducerServiceServer) ListProducerRoles(context.Context, *ListProducerRolesRequest) (*ListProducerRolesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProducerRoles not implemented")
+}
 func (UnimplementedProducerServiceServer) GetAgencyFiles(context.Context, *GetAgencyFilesRequest) (*GetAgencyFilesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgencyFiles not implemented")
 }
@@ -3533,6 +3581,24 @@ func _ProducerService_GetProducer_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProducerServiceServer).GetProducer(ctx, req.(*GetProducerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProducerService_ListProducerRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProducerRolesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).ListProducerRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_ListProducerRoles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).ListProducerRoles(ctx, req.(*ListProducerRolesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4027,6 +4093,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProducer",
 			Handler:    _ProducerService_GetProducer_Handler,
+		},
+		{
+			MethodName: "ListProducerRoles",
+			Handler:    _ProducerService_ListProducerRoles_Handler,
 		},
 		{
 			MethodName: "GetAgencyFiles",

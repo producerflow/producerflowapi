@@ -64,6 +64,7 @@ private static final long serialVersionUID = 0L;
     locations_ = java.util.Collections.emptyList();
     externalId_ = "";
     onboardingStatus_ = 0;
+    role_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -1238,7 +1239,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3271
+       *     See producerflow/producer/v1/producer.proto;l=3315
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1249,7 +1250,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3271
+       *     See producerflow/producer/v1/producer.proto;l=3315
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -1798,7 +1799,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3321
+         *     See producerflow/producer/v1/producer.proto;l=3365
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -1809,7 +1810,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3321
+         *     See producerflow/producer/v1/producer.proto;l=3365
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -2017,7 +2018,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3321
+         *     See producerflow/producer/v1/producer.proto;l=3365
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -2031,7 +2032,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3321
+         *     See producerflow/producer/v1/producer.proto;l=3365
          * @return The issueDate.
          */
         @java.lang.Override
@@ -2740,7 +2741,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3321
+           *     See producerflow/producer/v1/producer.proto;l=3365
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -2753,7 +2754,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3321
+           *     See producerflow/producer/v1/producer.proto;l=3365
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3321,7 +3322,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3271
+       *     See producerflow/producer/v1/producer.proto;l=3315
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3335,7 +3336,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3271
+       *     See producerflow/producer/v1/producer.proto;l=3315
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -4823,7 +4824,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3271
+         *     See producerflow/producer/v1/producer.proto;l=3315
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -4836,7 +4837,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3271
+         *     See producerflow/producer/v1/producer.proto;l=3315
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -6209,7 +6210,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3379
+       *     See producerflow/producer/v1/producer.proto;l=3423
        * @return The fein.
        */
       @java.lang.Deprecated java.lang.String getFein();
@@ -6221,7 +6222,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3379
+       *     See producerflow/producer/v1/producer.proto;l=3423
        * @return The bytes for fein.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6235,7 +6236,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3383
+       *     See producerflow/producer/v1/producer.proto;l=3427
        * @return The companyName.
        */
       @java.lang.Deprecated java.lang.String getCompanyName();
@@ -6247,7 +6248,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3383
+       *     See producerflow/producer/v1/producer.proto;l=3427
        * @return The bytes for companyName.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6261,7 +6262,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3387
+       *     See producerflow/producer/v1/producer.proto;l=3431
        * @return The stateDomicile.
        */
       @java.lang.Deprecated java.lang.String getStateDomicile();
@@ -6273,7 +6274,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3387
+       *     See producerflow/producer/v1/producer.proto;l=3431
        * @return The bytes for stateDomicile.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6517,7 +6518,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3379
+       *     See producerflow/producer/v1/producer.proto;l=3423
        * @return The fein.
        */
       @java.lang.Override
@@ -6541,7 +6542,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3379
+       *     See producerflow/producer/v1/producer.proto;l=3423
        * @return The bytes for fein.
        */
       @java.lang.Override
@@ -6570,7 +6571,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3383
+       *     See producerflow/producer/v1/producer.proto;l=3427
        * @return The companyName.
        */
       @java.lang.Override
@@ -6594,7 +6595,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3383
+       *     See producerflow/producer/v1/producer.proto;l=3427
        * @return The bytes for companyName.
        */
       @java.lang.Override
@@ -6623,7 +6624,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3387
+       *     See producerflow/producer/v1/producer.proto;l=3431
        * @return The stateDomicile.
        */
       @java.lang.Override
@@ -6647,7 +6648,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3387
+       *     See producerflow/producer/v1/producer.proto;l=3431
        * @return The bytes for stateDomicile.
        */
       @java.lang.Override
@@ -7570,7 +7571,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3379
+         *     See producerflow/producer/v1/producer.proto;l=3423
          * @return The fein.
          */
         @java.lang.Deprecated public java.lang.String getFein() {
@@ -7593,7 +7594,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3379
+         *     See producerflow/producer/v1/producer.proto;l=3423
          * @return The bytes for fein.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7617,7 +7618,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3379
+         *     See producerflow/producer/v1/producer.proto;l=3423
          * @param value The fein to set.
          * @return This builder for chaining.
          */
@@ -7637,7 +7638,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3379
+         *     See producerflow/producer/v1/producer.proto;l=3423
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearFein() {
@@ -7654,7 +7655,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3379
+         *     See producerflow/producer/v1/producer.proto;l=3423
          * @param value The bytes for fein to set.
          * @return This builder for chaining.
          */
@@ -7677,7 +7678,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3383
+         *     See producerflow/producer/v1/producer.proto;l=3427
          * @return The companyName.
          */
         @java.lang.Deprecated public java.lang.String getCompanyName() {
@@ -7700,7 +7701,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3383
+         *     See producerflow/producer/v1/producer.proto;l=3427
          * @return The bytes for companyName.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7724,7 +7725,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3383
+         *     See producerflow/producer/v1/producer.proto;l=3427
          * @param value The companyName to set.
          * @return This builder for chaining.
          */
@@ -7744,7 +7745,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3383
+         *     See producerflow/producer/v1/producer.proto;l=3427
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearCompanyName() {
@@ -7761,7 +7762,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3383
+         *     See producerflow/producer/v1/producer.proto;l=3427
          * @param value The bytes for companyName to set.
          * @return This builder for chaining.
          */
@@ -7784,7 +7785,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3387
+         *     See producerflow/producer/v1/producer.proto;l=3431
          * @return The stateDomicile.
          */
         @java.lang.Deprecated public java.lang.String getStateDomicile() {
@@ -7807,7 +7808,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3387
+         *     See producerflow/producer/v1/producer.proto;l=3431
          * @return The bytes for stateDomicile.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7831,7 +7832,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3387
+         *     See producerflow/producer/v1/producer.proto;l=3431
          * @param value The stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -7851,7 +7852,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3387
+         *     See producerflow/producer/v1/producer.proto;l=3431
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStateDomicile() {
@@ -7868,7 +7869,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3387
+         *     See producerflow/producer/v1/producer.proto;l=3431
          * @param value The bytes for stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -7939,28 +7940,28 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
-      int getRegulatoryActionsByStateCount();
+      @java.lang.Deprecated int getRegulatoryActionsByStateCount();
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
-      boolean containsRegulatoryActionsByState(
+      @java.lang.Deprecated boolean containsRegulatoryActionsByState(
           java.lang.String key);
       /**
        * Use {@link #getRegulatoryActionsByStateMap()} instead.
@@ -7970,45 +7971,45 @@ private static final long serialVersionUID = 0L;
       getRegulatoryActionsByState();
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
-      java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction>
+      @java.lang.Deprecated java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction>
       getRegulatoryActionsByStateMap();
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
-      /* nullable */
+      @java.lang.Deprecated /* nullable */
 com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrDefault(
           java.lang.String key,
           /* nullable */
 com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction defaultValue);
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
-      com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
+      @java.lang.Deprecated com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
           java.lang.String key);
 
       /**
@@ -8064,6 +8065,65 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        */
       com.google.protobuf.ByteString
           getNasdExamDetailsBytes();
+
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> 
+          getRegulatoryActionsList();
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActions(int index);
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      int getRegulatoryActionsCount();
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      java.util.List<? extends com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> 
+          getRegulatoryActionsOrBuilderList();
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder getRegulatoryActionsOrBuilder(
+          int index);
     }
     /**
      * <pre>
@@ -8100,6 +8160,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       private ProducerRegulatoryInfo() {
         clearanceCertificationInfo_ = "";
         nasdExamDetails_ = "";
+        regulatoryActions_ = java.util.Collections.emptyList();
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -8402,6 +8463,30 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
          */
         com.google.protobuf.ByteString
             getLengthOfOrderBytes();
+
+        /**
+         * <pre>
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
+         * </pre>
+         *
+         * <code>string state_code = 11 [json_name = "stateCode"];</code>
+         * @return The stateCode.
+         */
+        java.lang.String getStateCode();
+        /**
+         * <pre>
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
+         * </pre>
+         *
+         * <code>string state_code = 11 [json_name = "stateCode"];</code>
+         * @return The bytes for stateCode.
+         */
+        com.google.protobuf.ByteString
+            getStateCodeBytes();
       }
       /**
        * <pre>
@@ -8449,6 +8534,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           fileRef_ = "";
           penaltyFineForfeiture_ = "";
           lengthOfOrder_ = "";
+          stateCode_ = "";
         }
 
         public static final com.google.protobuf.Descriptors.Descriptor
@@ -8959,6 +9045,57 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
         }
 
+        public static final int STATE_CODE_FIELD_NUMBER = 11;
+        @SuppressWarnings("serial")
+        private volatile java.lang.Object stateCode_ = "";
+        /**
+         * <pre>
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
+         * </pre>
+         *
+         * <code>string state_code = 11 [json_name = "stateCode"];</code>
+         * @return The stateCode.
+         */
+        @java.lang.Override
+        public java.lang.String getStateCode() {
+          java.lang.Object ref = stateCode_;
+          if (ref instanceof java.lang.String) {
+            return (java.lang.String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            stateCode_ = s;
+            return s;
+          }
+        }
+        /**
+         * <pre>
+         * The two-letter state code of the regulatory authority that took
+         * the action.
+         * Format: US state code (e.g., "CA", "TX", "NY").
+         * </pre>
+         *
+         * <code>string state_code = 11 [json_name = "stateCode"];</code>
+         * @return The bytes for stateCode.
+         */
+        @java.lang.Override
+        public com.google.protobuf.ByteString
+            getStateCodeBytes() {
+          java.lang.Object ref = stateCode_;
+          if (ref instanceof java.lang.String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            stateCode_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+
         private byte memoizedIsInitialized = -1;
         @java.lang.Override
         public final boolean isInitialized() {
@@ -9003,6 +9140,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lengthOfOrder_)) {
             com.google.protobuf.GeneratedMessage.writeString(output, 10, lengthOfOrder_);
           }
+          if (!com.google.protobuf.GeneratedMessage.isStringEmpty(stateCode_)) {
+            com.google.protobuf.GeneratedMessage.writeString(output, 11, stateCode_);
+          }
           getUnknownFields().writeTo(output);
         }
 
@@ -9044,6 +9184,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           if (!com.google.protobuf.GeneratedMessage.isStringEmpty(lengthOfOrder_)) {
             size += com.google.protobuf.GeneratedMessage.computeStringSize(10, lengthOfOrder_);
+          }
+          if (!com.google.protobuf.GeneratedMessage.isStringEmpty(stateCode_)) {
+            size += com.google.protobuf.GeneratedMessage.computeStringSize(11, stateCode_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSize = size;
@@ -9089,6 +9232,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
               .equals(other.getPenaltyFineForfeiture())) return false;
           if (!getLengthOfOrder()
               .equals(other.getLengthOfOrder())) return false;
+          if (!getStateCode()
+              .equals(other.getStateCode())) return false;
           if (!getUnknownFields().equals(other.getUnknownFields())) return false;
           return true;
         }
@@ -9126,6 +9271,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           hash = (53 * hash) + getPenaltyFineForfeiture().hashCode();
           hash = (37 * hash) + LENGTH_OF_ORDER_FIELD_NUMBER;
           hash = (53 * hash) + getLengthOfOrder().hashCode();
+          hash = (37 * hash) + STATE_CODE_FIELD_NUMBER;
+          hash = (53 * hash) + getStateCode().hashCode();
           hash = (29 * hash) + getUnknownFields().hashCode();
           memoizedHashCode = hash;
           return hash;
@@ -9304,6 +9451,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             fileRef_ = "";
             penaltyFineForfeiture_ = "";
             lengthOfOrder_ = "";
+            stateCode_ = "";
             return this;
           }
 
@@ -9377,6 +9525,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             if (((from_bitField0_ & 0x00000200) != 0)) {
               result.lengthOfOrder_ = lengthOfOrder_;
             }
+            if (((from_bitField0_ & 0x00000400) != 0)) {
+              result.stateCode_ = stateCode_;
+            }
             result.bitField0_ |= to_bitField0_;
           }
 
@@ -9434,6 +9585,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             if (!other.getLengthOfOrder().isEmpty()) {
               lengthOfOrder_ = other.lengthOfOrder_;
               bitField0_ |= 0x00000200;
+              onChanged();
+            }
+            if (!other.getStateCode().isEmpty()) {
+              stateCode_ = other.stateCode_;
+              bitField0_ |= 0x00000400;
               onChanged();
             }
             this.mergeUnknownFields(other.getUnknownFields());
@@ -9518,6 +9674,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
                     bitField0_ |= 0x00000200;
                     break;
                   } // case 82
+                  case 90: {
+                    stateCode_ = input.readStringRequireUtf8();
+                    bitField0_ |= 0x00000400;
+                    break;
+                  } // case 90
                   default: {
                     if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                       done = true; // was an endgroup tag
@@ -10782,6 +10943,108 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             return this;
           }
 
+          private java.lang.Object stateCode_ = "";
+          /**
+           * <pre>
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * </pre>
+           *
+           * <code>string state_code = 11 [json_name = "stateCode"];</code>
+           * @return The stateCode.
+           */
+          public java.lang.String getStateCode() {
+            java.lang.Object ref = stateCode_;
+            if (!(ref instanceof java.lang.String)) {
+              com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+              java.lang.String s = bs.toStringUtf8();
+              stateCode_ = s;
+              return s;
+            } else {
+              return (java.lang.String) ref;
+            }
+          }
+          /**
+           * <pre>
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * </pre>
+           *
+           * <code>string state_code = 11 [json_name = "stateCode"];</code>
+           * @return The bytes for stateCode.
+           */
+          public com.google.protobuf.ByteString
+              getStateCodeBytes() {
+            java.lang.Object ref = stateCode_;
+            if (ref instanceof String) {
+              com.google.protobuf.ByteString b = 
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                      (java.lang.String) ref);
+              stateCode_ = b;
+              return b;
+            } else {
+              return (com.google.protobuf.ByteString) ref;
+            }
+          }
+          /**
+           * <pre>
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * </pre>
+           *
+           * <code>string state_code = 11 [json_name = "stateCode"];</code>
+           * @param value The stateCode to set.
+           * @return This builder for chaining.
+           */
+          public Builder setStateCode(
+              java.lang.String value) {
+            if (value == null) { throw new NullPointerException(); }
+            stateCode_ = value;
+            bitField0_ |= 0x00000400;
+            onChanged();
+            return this;
+          }
+          /**
+           * <pre>
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * </pre>
+           *
+           * <code>string state_code = 11 [json_name = "stateCode"];</code>
+           * @return This builder for chaining.
+           */
+          public Builder clearStateCode() {
+            stateCode_ = getDefaultInstance().getStateCode();
+            bitField0_ = (bitField0_ & ~0x00000400);
+            onChanged();
+            return this;
+          }
+          /**
+           * <pre>
+           * The two-letter state code of the regulatory authority that took
+           * the action.
+           * Format: US state code (e.g., "CA", "TX", "NY").
+           * </pre>
+           *
+           * <code>string state_code = 11 [json_name = "stateCode"];</code>
+           * @param value The bytes for stateCode to set.
+           * @return This builder for chaining.
+           */
+          public Builder setStateCodeBytes(
+              com.google.protobuf.ByteString value) {
+            if (value == null) { throw new NullPointerException(); }
+            checkByteStringIsUtf8(value);
+            stateCode_ = value;
+            bitField0_ |= 0x00000400;
+            onChanged();
+            return this;
+          }
+
           // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction)
         }
 
@@ -10856,22 +11119,22 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         return regulatoryActionsByState_;
       }
-      public int getRegulatoryActionsByStateCount() {
+      @java.lang.Deprecated public int getRegulatoryActionsByStateCount() {
         return internalGetRegulatoryActionsByState().getMap().size();
       }
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
       @java.lang.Override
-      public boolean containsRegulatoryActionsByState(
+      @java.lang.Deprecated public boolean containsRegulatoryActionsByState(
           java.lang.String key) {
         if (key == null) { throw new NullPointerException("map key"); }
         return internalGetRegulatoryActionsByState().getMap().containsKey(key);
@@ -10886,32 +11149,32 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
       @java.lang.Override
-      public java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsByStateMap() {
+      @java.lang.Deprecated public java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsByStateMap() {
         return internalGetRegulatoryActionsByState().getMap();
       }
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
       @java.lang.Override
-      public /* nullable */
+      @java.lang.Deprecated public /* nullable */
 com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrDefault(
           java.lang.String key,
           /* nullable */
@@ -10923,17 +11186,17 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
       }
       /**
        * <pre>
-       * Map of regulatory actions keyed by two-letter state code.
-       * The key is the state code (e.g., "CA", "TX"), and the value is the
-       * regulatory action for that state. A producer may have regulatory
-       * actions in multiple states.
-       * An empty map indicates no regulatory actions on record in NIPR.
+       * Deprecated: use regulatory_actions instead.
+       * Map of regulatory actions keyed by two-letter state code. A producer
+       * may have multiple regulatory actions in the same state, but this map
+       * can only carry one per state — additional actions are dropped.
+       * Populated for backwards compatibility only.
        * </pre>
        *
-       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+       * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
        */
       @java.lang.Override
-      public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
+      @java.lang.Deprecated public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
           java.lang.String key) {
         if (key == null) { throw new NullPointerException("map key"); }
         java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> map =
@@ -11052,6 +11315,82 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
       }
 
+      public static final int REGULATORY_ACTIONS_FIELD_NUMBER = 4;
+      @SuppressWarnings("serial")
+      private java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatoryActions_;
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      @java.lang.Override
+      public java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsList() {
+        return regulatoryActions_;
+      }
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      @java.lang.Override
+      public java.util.List<? extends com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> 
+          getRegulatoryActionsOrBuilderList() {
+        return regulatoryActions_;
+      }
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      @java.lang.Override
+      public int getRegulatoryActionsCount() {
+        return regulatoryActions_.size();
+      }
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActions(int index) {
+        return regulatoryActions_.get(index);
+      }
+      /**
+       * <pre>
+       * All regulatory actions on record for this producer, including
+       * multiple actions in the same state. Each action carries its own
+       * state_code. An empty list indicates no regulatory actions on
+       * record in NIPR.
+       * </pre>
+       *
+       * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder getRegulatoryActionsOrBuilder(
+          int index) {
+        return regulatoryActions_.get(index);
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -11078,6 +11417,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(nasdExamDetails_)) {
           com.google.protobuf.GeneratedMessage.writeString(output, 3, nasdExamDetails_);
         }
+        for (int i = 0; i < regulatoryActions_.size(); i++) {
+          output.writeMessage(4, regulatoryActions_.get(i));
+        }
         getUnknownFields().writeTo(output);
       }
 
@@ -11103,6 +11445,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(nasdExamDetails_)) {
           size += com.google.protobuf.GeneratedMessage.computeStringSize(3, nasdExamDetails_);
         }
+        for (int i = 0; i < regulatoryActions_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(4, regulatoryActions_.get(i));
+        }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
@@ -11124,6 +11470,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             .equals(other.getClearanceCertificationInfo())) return false;
         if (!getNasdExamDetails()
             .equals(other.getNasdExamDetails())) return false;
+        if (!getRegulatoryActionsList()
+            .equals(other.getRegulatoryActionsList())) return false;
         if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
@@ -11143,6 +11491,10 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         hash = (53 * hash) + getClearanceCertificationInfo().hashCode();
         hash = (37 * hash) + NASD_EXAM_DETAILS_FIELD_NUMBER;
         hash = (53 * hash) + getNasdExamDetails().hashCode();
+        if (getRegulatoryActionsCount() > 0) {
+          hash = (37 * hash) + REGULATORY_ACTIONS_FIELD_NUMBER;
+          hash = (53 * hash) + getRegulatoryActionsList().hashCode();
+        }
         hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -11310,6 +11662,13 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           internalGetMutableRegulatoryActionsByState().clear();
           clearanceCertificationInfo_ = "";
           nasdExamDetails_ = "";
+          if (regulatoryActionsBuilder_ == null) {
+            regulatoryActions_ = java.util.Collections.emptyList();
+          } else {
+            regulatoryActions_ = null;
+            regulatoryActionsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000008);
           return this;
         }
 
@@ -11336,9 +11695,22 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         @java.lang.Override
         public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo buildPartial() {
           com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo result = new com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo(this);
+          buildPartialRepeatedFields(result);
           if (bitField0_ != 0) { buildPartial0(result); }
           onBuilt();
           return result;
+        }
+
+        private void buildPartialRepeatedFields(com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo result) {
+          if (regulatoryActionsBuilder_ == null) {
+            if (((bitField0_ & 0x00000008) != 0)) {
+              regulatoryActions_ = java.util.Collections.unmodifiableList(regulatoryActions_);
+              bitField0_ = (bitField0_ & ~0x00000008);
+            }
+            result.regulatoryActions_ = regulatoryActions_;
+          } else {
+            result.regulatoryActions_ = regulatoryActionsBuilder_.build();
+          }
         }
 
         private void buildPartial0(com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo result) {
@@ -11378,6 +11750,32 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             nasdExamDetails_ = other.nasdExamDetails_;
             bitField0_ |= 0x00000004;
             onChanged();
+          }
+          if (regulatoryActionsBuilder_ == null) {
+            if (!other.regulatoryActions_.isEmpty()) {
+              if (regulatoryActions_.isEmpty()) {
+                regulatoryActions_ = other.regulatoryActions_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+              } else {
+                ensureRegulatoryActionsIsMutable();
+                regulatoryActions_.addAll(other.regulatoryActions_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.regulatoryActions_.isEmpty()) {
+              if (regulatoryActionsBuilder_.isEmpty()) {
+                regulatoryActionsBuilder_.dispose();
+                regulatoryActionsBuilder_ = null;
+                regulatoryActions_ = other.regulatoryActions_;
+                bitField0_ = (bitField0_ & ~0x00000008);
+                regulatoryActionsBuilder_ = 
+                  com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                     getRegulatoryActionsFieldBuilder() : null;
+              } else {
+                regulatoryActionsBuilder_.addAllMessages(other.regulatoryActions_);
+              }
+            }
           }
           this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
@@ -11424,6 +11822,19 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
                   bitField0_ |= 0x00000004;
                   break;
                 } // case 26
+                case 34: {
+                  com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction m =
+                      input.readMessage(
+                          com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.parser(),
+                          extensionRegistry);
+                  if (regulatoryActionsBuilder_ == null) {
+                    ensureRegulatoryActionsIsMutable();
+                    regulatoryActions_.add(m);
+                  } else {
+                    regulatoryActionsBuilder_.addMessage(m);
+                  }
+                  break;
+                } // case 34
                 default: {
                   if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                     done = true; // was an endgroup tag
@@ -11457,14 +11868,14 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
 
         private com.google.protobuf.MapFieldBuilder<
             java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder> regulatoryActionsByState_;
-        private com.google.protobuf.MapFieldBuilder<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder>
+        @java.lang.Deprecated private com.google.protobuf.MapFieldBuilder<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder>
             internalGetRegulatoryActionsByState() {
           if (regulatoryActionsByState_ == null) {
             return new com.google.protobuf.MapFieldBuilder<>(regulatoryActionsByStateConverter);
           }
           return regulatoryActionsByState_;
         }
-        private com.google.protobuf.MapFieldBuilder<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder>
+        @java.lang.Deprecated private com.google.protobuf.MapFieldBuilder<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder>
             internalGetMutableRegulatoryActionsByState() {
           if (regulatoryActionsByState_ == null) {
             regulatoryActionsByState_ = new com.google.protobuf.MapFieldBuilder<>(regulatoryActionsByStateConverter);
@@ -11473,22 +11884,22 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           onChanged();
           return regulatoryActionsByState_;
         }
-        public int getRegulatoryActionsByStateCount() {
+        @java.lang.Deprecated public int getRegulatoryActionsByStateCount() {
           return internalGetRegulatoryActionsByState().ensureBuilderMap().size();
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
         @java.lang.Override
-        public boolean containsRegulatoryActionsByState(
+        @java.lang.Deprecated public boolean containsRegulatoryActionsByState(
             java.lang.String key) {
           if (key == null) { throw new NullPointerException("map key"); }
           return internalGetRegulatoryActionsByState().ensureBuilderMap().containsKey(key);
@@ -11503,32 +11914,32 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
         @java.lang.Override
-        public java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsByStateMap() {
+        @java.lang.Deprecated public java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsByStateMap() {
           return internalGetRegulatoryActionsByState().getImmutableMap();
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
         @java.lang.Override
-        public /* nullable */
+        @java.lang.Deprecated public /* nullable */
 com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrDefault(
             java.lang.String key,
             /* nullable */
@@ -11539,17 +11950,17 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
         @java.lang.Override
-        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
+        @java.lang.Deprecated public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActionsByStateOrThrow(
             java.lang.String key) {
           if (key == null) { throw new NullPointerException("map key"); }
           java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> map = internalGetMutableRegulatoryActionsByState().ensureBuilderMap();
@@ -11558,23 +11969,23 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           }
           return regulatoryActionsByStateConverter.build(map.get(key));
         }
-        public Builder clearRegulatoryActionsByState() {
+        @java.lang.Deprecated public Builder clearRegulatoryActionsByState() {
           bitField0_ = (bitField0_ & ~0x00000001);
           internalGetMutableRegulatoryActionsByState().clear();
           return this;
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
-        public Builder removeRegulatoryActionsByState(
+        @java.lang.Deprecated public Builder removeRegulatoryActionsByState(
             java.lang.String key) {
           if (key == null) { throw new NullPointerException("map key"); }
           internalGetMutableRegulatoryActionsByState().ensureBuilderMap()
@@ -11592,16 +12003,16 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
-        public Builder putRegulatoryActionsByState(
+        @java.lang.Deprecated public Builder putRegulatoryActionsByState(
             java.lang.String key,
             com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction value) {
           if (key == null) { throw new NullPointerException("map key"); }
@@ -11613,16 +12024,16 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
-        public Builder putAllRegulatoryActionsByState(
+        @java.lang.Deprecated public Builder putAllRegulatoryActionsByState(
             java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> values) {
           for (java.util.Map.Entry<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> e : values.entrySet()) {
             if (e.getKey() == null || e.getValue() == null) {
@@ -11636,16 +12047,16 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         /**
          * <pre>
-         * Map of regulatory actions keyed by two-letter state code.
-         * The key is the state code (e.g., "CA", "TX"), and the value is the
-         * regulatory action for that state. A producer may have regulatory
-         * actions in multiple states.
-         * An empty map indicates no regulatory actions on record in NIPR.
+         * Deprecated: use regulatory_actions instead.
+         * Map of regulatory actions keyed by two-letter state code. A producer
+         * may have multiple regulatory actions in the same state, but this map
+         * can only carry one per state — additional actions are dropped.
+         * Populated for backwards compatibility only.
          * </pre>
          *
-         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState"];</code>
+         * <code>map&lt;string, .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction&gt; regulatory_actions_by_state = 1 [json_name = "regulatoryActionsByState", deprecated = true];</code>
          */
-        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder putRegulatoryActionsByStateBuilderIfAbsent(
+        @java.lang.Deprecated public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder putRegulatoryActionsByStateBuilderIfAbsent(
             java.lang.String key) {
           java.util.Map<java.lang.String, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> builderMap = internalGetMutableRegulatoryActionsByState().ensureBuilderMap();
           com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder entry = builderMap.get(key);
@@ -11877,6 +12288,372 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           bitField0_ |= 0x00000004;
           onChanged();
           return this;
+        }
+
+        private java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> regulatoryActions_ =
+          java.util.Collections.emptyList();
+        private void ensureRegulatoryActionsIsMutable() {
+          if (!((bitField0_ & 0x00000008) != 0)) {
+            regulatoryActions_ = new java.util.ArrayList<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction>(regulatoryActions_);
+            bitField0_ |= 0x00000008;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> regulatoryActionsBuilder_;
+
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> getRegulatoryActionsList() {
+          if (regulatoryActionsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(regulatoryActions_);
+          } else {
+            return regulatoryActionsBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public int getRegulatoryActionsCount() {
+          if (regulatoryActionsBuilder_ == null) {
+            return regulatoryActions_.size();
+          } else {
+            return regulatoryActionsBuilder_.getCount();
+          }
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction getRegulatoryActions(int index) {
+          if (regulatoryActionsBuilder_ == null) {
+            return regulatoryActions_.get(index);
+          } else {
+            return regulatoryActionsBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder setRegulatoryActions(
+            int index, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction value) {
+          if (regulatoryActionsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.set(index, value);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder setRegulatoryActions(
+            int index, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder builderForValue) {
+          if (regulatoryActionsBuilder_ == null) {
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder addRegulatoryActions(com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction value) {
+          if (regulatoryActionsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.add(value);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder addRegulatoryActions(
+            int index, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction value) {
+          if (regulatoryActionsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.add(index, value);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder addRegulatoryActions(
+            com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder builderForValue) {
+          if (regulatoryActionsBuilder_ == null) {
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.add(builderForValue.build());
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder addRegulatoryActions(
+            int index, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder builderForValue) {
+          if (regulatoryActionsBuilder_ == null) {
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder addAllRegulatoryActions(
+            java.lang.Iterable<? extends com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction> values) {
+          if (regulatoryActionsBuilder_ == null) {
+            ensureRegulatoryActionsIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, regulatoryActions_);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder clearRegulatoryActions() {
+          if (regulatoryActionsBuilder_ == null) {
+            regulatoryActions_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000008);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public Builder removeRegulatoryActions(int index) {
+          if (regulatoryActionsBuilder_ == null) {
+            ensureRegulatoryActionsIsMutable();
+            regulatoryActions_.remove(index);
+            onChanged();
+          } else {
+            regulatoryActionsBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder getRegulatoryActionsBuilder(
+            int index) {
+          return getRegulatoryActionsFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder getRegulatoryActionsOrBuilder(
+            int index) {
+          if (regulatoryActionsBuilder_ == null) {
+            return regulatoryActions_.get(index);  } else {
+            return regulatoryActionsBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public java.util.List<? extends com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> 
+             getRegulatoryActionsOrBuilderList() {
+          if (regulatoryActionsBuilder_ != null) {
+            return regulatoryActionsBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(regulatoryActions_);
+          }
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder addRegulatoryActionsBuilder() {
+          return getRegulatoryActionsFieldBuilder().addBuilder(
+              com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.getDefaultInstance());
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder addRegulatoryActionsBuilder(
+            int index) {
+          return getRegulatoryActionsFieldBuilder().addBuilder(
+              index, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.getDefaultInstance());
+        }
+        /**
+         * <pre>
+         * All regulatory actions on record for this producer, including
+         * multiple actions in the same state. Each action carries its own
+         * state_code. An empty list indicates no regulatory actions on
+         * record in NIPR.
+         * </pre>
+         *
+         * <code>repeated .producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction regulatory_actions = 4 [json_name = "regulatoryActions"];</code>
+         */
+        public java.util.List<com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder> 
+             getRegulatoryActionsBuilderList() {
+          return getRegulatoryActionsFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilder<
+            com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder> 
+            getRegulatoryActionsFieldBuilder() {
+          if (regulatoryActionsBuilder_ == null) {
+            regulatoryActionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryAction.Builder, com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionOrBuilder>(
+                    regulatoryActions_,
+                    ((bitField0_ & 0x00000008) != 0),
+                    getParentForChildren(),
+                    isClean());
+            regulatoryActions_ = null;
+          }
+          return regulatoryActionsBuilder_;
         }
 
         // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo)
@@ -17142,7 +17919,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3619
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -17153,7 +17930,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3619
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -17326,7 +18103,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3619
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The street.
      */
     @java.lang.Override
@@ -17349,7 +18126,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3619
+     *     See producerflow/producer/v1/producer.proto;l=3674
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -18048,7 +18825,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3619
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -18070,7 +18847,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3619
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -18093,7 +18870,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3619
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -18112,7 +18889,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3619
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -18128,7 +18905,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3619
+       *     See producerflow/producer/v1/producer.proto;l=3674
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -19744,6 +20521,63 @@ java.lang.String defaultValue) {
     return onboardingStatusUpdatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : onboardingStatusUpdatedAt_;
   }
 
+  public static final int ROLE_FIELD_NUMBER = 46;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object role_ = "";
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Reflects the role assigned during NewProducer / onboarding or via
+   * UpdateProducer. Empty when the producer has no role assigned, or when the
+   * tenant has not configured any role labels.
+   * </pre>
+   *
+   * <code>string role = 46 [json_name = "role"];</code>
+   * @return The role.
+   */
+  @java.lang.Override
+  public java.lang.String getRole() {
+    java.lang.Object ref = role_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      role_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Reflects the role assigned during NewProducer / onboarding or via
+   * UpdateProducer. Empty when the producer has no role assigned, or when the
+   * tenant has not configured any role labels.
+   * </pre>
+   *
+   * <code>string role = 46 [json_name = "role"];</code>
+   * @return The bytes for role.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getRoleBytes() {
+    java.lang.Object ref = role_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      role_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -19826,6 +20660,9 @@ java.lang.String defaultValue) {
     }
     if (((bitField0_ & 0x00000008) != 0)) {
       output.writeMessage(45, getOnboardingStatusUpdatedAt());
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 46, role_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -19930,6 +20767,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(45, getOnboardingStatusUpdatedAt());
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(46, role_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -19996,6 +20836,8 @@ java.lang.String defaultValue) {
       if (!getOnboardingStatusUpdatedAt()
           .equals(other.getOnboardingStatusUpdatedAt())) return false;
     }
+    if (!getRole()
+        .equals(other.getRole())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -20067,6 +20909,8 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + ONBOARDING_STATUS_UPDATED_AT_FIELD_NUMBER;
       hash = (53 * hash) + getOnboardingStatusUpdatedAt().hashCode();
     }
+    hash = (37 * hash) + ROLE_FIELD_NUMBER;
+    hash = (53 * hash) + getRole().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -20306,6 +21150,7 @@ java.lang.String defaultValue) {
         onboardingStatusUpdatedAtBuilder_.dispose();
         onboardingStatusUpdatedAtBuilder_ = null;
       }
+      role_ = "";
       return this;
     }
 
@@ -20425,6 +21270,9 @@ java.lang.String defaultValue) {
             ? onboardingStatusUpdatedAt_
             : onboardingStatusUpdatedAtBuilder_.build();
         to_bitField0_ |= 0x00000008;
+      }
+      if (((from_bitField0_ & 0x00100000) != 0)) {
+        result.role_ = role_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -20546,6 +21394,11 @@ java.lang.String defaultValue) {
       }
       if (other.hasOnboardingStatusUpdatedAt()) {
         mergeOnboardingStatusUpdatedAt(other.getOnboardingStatusUpdatedAt());
+      }
+      if (!other.getRole().isEmpty()) {
+        role_ = other.role_;
+        bitField0_ |= 0x00100000;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -20702,6 +21555,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00080000;
               break;
             } // case 362
+            case 370: {
+              role_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00100000;
+              break;
+            } // case 370
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -23373,6 +24231,123 @@ java.lang.String defaultValue) {
         onboardingStatusUpdatedAt_ = null;
       }
       return onboardingStatusUpdatedAtBuilder_;
+    }
+
+    private java.lang.Object role_ = "";
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * </pre>
+     *
+     * <code>string role = 46 [json_name = "role"];</code>
+     * @return The role.
+     */
+    public java.lang.String getRole() {
+      java.lang.Object ref = role_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        role_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * </pre>
+     *
+     * <code>string role = 46 [json_name = "role"];</code>
+     * @return The bytes for role.
+     */
+    public com.google.protobuf.ByteString
+        getRoleBytes() {
+      java.lang.Object ref = role_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        role_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * </pre>
+     *
+     * <code>string role = 46 [json_name = "role"];</code>
+     * @param value The role to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRole(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      role_ = value;
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * </pre>
+     *
+     * <code>string role = 46 [json_name = "role"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearRole() {
+      role_ = getDefaultInstance().getRole();
+      bitField0_ = (bitField0_ & ~0x00100000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+     * "CSR", "Agency Principal").
+     *
+     * Reflects the role assigned during NewProducer / onboarding or via
+     * UpdateProducer. Empty when the producer has no role assigned, or when the
+     * tenant has not configured any role labels.
+     * </pre>
+     *
+     * <code>string role = 46 [json_name = "role"];</code>
+     * @param value The bytes for role to set.
+     * @return This builder for chaining.
+     */
+    public Builder setRoleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      role_ = value;
+      bitField0_ |= 0x00100000;
+      onChanged();
+      return this;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Producer)

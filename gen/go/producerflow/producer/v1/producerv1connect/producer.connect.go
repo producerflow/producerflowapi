@@ -72,6 +72,9 @@ const (
 	// ProducerServiceGetProducerProcedure is the fully-qualified name of the ProducerService's
 	// GetProducer RPC.
 	ProducerServiceGetProducerProcedure = "/producerflow.producer.v1.ProducerService/GetProducer"
+	// ProducerServiceListProducerRolesProcedure is the fully-qualified name of the ProducerService's
+	// ListProducerRoles RPC.
+	ProducerServiceListProducerRolesProcedure = "/producerflow.producer.v1.ProducerService/ListProducerRoles"
 	// ProducerServiceGetAgencyFilesProcedure is the fully-qualified name of the ProducerService's
 	// GetAgencyFiles RPC.
 	ProducerServiceGetAgencyFilesProcedure = "/producerflow.producer.v1.ProducerService/GetAgencyFiles"
@@ -611,6 +614,23 @@ type ProducerServiceClient interface {
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
 	GetProducer(context.Context, *connect.Request[v1.GetProducerRequest]) (*connect.Response[v1.GetProducerResponse], error)
+	// ListProducerRoles returns the producer role labels configured for the
+	// authenticated tenant.
+	//
+	// These role labels are the valid values for the `role` field on
+	// NewProducer / UpdateProducer requests, and the values that may appear in
+	// the `role` field of a Producer response. The list is configured per-tenant
+	// and may be empty if the tenant has not enabled the producer-role feature —
+	// callers should treat an empty list as "no role should be sent".
+	//
+	// Use this endpoint to populate role pickers, validate role inputs
+	// client-side, or discover whether the feature is enabled for the tenant.
+	//
+	// Returns:
+	// The list of role labels available for the authenticated tenant, in the
+	// order they were configured. Empty when the tenant has not configured any
+	// roles.
+	ListProducerRoles(context.Context, *connect.Request[v1.ListProducerRolesRequest]) (*connect.Response[v1.ListProducerRolesResponse], error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//
 	// Returns pre-signed URLs for the following document types:
@@ -1575,6 +1595,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("GetProducer")),
 			connect.WithClientOptions(opts...),
 		),
+		listProducerRoles: connect.NewClient[v1.ListProducerRolesRequest, v1.ListProducerRolesResponse](
+			httpClient,
+			baseURL+ProducerServiceListProducerRolesProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("ListProducerRoles")),
+			connect.WithClientOptions(opts...),
+		),
 		getAgencyFiles: connect.NewClient[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse](
 			httpClient,
 			baseURL+ProducerServiceGetAgencyFilesProcedure,
@@ -1737,6 +1763,7 @@ type producerServiceClient struct {
 	getAgencyProducers            *connect.Client[v1.GetAgencyProducersRequest, v1.GetAgencyProducersResponse]
 	getAgency                     *connect.Client[v1.GetAgencyRequest, v1.GetAgencyResponse]
 	getProducer                   *connect.Client[v1.GetProducerRequest, v1.GetProducerResponse]
+	listProducerRoles             *connect.Client[v1.ListProducerRolesRequest, v1.ListProducerRolesResponse]
 	getAgencyFiles                *connect.Client[v1.GetAgencyFilesRequest, v1.GetAgencyFilesResponse]
 	updateProducer                *connect.Client[v1.UpdateProducerRequest, v1.UpdateProducerResponse]
 	updateAgency                  *connect.Client[v1.UpdateAgencyRequest, v1.UpdateAgencyResponse]
@@ -1830,6 +1857,11 @@ func (c *producerServiceClient) GetAgency(ctx context.Context, req *connect.Requ
 // GetProducer calls producerflow.producer.v1.ProducerService.GetProducer.
 func (c *producerServiceClient) GetProducer(ctx context.Context, req *connect.Request[v1.GetProducerRequest]) (*connect.Response[v1.GetProducerResponse], error) {
 	return c.getProducer.CallUnary(ctx, req)
+}
+
+// ListProducerRoles calls producerflow.producer.v1.ProducerService.ListProducerRoles.
+func (c *producerServiceClient) ListProducerRoles(ctx context.Context, req *connect.Request[v1.ListProducerRolesRequest]) (*connect.Response[v1.ListProducerRolesResponse], error) {
+	return c.listProducerRoles.CallUnary(ctx, req)
 }
 
 // GetAgencyFiles calls producerflow.producer.v1.ProducerService.GetAgencyFiles.
@@ -2420,6 +2452,23 @@ type ProducerServiceHandler interface {
 	//   - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
 	//     associated agency not found
 	GetProducer(context.Context, *connect.Request[v1.GetProducerRequest]) (*connect.Response[v1.GetProducerResponse], error)
+	// ListProducerRoles returns the producer role labels configured for the
+	// authenticated tenant.
+	//
+	// These role labels are the valid values for the `role` field on
+	// NewProducer / UpdateProducer requests, and the values that may appear in
+	// the `role` field of a Producer response. The list is configured per-tenant
+	// and may be empty if the tenant has not enabled the producer-role feature —
+	// callers should treat an empty list as "no role should be sent".
+	//
+	// Use this endpoint to populate role pickers, validate role inputs
+	// client-side, or discover whether the feature is enabled for the tenant.
+	//
+	// Returns:
+	// The list of role labels available for the authenticated tenant, in the
+	// order they were configured. Empty when the tenant has not configured any
+	// roles.
+	ListProducerRoles(context.Context, *connect.Request[v1.ListProducerRolesRequest]) (*connect.Response[v1.ListProducerRolesResponse], error)
 	// GetAgencyFiles retrieves signed URLs for accessing agency documents.
 	//
 	// Returns pre-signed URLs for the following document types:
@@ -3380,6 +3429,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("GetProducer")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceListProducerRolesHandler := connect.NewUnaryHandler(
+		ProducerServiceListProducerRolesProcedure,
+		svc.ListProducerRoles,
+		connect.WithSchema(producerServiceMethods.ByName("ListProducerRoles")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceGetAgencyFilesHandler := connect.NewUnaryHandler(
 		ProducerServiceGetAgencyFilesProcedure,
 		svc.GetAgencyFiles,
@@ -3552,6 +3607,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceGetAgencyHandler.ServeHTTP(w, r)
 		case ProducerServiceGetProducerProcedure:
 			producerServiceGetProducerHandler.ServeHTTP(w, r)
+		case ProducerServiceListProducerRolesProcedure:
+			producerServiceListProducerRolesHandler.ServeHTTP(w, r)
 		case ProducerServiceGetAgencyFilesProcedure:
 			producerServiceGetAgencyFilesHandler.ServeHTTP(w, r)
 		case ProducerServiceUpdateProducerProcedure:
@@ -3659,6 +3716,10 @@ func (UnimplementedProducerServiceHandler) GetAgency(context.Context, *connect.R
 
 func (UnimplementedProducerServiceHandler) GetProducer(context.Context, *connect.Request[v1.GetProducerRequest]) (*connect.Response[v1.GetProducerResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetProducer is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) ListProducerRoles(context.Context, *connect.Request[v1.ListProducerRolesRequest]) (*connect.Response[v1.ListProducerRolesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListProducerRoles is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) GetAgencyFiles(context.Context, *connect.Request[v1.GetAgencyFilesRequest]) (*connect.Response[v1.GetAgencyFilesResponse], error) {

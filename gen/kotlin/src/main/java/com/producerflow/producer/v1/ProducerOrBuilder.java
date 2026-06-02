@@ -671,4 +671,34 @@ java.lang.String defaultValue);
    * <code>.google.protobuf.Timestamp onboarding_status_updated_at = 45 [json_name = "onboardingStatusUpdatedAt"];</code>
    */
   com.google.protobuf.TimestampOrBuilder getOnboardingStatusUpdatedAtOrBuilder();
+
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Reflects the role assigned during NewProducer / onboarding or via
+   * UpdateProducer. Empty when the producer has no role assigned, or when the
+   * tenant has not configured any role labels.
+   * </pre>
+   *
+   * <code>string role = 46 [json_name = "role"];</code>
+   * @return The role.
+   */
+  java.lang.String getRole();
+  /**
+   * <pre>
+   * Tenant-defined role label for the producer (e.g. "Licensed Producer",
+   * "CSR", "Agency Principal").
+   *
+   * Reflects the role assigned during NewProducer / onboarding or via
+   * UpdateProducer. Empty when the producer has no role assigned, or when the
+   * tenant has not configured any role labels.
+   * </pre>
+   *
+   * <code>string role = 46 [json_name = "role"];</code>
+   * @return The bytes for role.
+   */
+  com.google.protobuf.ByteString
+      getRoleBytes();
 }

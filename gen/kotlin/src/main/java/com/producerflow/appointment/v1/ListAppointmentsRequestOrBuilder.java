@@ -92,5 +92,54 @@ public interface ListAppointmentsRequestOrBuilder extends
   com.google.protobuf.ByteString
       getAgencyIdBytes();
 
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return A list containing the operationalStatus.
+   */
+  java.util.List<com.producerflow.appointment.v1.OperationalStatus> getOperationalStatusList();
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return The count of operationalStatus.
+   */
+  int getOperationalStatusCount();
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @param index The index of the element to return.
+   * @return The operationalStatus at the given index.
+   */
+  com.producerflow.appointment.v1.OperationalStatus getOperationalStatus(int index);
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @return A list containing the enum numeric values on the wire for operationalStatus.
+   */
+  java.util.List<java.lang.Integer>
+  getOperationalStatusValueList();
+  /**
+   * <pre>
+   * Optional. Filter results by operational status.
+   * </pre>
+   *
+   * <code>repeated .producerflow.appointment.v1.OperationalStatus operational_status = 4 [json_name = "operationalStatus"];</code>
+   * @param index The index of the value to return.
+   * @return The enum numeric value on the wire of operationalStatus at the given index.
+   */
+  int getOperationalStatusValue(int index);
+
   com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase getLicenseOwnerCase();
 }

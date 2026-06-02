@@ -56,12 +56,14 @@ public enum ContactRole
   CONTACT_ROLE_CSR(3),
   /**
    * <pre>
-   * Unlicensed Producer: An individual working in a producer-like capacity
-   * but who does not hold an active insurance producer license.
+   * Deprecated: Use CONTACT_ROLE_UNLICENSED_SERVICE instead.
+   * Requests carrying this value are accepted for backward compatibility
+   * and stored as CONTACT_ROLE_UNLICENSED_SERVICE.
    * </pre>
    *
-   * <code>CONTACT_ROLE_UNLICENSED_PRODUCER = 4;</code>
+   * <code>CONTACT_ROLE_UNLICENSED_PRODUCER = 4 [deprecated = true];</code>
    */
+  @java.lang.Deprecated
   CONTACT_ROLE_UNLICENSED_PRODUCER(4),
   /**
    * <pre>
@@ -132,13 +134,14 @@ public enum ContactRole
   public static final int CONTACT_ROLE_CSR_VALUE = 3;
   /**
    * <pre>
-   * Unlicensed Producer: An individual working in a producer-like capacity
-   * but who does not hold an active insurance producer license.
+   * Deprecated: Use CONTACT_ROLE_UNLICENSED_SERVICE instead.
+   * Requests carrying this value are accepted for backward compatibility
+   * and stored as CONTACT_ROLE_UNLICENSED_SERVICE.
    * </pre>
    *
-   * <code>CONTACT_ROLE_UNLICENSED_PRODUCER = 4;</code>
+   * <code>CONTACT_ROLE_UNLICENSED_PRODUCER = 4 [deprecated = true];</code>
    */
-  public static final int CONTACT_ROLE_UNLICENSED_PRODUCER_VALUE = 4;
+  @java.lang.Deprecated public static final int CONTACT_ROLE_UNLICENSED_PRODUCER_VALUE = 4;
   /**
    * <pre>
    * Unlicensed Service: A contact providing services to the agency
