@@ -518,6 +518,25 @@ service ProducerService {
   //
   rpc GetProducer(GetProducerRequest) returns (GetProducerResponse);
 
+  // ListProducerRoles returns the producer role labels configured for the
+  // authenticated tenant.
+  //
+  // These role labels are the valid values for the `role` field on
+  // NewProducer / UpdateProducer requests, and the values that may appear in
+  // the `role` field of a Producer response. The list is configured per-tenant
+  // and may be empty if the tenant has not enabled the producer-role feature —
+  // callers should treat an empty list as "no role should be sent".
+  //
+  // Use this endpoint to populate role pickers, validate role inputs
+  // client-side, or discover whether the feature is enabled for the tenant.
+  //
+  // Returns:
+  // The list of role labels available for the authenticated tenant, in the
+  // order they were configured. Empty when the tenant has not configured any
+  // roles.
+  //
+  rpc ListProducerRoles(ListProducerRolesRequest) returns (ListProducerRolesResponse);
+
   // GetAgencyFiles retrieves signed URLs for accessing agency documents.
   //
   // Returns pre-signed URLs for the following document types:
@@ -1462,9 +1481,10 @@ enum ContactRole {
   // and support. Does not hold an insurance producer license.
   CONTACT_ROLE_CSR = 3;
 
-  // Unlicensed Producer: An individual working in a producer-like capacity
-  // but who does not hold an active insurance producer license.
-  CONTACT_ROLE_UNLICENSED_PRODUCER = 4;
+  // Deprecated: Use CONTACT_ROLE_UNLICENSED_SERVICE instead.
+  // Requests carrying this value are accepted for backward compatibility
+  // and stored as CONTACT_ROLE_UNLICENSED_SERVICE.
+  CONTACT_ROLE_UNLICENSED_PRODUCER = 4 [deprecated = true];
 
   // Unlicensed Service: A contact providing services to the agency
   // without requiring an insurance license.
@@ -2107,6 +2127,19 @@ message GetProducerResponse {
   Producer producer = 1;
 }
 
+// ListProducerRolesRequest is the empty request for the ListProducerRoles RPC.
+// The tenant is determined from the authenticated API key.
+message ListProducerRolesRequest {}
+
+// ListProducerRolesResponse contains the producer role labels configured for
+// the authenticated tenant.
+message ListProducerRolesResponse {
+  // The list of producer role labels available for the authenticated tenant,
+  // in the order they were configured. Empty when the tenant has not
+  // configured any roles.
+  repeated string roles = 1;
+}
+
 // GetAgencyRequest requests information about a specific agency.
 message GetAgencyRequest {
   // AgencyIDLookup allows looking up an agency by its unique identifier.
@@ -2302,6 +2335,17 @@ message UpdateProducerRequest {
     // If not provided, the onboarding status remains unchanged.
     // When set, the onboarding_status_updated_at timestamp is automatically updated.
     optional OnboardingStatus onboarding_status = 15;
+
+    // Tenant-defined role label for the producer (e.g. "Licensed Producer",
+    // "CSR", "Agency Principal").
+    //
+    // Update behavior:
+    // - If not provided (null): the existing role is preserved unchanged.
+    // - If provided as empty string: the role is cleared.
+    // - If provided with a value: the value must match one of the role labels
+    //   configured in the tenant's settings; otherwise the request is rejected
+    //   with INVALID_ARGUMENT.
+    optional string role = 16;
   }
 
   // The ID of the producer to update.
@@ -3467,14 +3511,19 @@ message Producer {
         // Format: Free-text describing the time period (e.g., "12 months",
         // "Indefinite", "Until compliance").
         string length_of_order = 10;
+
+        // The two-letter state code of the regulatory authority that took
+        // the action.
+        // Format: US state code (e.g., "CA", "TX", "NY").
+        string state_code = 11;
       }
 
-      // Map of regulatory actions keyed by two-letter state code.
-      // The key is the state code (e.g., "CA", "TX"), and the value is the
-      // regulatory action for that state. A producer may have regulatory
-      // actions in multiple states.
-      // An empty map indicates no regulatory actions on record in NIPR.
-      map<string, RegulatoryAction> regulatory_actions_by_state = 1;
+      // Deprecated: use regulatory_actions instead.
+      // Map of regulatory actions keyed by two-letter state code. A producer
+      // may have multiple regulatory actions in the same state, but this map
+      // can only carry one per state — additional actions are dropped.
+      // Populated for backwards compatibility only.
+      map<string, RegulatoryAction> regulatory_actions_by_state = 1 [deprecated = true];
 
       // Clearance certification information for the producer.
       // Indicates whether the producer has obtained clearance from NIPR's
@@ -3488,6 +3537,12 @@ message Producer {
       // variable insurance products.
       // Reference: https://www.finra.org
       string nasd_exam_details = 3;
+
+      // All regulatory actions on record for this producer, including
+      // multiple actions in the same state. Each action carries its own
+      // state_code. An empty list indicates no regulatory actions on
+      // record in NIPR.
+      repeated RegulatoryAction regulatory_actions = 4;
     }
     // Producer's regulatory information from NIPR
     ProducerRegulatoryInfo regulatory_info = 9;
@@ -3679,6 +3734,14 @@ message Producer {
   // Timestamp when the onboarding status was last updated.
   // This field is only populated when the tenant has enabled the onboarding status feature.
   google.protobuf.Timestamp onboarding_status_updated_at = 45;
+
+  // Tenant-defined role label for the producer (e.g. "Licensed Producer",
+  // "CSR", "Agency Principal").
+  //
+  // Reflects the role assigned during NewProducer / onboarding or via
+  // UpdateProducer. Empty when the producer has no role assigned, or when the
+  // tenant has not configured any role labels.
+  string role = 46;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.
@@ -3855,6 +3918,18 @@ message NewProducer {
   // Producerflow and their corresponding responses. Keys are question identifiers or text,
   // values are the answers provided.
   map<string, string> tenant_additional_questions = 12;
+
+  // Tenant-defined role label for the producer (e.g. "Licensed Producer",
+  // "CSR", "Agency Principal").
+  //
+  // Optional. When set, the value must match one of the role labels configured
+  // for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.
+  //
+  // Tenants that have not configured any roles should leave this empty.
+  optional string role = 13 [
+    (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
+    (buf.validate.field).string.min_len = 1
+  ];
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.

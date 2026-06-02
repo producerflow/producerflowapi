@@ -170,6 +170,9 @@ message ListAppointmentsRequest {
     string agency_id = 3 [(buf.validate.field).string.uuid = true];
     option (buf.validate.oneof).required = true;
   }
+
+  // Optional. Filter results by operational status.
+  repeated OperationalStatus operational_status = 4;
 }
 
 message ListAppointmentsResponse {
