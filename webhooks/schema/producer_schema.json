@@ -12,7 +12,7 @@
     "event_type": {
       "type": "string",
       "minLength": 1,
-      "description": "Type of event that occurred (e.g., 'producer.updated', 'producer.synced')"
+      "description": "Type of event that occurred (e.g., 'producer.created', 'producer.updated', 'producer.transferred')"
     },
     "origin": {
       "type": "string",
@@ -36,11 +36,23 @@
     "agency_id": {
       "type": "string",
       "minLength": 1,
-      "description": "Always present. ID of the agency that the producer belongs to"
+      "description": "Always present. ID of the agency that the producer belongs to. For 'producer.transferred', this is the TARGET (new) agency"
     },
     "external_agency_id": {
       "type": "string",
-      "description": "Only present if filled in by tenant. External ID of the agency that the producer belongs to"
+      "description": "Only present if filled in by tenant. External ID of the agency that the producer belongs to. For 'producer.transferred', this is the target agency's external ID"
+    },
+    "transfer_id": {
+      "type": "string",
+      "description": "Present only for 'producer.transferred'. Unique identifier of the transfer"
+    },
+    "source_agency_id": {
+      "type": "string",
+      "description": "Present only for 'producer.transferred'. ID of the agency the producer was transferred FROM"
+    },
+    "external_source_agency_id": {
+      "type": "string",
+      "description": "Present only for 'producer.transferred', when filled in by tenant. External ID of the source agency"
     },
     "npn": {
       "type": "string",

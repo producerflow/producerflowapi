@@ -1,0 +1,16 @@
+{
+  "id": "transfer:6f1a3c7e-4b2d-4d8a-9c1f-2b8e1c9f0e21",
+  "event_type": "producer.transferred",
+  "origin": "ProducerFlowAPI",
+  "timestamp": "2026-05-11T15:30:00Z",
+  "producer_id": "prod_987654321",
+  "external_id": "ext_123",
+  "agency_id": "agcy_target_456",
+  "external_agency_id": "ext_agcy_target_456",
+  "npn": "12345678",
+  "transfer_id": "6f1a3c7e-4b2d-4d8a-9c1f-2b8e1c9f0e21",
+  "source_agency_id": "agcy_source_123",
+  "external_source_agency_id": "ext_agcy_source_123",
+  "nipr_sync_status": "active",
+  "nipr_sync_status_updated_at": "2026-05-11T15:30:00Z"
+}

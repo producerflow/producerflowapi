@@ -50,12 +50,16 @@ Triggered when agency data is created, updated, or synchronized from external so
 Triggered when producer/agent data is created, updated, or synchronized.
 
 **Schema**: [producer_schema.json](./schema/producer_schema.json)
-**Example Payload**: [producer_example.json](./examples/producer_example.json)
+**Example Payloads**:
+
+- [producer_example.json](./examples/producer_example.json) - Basic producer event
+- [producer_transferred_example.json](./examples/producer_transferred_example.json) - Producer transferred between agencies
 
 **Event Types:**
 
 - `producer.created` - New producer record created
 - `producer.updated` - Existing producer record modified
+- `producer.transferred` - Producer moved from one agency to another within the same tenant
 
 **Key Data Included:**
 
@@ -157,6 +161,7 @@ The `event_type` field follows a consistent pattern: `{object}.{action}`. Here a
 | `agency.updated` | An existing agency record was modified |
 | `producer.created` | A new producer record was created |
 | `producer.updated` | An existing producer record was modified |
+| `producer.transferred` | A producer was moved from one agency to another within the same tenant. `agency_id` is the target agency; `source_agency_id` is the previous agency |
 | `contact.created` | A new contact record was created |
 | `contact.updated` | An existing contact record was modified |
 | `contact.deleted` | A contact record was removed |
