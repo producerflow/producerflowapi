@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.25] - 2026-06-15
+
+### Added
+
+#### ProducerService
+
+- **New `GetContact` RPC** — retrieves a single contact without requiring the agency to be known, usable in flows where only the contact is known. Supports lookup by contact ID (UUID) or by tenant-defined external ID (exactly one required); returns `NOT_FOUND` if the contact doesn't exist or doesn't belong to the tenant. The response includes the contact's `external_id` and `external_metadata`
+- **`external_id` on `Contact`** — tenant-provided external identifier for a contact, set via `SetExternalID`; empty string if unassigned
+- **`external_id` and `external_metadata` on `Producer.Agency`** — the associated agency now exposes its tenant-provided external ID and external metadata, so callers don't need an extra `GetAgency` call
+- **`agency_name` on `ValidateAgencyNPNResponse`** — the agency name as registered in NIPR, populated only when the NPN is valid
+- **`NIPR_SYNC_STATE_NO_LICENSE_FOUND` on `NIPRSyncState`** — NIPR returned no license information for a valid NPN (not an error; the sync is not auto-retried), distinguished from `NIPR_SYNC_STATE_FAILING`
+
+### Changed
+
+#### ProducerService
+
+- **`valid` field on `ValidateProducerNPNResponse` and `ValidateAgencyNPNResponse` is now `optional`** — so the field is always emitted in JSON, even when `false`
+- Regenerated client libraries with latest proto changes
+
+#### Webhooks
+
+- **New `producer.transferred` event type** — emitted when a producer is moved from one agency to another within the same tenant. Adds `transfer_id`, `source_agency_id`, and `external_source_agency_id` fields; for this event `agency_id`/`external_agency_id` refer to the target agency. Includes a new `producer_transferred_example.json` example payload
+
 ## [1.0.24] - 2026-05-29
 
 ### Added
