@@ -37,9 +37,10 @@ public object ValidateAgencyNPNResponseKt {
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR's agency records.
      * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * ```
      *
-     * `bool valid = 1 [json_name = "valid"];`
+     * `optional bool valid = 1 [json_name = "valid"];`
      */
     public var valid: kotlin.Boolean
       @JvmName("getValid")
@@ -53,12 +54,54 @@ public object ValidateAgencyNPNResponseKt {
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR's agency records.
      * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * ```
      *
-     * `bool valid = 1 [json_name = "valid"];`
+     * `optional bool valid = 1 [json_name = "valid"];`
      */
     public fun clearValid() {
       _builder.clearValid()
+    }
+    /**
+     * ```
+     * Indicates whether the NPN is valid.
+     * True if the NPN exists in NIPR's agency records.
+     * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
+     * ```
+     *
+     * `optional bool valid = 1 [json_name = "valid"];`
+     * @return Whether the valid field is set.
+     */
+    public fun hasValid(): kotlin.Boolean {
+      return _builder.hasValid()
+    }
+
+    /**
+     * ```
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * ```
+     *
+     * `string agency_name = 2 [json_name = "agencyName"];`
+     */
+    public var agencyName: kotlin.String
+      @JvmName("getAgencyName")
+      get() = _builder.agencyName
+      @JvmName("setAgencyName")
+      set(value) {
+        _builder.agencyName = value
+      }
+    /**
+     * ```
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * ```
+     *
+     * `string agency_name = 2 [json_name = "agencyName"];`
+     */
+    public fun clearAgencyName() {
+      _builder.clearAgencyName()
     }
   }
 }

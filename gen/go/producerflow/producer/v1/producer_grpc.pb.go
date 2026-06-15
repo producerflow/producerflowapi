@@ -39,6 +39,7 @@ const (
 	ProducerService_NewContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/NewContact"
 	ProducerService_NewContacts_FullMethodName                   = "/producerflow.producer.v1.ProducerService/NewContacts"
 	ProducerService_ListAgencyContacts_FullMethodName            = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
+	ProducerService_GetContact_FullMethodName                    = "/producerflow.producer.v1.ProducerService/GetContact"
 	ProducerService_UpdateContact_FullMethodName                 = "/producerflow.producer.v1.ProducerService/UpdateContact"
 	ProducerService_SetExternalID_FullMethodName                 = "/producerflow.producer.v1.ProducerService/SetExternalID"
 	ProducerService_ValidateProducerNPN_FullMethodName           = "/producerflow.producer.v1.ProducerService/ValidateProducerNPN"
@@ -803,6 +804,29 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(ctx context.Context, in *ListAgencyContactsRequest, opts ...grpc.CallOption) (*ListAgencyContactsResponse, error)
+	// GetContact retrieves a single contact.
+	//
+	// Unlike ListAgencyContacts, this does not require knowing the agency, which
+	// makes it usable in flows where only the contact is known.
+	//
+	// Supports two lookup methods:
+	// - By contact ID (UUID)
+	// - By external ID (tenant-defined identifier set via SetExternalID)
+	//
+	// The response includes the contact's external_id and external_metadata.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - contact_id_lookup.contact_id: Must be a valid UUID format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+	//
+	// Returns:
+	// The single matched contact.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	GetContact(ctx context.Context, in *GetContactRequest, opts ...grpc.CallOption) (*GetContactResponse, error)
 	// UpdateContact updates editable fields for an existing contact.
 	//
 	// This endpoint allows updating contact information for non-producer personnel
@@ -1642,6 +1666,16 @@ func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, in *List
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAgencyContactsResponse)
 	err := c.cc.Invoke(ctx, ProducerService_ListAgencyContacts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *producerServiceClient) GetContact(ctx context.Context, in *GetContactRequest, opts ...grpc.CallOption) (*GetContactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetContactResponse)
+	err := c.cc.Invoke(ctx, ProducerService_GetContact_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2572,6 +2606,29 @@ type ProducerServiceServer interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error)
+	// GetContact retrieves a single contact.
+	//
+	// Unlike ListAgencyContacts, this does not require knowing the agency, which
+	// makes it usable in flows where only the contact is known.
+	//
+	// Supports two lookup methods:
+	// - By contact ID (UUID)
+	// - By external ID (tenant-defined identifier set via SetExternalID)
+	//
+	// The response includes the contact's external_id and external_metadata.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - contact_id_lookup.contact_id: Must be a valid UUID format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+	//
+	// Returns:
+	// The single matched contact.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	GetContact(context.Context, *GetContactRequest) (*GetContactResponse, error)
 	// UpdateContact updates editable fields for an existing contact.
 	//
 	// This endpoint allows updating contact information for non-producer personnel
@@ -3276,6 +3333,9 @@ func (UnimplementedProducerServiceServer) NewContacts(context.Context, *NewConta
 func (UnimplementedProducerServiceServer) ListAgencyContacts(context.Context, *ListAgencyContactsRequest) (*ListAgencyContactsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAgencyContacts not implemented")
 }
+func (UnimplementedProducerServiceServer) GetContact(context.Context, *GetContactRequest) (*GetContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContact not implemented")
+}
 func (UnimplementedProducerServiceServer) UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateContact not implemented")
 }
@@ -3711,6 +3771,24 @@ func _ProducerService_ListAgencyContacts_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProducerService_GetContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetContactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProducerServiceServer).GetContact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProducerService_GetContact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProducerServiceServer).GetContact(ctx, req.(*GetContactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProducerService_UpdateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateContactRequest)
 	if err := dec(in); err != nil {
@@ -4121,6 +4199,10 @@ var ProducerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAgencyContacts",
 			Handler:    _ProducerService_ListAgencyContacts_Handler,
+		},
+		{
+			MethodName: "GetContact",
+			Handler:    _ProducerService_GetContact_Handler,
 		},
 		{
 			MethodName: "UpdateContact",

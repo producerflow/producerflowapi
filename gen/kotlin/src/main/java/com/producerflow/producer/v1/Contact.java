@@ -41,6 +41,7 @@ private static final long serialVersionUID = 0L;
     role_ = "";
     npn_ = "";
     roleType_ = 0;
+    externalId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -364,7 +365,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4151
+   *     See producerflow/producer/v1/producer.proto;l=4194
    * @return The role.
    */
   @java.lang.Override
@@ -388,7 +389,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4151
+   *     See producerflow/producer/v1/producer.proto;l=4194
    * @return The bytes for role.
    */
   @java.lang.Override
@@ -676,6 +677,57 @@ java.lang.String defaultValue) {
     return map.get(key);
   }
 
+  public static final int EXTERNAL_ID_FIELD_NUMBER = 13;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object externalId_ = "";
+  /**
+   * <pre>
+   * Tenant-provided external identifier for this contact.
+   * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+   * Set via SetExternalID. Empty string if the tenant has not assigned one.
+   * </pre>
+   *
+   * <code>string external_id = 13 [json_name = "externalId"];</code>
+   * @return The externalId.
+   */
+  @java.lang.Override
+  public java.lang.String getExternalId() {
+    java.lang.Object ref = externalId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      externalId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * Tenant-provided external identifier for this contact.
+   * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+   * Set via SetExternalID. Empty string if the tenant has not assigned one.
+   * </pre>
+   *
+   * <code>string external_id = 13 [json_name = "externalId"];</code>
+   * @return The bytes for externalId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getExternalIdBytes() {
+    java.lang.Object ref = externalId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      externalId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -729,6 +781,9 @@ java.lang.String defaultValue) {
         internalGetExternalMetadata(),
         ExternalMetadataDefaultEntryHolder.defaultEntry,
         12);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 13, externalId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -784,6 +839,9 @@ java.lang.String defaultValue) {
       size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, externalMetadata__);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(13, externalId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -828,6 +886,8 @@ java.lang.String defaultValue) {
     if (roleType_ != other.roleType_) return false;
     if (!internalGetExternalMetadata().equals(
         other.internalGetExternalMetadata())) return false;
+    if (!getExternalId()
+        .equals(other.getExternalId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -869,6 +929,8 @@ java.lang.String defaultValue) {
       hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
       hash = (53 * hash) + internalGetExternalMetadata().hashCode();
     }
+    hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getExternalId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1054,6 +1116,7 @@ java.lang.String defaultValue) {
       }
       roleType_ = 0;
       internalGetMutableExternalMetadata().clear();
+      externalId_ = "";
       return this;
     }
 
@@ -1131,6 +1194,9 @@ java.lang.String defaultValue) {
         result.externalMetadata_ = internalGetExternalMetadata();
         result.externalMetadata_.makeImmutable();
       }
+      if (((from_bitField0_ & 0x00001000) != 0)) {
+        result.externalId_ = externalId_;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -1198,6 +1264,11 @@ java.lang.String defaultValue) {
       internalGetMutableExternalMetadata().mergeFrom(
           other.internalGetExternalMetadata());
       bitField0_ |= 0x00000800;
+      if (!other.getExternalId().isEmpty()) {
+        externalId_ = other.externalId_;
+        bitField0_ |= 0x00001000;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -1292,6 +1363,11 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00000800;
               break;
             } // case 98
+            case 106: {
+              externalId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00001000;
+              break;
+            } // case 106
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1875,7 +1951,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4151
+     *     See producerflow/producer/v1/producer.proto;l=4194
      * @return The role.
      */
     @java.lang.Deprecated public java.lang.String getRole() {
@@ -1898,7 +1974,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4151
+     *     See producerflow/producer/v1/producer.proto;l=4194
      * @return The bytes for role.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1922,7 +1998,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4151
+     *     See producerflow/producer/v1/producer.proto;l=4194
      * @param value The role to set.
      * @return This builder for chaining.
      */
@@ -1942,7 +2018,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4151
+     *     See producerflow/producer/v1/producer.proto;l=4194
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearRole() {
@@ -1959,7 +2035,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4151
+     *     See producerflow/producer/v1/producer.proto;l=4194
      * @param value The bytes for role to set.
      * @return This builder for chaining.
      */
@@ -2660,6 +2736,108 @@ java.lang.String defaultValue) {
       internalGetMutableExternalMetadata().getMutableMap()
           .putAll(values);
       bitField0_ |= 0x00000800;
+      return this;
+    }
+
+    private java.lang.Object externalId_ = "";
+    /**
+     * <pre>
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * </pre>
+     *
+     * <code>string external_id = 13 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    public java.lang.String getExternalId() {
+      java.lang.Object ref = externalId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        externalId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * </pre>
+     *
+     * <code>string external_id = 13 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    public com.google.protobuf.ByteString
+        getExternalIdBytes() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        externalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * </pre>
+     *
+     * <code>string external_id = 13 [json_name = "externalId"];</code>
+     * @param value The externalId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExternalId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      externalId_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * </pre>
+     *
+     * <code>string external_id = 13 [json_name = "externalId"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearExternalId() {
+      externalId_ = getDefaultInstance().getExternalId();
+      bitField0_ = (bitField0_ & ~0x00001000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * </pre>
+     *
+     * <code>string external_id = 13 [json_name = "externalId"];</code>
+     * @param value The bytes for externalId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setExternalIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      externalId_ = value;
+      bitField0_ |= 0x00001000;
+      onChanged();
       return this;
     }
 

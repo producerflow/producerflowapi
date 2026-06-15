@@ -60,6 +60,7 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [NewContact](#newcontact)
   - [NewContacts](#newcontacts)
   - [ListAgencyContacts](#listagencycontacts)
+  - [GetContact](#getcontact)
   - [UpdateContact](#updatecontact)
   - [SetExternalID](#setexternalid)
   - [ValidateProducerNPN](#validateproducernpn)
@@ -1754,6 +1755,55 @@ ListAgencyContactsResponse contains all contacts associated with an agency.
 ---
 
 
+### GetContact
+
+
+GetContact retrieves a single contact.
+
+Unlike ListAgencyContacts, this does not require knowing the agency, which
+makes it usable in flows where only the contact is known.
+
+Supports two lookup methods:
+- By contact ID (UUID)
+- By external ID (tenant-defined identifier set via SetExternalID)
+
+The response includes the contact's external_id and external_metadata.
+
+Validation Rules:
+Proto validation (format checks):
+Exactly one lookup method must be provided (oneof required):
+- contact_id_lookup.contact_id: Must be a valid UUID format
+- external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+
+Returns:
+The single matched contact.
+
+Common Error Codes:
+- NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+
+#### Request: `GetContactRequest`
+
+
+GetContactRequest looks up a single contact, without requiring the agency to
+be known in advance. Exactly one lookup method must be provided.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact_id_lookup` | [GetContactRequest.ContactIDLookup](#getcontactrequestcontactidlookup) |  |  |
+| `external_id_lookup` | [GetContactRequest.ExternalIDLookup](#getcontactrequestexternalidlookup) |  |  |
+
+#### Response: `GetContactResponse`
+
+
+GetContactResponse contains the single matched contact.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact` | [Contact](#contact) |  | The matched contact, including its external_id and external_metadata. |
+
+---
+
+
 ### UpdateContact
 
 
@@ -1959,7 +2009,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. |
+| `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. Marked optional so the field is always emitted in JSON, even when false. |
 
 ---
 
@@ -2008,7 +2058,8 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. |
+| `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. Marked optional so the field is always emitted in JSON, even when false. |
+| `agency_name` | [string](#string) |  | The agency name as registered in NIPR. Populated only when the NPN is valid; empty otherwise. |
 
 ---
 
@@ -3512,6 +3563,7 @@ Contacts are non-producer individuals linked to the agency.
 | `created_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | When the contact was created. |
 | `role_type` | [ContactRole](#contactrole) |  | The role type of the contact as an enum. This field replaces the deprecated string-based 'role' field. |
 | `external_metadata` | [Contact.ExternalMetadataEntry](#contactexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic, reporting, or integration needs. The map key is the metadata field name, and the value is the associated data. |
+| `external_id` | [string](#string) |  | Tenant-provided external identifier for this contact. This ID allows tenants to map Producerflow contacts back to their own system's identifiers. Set via SetExternalID. Empty string if the tenant has not assigned one. |
 
 #### Contact.ExternalMetadataEntry
 
@@ -3723,6 +3775,40 @@ GetAgencyResponse contains the complete agency information.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `agency` | [Agency](#agency) |  | Complete agency information including contact details, addresses, principal, bank account, E&O coverage, NIPR data, and locations. |
+
+#### GetContactRequest
+
+GetContactRequest looks up a single contact, without requiring the agency to
+be known in advance. Exactly one lookup method must be provided.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact_id_lookup` | [GetContactRequest.ContactIDLookup](#getcontactrequestcontactidlookup) |  |  |
+| `external_id_lookup` | [GetContactRequest.ExternalIDLookup](#getcontactrequestexternalidlookup) |  |  |
+
+#### GetContactRequest.ContactIDLookup
+
+ContactIDLookup looks up a contact by its internal UUID.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact_id` | [string](#string) |  | The UUID of the contact to retrieve. |
+
+#### GetContactRequest.ExternalIDLookup
+
+ExternalIDLookup looks up a contact by its tenant-defined external ID.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `external_id` | [string](#string) |  | The tenant-defined external identifier of the contact to retrieve. |
+
+#### GetContactResponse
+
+GetContactResponse contains the single matched contact.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `contact` | [Contact](#contact) |  | The matched contact, including its external_id and external_metadata. |
 
 #### GetOrganizationRequest
 
@@ -4453,6 +4539,17 @@ Agency contains basic information about the agency this producer is associated w
 |-------|------|-------|-------------|
 | `agency_id` | [string](#string) |  | Unique identifier for the associated agency. |
 | `name` | [string](#string) |  | Name of the associated agency. |
+| `external_id` | [string](#string) |  | Tenant-provided external identifier for the associated agency. This ID allows tenants to map Producerflow agencies back to their own system's identifiers without an extra GetAgency call. Set during agency creation/onboarding via the public API. |
+| `external_metadata` | [Producer.Agency.ExternalMetadataEntry](#produceragencyexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model for the associated agency. The map key is the metadata field name, and the value is the associated data. Exposed here so callers do not need an extra GetAgency call to read it. |
+
+#### Producer.Agency.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### Producer.ExternalMetadataEntry
 
@@ -5029,7 +5126,8 @@ ValidateAgencyNPNResponse contains the result of validating an agency's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. |
+| `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR's agency records. False if the NPN does not exist. Marked optional so the field is always emitted in JSON, even when false. |
+| `agency_name` | [string](#string) |  | The agency name as registered in NIPR. Populated only when the NPN is valid; empty otherwise. |
 
 #### ValidateProducerNPNRequest
 
@@ -5048,7 +5146,7 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `valid` | [bool](#bool) |  | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. |
+| `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. Marked optional so the field is always emitted in JSON, even when false. |
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -5268,6 +5366,7 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 | `NIPR_SYNC_STATE_DISABLED` | 4 | Synchronization has been disabled. |
 | `NIPR_SYNC_STATE_IN_PROGRESS` | 5 | Synchronization is in progress. |
 | `NIPR_SYNC_STATE_STOPPING` | 6 | Synchronization is being stopped. |
+| `NIPR_SYNC_STATE_NO_LICENSE_FOUND` | 7 | NIPR returned no license information for a valid NPN. This is not an error: the entity simply has no license data on file in NIPR, so the sync is not retried automatically (a manual re-sync remains available). Distinguished from NIPR_SYNC_STATE_FAILING so callers can tell an expected empty result apart from a genuine sync failure. |
 
 
 #### NewAgencyRequest.Agency.BankAccount.AccountType

@@ -46,6 +46,7 @@ private static final long serialVersionUID = 0L;
             com.producerflow.producer.v1.ValidateProducerNPNResponse.class, com.producerflow.producer.v1.ValidateProducerNPNResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int VALID_FIELD_NUMBER = 1;
   private boolean valid_ = false;
   /**
@@ -53,9 +54,25 @@ private static final long serialVersionUID = 0L;
    * Indicates whether the NPN is valid.
    * True if the NPN exists in NIPR (and name matches, if provided).
    * False if the NPN does not exist or the name does not match.
+   * Marked optional so the field is always emitted in JSON, even when false.
    * </pre>
    *
-   * <code>bool valid = 1 [json_name = "valid"];</code>
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
+   * @return Whether the valid field is set.
+   */
+  @java.lang.Override
+  public boolean hasValid() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <pre>
+   * Indicates whether the NPN is valid.
+   * True if the NPN exists in NIPR (and name matches, if provided).
+   * False if the NPN does not exist or the name does not match.
+   * Marked optional so the field is always emitted in JSON, even when false.
+   * </pre>
+   *
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
    * @return The valid.
    */
   @java.lang.Override
@@ -77,7 +94,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (valid_ != false) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       output.writeBool(1, valid_);
     }
     getUnknownFields().writeTo(output);
@@ -89,7 +106,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (valid_ != false) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(1, valid_);
     }
@@ -108,8 +125,11 @@ private static final long serialVersionUID = 0L;
     }
     com.producerflow.producer.v1.ValidateProducerNPNResponse other = (com.producerflow.producer.v1.ValidateProducerNPNResponse) obj;
 
-    if (getValid()
-        != other.getValid()) return false;
+    if (hasValid() != other.hasValid()) return false;
+    if (hasValid()) {
+      if (getValid()
+          != other.getValid()) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -121,9 +141,11 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + VALID_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getValid());
+    if (hasValid()) {
+      hash = (37 * hash) + VALID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getValid());
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -293,9 +315,12 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(com.producerflow.producer.v1.ValidateProducerNPNResponse result) {
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.valid_ = valid_;
+        to_bitField0_ |= 0x00000001;
       }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -310,7 +335,7 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.producerflow.producer.v1.ValidateProducerNPNResponse other) {
       if (other == com.producerflow.producer.v1.ValidateProducerNPNResponse.getDefaultInstance()) return this;
-      if (other.getValid() != false) {
+      if (other.hasValid()) {
         setValid(other.getValid());
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -367,9 +392,25 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR (and name matches, if provided).
      * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
+     * @return Whether the valid field is set.
+     */
+    @java.lang.Override
+    public boolean hasValid() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <pre>
+     * Indicates whether the NPN is valid.
+     * True if the NPN exists in NIPR (and name matches, if provided).
+     * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
+     * </pre>
+     *
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @return The valid.
      */
     @java.lang.Override
@@ -381,9 +422,10 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR (and name matches, if provided).
      * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @param value The valid to set.
      * @return This builder for chaining.
      */
@@ -399,9 +441,10 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR (and name matches, if provided).
      * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @return This builder for chaining.
      */
     public Builder clearValid() {

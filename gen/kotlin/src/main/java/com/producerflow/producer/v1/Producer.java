@@ -139,6 +139,101 @@ private static final long serialVersionUID = 0L;
      */
     com.google.protobuf.ByteString
         getNameBytes();
+
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    java.lang.String getExternalId();
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    com.google.protobuf.ByteString
+        getExternalIdBytes();
+
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    int getExternalMetadataCount();
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    boolean containsExternalMetadata(
+        java.lang.String key);
+    /**
+     * Use {@link #getExternalMetadataMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.String>
+    getExternalMetadata();
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    java.util.Map<java.lang.String, java.lang.String>
+    getExternalMetadataMap();
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue);
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    java.lang.String getExternalMetadataOrThrow(
+        java.lang.String key);
   }
   /**
    * <pre>
@@ -168,6 +263,7 @@ private static final long serialVersionUID = 0L;
     private Agency() {
       agencyId_ = "";
       name_ = "";
+      externalId_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -175,6 +271,18 @@ private static final long serialVersionUID = 0L;
       return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Producer_Agency_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
+    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+        int number) {
+      switch (number) {
+        case 4:
+          return internalGetExternalMetadata();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -277,6 +385,166 @@ private static final long serialVersionUID = 0L;
       }
     }
 
+    public static final int EXTERNAL_ID_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object externalId_ = "";
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    @java.lang.Override
+    public java.lang.String getExternalId() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        externalId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExternalIdBytes() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        externalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EXTERNAL_METADATA_FIELD_NUMBER = 4;
+    private static final class ExternalMetadataDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.String> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.String>newDefaultInstance(
+                  com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Producer_Agency_ExternalMetadataEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "");
+    }
+    @SuppressWarnings("serial")
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> externalMetadata_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+    internalGetExternalMetadata() {
+      if (externalMetadata_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            ExternalMetadataDefaultEntryHolder.defaultEntry);
+      }
+      return externalMetadata_;
+    }
+    public int getExternalMetadataCount() {
+      return internalGetExternalMetadata().getMap().size();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public boolean containsExternalMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetExternalMetadata().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getExternalMetadataMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+      return getExternalMetadataMap();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+      return internalGetExternalMetadata().getMap();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExternalMetadata().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * ExternalMetadata contains additional custom information that the tenant
+     * stores in ProducerFlow's data model for the associated agency. The map
+     * key is the metadata field name, and the value is the associated data.
+     * Exposed here so callers do not need an extra GetAgency call to read it.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getExternalMetadataOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExternalMetadata().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -297,6 +565,15 @@ private static final long serialVersionUID = 0L;
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
       }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, externalId_);
+      }
+      com.google.protobuf.GeneratedMessage
+        .serializeStringMapTo(
+          output,
+          internalGetExternalMetadata(),
+          ExternalMetadataDefaultEntryHolder.defaultEntry,
+          4);
       getUnknownFields().writeTo(output);
     }
 
@@ -311,6 +588,19 @@ private static final long serialVersionUID = 0L;
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, externalId_);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+           : internalGetExternalMetadata().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+        externalMetadata__ = ExternalMetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(4, externalMetadata__);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -331,6 +621,10 @@ private static final long serialVersionUID = 0L;
           .equals(other.getAgencyId())) return false;
       if (!getName()
           .equals(other.getName())) return false;
+      if (!getExternalId()
+          .equals(other.getExternalId())) return false;
+      if (!internalGetExternalMetadata().equals(
+          other.internalGetExternalMetadata())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -346,6 +640,12 @@ private static final long serialVersionUID = 0L;
       hash = (53 * hash) + getAgencyId().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getExternalId().hashCode();
+      if (!internalGetExternalMetadata().getMap().isEmpty()) {
+        hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetExternalMetadata().hashCode();
+      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -459,6 +759,28 @@ private static final long serialVersionUID = 0L;
         return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Producer_Agency_descriptor;
       }
 
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
+          int number) {
+        switch (number) {
+          case 4:
+            return internalGetExternalMetadata();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
+      @SuppressWarnings({"rawtypes"})
+      protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
+          int number) {
+        switch (number) {
+          case 4:
+            return internalGetMutableExternalMetadata();
+          default:
+            throw new RuntimeException(
+                "Invalid map field number: " + number);
+        }
+      }
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
@@ -483,6 +805,8 @@ private static final long serialVersionUID = 0L;
         bitField0_ = 0;
         agencyId_ = "";
         name_ = "";
+        externalId_ = "";
+        internalGetMutableExternalMetadata().clear();
         return this;
       }
 
@@ -522,6 +846,13 @@ private static final long serialVersionUID = 0L;
         if (((from_bitField0_ & 0x00000002) != 0)) {
           result.name_ = name_;
         }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.externalId_ = externalId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.externalMetadata_ = internalGetExternalMetadata();
+          result.externalMetadata_.makeImmutable();
+        }
       }
 
       @java.lang.Override
@@ -546,6 +877,14 @@ private static final long serialVersionUID = 0L;
           bitField0_ |= 0x00000002;
           onChanged();
         }
+        if (!other.getExternalId().isEmpty()) {
+          externalId_ = other.externalId_;
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        internalGetMutableExternalMetadata().mergeFrom(
+            other.internalGetExternalMetadata());
+        bitField0_ |= 0x00000008;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -582,6 +921,20 @@ private static final long serialVersionUID = 0L;
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
+              case 26: {
+                externalId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+                externalMetadata__ = input.readMessage(
+                    ExternalMetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableExternalMetadata().getMutableMap().put(
+                    externalMetadata__.getKey(), externalMetadata__.getValue());
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -780,6 +1133,289 @@ private static final long serialVersionUID = 0L;
         name_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
+        return this;
+      }
+
+      private java.lang.Object externalId_ = "";
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return The externalId.
+       */
+      public java.lang.String getExternalId() {
+        java.lang.Object ref = externalId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          externalId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return The bytes for externalId.
+       */
+      public com.google.protobuf.ByteString
+          getExternalIdBytes() {
+        java.lang.Object ref = externalId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          externalId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @param value The externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        externalId_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExternalId() {
+        externalId_ = getDefaultInstance().getExternalId();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @param value The bytes for externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        externalId_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.String> externalMetadata_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+          internalGetExternalMetadata() {
+        if (externalMetadata_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              ExternalMetadataDefaultEntryHolder.defaultEntry);
+        }
+        return externalMetadata_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+          internalGetMutableExternalMetadata() {
+        if (externalMetadata_ == null) {
+          externalMetadata_ = com.google.protobuf.MapField.newMapField(
+              ExternalMetadataDefaultEntryHolder.defaultEntry);
+        }
+        if (!externalMetadata_.isMutable()) {
+          externalMetadata_ = externalMetadata_.copy();
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return externalMetadata_;
+      }
+      public int getExternalMetadataCount() {
+        return internalGetExternalMetadata().getMap().size();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public boolean containsExternalMetadata(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        return internalGetExternalMetadata().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getExternalMetadataMap()} instead.
+       */
+      @java.lang.Override
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+        return getExternalMetadataMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+        return internalGetExternalMetadata().getMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+          java.lang.String key,
+          /* nullable */
+java.lang.String defaultValue) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.lang.String getExternalMetadataOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+      public Builder clearExternalMetadata() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        internalGetMutableExternalMetadata().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      public Builder removeExternalMetadata(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        internalGetMutableExternalMetadata().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String>
+          getMutableExternalMetadata() {
+        bitField0_ |= 0x00000008;
+        return internalGetMutableExternalMetadata().getMutableMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      public Builder putExternalMetadata(
+          java.lang.String key,
+          java.lang.String value) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        if (value == null) { throw new NullPointerException("map value"); }
+        internalGetMutableExternalMetadata().getMutableMap()
+            .put(key, value);
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 4 [json_name = "externalMetadata"];</code>
+       */
+      public Builder putAllExternalMetadata(
+          java.util.Map<java.lang.String, java.lang.String> values) {
+        internalGetMutableExternalMetadata().getMutableMap()
+            .putAll(values);
+        bitField0_ |= 0x00000008;
         return this;
       }
 
@@ -1239,7 +1875,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3315
+       *     See producerflow/producer/v1/producer.proto;l=3358
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1250,7 +1886,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3315
+       *     See producerflow/producer/v1/producer.proto;l=3358
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -1799,7 +2435,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3365
+         *     See producerflow/producer/v1/producer.proto;l=3408
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -1810,7 +2446,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3365
+         *     See producerflow/producer/v1/producer.proto;l=3408
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -2018,7 +2654,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3365
+         *     See producerflow/producer/v1/producer.proto;l=3408
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -2032,7 +2668,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3365
+         *     See producerflow/producer/v1/producer.proto;l=3408
          * @return The issueDate.
          */
         @java.lang.Override
@@ -2741,7 +3377,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3365
+           *     See producerflow/producer/v1/producer.proto;l=3408
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -2754,7 +3390,7 @@ private static final long serialVersionUID = 0L;
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3365
+           *     See producerflow/producer/v1/producer.proto;l=3408
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3322,7 +3958,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3315
+       *     See producerflow/producer/v1/producer.proto;l=3358
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3336,7 +3972,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3315
+       *     See producerflow/producer/v1/producer.proto;l=3358
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -4824,7 +5460,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3315
+         *     See producerflow/producer/v1/producer.proto;l=3358
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -4837,7 +5473,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3315
+         *     See producerflow/producer/v1/producer.proto;l=3358
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -6210,7 +6846,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3423
+       *     See producerflow/producer/v1/producer.proto;l=3466
        * @return The fein.
        */
       @java.lang.Deprecated java.lang.String getFein();
@@ -6222,7 +6858,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3423
+       *     See producerflow/producer/v1/producer.proto;l=3466
        * @return The bytes for fein.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6236,7 +6872,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3427
+       *     See producerflow/producer/v1/producer.proto;l=3470
        * @return The companyName.
        */
       @java.lang.Deprecated java.lang.String getCompanyName();
@@ -6248,7 +6884,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3427
+       *     See producerflow/producer/v1/producer.proto;l=3470
        * @return The bytes for companyName.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6262,7 +6898,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3431
+       *     See producerflow/producer/v1/producer.proto;l=3474
        * @return The stateDomicile.
        */
       @java.lang.Deprecated java.lang.String getStateDomicile();
@@ -6274,7 +6910,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3431
+       *     See producerflow/producer/v1/producer.proto;l=3474
        * @return The bytes for stateDomicile.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6518,7 +7154,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3423
+       *     See producerflow/producer/v1/producer.proto;l=3466
        * @return The fein.
        */
       @java.lang.Override
@@ -6542,7 +7178,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3423
+       *     See producerflow/producer/v1/producer.proto;l=3466
        * @return The bytes for fein.
        */
       @java.lang.Override
@@ -6571,7 +7207,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3427
+       *     See producerflow/producer/v1/producer.proto;l=3470
        * @return The companyName.
        */
       @java.lang.Override
@@ -6595,7 +7231,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3427
+       *     See producerflow/producer/v1/producer.proto;l=3470
        * @return The bytes for companyName.
        */
       @java.lang.Override
@@ -6624,7 +7260,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3431
+       *     See producerflow/producer/v1/producer.proto;l=3474
        * @return The stateDomicile.
        */
       @java.lang.Override
@@ -6648,7 +7284,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3431
+       *     See producerflow/producer/v1/producer.proto;l=3474
        * @return The bytes for stateDomicile.
        */
       @java.lang.Override
@@ -7571,7 +8207,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3423
+         *     See producerflow/producer/v1/producer.proto;l=3466
          * @return The fein.
          */
         @java.lang.Deprecated public java.lang.String getFein() {
@@ -7594,7 +8230,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3423
+         *     See producerflow/producer/v1/producer.proto;l=3466
          * @return The bytes for fein.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7618,7 +8254,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3423
+         *     See producerflow/producer/v1/producer.proto;l=3466
          * @param value The fein to set.
          * @return This builder for chaining.
          */
@@ -7638,7 +8274,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3423
+         *     See producerflow/producer/v1/producer.proto;l=3466
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearFein() {
@@ -7655,7 +8291,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3423
+         *     See producerflow/producer/v1/producer.proto;l=3466
          * @param value The bytes for fein to set.
          * @return This builder for chaining.
          */
@@ -7678,7 +8314,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3427
+         *     See producerflow/producer/v1/producer.proto;l=3470
          * @return The companyName.
          */
         @java.lang.Deprecated public java.lang.String getCompanyName() {
@@ -7701,7 +8337,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3427
+         *     See producerflow/producer/v1/producer.proto;l=3470
          * @return The bytes for companyName.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7725,7 +8361,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3427
+         *     See producerflow/producer/v1/producer.proto;l=3470
          * @param value The companyName to set.
          * @return This builder for chaining.
          */
@@ -7745,7 +8381,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3427
+         *     See producerflow/producer/v1/producer.proto;l=3470
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearCompanyName() {
@@ -7762,7 +8398,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3427
+         *     See producerflow/producer/v1/producer.proto;l=3470
          * @param value The bytes for companyName to set.
          * @return This builder for chaining.
          */
@@ -7785,7 +8421,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3431
+         *     See producerflow/producer/v1/producer.proto;l=3474
          * @return The stateDomicile.
          */
         @java.lang.Deprecated public java.lang.String getStateDomicile() {
@@ -7808,7 +8444,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3431
+         *     See producerflow/producer/v1/producer.proto;l=3474
          * @return The bytes for stateDomicile.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -7832,7 +8468,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3431
+         *     See producerflow/producer/v1/producer.proto;l=3474
          * @param value The stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -7852,7 +8488,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3431
+         *     See producerflow/producer/v1/producer.proto;l=3474
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStateDomicile() {
@@ -7869,7 +8505,7 @@ private static final long serialVersionUID = 0L;
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3431
+         *     See producerflow/producer/v1/producer.proto;l=3474
          * @param value The bytes for stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -17919,7 +18555,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3674
+     *     See producerflow/producer/v1/producer.proto;l=3717
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -17930,7 +18566,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3674
+     *     See producerflow/producer/v1/producer.proto;l=3717
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -18103,7 +18739,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3674
+     *     See producerflow/producer/v1/producer.proto;l=3717
      * @return The street.
      */
     @java.lang.Override
@@ -18126,7 +18762,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3674
+     *     See producerflow/producer/v1/producer.proto;l=3717
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -18825,7 +19461,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3674
+       *     See producerflow/producer/v1/producer.proto;l=3717
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -18847,7 +19483,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3674
+       *     See producerflow/producer/v1/producer.proto;l=3717
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -18870,7 +19506,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3674
+       *     See producerflow/producer/v1/producer.proto;l=3717
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -18889,7 +19525,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3674
+       *     See producerflow/producer/v1/producer.proto;l=3717
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -18905,7 +19541,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3674
+       *     See producerflow/producer/v1/producer.proto;l=3717
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */

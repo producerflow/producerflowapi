@@ -461,6 +461,35 @@ public object ContactKt {
       .clear() {
          _builder.clearExternalMetadata()
        }
+
+    /**
+     * ```
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * ```
+     *
+     * `string external_id = 13 [json_name = "externalId"];`
+     */
+    public var externalId: kotlin.String
+      @JvmName("getExternalId")
+      get() = _builder.externalId
+      @JvmName("setExternalId")
+      set(value) {
+        _builder.externalId = value
+      }
+    /**
+     * ```
+     * Tenant-provided external identifier for this contact.
+     * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+     * Set via SetExternalID. Empty string if the tenant has not assigned one.
+     * ```
+     *
+     * `string external_id = 13 [json_name = "externalId"];`
+     */
+    public fun clearExternalId() {
+      _builder.clearExternalId()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

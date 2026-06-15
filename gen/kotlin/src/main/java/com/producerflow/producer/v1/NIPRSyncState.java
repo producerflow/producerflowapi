@@ -70,6 +70,18 @@ public enum NIPRSyncState
    * <code>NIPR_SYNC_STATE_STOPPING = 6;</code>
    */
   NIPR_SYNC_STATE_STOPPING(6),
+  /**
+   * <pre>
+   * NIPR returned no license information for a valid NPN. This is not an error:
+   * the entity simply has no license data on file in NIPR, so the sync is not
+   * retried automatically (a manual re-sync remains available). Distinguished
+   * from NIPR_SYNC_STATE_FAILING so callers can tell an expected empty result
+   * apart from a genuine sync failure.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_NO_LICENSE_FOUND = 7;</code>
+   */
+  NIPR_SYNC_STATE_NO_LICENSE_FOUND(7),
   UNRECOGNIZED(-1),
   ;
 
@@ -138,6 +150,18 @@ public enum NIPRSyncState
    * <code>NIPR_SYNC_STATE_STOPPING = 6;</code>
    */
   public static final int NIPR_SYNC_STATE_STOPPING_VALUE = 6;
+  /**
+   * <pre>
+   * NIPR returned no license information for a valid NPN. This is not an error:
+   * the entity simply has no license data on file in NIPR, so the sync is not
+   * retried automatically (a manual re-sync remains available). Distinguished
+   * from NIPR_SYNC_STATE_FAILING so callers can tell an expected empty result
+   * apart from a genuine sync failure.
+   * </pre>
+   *
+   * <code>NIPR_SYNC_STATE_NO_LICENSE_FOUND = 7;</code>
+   */
+  public static final int NIPR_SYNC_STATE_NO_LICENSE_FOUND_VALUE = 7;
 
 
   public final int getNumber() {
@@ -171,6 +195,7 @@ public enum NIPRSyncState
       case 4: return NIPR_SYNC_STATE_DISABLED;
       case 5: return NIPR_SYNC_STATE_IN_PROGRESS;
       case 6: return NIPR_SYNC_STATE_STOPPING;
+      case 7: return NIPR_SYNC_STATE_NO_LICENSE_FOUND;
       default: return null;
     }
   }

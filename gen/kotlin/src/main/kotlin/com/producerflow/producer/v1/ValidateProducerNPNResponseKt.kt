@@ -37,9 +37,10 @@ public object ValidateProducerNPNResponseKt {
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR (and name matches, if provided).
      * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * ```
      *
-     * `bool valid = 1 [json_name = "valid"];`
+     * `optional bool valid = 1 [json_name = "valid"];`
      */
     public var valid: kotlin.Boolean
       @JvmName("getValid")
@@ -53,12 +54,27 @@ public object ValidateProducerNPNResponseKt {
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR (and name matches, if provided).
      * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * ```
      *
-     * `bool valid = 1 [json_name = "valid"];`
+     * `optional bool valid = 1 [json_name = "valid"];`
      */
     public fun clearValid() {
       _builder.clearValid()
+    }
+    /**
+     * ```
+     * Indicates whether the NPN is valid.
+     * True if the NPN exists in NIPR (and name matches, if provided).
+     * False if the NPN does not exist or the name does not match.
+     * Marked optional so the field is always emitted in JSON, even when false.
+     * ```
+     *
+     * `optional bool valid = 1 [json_name = "valid"];`
+     * @return Whether the valid field is set.
+     */
+    public fun hasValid(): kotlin.Boolean {
+      return _builder.hasValid()
     }
   }
 }

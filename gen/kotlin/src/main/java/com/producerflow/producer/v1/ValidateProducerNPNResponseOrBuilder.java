@@ -14,9 +14,22 @@ public interface ValidateProducerNPNResponseOrBuilder extends
    * Indicates whether the NPN is valid.
    * True if the NPN exists in NIPR (and name matches, if provided).
    * False if the NPN does not exist or the name does not match.
+   * Marked optional so the field is always emitted in JSON, even when false.
    * </pre>
    *
-   * <code>bool valid = 1 [json_name = "valid"];</code>
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
+   * @return Whether the valid field is set.
+   */
+  boolean hasValid();
+  /**
+   * <pre>
+   * Indicates whether the NPN is valid.
+   * True if the NPN exists in NIPR (and name matches, if provided).
+   * False if the NPN does not exist or the name does not match.
+   * Marked optional so the field is always emitted in JSON, even when false.
+   * </pre>
+   *
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
    * @return The valid.
    */
   boolean getValid();

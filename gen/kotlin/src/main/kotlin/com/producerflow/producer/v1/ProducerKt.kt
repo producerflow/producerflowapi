@@ -1175,6 +1175,140 @@ public object ProducerKt {
       public fun clearName() {
         _builder.clearName()
       }
+
+      /**
+       * ```
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * ```
+       *
+       * `string external_id = 3 [json_name = "externalId"];`
+       */
+      public var externalId: kotlin.String
+        @JvmName("getExternalId")
+        get() = _builder.externalId
+        @JvmName("setExternalId")
+        set(value) {
+          _builder.externalId = value
+        }
+      /**
+       * ```
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * ```
+       *
+       * `string external_id = 3 [json_name = "externalId"];`
+       */
+      public fun clearExternalId() {
+        _builder.clearExternalId()
+      }
+
+      /**
+       * An uninstantiable, behaviorless type to represent the field in
+       * generics.
+       */
+      @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+      public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+       public val externalMetadata: com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        @kotlin.jvm.JvmSynthetic
+        @JvmName("getExternalMetadataMap")
+        get() = com.google.protobuf.kotlin.DslMap(
+          _builder.externalMetadataMap
+        )
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+      @JvmName("putExternalMetadata")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        .put(key: kotlin.String, value: kotlin.String) {
+           _builder.putExternalMetadata(key, value)
+         }
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("setExternalMetadata")
+      @Suppress("NOTHING_TO_INLINE")
+      public inline operator fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        .set(key: kotlin.String, value: kotlin.String) {
+           put(key, value)
+         }
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("removeExternalMetadata")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        .remove(key: kotlin.String) {
+           _builder.removeExternalMetadata(key)
+         }
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("putAllExternalMetadata")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        .putAll(map: kotlin.collections.Map<kotlin.String, kotlin.String>) {
+           _builder.putAllExternalMetadata(map)
+         }
+      /**
+       * ```
+       * ExternalMetadata contains additional custom information that the tenant
+       * stores in ProducerFlow's data model for the associated agency. The map
+       * key is the metadata field name, and the value is the associated data.
+       * Exposed here so callers do not need an extra GetAgency call to read it.
+       * ```
+       *
+       * `map<string, string> external_metadata = 4 [json_name = "externalMetadata"];`
+       */
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("clearExternalMetadata")
+      public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+        .clear() {
+           _builder.clearExternalMetadata()
+         }
     }
   }
   @kotlin.jvm.JvmName("-initializenIPR")

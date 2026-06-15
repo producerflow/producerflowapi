@@ -139,7 +139,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4151
+   *     See producerflow/producer/v1/producer.proto;l=4194
    * @return The role.
    */
   @java.lang.Deprecated java.lang.String getRole();
@@ -151,7 +151,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4151
+   *     See producerflow/producer/v1/producer.proto;l=4194
    * @return The bytes for role.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -332,4 +332,28 @@ java.lang.String defaultValue);
    */
   java.lang.String getExternalMetadataOrThrow(
       java.lang.String key);
+
+  /**
+   * <pre>
+   * Tenant-provided external identifier for this contact.
+   * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+   * Set via SetExternalID. Empty string if the tenant has not assigned one.
+   * </pre>
+   *
+   * <code>string external_id = 13 [json_name = "externalId"];</code>
+   * @return The externalId.
+   */
+  java.lang.String getExternalId();
+  /**
+   * <pre>
+   * Tenant-provided external identifier for this contact.
+   * This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+   * Set via SetExternalID. Empty string if the tenant has not assigned one.
+   * </pre>
+   *
+   * <code>string external_id = 13 [json_name = "externalId"];</code>
+   * @return The bytes for externalId.
+   */
+  com.google.protobuf.ByteString
+      getExternalIdBytes();
 }

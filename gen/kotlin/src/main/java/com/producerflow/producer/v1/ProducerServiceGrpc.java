@@ -655,6 +655,37 @@ public final class ProducerServiceGrpc {
     return getListAgencyContactsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetContactRequest,
+      com.producerflow.producer.v1.GetContactResponse> getGetContactMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetContact",
+      requestType = com.producerflow.producer.v1.GetContactRequest.class,
+      responseType = com.producerflow.producer.v1.GetContactResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetContactRequest,
+      com.producerflow.producer.v1.GetContactResponse> getGetContactMethod() {
+    io.grpc.MethodDescriptor<com.producerflow.producer.v1.GetContactRequest, com.producerflow.producer.v1.GetContactResponse> getGetContactMethod;
+    if ((getGetContactMethod = ProducerServiceGrpc.getGetContactMethod) == null) {
+      synchronized (ProducerServiceGrpc.class) {
+        if ((getGetContactMethod = ProducerServiceGrpc.getGetContactMethod) == null) {
+          ProducerServiceGrpc.getGetContactMethod = getGetContactMethod =
+              io.grpc.MethodDescriptor.<com.producerflow.producer.v1.GetContactRequest, com.producerflow.producer.v1.GetContactResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetContact"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.GetContactRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.producerflow.producer.v1.GetContactResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ProducerServiceMethodDescriptorSupplier("GetContact"))
+              .build();
+        }
+      }
+    }
+    return getGetContactMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.producerflow.producer.v1.UpdateContactRequest,
       com.producerflow.producer.v1.UpdateContactResponse> getUpdateContactMethod;
 
@@ -2043,6 +2074,31 @@ public final class ProducerServiceGrpc {
     default void listAgencyContacts(com.producerflow.producer.v1.ListAgencyContactsRequest request,
         io.grpc.stub.StreamObserver<com.producerflow.producer.v1.ListAgencyContactsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListAgencyContactsMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * GetContact retrieves a single contact.
+     * Unlike ListAgencyContacts, this does not require knowing the agency, which
+     * makes it usable in flows where only the contact is known.
+     * Supports two lookup methods:
+     * - By contact ID (UUID)
+     * - By external ID (tenant-defined identifier set via SetExternalID)
+     * The response includes the contact's external_id and external_metadata.
+     * Validation Rules:
+     * Proto validation (format checks):
+     * Exactly one lookup method must be provided (oneof required):
+     * - contact_id_lookup.contact_id: Must be a valid UUID format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+     * Returns:
+     * The single matched contact.
+     * Common Error Codes:
+     * - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    default void getContact(com.producerflow.producer.v1.GetContactRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetContactResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetContactMethod(), responseObserver);
     }
 
     /**
@@ -3555,6 +3611,32 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * GetContact retrieves a single contact.
+     * Unlike ListAgencyContacts, this does not require knowing the agency, which
+     * makes it usable in flows where only the contact is known.
+     * Supports two lookup methods:
+     * - By contact ID (UUID)
+     * - By external ID (tenant-defined identifier set via SetExternalID)
+     * The response includes the contact's external_id and external_metadata.
+     * Validation Rules:
+     * Proto validation (format checks):
+     * Exactly one lookup method must be provided (oneof required):
+     * - contact_id_lookup.contact_id: Must be a valid UUID format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+     * Returns:
+     * The single matched contact.
+     * Common Error Codes:
+     * - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public void getContact(com.producerflow.producer.v1.GetContactRequest request,
+        io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetContactResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetContactMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
      * UpdateContact updates editable fields for an existing contact.
      * This endpoint allows updating contact information for non-producer personnel
      * associated with an agency. All fields are optional, enabling partial updates
@@ -5026,6 +5108,31 @@ public final class ProducerServiceGrpc {
     public com.producerflow.producer.v1.ListAgencyContactsResponse listAgencyContacts(com.producerflow.producer.v1.ListAgencyContactsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListAgencyContactsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * GetContact retrieves a single contact.
+     * Unlike ListAgencyContacts, this does not require knowing the agency, which
+     * makes it usable in flows where only the contact is known.
+     * Supports two lookup methods:
+     * - By contact ID (UUID)
+     * - By external ID (tenant-defined identifier set via SetExternalID)
+     * The response includes the contact's external_id and external_metadata.
+     * Validation Rules:
+     * Proto validation (format checks):
+     * Exactly one lookup method must be provided (oneof required):
+     * - contact_id_lookup.contact_id: Must be a valid UUID format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+     * Returns:
+     * The single matched contact.
+     * Common Error Codes:
+     * - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public com.producerflow.producer.v1.GetContactResponse getContact(com.producerflow.producer.v1.GetContactRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetContactMethod(), getCallOptions(), request);
     }
 
     /**
@@ -6507,6 +6614,32 @@ public final class ProducerServiceGrpc {
 
     /**
      * <pre>
+     * GetContact retrieves a single contact.
+     * Unlike ListAgencyContacts, this does not require knowing the agency, which
+     * makes it usable in flows where only the contact is known.
+     * Supports two lookup methods:
+     * - By contact ID (UUID)
+     * - By external ID (tenant-defined identifier set via SetExternalID)
+     * The response includes the contact's external_id and external_metadata.
+     * Validation Rules:
+     * Proto validation (format checks):
+     * Exactly one lookup method must be provided (oneof required):
+     * - contact_id_lookup.contact_id: Must be a valid UUID format
+     * - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+     * Returns:
+     * The single matched contact.
+     * Common Error Codes:
+     * - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.GetContactResponse> getContact(
+        com.producerflow.producer.v1.GetContactRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetContactMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
      * UpdateContact updates editable fields for an existing contact.
      * This endpoint allows updating contact information for non-producer personnel
      * associated with an agency. All fields are optional, enabling partial updates
@@ -7200,24 +7333,25 @@ public final class ProducerServiceGrpc {
   private static final int METHODID_NEW_CONTACT = 17;
   private static final int METHODID_NEW_CONTACTS = 18;
   private static final int METHODID_LIST_AGENCY_CONTACTS = 19;
-  private static final int METHODID_UPDATE_CONTACT = 20;
-  private static final int METHODID_SET_EXTERNAL_ID = 21;
-  private static final int METHODID_VALIDATE_PRODUCER_NPN = 22;
-  private static final int METHODID_VALIDATE_AGENCY_NPN = 23;
-  private static final int METHODID_LOOKUP_NPNBY_FEIN = 24;
-  private static final int METHODID_RESYNC_PRODUCER = 25;
-  private static final int METHODID_RESYNC_AGENCY = 26;
-  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 27;
-  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 28;
-  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 29;
-  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 30;
-  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 31;
-  private static final int METHODID_ADD_AGENCY_LOCATIONS = 32;
-  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 33;
-  private static final int METHODID_LIST_AGENCY_LOCATIONS = 34;
-  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 35;
-  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 36;
-  private static final int METHODID_UPDATE_AGENCY_LOCATION = 37;
+  private static final int METHODID_GET_CONTACT = 20;
+  private static final int METHODID_UPDATE_CONTACT = 21;
+  private static final int METHODID_SET_EXTERNAL_ID = 22;
+  private static final int METHODID_VALIDATE_PRODUCER_NPN = 23;
+  private static final int METHODID_VALIDATE_AGENCY_NPN = 24;
+  private static final int METHODID_LOOKUP_NPNBY_FEIN = 25;
+  private static final int METHODID_RESYNC_PRODUCER = 26;
+  private static final int METHODID_RESYNC_AGENCY = 27;
+  private static final int METHODID_SYNC_PRODUCER_WITH_NIPR = 28;
+  private static final int METHODID_SYNC_AGENCY_WITH_NIPR = 29;
+  private static final int METHODID_STOP_SYNC_PRODUCER_WITH_NIPR = 30;
+  private static final int METHODID_STOP_SYNC_AGENCY_WITH_NIPR = 31;
+  private static final int METHODID_CREATE_PRODUCER_UPLOAD_URL = 32;
+  private static final int METHODID_ADD_AGENCY_LOCATIONS = 33;
+  private static final int METHODID_REMOVE_AGENCY_LOCATIONS = 34;
+  private static final int METHODID_LIST_AGENCY_LOCATIONS = 35;
+  private static final int METHODID_ASSIGN_PRODUCER_TO_LOCATIONS = 36;
+  private static final int METHODID_UNASSIGN_PRODUCER_FROM_LOCATIONS = 37;
+  private static final int METHODID_UPDATE_AGENCY_LOCATION = 38;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -7315,6 +7449,10 @@ public final class ProducerServiceGrpc {
         case METHODID_LIST_AGENCY_CONTACTS:
           serviceImpl.listAgencyContacts((com.producerflow.producer.v1.ListAgencyContactsRequest) request,
               (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.ListAgencyContactsResponse>) responseObserver);
+          break;
+        case METHODID_GET_CONTACT:
+          serviceImpl.getContact((com.producerflow.producer.v1.GetContactRequest) request,
+              (io.grpc.stub.StreamObserver<com.producerflow.producer.v1.GetContactResponse>) responseObserver);
           break;
         case METHODID_UPDATE_CONTACT:
           serviceImpl.updateContact((com.producerflow.producer.v1.UpdateContactRequest) request,
@@ -7547,6 +7685,13 @@ public final class ProducerServiceGrpc {
               com.producerflow.producer.v1.ListAgencyContactsResponse>(
                 service, METHODID_LIST_AGENCY_CONTACTS)))
         .addMethod(
+          getGetContactMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.producerflow.producer.v1.GetContactRequest,
+              com.producerflow.producer.v1.GetContactResponse>(
+                service, METHODID_GET_CONTACT)))
+        .addMethod(
           getUpdateContactMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -7740,6 +7885,7 @@ public final class ProducerServiceGrpc {
               .addMethod(getNewContactMethod())
               .addMethod(getNewContactsMethod())
               .addMethod(getListAgencyContactsMethod())
+              .addMethod(getGetContactMethod())
               .addMethod(getUpdateContactMethod())
               .addMethod(getSetExternalIDMethod())
               .addMethod(getValidateProducerNPNMethod())

@@ -31,6 +31,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ValidateAgencyNPNResponse() {
+    agencyName_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -46,6 +47,7 @@ private static final long serialVersionUID = 0L;
             com.producerflow.producer.v1.ValidateAgencyNPNResponse.class, com.producerflow.producer.v1.ValidateAgencyNPNResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int VALID_FIELD_NUMBER = 1;
   private boolean valid_ = false;
   /**
@@ -53,14 +55,79 @@ private static final long serialVersionUID = 0L;
    * Indicates whether the NPN is valid.
    * True if the NPN exists in NIPR's agency records.
    * False if the NPN does not exist.
+   * Marked optional so the field is always emitted in JSON, even when false.
    * </pre>
    *
-   * <code>bool valid = 1 [json_name = "valid"];</code>
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
+   * @return Whether the valid field is set.
+   */
+  @java.lang.Override
+  public boolean hasValid() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <pre>
+   * Indicates whether the NPN is valid.
+   * True if the NPN exists in NIPR's agency records.
+   * False if the NPN does not exist.
+   * Marked optional so the field is always emitted in JSON, even when false.
+   * </pre>
+   *
+   * <code>optional bool valid = 1 [json_name = "valid"];</code>
    * @return The valid.
    */
   @java.lang.Override
   public boolean getValid() {
     return valid_;
+  }
+
+  public static final int AGENCY_NAME_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object agencyName_ = "";
+  /**
+   * <pre>
+   * The agency name as registered in NIPR.
+   * Populated only when the NPN is valid; empty otherwise.
+   * </pre>
+   *
+   * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+   * @return The agencyName.
+   */
+  @java.lang.Override
+  public java.lang.String getAgencyName() {
+    java.lang.Object ref = agencyName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      agencyName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The agency name as registered in NIPR.
+   * Populated only when the NPN is valid; empty otherwise.
+   * </pre>
+   *
+   * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+   * @return The bytes for agencyName.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getAgencyNameBytes() {
+    java.lang.Object ref = agencyName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      agencyName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -77,8 +144,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (valid_ != false) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       output.writeBool(1, valid_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyName_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 2, agencyName_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -89,9 +159,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (valid_ != false) {
+    if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(1, valid_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyName_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, agencyName_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -108,8 +181,13 @@ private static final long serialVersionUID = 0L;
     }
     com.producerflow.producer.v1.ValidateAgencyNPNResponse other = (com.producerflow.producer.v1.ValidateAgencyNPNResponse) obj;
 
-    if (getValid()
-        != other.getValid()) return false;
+    if (hasValid() != other.hasValid()) return false;
+    if (hasValid()) {
+      if (getValid()
+          != other.getValid()) return false;
+    }
+    if (!getAgencyName()
+        .equals(other.getAgencyName())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -121,9 +199,13 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + VALID_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getValid());
+    if (hasValid()) {
+      hash = (37 * hash) + VALID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getValid());
+    }
+    hash = (37 * hash) + AGENCY_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getAgencyName().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -260,6 +342,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       valid_ = false;
+      agencyName_ = "";
       return this;
     }
 
@@ -293,9 +376,15 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(com.producerflow.producer.v1.ValidateAgencyNPNResponse result) {
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.valid_ = valid_;
+        to_bitField0_ |= 0x00000001;
       }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.agencyName_ = agencyName_;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -310,8 +399,13 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.producerflow.producer.v1.ValidateAgencyNPNResponse other) {
       if (other == com.producerflow.producer.v1.ValidateAgencyNPNResponse.getDefaultInstance()) return this;
-      if (other.getValid() != false) {
+      if (other.hasValid()) {
         setValid(other.getValid());
+      }
+      if (!other.getAgencyName().isEmpty()) {
+        agencyName_ = other.agencyName_;
+        bitField0_ |= 0x00000002;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -344,6 +438,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 8
+            case 18: {
+              agencyName_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -367,9 +466,25 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR's agency records.
      * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
+     * @return Whether the valid field is set.
+     */
+    @java.lang.Override
+    public boolean hasValid() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <pre>
+     * Indicates whether the NPN is valid.
+     * True if the NPN exists in NIPR's agency records.
+     * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
+     * </pre>
+     *
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @return The valid.
      */
     @java.lang.Override
@@ -381,9 +496,10 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR's agency records.
      * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @param value The valid to set.
      * @return This builder for chaining.
      */
@@ -399,14 +515,112 @@ private static final long serialVersionUID = 0L;
      * Indicates whether the NPN is valid.
      * True if the NPN exists in NIPR's agency records.
      * False if the NPN does not exist.
+     * Marked optional so the field is always emitted in JSON, even when false.
      * </pre>
      *
-     * <code>bool valid = 1 [json_name = "valid"];</code>
+     * <code>optional bool valid = 1 [json_name = "valid"];</code>
      * @return This builder for chaining.
      */
     public Builder clearValid() {
       bitField0_ = (bitField0_ & ~0x00000001);
       valid_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object agencyName_ = "";
+    /**
+     * <pre>
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * </pre>
+     *
+     * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+     * @return The agencyName.
+     */
+    public java.lang.String getAgencyName() {
+      java.lang.Object ref = agencyName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        agencyName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * </pre>
+     *
+     * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+     * @return The bytes for agencyName.
+     */
+    public com.google.protobuf.ByteString
+        getAgencyNameBytes() {
+      java.lang.Object ref = agencyName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        agencyName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * </pre>
+     *
+     * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+     * @param value The agencyName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAgencyName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      agencyName_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * </pre>
+     *
+     * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAgencyName() {
+      agencyName_ = getDefaultInstance().getAgencyName();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The agency name as registered in NIPR.
+     * Populated only when the NPN is valid; empty otherwise.
+     * </pre>
+     *
+     * <code>string agency_name = 2 [json_name = "agencyName"];</code>
+     * @param value The bytes for agencyName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAgencyNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      agencyName_ = value;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }

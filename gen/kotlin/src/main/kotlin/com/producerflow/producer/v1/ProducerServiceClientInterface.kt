@@ -1588,6 +1588,58 @@ public interface ProducerServiceClientInterface {
   public fun listAgencyContactsBlocking(request: ListAgencyContactsRequest, headers: Headers = emptyMap()): UnaryBlockingCall<ListAgencyContactsResponse>
 
   /**
+   *  GetContact retrieves a single contact.
+   *
+   *  Unlike ListAgencyContacts, this does not require knowing the agency, which
+   *  makes it usable in flows where only the contact is known.
+   *
+   *  Supports two lookup methods:
+   *  - By contact ID (UUID)
+   *  - By external ID (tenant-defined identifier set via SetExternalID)
+   *
+   *  The response includes the contact's external_id and external_metadata.
+   *
+   *  Validation Rules:
+   *  Proto validation (format checks):
+   *  Exactly one lookup method must be provided (oneof required):
+   *  - contact_id_lookup.contact_id: Must be a valid UUID format
+   *  - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+   *
+   *  Returns:
+   *  The single matched contact.
+   *
+   *  Common Error Codes:
+   *  - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+   */
+  public suspend fun getContact(request: GetContactRequest, headers: Headers = emptyMap()): ResponseMessage<GetContactResponse>
+
+  /**
+   *  GetContact retrieves a single contact.
+   *
+   *  Unlike ListAgencyContacts, this does not require knowing the agency, which
+   *  makes it usable in flows where only the contact is known.
+   *
+   *  Supports two lookup methods:
+   *  - By contact ID (UUID)
+   *  - By external ID (tenant-defined identifier set via SetExternalID)
+   *
+   *  The response includes the contact's external_id and external_metadata.
+   *
+   *  Validation Rules:
+   *  Proto validation (format checks):
+   *  Exactly one lookup method must be provided (oneof required):
+   *  - contact_id_lookup.contact_id: Must be a valid UUID format
+   *  - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+   *
+   *  Returns:
+   *  The single matched contact.
+   *
+   *  Common Error Codes:
+   *  - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+   */
+  public fun getContactBlocking(request: GetContactRequest, headers: Headers = emptyMap()): UnaryBlockingCall<GetContactResponse>
+
+  /**
    *  UpdateContact updates editable fields for an existing contact.
    *
    *  This endpoint allows updating contact information for non-producer personnel

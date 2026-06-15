@@ -93,6 +93,9 @@ const (
 	// ProducerServiceListAgencyContactsProcedure is the fully-qualified name of the ProducerService's
 	// ListAgencyContacts RPC.
 	ProducerServiceListAgencyContactsProcedure = "/producerflow.producer.v1.ProducerService/ListAgencyContacts"
+	// ProducerServiceGetContactProcedure is the fully-qualified name of the ProducerService's
+	// GetContact RPC.
+	ProducerServiceGetContactProcedure = "/producerflow.producer.v1.ProducerService/GetContact"
 	// ProducerServiceUpdateContactProcedure is the fully-qualified name of the ProducerService's
 	// UpdateContact RPC.
 	ProducerServiceUpdateContactProcedure = "/producerflow.producer.v1.ProducerService/UpdateContact"
@@ -870,6 +873,29 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
+	// GetContact retrieves a single contact.
+	//
+	// Unlike ListAgencyContacts, this does not require knowing the agency, which
+	// makes it usable in flows where only the contact is known.
+	//
+	// Supports two lookup methods:
+	// - By contact ID (UUID)
+	// - By external ID (tenant-defined identifier set via SetExternalID)
+	//
+	// The response includes the contact's external_id and external_metadata.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - contact_id_lookup.contact_id: Must be a valid UUID format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+	//
+	// Returns:
+	// The single matched contact.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	GetContact(context.Context, *connect.Request[v1.GetContactRequest]) (*connect.Response[v1.GetContactResponse], error)
 	// UpdateContact updates editable fields for an existing contact.
 	//
 	// This endpoint allows updating contact information for non-producer personnel
@@ -1637,6 +1663,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
 			connect.WithClientOptions(opts...),
 		),
+		getContact: connect.NewClient[v1.GetContactRequest, v1.GetContactResponse](
+			httpClient,
+			baseURL+ProducerServiceGetContactProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("GetContact")),
+			connect.WithClientOptions(opts...),
+		),
 		updateContact: connect.NewClient[v1.UpdateContactRequest, v1.UpdateContactResponse](
 			httpClient,
 			baseURL+ProducerServiceUpdateContactProcedure,
@@ -1770,6 +1802,7 @@ type producerServiceClient struct {
 	newContact                    *connect.Client[v1.NewContactRequest, v1.NewContactResponse]
 	newContacts                   *connect.Client[v1.NewContactsRequest, v1.NewContactsResponse]
 	listAgencyContacts            *connect.Client[v1.ListAgencyContactsRequest, v1.ListAgencyContactsResponse]
+	getContact                    *connect.Client[v1.GetContactRequest, v1.GetContactResponse]
 	updateContact                 *connect.Client[v1.UpdateContactRequest, v1.UpdateContactResponse]
 	setExternalID                 *connect.Client[v1.SetExternalIDRequest, v1.SetExternalIDResponse]
 	validateProducerNPN           *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
@@ -1892,6 +1925,11 @@ func (c *producerServiceClient) NewContacts(ctx context.Context, req *connect.Re
 // ListAgencyContacts calls producerflow.producer.v1.ProducerService.ListAgencyContacts.
 func (c *producerServiceClient) ListAgencyContacts(ctx context.Context, req *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
 	return c.listAgencyContacts.CallUnary(ctx, req)
+}
+
+// GetContact calls producerflow.producer.v1.ProducerService.GetContact.
+func (c *producerServiceClient) GetContact(ctx context.Context, req *connect.Request[v1.GetContactRequest]) (*connect.Response[v1.GetContactResponse], error) {
+	return c.getContact.CallUnary(ctx, req)
 }
 
 // UpdateContact calls producerflow.producer.v1.ProducerService.UpdateContact.
@@ -2708,6 +2746,29 @@ type ProducerServiceHandler interface {
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error)
+	// GetContact retrieves a single contact.
+	//
+	// Unlike ListAgencyContacts, this does not require knowing the agency, which
+	// makes it usable in flows where only the contact is known.
+	//
+	// Supports two lookup methods:
+	// - By contact ID (UUID)
+	// - By external ID (tenant-defined identifier set via SetExternalID)
+	//
+	// The response includes the contact's external_id and external_metadata.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// Exactly one lookup method must be provided (oneof required):
+	// - contact_id_lookup.contact_id: Must be a valid UUID format
+	// - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+	//
+	// Returns:
+	// The single matched contact.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+	GetContact(context.Context, *connect.Request[v1.GetContactRequest]) (*connect.Response[v1.GetContactResponse], error)
 	// UpdateContact updates editable fields for an existing contact.
 	//
 	// This endpoint allows updating contact information for non-producer personnel
@@ -3471,6 +3532,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("ListAgencyContacts")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceGetContactHandler := connect.NewUnaryHandler(
+		ProducerServiceGetContactProcedure,
+		svc.GetContact,
+		connect.WithSchema(producerServiceMethods.ByName("GetContact")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceUpdateContactHandler := connect.NewUnaryHandler(
 		ProducerServiceUpdateContactProcedure,
 		svc.UpdateContact,
@@ -3621,6 +3688,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceNewContactsHandler.ServeHTTP(w, r)
 		case ProducerServiceListAgencyContactsProcedure:
 			producerServiceListAgencyContactsHandler.ServeHTTP(w, r)
+		case ProducerServiceGetContactProcedure:
+			producerServiceGetContactHandler.ServeHTTP(w, r)
 		case ProducerServiceUpdateContactProcedure:
 			producerServiceUpdateContactHandler.ServeHTTP(w, r)
 		case ProducerServiceSetExternalIDProcedure:
@@ -3744,6 +3813,10 @@ func (UnimplementedProducerServiceHandler) NewContacts(context.Context, *connect
 
 func (UnimplementedProducerServiceHandler) ListAgencyContacts(context.Context, *connect.Request[v1.ListAgencyContactsRequest]) (*connect.Response[v1.ListAgencyContactsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.ListAgencyContacts is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) GetContact(context.Context, *connect.Request[v1.GetContactRequest]) (*connect.Response[v1.GetContactResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.GetContact is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) UpdateContact(context.Context, *connect.Request[v1.UpdateContactRequest]) (*connect.Response[v1.UpdateContactResponse], error) {
