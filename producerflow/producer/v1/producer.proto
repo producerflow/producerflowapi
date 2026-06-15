@@ -789,6 +789,31 @@ service ProducerService {
   //
   rpc ListAgencyContacts(ListAgencyContactsRequest) returns (ListAgencyContactsResponse);
 
+  // GetContact retrieves a single contact.
+  //
+  // Unlike ListAgencyContacts, this does not require knowing the agency, which
+  // makes it usable in flows where only the contact is known.
+  //
+  // Supports two lookup methods:
+  // - By contact ID (UUID)
+  // - By external ID (tenant-defined identifier set via SetExternalID)
+  //
+  // The response includes the contact's external_id and external_metadata.
+  //
+  // Validation Rules:
+  // Proto validation (format checks):
+  // Exactly one lookup method must be provided (oneof required):
+  // - contact_id_lookup.contact_id: Must be a valid UUID format
+  // - external_id_lookup.external_id: Must be a non-empty string, max 255 characters
+  //
+  // Returns:
+  // The single matched contact.
+  //
+  // Common Error Codes:
+  // - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
+  //
+  rpc GetContact(GetContactRequest) returns (GetContactResponse);
+
   // UpdateContact updates editable fields for an existing contact.
   //
   // This endpoint allows updating contact information for non-producer personnel
@@ -1598,6 +1623,12 @@ enum NIPRSyncState {
   NIPR_SYNC_STATE_IN_PROGRESS = 5;
   // Synchronization is being stopped.
   NIPR_SYNC_STATE_STOPPING = 6;
+  // NIPR returned no license information for a valid NPN. This is not an error:
+  // the entity simply has no license data on file in NIPR, so the sync is not
+  // retried automatically (a manual re-sync remains available). Distinguished
+  // from NIPR_SYNC_STATE_FAILING so callers can tell an expected empty result
+  // apart from a genuine sync failure.
+  NIPR_SYNC_STATE_NO_LICENSE_FOUND = 7;
 }
 
 // OnboardingStatus represents the current stage of a producer in the onboarding workflow.
@@ -3242,6 +3273,18 @@ message Producer {
 
     // Name of the associated agency.
     string name = 2;
+
+    // Tenant-provided external identifier for the associated agency.
+    // This ID allows tenants to map Producerflow agencies back to their own
+    // system's identifiers without an extra GetAgency call.
+    // Set during agency creation/onboarding via the public API.
+    string external_id = 3;
+
+    // ExternalMetadata contains additional custom information that the tenant
+    // stores in ProducerFlow's data model for the associated agency. The map
+    // key is the metadata field name, and the value is the associated data.
+    // Exposed here so callers do not need an extra GetAgency call to read it.
+    map<string, string> external_metadata = 4;
   }
 
   // Basic information about the agency this producer is associated with.
@@ -4175,6 +4218,11 @@ message Contact {
   // reporting, or integration needs.
   // The map key is the metadata field name, and the value is the associated data.
   map<string, string> external_metadata = 12;
+
+  // Tenant-provided external identifier for this contact.
+  // This ID allows tenants to map Producerflow contacts back to their own system's identifiers.
+  // Set via SetExternalID. Empty string if the tenant has not assigned one.
+  string external_id = 13;
 }
 
 // ListAgencyContactsRequest requests all contacts associated with an agency.
@@ -4188,6 +4236,37 @@ message ListAgencyContactsRequest {
 message ListAgencyContactsResponse {
   // List of all contacts associated with the specified agency.
   repeated Contact contacts = 1;
+}
+
+// GetContactRequest looks up a single contact, without requiring the agency to
+// be known in advance. Exactly one lookup method must be provided.
+message GetContactRequest {
+  // ContactIDLookup looks up a contact by its internal UUID.
+  message ContactIDLookup {
+    // The UUID of the contact to retrieve.
+    string contact_id = 1 [(buf.validate.field).string.uuid = true];
+  }
+
+  // ExternalIDLookup looks up a contact by its tenant-defined external ID.
+  message ExternalIDLookup {
+    // The tenant-defined external identifier of the contact to retrieve.
+    string external_id = 1 [(buf.validate.field).string = {
+      min_len: 1
+      max_len: 255
+    }];
+  }
+
+  oneof lookup_method {
+    ContactIDLookup contact_id_lookup = 1;
+    ExternalIDLookup external_id_lookup = 2;
+    option (buf.validate.oneof).required = true;
+  }
+}
+
+// GetContactResponse contains the single matched contact.
+message GetContactResponse {
+  // The matched contact, including its external_id and external_metadata.
+  Contact contact = 1;
 }
 
 // UpdateContactRequest is used to update an existing contact's information.
@@ -4315,7 +4394,8 @@ message ValidateProducerNPNResponse {
   // Indicates whether the NPN is valid.
   // True if the NPN exists in NIPR (and name matches, if provided).
   // False if the NPN does not exist or the name does not match.
-  bool valid = 1;
+  // Marked optional so the field is always emitted in JSON, even when false.
+  optional bool valid = 1;
 }
 
 // ValidateAgencyNPNRequest is used to validate an agency's National Producer
@@ -4335,7 +4415,11 @@ message ValidateAgencyNPNResponse {
   // Indicates whether the NPN is valid.
   // True if the NPN exists in NIPR's agency records.
   // False if the NPN does not exist.
-  bool valid = 1;
+  // Marked optional so the field is always emitted in JSON, even when false.
+  optional bool valid = 1;
+  // The agency name as registered in NIPR.
+  // Populated only when the NPN is valid; empty otherwise.
+  string agency_name = 2;
 }
 
 // LookupNPNByFEINRequest is used to look up an agency's National Producer
