@@ -1,0 +1,67 @@
+---
+title: Introduction
+description: Build apps and integrations on top of Producerflow's API using our SDKs.
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import {
+	Rocket,
+	KeyRound,
+	Workflow,
+	Webhook,
+	CalendarClock,
+	BookOpen
+} from 'lucide-react';
+
+Welcome to [Producerflow](https://www.producerflow.com)'s developer docs, where you can learn more about Producerflow's API and developer tooling. You can use Producerflow's API to build everything from light scripts to complete integrations for the tool you're working on.
+
+## Quick start
+
+<Cards>
+	<Card
+		icon={<Rocket />}
+		title="Getting started with gRPC"
+		description="A complete guide to using our gRPC and Connect API."
+		href="/getting-started/grpc"
+	/>
+	<Card
+		icon={<KeyRound />}
+		title="Authentication"
+		description="How to obtain and use API keys to authenticate your requests."
+		href="/getting-started/authentication"
+	/>
+</Cards>
+
+## Core documentation
+
+<Cards>
+	<Card
+		icon={<Workflow />}
+		title="API workflows"
+		description="End-to-end diagrams for agencies, producers, locations, and onboarding."
+		href="/guides/api-workflows"
+	/>
+	<Card
+		icon={<Webhook />}
+		title="Webhooks"
+		description="Real-time notifications, payload structure, and signature verification."
+		href="/webhooks"
+	/>
+	<Card
+		icon={<CalendarClock />}
+		title="Appointment features"
+		description="Appointment events and daily operational status monitoring."
+		href="/appointments/appointment-events"
+	/>
+	<Card
+		icon={<BookOpen />}
+		title="API reference"
+		description="Complete protocol documentation generated from our Protocol Buffers."
+		href="/reference/api-reference"
+	/>
+</Cards>
+
+## Additional resources
+
+- **Webhooks directory** — the [`/webhooks`](https://github.com/producerflow/producerflowapi/tree/main/webhooks) directory contains sample payloads and JSON schema files for validation.
+- **Generated code** — the [`/gen`](https://github.com/producerflow/producerflowapi/tree/main/gen) directory contains generated client libraries for Go, TypeScript, and Kotlin.
