@@ -321,7 +321,7 @@ sequenceDiagram
 
     Note over Client,WH: Manage Producer Location Assignments
     
-    rect rgb(200, 230, 250)
+    rect rgba(200, 230, 250, 0.1)
         Note right of Client: Assign Producer to Locations
         Client->>API: AssignProducerToLocations()
         Note over Client,API: producer_id + location_ids[]
@@ -342,7 +342,7 @@ sequenceDiagram
         end
     end
     
-    rect rgb(250, 230, 200)
+    rect rgba(250, 230, 200, 0.1)
         Note right of Client: Unassign Producer from Locations
         Client->>API: UnassignProducerFromLocations()
         Note over Client,API: producer_id + location_ids[]
@@ -370,7 +370,7 @@ sequenceDiagram
 
     Note over Client,System: Webhook Event Flow
     
-    rect rgb(200, 230, 250)
+    rect rgba(200, 230, 250, 0.1)
         Note right of API: Agency Events
         API->>WH: POST /webhook
         Note over WH: agency.created or<br/>agency.updated
@@ -379,7 +379,7 @@ sequenceDiagram
         WH-->>API: 200 OK
     end
     
-    rect rgb(250, 230, 200)
+    rect rgba(250, 230, 200, 0.1)
         Note right of API: Producer Events
         API->>WH: POST /webhook
         Note over WH: producer.created or<br/>producer.updated
@@ -388,7 +388,7 @@ sequenceDiagram
         WH-->>API: 200 OK
     end
     
-    rect rgb(230, 250, 230)
+    rect rgba(230, 250, 230, 0.1)
         Note right of API: Location Events
         API->>WH: POST /webhook
         Note over WH: Included in agency.updated<br/>for location changes
@@ -397,7 +397,7 @@ sequenceDiagram
         WH-->>API: 200 OK
     end
     
-    rect rgb(250, 220, 250)
+    rect rgba(250, 220, 250, 0.1)
         Note right of API: Appointment Events
         API->>WH: POST /webhook
         Note over WH: appointment.created or<br/>appointment.updated

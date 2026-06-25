@@ -112,14 +112,14 @@ sequenceDiagram
     PF->>PF: Create Agency Record
     PF->>PF: Create Principal Producer Record
     
-    rect rgb(200, 230, 250)
+    rect rgba(200, 230, 250, 0.1)
         Note right of PF: Event 1: Agency Created
         PF->>WH: POST /webhook
         Note over WH: agency.created event
         WH-->>PF: 200 OK
     end
     
-    rect rgb(250, 230, 200)
+    rect rgba(250, 230, 200, 0.1)
         Note right of PF: Event 2: Producer Created
         PF->>WH: POST /webhook
         Note over WH: producer.created event
