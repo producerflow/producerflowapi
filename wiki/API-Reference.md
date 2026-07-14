@@ -79,6 +79,9 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [AssignProducerToLocations](#assignproducertolocations)
   - [UnassignProducerFromLocations](#unassignproducerfromlocations)
   - [UpdateAgencyLocation](#updateagencylocation)
+- [TestingService](#testingservice)
+  - [DeleteAgency](#deleteagency)
+  - [DeleteAppointment](#deleteappointment)
 
 ---
 
@@ -2892,6 +2895,105 @@ UpdateAgencyLocationResponse contains the updated location details.
 
 ---
 
+## TestingService
+
+============================================================================
+DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
+Every method on this service is enabled exclusively in the dev and UAT
+test environments. In production, every call is rejected with
+PERMISSION_DENIED, regardless of the API key or arguments.
+============================================================================
+
+TestingService provides cleanup utilities that let tenants reset their test
+environments between automated runs. For example, deleting an agency frees
+the licenses it used so the same test setup can be reused across test cases
+instead of provisioning new agencies each time. These operations are
+intended solely for preparing and cleaning up automated test scenarios and
+have no production use.
+
+Any call to this service must be authenticated using an API key in the
+request headers. The API key can be found in the ProducerFlow API key
+section of the ProducerFlow UI and it identifies the tenant that is making
+the request.
+
+
+### DeleteAgency
+
+
+DeleteAgency permanently removes an agency and every producer,
+appointment, and NIPR record scoped to it, freeing the underlying
+licenses to be appointed again. It lets tenants reset the same agency
+between automated test runs instead of provisioning a new one each time.
+
+DEV AND UAT ONLY: this method is not available in production. Calls made
+in production are always rejected with PERMISSION_DENIED.
+
+The agency must belong to the tenant resolved from the request's API key.
+Tenant (internal) agencies cannot be deleted — they hold per-tenant
+configuration. The operation is irreversible and emits no events.
+
+Errors:
+- NOT_FOUND: no agency with the given ID exists for the tenant.
+- FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+- INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
+- PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+
+#### Request: `DeleteAgencyRequest`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | UUID of the Agencies row to delete. Must belong to the tenant resolved from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND. |
+
+#### Response: `DeleteAgencyResponse`
+
+
+Empty response
+
+
+*This message has no fields.*
+
+---
+
+
+### DeleteAppointment
+
+
+DeleteAppointment permanently removes a single appointment, freeing the
+underlying license to be appointed again. Unlike terminating an
+appointment — which leaves a TERMINATED record that still blocks the
+license from being re-appointed — deleting it removes the row entirely so
+the same license can be reused across automated test runs.
+
+DEV AND UAT ONLY: this method is not available in production. Calls made
+in production are always rejected with PERMISSION_DENIED.
+
+The appointment must belong to the tenant resolved from the request's API
+key. Its interleaved history is removed with it. The operation is
+irreversible, emits no events, and sends nothing to NIPR.
+
+Errors:
+- NOT_FOUND: no appointment with the given ID exists for the tenant.
+- INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
+- PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+
+#### Request: `DeleteAppointmentRequest`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | UUID of the Appointments row to delete. Must belong to the tenant resolved from the API key; a cross-tenant or unknown appointment_id returns NOT_FOUND. |
+
+#### Response: `DeleteAppointmentResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `state` | [string](#string) |  | State of the deleted appointment, echoed back for confirmation. |
+| `agency_id` | [string](#string) |  | Agency the deleted appointment belonged to, echoed back for confirmation. |
+
+---
+
 
 ## Shared Types
 
@@ -4517,6 +4619,7 @@ Use Cases:
 | `onboarding_status` | [OnboardingStatus](#onboardingstatus) |  | Current onboarding status of the producer in the workflow. This field tracks the producer's progression through the onboarding process, from initial onboarding to being ready to quote.  This field is only populated when the tenant has enabled the onboarding status feature. When the feature is disabled, this field will be ONBOARDING_STATUS_UNSPECIFIED. |
 | `onboarding_status_updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the onboarding status was last updated. This field is only populated when the tenant has enabled the onboarding status feature. |
 | `role` | [string](#string) |  | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Reflects the role assigned during NewProducer / onboarding or via UpdateProducer. Empty when the producer has no role assigned, or when the tenant has not configured any role labels. |
+| `organization` | [Organization](#organization) |  | Organization that the producer's agency belongs to. This field contains the full organization details including id, name, and contact information. Unset when the producer's agency does not belong to any organization. |
 
 #### Producer.Address
 
@@ -5148,6 +5251,39 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 |-------|------|-------|-------------|
 | `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. Marked optional so the field is always emitted in JSON, even when false. |
 
+### producerflow/testing/v1/testing.proto
+
+
+#### DeleteAgencyRequest
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | UUID of the Agencies row to delete. Must belong to the tenant resolved from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND. |
+
+#### DeleteAgencyResponse
+
+Empty response
+
+
+#### DeleteAppointmentRequest
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | UUID of the Appointments row to delete. Must belong to the tenant resolved from the API key; a cross-tenant or unknown appointment_id returns NOT_FOUND. |
+
+#### DeleteAppointmentResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `state` | [string](#string) |  | State of the deleted appointment, echoed back for confirmation. |
+| `agency_id` | [string](#string) |  | Agency the deleted appointment belonged to, echoed back for confirmation. |
+
 [↑ Back to Table of Contents](#table-of-contents)
 
 ---
@@ -5235,6 +5371,8 @@ trigger operational status changes.
 | `RISK_REASON_EO_NOT_FOUND` | 3 | No E&O coverage exists for agency. |
 | `RISK_REASON_EO_INACTIVE` | 4 | E&O Status is not "Active". |
 | `RISK_REASON_EO_EXPIRED` | 5 | E&O coverage has expired (E&O ExpirationDate < current date). |
+| `RISK_REASON_STATE_APPOINTMENT_TERMINATED` | 6 | A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active. |
+| `RISK_REASON_REGULATORY_ACTION` | 7 | An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state. |
 
 
 #### TerminationReason

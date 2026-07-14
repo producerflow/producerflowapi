@@ -701,4 +701,37 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getRoleBytes();
+
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   * @return Whether the organization field is set.
+   */
+  boolean hasOrganization();
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   * @return The organization.
+   */
+  com.producerflow.producer.v1.Organization getOrganization();
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   */
+  com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder();
 }

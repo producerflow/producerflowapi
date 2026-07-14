@@ -60,6 +60,24 @@ public enum RiskReason
    * <code>RISK_REASON_EO_EXPIRED = 5;</code>
    */
   RISK_REASON_EO_EXPIRED(5),
+  /**
+   * <pre>
+   * A state has terminated the appointment (reported via NIPR) while
+   * producerflow still shows it as active.
+   * </pre>
+   *
+   * <code>RISK_REASON_STATE_APPOINTMENT_TERMINATED = 6;</code>
+   */
+  RISK_REASON_STATE_APPOINTMENT_TERMINATED(6),
+  /**
+   * <pre>
+   * An undismissed regulatory action exists (reported via NIPR) against the
+   * appointment's producer or agency in the appointment's state.
+   * </pre>
+   *
+   * <code>RISK_REASON_REGULATORY_ACTION = 7;</code>
+   */
+  RISK_REASON_REGULATORY_ACTION(7),
   UNRECOGNIZED(-1),
   ;
 
@@ -116,6 +134,24 @@ public enum RiskReason
    * <code>RISK_REASON_EO_EXPIRED = 5;</code>
    */
   public static final int RISK_REASON_EO_EXPIRED_VALUE = 5;
+  /**
+   * <pre>
+   * A state has terminated the appointment (reported via NIPR) while
+   * producerflow still shows it as active.
+   * </pre>
+   *
+   * <code>RISK_REASON_STATE_APPOINTMENT_TERMINATED = 6;</code>
+   */
+  public static final int RISK_REASON_STATE_APPOINTMENT_TERMINATED_VALUE = 6;
+  /**
+   * <pre>
+   * An undismissed regulatory action exists (reported via NIPR) against the
+   * appointment's producer or agency in the appointment's state.
+   * </pre>
+   *
+   * <code>RISK_REASON_REGULATORY_ACTION = 7;</code>
+   */
+  public static final int RISK_REASON_REGULATORY_ACTION_VALUE = 7;
 
 
   public final int getNumber() {
@@ -148,6 +184,8 @@ public enum RiskReason
       case 3: return RISK_REASON_EO_NOT_FOUND;
       case 4: return RISK_REASON_EO_INACTIVE;
       case 5: return RISK_REASON_EO_EXPIRED;
+      case 6: return RISK_REASON_STATE_APPOINTMENT_TERMINATED;
+      case 7: return RISK_REASON_REGULATORY_ACTION;
       default: return null;
     }
   }

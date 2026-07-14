@@ -245,80 +245,82 @@ public final class AppointmentProto {
       "\022terminationReasons*v\n\021OperationalStatus" +
       "\022\"\n\036OPERATIONAL_STATUS_UNSPECIFIED\020\000\022\035\n\031" +
       "OPERATIONAL_STATUS_ACTIVE\020\001\022\036\n\032OPERATION" +
-      "AL_STATUS_AT_RISK\020\002*\303\001\n\nRiskReason\022\033\n\027RI" +
+      "AL_STATUS_AT_RISK\020\002*\224\002\n\nRiskReason\022\033\n\027RI" +
       "SK_REASON_UNSPECIFIED\020\000\022 \n\034RISK_REASON_L" +
       "ICENSE_INACTIVE\020\001\022\037\n\033RISK_REASON_LICENSE" +
       "_EXPIRED\020\002\022\034\n\030RISK_REASON_EO_NOT_FOUND\020\003" +
       "\022\033\n\027RISK_REASON_EO_INACTIVE\020\004\022\032\n\026RISK_RE" +
-      "ASON_EO_EXPIRED\020\005*\217\002\n\020ProcessingStatus\022!" +
-      "\n\035PROCESSING_STATUS_UNSPECIFIED\020\000\022!\n\035PRO" +
-      "CESSING_STATUS_IN_PROGRESS\020\001\022\037\n\033PROCESSI" +
-      "NG_STATUS_APPOINTED\020\002\022 \n\034PROCESSING_STAT" +
-      "US_TERMINATED\020\003\022\036\n\032PROCESSING_STATUS_REJ" +
-      "ECTED\020\004\022%\n!PROCESSING_STATUS_MISSING_LIC" +
-      "ENSE\020\005\022+\n\'PROCESSING_STATUS_TERMINATION_" +
-      "REQUESTED\020\006*\264\001\n\017AppointmentType\022 \n\034APPOI" +
-      "NTMENT_TYPE_UNSPECIFIED\020\000\022\035\n\031APPOINTMENT" +
-      "_TYPE_REGISTRY\020\001\022\035\n\031APPOINTMENT_TYPE_UP_" +
-      "FRONT\020\002\022!\n\035APPOINTMENT_TYPE_JUST_IN_TIME" +
-      "\020\003\022\036\n\032APPOINTMENT_TYPE_SYNTHETIC\020\004*\301\005\n\021T" +
-      "erminationReason\022\"\n\036TERMINATION_REASON_U" +
-      "NSPECIFIED\020\000\022,\n(TERMINATION_REASON_VOLUN" +
-      "TARY_TERMINATION\020\001\022,\n(TERMINATION_REASON" +
-      "_INADEQUATE_PRODUCTION\020\002\0221\n-TERMINATION_" +
-      "REASON_CANCELLED_BY_GENERAL_AGENT\020\003\022\034\n\030T" +
-      "ERMINATION_REASON_DEATH\020\004\0225\n1TERMINATION" +
-      "_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION\020\005" +
-      "\022+\n\'TERMINATION_REASON_COMPANY_INDEBTEDN" +
-      "ESS\020\006\0220\n,TERMINATION_REASON_POOR_POLICYH" +
-      "OLDER_SERVICE\020\007\022\"\n\036TERMINATION_REASON_AG" +
-      "ENT_MOVED\020\010\022)\n%TERMINATION_REASON_APPOIN" +
-      "TED_IN_ERROR\020\t\022 \n\034TERMINATION_REASON_CAN" +
-      "CELLED\020\n\022*\n&TERMINATION_REASON_CANCELLED" +
-      "_FOR_CAUSE\020\013\022%\n!TERMINATION_REASON_COMPA" +
-      "NY_MERGER\020\014\022\036\n\032TERMINATION_REASON_REVOKE" +
-      "D\020\r\022/\n+TERMINATION_REASON_SUSPENDED_FOR_" +
-      "COMPLIANCE\020\016\0220\n,TERMINATION_REASON_REQUE" +
-      "ST_REGULATORY_REVIEW\020\0172\360\t\n\022AppointmentSe" +
-      "rvice\022y\n\016GetAppointment\0222.producerflow.a" +
-      "ppointment.v1.GetAppointmentRequest\0323.pr" +
-      "oducerflow.appointment.v1.GetAppointment" +
-      "Response\022\205\001\n\022GetAppointmentFees\0226.produc" +
-      "erflow.appointment.v1.GetAppointmentFees" +
-      "Request\0327.producerflow.appointment.v1.Ge" +
-      "tAppointmentFeesResponse\022\221\001\n\026GetAppointa" +
-      "bleCarriers\022:.producerflow.appointment.v" +
-      "1.GetAppointableCarriersRequest\032;.produc" +
-      "erflow.appointment.v1.GetAppointableCarr" +
-      "iersResponse\022\205\001\n\022GetTerminationFees\0226.pr" +
-      "oducerflow.appointment.v1.GetTermination" +
-      "FeesRequest\0327.producerflow.appointment.v" +
-      "1.GetTerminationFeesResponse\022\177\n\020ListAppo" +
-      "intments\0224.producerflow.appointment.v1.L" +
-      "istAppointmentsRequest\0325.producerflow.ap" +
-      "pointment.v1.ListAppointmentsResponse\022\213\001" +
-      "\n\024ListEligibleLicenses\0228.producerflow.ap" +
-      "pointment.v1.ListEligibleLicensesRequest" +
-      "\0329.producerflow.appointment.v1.ListEligi" +
-      "bleLicensesResponse\022\207\001\n\022RequestAppointme" +
-      "nt\0226.producerflow.appointment.v1.Request" +
-      "AppointmentRequest\0327.producerflow.appoin" +
-      "tment.v1.RequestAppointmentResponse\"\000\022\215\001" +
-      "\n\024TerminateAppointment\0228.producerflow.ap" +
-      "pointment.v1.TerminateAppointmentRequest" +
-      "\0329.producerflow.appointment.v1.Terminate" +
-      "AppointmentResponse\"\000\022\221\001\n\026ListTerminatio" +
-      "nReasons\022:.producerflow.appointment.v1.L" +
-      "istTerminationReasonsRequest\032;.producerf" +
-      "low.appointment.v1.ListTerminationReason" +
-      "sResponseB\233\002\n\037com.producerflow.appointme" +
-      "nt.v1B\020AppointmentProtoP\001ZXgithub.com/pr" +
-      "oducerflow/producerflowapi/gen/go/produc" +
-      "erflow/appointment/v1;appointmentv1\242\002\003PA" +
-      "X\252\002\033Producerflow.Appointment.V1\312\002\033Produc" +
-      "erflow\\Appointment\\V1\342\002\'Producerflow\\App" +
-      "ointment\\V1\\GPBMetadata\352\002\035Producerflow::" +
-      "Appointment::V1b\006proto3"
+      "ASON_EO_EXPIRED\020\005\022,\n(RISK_REASON_STATE_A" +
+      "PPOINTMENT_TERMINATED\020\006\022!\n\035RISK_REASON_R" +
+      "EGULATORY_ACTION\020\007*\217\002\n\020ProcessingStatus\022" +
+      "!\n\035PROCESSING_STATUS_UNSPECIFIED\020\000\022!\n\035PR" +
+      "OCESSING_STATUS_IN_PROGRESS\020\001\022\037\n\033PROCESS" +
+      "ING_STATUS_APPOINTED\020\002\022 \n\034PROCESSING_STA" +
+      "TUS_TERMINATED\020\003\022\036\n\032PROCESSING_STATUS_RE" +
+      "JECTED\020\004\022%\n!PROCESSING_STATUS_MISSING_LI" +
+      "CENSE\020\005\022+\n\'PROCESSING_STATUS_TERMINATION" +
+      "_REQUESTED\020\006*\264\001\n\017AppointmentType\022 \n\034APPO" +
+      "INTMENT_TYPE_UNSPECIFIED\020\000\022\035\n\031APPOINTMEN" +
+      "T_TYPE_REGISTRY\020\001\022\035\n\031APPOINTMENT_TYPE_UP" +
+      "_FRONT\020\002\022!\n\035APPOINTMENT_TYPE_JUST_IN_TIM" +
+      "E\020\003\022\036\n\032APPOINTMENT_TYPE_SYNTHETIC\020\004*\301\005\n\021" +
+      "TerminationReason\022\"\n\036TERMINATION_REASON_" +
+      "UNSPECIFIED\020\000\022,\n(TERMINATION_REASON_VOLU" +
+      "NTARY_TERMINATION\020\001\022,\n(TERMINATION_REASO" +
+      "N_INADEQUATE_PRODUCTION\020\002\0221\n-TERMINATION" +
+      "_REASON_CANCELLED_BY_GENERAL_AGENT\020\003\022\034\n\030" +
+      "TERMINATION_REASON_DEATH\020\004\0225\n1TERMINATIO" +
+      "N_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION\020" +
+      "\005\022+\n\'TERMINATION_REASON_COMPANY_INDEBTED" +
+      "NESS\020\006\0220\n,TERMINATION_REASON_POOR_POLICY" +
+      "HOLDER_SERVICE\020\007\022\"\n\036TERMINATION_REASON_A" +
+      "GENT_MOVED\020\010\022)\n%TERMINATION_REASON_APPOI" +
+      "NTED_IN_ERROR\020\t\022 \n\034TERMINATION_REASON_CA" +
+      "NCELLED\020\n\022*\n&TERMINATION_REASON_CANCELLE" +
+      "D_FOR_CAUSE\020\013\022%\n!TERMINATION_REASON_COMP" +
+      "ANY_MERGER\020\014\022\036\n\032TERMINATION_REASON_REVOK" +
+      "ED\020\r\022/\n+TERMINATION_REASON_SUSPENDED_FOR" +
+      "_COMPLIANCE\020\016\0220\n,TERMINATION_REASON_REQU" +
+      "EST_REGULATORY_REVIEW\020\0172\360\t\n\022AppointmentS" +
+      "ervice\022y\n\016GetAppointment\0222.producerflow." +
+      "appointment.v1.GetAppointmentRequest\0323.p" +
+      "roducerflow.appointment.v1.GetAppointmen" +
+      "tResponse\022\205\001\n\022GetAppointmentFees\0226.produ" +
+      "cerflow.appointment.v1.GetAppointmentFee" +
+      "sRequest\0327.producerflow.appointment.v1.G" +
+      "etAppointmentFeesResponse\022\221\001\n\026GetAppoint" +
+      "ableCarriers\022:.producerflow.appointment." +
+      "v1.GetAppointableCarriersRequest\032;.produ" +
+      "cerflow.appointment.v1.GetAppointableCar" +
+      "riersResponse\022\205\001\n\022GetTerminationFees\0226.p" +
+      "roducerflow.appointment.v1.GetTerminatio" +
+      "nFeesRequest\0327.producerflow.appointment." +
+      "v1.GetTerminationFeesResponse\022\177\n\020ListApp" +
+      "ointments\0224.producerflow.appointment.v1." +
+      "ListAppointmentsRequest\0325.producerflow.a" +
+      "ppointment.v1.ListAppointmentsResponse\022\213" +
+      "\001\n\024ListEligibleLicenses\0228.producerflow.a" +
+      "ppointment.v1.ListEligibleLicensesReques" +
+      "t\0329.producerflow.appointment.v1.ListElig" +
+      "ibleLicensesResponse\022\207\001\n\022RequestAppointm" +
+      "ent\0226.producerflow.appointment.v1.Reques" +
+      "tAppointmentRequest\0327.producerflow.appoi" +
+      "ntment.v1.RequestAppointmentResponse\"\000\022\215" +
+      "\001\n\024TerminateAppointment\0228.producerflow.a" +
+      "ppointment.v1.TerminateAppointmentReques" +
+      "t\0329.producerflow.appointment.v1.Terminat" +
+      "eAppointmentResponse\"\000\022\221\001\n\026ListTerminati" +
+      "onReasons\022:.producerflow.appointment.v1." +
+      "ListTerminationReasonsRequest\032;.producer" +
+      "flow.appointment.v1.ListTerminationReaso" +
+      "nsResponseB\233\002\n\037com.producerflow.appointm" +
+      "ent.v1B\020AppointmentProtoP\001ZXgithub.com/p" +
+      "roducerflow/producerflowapi/gen/go/produ" +
+      "cerflow/appointment/v1;appointmentv1\242\002\003P" +
+      "AX\252\002\033Producerflow.Appointment.V1\312\002\033Produ" +
+      "cerflow\\Appointment\\V1\342\002\'Producerflow\\Ap" +
+      "pointment\\V1\\GPBMetadata\352\002\035Producerflow:" +
+      ":Appointment::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

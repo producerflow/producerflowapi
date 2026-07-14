@@ -94,6 +94,12 @@ const (
 	RiskReason_RISK_REASON_EO_INACTIVE RiskReason = 4
 	// E&O coverage has expired (E&O ExpirationDate < current date).
 	RiskReason_RISK_REASON_EO_EXPIRED RiskReason = 5
+	// A state has terminated the appointment (reported via NIPR) while
+	// producerflow still shows it as active.
+	RiskReason_RISK_REASON_STATE_APPOINTMENT_TERMINATED RiskReason = 6
+	// An undismissed regulatory action exists (reported via NIPR) against the
+	// appointment's producer or agency in the appointment's state.
+	RiskReason_RISK_REASON_REGULATORY_ACTION RiskReason = 7
 )
 
 // Enum value maps for RiskReason.
@@ -105,14 +111,18 @@ var (
 		3: "RISK_REASON_EO_NOT_FOUND",
 		4: "RISK_REASON_EO_INACTIVE",
 		5: "RISK_REASON_EO_EXPIRED",
+		6: "RISK_REASON_STATE_APPOINTMENT_TERMINATED",
+		7: "RISK_REASON_REGULATORY_ACTION",
 	}
 	RiskReason_value = map[string]int32{
-		"RISK_REASON_UNSPECIFIED":      0,
-		"RISK_REASON_LICENSE_INACTIVE": 1,
-		"RISK_REASON_LICENSE_EXPIRED":  2,
-		"RISK_REASON_EO_NOT_FOUND":     3,
-		"RISK_REASON_EO_INACTIVE":      4,
-		"RISK_REASON_EO_EXPIRED":       5,
+		"RISK_REASON_UNSPECIFIED":                  0,
+		"RISK_REASON_LICENSE_INACTIVE":             1,
+		"RISK_REASON_LICENSE_EXPIRED":              2,
+		"RISK_REASON_EO_NOT_FOUND":                 3,
+		"RISK_REASON_EO_INACTIVE":                  4,
+		"RISK_REASON_EO_EXPIRED":                   5,
+		"RISK_REASON_STATE_APPOINTMENT_TERMINATED": 6,
+		"RISK_REASON_REGULATORY_ACTION":            7,
 	}
 )
 
@@ -2045,7 +2055,7 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x11OperationalStatus\x12\"\n" +
 	"\x1eOPERATIONAL_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19OPERATIONAL_STATUS_ACTIVE\x10\x01\x12\x1e\n" +
-	"\x1aOPERATIONAL_STATUS_AT_RISK\x10\x02*\xc3\x01\n" +
+	"\x1aOPERATIONAL_STATUS_AT_RISK\x10\x02*\x94\x02\n" +
 	"\n" +
 	"RiskReason\x12\x1b\n" +
 	"\x17RISK_REASON_UNSPECIFIED\x10\x00\x12 \n" +
@@ -2053,7 +2063,9 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x1bRISK_REASON_LICENSE_EXPIRED\x10\x02\x12\x1c\n" +
 	"\x18RISK_REASON_EO_NOT_FOUND\x10\x03\x12\x1b\n" +
 	"\x17RISK_REASON_EO_INACTIVE\x10\x04\x12\x1a\n" +
-	"\x16RISK_REASON_EO_EXPIRED\x10\x05*\x8f\x02\n" +
+	"\x16RISK_REASON_EO_EXPIRED\x10\x05\x12,\n" +
+	"(RISK_REASON_STATE_APPOINTMENT_TERMINATED\x10\x06\x12!\n" +
+	"\x1dRISK_REASON_REGULATORY_ACTION\x10\a*\x8f\x02\n" +
 	"\x10ProcessingStatus\x12!\n" +
 	"\x1dPROCESSING_STATUS_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dPROCESSING_STATUS_IN_PROGRESS\x10\x01\x12\x1f\n" +

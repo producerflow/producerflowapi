@@ -1099,6 +1099,50 @@ public object ProducerKt {
     public fun clearRole() {
       _builder.clearRole()
     }
+
+    /**
+     * ```
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];`
+     */
+    public var organization: com.producerflow.producer.v1.Organization
+      @JvmName("getOrganization")
+      get() = _builder.organization
+      @JvmName("setOrganization")
+      set(value) {
+        _builder.organization = value
+      }
+    /**
+     * ```
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];`
+     */
+    public fun clearOrganization() {
+      _builder.clearOrganization()
+    }
+    /**
+     * ```
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];`
+     * @return Whether the organization field is set.
+     */
+    public fun hasOrganization(): kotlin.Boolean {
+      return _builder.hasOrganization()
+    }
+    public val ProducerKt.Dsl.organizationOrNull: com.producerflow.producer.v1.Organization?
+      get() = _builder.organizationOrNull
   }
   @kotlin.jvm.JvmName("-initializeagency")
   public inline fun agency(block: com.producerflow.producer.v1.ProducerKt.AgencyKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Producer.Agency =
@@ -4186,4 +4230,7 @@ public val com.producerflow.producer.v1.ProducerOrBuilder.addressOrNull: com.pro
 
 public val com.producerflow.producer.v1.ProducerOrBuilder.onboardingStatusUpdatedAtOrNull: com.google.protobuf.Timestamp?
   get() = if (hasOnboardingStatusUpdatedAt()) getOnboardingStatusUpdatedAt() else null
+
+public val com.producerflow.producer.v1.ProducerOrBuilder.organizationOrNull: com.producerflow.producer.v1.Organization?
+  get() = if (hasOrganization()) getOrganization() else null
 

@@ -21214,6 +21214,50 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int ORGANIZATION_FIELD_NUMBER = 47;
+  private com.producerflow.producer.v1.Organization organization_;
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   * @return Whether the organization field is set.
+   */
+  @java.lang.Override
+  public boolean hasOrganization() {
+    return ((bitField0_ & 0x00000010) != 0);
+  }
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   * @return The organization.
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.Organization getOrganization() {
+    return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+  }
+  /**
+   * <pre>
+   * Organization that the producer's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the producer's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder() {
+    return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -21299,6 +21343,9 @@ java.lang.String defaultValue) {
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 46, role_);
+    }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      output.writeMessage(47, getOrganization());
     }
     getUnknownFields().writeTo(output);
   }
@@ -21406,6 +21453,10 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(role_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(46, role_);
     }
+    if (((bitField0_ & 0x00000010) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(47, getOrganization());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -21474,6 +21525,11 @@ java.lang.String defaultValue) {
     }
     if (!getRole()
         .equals(other.getRole())) return false;
+    if (hasOrganization() != other.hasOrganization()) return false;
+    if (hasOrganization()) {
+      if (!getOrganization()
+          .equals(other.getOrganization())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -21547,6 +21603,10 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + ROLE_FIELD_NUMBER;
     hash = (53 * hash) + getRole().hashCode();
+    if (hasOrganization()) {
+      hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
+      hash = (53 * hash) + getOrganization().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -21737,6 +21797,7 @@ java.lang.String defaultValue) {
         getAddressFieldBuilder();
         getLocationsFieldBuilder();
         getOnboardingStatusUpdatedAtFieldBuilder();
+        getOrganizationFieldBuilder();
       }
     }
     @java.lang.Override
@@ -21787,6 +21848,11 @@ java.lang.String defaultValue) {
         onboardingStatusUpdatedAtBuilder_ = null;
       }
       role_ = "";
+      organization_ = null;
+      if (organizationBuilder_ != null) {
+        organizationBuilder_.dispose();
+        organizationBuilder_ = null;
+      }
       return this;
     }
 
@@ -21909,6 +21975,12 @@ java.lang.String defaultValue) {
       }
       if (((from_bitField0_ & 0x00100000) != 0)) {
         result.role_ = role_;
+      }
+      if (((from_bitField0_ & 0x00200000) != 0)) {
+        result.organization_ = organizationBuilder_ == null
+            ? organization_
+            : organizationBuilder_.build();
+        to_bitField0_ |= 0x00000010;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -22035,6 +22107,9 @@ java.lang.String defaultValue) {
         role_ = other.role_;
         bitField0_ |= 0x00100000;
         onChanged();
+      }
+      if (other.hasOrganization()) {
+        mergeOrganization(other.getOrganization());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -22196,6 +22271,13 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00100000;
               break;
             } // case 370
+            case 378: {
+              input.readMessage(
+                  getOrganizationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00200000;
+              break;
+            } // case 378
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -24984,6 +25066,181 @@ java.lang.String defaultValue) {
       bitField0_ |= 0x00100000;
       onChanged();
       return this;
+    }
+
+    private com.producerflow.producer.v1.Organization organization_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder> organizationBuilder_;
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     * @return Whether the organization field is set.
+     */
+    public boolean hasOrganization() {
+      return ((bitField0_ & 0x00200000) != 0);
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     * @return The organization.
+     */
+    public com.producerflow.producer.v1.Organization getOrganization() {
+      if (organizationBuilder_ == null) {
+        return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+      } else {
+        return organizationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public Builder setOrganization(com.producerflow.producer.v1.Organization value) {
+      if (organizationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        organization_ = value;
+      } else {
+        organizationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public Builder setOrganization(
+        com.producerflow.producer.v1.Organization.Builder builderForValue) {
+      if (organizationBuilder_ == null) {
+        organization_ = builderForValue.build();
+      } else {
+        organizationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00200000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public Builder mergeOrganization(com.producerflow.producer.v1.Organization value) {
+      if (organizationBuilder_ == null) {
+        if (((bitField0_ & 0x00200000) != 0) &&
+          organization_ != null &&
+          organization_ != com.producerflow.producer.v1.Organization.getDefaultInstance()) {
+          getOrganizationBuilder().mergeFrom(value);
+        } else {
+          organization_ = value;
+        }
+      } else {
+        organizationBuilder_.mergeFrom(value);
+      }
+      if (organization_ != null) {
+        bitField0_ |= 0x00200000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public Builder clearOrganization() {
+      bitField0_ = (bitField0_ & ~0x00200000);
+      organization_ = null;
+      if (organizationBuilder_ != null) {
+        organizationBuilder_.dispose();
+        organizationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public com.producerflow.producer.v1.Organization.Builder getOrganizationBuilder() {
+      bitField0_ |= 0x00200000;
+      onChanged();
+      return getOrganizationFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    public com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder() {
+      if (organizationBuilder_ != null) {
+        return organizationBuilder_.getMessageOrBuilder();
+      } else {
+        return organization_ == null ?
+            com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+      }
+    }
+    /**
+     * <pre>
+     * Organization that the producer's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the producer's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 47 [json_name = "organization"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder> 
+        getOrganizationFieldBuilder() {
+      if (organizationBuilder_ == null) {
+        organizationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder>(
+                getOrganization(),
+                getParentForChildren(),
+                isClean());
+        organization_ = null;
+      }
+      return organizationBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Producer)

@@ -560,6 +560,19 @@
             </li>
           
         
+          
+            <li>
+              <a href="#producerflow.testing.v1.TestingService"><span class="badge">S</span>TestingService</a>
+              <ul>
+                
+                  <li><a href="#producerflow.testing.v1.TestingService.DeleteAgency">DeleteAgency</a></li>
+                
+                  <li><a href="#producerflow.testing.v1.TestingService.DeleteAppointment">DeleteAppointment</a></li>
+                
+              </ul>
+            </li>
+          
+        
         <li><a href="#shared-messages">Shared Types</a></li>
         <li><a href="#enums">Enums</a></li>
       </ul>
@@ -31573,6 +31586,231 @@ Must be unique within the tenant when set. Pass an empty string to clear it. </t
         </div>
       
     
+      
+        <div class="service-section">
+          <div class="service-heading">
+            <h2 id="producerflow.testing.v1.TestingService">TestingService</h2><a href="#title">Top</a>
+          </div>
+
+          <div class="description-content">
+            ============================================================================
+DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
+Every method on this service is enabled exclusively in the dev and UAT
+test environments. In production, every call is rejected with
+PERMISSION_DENIED, regardless of the API key or arguments.
+============================================================================
+
+TestingService provides cleanup utilities that let tenants reset their test
+environments between automated runs. For example, deleting an agency frees
+the licenses it used so the same test setup can be reused across test cases
+instead of provisioning new agencies each time. These operations are
+intended solely for preparing and cleaning up automated test scenarios and
+have no production use.
+
+Any call to this service must be authenticated using an API key in the
+request headers. The API key can be found in the ProducerFlow API key
+section of the ProducerFlow UI and it identifies the tenant that is making
+the request.
+          </div>
+
+          
+            <details class="method-details" id="producerflow.testing.v1.TestingService.DeleteAgency">
+              <summary>
+                <span class="method-name">DeleteAgency</span>
+                
+              </summary>
+              <div class="details-content">
+                <p class="method-description">DeleteAgency permanently removes an agency and every producer,
+appointment, and NIPR record scoped to it, freeing the underlying
+licenses to be appointed again. It lets tenants reset the same agency
+between automated test runs instead of provisioning a new one each time.
+
+DEV AND UAT ONLY: this method is not available in production. Calls made
+in production are always rejected with PERMISSION_DENIED.
+
+The agency must belong to the tenant resolved from the request's API key.
+Tenant (internal) agencies cannot be deleted — they hold per-tenant
+configuration. The operation is irreversible and emits no events.
+
+Errors:
+- NOT_FOUND: no agency with the given ID exists for the tenant.
+- FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+- INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
+- PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).</p>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label request-label">Request</span>
+                    <span class="message-type-name" id="producerflow.testing.v1.DeleteAgencyRequest">DeleteAgencyRequest</span>
+                  </h4>
+                  
+                    
+                      
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>agency_id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>UUID of the Agencies row to delete. Must belong to the tenant resolved
+from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label response-label">Response</span>
+                    <span class="message-type-name" id="producerflow.testing.v1.DeleteAgencyResponse">DeleteAgencyResponse</span>
+                    
+                  </h4>
+                  
+                    
+                  
+                    
+                      <p class="message-description">Empty response</p>
+                      
+                        <p class="no-fields">This message has no fields.</p>
+                      
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+              </div>
+            </details>
+          
+            <details class="method-details" id="producerflow.testing.v1.TestingService.DeleteAppointment">
+              <summary>
+                <span class="method-name">DeleteAppointment</span>
+                
+              </summary>
+              <div class="details-content">
+                <p class="method-description">DeleteAppointment permanently removes a single appointment, freeing the
+underlying license to be appointed again. Unlike terminating an
+appointment — which leaves a TERMINATED record that still blocks the
+license from being re-appointed — deleting it removes the row entirely so
+the same license can be reused across automated test runs.
+
+DEV AND UAT ONLY: this method is not available in production. Calls made
+in production are always rejected with PERMISSION_DENIED.
+
+The appointment must belong to the tenant resolved from the request's API
+key. Its interleaved history is removed with it. The operation is
+irreversible, emits no events, and sends nothing to NIPR.
+
+Errors:
+- NOT_FOUND: no appointment with the given ID exists for the tenant.
+- INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
+- PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).</p>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label request-label">Request</span>
+                    <span class="message-type-name" id="producerflow.testing.v1.DeleteAppointmentRequest">DeleteAppointmentRequest</span>
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                      
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>appointment_id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>UUID of the Appointments row to delete. Must belong to the tenant resolved
+from the API key; a cross-tenant or unknown appointment_id returns
+NOT_FOUND. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                </div>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label response-label">Response</span>
+                    <span class="message-type-name" id="producerflow.testing.v1.DeleteAppointmentResponse">DeleteAppointmentResponse</span>
+                    
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>state</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>State of the deleted appointment, echoed back for confirmation. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>agency_id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>Agency the deleted appointment belonged to, echoed back for confirmation. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                </div>
+              </div>
+            </details>
+          
+        </div>
+      
+    
 
     
     <h2 id="shared-messages">Shared Types</h2>
@@ -38260,6 +38498,15 @@ UpdateProducer. Empty when the producer has no role assigned, or when the
 tenant has not configured any role labels. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>organization</code></td>
+                          <td><a href="#producerflow.producer.v1.Organization">Organization</a></td>
+                          <td></td>
+                          <td>Organization that the producer's agency belongs to.
+This field contains the full organization details including id, name, and contact information.
+Unset when the producer's agency does not belong to any organization. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -40810,6 +41057,113 @@ Marked optional so the field is always emitted in JSON, even when false. </td>
         </details>
       
     
+      
+        <details>
+          <summary>producerflow/testing/v1/testing.proto - Types</summary>
+          <div class="details-content">
+            
+              
+              
+                <h3 id="producerflow.testing.v1.DeleteAgencyRequest">DeleteAgencyRequest</h3>
+                <div class="description-content"></div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>agency_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>UUID of the Agencies row to delete. Must belong to the tenant resolved
+from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.testing.v1.DeleteAgencyResponse">DeleteAgencyResponse</h3>
+                <div class="description-content">Empty response</div>
+
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.testing.v1.DeleteAppointmentRequest">DeleteAppointmentRequest</h3>
+                <div class="description-content"></div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>appointment_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>UUID of the Appointments row to delete. Must belong to the tenant resolved
+from the API key; a cross-tenant or unknown appointment_id returns
+NOT_FOUND. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.testing.v1.DeleteAppointmentResponse">DeleteAppointmentResponse</h3>
+                <div class="description-content"></div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>State of the deleted appointment, echoed back for confirmation. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>agency_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Agency the deleted appointment belonged to, echoed back for confirmation. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+          </div>
+        </details>
+      
+    
 
     
     <h2 id="enums">Enums</h2>
@@ -41031,6 +41385,20 @@ trigger operational status changes.</div>
                       <td>RISK_REASON_EO_EXPIRED</td>
                       <td>5</td>
                       <td><p>E&O coverage has expired (E&O ExpirationDate < current date).</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>RISK_REASON_STATE_APPOINTMENT_TERMINATED</td>
+                      <td>6</td>
+                      <td><p>A state has terminated the appointment (reported via NIPR) while
+producerflow still shows it as active.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>RISK_REASON_REGULATORY_ACTION</td>
+                      <td>7</td>
+                      <td><p>An undismissed regulatory action exists (reported via NIPR) against the
+appointment's producer or agency in the appointment's state.</p></td>
                     </tr>
                   
                 </tbody>
@@ -41652,8 +42020,12 @@ state until the license is reinstated.</p></td>
         </details>
       
     
+      
+    
 
     
+    
+      
     
       
     
