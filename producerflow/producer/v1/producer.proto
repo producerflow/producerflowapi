@@ -3785,6 +3785,11 @@ message Producer {
   // UpdateProducer. Empty when the producer has no role assigned, or when the
   // tenant has not configured any role labels.
   string role = 46;
+
+  // Organization that the producer's agency belongs to.
+  // This field contains the full organization details including id, name, and contact information.
+  // Unset when the producer's agency does not belong to any organization.
+  Organization organization = 47;
 }
 
 // NewProducer represents the data needed to create a new producer in the system.

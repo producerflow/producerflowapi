@@ -316,6 +316,12 @@ enum RiskReason {
   RISK_REASON_EO_INACTIVE = 4;
   // E&O coverage has expired (E&O ExpirationDate < current date).
   RISK_REASON_EO_EXPIRED = 5;
+  // A state has terminated the appointment (reported via NIPR) while
+  // producerflow still shows it as active.
+  RISK_REASON_STATE_APPOINTMENT_TERMINATED = 6;
+  // An undismissed regulatory action exists (reported via NIPR) against the
+  // appointment's producer or agency in the appointment's state.
+  RISK_REASON_REGULATORY_ACTION = 7;
 }
 
 // AppointmentOperationalStatus contains operational status information for an appointment.
