@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.26] - 2026-07-14
+
+### Added
+
+#### AppointmentService
+
+- **New `RISK_REASON_STATE_APPOINTMENT_TERMINATED` on `RiskReason`** — a state has terminated the appointment (reported via NIPR) while ProducerFlow still shows it as active
+- **New `RISK_REASON_REGULATORY_ACTION` on `RiskReason`** — an undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state
+
+#### ProducerService
+
+- **`organization` field on `Producer`** — the organization that the producer's agency belongs to, with full details (id, name, and contact information); unset when the producer's agency does not belong to any organization
+
+#### TestingService (DEV and UAT only)
+
+- **New `TestingService`** — cleanup utilities that let tenants reset their test environments between automated runs. Every method is enabled exclusively in dev and UAT; in production every call is rejected with `PERMISSION_DENIED`
+- **New `DeleteAgency` RPC** — permanently removes an agency and every producer, appointment, and NIPR record scoped to it, freeing the underlying licenses to be appointed again
+- **New `DeleteAppointment` RPC** — permanently removes a single appointment, freeing the underlying license to be appointed again (unlike termination, which leaves a record that still blocks re-appointment)
+
+### Changed
+
+- Regenerated client libraries with latest proto changes
+
 ## [1.0.25] - 2026-06-15
 
 ### Added
