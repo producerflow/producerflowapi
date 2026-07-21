@@ -1736,6 +1736,17 @@ message CreateAgencyOnboardingURLRequest {
     // the configured e-signature provider (Docusign or Adobe Sign).
     // The system will automatically detect the signature provider based on tenant configuration.
     optional string signature_template_id = 16;
+    // Relationship the agency will have with the organization once onboarded:
+    // - MAIN: The agency owns or manages the organization.
+    // - RELATED: The agency is part of the organization but not the primary owner.
+    // Only allowed when organization_id is set.
+    // If not provided, the agency is attached to the organization as RELATED.
+    optional AgencyOrganizationRelationship organization_relationship = 17 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
 
     // Principal is the person responsible for the agency.
     // All fields within the Principal message are also optional.
@@ -1905,6 +1916,13 @@ message NewAgencyRequest {
       // The mailing address of the principal.
       // This is where correspondence for the principal will be sent.
       Address mailing_address = 9;
+
+      // ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+      // populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+      // empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+      // Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+      // principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+      map<string, string> external_metadata = 14;
     }
 
     // Information about the agency's principal.
@@ -2015,6 +2033,20 @@ message NewAgencyRequest {
       (buf.validate.field).string.max_len = 36
     ];
 
+    // Relationship the agency will have with the organization referenced by
+    // root_organization_id:
+    // - MAIN: The agency owns or manages the organization.
+    // - RELATED: The agency is part of the organization but not the primary owner.
+    // Only allowed when root_organization_id is set.
+    // If not provided, the agency is attached to the organization as RELATED.
+    // Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+    optional AgencyOrganizationRelationship organization_relationship = 24 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
+
     // EntityType represents the type of business entity for an agency.
     EntityType entity_type = 15 [(buf.validate.field).enum = {
       in: [
@@ -2071,6 +2103,12 @@ message NewAgencyRequest {
     // IVANS account information for electronic carrier communication.
     // This is optional and only used if the agency uses IVANS.
     IvansAccount ivans_account = 23;
+
+    // ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+    // populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+    // empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+    // Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+    map<string, string> external_metadata = 25;
   }
 
   Agency agency = 1 [(buf.validate.field).required = true];
@@ -2511,6 +2549,25 @@ message UpdateAgencyRequest {
     // - If provided with all fields: IVANS account is created or completely replaced
     // - Partial updates are supported: only specified fields will be updated
     IvansAccount ivans_account = 9;
+
+    // Relationship the agency has with the organization it belongs to:
+    // - MAIN: The agency owns or manages the organization.
+    // - RELATED: The agency is part of the organization but not the primary owner.
+    //
+    // Update behavior:
+    // - If not provided (null): the current relationship is preserved unchanged
+    // - If provided: the relationship with the agency's current organization is
+    //   switched to the requested value (no-op if it already matches)
+    //
+    // The agency must already belong to an organization; otherwise the request
+    // fails with FAILED_PRECONDITION. This field cannot be used to attach an
+    // agency to an organization or detach it from one.
+    optional AgencyOrganizationRelationship organization_relationship = 10 [(buf.validate.field).enum = {
+      in: [
+        1,
+        2
+      ]
+    }];
   }
 
   // The agency information to update.
@@ -3978,6 +4035,12 @@ message NewProducer {
     (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
     (buf.validate.field).string.min_len = 1
   ];
+
+  // ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+  // populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+  // empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+  // Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+  map<string, string> external_metadata = 14;
 }
 
 // NewProducerRequest is used to create a new producer and associate it with an agency.
