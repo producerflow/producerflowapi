@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.27] - 2026-07-21
+
+### Added
+
+#### AgencyService
+
+- **`organization_relationship` on `CreateAgencyOnboardingURLRequest`**. Sets whether the onboarded agency is `MAIN` or `RELATED` to the organization. Only allowed when `organization_id` is set, defaults to `RELATED`
+- **`organization_relationship` on `NewAgencyRequest`**. Sets the agency's relationship (`MAIN`/`RELATED`) to the organization referenced by `root_organization_id`. Only allowed when that field is set, defaults to `RELATED`, supported for all entity types including sole proprietor
+- **`organization_relationship` on `UpdateAgencyRequest`**. Switches the relationship with the agency's current organization. The agency must already belong to an organization or the request fails with `FAILED_PRECONDITION`
+- **`external_metadata` on `NewAgencyRequest`**. Custom key-value metadata for the agency, populated via API. Keys are trimmed, and an absent or empty map at creation leaves metadata unset
+- **`external_metadata` on `NewAgencyRequest.Principal`**. Custom key-value metadata for the principal. When the principal is unlicensed (no NPN) it is stored on the principal Contact
+
+#### ProducerService
+
+- **`external_metadata` on `NewProducer`**. Custom key-value metadata for the producer, populated via API. Keys are trimmed, and an absent or empty map at creation leaves metadata unset
+
+---
+
 ## [1.0.26] - 2026-07-14
 
 ### Added
