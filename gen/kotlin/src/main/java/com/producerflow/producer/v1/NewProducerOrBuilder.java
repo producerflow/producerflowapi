@@ -645,4 +645,73 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getRoleBytes();
+
+  /**
+   * <pre>
+   * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+   * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+   * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+   * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+   */
+  int getExternalMetadataCount();
+  /**
+   * <pre>
+   * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+   * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+   * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+   * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+   */
+  boolean containsExternalMetadata(
+      java.lang.String key);
+  /**
+   * Use {@link #getExternalMetadataMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, java.lang.String>
+  getExternalMetadata();
+  /**
+   * <pre>
+   * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+   * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+   * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+   * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+   */
+  java.util.Map<java.lang.String, java.lang.String>
+  getExternalMetadataMap();
+  /**
+   * <pre>
+   * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+   * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+   * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+   * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+   */
+  /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+      java.lang.String key,
+      /* nullable */
+java.lang.String defaultValue);
+  /**
+   * <pre>
+   * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+   * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+   * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+   * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+   * </pre>
+   *
+   * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+   */
+  java.lang.String getExternalMetadataOrThrow(
+      java.lang.String key);
 }

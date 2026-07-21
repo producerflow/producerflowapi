@@ -922,6 +922,109 @@ public object NewProducerKt {
     public fun hasRole(): kotlin.Boolean {
       return _builder.hasRole()
     }
+
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+     public val externalMetadata: com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      @kotlin.jvm.JvmSynthetic
+      @JvmName("getExternalMetadataMap")
+      get() = com.google.protobuf.kotlin.DslMap(
+        _builder.externalMetadataMap
+      )
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+    @JvmName("putExternalMetadata")
+    public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      .put(key: kotlin.String, value: kotlin.String) {
+         _builder.putExternalMetadata(key, value)
+       }
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @JvmName("setExternalMetadata")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      .set(key: kotlin.String, value: kotlin.String) {
+         put(key, value)
+       }
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @JvmName("removeExternalMetadata")
+    public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      .remove(key: kotlin.String) {
+         _builder.removeExternalMetadata(key)
+       }
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @JvmName("putAllExternalMetadata")
+    public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      .putAll(map: kotlin.collections.Map<kotlin.String, kotlin.String>) {
+         _builder.putAllExternalMetadata(map)
+       }
+    /**
+     * ```
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id.
+     * ```
+     *
+     * `map<string, string> external_metadata = 14 [json_name = "externalMetadata"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @JvmName("clearExternalMetadata")
+    public fun com.google.protobuf.kotlin.DslMap<kotlin.String, kotlin.String, ExternalMetadataProxy>
+      .clear() {
+         _builder.clearExternalMetadata()
+       }
   }
   @kotlin.jvm.JvmName("-initializeaddress")
   public inline fun address(block: com.producerflow.producer.v1.NewProducerKt.AddressKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewProducer.Address =

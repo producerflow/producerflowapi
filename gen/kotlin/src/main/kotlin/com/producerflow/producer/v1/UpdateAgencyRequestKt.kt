@@ -663,6 +663,82 @@ public object UpdateAgencyRequestKt {
       }
       public val AgencyKt.Dsl.ivansAccountOrNull: com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount?
         get() = _builder.ivansAccountOrNull
+
+      /**
+       * ```
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       */
+      public var organizationRelationship: com.producerflow.producer.v1.AgencyOrganizationRelationship
+        @JvmName("getOrganizationRelationship")
+        get() = _builder.organizationRelationship
+        @JvmName("setOrganizationRelationship")
+        set(value) {
+          _builder.organizationRelationship = value
+        }
+      public var organizationRelationshipValue: kotlin.Int
+        @JvmName("getOrganizationRelationshipValue")
+        get() = _builder.organizationRelationshipValue
+        @JvmName("setOrganizationRelationshipValue")
+        set(value) {
+          _builder.organizationRelationshipValue = value
+        }
+      /**
+       * ```
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       */
+      public fun clearOrganizationRelationship() {
+        _builder.clearOrganizationRelationship()
+      }
+      /**
+       * ```
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       * @return Whether the organizationRelationship field is set.
+       */
+      public fun hasOrganizationRelationship(): kotlin.Boolean {
+        return _builder.hasOrganizationRelationship()
+      }
     }
     @kotlin.jvm.JvmName("-initializeaddress")
     public inline fun address(block: com.producerflow.producer.v1.UpdateAgencyRequestKt.AgencyKt.AddressKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.UpdateAgencyRequest.Agency.Address =

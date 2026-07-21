@@ -365,6 +365,52 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    boolean hasOrganizationRelationship();
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    int getOrganizationRelationshipValue();
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship();
+
+    /**
+     * <pre>
      * EntityType represents the type of business entity for an agency.
      * </pre>
      *
@@ -721,6 +767,75 @@ java.lang.String defaultValue);
      * <code>.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];</code>
      */
     com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder();
+
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    int getExternalMetadataCount();
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    boolean containsExternalMetadata(
+        java.lang.String key);
+    /**
+     * Use {@link #getExternalMetadataMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.String>
+    getExternalMetadata();
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    java.util.Map<java.lang.String, java.lang.String>
+    getExternalMetadataMap();
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue);
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    java.lang.String getExternalMetadataOrThrow(
+        java.lang.String key);
   }
   /**
    * <pre>
@@ -756,6 +871,7 @@ java.lang.String defaultValue);
       producers_ = java.util.Collections.emptyList();
       pointsOfContact_ = java.util.Collections.emptyList();
       rootOrganizationId_ = "";
+      organizationRelationship_ = 0;
       entityType_ = 0;
       fein_ = "";
       tenantAgencyId_ = "";
@@ -776,6 +892,8 @@ java.lang.String defaultValue);
           return internalGetMetadataQuestions();
         case 22:
           return internalGetTenantAdditionalQuestions();
+        case 25:
+          return internalGetExternalMetadata();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -1070,6 +1188,80 @@ java.lang.String defaultValue);
        * <code>.producerflow.producer.v1.Address mailing_address = 9 [json_name = "mailingAddress"];</code>
        */
       com.producerflow.producer.v1.AddressOrBuilder getMailingAddressOrBuilder();
+
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      int getExternalMetadataCount();
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      boolean containsExternalMetadata(
+          java.lang.String key);
+      /**
+       * Use {@link #getExternalMetadataMap()} instead.
+       */
+      @java.lang.Deprecated
+      java.util.Map<java.lang.String, java.lang.String>
+      getExternalMetadata();
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      java.util.Map<java.lang.String, java.lang.String>
+      getExternalMetadataMap();
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+          java.lang.String key,
+          /* nullable */
+java.lang.String defaultValue);
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      java.lang.String getExternalMetadataOrThrow(
+          java.lang.String key);
     }
     /**
      * <pre>
@@ -1120,6 +1312,8 @@ java.lang.String defaultValue);
         switch (number) {
           case 8:
             return internalGetTenantAdditionalQuestions();
+          case 14:
+            return internalGetExternalMetadata();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -1662,6 +1856,117 @@ java.lang.String defaultValue) {
         return mailingAddress_ == null ? com.producerflow.producer.v1.Address.getDefaultInstance() : mailingAddress_;
       }
 
+      public static final int EXTERNAL_METADATA_FIELD_NUMBER = 14;
+      private static final class ExternalMetadataDefaultEntryHolder {
+        static final com.google.protobuf.MapEntry<
+            java.lang.String, java.lang.String> defaultEntry =
+                com.google.protobuf.MapEntry
+                .<java.lang.String, java.lang.String>newDefaultInstance(
+                    com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_NewAgencyRequest_Agency_Principal_ExternalMetadataEntry_descriptor, 
+                    com.google.protobuf.WireFormat.FieldType.STRING,
+                    "",
+                    com.google.protobuf.WireFormat.FieldType.STRING,
+                    "");
+      }
+      @SuppressWarnings("serial")
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.String> externalMetadata_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+      internalGetExternalMetadata() {
+        if (externalMetadata_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              ExternalMetadataDefaultEntryHolder.defaultEntry);
+        }
+        return externalMetadata_;
+      }
+      public int getExternalMetadataCount() {
+        return internalGetExternalMetadata().getMap().size();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public boolean containsExternalMetadata(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        return internalGetExternalMetadata().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getExternalMetadataMap()} instead.
+       */
+      @java.lang.Override
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+        return getExternalMetadataMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+        return internalGetExternalMetadata().getMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+          java.lang.String key,
+          /* nullable */
+java.lang.String defaultValue) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+       * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.lang.String getExternalMetadataOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -1709,6 +2014,12 @@ java.lang.String defaultValue) {
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(middleName_)) {
           com.google.protobuf.GeneratedMessage.writeString(output, 13, middleName_);
         }
+        com.google.protobuf.GeneratedMessage
+          .serializeStringMapTo(
+            output,
+            internalGetExternalMetadata(),
+            ExternalMetadataDefaultEntryHolder.defaultEntry,
+            14);
         getUnknownFields().writeTo(output);
       }
 
@@ -1757,6 +2068,16 @@ java.lang.String defaultValue) {
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(middleName_)) {
           size += com.google.protobuf.GeneratedMessage.computeStringSize(13, middleName_);
         }
+        for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+             : internalGetExternalMetadata().getMap().entrySet()) {
+          com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+          externalMetadata__ = ExternalMetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
+              .setKey(entry.getKey())
+              .setValue(entry.getValue())
+              .build();
+          size += com.google.protobuf.CodedOutputStream
+              .computeMessageSize(14, externalMetadata__);
+        }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
@@ -1801,6 +2122,8 @@ java.lang.String defaultValue) {
           if (!getMailingAddress()
               .equals(other.getMailingAddress())) return false;
         }
+        if (!internalGetExternalMetadata().equals(
+            other.internalGetExternalMetadata())) return false;
         if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
@@ -1840,6 +2163,10 @@ java.lang.String defaultValue) {
         if (hasMailingAddress()) {
           hash = (37 * hash) + MAILING_ADDRESS_FIELD_NUMBER;
           hash = (53 * hash) + getMailingAddress().hashCode();
+        }
+        if (!internalGetExternalMetadata().getMap().isEmpty()) {
+          hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
+          hash = (53 * hash) + internalGetExternalMetadata().hashCode();
         }
         hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
@@ -1962,6 +2289,8 @@ java.lang.String defaultValue) {
           switch (number) {
             case 8:
               return internalGetTenantAdditionalQuestions();
+            case 14:
+              return internalGetExternalMetadata();
             default:
               throw new RuntimeException(
                   "Invalid map field number: " + number);
@@ -1973,6 +2302,8 @@ java.lang.String defaultValue) {
           switch (number) {
             case 8:
               return internalGetMutableTenantAdditionalQuestions();
+            case 14:
+              return internalGetMutableExternalMetadata();
             default:
               throw new RuntimeException(
                   "Invalid map field number: " + number);
@@ -2020,6 +2351,7 @@ java.lang.String defaultValue) {
             mailingAddressBuilder_.dispose();
             mailingAddressBuilder_ = null;
           }
+          internalGetMutableExternalMetadata().clear();
           return this;
         }
 
@@ -2090,6 +2422,10 @@ java.lang.String defaultValue) {
                 : mailingAddressBuilder_.build();
             to_bitField0_ |= 0x00000004;
           }
+          if (((from_bitField0_ & 0x00000400) != 0)) {
+            result.externalMetadata_ = internalGetExternalMetadata();
+            result.externalMetadata_.makeImmutable();
+          }
           result.bitField0_ |= to_bitField0_;
         }
 
@@ -2149,6 +2485,9 @@ java.lang.String defaultValue) {
           if (other.hasMailingAddress()) {
             mergeMailingAddress(other.getMailingAddress());
           }
+          internalGetMutableExternalMetadata().mergeFrom(
+              other.internalGetExternalMetadata());
+          bitField0_ |= 0x00000400;
           this.mergeUnknownFields(other.getUnknownFields());
           onChanged();
           return this;
@@ -2231,6 +2570,15 @@ java.lang.String defaultValue) {
                   bitField0_ |= 0x00000004;
                   break;
                 } // case 106
+                case 114: {
+                  com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+                  externalMetadata__ = input.readMessage(
+                      ExternalMetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                  internalGetMutableExternalMetadata().getMutableMap().put(
+                      externalMetadata__.getKey(), externalMetadata__.getValue());
+                  bitField0_ |= 0x00000400;
+                  break;
+                } // case 114
                 default: {
                   if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                     done = true; // was an endgroup tag
@@ -3330,6 +3678,189 @@ java.lang.String defaultValue) {
             mailingAddress_ = null;
           }
           return mailingAddressBuilder_;
+        }
+
+        private com.google.protobuf.MapField<
+            java.lang.String, java.lang.String> externalMetadata_;
+        private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+            internalGetExternalMetadata() {
+          if (externalMetadata_ == null) {
+            return com.google.protobuf.MapField.emptyMapField(
+                ExternalMetadataDefaultEntryHolder.defaultEntry);
+          }
+          return externalMetadata_;
+        }
+        private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+            internalGetMutableExternalMetadata() {
+          if (externalMetadata_ == null) {
+            externalMetadata_ = com.google.protobuf.MapField.newMapField(
+                ExternalMetadataDefaultEntryHolder.defaultEntry);
+          }
+          if (!externalMetadata_.isMutable()) {
+            externalMetadata_ = externalMetadata_.copy();
+          }
+          bitField0_ |= 0x00000400;
+          onChanged();
+          return externalMetadata_;
+        }
+        public int getExternalMetadataCount() {
+          return internalGetExternalMetadata().getMap().size();
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        @java.lang.Override
+        public boolean containsExternalMetadata(
+            java.lang.String key) {
+          if (key == null) { throw new NullPointerException("map key"); }
+          return internalGetExternalMetadata().getMap().containsKey(key);
+        }
+        /**
+         * Use {@link #getExternalMetadataMap()} instead.
+         */
+        @java.lang.Override
+        @java.lang.Deprecated
+        public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+          return getExternalMetadataMap();
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        @java.lang.Override
+        public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+          return internalGetExternalMetadata().getMap();
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        @java.lang.Override
+        public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+            java.lang.String key,
+            /* nullable */
+java.lang.String defaultValue) {
+          if (key == null) { throw new NullPointerException("map key"); }
+          java.util.Map<java.lang.String, java.lang.String> map =
+              internalGetExternalMetadata().getMap();
+          return map.containsKey(key) ? map.get(key) : defaultValue;
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        @java.lang.Override
+        public java.lang.String getExternalMetadataOrThrow(
+            java.lang.String key) {
+          if (key == null) { throw new NullPointerException("map key"); }
+          java.util.Map<java.lang.String, java.lang.String> map =
+              internalGetExternalMetadata().getMap();
+          if (!map.containsKey(key)) {
+            throw new java.lang.IllegalArgumentException();
+          }
+          return map.get(key);
+        }
+        public Builder clearExternalMetadata() {
+          bitField0_ = (bitField0_ & ~0x00000400);
+          internalGetMutableExternalMetadata().getMutableMap()
+              .clear();
+          return this;
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        public Builder removeExternalMetadata(
+            java.lang.String key) {
+          if (key == null) { throw new NullPointerException("map key"); }
+          internalGetMutableExternalMetadata().getMutableMap()
+              .remove(key);
+          return this;
+        }
+        /**
+         * Use alternate mutation accessors instead.
+         */
+        @java.lang.Deprecated
+        public java.util.Map<java.lang.String, java.lang.String>
+            getMutableExternalMetadata() {
+          bitField0_ |= 0x00000400;
+          return internalGetMutableExternalMetadata().getMutableMap();
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        public Builder putExternalMetadata(
+            java.lang.String key,
+            java.lang.String value) {
+          if (key == null) { throw new NullPointerException("map key"); }
+          if (value == null) { throw new NullPointerException("map value"); }
+          internalGetMutableExternalMetadata().getMutableMap()
+              .put(key, value);
+          bitField0_ |= 0x00000400;
+          return this;
+        }
+        /**
+         * <pre>
+         * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+         * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+         * empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it).
+         * Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the
+         * principal is unlicensed (no NPN), the metadata is stored on the principal Contact.
+         * </pre>
+         *
+         * <code>map&lt;string, string&gt; external_metadata = 14 [json_name = "externalMetadata"];</code>
+         */
+        public Builder putAllExternalMetadata(
+            java.util.Map<java.lang.String, java.lang.String> values) {
+          internalGetMutableExternalMetadata().getMutableMap()
+              .putAll(values);
+          bitField0_ |= 0x00000400;
+          return this;
         }
 
         // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.NewAgencyRequest.Agency.Principal)
@@ -10811,6 +11342,61 @@ java.lang.String defaultValue) {
       }
     }
 
+    public static final int ORGANIZATION_RELATIONSHIP_FIELD_NUMBER = 24;
+    private int organizationRelationship_ = 0;
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    @java.lang.Override public boolean hasOrganizationRelationship() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    @java.lang.Override public int getOrganizationRelationshipValue() {
+      return organizationRelationship_;
+    }
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization referenced by
+     * root_organization_id:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when root_organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+      com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+      return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+
     public static final int ENTITY_TYPE_FIELD_NUMBER = 15;
     private int entityType_ = 0;
     /**
@@ -10852,7 +11438,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasFein() {
-      return ((bitField0_ & 0x00000040) != 0);
+      return ((bitField0_ & 0x00000080) != 0);
     }
     /**
      * <pre>
@@ -10914,7 +11500,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasMailingAddress() {
-      return ((bitField0_ & 0x00000080) != 0);
+      return ((bitField0_ & 0x00000100) != 0);
     }
     /**
      * <pre>
@@ -10952,7 +11538,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasPhysicalAddress() {
-      return ((bitField0_ & 0x00000100) != 0);
+      return ((bitField0_ & 0x00000200) != 0);
     }
     /**
      * <pre>
@@ -10990,7 +11576,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasInvoicingAddress() {
-      return ((bitField0_ & 0x00000200) != 0);
+      return ((bitField0_ & 0x00000400) != 0);
     }
     /**
      * <pre>
@@ -11345,7 +11931,7 @@ java.lang.String defaultValue) {
      */
     @java.lang.Override
     public boolean hasIvansAccount() {
-      return ((bitField0_ & 0x00000400) != 0);
+      return ((bitField0_ & 0x00000800) != 0);
     }
     /**
      * <pre>
@@ -11371,6 +11957,113 @@ java.lang.String defaultValue) {
     @java.lang.Override
     public com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder() {
       return ivansAccount_ == null ? com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
+    }
+
+    public static final int EXTERNAL_METADATA_FIELD_NUMBER = 25;
+    private static final class ExternalMetadataDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.String> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.String>newDefaultInstance(
+                  com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_NewAgencyRequest_Agency_ExternalMetadataEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "");
+    }
+    @SuppressWarnings("serial")
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.String> externalMetadata_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+    internalGetExternalMetadata() {
+      if (externalMetadata_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            ExternalMetadataDefaultEntryHolder.defaultEntry);
+      }
+      return externalMetadata_;
+    }
+    public int getExternalMetadataCount() {
+      return internalGetExternalMetadata().getMap().size();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public boolean containsExternalMetadata(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      return internalGetExternalMetadata().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getExternalMetadataMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+      return getExternalMetadataMap();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+      return internalGetExternalMetadata().getMap();
+    }
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+        java.lang.String key,
+        /* nullable */
+java.lang.String defaultValue) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExternalMetadata().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+     * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+     * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+     * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+     */
+    @java.lang.Override
+    public java.lang.String getExternalMetadataOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new NullPointerException("map key"); }
+      java.util.Map<java.lang.String, java.lang.String> map =
+          internalGetExternalMetadata().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -11405,7 +12098,7 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00000002) != 0)) {
         output.writeMessage(7, getPrincipal());
       }
-      if (((bitField0_ & 0x00000080) != 0)) {
+      if (((bitField0_ & 0x00000100) != 0)) {
         output.writeMessage(8, getMailingAddress());
       }
       if (((bitField0_ & 0x00000004) != 0)) {
@@ -11429,13 +12122,13 @@ java.lang.String defaultValue) {
       if (entityType_ != com.producerflow.producer.v1.EntityType.ENTITY_TYPE_UNSPECIFIED.getNumber()) {
         output.writeEnum(15, entityType_);
       }
-      if (((bitField0_ & 0x00000040) != 0)) {
+      if (((bitField0_ & 0x00000080) != 0)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 16, fein_);
       }
-      if (((bitField0_ & 0x00000100) != 0)) {
+      if (((bitField0_ & 0x00000200) != 0)) {
         output.writeMessage(17, getPhysicalAddress());
       }
-      if (((bitField0_ & 0x00000200) != 0)) {
+      if (((bitField0_ & 0x00000400) != 0)) {
         output.writeMessage(18, getInvoicingAddress());
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(tenantAgencyId_)) {
@@ -11456,9 +12149,18 @@ java.lang.String defaultValue) {
           internalGetTenantAdditionalQuestions(),
           TenantAdditionalQuestionsDefaultEntryHolder.defaultEntry,
           22);
-      if (((bitField0_ & 0x00000400) != 0)) {
+      if (((bitField0_ & 0x00000800) != 0)) {
         output.writeMessage(23, getIvansAccount());
       }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        output.writeEnum(24, organizationRelationship_);
+      }
+      com.google.protobuf.GeneratedMessage
+        .serializeStringMapTo(
+          output,
+          internalGetExternalMetadata(),
+          ExternalMetadataDefaultEntryHolder.defaultEntry,
+          25);
       getUnknownFields().writeTo(output);
     }
 
@@ -11487,7 +12189,7 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getPrincipal());
       }
-      if (((bitField0_ & 0x00000080) != 0)) {
+      if (((bitField0_ & 0x00000100) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, getMailingAddress());
       }
@@ -11518,14 +12220,14 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(15, entityType_);
       }
-      if (((bitField0_ & 0x00000040) != 0)) {
+      if (((bitField0_ & 0x00000080) != 0)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(16, fein_);
       }
-      if (((bitField0_ & 0x00000100) != 0)) {
+      if (((bitField0_ & 0x00000200) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(17, getPhysicalAddress());
       }
-      if (((bitField0_ & 0x00000200) != 0)) {
+      if (((bitField0_ & 0x00000400) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(18, getInvoicingAddress());
       }
@@ -11556,9 +12258,23 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(22, tenantAdditionalQuestions__);
       }
-      if (((bitField0_ & 0x00000400) != 0)) {
+      if (((bitField0_ & 0x00000800) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(23, getIvansAccount());
+      }
+      if (((bitField0_ & 0x00000040) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(24, organizationRelationship_);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+           : internalGetExternalMetadata().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+        externalMetadata__ = ExternalMetadataDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(25, externalMetadata__);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -11617,6 +12333,10 @@ java.lang.String defaultValue) {
         if (!getRootOrganizationId()
             .equals(other.getRootOrganizationId())) return false;
       }
+      if (hasOrganizationRelationship() != other.hasOrganizationRelationship()) return false;
+      if (hasOrganizationRelationship()) {
+        if (organizationRelationship_ != other.organizationRelationship_) return false;
+      }
       if (entityType_ != other.entityType_) return false;
       if (hasFein() != other.hasFein()) return false;
       if (hasFein()) {
@@ -11651,6 +12371,8 @@ java.lang.String defaultValue) {
         if (!getIvansAccount()
             .equals(other.getIvansAccount())) return false;
       }
+      if (!internalGetExternalMetadata().equals(
+          other.internalGetExternalMetadata())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -11702,6 +12424,10 @@ java.lang.String defaultValue) {
         hash = (37 * hash) + ROOT_ORGANIZATION_ID_FIELD_NUMBER;
         hash = (53 * hash) + getRootOrganizationId().hashCode();
       }
+      if (hasOrganizationRelationship()) {
+        hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
+        hash = (53 * hash) + organizationRelationship_;
+      }
       hash = (37 * hash) + ENTITY_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + entityType_;
       if (hasFein()) {
@@ -11737,6 +12463,10 @@ java.lang.String defaultValue) {
       if (hasIvansAccount()) {
         hash = (37 * hash) + IVANS_ACCOUNT_FIELD_NUMBER;
         hash = (53 * hash) + getIvansAccount().hashCode();
+      }
+      if (!internalGetExternalMetadata().getMap().isEmpty()) {
+        hash = (37 * hash) + EXTERNAL_METADATA_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetExternalMetadata().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -11859,6 +12589,8 @@ java.lang.String defaultValue) {
             return internalGetMetadataQuestions();
           case 22:
             return internalGetTenantAdditionalQuestions();
+          case 25:
+            return internalGetExternalMetadata();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -11872,6 +12604,8 @@ java.lang.String defaultValue) {
             return internalGetMutableMetadataQuestions();
           case 22:
             return internalGetMutableTenantAdditionalQuestions();
+          case 25:
+            return internalGetMutableExternalMetadata();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -11955,6 +12689,7 @@ java.lang.String defaultValue) {
         }
         bitField0_ = (bitField0_ & ~0x00000400);
         rootOrganizationId_ = "";
+        organizationRelationship_ = 0;
         entityType_ = 0;
         fein_ = "";
         mailingAddress_ = null;
@@ -11979,7 +12714,7 @@ java.lang.String defaultValue) {
           locations_ = null;
           locationsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         internalGetMutableMetadataQuestions().clear();
         internalGetMutableTenantAdditionalQuestions().clear();
         ivansAccount_ = null;
@@ -11987,6 +12722,7 @@ java.lang.String defaultValue) {
           ivansAccountBuilder_.dispose();
           ivansAccountBuilder_ = null;
         }
+        internalGetMutableExternalMetadata().clear();
         return this;
       }
 
@@ -12039,9 +12775,9 @@ java.lang.String defaultValue) {
           result.pointsOfContact_ = pointsOfContactBuilder_.build();
         }
         if (locationsBuilder_ == null) {
-          if (((bitField0_ & 0x00040000) != 0)) {
+          if (((bitField0_ & 0x00080000) != 0)) {
             locations_ = java.util.Collections.unmodifiableList(locations_);
-            bitField0_ = (bitField0_ & ~0x00040000);
+            bitField0_ = (bitField0_ & ~0x00080000);
           }
           result.locations_ = locations_;
         } else {
@@ -12097,46 +12833,54 @@ java.lang.String defaultValue) {
           to_bitField0_ |= 0x00000020;
         }
         if (((from_bitField0_ & 0x00001000) != 0)) {
-          result.entityType_ = entityType_;
-        }
-        if (((from_bitField0_ & 0x00002000) != 0)) {
-          result.fein_ = fein_;
+          result.organizationRelationship_ = organizationRelationship_;
           to_bitField0_ |= 0x00000040;
         }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
+          result.entityType_ = entityType_;
+        }
         if (((from_bitField0_ & 0x00004000) != 0)) {
-          result.mailingAddress_ = mailingAddressBuilder_ == null
-              ? mailingAddress_
-              : mailingAddressBuilder_.build();
+          result.fein_ = fein_;
           to_bitField0_ |= 0x00000080;
         }
         if (((from_bitField0_ & 0x00008000) != 0)) {
-          result.physicalAddress_ = physicalAddressBuilder_ == null
-              ? physicalAddress_
-              : physicalAddressBuilder_.build();
+          result.mailingAddress_ = mailingAddressBuilder_ == null
+              ? mailingAddress_
+              : mailingAddressBuilder_.build();
           to_bitField0_ |= 0x00000100;
         }
         if (((from_bitField0_ & 0x00010000) != 0)) {
-          result.invoicingAddress_ = invoicingAddressBuilder_ == null
-              ? invoicingAddress_
-              : invoicingAddressBuilder_.build();
+          result.physicalAddress_ = physicalAddressBuilder_ == null
+              ? physicalAddress_
+              : physicalAddressBuilder_.build();
           to_bitField0_ |= 0x00000200;
         }
         if (((from_bitField0_ & 0x00020000) != 0)) {
+          result.invoicingAddress_ = invoicingAddressBuilder_ == null
+              ? invoicingAddress_
+              : invoicingAddressBuilder_.build();
+          to_bitField0_ |= 0x00000400;
+        }
+        if (((from_bitField0_ & 0x00040000) != 0)) {
           result.tenantAgencyId_ = tenantAgencyId_;
         }
-        if (((from_bitField0_ & 0x00080000) != 0)) {
+        if (((from_bitField0_ & 0x00100000) != 0)) {
           result.metadataQuestions_ = internalGetMetadataQuestions();
           result.metadataQuestions_.makeImmutable();
         }
-        if (((from_bitField0_ & 0x00100000) != 0)) {
+        if (((from_bitField0_ & 0x00200000) != 0)) {
           result.tenantAdditionalQuestions_ = internalGetTenantAdditionalQuestions();
           result.tenantAdditionalQuestions_.makeImmutable();
         }
-        if (((from_bitField0_ & 0x00200000) != 0)) {
+        if (((from_bitField0_ & 0x00400000) != 0)) {
           result.ivansAccount_ = ivansAccountBuilder_ == null
               ? ivansAccount_
               : ivansAccountBuilder_.build();
-          to_bitField0_ |= 0x00000400;
+          to_bitField0_ |= 0x00000800;
+        }
+        if (((from_bitField0_ & 0x00800000) != 0)) {
+          result.externalMetadata_ = internalGetExternalMetadata();
+          result.externalMetadata_.makeImmutable();
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -12247,12 +12991,15 @@ java.lang.String defaultValue) {
           bitField0_ |= 0x00000800;
           onChanged();
         }
+        if (other.hasOrganizationRelationship()) {
+          setOrganizationRelationship(other.getOrganizationRelationship());
+        }
         if (other.entityType_ != 0) {
           setEntityTypeValue(other.getEntityTypeValue());
         }
         if (other.hasFein()) {
           fein_ = other.fein_;
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
           onChanged();
         }
         if (other.hasMailingAddress()) {
@@ -12266,14 +13013,14 @@ java.lang.String defaultValue) {
         }
         if (!other.getTenantAgencyId().isEmpty()) {
           tenantAgencyId_ = other.tenantAgencyId_;
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00040000;
           onChanged();
         }
         if (locationsBuilder_ == null) {
           if (!other.locations_.isEmpty()) {
             if (locations_.isEmpty()) {
               locations_ = other.locations_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
             } else {
               ensureLocationsIsMutable();
               locations_.addAll(other.locations_);
@@ -12286,7 +13033,7 @@ java.lang.String defaultValue) {
               locationsBuilder_.dispose();
               locationsBuilder_ = null;
               locations_ = other.locations_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
               locationsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLocationsFieldBuilder() : null;
@@ -12297,13 +13044,16 @@ java.lang.String defaultValue) {
         }
         internalGetMutableMetadataQuestions().mergeFrom(
             other.internalGetMetadataQuestions());
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         internalGetMutableTenantAdditionalQuestions().mergeFrom(
             other.internalGetTenantAdditionalQuestions());
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         if (other.hasIvansAccount()) {
           mergeIvansAccount(other.getIvansAccount());
         }
+        internalGetMutableExternalMetadata().mergeFrom(
+            other.internalGetExternalMetadata());
+        bitField0_ |= 0x00800000;
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -12366,7 +13116,7 @@ java.lang.String defaultValue) {
                 input.readMessage(
                     getMailingAddressFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00004000;
+                bitField0_ |= 0x00008000;
                 break;
               } // case 66
               case 74: {
@@ -12423,31 +13173,31 @@ java.lang.String defaultValue) {
               } // case 114
               case 120: {
                 entityType_ = input.readEnum();
-                bitField0_ |= 0x00001000;
+                bitField0_ |= 0x00002000;
                 break;
               } // case 120
               case 130: {
                 fein_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00002000;
+                bitField0_ |= 0x00004000;
                 break;
               } // case 130
               case 138: {
                 input.readMessage(
                     getPhysicalAddressFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00008000;
+                bitField0_ |= 0x00010000;
                 break;
               } // case 138
               case 146: {
                 input.readMessage(
                     getInvoicingAddressFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00010000;
+                bitField0_ |= 0x00020000;
                 break;
               } // case 146
               case 154: {
                 tenantAgencyId_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00020000;
+                bitField0_ |= 0x00040000;
                 break;
               } // case 154
               case 162: {
@@ -12469,7 +13219,7 @@ java.lang.String defaultValue) {
                     MetadataQuestionsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
                 internalGetMutableMetadataQuestions().getMutableMap().put(
                     metadataQuestions__.getKey(), metadataQuestions__.getValue());
-                bitField0_ |= 0x00080000;
+                bitField0_ |= 0x00100000;
                 break;
               } // case 170
               case 178: {
@@ -12478,16 +13228,30 @@ java.lang.String defaultValue) {
                     TenantAdditionalQuestionsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
                 internalGetMutableTenantAdditionalQuestions().getMutableMap().put(
                     tenantAdditionalQuestions__.getKey(), tenantAdditionalQuestions__.getValue());
-                bitField0_ |= 0x00100000;
+                bitField0_ |= 0x00200000;
                 break;
               } // case 178
               case 186: {
                 input.readMessage(
                     getIvansAccountFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00200000;
+                bitField0_ |= 0x00400000;
                 break;
               } // case 186
+              case 192: {
+                organizationRelationship_ = input.readEnum();
+                bitField0_ |= 0x00001000;
+                break;
+              } // case 192
+              case 202: {
+                com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+                externalMetadata__ = input.readMessage(
+                    ExternalMetadataDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableExternalMetadata().getMutableMap().put(
+                    externalMetadata__.getKey(), externalMetadata__.getValue());
+                bitField0_ |= 0x00800000;
+                break;
+              } // case 202
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -14234,6 +14998,126 @@ java.lang.String defaultValue) {
         return this;
       }
 
+      private int organizationRelationship_ = 0;
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return Whether the organizationRelationship field is set.
+       */
+      @java.lang.Override public boolean hasOrganizationRelationship() {
+        return ((bitField0_ & 0x00001000) != 0);
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The enum numeric value on the wire for organizationRelationship.
+       */
+      @java.lang.Override public int getOrganizationRelationshipValue() {
+        return organizationRelationship_;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The enum numeric value on the wire for organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationshipValue(int value) {
+        organizationRelationship_ = value;
+        bitField0_ |= 0x00001000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The organizationRelationship.
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+        com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+        return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationship(com.producerflow.producer.v1.AgencyOrganizationRelationship value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00001000;
+        organizationRelationship_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization referenced by
+       * root_organization_id:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when root_organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 24 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrganizationRelationship() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        organizationRelationship_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int entityType_ = 0;
       /**
        * <pre>
@@ -14257,7 +15141,7 @@ java.lang.String defaultValue) {
        */
       public Builder setEntityTypeValue(int value) {
         entityType_ = value;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -14287,7 +15171,7 @@ java.lang.String defaultValue) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         entityType_ = value.getNumber();
         onChanged();
         return this;
@@ -14301,7 +15185,7 @@ java.lang.String defaultValue) {
        * @return This builder for chaining.
        */
       public Builder clearEntityType() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         entityType_ = 0;
         onChanged();
         return this;
@@ -14319,7 +15203,7 @@ java.lang.String defaultValue) {
        * @return Whether the fein field is set.
        */
       public boolean hasFein() {
-        return ((bitField0_ & 0x00002000) != 0);
+        return ((bitField0_ & 0x00004000) != 0);
       }
       /**
        * <pre>
@@ -14381,7 +15265,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         fein_ = value;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         onChanged();
         return this;
       }
@@ -14397,7 +15281,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearFein() {
         fein_ = getDefaultInstance().getFein();
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         onChanged();
         return this;
       }
@@ -14417,7 +15301,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         fein_ = value;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         onChanged();
         return this;
       }
@@ -14434,7 +15318,7 @@ java.lang.String defaultValue) {
        * @return Whether the mailingAddress field is set.
        */
       public boolean hasMailingAddress() {
-        return ((bitField0_ & 0x00004000) != 0);
+        return ((bitField0_ & 0x00008000) != 0);
       }
       /**
        * <pre>
@@ -14467,7 +15351,7 @@ java.lang.String defaultValue) {
         } else {
           mailingAddressBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -14485,7 +15369,7 @@ java.lang.String defaultValue) {
         } else {
           mailingAddressBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -14498,7 +15382,7 @@ java.lang.String defaultValue) {
        */
       public Builder mergeMailingAddress(com.producerflow.producer.v1.Address value) {
         if (mailingAddressBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) != 0) &&
+          if (((bitField0_ & 0x00008000) != 0) &&
             mailingAddress_ != null &&
             mailingAddress_ != com.producerflow.producer.v1.Address.getDefaultInstance()) {
             getMailingAddressBuilder().mergeFrom(value);
@@ -14509,7 +15393,7 @@ java.lang.String defaultValue) {
           mailingAddressBuilder_.mergeFrom(value);
         }
         if (mailingAddress_ != null) {
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
           onChanged();
         }
         return this;
@@ -14522,7 +15406,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address mailing_address = 8 [json_name = "mailingAddress"];</code>
        */
       public Builder clearMailingAddress() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         mailingAddress_ = null;
         if (mailingAddressBuilder_ != null) {
           mailingAddressBuilder_.dispose();
@@ -14539,7 +15423,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address mailing_address = 8 [json_name = "mailingAddress"];</code>
        */
       public com.producerflow.producer.v1.Address.Builder getMailingAddressBuilder() {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00008000;
         onChanged();
         return getMailingAddressFieldBuilder().getBuilder();
       }
@@ -14591,7 +15475,7 @@ java.lang.String defaultValue) {
        * @return Whether the physicalAddress field is set.
        */
       public boolean hasPhysicalAddress() {
-        return ((bitField0_ & 0x00008000) != 0);
+        return ((bitField0_ & 0x00010000) != 0);
       }
       /**
        * <pre>
@@ -14624,7 +15508,7 @@ java.lang.String defaultValue) {
         } else {
           physicalAddressBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return this;
       }
@@ -14642,7 +15526,7 @@ java.lang.String defaultValue) {
         } else {
           physicalAddressBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return this;
       }
@@ -14655,7 +15539,7 @@ java.lang.String defaultValue) {
        */
       public Builder mergePhysicalAddress(com.producerflow.producer.v1.Address value) {
         if (physicalAddressBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) != 0) &&
+          if (((bitField0_ & 0x00010000) != 0) &&
             physicalAddress_ != null &&
             physicalAddress_ != com.producerflow.producer.v1.Address.getDefaultInstance()) {
             getPhysicalAddressBuilder().mergeFrom(value);
@@ -14666,7 +15550,7 @@ java.lang.String defaultValue) {
           physicalAddressBuilder_.mergeFrom(value);
         }
         if (physicalAddress_ != null) {
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
           onChanged();
         }
         return this;
@@ -14679,7 +15563,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address physical_address = 17 [json_name = "physicalAddress"];</code>
        */
       public Builder clearPhysicalAddress() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         physicalAddress_ = null;
         if (physicalAddressBuilder_ != null) {
           physicalAddressBuilder_.dispose();
@@ -14696,7 +15580,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address physical_address = 17 [json_name = "physicalAddress"];</code>
        */
       public com.producerflow.producer.v1.Address.Builder getPhysicalAddressBuilder() {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return getPhysicalAddressFieldBuilder().getBuilder();
       }
@@ -14748,7 +15632,7 @@ java.lang.String defaultValue) {
        * @return Whether the invoicingAddress field is set.
        */
       public boolean hasInvoicingAddress() {
-        return ((bitField0_ & 0x00010000) != 0);
+        return ((bitField0_ & 0x00020000) != 0);
       }
       /**
        * <pre>
@@ -14781,7 +15665,7 @@ java.lang.String defaultValue) {
         } else {
           invoicingAddressBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00020000;
         onChanged();
         return this;
       }
@@ -14799,7 +15683,7 @@ java.lang.String defaultValue) {
         } else {
           invoicingAddressBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00020000;
         onChanged();
         return this;
       }
@@ -14812,7 +15696,7 @@ java.lang.String defaultValue) {
        */
       public Builder mergeInvoicingAddress(com.producerflow.producer.v1.Address value) {
         if (invoicingAddressBuilder_ == null) {
-          if (((bitField0_ & 0x00010000) != 0) &&
+          if (((bitField0_ & 0x00020000) != 0) &&
             invoicingAddress_ != null &&
             invoicingAddress_ != com.producerflow.producer.v1.Address.getDefaultInstance()) {
             getInvoicingAddressBuilder().mergeFrom(value);
@@ -14823,7 +15707,7 @@ java.lang.String defaultValue) {
           invoicingAddressBuilder_.mergeFrom(value);
         }
         if (invoicingAddress_ != null) {
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00020000;
           onChanged();
         }
         return this;
@@ -14836,7 +15720,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address invoicing_address = 18 [json_name = "invoicingAddress"];</code>
        */
       public Builder clearInvoicingAddress() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         invoicingAddress_ = null;
         if (invoicingAddressBuilder_ != null) {
           invoicingAddressBuilder_.dispose();
@@ -14853,7 +15737,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.Address invoicing_address = 18 [json_name = "invoicingAddress"];</code>
        */
       public com.producerflow.producer.v1.Address.Builder getInvoicingAddressBuilder() {
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00020000;
         onChanged();
         return getInvoicingAddressFieldBuilder().getBuilder();
       }
@@ -14951,7 +15835,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         tenantAgencyId_ = value;
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00040000;
         onChanged();
         return this;
       }
@@ -14966,7 +15850,7 @@ java.lang.String defaultValue) {
        */
       public Builder clearTenantAgencyId() {
         tenantAgencyId_ = getDefaultInstance().getTenantAgencyId();
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         onChanged();
         return this;
       }
@@ -14985,7 +15869,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         tenantAgencyId_ = value;
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00040000;
         onChanged();
         return this;
       }
@@ -14993,9 +15877,9 @@ java.lang.String defaultValue) {
       private java.util.List<com.producerflow.producer.v1.LocationInput> locations_ =
         java.util.Collections.emptyList();
       private void ensureLocationsIsMutable() {
-        if (!((bitField0_ & 0x00040000) != 0)) {
+        if (!((bitField0_ & 0x00080000) != 0)) {
           locations_ = new java.util.ArrayList<com.producerflow.producer.v1.LocationInput>(locations_);
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00080000;
          }
       }
 
@@ -15189,7 +16073,7 @@ java.lang.String defaultValue) {
       public Builder clearLocations() {
         if (locationsBuilder_ == null) {
           locations_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00080000);
           onChanged();
         } else {
           locationsBuilder_.clear();
@@ -15294,7 +16178,7 @@ java.lang.String defaultValue) {
           locationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.producerflow.producer.v1.LocationInput, com.producerflow.producer.v1.LocationInput.Builder, com.producerflow.producer.v1.LocationInputOrBuilder>(
                   locations_,
-                  ((bitField0_ & 0x00040000) != 0),
+                  ((bitField0_ & 0x00080000) != 0),
                   getParentForChildren(),
                   isClean());
           locations_ = null;
@@ -15321,7 +16205,7 @@ java.lang.String defaultValue) {
         if (!metadataQuestions_.isMutable()) {
           metadataQuestions_ = metadataQuestions_.copy();
         }
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         onChanged();
         return metadataQuestions_;
       }
@@ -15405,7 +16289,7 @@ java.lang.String defaultValue) {
         return map.get(key);
       }
       @java.lang.Deprecated public Builder clearMetadataQuestions() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         internalGetMutableMetadataQuestions().getMutableMap()
             .clear();
         return this;
@@ -15432,7 +16316,7 @@ java.lang.String defaultValue) {
       @java.lang.Deprecated
       public java.util.Map<java.lang.String, java.lang.String>
           getMutableMetadataQuestions() {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         return internalGetMutableMetadataQuestions().getMutableMap();
       }
       /**
@@ -15451,7 +16335,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException("map value"); }
         internalGetMutableMetadataQuestions().getMutableMap()
             .put(key, value);
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         return this;
       }
       /**
@@ -15467,7 +16351,7 @@ java.lang.String defaultValue) {
           java.util.Map<java.lang.String, java.lang.String> values) {
         internalGetMutableMetadataQuestions().getMutableMap()
             .putAll(values);
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00100000;
         return this;
       }
 
@@ -15490,7 +16374,7 @@ java.lang.String defaultValue) {
         if (!tenantAdditionalQuestions_.isMutable()) {
           tenantAdditionalQuestions_ = tenantAdditionalQuestions_.copy();
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         onChanged();
         return tenantAdditionalQuestions_;
       }
@@ -15574,7 +16458,7 @@ java.lang.String defaultValue) {
         return map.get(key);
       }
       public Builder clearTenantAdditionalQuestions() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         internalGetMutableTenantAdditionalQuestions().getMutableMap()
             .clear();
         return this;
@@ -15601,7 +16485,7 @@ java.lang.String defaultValue) {
       @java.lang.Deprecated
       public java.util.Map<java.lang.String, java.lang.String>
           getMutableTenantAdditionalQuestions() {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         return internalGetMutableTenantAdditionalQuestions().getMutableMap();
       }
       /**
@@ -15620,7 +16504,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException("map value"); }
         internalGetMutableTenantAdditionalQuestions().getMutableMap()
             .put(key, value);
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         return this;
       }
       /**
@@ -15636,7 +16520,7 @@ java.lang.String defaultValue) {
           java.util.Map<java.lang.String, java.lang.String> values) {
         internalGetMutableTenantAdditionalQuestions().getMutableMap()
             .putAll(values);
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00200000;
         return this;
       }
 
@@ -15653,7 +16537,7 @@ java.lang.String defaultValue) {
        * @return Whether the ivansAccount field is set.
        */
       public boolean hasIvansAccount() {
-        return ((bitField0_ & 0x00200000) != 0);
+        return ((bitField0_ & 0x00400000) != 0);
       }
       /**
        * <pre>
@@ -15688,7 +16572,7 @@ java.lang.String defaultValue) {
         } else {
           ivansAccountBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00400000;
         onChanged();
         return this;
       }
@@ -15707,7 +16591,7 @@ java.lang.String defaultValue) {
         } else {
           ivansAccountBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00400000;
         onChanged();
         return this;
       }
@@ -15721,7 +16605,7 @@ java.lang.String defaultValue) {
        */
       public Builder mergeIvansAccount(com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount value) {
         if (ivansAccountBuilder_ == null) {
-          if (((bitField0_ & 0x00200000) != 0) &&
+          if (((bitField0_ & 0x00400000) != 0) &&
             ivansAccount_ != null &&
             ivansAccount_ != com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.getDefaultInstance()) {
             getIvansAccountBuilder().mergeFrom(value);
@@ -15732,7 +16616,7 @@ java.lang.String defaultValue) {
           ivansAccountBuilder_.mergeFrom(value);
         }
         if (ivansAccount_ != null) {
-          bitField0_ |= 0x00200000;
+          bitField0_ |= 0x00400000;
           onChanged();
         }
         return this;
@@ -15746,7 +16630,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];</code>
        */
       public Builder clearIvansAccount() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         ivansAccount_ = null;
         if (ivansAccountBuilder_ != null) {
           ivansAccountBuilder_.dispose();
@@ -15764,7 +16648,7 @@ java.lang.String defaultValue) {
        * <code>.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount ivans_account = 23 [json_name = "ivansAccount"];</code>
        */
       public com.producerflow.producer.v1.NewAgencyRequest.Agency.IvansAccount.Builder getIvansAccountBuilder() {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00400000;
         onChanged();
         return getIvansAccountFieldBuilder().getBuilder();
       }
@@ -15804,6 +16688,182 @@ java.lang.String defaultValue) {
           ivansAccount_ = null;
         }
         return ivansAccountBuilder_;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.String> externalMetadata_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+          internalGetExternalMetadata() {
+        if (externalMetadata_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              ExternalMetadataDefaultEntryHolder.defaultEntry);
+        }
+        return externalMetadata_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+          internalGetMutableExternalMetadata() {
+        if (externalMetadata_ == null) {
+          externalMetadata_ = com.google.protobuf.MapField.newMapField(
+              ExternalMetadataDefaultEntryHolder.defaultEntry);
+        }
+        if (!externalMetadata_.isMutable()) {
+          externalMetadata_ = externalMetadata_.copy();
+        }
+        bitField0_ |= 0x00800000;
+        onChanged();
+        return externalMetadata_;
+      }
+      public int getExternalMetadataCount() {
+        return internalGetExternalMetadata().getMap().size();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public boolean containsExternalMetadata(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        return internalGetExternalMetadata().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getExternalMetadataMap()} instead.
+       */
+      @java.lang.Override
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadata() {
+        return getExternalMetadataMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.util.Map<java.lang.String, java.lang.String> getExternalMetadataMap() {
+        return internalGetExternalMetadata().getMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public /* nullable */
+java.lang.String getExternalMetadataOrDefault(
+          java.lang.String key,
+          /* nullable */
+java.lang.String defaultValue) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      @java.lang.Override
+      public java.lang.String getExternalMetadataOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        java.util.Map<java.lang.String, java.lang.String> map =
+            internalGetExternalMetadata().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+      public Builder clearExternalMetadata() {
+        bitField0_ = (bitField0_ & ~0x00800000);
+        internalGetMutableExternalMetadata().getMutableMap()
+            .clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      public Builder removeExternalMetadata(
+          java.lang.String key) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        internalGetMutableExternalMetadata().getMutableMap()
+            .remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.String>
+          getMutableExternalMetadata() {
+        bitField0_ |= 0x00800000;
+        return internalGetMutableExternalMetadata().getMutableMap();
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      public Builder putExternalMetadata(
+          java.lang.String key,
+          java.lang.String value) {
+        if (key == null) { throw new NullPointerException("map key"); }
+        if (value == null) { throw new NullPointerException("map value"); }
+        internalGetMutableExternalMetadata().getMutableMap()
+            .put(key, value);
+        bitField0_ |= 0x00800000;
+        return this;
+      }
+      /**
+       * <pre>
+       * ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model,
+       * populated programmatically via API. Keys are trimmed before storage. At creation an absent or
+       * empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it).
+       * Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id.
+       * </pre>
+       *
+       * <code>map&lt;string, string&gt; external_metadata = 25 [json_name = "externalMetadata"];</code>
+       */
+      public Builder putAllExternalMetadata(
+          java.util.Map<java.lang.String, java.lang.String> values) {
+        internalGetMutableExternalMetadata().getMutableMap()
+            .putAll(values);
+        bitField0_ |= 0x00800000;
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.NewAgencyRequest.Agency)

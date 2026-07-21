@@ -426,6 +426,67 @@ java.lang.String defaultValue);
      * <code>.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount ivans_account = 9 [json_name = "ivansAccount"];</code>
      */
     com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccountOrBuilder getIvansAccountOrBuilder();
+
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    boolean hasOrganizationRelationship();
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    int getOrganizationRelationshipValue();
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship();
   }
   /**
    * <pre>
@@ -461,6 +522,7 @@ java.lang.String defaultValue);
       requestedAppointments_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       notes_ = "";
+      organizationRelationship_ = 0;
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -499,7 +561,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated boolean hasStreet();
@@ -510,7 +572,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -521,7 +583,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -747,7 +809,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return Whether the street field is set.
        */
       @java.lang.Override
@@ -761,7 +823,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return The street.
        */
       @java.lang.Override
@@ -784,7 +846,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2410
+       *     See producerflow/producer/v1/producer.proto;l=2448
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -1578,7 +1640,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @return Whether the street field is set.
          */
         @java.lang.Deprecated public boolean hasStreet() {
@@ -1591,7 +1653,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1613,7 +1675,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1636,7 +1698,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -1655,7 +1717,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -1671,7 +1733,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2410
+         *     See producerflow/producer/v1/producer.proto;l=2448
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -4190,6 +4252,76 @@ java.lang.String defaultValue) {
       return ivansAccount_ == null ? com.producerflow.producer.v1.UpdateAgencyRequest.Agency.IvansAccount.getDefaultInstance() : ivansAccount_;
     }
 
+    public static final int ORGANIZATION_RELATIONSHIP_FIELD_NUMBER = 10;
+    private int organizationRelationship_ = 0;
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    @java.lang.Override public boolean hasOrganizationRelationship() {
+      return ((bitField0_ & 0x00000080) != 0);
+    }
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    @java.lang.Override public int getOrganizationRelationshipValue() {
+      return organizationRelationship_;
+    }
+    /**
+     * <pre>
+     * Relationship the agency has with the organization it belongs to:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     *
+     * Update behavior:
+     * - If not provided (null): the current relationship is preserved unchanged
+     * - If provided: the relationship with the agency's current organization is
+     * switched to the requested value (no-op if it already matches)
+     *
+     * The agency must already belong to an organization; otherwise the request
+     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+     * agency to an organization or detach it from one.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+      com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+      return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4233,6 +4365,9 @@ java.lang.String defaultValue) {
           8);
       if (((bitField0_ & 0x00000040) != 0)) {
         output.writeMessage(9, getIvansAccount());
+      }
+      if (((bitField0_ & 0x00000080) != 0)) {
+        output.writeEnum(10, organizationRelationship_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4283,6 +4418,10 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00000040) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, getIvansAccount());
+      }
+      if (((bitField0_ & 0x00000080) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(10, organizationRelationship_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -4338,6 +4477,10 @@ java.lang.String defaultValue) {
         if (!getIvansAccount()
             .equals(other.getIvansAccount())) return false;
       }
+      if (hasOrganizationRelationship() != other.hasOrganizationRelationship()) return false;
+      if (hasOrganizationRelationship()) {
+        if (organizationRelationship_ != other.organizationRelationship_) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4384,6 +4527,10 @@ java.lang.String defaultValue) {
       if (hasIvansAccount()) {
         hash = (37 * hash) + IVANS_ACCOUNT_FIELD_NUMBER;
         hash = (53 * hash) + getIvansAccount().hashCode();
+      }
+      if (hasOrganizationRelationship()) {
+        hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
+        hash = (53 * hash) + organizationRelationship_;
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -4568,6 +4715,7 @@ java.lang.String defaultValue) {
           ivansAccountBuilder_.dispose();
           ivansAccountBuilder_ = null;
         }
+        organizationRelationship_ = 0;
         return this;
       }
 
@@ -4642,6 +4790,10 @@ java.lang.String defaultValue) {
               : ivansAccountBuilder_.build();
           to_bitField0_ |= 0x00000040;
         }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.organizationRelationship_ = organizationRelationship_;
+          to_bitField0_ |= 0x00000080;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -4700,6 +4852,9 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00000080;
         if (other.hasIvansAccount()) {
           mergeIvansAccount(other.getIvansAccount());
+        }
+        if (other.hasOrganizationRelationship()) {
+          setOrganizationRelationship(other.getOrganizationRelationship());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -4781,6 +4936,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00000100;
                 break;
               } // case 74
+              case 80: {
+                organizationRelationship_ = input.readEnum();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 80
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6066,6 +6226,156 @@ java.lang.String defaultValue) {
           ivansAccount_ = null;
         }
         return ivansAccountBuilder_;
+      }
+
+      private int organizationRelationship_ = 0;
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return Whether the organizationRelationship field is set.
+       */
+      @java.lang.Override public boolean hasOrganizationRelationship() {
+        return ((bitField0_ & 0x00000200) != 0);
+      }
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The enum numeric value on the wire for organizationRelationship.
+       */
+      @java.lang.Override public int getOrganizationRelationshipValue() {
+        return organizationRelationship_;
+      }
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The enum numeric value on the wire for organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationshipValue(int value) {
+        organizationRelationship_ = value;
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The organizationRelationship.
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+        com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+        return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationship(com.producerflow.producer.v1.AgencyOrganizationRelationship value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000200;
+        organizationRelationship_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency has with the organization it belongs to:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       *
+       * Update behavior:
+       * - If not provided (null): the current relationship is preserved unchanged
+       * - If provided: the relationship with the agency's current organization is
+       * switched to the requested value (no-op if it already matches)
+       *
+       * The agency must already belong to an organization; otherwise the request
+       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
+       * agency to an organization or detach it from one.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrganizationRelationship() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        organizationRelationship_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.UpdateAgencyRequest.Agency)

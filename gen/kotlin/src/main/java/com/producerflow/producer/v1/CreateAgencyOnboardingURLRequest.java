@@ -426,6 +426,46 @@ private static final long serialVersionUID = 0L;
         getSignatureTemplateIdBytes();
 
     /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    boolean hasOrganizationRelationship();
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    int getOrganizationRelationshipValue();
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship();
+
+    /**
      * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
      * @return Whether the principal field is set.
      */
@@ -479,6 +519,7 @@ private static final long serialVersionUID = 0L;
       npn_ = "";
       organizationId_ = "";
       signatureTemplateId_ = "";
+      organizationRelationship_ = 0;
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -3177,6 +3218,55 @@ private static final long serialVersionUID = 0L;
       }
     }
 
+    public static final int ORGANIZATION_RELATIONSHIP_FIELD_NUMBER = 17;
+    private int organizationRelationship_ = 0;
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationRelationship field is set.
+     */
+    @java.lang.Override public boolean hasOrganizationRelationship() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The enum numeric value on the wire for organizationRelationship.
+     */
+    @java.lang.Override public int getOrganizationRelationshipValue() {
+      return organizationRelationship_;
+    }
+    /**
+     * <pre>
+     * Relationship the agency will have with the organization once onboarded:
+     * - MAIN: The agency owns or manages the organization.
+     * - RELATED: The agency is part of the organization but not the primary owner.
+     * Only allowed when organization_id is set.
+     * If not provided, the agency is attached to the organization as RELATED.
+     * </pre>
+     *
+     * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+     * @return The organizationRelationship.
+     */
+    @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+      com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+      return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+
     public static final int PRINCIPAL_FIELD_NUMBER = 14;
     private com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal_;
     /**
@@ -3185,7 +3275,7 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Override
     public boolean hasPrincipal() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
      * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
@@ -3256,7 +3346,7 @@ private static final long serialVersionUID = 0L;
       if (((bitField0_ & 0x00000004) != 0)) {
         output.writeMessage(13, getInvoicingAddress());
       }
-      if (((bitField0_ & 0x00000010) != 0)) {
+      if (((bitField0_ & 0x00000020) != 0)) {
         output.writeMessage(14, getPrincipal());
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(organizationId_)) {
@@ -3264,6 +3354,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 16, signatureTemplateId_);
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        output.writeEnum(17, organizationRelationship_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3317,7 +3410,7 @@ private static final long serialVersionUID = 0L;
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(13, getInvoicingAddress());
       }
-      if (((bitField0_ & 0x00000010) != 0)) {
+      if (((bitField0_ & 0x00000020) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(14, getPrincipal());
       }
@@ -3326,6 +3419,10 @@ private static final long serialVersionUID = 0L;
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(16, signatureTemplateId_);
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(17, organizationRelationship_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3383,6 +3480,10 @@ private static final long serialVersionUID = 0L;
         if (!getSignatureTemplateId()
             .equals(other.getSignatureTemplateId())) return false;
       }
+      if (hasOrganizationRelationship() != other.hasOrganizationRelationship()) return false;
+      if (hasOrganizationRelationship()) {
+        if (organizationRelationship_ != other.organizationRelationship_) return false;
+      }
       if (hasPrincipal() != other.hasPrincipal()) return false;
       if (hasPrincipal()) {
         if (!getPrincipal()
@@ -3436,6 +3537,10 @@ private static final long serialVersionUID = 0L;
       if (hasSignatureTemplateId()) {
         hash = (37 * hash) + SIGNATURE_TEMPLATE_ID_FIELD_NUMBER;
         hash = (53 * hash) + getSignatureTemplateId().hashCode();
+      }
+      if (hasOrganizationRelationship()) {
+        hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
+        hash = (53 * hash) + organizationRelationship_;
       }
       if (hasPrincipal()) {
         hash = (37 * hash) + PRINCIPAL_FIELD_NUMBER;
@@ -3613,6 +3718,7 @@ private static final long serialVersionUID = 0L;
         }
         organizationId_ = "";
         signatureTemplateId_ = "";
+        organizationRelationship_ = 0;
         principal_ = null;
         if (principalBuilder_ != null) {
           principalBuilder_.dispose();
@@ -3708,10 +3814,14 @@ private static final long serialVersionUID = 0L;
           to_bitField0_ |= 0x00000008;
         }
         if (((from_bitField0_ & 0x00008000) != 0)) {
+          result.organizationRelationship_ = organizationRelationship_;
+          to_bitField0_ |= 0x00000010;
+        }
+        if (((from_bitField0_ & 0x00010000) != 0)) {
           result.principal_ = principalBuilder_ == null
               ? principal_
               : principalBuilder_.build();
-          to_bitField0_ |= 0x00000010;
+          to_bitField0_ |= 0x00000020;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -3794,6 +3904,9 @@ private static final long serialVersionUID = 0L;
           signatureTemplateId_ = other.signatureTemplateId_;
           bitField0_ |= 0x00004000;
           onChanged();
+        }
+        if (other.hasOrganizationRelationship()) {
+          setOrganizationRelationship(other.getOrganizationRelationship());
         }
         if (other.hasPrincipal()) {
           mergePrincipal(other.getPrincipal());
@@ -3899,7 +4012,7 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(
                     getPrincipalFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00008000;
+                bitField0_ |= 0x00010000;
                 break;
               } // case 114
               case 122: {
@@ -3912,6 +4025,11 @@ private static final long serialVersionUID = 0L;
                 bitField0_ |= 0x00004000;
                 break;
               } // case 130
+              case 136: {
+                organizationRelationship_ = input.readEnum();
+                bitField0_ |= 0x00008000;
+                break;
+              } // case 136
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -5593,6 +5711,114 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      private int organizationRelationship_ = 0;
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return Whether the organizationRelationship field is set.
+       */
+      @java.lang.Override public boolean hasOrganizationRelationship() {
+        return ((bitField0_ & 0x00008000) != 0);
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The enum numeric value on the wire for organizationRelationship.
+       */
+      @java.lang.Override public int getOrganizationRelationshipValue() {
+        return organizationRelationship_;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The enum numeric value on the wire for organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationshipValue(int value) {
+        organizationRelationship_ = value;
+        bitField0_ |= 0x00008000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return The organizationRelationship.
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
+        com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
+        return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @param value The organizationRelationship to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationRelationship(com.producerflow.producer.v1.AgencyOrganizationRelationship value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00008000;
+        organizationRelationship_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * </pre>
+       *
+       * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrganizationRelationship() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        organizationRelationship_ = 0;
+        onChanged();
+        return this;
+      }
+
       private com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal_;
       private com.google.protobuf.SingleFieldBuilder<
           com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal, com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.Builder, com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.PrincipalOrBuilder> principalBuilder_;
@@ -5601,7 +5827,7 @@ private static final long serialVersionUID = 0L;
        * @return Whether the principal field is set.
        */
       public boolean hasPrincipal() {
-        return ((bitField0_ & 0x00008000) != 0);
+        return ((bitField0_ & 0x00010000) != 0);
       }
       /**
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
@@ -5626,7 +5852,7 @@ private static final long serialVersionUID = 0L;
         } else {
           principalBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return this;
       }
@@ -5640,7 +5866,7 @@ private static final long serialVersionUID = 0L;
         } else {
           principalBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return this;
       }
@@ -5649,7 +5875,7 @@ private static final long serialVersionUID = 0L;
        */
       public Builder mergePrincipal(com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal value) {
         if (principalBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) != 0) &&
+          if (((bitField0_ & 0x00010000) != 0) &&
             principal_ != null &&
             principal_ != com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.getDefaultInstance()) {
             getPrincipalBuilder().mergeFrom(value);
@@ -5660,7 +5886,7 @@ private static final long serialVersionUID = 0L;
           principalBuilder_.mergeFrom(value);
         }
         if (principal_ != null) {
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
           onChanged();
         }
         return this;
@@ -5669,7 +5895,7 @@ private static final long serialVersionUID = 0L;
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
        */
       public Builder clearPrincipal() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         principal_ = null;
         if (principalBuilder_ != null) {
           principalBuilder_.dispose();
@@ -5682,7 +5908,7 @@ private static final long serialVersionUID = 0L;
        * <code>.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];</code>
        */
       public com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal.Builder getPrincipalBuilder() {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         onChanged();
         return getPrincipalFieldBuilder().getBuilder();
       }

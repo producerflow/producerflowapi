@@ -3712,6 +3712,7 @@ All fields within the Agency message are also optional.
 | `invoicing_address` | [Address](#address) |  | Invoicing address of the agency |
 | `organization_id` | [string](#string) |  | Organization ID of the agency. To get valid organization IDs, use the ListOrganizations RPC. |
 | `signature_template_id` | [string](#string) | optional | An optional signature template ID to be used to send the agency agreement through the configured e-signature provider (Docusign or Adobe Sign). The system will automatically detect the signature provider based on tenant configuration. |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | Relationship the agency will have with the organization once onboarded: - MAIN: The agency owns or manages the organization. - RELATED: The agency is part of the organization but not the primary owner. Only allowed when organization_id is set. If not provided, the agency is attached to the organization as RELATED. |
 | `principal` | [CreateAgencyOnboardingURLRequest.Agency.Principal](#createagencyonboardingurlrequestagencyprincipal) |  |  |
 
 #### CreateAgencyOnboardingURLRequest.Agency.Principal
@@ -4204,6 +4205,7 @@ Agency contains all information about the agency to be created
 | `producers` | [NewProducer](#newproducer) | repeated | List of producers associated with the agency |
 | `points_of_contact` | [NewAgencyRequest.Agency.PointOfContact](#newagencyrequestagencypointofcontact) | repeated |  |
 | `root_organization_id` | [string](#string) | optional | RootOrganizationID represents the ID of the root organization that the agency belongs to. An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network. We currently don't support multiple levels of organizations or agencies. Agencies are not always part of an organization, so this field is optional. To get valid organization IDs, use the ListOrganizations RPC. |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | Relationship the agency will have with the organization referenced by root_organization_id: - MAIN: The agency owns or manages the organization. - RELATED: The agency is part of the organization but not the primary owner. Only allowed when root_organization_id is set. If not provided, the agency is attached to the organization as RELATED. Supported for both entity types, including ENTITY_TYPE_SOLE_PROPRIETOR. |
 | `entity_type` | [EntityType](#entitytype) |  | EntityType represents the type of business entity for an agency. |
 | `fein` | [string](#string) | optional | FEIN represents the Federal Employer Identification Number of the agency. Required for ENTITY_TYPE_AGENCY Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR |
 | `mailing_address` | [Address](#address) |  | MailingAddress represents the mailing address of the agency. |
@@ -4214,6 +4216,7 @@ Agency contains all information about the agency to be created
 | `metadata_questions` | [NewAgencyRequest.Agency.MetadataQuestionsEntry](#newagencyrequestagencymetadataquestionsentry) | repeated | **Deprecated.** MetadataQuestions contains custom metadata questions and answers for the agency. The map key is the question identifier/text, and the value is the answer provided. This field is deprecated and will be removed in a future release. |
 | `tenant_additional_questions` | [NewAgencyRequest.Agency.TenantAdditionalQuestionsEntry](#newagencyrequestagencytenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 | `ivans_account` | [NewAgencyRequest.Agency.IvansAccount](#newagencyrequestagencyivansaccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS. |
+| `external_metadata` | [NewAgencyRequest.Agency.ExternalMetadataEntry](#newagencyrequestagencyexternalmetadataentry) | repeated | ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model, populated programmatically via API. Keys are trimmed before storage. At creation an absent or empty map leaves the metadata unset (unlike UpdateAgency, where an empty map clears it). Distinct from tenant_additional_questions and from tenant_agency_id/tenant_id. |
 
 #### NewAgencyRequest.Agency.BankAccount
 
@@ -4257,6 +4260,15 @@ EOInfo contains Errors & Omissions insurance information
 | `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit) |
 | `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will become effective |
 | `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy |
+
+#### NewAgencyRequest.Agency.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### NewAgencyRequest.Agency.IvansAccount
 
@@ -4310,6 +4322,16 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `sync_with_nipr` | [bool](#bool) | optional | Optional. Controls whether the principal should be validated and synced with NIPR. If set to false, the principal's NPN will not be validated against NIPR and the principal will not be synced with NIPR. Defaults to true if not specified. |
 | `tenant_additional_questions` | [NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry](#newagencyrequestagencyprincipaltenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 | `mailing_address` | [Address](#address) |  | The mailing address of the principal. This is where correspondence for the principal will be sent. |
+| `external_metadata` | [NewAgencyRequest.Agency.Principal.ExternalMetadataEntry](#newagencyrequestagencyprincipalexternalmetadataentry) | repeated | ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model, populated programmatically via API. Keys are trimmed before storage. At creation an absent or empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it). Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. When the principal is unlicensed (no NPN), the metadata is stored on the principal Contact. |
+
+#### NewAgencyRequest.Agency.Principal.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### NewAgencyRequest.Agency.Principal.TenantAdditionalQuestionsEntry
 
@@ -4424,6 +4446,7 @@ appointment, and regulatory information from NIPR.
 | `metadata_questions` | [NewProducer.MetadataQuestionsEntry](#newproducermetadataquestionsentry) | repeated | **Deprecated.** Custom metadata questions and answers for the producer.  Optional field for storing tenant-specific information collected during producer onboarding. This allows tenants to capture additional data points that are important for their business processes but not part of the standard producer fields.  Structure: - Key: Question identifier or the question text itself - Value: The producer's answer or response  Common Use Cases: - Compliance questionnaires (e.g., "Have you ever had a license revoked?") - Business preferences (e.g., "Preferred carrier partners") - Specializations (e.g., "Areas of expertise") - Internal classifications (e.g., "Producer tier", "Region")  Note: This data is stored but not validated by ProducerFlow. Ensure your application handles any necessary validation of the responses. Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release. |
 | `tenant_additional_questions` | [NewProducer.TenantAdditionalQuestionsEntry](#newproducertenantadditionalquestionsentry) | repeated | tenant_additional_questions contains tenant-specific custom questions configured by Producerflow and their corresponding responses. Keys are question identifiers or text, values are the answers provided. |
 | `role` | [string](#string) | optional | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Optional. When set, the value must match one of the role labels configured for the tenant; otherwise the request is rejected with INVALID_ARGUMENT.  Tenants that have not configured any roles should leave this empty. |
+| `external_metadata` | [NewProducer.ExternalMetadataEntry](#newproducerexternalmetadataentry) | repeated | ExternalMetadata is custom key-value metadata the tenant stores in Producerflow's data model, populated programmatically via API. Keys are trimmed before storage. At creation an absent or empty map leaves the metadata unset (unlike UpdateProducer, where an empty map clears it). Distinct from tenant_additional_questions and from tenant_id/tenant_agency_id. |
 
 #### NewProducer.Address
 
@@ -4442,6 +4465,15 @@ This address is used for:
 | `zip` | [string](#string) |  | Zip code of the producer's mailing address. Supports both 5-digit (12345) and ZIP+4 (12345-6789) formats. |
 | `address_line_2` | [string](#string) | optional | Optional second line of address (apt, suite, unit, etc.) |
 | `address_line_1` | [string](#string) |  | Primary address line of the producer. For backward compatibility, either street or address_line_1 can be used. |
+
+#### NewProducer.ExternalMetadataEntry
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `key` | [string](#string) |  |  |
+| `value` | [string](#string) |  |  |
 
 #### NewProducer.MetadataQuestionsEntry
 
@@ -5084,6 +5116,7 @@ All fields are optional, allowing partial updates.
 | `physical_address` | [UpdateAgencyRequest.Agency.Address](#updateagencyrequestagencyaddress) | optional | Physical address of the agency. |
 | `external_metadata` | [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#updateagencyrequestagencyexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
 | `ivans_account` | [UpdateAgencyRequest.Agency.IvansAccount](#updateagencyrequestagencyivansaccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS.  Update behavior: - If not provided (null): existing IVANS account is preserved unchanged - If provided with all fields: IVANS account is created or completely replaced - Partial updates are supported: only specified fields will be updated |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | Relationship the agency has with the organization it belongs to: - MAIN: The agency owns or manages the organization. - RELATED: The agency is part of the organization but not the primary owner.  Update behavior: - If not provided (null): the current relationship is preserved unchanged - If provided: the relationship with the agency's current organization is   switched to the requested value (no-op if it already matches)  The agency must already belong to an organization; otherwise the request fails with FAILED_PRECONDITION. This field cannot be used to attach an agency to an organization or detach it from one. |
 
 #### UpdateAgencyRequest.Agency.Address
 

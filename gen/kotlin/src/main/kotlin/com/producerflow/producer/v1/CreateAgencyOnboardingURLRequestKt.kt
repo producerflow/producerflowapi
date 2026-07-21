@@ -560,6 +560,61 @@ public object CreateAgencyOnboardingURLRequestKt {
       }
 
       /**
+       * ```
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       */
+      public var organizationRelationship: com.producerflow.producer.v1.AgencyOrganizationRelationship
+        @JvmName("getOrganizationRelationship")
+        get() = _builder.organizationRelationship
+        @JvmName("setOrganizationRelationship")
+        set(value) {
+          _builder.organizationRelationship = value
+        }
+      public var organizationRelationshipValue: kotlin.Int
+        @JvmName("getOrganizationRelationshipValue")
+        get() = _builder.organizationRelationshipValue
+        @JvmName("setOrganizationRelationshipValue")
+        set(value) {
+          _builder.organizationRelationshipValue = value
+        }
+      /**
+       * ```
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       */
+      public fun clearOrganizationRelationship() {
+        _builder.clearOrganizationRelationship()
+      }
+      /**
+       * ```
+       * Relationship the agency will have with the organization once onboarded:
+       * - MAIN: The agency owns or manages the organization.
+       * - RELATED: The agency is part of the organization but not the primary owner.
+       * Only allowed when organization_id is set.
+       * If not provided, the agency is attached to the organization as RELATED.
+       * ```
+       *
+       * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 17 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
+       * @return Whether the organizationRelationship field is set.
+       */
+      public fun hasOrganizationRelationship(): kotlin.Boolean {
+        return _builder.hasOrganizationRelationship()
+      }
+
+      /**
        * `.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal principal = 14 [json_name = "principal"];`
        */
       public var principal: com.producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.Principal
