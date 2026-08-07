@@ -31,7 +31,8 @@
     "business_phone": "415-555-0124",
     "first_name": "John",
     "last_name": "Doe",
-    "middle_name": "Robert"
+    "middle_name": "Robert",
+    "suffix": "Jr."
   },
   "producer_nipr_appointments": [
     {

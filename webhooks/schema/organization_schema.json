@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrganizationChange",
+  "description": "Represents a change in an organization within Producerflow",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for the change"
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Type of event that occurred (e.g., 'organization.created', 'organization.updated')"
+    },
+    "origin": {
+      "type": "string",
+      "description": "Source of the change",
+      "enum": ["ProducerFlowAPI", "ProducerFlowPortal", "NIPR"]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Time when the change occurred",
+      "format": "date-time"
+    },
+    "organization_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Always present. Unique identifier for the organization"
+    },
+    "name": {
+      "type": "string",
+      "description": "Always present. Display name of the organization"
+    },
+    "external_id": {
+      "type": "string",
+      "description": "Always present if filled in by tenant. External identifier for the organization"
+    },
+    "email": {
+      "type": "string",
+      "description": "Always present if filled in by tenant. Contact email address of the organization"
+    },
+    "is_wholesaler": {
+      "type": "boolean",
+      "description": "Present when true. Whether the organization is a wholesaler"
+    }
+  },
+  "required": ["id", "event_type", "origin", "timestamp", "organization_id"],
+  "additionalProperties": false
+}

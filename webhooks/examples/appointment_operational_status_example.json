@@ -12,6 +12,7 @@
   "producer_npn": "98765432",
   "appointment_data": {
     "carrier": "progressive",
+    "cocode": "24260",
     "state": "ca",
     "status": "appointed",
     "license_number": "ca98765",

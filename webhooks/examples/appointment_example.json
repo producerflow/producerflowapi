@@ -12,6 +12,7 @@
   "producer_npn": "12345678",
   "appointment_data": {
     "carrier": "State Farm",
+    "cocode": "25178",
     "state": "TX",
     "status": "appointed",
     "license_number": "TX12345",

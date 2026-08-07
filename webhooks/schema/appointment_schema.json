@@ -61,6 +61,10 @@
           "type": "string",
           "description": "Insurance carrier name"
         },
+        "cocode": {
+          "type": "string",
+          "description": "NAIC company code of the carrier"
+        },
         "state": {
           "type": "string",
           "description": "State where the appointment is valid"

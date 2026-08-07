@@ -10,6 +10,7 @@ ProducerFlow webhooks deliver real-time notifications for changes to:
 - **Producers** - Individual producer/agent information and licensing data
 - **Contacts** - Contact information for agency personnel
 - **Appointments** - Producer-carrier appointment relationships and operational status
+- **Organizations** - Distribution partners / aggregators that group agencies
 
 Each webhook payload contains structured data that follows JSON Schema specifications for validation and documentation purposes.
 
@@ -112,13 +113,31 @@ Triggered when producer-carrier appointment relationships are created, updated, 
 
 **Key Data Included:**
 
-- Appointment details (carrier, state, status, license number)
+- Appointment details (carrier, cocode, state, status, license number)
 - Effective and termination dates
 - Associated producer and agency information
 - National Producer Numbers (NPN) for both agency and producer
 - Operational status tracking (`active`, `at_risk`)
 - Risk assessment reasons (license expiration, E&O insurance status)
 - Appointment termination reasons when applicable
+
+### Organization Webhooks
+
+Triggered when an organization is created or updated. Organization events are only delivered to tenants that have the feature enabled.
+
+**Schema**: [organization_schema.json](./schema/organization_schema.json)
+**Example Payload**: [organization_example.json](./examples/organization_example.json)
+
+**Event Types:**
+
+- `organization.created` - New organization record created
+- `organization.updated` - Existing organization record modified
+
+**Key Data Included:**
+
+- Organization display name and contact email
+- External identifier for the organization (if set by the tenant)
+- Whether the organization is a wholesaler
 
 ## Common Payload Structure
 
@@ -150,6 +169,7 @@ Additionally, each webhook type has its own required identifier field:
 - **Producer webhooks**: `producer_id` (always present)
 - **Contact webhooks**: `contact_id` (always present)
 - **Appointment webhooks**: `appointment_id` (always present)
+- **Organization webhooks**: `organization_id` (always present)
 
 ### Event Types
 
@@ -167,6 +187,8 @@ The `event_type` field follows a consistent pattern: `{object}.{action}`. Here a
 | `contact.deleted` | A contact record was removed |
 | `appointment.created` | A new appointment relationship was established |
 | `appointment.updated` | An existing appointment was modified or status changed |
+| `organization.created` | A new organization record was created |
+| `organization.updated` | An existing organization record was modified |
 
 ## Data Origins
 
@@ -192,6 +214,7 @@ Each webhook type has specific required fields:
 - **Producer**: `id`, `timestamp`, `producer_id`
 - **Contact**: `id`, `timestamp`, `contact_id`
 - **Appointment**: `id`, `timestamp`, `appointment_id`
+- **Organization**: `id`, `timestamp`, `organization_id`
 
 ## Integration Tips
 
@@ -212,5 +235,17 @@ Many webhooks include NIPR (National Insurance Producer Registry) data, which pr
 - License expiration and renewal dates
 
 This data is critical for compliance and regulatory reporting in the insurance industry.
+
+### Completed NIPR syncs
+
+When a NIPR sync finishes, the entity receives a single `agency.updated` or
+`producer.updated` event that carries the synced NIPR data together with
+`nipr_sync_status: "active"`. The data and the finished status always arrive in
+the same message, so there is nothing to correlate: an event carrying NIPR data
+is never stamped `pending`, and the completion is never announced separately
+with an empty payload.
+
+A sync that does not complete reports its outcome the usual way, as an update
+carrying only the new `nipr_sync_status` (for example `failing`).
 
 For additional API documentation and integration guides, please refer to the main [API documentation](../wiki/Webhooks.md.md).

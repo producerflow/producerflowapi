@@ -1,0 +1,11 @@
+{
+  "id": "chg_123456789",
+  "event_type": "organization.created",
+  "origin": "ProducerFlowAPI",
+  "timestamp": "2024-01-20T15:30:45Z",
+  "organization_id": "org_456789123",
+  "name": "Acme Distribution Partners",
+  "external_id": "ext_789123456",
+  "email": "ops@acmedistribution.com",
+  "is_wholesaler": true
+}

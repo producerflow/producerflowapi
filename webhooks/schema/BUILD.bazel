@@ -2,5 +2,6 @@ exports_files([
     "agency_schema.json",
     "appointment_schema.json",
     "contact_schema.json",
+    "organization_schema.json",
     "producer_schema.json",
 ])
