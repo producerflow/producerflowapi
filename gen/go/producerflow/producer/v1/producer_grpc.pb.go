@@ -241,7 +241,12 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
 	//     NPN not found in NIPR
-	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant
+	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+	//     error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+	//     the existing agency (for principal email conflicts, the agency of the
+	//     existing producer), so you can link the existing record on your side
+	//     without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+	//     details on each conflict and how to decode it.
 	NewAgency(ctx context.Context, in *NewAgencyRequest, opts ...grpc.CallOption) (*NewAgencyResponse, error)
 	// ListAgencies retrieves a paginated list of agencies associated with the tenant.
 	//
@@ -792,6 +797,8 @@ type ProducerServiceClient interface {
 	// - Mailing address
 	// - NPN (if applicable)
 	// - Creation timestamp
+	// - The agency the contact belongs to, including its external_id
+	// - The organization that agency belongs to, when it belongs to one
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -813,7 +820,10 @@ type ProducerServiceClient interface {
 	// - By contact ID (UUID)
 	// - By external ID (tenant-defined identifier set via SetExternalID)
 	//
-	// The response includes the contact's external_id and external_metadata.
+	// The response includes the contact's external_id and external_metadata, the
+	// agency it belongs to (with the agency's external_id), and the organization
+	// that agency belongs to when it belongs to one. This resolves a contact to
+	// its partner/source organization in a single call.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2043,7 +2053,12 @@ type ProducerServiceServer interface {
 	// Common Error Codes:
 	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
 	//     NPN not found in NIPR
-	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant
+	//   - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+	//     error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+	//     the existing agency (for principal email conflicts, the agency of the
+	//     existing producer), so you can link the existing record on your side
+	//     without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+	//     details on each conflict and how to decode it.
 	NewAgency(context.Context, *NewAgencyRequest) (*NewAgencyResponse, error)
 	// ListAgencies retrieves a paginated list of agencies associated with the tenant.
 	//
@@ -2594,6 +2609,8 @@ type ProducerServiceServer interface {
 	// - Mailing address
 	// - NPN (if applicable)
 	// - Creation timestamp
+	// - The agency the contact belongs to, including its external_id
+	// - The organization that agency belongs to, when it belongs to one
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2615,7 +2632,10 @@ type ProducerServiceServer interface {
 	// - By contact ID (UUID)
 	// - By external ID (tenant-defined identifier set via SetExternalID)
 	//
-	// The response includes the contact's external_id and external_metadata.
+	// The response includes the contact's external_id and external_metadata, the
+	// agency it belongs to (with the agency's external_id), and the organization
+	// that agency belongs to when it belongs to one. This resolves a contact to
+	// its partner/source organization in a single call.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):

@@ -490,15 +490,216 @@ public object ContactKt {
     public fun clearExternalId() {
       _builder.clearExternalId()
     }
+
+    /**
+     * ```
+     * Basic information about the agency this contact is associated with.
+     * ```
+     *
+     * `.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];`
+     */
+    public var agency: com.producerflow.producer.v1.Contact.Agency
+      @JvmName("getAgency")
+      get() = _builder.agency
+      @JvmName("setAgency")
+      set(value) {
+        _builder.agency = value
+      }
+    /**
+     * ```
+     * Basic information about the agency this contact is associated with.
+     * ```
+     *
+     * `.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];`
+     */
+    public fun clearAgency() {
+      _builder.clearAgency()
+    }
+    /**
+     * ```
+     * Basic information about the agency this contact is associated with.
+     * ```
+     *
+     * `.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];`
+     * @return Whether the agency field is set.
+     */
+    public fun hasAgency(): kotlin.Boolean {
+      return _builder.hasAgency()
+    }
+    public val ContactKt.Dsl.agencyOrNull: com.producerflow.producer.v1.Contact.Agency?
+      get() = _builder.agencyOrNull
+
+    /**
+     * ```
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];`
+     */
+    public var organization: com.producerflow.producer.v1.Organization
+      @JvmName("getOrganization")
+      get() = _builder.organization
+      @JvmName("setOrganization")
+      set(value) {
+        _builder.organization = value
+      }
+    /**
+     * ```
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];`
+     */
+    public fun clearOrganization() {
+      _builder.clearOrganization()
+    }
+    /**
+     * ```
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * ```
+     *
+     * `.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];`
+     * @return Whether the organization field is set.
+     */
+    public fun hasOrganization(): kotlin.Boolean {
+      return _builder.hasOrganization()
+    }
+    public val ContactKt.Dsl.organizationOrNull: com.producerflow.producer.v1.Organization?
+      get() = _builder.organizationOrNull
+  }
+  @kotlin.jvm.JvmName("-initializeagency")
+  public inline fun agency(block: com.producerflow.producer.v1.ContactKt.AgencyKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Contact.Agency =
+    com.producerflow.producer.v1.ContactKt.AgencyKt.Dsl._create(com.producerflow.producer.v1.Contact.Agency.newBuilder()).apply { block() }._build()
+  /**
+   * ```
+   * Agency contains basic information about the agency this contact is associated with.
+   * Use GetAgency to read the rest of the agency's details.
+   * ```
+   *
+   * Protobuf type `producerflow.producer.v1.Contact.Agency`
+   */
+  public object AgencyKt {
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    @com.google.protobuf.kotlin.ProtoDslMarker
+    public class Dsl private constructor(
+      private val _builder: com.producerflow.producer.v1.Contact.Agency.Builder
+    ) {
+      public companion object {
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _create(builder: com.producerflow.producer.v1.Contact.Agency.Builder): Dsl = Dsl(builder)
+      }
+
+      @kotlin.jvm.JvmSynthetic
+      @kotlin.PublishedApi
+      internal fun _build(): com.producerflow.producer.v1.Contact.Agency = _builder.build()
+
+      /**
+       * ```
+       * Unique identifier for the associated agency.
+       * ```
+       *
+       * `string agency_id = 1 [json_name = "agencyId"];`
+       */
+      public var agencyId: kotlin.String
+        @JvmName("getAgencyId")
+        get() = _builder.agencyId
+        @JvmName("setAgencyId")
+        set(value) {
+          _builder.agencyId = value
+        }
+      /**
+       * ```
+       * Unique identifier for the associated agency.
+       * ```
+       *
+       * `string agency_id = 1 [json_name = "agencyId"];`
+       */
+      public fun clearAgencyId() {
+        _builder.clearAgencyId()
+      }
+
+      /**
+       * ```
+       * Name of the associated agency.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public var name: kotlin.String
+        @JvmName("getName")
+        get() = _builder.name
+        @JvmName("setName")
+        set(value) {
+          _builder.name = value
+        }
+      /**
+       * ```
+       * Name of the associated agency.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public fun clearName() {
+        _builder.clearName()
+      }
+
+      /**
+       * ```
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * ```
+       *
+       * `string external_id = 3 [json_name = "externalId"];`
+       */
+      public var externalId: kotlin.String
+        @JvmName("getExternalId")
+        get() = _builder.externalId
+        @JvmName("setExternalId")
+        set(value) {
+          _builder.externalId = value
+        }
+      /**
+       * ```
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * ```
+       *
+       * `string external_id = 3 [json_name = "externalId"];`
+       */
+      public fun clearExternalId() {
+        _builder.clearExternalId()
+      }
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.producer.v1.Contact.copy(block: `com.producerflow.producer.v1`.ContactKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Contact =
   `com.producerflow.producer.v1`.ContactKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.Contact.Agency.copy(block: `com.producerflow.producer.v1`.ContactKt.AgencyKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.Contact.Agency =
+  `com.producerflow.producer.v1`.ContactKt.AgencyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
 public val com.producerflow.producer.v1.ContactOrBuilder.addressOrNull: com.producerflow.producer.v1.Address?
   get() = if (hasAddress()) getAddress() else null
 
 public val com.producerflow.producer.v1.ContactOrBuilder.createdAtOrNull: com.google.protobuf.Timestamp?
   get() = if (hasCreatedAt()) getCreatedAt() else null
+
+public val com.producerflow.producer.v1.ContactOrBuilder.agencyOrNull: com.producerflow.producer.v1.Contact.Agency?
+  get() = if (hasAgency()) getAgency() else null
+
+public val com.producerflow.producer.v1.ContactOrBuilder.organizationOrNull: com.producerflow.producer.v1.Organization?
+  get() = if (hasOrganization()) getOrganization() else null
 

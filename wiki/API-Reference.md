@@ -637,7 +637,12 @@ IDs of the created agency, principal, optional producers, and locations (if prov
 Common Error Codes:
 - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
   NPN not found in NIPR
-- ALREADY_EXISTS: Email or NPN already registered in your tenant
+- ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+  error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+  the existing agency (for principal email conflicts, the agency of the
+  existing producer), so you can link the existing record on your side
+  without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+  details on each conflict and how to decode it.
 
 #### Request: `NewAgencyRequest`
 
@@ -1725,6 +1730,8 @@ The response includes complete contact information:
 - Mailing address
 - NPN (if applicable)
 - Creation timestamp
+- The agency the contact belongs to, including its external_id
+- The organization that agency belongs to, when it belongs to one
 
 Validation Rules:
 Proto validation (format checks):
@@ -1770,7 +1777,10 @@ Supports two lookup methods:
 - By contact ID (UUID)
 - By external ID (tenant-defined identifier set via SetExternalID)
 
-The response includes the contact's external_id and external_metadata.
+The response includes the contact's external_id and external_metadata, the
+agency it belongs to (with the agency's external_id), and the organization
+that agency belongs to when it belongs to one. This resolves a contact to
+its partner/source organization in a single call.
 
 Validation Rules:
 Proto validation (format checks):
@@ -3601,6 +3611,37 @@ The principal is usually the CEO or CFO of the agency.nThe principal is also kno
 | `key` | [string](#string) |  |  |
 | `value` | [string](#string) |  |  |
 
+#### AgencyAlreadyExistsErrorDetail
+
+AgencyAlreadyExistsErrorDetail identifies the agency that already exists
+when a NewAgency call fails with ALREADY_EXISTS, so you can link the
+existing record on your side — store its agency ID, assign your own
+external ID with SetExternalID, or check which organization it belongs
+to — without searching for it in a follow-up call.
+
+Which agency it identifies:
+- Agency email or agency NPN conflict: the existing agency that holds the
+  email or NPN (for sole-proprietor requests, the email checked is the
+  principal's).
+- Principal email conflict: the agency of the existing producer that
+  already uses the email.
+- Sole-proprietor NPN conflict: the existing sole-proprietor agency
+  registered under the principal's NPN.
+
+How to decode it:
+The detail travels in the error's details list as a google.protobuf.Any
+with the message type producerflow.producer.v1.AgencyAlreadyExistsErrorDetail.
+Connect and gRPC clients expose it through their standard error-details
+APIs. The detail is provided on a best-effort basis, so handle its absence
+gracefully.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | Unique identifier (UUID format) of the existing agency. Use it with GetAgency, or any other API operation that references an agency, to retrieve the full record. |
+| `external_id` | [string](#string) |  | Your system's identifier for the existing agency, as provided at creation (tenant_agency_id) or assigned later with SetExternalID. Empty when no external ID has been assigned yet. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the existing agency. Empty for sole-proprietor agencies, whose NPN lives on the principal. |
+| `organization_id` | [string](#string) |  | Unique identifier of the organization the existing agency belongs to, usable with GetOrganization. Empty when the agency is not part of any organization. |
+
 #### AgencySummary
 
 AgencySummary provides essential agency information for list views and quick
@@ -3666,6 +3707,19 @@ Contacts are non-producer individuals linked to the agency.
 | `role_type` | [ContactRole](#contactrole) |  | The role type of the contact as an enum. This field replaces the deprecated string-based 'role' field. |
 | `external_metadata` | [Contact.ExternalMetadataEntry](#contactexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic, reporting, or integration needs. The map key is the metadata field name, and the value is the associated data. |
 | `external_id` | [string](#string) |  | Tenant-provided external identifier for this contact. This ID allows tenants to map Producerflow contacts back to their own system's identifiers. Set via SetExternalID. Empty string if the tenant has not assigned one. |
+| `agency` | [Contact.Agency](#contactagency) |  | Basic information about the agency this contact is associated with. |
+| `organization` | [Organization](#organization) |  | Organization that the contact's agency belongs to. This field contains the full organization details including id, name, and contact information. Unset when the contact's agency does not belong to any organization. |
+
+#### Contact.Agency
+
+Agency contains basic information about the agency this contact is associated with.
+Use GetAgency to read the rest of the agency's details.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `agency_id` | [string](#string) |  | Unique identifier for the associated agency. |
+| `name` | [string](#string) |  | Name of the associated agency. |
+| `external_id` | [string](#string) |  | Tenant-provided external identifier for the associated agency. This ID allows tenants to map Producerflow agencies back to their own system's identifiers without an extra GetAgency call. Set during agency creation/onboarding via the public API. |
 
 #### Contact.ExternalMetadataEntry
 

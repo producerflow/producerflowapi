@@ -139,7 +139,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4262
+   *     See producerflow/producer/v1/producer.proto;l=4314
    * @return The role.
    */
   @java.lang.Deprecated java.lang.String getRole();
@@ -151,7 +151,7 @@ public interface ContactOrBuilder extends
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4262
+   *     See producerflow/producer/v1/producer.proto;l=4314
    * @return The bytes for role.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -356,4 +356,64 @@ java.lang.String defaultValue);
    */
   com.google.protobuf.ByteString
       getExternalIdBytes();
+
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   * @return Whether the agency field is set.
+   */
+  boolean hasAgency();
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   * @return The agency.
+   */
+  com.producerflow.producer.v1.Contact.Agency getAgency();
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   */
+  com.producerflow.producer.v1.Contact.AgencyOrBuilder getAgencyOrBuilder();
+
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   * @return Whether the organization field is set.
+   */
+  boolean hasOrganization();
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   * @return The organization.
+   */
+  com.producerflow.producer.v1.Organization getOrganization();
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   */
+  com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder();
 }

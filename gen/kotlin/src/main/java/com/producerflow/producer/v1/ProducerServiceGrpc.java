@@ -1466,7 +1466,12 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
      *   NPN not found in NIPR
-     * - ALREADY_EXISTS: Email or NPN already registered in your tenant
+     * - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+     *   error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+     *   the existing agency (for principal email conflicts, the agency of the
+     *   existing producer), so you can link the existing record on your side
+     *   without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+     *   details on each conflict and how to decode it.
      * </pre>
      */
     default void newAgency(com.producerflow.producer.v1.NewAgencyRequest request,
@@ -2061,6 +2066,8 @@ public final class ProducerServiceGrpc {
      * - Mailing address
      * - NPN (if applicable)
      * - Creation timestamp
+     * - The agency the contact belongs to, including its external_id
+     * - The organization that agency belongs to, when it belongs to one
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -2084,7 +2091,10 @@ public final class ProducerServiceGrpc {
      * Supports two lookup methods:
      * - By contact ID (UUID)
      * - By external ID (tenant-defined identifier set via SetExternalID)
-     * The response includes the contact's external_id and external_metadata.
+     * The response includes the contact's external_id and external_metadata, the
+     * agency it belongs to (with the agency's external_id), and the organization
+     * that agency belongs to when it belongs to one. This resolves a contact to
+     * its partner/source organization in a single call.
      * Validation Rules:
      * Proto validation (format checks):
      * Exactly one lookup method must be provided (oneof required):
@@ -2981,7 +2991,12 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
      *   NPN not found in NIPR
-     * - ALREADY_EXISTS: Email or NPN already registered in your tenant
+     * - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+     *   error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+     *   the existing agency (for principal email conflicts, the agency of the
+     *   existing producer), so you can link the existing record on your side
+     *   without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+     *   details on each conflict and how to decode it.
      * </pre>
      */
     public void newAgency(com.producerflow.producer.v1.NewAgencyRequest request,
@@ -3593,6 +3608,8 @@ public final class ProducerServiceGrpc {
      * - Mailing address
      * - NPN (if applicable)
      * - Creation timestamp
+     * - The agency the contact belongs to, including its external_id
+     * - The organization that agency belongs to, when it belongs to one
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -3617,7 +3634,10 @@ public final class ProducerServiceGrpc {
      * Supports two lookup methods:
      * - By contact ID (UUID)
      * - By external ID (tenant-defined identifier set via SetExternalID)
-     * The response includes the contact's external_id and external_metadata.
+     * The response includes the contact's external_id and external_metadata, the
+     * agency it belongs to (with the agency's external_id), and the organization
+     * that agency belongs to when it belongs to one. This resolves a contact to
+     * its partner/source organization in a single call.
      * Validation Rules:
      * Proto validation (format checks):
      * Exactly one lookup method must be provided (oneof required):
@@ -4500,7 +4520,12 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
      *   NPN not found in NIPR
-     * - ALREADY_EXISTS: Email or NPN already registered in your tenant
+     * - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+     *   error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+     *   the existing agency (for principal email conflicts, the agency of the
+     *   existing producer), so you can link the existing record on your side
+     *   without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+     *   details on each conflict and how to decode it.
      * </pre>
      */
     public com.producerflow.producer.v1.NewAgencyResponse newAgency(com.producerflow.producer.v1.NewAgencyRequest request) {
@@ -5095,6 +5120,8 @@ public final class ProducerServiceGrpc {
      * - Mailing address
      * - NPN (if applicable)
      * - Creation timestamp
+     * - The agency the contact belongs to, including its external_id
+     * - The organization that agency belongs to, when it belongs to one
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -5118,7 +5145,10 @@ public final class ProducerServiceGrpc {
      * Supports two lookup methods:
      * - By contact ID (UUID)
      * - By external ID (tenant-defined identifier set via SetExternalID)
-     * The response includes the contact's external_id and external_metadata.
+     * The response includes the contact's external_id and external_metadata, the
+     * agency it belongs to (with the agency's external_id), and the organization
+     * that agency belongs to when it belongs to one. This resolves a contact to
+     * its partner/source organization in a single call.
      * Validation Rules:
      * Proto validation (format checks):
      * Exactly one lookup method must be provided (oneof required):
@@ -5984,7 +6014,12 @@ public final class ProducerServiceGrpc {
      * Common Error Codes:
      * - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
      *   NPN not found in NIPR
-     * - ALREADY_EXISTS: Email or NPN already registered in your tenant
+     * - ALREADY_EXISTS: Email or NPN already registered in your tenant. The
+     *   error includes an AgencyAlreadyExistsErrorDetail with the identifiers of
+     *   the existing agency (for principal email conflicts, the agency of the
+     *   existing producer), so you can link the existing record on your side
+     *   without a follow-up lookup. See AgencyAlreadyExistsErrorDetail for
+     *   details on each conflict and how to decode it.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.NewAgencyResponse> newAgency(
@@ -6596,6 +6631,8 @@ public final class ProducerServiceGrpc {
      * - Mailing address
      * - NPN (if applicable)
      * - Creation timestamp
+     * - The agency the contact belongs to, including its external_id
+     * - The organization that agency belongs to, when it belongs to one
      * Validation Rules:
      * Proto validation (format checks):
      * - agency_id: Required, must be a valid UUID format
@@ -6620,7 +6657,10 @@ public final class ProducerServiceGrpc {
      * Supports two lookup methods:
      * - By contact ID (UUID)
      * - By external ID (tenant-defined identifier set via SetExternalID)
-     * The response includes the contact's external_id and external_metadata.
+     * The response includes the contact's external_id and external_metadata, the
+     * agency it belongs to (with the agency's external_id), and the organization
+     * that agency belongs to when it belongs to one. This resolves a contact to
+     * its partner/source organization in a single call.
      * Validation Rules:
      * Proto validation (format checks):
      * Exactly one lookup method must be provided (oneof required):

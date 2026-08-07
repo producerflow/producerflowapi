@@ -69,6 +69,957 @@ private static final long serialVersionUID = 0L;
             com.producerflow.producer.v1.Contact.class, com.producerflow.producer.v1.Contact.Builder.class);
   }
 
+  public interface AgencyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.Contact.Agency)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Unique identifier for the associated agency.
+     * </pre>
+     *
+     * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+     * @return The agencyId.
+     */
+    java.lang.String getAgencyId();
+    /**
+     * <pre>
+     * Unique identifier for the associated agency.
+     * </pre>
+     *
+     * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+     * @return The bytes for agencyId.
+     */
+    com.google.protobuf.ByteString
+        getAgencyIdBytes();
+
+    /**
+     * <pre>
+     * Name of the associated agency.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * Name of the associated agency.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    java.lang.String getExternalId();
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    com.google.protobuf.ByteString
+        getExternalIdBytes();
+  }
+  /**
+   * <pre>
+   * Agency contains basic information about the agency this contact is associated with.
+   * Use GetAgency to read the rest of the agency's details.
+   * </pre>
+   *
+   * Protobuf type {@code producerflow.producer.v1.Contact.Agency}
+   */
+  public static final class Agency extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:producerflow.producer.v1.Contact.Agency)
+      AgencyOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 3,
+        /* suffix= */ "",
+        Agency.class.getName());
+    }
+    // Use Agency.newBuilder() to construct.
+    private Agency(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private Agency() {
+      agencyId_ = "";
+      name_ = "";
+      externalId_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Contact_Agency_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Contact_Agency_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.producerflow.producer.v1.Contact.Agency.class, com.producerflow.producer.v1.Contact.Agency.Builder.class);
+    }
+
+    public static final int AGENCY_ID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object agencyId_ = "";
+    /**
+     * <pre>
+     * Unique identifier for the associated agency.
+     * </pre>
+     *
+     * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+     * @return The agencyId.
+     */
+    @java.lang.Override
+    public java.lang.String getAgencyId() {
+      java.lang.Object ref = agencyId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        agencyId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Unique identifier for the associated agency.
+     * </pre>
+     *
+     * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+     * @return The bytes for agencyId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getAgencyIdBytes() {
+      java.lang.Object ref = agencyId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        agencyId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object name_ = "";
+    /**
+     * <pre>
+     * Name of the associated agency.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Name of the associated agency.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EXTERNAL_ID_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object externalId_ = "";
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The externalId.
+     */
+    @java.lang.Override
+    public java.lang.String getExternalId() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        externalId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Tenant-provided external identifier for the associated agency.
+     * This ID allows tenants to map Producerflow agencies back to their own
+     * system's identifiers without an extra GetAgency call.
+     * Set during agency creation/onboarding via the public API.
+     * </pre>
+     *
+     * <code>string external_id = 3 [json_name = "externalId"];</code>
+     * @return The bytes for externalId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getExternalIdBytes() {
+      java.lang.Object ref = externalId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        externalId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, agencyId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, externalId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, agencyId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, externalId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.producerflow.producer.v1.Contact.Agency)) {
+        return super.equals(obj);
+      }
+      com.producerflow.producer.v1.Contact.Agency other = (com.producerflow.producer.v1.Contact.Agency) obj;
+
+      if (!getAgencyId()
+          .equals(other.getAgencyId())) return false;
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (!getExternalId()
+          .equals(other.getExternalId())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + AGENCY_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAgencyId().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getExternalId().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.producerflow.producer.v1.Contact.Agency parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.producerflow.producer.v1.Contact.Agency parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.Contact.Agency parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.producerflow.producer.v1.Contact.Agency prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Agency contains basic information about the agency this contact is associated with.
+     * Use GetAgency to read the rest of the agency's details.
+     * </pre>
+     *
+     * Protobuf type {@code producerflow.producer.v1.Contact.Agency}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.Contact.Agency)
+        com.producerflow.producer.v1.Contact.AgencyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Contact_Agency_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Contact_Agency_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.producerflow.producer.v1.Contact.Agency.class, com.producerflow.producer.v1.Contact.Agency.Builder.class);
+      }
+
+      // Construct using com.producerflow.producer.v1.Contact.Agency.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        agencyId_ = "";
+        name_ = "";
+        externalId_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_Contact_Agency_descriptor;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.Contact.Agency getDefaultInstanceForType() {
+        return com.producerflow.producer.v1.Contact.Agency.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.Contact.Agency build() {
+        com.producerflow.producer.v1.Contact.Agency result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.Contact.Agency buildPartial() {
+        com.producerflow.producer.v1.Contact.Agency result = new com.producerflow.producer.v1.Contact.Agency(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.producerflow.producer.v1.Contact.Agency result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.agencyId_ = agencyId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.externalId_ = externalId_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.producerflow.producer.v1.Contact.Agency) {
+          return mergeFrom((com.producerflow.producer.v1.Contact.Agency)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.producerflow.producer.v1.Contact.Agency other) {
+        if (other == com.producerflow.producer.v1.Contact.Agency.getDefaultInstance()) return this;
+        if (!other.getAgencyId().isEmpty()) {
+          agencyId_ = other.agencyId_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (!other.getExternalId().isEmpty()) {
+          externalId_ = other.externalId_;
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                agencyId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                name_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                externalId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object agencyId_ = "";
+      /**
+       * <pre>
+       * Unique identifier for the associated agency.
+       * </pre>
+       *
+       * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+       * @return The agencyId.
+       */
+      public java.lang.String getAgencyId() {
+        java.lang.Object ref = agencyId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          agencyId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier for the associated agency.
+       * </pre>
+       *
+       * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+       * @return The bytes for agencyId.
+       */
+      public com.google.protobuf.ByteString
+          getAgencyIdBytes() {
+        java.lang.Object ref = agencyId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          agencyId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier for the associated agency.
+       * </pre>
+       *
+       * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+       * @param value The agencyId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAgencyId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        agencyId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier for the associated agency.
+       * </pre>
+       *
+       * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAgencyId() {
+        agencyId_ = getDefaultInstance().getAgencyId();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier for the associated agency.
+       * </pre>
+       *
+       * <code>string agency_id = 1 [json_name = "agencyId"];</code>
+       * @param value The bytes for agencyId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAgencyIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        agencyId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * Name of the associated agency.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The name.
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name of the associated agency.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The bytes for name.
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name of the associated agency.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name of the associated agency.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name of the associated agency.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object externalId_ = "";
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return The externalId.
+       */
+      public java.lang.String getExternalId() {
+        java.lang.Object ref = externalId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          externalId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return The bytes for externalId.
+       */
+      public com.google.protobuf.ByteString
+          getExternalIdBytes() {
+        java.lang.Object ref = externalId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          externalId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @param value The externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        externalId_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExternalId() {
+        externalId_ = getDefaultInstance().getExternalId();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tenant-provided external identifier for the associated agency.
+       * This ID allows tenants to map Producerflow agencies back to their own
+       * system's identifiers without an extra GetAgency call.
+       * Set during agency creation/onboarding via the public API.
+       * </pre>
+       *
+       * <code>string external_id = 3 [json_name = "externalId"];</code>
+       * @param value The bytes for externalId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExternalIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        externalId_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Contact.Agency)
+    }
+
+    // @@protoc_insertion_point(class_scope:producerflow.producer.v1.Contact.Agency)
+    private static final com.producerflow.producer.v1.Contact.Agency DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.producerflow.producer.v1.Contact.Agency();
+    }
+
+    public static com.producerflow.producer.v1.Contact.Agency getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Agency>
+        PARSER = new com.google.protobuf.AbstractParser<Agency>() {
+      @java.lang.Override
+      public Agency parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<Agency> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Agency> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.producerflow.producer.v1.Contact.Agency getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
@@ -365,7 +1316,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4262
+   *     See producerflow/producer/v1/producer.proto;l=4314
    * @return The role.
    */
   @java.lang.Override
@@ -389,7 +1340,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4262
+   *     See producerflow/producer/v1/producer.proto;l=4314
    * @return The bytes for role.
    */
   @java.lang.Override
@@ -728,6 +1679,88 @@ java.lang.String defaultValue) {
     }
   }
 
+  public static final int AGENCY_FIELD_NUMBER = 14;
+  private com.producerflow.producer.v1.Contact.Agency agency_;
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   * @return Whether the agency field is set.
+   */
+  @java.lang.Override
+  public boolean hasAgency() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   * @return The agency.
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.Contact.Agency getAgency() {
+    return agency_ == null ? com.producerflow.producer.v1.Contact.Agency.getDefaultInstance() : agency_;
+  }
+  /**
+   * <pre>
+   * Basic information about the agency this contact is associated with.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.Contact.AgencyOrBuilder getAgencyOrBuilder() {
+    return agency_ == null ? com.producerflow.producer.v1.Contact.Agency.getDefaultInstance() : agency_;
+  }
+
+  public static final int ORGANIZATION_FIELD_NUMBER = 15;
+  private com.producerflow.producer.v1.Organization organization_;
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   * @return Whether the organization field is set.
+   */
+  @java.lang.Override
+  public boolean hasOrganization() {
+    return ((bitField0_ & 0x00000008) != 0);
+  }
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   * @return The organization.
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.Organization getOrganization() {
+    return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+  }
+  /**
+   * <pre>
+   * Organization that the contact's agency belongs to.
+   * This field contains the full organization details including id, name, and contact information.
+   * Unset when the contact's agency does not belong to any organization.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder() {
+    return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -783,6 +1816,12 @@ java.lang.String defaultValue) {
         12);
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 13, externalId_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      output.writeMessage(14, getAgency());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      output.writeMessage(15, getOrganization());
     }
     getUnknownFields().writeTo(output);
   }
@@ -842,6 +1881,14 @@ java.lang.String defaultValue) {
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(externalId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(13, externalId_);
     }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(14, getAgency());
+    }
+    if (((bitField0_ & 0x00000008) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(15, getOrganization());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -888,6 +1935,16 @@ java.lang.String defaultValue) {
         other.internalGetExternalMetadata())) return false;
     if (!getExternalId()
         .equals(other.getExternalId())) return false;
+    if (hasAgency() != other.hasAgency()) return false;
+    if (hasAgency()) {
+      if (!getAgency()
+          .equals(other.getAgency())) return false;
+    }
+    if (hasOrganization() != other.hasOrganization()) return false;
+    if (hasOrganization()) {
+      if (!getOrganization()
+          .equals(other.getOrganization())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -931,6 +1988,14 @@ java.lang.String defaultValue) {
     }
     hash = (37 * hash) + EXTERNAL_ID_FIELD_NUMBER;
     hash = (53 * hash) + getExternalId().hashCode();
+    if (hasAgency()) {
+      hash = (37 * hash) + AGENCY_FIELD_NUMBER;
+      hash = (53 * hash) + getAgency().hashCode();
+    }
+    if (hasOrganization()) {
+      hash = (37 * hash) + ORGANIZATION_FIELD_NUMBER;
+      hash = (53 * hash) + getOrganization().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -1090,6 +2155,8 @@ java.lang.String defaultValue) {
               .alwaysUseFieldBuilders) {
         getAddressFieldBuilder();
         getCreatedAtFieldBuilder();
+        getAgencyFieldBuilder();
+        getOrganizationFieldBuilder();
       }
     }
     @java.lang.Override
@@ -1117,6 +2184,16 @@ java.lang.String defaultValue) {
       roleType_ = 0;
       internalGetMutableExternalMetadata().clear();
       externalId_ = "";
+      agency_ = null;
+      if (agencyBuilder_ != null) {
+        agencyBuilder_.dispose();
+        agencyBuilder_ = null;
+      }
+      organization_ = null;
+      if (organizationBuilder_ != null) {
+        organizationBuilder_.dispose();
+        organizationBuilder_ = null;
+      }
       return this;
     }
 
@@ -1197,6 +2274,18 @@ java.lang.String defaultValue) {
       if (((from_bitField0_ & 0x00001000) != 0)) {
         result.externalId_ = externalId_;
       }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
+        result.agency_ = agencyBuilder_ == null
+            ? agency_
+            : agencyBuilder_.build();
+        to_bitField0_ |= 0x00000004;
+      }
+      if (((from_bitField0_ & 0x00004000) != 0)) {
+        result.organization_ = organizationBuilder_ == null
+            ? organization_
+            : organizationBuilder_.build();
+        to_bitField0_ |= 0x00000008;
+      }
       result.bitField0_ |= to_bitField0_;
     }
 
@@ -1268,6 +2357,12 @@ java.lang.String defaultValue) {
         externalId_ = other.externalId_;
         bitField0_ |= 0x00001000;
         onChanged();
+      }
+      if (other.hasAgency()) {
+        mergeAgency(other.getAgency());
+      }
+      if (other.hasOrganization()) {
+        mergeOrganization(other.getOrganization());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -1368,6 +2463,20 @@ java.lang.String defaultValue) {
               bitField0_ |= 0x00001000;
               break;
             } // case 106
+            case 114: {
+              input.readMessage(
+                  getAgencyFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00002000;
+              break;
+            } // case 114
+            case 122: {
+              input.readMessage(
+                  getOrganizationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00004000;
+              break;
+            } // case 122
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1951,7 +3060,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4262
+     *     See producerflow/producer/v1/producer.proto;l=4314
      * @return The role.
      */
     @java.lang.Deprecated public java.lang.String getRole() {
@@ -1974,7 +3083,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4262
+     *     See producerflow/producer/v1/producer.proto;l=4314
      * @return The bytes for role.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1998,7 +3107,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4262
+     *     See producerflow/producer/v1/producer.proto;l=4314
      * @param value The role to set.
      * @return This builder for chaining.
      */
@@ -2018,7 +3127,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4262
+     *     See producerflow/producer/v1/producer.proto;l=4314
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearRole() {
@@ -2035,7 +3144,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4262
+     *     See producerflow/producer/v1/producer.proto;l=4314
      * @param value The bytes for role to set.
      * @return This builder for chaining.
      */
@@ -2839,6 +3948,338 @@ java.lang.String defaultValue) {
       bitField0_ |= 0x00001000;
       onChanged();
       return this;
+    }
+
+    private com.producerflow.producer.v1.Contact.Agency agency_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Contact.Agency, com.producerflow.producer.v1.Contact.Agency.Builder, com.producerflow.producer.v1.Contact.AgencyOrBuilder> agencyBuilder_;
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     * @return Whether the agency field is set.
+     */
+    public boolean hasAgency() {
+      return ((bitField0_ & 0x00002000) != 0);
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     * @return The agency.
+     */
+    public com.producerflow.producer.v1.Contact.Agency getAgency() {
+      if (agencyBuilder_ == null) {
+        return agency_ == null ? com.producerflow.producer.v1.Contact.Agency.getDefaultInstance() : agency_;
+      } else {
+        return agencyBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public Builder setAgency(com.producerflow.producer.v1.Contact.Agency value) {
+      if (agencyBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        agency_ = value;
+      } else {
+        agencyBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public Builder setAgency(
+        com.producerflow.producer.v1.Contact.Agency.Builder builderForValue) {
+      if (agencyBuilder_ == null) {
+        agency_ = builderForValue.build();
+      } else {
+        agencyBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public Builder mergeAgency(com.producerflow.producer.v1.Contact.Agency value) {
+      if (agencyBuilder_ == null) {
+        if (((bitField0_ & 0x00002000) != 0) &&
+          agency_ != null &&
+          agency_ != com.producerflow.producer.v1.Contact.Agency.getDefaultInstance()) {
+          getAgencyBuilder().mergeFrom(value);
+        } else {
+          agency_ = value;
+        }
+      } else {
+        agencyBuilder_.mergeFrom(value);
+      }
+      if (agency_ != null) {
+        bitField0_ |= 0x00002000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public Builder clearAgency() {
+      bitField0_ = (bitField0_ & ~0x00002000);
+      agency_ = null;
+      if (agencyBuilder_ != null) {
+        agencyBuilder_.dispose();
+        agencyBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public com.producerflow.producer.v1.Contact.Agency.Builder getAgencyBuilder() {
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return getAgencyFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    public com.producerflow.producer.v1.Contact.AgencyOrBuilder getAgencyOrBuilder() {
+      if (agencyBuilder_ != null) {
+        return agencyBuilder_.getMessageOrBuilder();
+      } else {
+        return agency_ == null ?
+            com.producerflow.producer.v1.Contact.Agency.getDefaultInstance() : agency_;
+      }
+    }
+    /**
+     * <pre>
+     * Basic information about the agency this contact is associated with.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Contact.Agency agency = 14 [json_name = "agency"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Contact.Agency, com.producerflow.producer.v1.Contact.Agency.Builder, com.producerflow.producer.v1.Contact.AgencyOrBuilder> 
+        getAgencyFieldBuilder() {
+      if (agencyBuilder_ == null) {
+        agencyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.producerflow.producer.v1.Contact.Agency, com.producerflow.producer.v1.Contact.Agency.Builder, com.producerflow.producer.v1.Contact.AgencyOrBuilder>(
+                getAgency(),
+                getParentForChildren(),
+                isClean());
+        agency_ = null;
+      }
+      return agencyBuilder_;
+    }
+
+    private com.producerflow.producer.v1.Organization organization_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder> organizationBuilder_;
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     * @return Whether the organization field is set.
+     */
+    public boolean hasOrganization() {
+      return ((bitField0_ & 0x00004000) != 0);
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     * @return The organization.
+     */
+    public com.producerflow.producer.v1.Organization getOrganization() {
+      if (organizationBuilder_ == null) {
+        return organization_ == null ? com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+      } else {
+        return organizationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public Builder setOrganization(com.producerflow.producer.v1.Organization value) {
+      if (organizationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        organization_ = value;
+      } else {
+        organizationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public Builder setOrganization(
+        com.producerflow.producer.v1.Organization.Builder builderForValue) {
+      if (organizationBuilder_ == null) {
+        organization_ = builderForValue.build();
+      } else {
+        organizationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public Builder mergeOrganization(com.producerflow.producer.v1.Organization value) {
+      if (organizationBuilder_ == null) {
+        if (((bitField0_ & 0x00004000) != 0) &&
+          organization_ != null &&
+          organization_ != com.producerflow.producer.v1.Organization.getDefaultInstance()) {
+          getOrganizationBuilder().mergeFrom(value);
+        } else {
+          organization_ = value;
+        }
+      } else {
+        organizationBuilder_.mergeFrom(value);
+      }
+      if (organization_ != null) {
+        bitField0_ |= 0x00004000;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public Builder clearOrganization() {
+      bitField0_ = (bitField0_ & ~0x00004000);
+      organization_ = null;
+      if (organizationBuilder_ != null) {
+        organizationBuilder_.dispose();
+        organizationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public com.producerflow.producer.v1.Organization.Builder getOrganizationBuilder() {
+      bitField0_ |= 0x00004000;
+      onChanged();
+      return getOrganizationFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    public com.producerflow.producer.v1.OrganizationOrBuilder getOrganizationOrBuilder() {
+      if (organizationBuilder_ != null) {
+        return organizationBuilder_.getMessageOrBuilder();
+      } else {
+        return organization_ == null ?
+            com.producerflow.producer.v1.Organization.getDefaultInstance() : organization_;
+      }
+    }
+    /**
+     * <pre>
+     * Organization that the contact's agency belongs to.
+     * This field contains the full organization details including id, name, and contact information.
+     * Unset when the contact's agency does not belong to any organization.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Organization organization = 15 [json_name = "organization"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder> 
+        getOrganizationFieldBuilder() {
+      if (organizationBuilder_ == null) {
+        organizationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.producerflow.producer.v1.Organization, com.producerflow.producer.v1.Organization.Builder, com.producerflow.producer.v1.OrganizationOrBuilder>(
+                getOrganization(),
+                getParentForChildren(),
+                isClean());
+        organization_ = null;
+      }
+      return organizationBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.Contact)
