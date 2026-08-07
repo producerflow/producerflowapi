@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.28] - 2026-08-07
+
+### Added
+
+#### ProducerService
+
+- **`agency` on `Contact`** — basic details of the agency the contact belongs to (`agency_id`, `name`, and the tenant-provided `external_id`), so callers no longer need a follow-up `GetAgency` to map a contact to their own agency identifier. Returned by every RPC that returns a `Contact`, including `GetContact` and `ListAgencyContacts`
+- **`organization` on `Contact`** — the organization that the contact's agency belongs to, with full details (id, name, and contact information). Unset when the agency does not belong to any organization. Together with `agency`, this resolves a contact to its partner/source organization in a single call
+- **New `AgencyAlreadyExistsErrorDetail`** — when `NewAgency` fails with `ALREADY_EXISTS`, the error now carries the identifiers of the conflicting agency (`agency_id`, `external_id`, `npn`, `organization_id`), so the existing record can be linked without a follow-up lookup. It identifies the agency holding the conflicting agency email or NPN; for a principal email conflict, the agency of the existing producer; and for a sole-proprietor NPN conflict, the existing sole-proprietor agency registered under the principal's NPN. The detail travels in the error's details list as a `google.protobuf.Any` and is provided on a best-effort basis, so handle its absence gracefully
+
+### Changed
+
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.27] - 2026-07-21
 
 ### Added
