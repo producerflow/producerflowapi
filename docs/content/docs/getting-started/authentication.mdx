@@ -1,0 +1,236 @@
+---
+title: Authentication
+description: How to obtain API keys and use them to authenticate your Connect API calls.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+All requests to our API require authentication. This guide explains how to obtain API keys and use them to authenticate your Connect API calls.
+
+## API endpoints
+
+The Producerflow API is available at the following endpoints:
+
+- **Production**: `https://api.producerflow.com`
+- **UAT (User Acceptance Testing)**: `https://api.uat.producerflow.com`
+
+Use the production endpoint for live applications and the UAT endpoint for testing and development purposes.
+
+## Obtaining an API key
+
+To use our API, you'll need to generate an API key from the Producerflow user interface:
+
+1. Navigate to the settings section and select "API keys"
+
+   ![API Keys Section](/img/getting-api-key/getting-api-key-01.png)
+
+2. Click the "Generate new API key" button
+
+   ![API Keys Management](/img/getting-api-key/getting-api-key-02.png)
+
+3. Fill out the form:
+   - Provide a name for your API key
+   - Add an optional description
+   - Select an expiration time (or use the default)
+
+   ![Generate API Key Form](/img/getting-api-key/getting-api-key-03.png)
+
+4. Click "Generate new API key" and securely store the generated key
+
+<Callout type="warn" title="Important">
+	The API key will only be displayed once. Make sure to copy and store it securely.
+</Callout>
+
+## Using API keys in Go
+
+In Go, you can authenticate your Connect API calls by adding your API key as a bearer token or header in your HTTP client.
+
+### Using a custom HTTP transport
+
+```go
+package main
+
+import (
+    "context"
+    "net/http"
+
+    "connectrpc.com/connect"
+    producerpb "github.com/producerflow/producerflowapi/gen/go/producerflow/producer/v1"
+    producerconnect "github.com/producerflow/producerflowapi/gen/go/producerflow/producer/v1/producerv1connect"
+)
+
+// Custom transport to add authentication headers
+type authTransport struct {
+    base   http.RoundTripper
+    apiKey string
+}
+
+func (t *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+    // Add the API key as a header
+    req.Header.Add("x-api-key", t.apiKey)
+
+    return t.base.RoundTrip(req)
+}
+
+func createAuthenticatedClient(apiKey string, useUAT bool) producerconnect.ProducerServiceClient {
+    // Create an HTTP client with authentication headers
+    httpClient := &http.Client{
+        Transport: &authTransport{
+            base:   http.DefaultTransport,
+            apiKey: apiKey,
+        },
+    }
+
+    // Choose endpoint based on environment
+    endpoint := "https://api.producerflow.com"
+    if useUAT {
+        endpoint = "https://api.uat.producerflow.com"
+    }
+
+    return producerconnect.NewProducerServiceClient(
+        httpClient,
+        endpoint,
+        connect.WithGRPC(), // or WithConnect() depending on protocol
+    )
+}
+
+func main() {
+    // For production use
+    client := createAuthenticatedClient("YOUR_API_KEY", false)
+
+    // For UAT/testing use
+    // client := createAuthenticatedClient("YOUR_API_KEY", true)
+
+    // Now you can make authenticated API calls
+    req := connect.NewRequest(&producerpb.GetProducerRequest{
+        // Add request parameters
+    })
+
+    resp, err := client.GetProducer(context.Background(), req)
+    // Process response
+}
+```
+
+## Using API keys in TypeScript
+
+In TypeScript, you can authenticate your Connect API calls using interceptors.
+
+### Using Connect interceptors
+
+```typescript
+import { createPromiseClient } from "@connectrpc/connect";
+import { createConnectTransport } from "@connectrpc/connect-node";
+import { ProducerService } from "@producerflow/producerflowapi";
+
+// Create an authenticated client
+function createAuthenticatedClient(apiKey: string, useUAT: boolean = false) {
+    // Choose endpoint based on environment
+    const baseUrl = useUAT ? "https://api.uat.producerflow.com" : "https://api.producerflow.com";
+
+    // Create a transport with authentication headers
+    const transport = createConnectTransport({
+        baseUrl: baseUrl,
+        httpVersion: "1.1",
+        interceptors: [{
+            interceptRequest(next, req) {
+                // Add the API key header
+                req.header.set("x-api-key", apiKey);
+
+                return next(req);
+            }
+        }]
+    });
+
+    return createPromiseClient(ProducerService, transport);
+}
+
+async function main() {
+    // For production use
+    const client = createAuthenticatedClient("YOUR_API_KEY", false);
+
+    // For UAT/testing use
+    // const client = createAuthenticatedClient("YOUR_API_KEY", true);
+
+    // Make authenticated API calls
+    try {
+        const response = await client.getProducer({
+            lookupMethod: {
+                case: "producerIdLookup",
+                value: {
+                    producerId: "example-id",
+                },
+            },
+        });
+
+        console.log("Producer data:", response.producer);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+main();
+```
+
+### For browser environments
+
+```typescript
+import { createPromiseClient } from "@connectrpc/connect";
+import { createConnectTransport } from "@connectrpc/connect-web";
+import { ProducerService } from "@producerflow/producerflowapi";
+
+function createAuthenticatedClient(apiKey: string, useUAT: boolean = false) {
+    // Choose endpoint based on environment
+    const baseUrl = useUAT ? "https://api.uat.producerflow.com" : "https://api.producerflow.com";
+
+    const transport = createConnectTransport({
+        baseUrl: baseUrl,
+        interceptors: [{
+            interceptRequest(next, req) {
+                req.header.set("Authorization", `Bearer ${apiKey}`);
+                // Or alternatively:
+                // req.header.set("x-api-key", apiKey);
+
+                return next(req);
+            }
+        }]
+    });
+
+    return createPromiseClient(ProducerService, transport);
+}
+
+// Usage in browser code
+// For production use
+const client = createAuthenticatedClient("YOUR_API_KEY", false);
+
+// For UAT/testing use
+// const client = createAuthenticatedClient("YOUR_API_KEY", true);
+
+// Make authenticated API calls
+async function fetchProducer(producerId: string) {
+    try {
+        const response = await client.getProducer({
+            lookupMethod: {
+                case: "producerIdLookup",
+                value: {
+                    producerId: producerId,
+                },
+            },
+        });
+
+        return response.producer;
+    } catch (error) {
+        console.error("Error fetching producer:", error);
+        throw error;
+    }
+}
+```
+
+## Security best practices
+
+When working with API keys, follow these best practices:
+
+1. **Store securely**: Never hardcode API keys in your source code or commit them to version control
+2. **Use environment variables**: Store API keys in environment variables or secure credential stores
+3. **Implement key rotation**: Regularly rotate your API keys, especially for production environments
+4. **Set appropriate expirations**: Choose expiration times that balance security and convenience
+5. **Use least privilege**: Generate keys with only the permissions needed for your application

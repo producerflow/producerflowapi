@@ -238,3 +238,9 @@ $RECYCLE.BIN/
 build/
 dist/
 bin/
+
+# Fumadocs site (docs/)
+docs/node_modules
+docs/.next
+docs/out
+docs/.source
