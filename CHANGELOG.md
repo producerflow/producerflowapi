@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+#### Webhooks
+
+- **`external_agency_id` in contact webhook events** — `contact.created`, `contact.updated`, and `contact.deleted` payloads now include the external ID of the contact's agency, matching producer and appointment events. Omitted when the agency has no external ID assigned. Added to the contact schema and example payload
+
 ## [1.0.28] - 2026-08-07
 
 ### Added

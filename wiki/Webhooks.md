@@ -321,7 +321,7 @@ Each webhook type has specific required fields:
 #### Identifier Fields
 
 - **Agency Identifier**: All webhook types include `agency_id`. For agency webhooks, this identifies the agency itself. For producer and contact webhooks, this identifies the associated agency.
-- **External Identifiers**: When available, webhooks include `external_id` fields representing identifiers from your system that you've provided to ProducerFlow.
+- **External Identifiers**: When available, webhooks include `external_id` fields representing identifiers from your system that you've provided to ProducerFlow. Producer and contact webhooks also include `external_agency_id`, the external ID of the associated agency.
 - **National Producer Numbers (NPN)**: Included when available for agencies and producers.
 
 #### Origin Field Values
@@ -361,7 +361,7 @@ For update events, only the changed section(s) will be included:
 
 #### Contact Data
 
-Contact webhooks contain flattened data including personal information, role, and address details.
+Contact webhooks contain flattened data including personal information, role, and address details. They also include `external_agency_id`, the external ID of the contact's agency, when the agency has one.
 
 ### Schema Validation
 
