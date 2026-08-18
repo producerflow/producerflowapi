@@ -216,10 +216,69 @@ Each webhook type has specific required fields:
 - **Appointment**: `id`, `timestamp`, `appointment_id`
 - **Organization**: `id`, `timestamp`, `organization_id`
 
+## Compression
+
+Deliveries are uncompressed by default. On request we can enable gzip for your
+webhook, in which case each request arrives with:
+
+```
+Content-Encoding: gzip
+```
+
+and a body you inflate before parsing. Our event payloads are long runs of
+near-identical objects, so this typically reduces them by an order of magnitude —
+useful if your endpoint enforces a request body limit, since those limits are
+normally applied to the bytes received.
+
+Two things worth knowing before asking for it:
+
+- **Your stack has to inflate request bodies.** Most frameworks do not do this
+  out of the box for incoming requests, even where they compress responses. A
+  Fastify endpoint, for example, needs `@fastify/compress`. Without it you will
+  receive bytes you cannot parse.
+- **Verify before you inflate.** `Producerflow-Signature` always covers the body
+  exactly as sent, so on a compressed delivery it is the HMAC of the compressed
+  bytes, not of the JSON inside them. The rule is the same either way — hash the
+  body you received — but it does mean you must compute the signature over the
+  raw request body before anything decompresses it.
+
+  This is worth checking against your stack before asking us to enable
+  compression. Some common setups hand your code an already-inflated body: Express's
+  `body-parser` inflates by default and its `verify` callback receives the
+  inflated buffer, and a proxy or CDN in front of your service may decompress
+  the request before your origin sees it. If you cannot get at the raw bytes,
+  compression is not usable for you as-is.
+
+Once it is on, the webhook integration settings tag the delivery URL
+`Compressed`, and so is each compressed delivery in the delivery history.
+
+## Delivery headers
+
+Every delivery carries routing headers alongside `Producerflow-Signature`:
+
+- `X-Event-Type` / `X-Event-Resource` / `X-Event-Action` — the event type and
+  its two halves, e.g. `agency.updated` / `agency` / `updated`.
+- `X-Event-Sections` — the payload sections the body carries, sorted and
+  comma-separated, e.g. `agency_data, agency_nipr_appointments`. A section is a
+  structured part of the payload (a JSON object or array); identity and status
+  fields are not listed, including `agency_principal`, which accompanies every
+  agency event that has a principal. The value may be empty for an event
+  carrying only identity fields.
+
+`X-Event-Sections` exists so you can route or discard a delivery without
+verifying, inflating and parsing a potentially large body: if the event carries
+nothing you consume, drop it on the header alone. Two caveats: the signature
+covers the body only, so headers are routing hints rather than signed claims —
+anything you act on beyond routing should come from the verified body. And a
+section being listed means it is present in this event, not that it is your
+only change signal: a section absent from one event may simply not have
+changed, or be one you unsubscribed from.
+
 ## Integration Tips
 
 1. **Idempotency**: Use the `id` field to handle duplicate webhook deliveries
-2. **Filtering**: Check `event_type` to process only relevant events
+2. **Filtering**: Check `event_type` to process only relevant events, and
+   `X-Event-Sections` to skip deliveries whose payload holds nothing you consume
 3. **Validation**: Validate payloads against the provided JSON schemas
 4. **Error Handling**: Implement retry logic for failed webhook processing
 5. **Security**: Verify webhook signatures (implementation-specific)
@@ -236,6 +295,19 @@ Many webhooks include NIPR (National Insurance Producer Registry) data, which pr
 
 This data is critical for compliance and regulatory reporting in the insurance industry.
 
+### NIPR payload categories
+
+The NIPR sections of an event are grouped into four categories a tenant can
+subscribe to independently: `nipr.demographics` (the `*_nipr_data` section,
+registered name included), `nipr.licenses` (licenses and their LOAs),
+`nipr.appointments` and `nipr.addresses`. All four are subscribed by default;
+unsubscribing removes that category's sections from your webhook payloads. An
+absent section and an empty one look the same on the wire, as they always have.
+
+Events reporting a NIPR change also carry only the sections that changed, so a
+subscribed section may still be absent from any given event: absence means "not
+in this event", never "the data is gone".
+
 ### Completed NIPR syncs
 
 When a NIPR sync finishes, the entity receives a single `agency.updated` or
@@ -243,7 +315,9 @@ When a NIPR sync finishes, the entity receives a single `agency.updated` or
 `nipr_sync_status: "active"`. The data and the finished status always arrive in
 the same message, so there is nothing to correlate: an event carrying NIPR data
 is never stamped `pending`, and the completion is never announced separately
-with an empty payload.
+with an empty payload. Unsubscribing from categories narrows the data half but
+never suppresses the message: a tenant unsubscribed from all four still
+receives the completion event carrying `nipr_sync_status`.
 
 A sync that does not complete reports its outcome the usual way, as an update
 carrying only the new `nipr_sync_status` (for example `failing`).

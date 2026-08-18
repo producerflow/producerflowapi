@@ -4,6 +4,7 @@
   "origin": "ProducerFlowAPI",
   "timestamp": "2024-01-20T15:30:45Z",
   "agency_id": "agc_987654321",
+  "external_agency_id": "ext_agc_654987321",
   "contact_id": "cnt_456789123",
   "first_name": "John",
   "last_name": "Doe",

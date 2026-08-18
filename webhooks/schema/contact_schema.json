@@ -28,6 +28,10 @@
       "type": "string",
       "description": "Always present. ID of the agency that the contact belongs to"
     },
+    "external_agency_id": {
+      "type": "string",
+      "description": "Only present if filled in by tenant. External ID of the agency that the contact belongs to"
+    },
     "contact_id": {
       "type": "string",
       "minLength": 1,
