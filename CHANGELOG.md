@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.29] - 2026-08-18
+
+### Added
+
+#### AppointmentService
+
+- **`pagination` on `ListAppointmentsRequest`** — standard `producerflow.producer.v1.Pagination`, so appointment listings page like the rest of the API. Defaults to `page_size=50`, maximum 200. `next_page_token` is empty when there are no more results
+
+#### ProducerService
+
+- **`organization_id` on `UpdateAgencyRequest.AgencyData`** — moves an agency to another organization, attaches one that had none, or detaches it when passed as an empty string. The producers under the agency follow it, since a producer's organization is derived from its agency. The relationship comes from `organization_relationship` when set, and is otherwise preserved from the organization the agency is moved from (`RELATED` when it had none). Maximum 36 characters; the agency must belong to at most one organization, otherwise the source organization is ambiguous and the request fails with `FAILED_PRECONDITION` (detaching is exempt)
+
+#### Webhooks
+
+- **`external_agency_id` on contact events** — the tenant-provided external ID of the agency the contact belongs to. Present only when filled in by the tenant
+- **Documented opt-in gzip compression** — on request, deliveries arrive with `Content-Encoding: gzip`. `Producerflow-Signature` always covers the body exactly as sent, so on a compressed delivery it is the HMAC of the compressed bytes: compute it over the raw request body before anything decompresses it
+- **Documented delivery headers** — `X-Event-Type`, `X-Event-Resource`, `X-Event-Action`, and `X-Event-Sections`, which lists the structured payload sections the body carries so a delivery can be routed or discarded without verifying, inflating and parsing it. Headers are routing hints, not signed claims
+- **Documented NIPR payload categories** — the NIPR sections of an event group into four independently subscribable categories (`nipr.demographics`, `nipr.licenses`, `nipr.appointments`, `nipr.addresses`), all subscribed by default. Unsubscribing narrows the data but never suppresses a sync-completion event
+
+### Changed
+
+#### AppointmentService
+
+- **`license_owner` on `ListAppointmentsRequest` is now required** — previously documented as an optional filter, it is the producer or agency whose appointments to list
+- **`RequestAppointment` re-send behavior** — requesting an appointment that already exists for the same license and carrier is refused with `ALREADY_EXISTS`, unless it is `TERMINATED` or `REJECTED`. Those are sent to the state again, reusing the existing appointment's ID and moving it back to `IN_PROGRESS`, so the result reads like a first request. Fix the cause before re-sending a `REJECTED` appointment — an unchanged one gets the same answer and is charged again. Either re-send is refused when the license is inactive or expired, or a NIPR transaction is already in flight
+
+#### ProducerService
+
+- **`organization_relationship` on `UpdateAgencyRequest`** — can now be combined with `organization_id` to move an agency and set its relationship in one call. On its own it still switches the relationship with the agency's current organization. Cannot be combined with an empty `organization_id`, and turning a main agency into a related one requires the agency to have a principal
+- `UpdateAgency` documentation now lists IVANS account and organization membership among the updatable fields
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.28] - 2026-08-07
 
 ### Added
