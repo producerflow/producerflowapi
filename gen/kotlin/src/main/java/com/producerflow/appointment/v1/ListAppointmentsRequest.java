@@ -48,6 +48,7 @@ private static final long serialVersionUID = 0L;
             com.producerflow.appointment.v1.ListAppointmentsRequest.class, com.producerflow.appointment.v1.ListAppointmentsRequest.Builder.class);
   }
 
+  private int bitField0_;
   private int licenseOwnerCase_ = 0;
   @SuppressWarnings("serial")
   private java.lang.Object licenseOwner_;
@@ -350,6 +351,47 @@ private static final long serialVersionUID = 0L;
   }
   private int operationalStatusMemoizedSerializedSize;
 
+  public static final int PAGINATION_FIELD_NUMBER = 5;
+  private com.producerflow.producer.v1.Pagination pagination_;
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   * @return Whether the pagination field is set.
+   */
+  @java.lang.Override
+  public boolean hasPagination() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   * @return The pagination.
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.Pagination getPagination() {
+    return pagination_ == null ? com.producerflow.producer.v1.Pagination.getDefaultInstance() : pagination_;
+  }
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.PaginationOrBuilder getPaginationOrBuilder() {
+    return pagination_ == null ? com.producerflow.producer.v1.Pagination.getDefaultInstance() : pagination_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -384,6 +426,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < operationalStatus_.size(); i++) {
       output.writeEnumNoTag(operationalStatus_.getInt(i));
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(5, getPagination());
     }
     getUnknownFields().writeTo(output);
   }
@@ -424,6 +469,10 @@ private static final long serialVersionUID = 0L;
           .computeUInt32SizeNoTag(dataSize);
       }operationalStatusMemoizedSerializedSize = dataSize;
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(5, getPagination());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -441,6 +490,11 @@ private static final long serialVersionUID = 0L;
 
     if (!processingStatus_.equals(other.processingStatus_)) return false;
     if (!operationalStatus_.equals(other.operationalStatus_)) return false;
+    if (hasPagination() != other.hasPagination()) return false;
+    if (hasPagination()) {
+      if (!getPagination()
+          .equals(other.getPagination())) return false;
+    }
     if (!getLicenseOwnerCase().equals(other.getLicenseOwnerCase())) return false;
     switch (licenseOwnerCase_) {
       case 2:
@@ -472,6 +526,10 @@ private static final long serialVersionUID = 0L;
     if (getOperationalStatusCount() > 0) {
       hash = (37 * hash) + OPERATIONAL_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + operationalStatus_.hashCode();
+    }
+    if (hasPagination()) {
+      hash = (37 * hash) + PAGINATION_FIELD_NUMBER;
+      hash = (53 * hash) + getPagination().hashCode();
     }
     switch (licenseOwnerCase_) {
       case 2:
@@ -608,13 +666,19 @@ private static final long serialVersionUID = 0L;
 
     // Construct using com.producerflow.appointment.v1.ListAppointmentsRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessage
+              .alwaysUseFieldBuilders) {
+        getPaginationFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
@@ -624,6 +688,11 @@ private static final long serialVersionUID = 0L;
       bitField0_ = (bitField0_ & ~0x00000001);
       operationalStatus_ = emptyIntList();
       bitField0_ = (bitField0_ & ~0x00000008);
+      pagination_ = null;
+      if (paginationBuilder_ != null) {
+        paginationBuilder_.dispose();
+        paginationBuilder_ = null;
+      }
       licenseOwnerCase_ = 0;
       licenseOwner_ = null;
       return this;
@@ -674,6 +743,14 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(com.producerflow.appointment.v1.ListAppointmentsRequest result) {
       int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.pagination_ = paginationBuilder_ == null
+            ? pagination_
+            : paginationBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     private void buildPartialOneofs(com.producerflow.appointment.v1.ListAppointmentsRequest result) {
@@ -712,6 +789,9 @@ private static final long serialVersionUID = 0L;
           operationalStatus_.addAll(other.operationalStatus_);
         }
         onChanged();
+      }
+      if (other.hasPagination()) {
+        mergePagination(other.getPagination());
       }
       switch (other.getLicenseOwnerCase()) {
         case PRODUCER_ID: {
@@ -802,6 +882,13 @@ private static final long serialVersionUID = 0L;
               input.popLimit(oldLimit);
               break;
             } // case 34
+            case 42: {
+              input.readMessage(
+                  getPaginationFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1394,6 +1481,172 @@ private static final long serialVersionUID = 0L;
       }
       onChanged();
       return this;
+    }
+
+    private com.producerflow.producer.v1.Pagination pagination_;
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Pagination, com.producerflow.producer.v1.Pagination.Builder, com.producerflow.producer.v1.PaginationOrBuilder> paginationBuilder_;
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     * @return Whether the pagination field is set.
+     */
+    public boolean hasPagination() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     * @return The pagination.
+     */
+    public com.producerflow.producer.v1.Pagination getPagination() {
+      if (paginationBuilder_ == null) {
+        return pagination_ == null ? com.producerflow.producer.v1.Pagination.getDefaultInstance() : pagination_;
+      } else {
+        return paginationBuilder_.getMessage();
+      }
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public Builder setPagination(com.producerflow.producer.v1.Pagination value) {
+      if (paginationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        pagination_ = value;
+      } else {
+        paginationBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public Builder setPagination(
+        com.producerflow.producer.v1.Pagination.Builder builderForValue) {
+      if (paginationBuilder_ == null) {
+        pagination_ = builderForValue.build();
+      } else {
+        paginationBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public Builder mergePagination(com.producerflow.producer.v1.Pagination value) {
+      if (paginationBuilder_ == null) {
+        if (((bitField0_ & 0x00000010) != 0) &&
+          pagination_ != null &&
+          pagination_ != com.producerflow.producer.v1.Pagination.getDefaultInstance()) {
+          getPaginationBuilder().mergeFrom(value);
+        } else {
+          pagination_ = value;
+        }
+      } else {
+        paginationBuilder_.mergeFrom(value);
+      }
+      if (pagination_ != null) {
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public Builder clearPagination() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      pagination_ = null;
+      if (paginationBuilder_ != null) {
+        paginationBuilder_.dispose();
+        paginationBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public com.producerflow.producer.v1.Pagination.Builder getPaginationBuilder() {
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return getPaginationFieldBuilder().getBuilder();
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    public com.producerflow.producer.v1.PaginationOrBuilder getPaginationOrBuilder() {
+      if (paginationBuilder_ != null) {
+        return paginationBuilder_.getMessageOrBuilder();
+      } else {
+        return pagination_ == null ?
+            com.producerflow.producer.v1.Pagination.getDefaultInstance() : pagination_;
+      }
+    }
+    /**
+     * <pre>
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilder<
+        com.producerflow.producer.v1.Pagination, com.producerflow.producer.v1.Pagination.Builder, com.producerflow.producer.v1.PaginationOrBuilder> 
+        getPaginationFieldBuilder() {
+      if (paginationBuilder_ == null) {
+        paginationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            com.producerflow.producer.v1.Pagination, com.producerflow.producer.v1.Pagination.Builder, com.producerflow.producer.v1.PaginationOrBuilder>(
+                getPagination(),
+                getParentForChildren(),
+                isClean());
+        pagination_ = null;
+      }
+      return paginationBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.appointment.v1.ListAppointmentsRequest)

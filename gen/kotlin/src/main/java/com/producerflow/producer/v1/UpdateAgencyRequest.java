@@ -435,12 +435,18 @@ java.lang.String defaultValue);
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -455,12 +461,18 @@ java.lang.String defaultValue);
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -475,18 +487,101 @@ java.lang.String defaultValue);
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
      * @return The organizationRelationship.
      */
     com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship();
+
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationId field is set.
+     */
+    boolean hasOrganizationId();
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return The organizationId.
+     */
+    java.lang.String getOrganizationId();
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for organizationId.
+     */
+    com.google.protobuf.ByteString
+        getOrganizationIdBytes();
   }
   /**
    * <pre>
@@ -523,6 +618,7 @@ java.lang.String defaultValue);
           com.google.protobuf.LazyStringArrayList.emptyList();
       notes_ = "";
       organizationRelationship_ = 0;
+      organizationId_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -561,7 +657,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated boolean hasStreet();
@@ -572,7 +668,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -583,7 +679,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -809,7 +905,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return Whether the street field is set.
        */
       @java.lang.Override
@@ -823,7 +919,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return The street.
        */
       @java.lang.Override
@@ -846,7 +942,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2500
+       *     See producerflow/producer/v1/producer.proto;l=2517
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -1640,7 +1736,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @return Whether the street field is set.
          */
         @java.lang.Deprecated public boolean hasStreet() {
@@ -1653,7 +1749,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1675,7 +1771,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1698,7 +1794,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -1717,7 +1813,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -1733,7 +1829,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2500
+         *     See producerflow/producer/v1/producer.proto;l=2517
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -4262,12 +4358,18 @@ java.lang.String defaultValue) {
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -4284,12 +4386,18 @@ java.lang.String defaultValue) {
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -4306,12 +4414,18 @@ java.lang.String defaultValue) {
      *
      * Update behavior:
      * - If not provided (null): the current relationship is preserved unchanged
-     * - If provided: the relationship with the agency's current organization is
-     * switched to the requested value (no-op if it already matches)
+     * - If provided together with organization_id: the agency is moved to that
+     * organization with the requested relationship
+     * - If provided on its own: the relationship with the agency's current
+     * organization is switched to the requested value (no-op if it already
+     * matches). The agency must already belong to an organization; otherwise
+     * the request fails with FAILED_PRECONDITION
      *
-     * The agency must already belong to an organization; otherwise the request
-     * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-     * agency to an organization or detach it from one.
+     * Turning a main agency into a related one requires the agency to have a
+     * principal, otherwise the request fails with FAILED_PRECONDITION.
+     *
+     * Cannot be combined with an empty organization_id, which detaches the
+     * agency and leaves it with no relationship at all.
      * </pre>
      *
      * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -4320,6 +4434,113 @@ java.lang.String defaultValue) {
     @java.lang.Override public com.producerflow.producer.v1.AgencyOrganizationRelationship getOrganizationRelationship() {
       com.producerflow.producer.v1.AgencyOrganizationRelationship result = com.producerflow.producer.v1.AgencyOrganizationRelationship.forNumber(organizationRelationship_);
       return result == null ? com.producerflow.producer.v1.AgencyOrganizationRelationship.UNRECOGNIZED : result;
+    }
+
+    public static final int ORGANIZATION_ID_FIELD_NUMBER = 11;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object organizationId_ = "";
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return Whether the organizationId field is set.
+     */
+    @java.lang.Override
+    public boolean hasOrganizationId() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return The organizationId.
+     */
+    @java.lang.Override
+    public java.lang.String getOrganizationId() {
+      java.lang.Object ref = organizationId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        organizationId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Organization the agency belongs to. Use the ListOrganizations RPC to get
+     * valid organization IDs. The producers under the agency follow it, since a
+     * producer's organization is derived from its agency.
+     *
+     * Update behavior:
+     * - If not provided (null): the current organization is preserved unchanged
+     * - If provided with an organization ID: the agency is moved to that
+     * organization (no-op if it already belongs to it), or attached to it if
+     * it had no organization. The relationship comes from
+     * organization_relationship when set, and is otherwise preserved from the
+     * organization the agency is moved from (RELATED when it had none)
+     * - If provided as an empty string: the agency is detached from its
+     * organization
+     *
+     * The agency must belong to at most one organization, otherwise the
+     * organization it is moved from is ambiguous and the request fails with
+     * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+     * </pre>
+     *
+     * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for organizationId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getOrganizationIdBytes() {
+      java.lang.Object ref = organizationId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        organizationId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4368,6 +4589,9 @@ java.lang.String defaultValue) {
       }
       if (((bitField0_ & 0x00000080) != 0)) {
         output.writeEnum(10, organizationRelationship_);
+      }
+      if (((bitField0_ & 0x00000100) != 0)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 11, organizationId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4422,6 +4646,9 @@ java.lang.String defaultValue) {
       if (((bitField0_ & 0x00000080) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(10, organizationRelationship_);
+      }
+      if (((bitField0_ & 0x00000100) != 0)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(11, organizationId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -4481,6 +4708,11 @@ java.lang.String defaultValue) {
       if (hasOrganizationRelationship()) {
         if (organizationRelationship_ != other.organizationRelationship_) return false;
       }
+      if (hasOrganizationId() != other.hasOrganizationId()) return false;
+      if (hasOrganizationId()) {
+        if (!getOrganizationId()
+            .equals(other.getOrganizationId())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4531,6 +4763,10 @@ java.lang.String defaultValue) {
       if (hasOrganizationRelationship()) {
         hash = (37 * hash) + ORGANIZATION_RELATIONSHIP_FIELD_NUMBER;
         hash = (53 * hash) + organizationRelationship_;
+      }
+      if (hasOrganizationId()) {
+        hash = (37 * hash) + ORGANIZATION_ID_FIELD_NUMBER;
+        hash = (53 * hash) + getOrganizationId().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -4716,6 +4952,7 @@ java.lang.String defaultValue) {
           ivansAccountBuilder_ = null;
         }
         organizationRelationship_ = 0;
+        organizationId_ = "";
         return this;
       }
 
@@ -4794,6 +5031,10 @@ java.lang.String defaultValue) {
           result.organizationRelationship_ = organizationRelationship_;
           to_bitField0_ |= 0x00000080;
         }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.organizationId_ = organizationId_;
+          to_bitField0_ |= 0x00000100;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -4855,6 +5096,11 @@ java.lang.String defaultValue) {
         }
         if (other.hasOrganizationRelationship()) {
           setOrganizationRelationship(other.getOrganizationRelationship());
+        }
+        if (other.hasOrganizationId()) {
+          organizationId_ = other.organizationId_;
+          bitField0_ |= 0x00000400;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -4941,6 +5187,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00000200;
                 break;
               } // case 80
+              case 90: {
+                organizationId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 90
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6237,12 +6488,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6259,12 +6516,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6281,12 +6544,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6307,12 +6576,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6331,12 +6606,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6360,12 +6641,18 @@ java.lang.String defaultValue) {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * </pre>
        *
        * <code>optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }</code>
@@ -6374,6 +6661,205 @@ java.lang.String defaultValue) {
       public Builder clearOrganizationRelationship() {
         bitField0_ = (bitField0_ & ~0x00000200);
         organizationRelationship_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object organizationId_ = "";
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @return Whether the organizationId field is set.
+       */
+      public boolean hasOrganizationId() {
+        return ((bitField0_ & 0x00000400) != 0);
+      }
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @return The organizationId.
+       */
+      public java.lang.String getOrganizationId() {
+        java.lang.Object ref = organizationId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          organizationId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for organizationId.
+       */
+      public com.google.protobuf.ByteString
+          getOrganizationIdBytes() {
+        java.lang.Object ref = organizationId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          organizationId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @param value The organizationId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        organizationId_ = value;
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrganizationId() {
+        organizationId_ = getDefaultInstance().getOrganizationId();
+        bitField0_ = (bitField0_ & ~0x00000400);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * </pre>
+       *
+       * <code>optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }</code>
+       * @param value The bytes for organizationId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrganizationIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        organizationId_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }

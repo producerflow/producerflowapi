@@ -5,6 +5,7 @@ package producerflow.appointment.v1;
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
+import "producerflow/producer/v1/producer.proto";
 
 // AppointmentService manages license appointments through NIPR.
 //
@@ -71,6 +72,20 @@ service AppointmentService {
   // integration):
   // - The appointment is processed automatically and immediately.
   // - Returns APPOINTED status immediately upon successful processing.
+  //
+  // Requesting an appointment that already exists for the same license and
+  // carrier is refused with ALREADY_EXISTS, unless that appointment is
+  // TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+  // the existing appointment's ID and moving it back to IN_PROGRESS, so the
+  // result reads the same as a first request.
+  //
+  // Before re-sending a REJECTED appointment, fix whatever caused the
+  // rejection: an unchanged appointment gets the same answer from the state
+  // and is charged again.
+  //
+  // Either re-send is refused when the underlying license is inactive or
+  // expired, since the state would reject it anyway, and when a NIPR
+  // transaction is already in flight for the appointment.
   rpc RequestAppointment(RequestAppointmentRequest) returns (RequestAppointmentResponse) {}
 
   // Terminates an existing appointment, permanently ending the relationship
@@ -164,7 +179,7 @@ message ListAppointmentsRequest {
   // Optional. Filter results by processing status.
   repeated ProcessingStatus processing_status = 1;
 
-  // Optional. Filter results by license owner.
+  // Required. The producer or agency whose appointments to list.
   oneof license_owner {
     string producer_id = 2 [(buf.validate.field).string.uuid = true];
     string agency_id = 3 [(buf.validate.field).string.uuid = true];
@@ -173,6 +188,10 @@ message ListAppointmentsRequest {
 
   // Optional. Filter results by operational status.
   repeated OperationalStatus operational_status = 4;
+
+  // Optional. Pagination parameters.
+  // If not provided, defaults to page_size=50. Maximum page_size is 200.
+  producerflow.producer.v1.Pagination pagination = 5;
 }
 
 message ListAppointmentsResponse {
@@ -180,6 +199,7 @@ message ListAppointmentsResponse {
   repeated Appointment appointments = 1;
 
   // Token for fetching the next page of results.
+  // Empty when there are no more results.
   string next_page_token = 2;
 }
 

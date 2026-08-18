@@ -141,5 +141,35 @@ public interface ListAppointmentsRequestOrBuilder extends
    */
   int getOperationalStatusValue(int index);
 
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   * @return Whether the pagination field is set.
+   */
+  boolean hasPagination();
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   * @return The pagination.
+   */
+  com.producerflow.producer.v1.Pagination getPagination();
+  /**
+   * <pre>
+   * Optional. Pagination parameters.
+   * If not provided, defaults to page_size=50. Maximum page_size is 200.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];</code>
+   */
+  com.producerflow.producer.v1.PaginationOrBuilder getPaginationOrBuilder();
+
   com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase getLicenseOwnerCase();
 }

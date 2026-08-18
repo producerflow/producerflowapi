@@ -265,7 +265,48 @@ public object ListAppointmentsRequestKt {
     @kotlin.jvm.JvmName("clearOperationalStatus")
     public fun com.google.protobuf.kotlin.DslList<com.producerflow.appointment.v1.OperationalStatus, OperationalStatusProxy>.clear() {
       _builder.clearOperationalStatus()
-    }public val licenseOwnerCase: com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase
+    }
+    /**
+     * ```
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * ```
+     *
+     * `.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];`
+     */
+    public var pagination: com.producerflow.producer.v1.Pagination
+      @JvmName("getPagination")
+      get() = _builder.pagination
+      @JvmName("setPagination")
+      set(value) {
+        _builder.pagination = value
+      }
+    /**
+     * ```
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * ```
+     *
+     * `.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];`
+     */
+    public fun clearPagination() {
+      _builder.clearPagination()
+    }
+    /**
+     * ```
+     * Optional. Pagination parameters.
+     * If not provided, defaults to page_size=50. Maximum page_size is 200.
+     * ```
+     *
+     * `.producerflow.producer.v1.Pagination pagination = 5 [json_name = "pagination"];`
+     * @return Whether the pagination field is set.
+     */
+    public fun hasPagination(): kotlin.Boolean {
+      return _builder.hasPagination()
+    }
+    public val ListAppointmentsRequestKt.Dsl.paginationOrNull: com.producerflow.producer.v1.Pagination?
+      get() = _builder.paginationOrNull
+    public val licenseOwnerCase: com.producerflow.appointment.v1.ListAppointmentsRequest.LicenseOwnerCase
       @JvmName("getLicenseOwnerCase")
       get() = _builder.getLicenseOwnerCase()
 
@@ -277,4 +318,7 @@ public object ListAppointmentsRequestKt {
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.appointment.v1.ListAppointmentsRequest.copy(block: `com.producerflow.appointment.v1`.ListAppointmentsRequestKt.Dsl.() -> kotlin.Unit): com.producerflow.appointment.v1.ListAppointmentsRequest =
   `com.producerflow.appointment.v1`.ListAppointmentsRequestKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val com.producerflow.appointment.v1.ListAppointmentsRequestOrBuilder.paginationOrNull: com.producerflow.producer.v1.Pagination?
+  get() = if (hasPagination()) getPagination() else null
 

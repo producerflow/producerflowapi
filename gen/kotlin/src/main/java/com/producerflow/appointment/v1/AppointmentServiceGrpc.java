@@ -465,6 +465,17 @@ public final class AppointmentServiceGrpc {
      * integration):
      * - The appointment is processed automatically and immediately.
      * - Returns APPOINTED status immediately upon successful processing.
+     * Requesting an appointment that already exists for the same license and
+     * carrier is refused with ALREADY_EXISTS, unless that appointment is
+     * TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+     * the existing appointment's ID and moving it back to IN_PROGRESS, so the
+     * result reads the same as a first request.
+     * Before re-sending a REJECTED appointment, fix whatever caused the
+     * rejection: an unchanged appointment gets the same answer from the state
+     * and is charged again.
+     * Either re-send is refused when the underlying license is inactive or
+     * expired, since the state would reject it anyway, and when a NIPR
+     * transaction is already in flight for the appointment.
      * </pre>
      */
     default void requestAppointment(com.producerflow.appointment.v1.RequestAppointmentRequest request,
@@ -684,6 +695,17 @@ public final class AppointmentServiceGrpc {
      * integration):
      * - The appointment is processed automatically and immediately.
      * - Returns APPOINTED status immediately upon successful processing.
+     * Requesting an appointment that already exists for the same license and
+     * carrier is refused with ALREADY_EXISTS, unless that appointment is
+     * TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+     * the existing appointment's ID and moving it back to IN_PROGRESS, so the
+     * result reads the same as a first request.
+     * Before re-sending a REJECTED appointment, fix whatever caused the
+     * rejection: an unchanged appointment gets the same answer from the state
+     * and is charged again.
+     * Either re-send is refused when the underlying license is inactive or
+     * expired, since the state would reject it anyway, and when a NIPR
+     * transaction is already in flight for the appointment.
      * </pre>
      */
     public void requestAppointment(com.producerflow.appointment.v1.RequestAppointmentRequest request,
@@ -868,6 +890,17 @@ public final class AppointmentServiceGrpc {
      * integration):
      * - The appointment is processed automatically and immediately.
      * - Returns APPOINTED status immediately upon successful processing.
+     * Requesting an appointment that already exists for the same license and
+     * carrier is refused with ALREADY_EXISTS, unless that appointment is
+     * TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+     * the existing appointment's ID and moving it back to IN_PROGRESS, so the
+     * result reads the same as a first request.
+     * Before re-sending a REJECTED appointment, fix whatever caused the
+     * rejection: an unchanged appointment gets the same answer from the state
+     * and is charged again.
+     * Either re-send is refused when the underlying license is inactive or
+     * expired, since the state would reject it anyway, and when a NIPR
+     * transaction is already in flight for the appointment.
      * </pre>
      */
     public com.producerflow.appointment.v1.RequestAppointmentResponse requestAppointment(com.producerflow.appointment.v1.RequestAppointmentRequest request) {
@@ -1055,6 +1088,17 @@ public final class AppointmentServiceGrpc {
      * integration):
      * - The appointment is processed automatically and immediately.
      * - Returns APPOINTED status immediately upon successful processing.
+     * Requesting an appointment that already exists for the same license and
+     * carrier is refused with ALREADY_EXISTS, unless that appointment is
+     * TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+     * the existing appointment's ID and moving it back to IN_PROGRESS, so the
+     * result reads the same as a first request.
+     * Before re-sending a REJECTED appointment, fix whatever caused the
+     * rejection: an unchanged appointment gets the same answer from the state
+     * and is charged again.
+     * Either re-send is refused when the underlying license is inactive or
+     * expired, since the state would reject it anyway, and when a NIPR
+     * transaction is already in flight for the appointment.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.appointment.v1.RequestAppointmentResponse> requestAppointment(

@@ -1914,6 +1914,9 @@ public final class ProducerServiceGrpc {
      * - Requested appointments (state codes)
      * - Notes
      * - External metadata (for tenant-specific data)
+     * - IVANS account
+     * - Organization membership (organization_id) and the relationship the agency
+     *   has with it (organization_relationship)
      * All fields are optional - only provide the fields you want to update.
      * Unchanged fields retain their current values.
      * Validation:
@@ -1935,17 +1938,31 @@ public final class ProducerServiceGrpc {
      *     - state: If provided, must be exactly 2 characters
      *     - zip: If provided, must be 1-10 characters
      *   - external_metadata: Map of key-value pairs for tenant-specific data
+     *   - organization_id: If provided, maximum 36 characters; an empty string
+     *     detaches the agency from its organization
+     *   - organization_relationship: If provided, must be MAIN or RELATED
      * Business logic validation:
      * - agency_id: Agency must exist and belong to the authenticated tenant
      * - email: If changed, must be unique within the tenant (case-insensitive comparison)
      * - phone: If provided, must be a valid phone number format
+     * - organization_id: The organization must exist within the tenant. The agency
+     *   must belong to at most one organization, otherwise the organization it is
+     *   moved from is ambiguous
+     * - organization_relationship: Cannot be combined with an empty organization_id.
+     *   Turning a main agency into a related one requires the agency to have a
+     *   principal
      * Returns:
      * Empty response on success.
      * Common Error Codes:
-     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+     *   requested organization doesn't exist
      * - ALREADY_EXISTS: Email already exists within tenant
-     * - INVALID_ARGUMENT: Invalid phone number format or all address fields required
-     *   when creating new address
+     * - INVALID_ARGUMENT: Invalid phone number format, all address fields required
+     *   when creating new address, or organization_relationship combined with an
+     *   empty organization_id
+     * - FAILED_PRECONDITION: The agency belongs to more than one organization, a
+     *   relationship change was requested for an agency without an organization, or
+     *   a main agency without a principal was turned into a related agency
      * </pre>
      */
     default void updateAgency(com.producerflow.producer.v1.UpdateAgencyRequest request,
@@ -3453,6 +3470,9 @@ public final class ProducerServiceGrpc {
      * - Requested appointments (state codes)
      * - Notes
      * - External metadata (for tenant-specific data)
+     * - IVANS account
+     * - Organization membership (organization_id) and the relationship the agency
+     *   has with it (organization_relationship)
      * All fields are optional - only provide the fields you want to update.
      * Unchanged fields retain their current values.
      * Validation:
@@ -3474,17 +3494,31 @@ public final class ProducerServiceGrpc {
      *     - state: If provided, must be exactly 2 characters
      *     - zip: If provided, must be 1-10 characters
      *   - external_metadata: Map of key-value pairs for tenant-specific data
+     *   - organization_id: If provided, maximum 36 characters; an empty string
+     *     detaches the agency from its organization
+     *   - organization_relationship: If provided, must be MAIN or RELATED
      * Business logic validation:
      * - agency_id: Agency must exist and belong to the authenticated tenant
      * - email: If changed, must be unique within the tenant (case-insensitive comparison)
      * - phone: If provided, must be a valid phone number format
+     * - organization_id: The organization must exist within the tenant. The agency
+     *   must belong to at most one organization, otherwise the organization it is
+     *   moved from is ambiguous
+     * - organization_relationship: Cannot be combined with an empty organization_id.
+     *   Turning a main agency into a related one requires the agency to have a
+     *   principal
      * Returns:
      * Empty response on success.
      * Common Error Codes:
-     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+     *   requested organization doesn't exist
      * - ALREADY_EXISTS: Email already exists within tenant
-     * - INVALID_ARGUMENT: Invalid phone number format or all address fields required
-     *   when creating new address
+     * - INVALID_ARGUMENT: Invalid phone number format, all address fields required
+     *   when creating new address, or organization_relationship combined with an
+     *   empty organization_id
+     * - FAILED_PRECONDITION: The agency belongs to more than one organization, a
+     *   relationship change was requested for an agency without an organization, or
+     *   a main agency without a principal was turned into a related agency
      * </pre>
      */
     public void updateAgency(com.producerflow.producer.v1.UpdateAgencyRequest request,
@@ -4968,6 +5002,9 @@ public final class ProducerServiceGrpc {
      * - Requested appointments (state codes)
      * - Notes
      * - External metadata (for tenant-specific data)
+     * - IVANS account
+     * - Organization membership (organization_id) and the relationship the agency
+     *   has with it (organization_relationship)
      * All fields are optional - only provide the fields you want to update.
      * Unchanged fields retain their current values.
      * Validation:
@@ -4989,17 +5026,31 @@ public final class ProducerServiceGrpc {
      *     - state: If provided, must be exactly 2 characters
      *     - zip: If provided, must be 1-10 characters
      *   - external_metadata: Map of key-value pairs for tenant-specific data
+     *   - organization_id: If provided, maximum 36 characters; an empty string
+     *     detaches the agency from its organization
+     *   - organization_relationship: If provided, must be MAIN or RELATED
      * Business logic validation:
      * - agency_id: Agency must exist and belong to the authenticated tenant
      * - email: If changed, must be unique within the tenant (case-insensitive comparison)
      * - phone: If provided, must be a valid phone number format
+     * - organization_id: The organization must exist within the tenant. The agency
+     *   must belong to at most one organization, otherwise the organization it is
+     *   moved from is ambiguous
+     * - organization_relationship: Cannot be combined with an empty organization_id.
+     *   Turning a main agency into a related one requires the agency to have a
+     *   principal
      * Returns:
      * Empty response on success.
      * Common Error Codes:
-     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+     *   requested organization doesn't exist
      * - ALREADY_EXISTS: Email already exists within tenant
-     * - INVALID_ARGUMENT: Invalid phone number format or all address fields required
-     *   when creating new address
+     * - INVALID_ARGUMENT: Invalid phone number format, all address fields required
+     *   when creating new address, or organization_relationship combined with an
+     *   empty organization_id
+     * - FAILED_PRECONDITION: The agency belongs to more than one organization, a
+     *   relationship change was requested for an agency without an organization, or
+     *   a main agency without a principal was turned into a related agency
      * </pre>
      */
     public com.producerflow.producer.v1.UpdateAgencyResponse updateAgency(com.producerflow.producer.v1.UpdateAgencyRequest request) {
@@ -6476,6 +6527,9 @@ public final class ProducerServiceGrpc {
      * - Requested appointments (state codes)
      * - Notes
      * - External metadata (for tenant-specific data)
+     * - IVANS account
+     * - Organization membership (organization_id) and the relationship the agency
+     *   has with it (organization_relationship)
      * All fields are optional - only provide the fields you want to update.
      * Unchanged fields retain their current values.
      * Validation:
@@ -6497,17 +6551,31 @@ public final class ProducerServiceGrpc {
      *     - state: If provided, must be exactly 2 characters
      *     - zip: If provided, must be 1-10 characters
      *   - external_metadata: Map of key-value pairs for tenant-specific data
+     *   - organization_id: If provided, maximum 36 characters; an empty string
+     *     detaches the agency from its organization
+     *   - organization_relationship: If provided, must be MAIN or RELATED
      * Business logic validation:
      * - agency_id: Agency must exist and belong to the authenticated tenant
      * - email: If changed, must be unique within the tenant (case-insensitive comparison)
      * - phone: If provided, must be a valid phone number format
+     * - organization_id: The organization must exist within the tenant. The agency
+     *   must belong to at most one organization, otherwise the organization it is
+     *   moved from is ambiguous
+     * - organization_relationship: Cannot be combined with an empty organization_id.
+     *   Turning a main agency into a related one requires the agency to have a
+     *   principal
      * Returns:
      * Empty response on success.
      * Common Error Codes:
-     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+     * - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+     *   requested organization doesn't exist
      * - ALREADY_EXISTS: Email already exists within tenant
-     * - INVALID_ARGUMENT: Invalid phone number format or all address fields required
-     *   when creating new address
+     * - INVALID_ARGUMENT: Invalid phone number format, all address fields required
+     *   when creating new address, or organization_relationship combined with an
+     *   empty organization_id
+     * - FAILED_PRECONDITION: The agency belongs to more than one organization, a
+     *   relationship change was requested for an agency without an organization, or
+     *   a main agency without a principal was turned into a related agency
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.producer.v1.UpdateAgencyResponse> updateAgency(

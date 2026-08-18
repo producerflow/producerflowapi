@@ -56,6 +56,7 @@ public interface ListAppointmentsResponseOrBuilder extends
   /**
    * <pre>
    * Token for fetching the next page of results.
+   * Empty when there are no more results.
    * </pre>
    *
    * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
@@ -65,6 +66,7 @@ public interface ListAppointmentsResponseOrBuilder extends
   /**
    * <pre>
    * Token for fetching the next page of results.
+   * Empty when there are no more results.
    * </pre>
    *
    * <code>string next_page_token = 2 [json_name = "nextPageToken"];</code>
