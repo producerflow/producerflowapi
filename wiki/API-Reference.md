@@ -29,16 +29,6 @@ For those topics, including onboarding guides, webhook behavior, examples, and a
 visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/producerflowapi/wiki/).
 
 ## Table of Contents
-- [AppointmentService](#appointmentservice)
-  - [GetAppointment](#getappointment)
-  - [GetAppointmentFees](#getappointmentfees)
-  - [GetAppointableCarriers](#getappointablecarriers)
-  - [GetTerminationFees](#getterminationfees)
-  - [ListAppointments](#listappointments)
-  - [ListEligibleLicenses](#listeligiblelicenses)
-  - [RequestAppointment](#requestappointment)
-  - [TerminateAppointment](#terminateappointment)
-  - [ListTerminationReasons](#listterminationreasons)
 - [ProducerService](#producerservice)
   - [CreateAgencyOnboardingURL](#createagencyonboardingurl)
   - [CreateProducerOnboardingURL](#createproduceronboardingurl)
@@ -79,326 +69,22 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [AssignProducerToLocations](#assignproducertolocations)
   - [UnassignProducerFromLocations](#unassignproducerfromlocations)
   - [UpdateAgencyLocation](#updateagencylocation)
+- [AppointmentService](#appointmentservice)
+  - [GetAppointment](#getappointment)
+  - [GetAppointmentFees](#getappointmentfees)
+  - [GetAppointableCarriers](#getappointablecarriers)
+  - [GetTerminationFees](#getterminationfees)
+  - [ListAppointments](#listappointments)
+  - [ListEligibleLicenses](#listeligiblelicenses)
+  - [RequestAppointment](#requestappointment)
+  - [TerminateAppointment](#terminateappointment)
+  - [ListTerminationReasons](#listterminationreasons)
 - [TestingService](#testingservice)
   - [DeleteAgency](#deleteagency)
   - [DeleteAppointment](#deleteappointment)
 
 ---
 
-
-## AppointmentService
-
-AppointmentService manages license appointments through NIPR.
-
-The appointment flow in NIPR is as follows:
-1. A new appointment (or termination) is requested for a license number.
-2. Some time later, NIPR processes the request and returns the final result.
-
-Since NIPR does not return results immediately, RequestAppointment and
-TerminateAppointment RPCs will return a processing status of IN_PROGRESS if
-the request is accepted by NIPR. When the appointment is finally processed by
-NIPR, ProducerFlow will notify via a webhook of the final result. Also, any
-call from this point on to ListAppointments or GetAppointment will also
-return the final result.
-
-IMPORTANT: Appointments in registry states or with capacity carriers
-(carriers that do not have NIPR integration) are processed automatically
-without going through NIPR. In these cases:
-- RequestAppointment will immediately return APPOINTED status.
-- TerminateAppointment will immediately return TERMINATED status.
-
-Any call to this service must be authenticated using an API key in the
-request headers. The API key can be found in the ProducerFlow API key
-section of the ProducerFlow UI and it identifies the tenant that is making
-the request.
-
-
-### GetAppointment
-
-
-Retrieves the details of an appointment by its ID.
-
-#### Request: `GetAppointmentRequest`
-
-
-Request to retrieve an appointment by ID.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
-
-#### Response: `GetAppointmentResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment` | [Appointment](#appointment) |  | The appointment details. |
-
----
-
-
-### GetAppointmentFees
-
-
-Retrieves the total fees associated with requesting an appointment for the given license.
-Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
-
-#### Request: `GetAppointmentFeesRequest`
-
-
-Request to get appointment fees.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
-
-#### Response: `GetAppointmentFeesResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
-
----
-
-
-### GetAppointableCarriers
-
-
-Retrieves the carriers that are available to appoint licenses for the tenant.
-
-#### Request: `GetAppointableCarriersRequest`
-
-
-Request to retrieve carriers that are available to be appointed.
-
-
-*This message has no fields.*
-
-#### Response: `GetAppointableCarriersResponse`
-
-
-Response containing carriers that are available to be appointed.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `carriers` | [Carrier](#carrier) | repeated | The list of carriers that are available to be appointed. |
-
----
-
-
-### GetTerminationFees
-
-
-Retrieves the total fees associated with terminating an appointment for the given license.
-Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
-
-#### Request: `GetTerminationFeesRequest`
-
-
-Request to get termination fees.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
-
-#### Response: `GetTerminationFeesResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
-
----
-
-
-### ListAppointments
-
-
-Lists appointments for the tenant, optionally filtered by processing status.
-
-#### Request: `ListAppointmentsRequest`
-
-
-Request to list appointments, optionally filtered by processing status.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
-| `producer_id` | [string](#string) |  |  |
-| `agency_id` | [string](#string) |  |  |
-| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
-
-#### Response: `ListAppointmentsResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointments` | [Appointment](#appointment) | repeated | List of appointments. |
-| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. |
-
----
-
-
-### ListEligibleLicenses
-
-
-Returns a list of licenses that are eligible to be appointed.
-
-#### Request: `ListEligibleLicensesRequest`
-
-
-Request to retrieve a list of licenses that are eligible to be appointed.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `producer_id` | [string](#string) |  |  |
-| `agency_id` | [string](#string) |  |  |
-
-#### Response: `ListEligibleLicensesResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `licenses` | [License](#license) | repeated | List of licenses that are eligible to be appointed. |
-
----
-
-
-### RequestAppointment
-
-
-Requests a new appointment for a license that is eligible to be appointed.
-
-The simpler way to do this is to call ListEligibleLicenses to get a list of
-licenses that are eligible to be appointed. Then, call RequestAppointment
-for the licenses in the list that you want to appoint.
-
-Processing behavior varies based on the license state and carrier NIPR
-integration:
-
-For NIPR-integrated carriers in non-registry states:
-- If the request is accepted by NIPR, the appointment will have
-  IN_PROGRESS processing status.
-- If rejected, it will have REJECTED status and reasons will be provided
-  in not_eligible_reasons.
-- Final result will be delivered via webhook when NIPR completes
-  processing.
-
-For registry states or capacity carriers (carriers without NIPR
-integration):
-- The appointment is processed automatically and immediately.
-- Returns APPOINTED status immediately upon successful processing.
-
-#### Request: `RequestAppointmentRequest`
-
-
-Request to create a new appointment.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
-| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
-
-#### Response: `RequestAppointmentResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
-| `processing_status` | [ProcessingStatus](#processingstatus) |  | Processing status of the appointment request.  For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected.  For registry states or non-NIPR carriers: APPOINTED if successful. |
-| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why. Only populated when processing_status is REJECTED. |
-
----
-
-
-### TerminateAppointment
-
-
-Terminates an existing appointment, permanently ending the relationship
-between the license holder and the carrier.
-
-Before calling this method, you must:
-1. Ensure the appointment exists and is in APPOINTED status.
-2. Call ListTerminationReasons to get valid termination reasons for the
-   license's state.
-3. Select an appropriate termination reason from the state-specific list.
-
-Processing behavior varies based on the license state and carrier NIPR
-integration:
-
-For NIPR-integrated carriers in non-registry states:
-- The request is submitted to NIPR for processing.
-- Once NIPR completes processing, the status becomes TERMINATED.
-- If rejected by NIPR, the appointment remains in its current status.
-- You will receive webhook notifications when the termination is processed
-  by NIPR.
-
-For registry states, capacity carriers (carriers without NIPR
-integration), or synthetic appointments:
-- The termination is processed automatically and immediately.
-- Returns TERMINATED status immediately upon successful processing.
-
-Important considerations:
-- Termination is permanent and cannot be undone.
-- Termination reasons must be valid for the specific state where the
-  license is issued.
-- Some terminations may incur fees (check GetTerminationFees first).
-- The response indicates whether the termination request was successfully
-  submitted, not whether the actual termination was completed (since NIPR
-  processes asynchronously).
-
-#### Request: `TerminateAppointmentRequest`
-
-
-Request to terminate an appointment.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
-| `reason` | [TerminationReason](#terminationreason) |  | Reason for termination. This must be a valid termination reason for the state where the license is issued. Call ListTerminationReasons first to get the list of valid reasons for the specific state. |
-
-#### Response: `TerminateAppointmentResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed.  For NIPR-integrated carriers: - Indicates whether the termination request was successfully submitted to   NIPR. - This does not indicate that the appointment has been terminated, only   that the request has been accepted for processing. - The actual termination will be processed asynchronously by NIPR, and   you will be notified via webhook when the process completes.  For registry states or non-NIPR carriers: - Indicates whether the termination was successfully completed immediately. |
-
----
-
-
-### ListTerminationReasons
-
-
-Lists the valid termination reasons for appointments in a specific state.
-
-When terminating an appointment, you must provide a valid termination
-reason that is accepted by NIPR for the state where the license is
-issued. Termination reasons vary by state, so you should call this method
-first to retrieve the list of valid reasons before calling
-TerminateAppointment.
-
-The termination reasons returned are based on NIPR's valid termination
-codes for the specified state. Each reason corresponds to a specific
-business scenario for why an appointment might be terminated (e.g.,
-voluntary termination, inadequate production, company merger, etc.).
-
-#### Request: `ListTerminationReasonsRequest`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve valid termination reasons. Different states may have different sets of valid termination reasons accepted by NIPR. |
-
-#### Response: `ListTerminationReasonsResponse`
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `termination_reasons` | [TerminationReason](#terminationreason) | repeated | The list of valid termination reasons for the specified state. These reasons can be used when calling TerminateAppointment for licenses issued in this state. |
-
----
 
 ## ProducerService
 
@@ -1503,6 +1189,9 @@ Updatable Fields:
 - Requested appointments (state codes)
 - Notes
 - External metadata (for tenant-specific data)
+- IVANS account
+- Organization membership (organization_id) and the relationship the agency
+  has with it (organization_relationship)
 
 All fields are optional - only provide the fields you want to update.
 Unchanged fields retain their current values.
@@ -1527,20 +1216,34 @@ Proto validation (format checks):
     - state: If provided, must be exactly 2 characters
     - zip: If provided, must be 1-10 characters
   - external_metadata: Map of key-value pairs for tenant-specific data
+  - organization_id: If provided, maximum 36 characters; an empty string
+    detaches the agency from its organization
+  - organization_relationship: If provided, must be MAIN or RELATED
 
 Business logic validation:
 - agency_id: Agency must exist and belong to the authenticated tenant
 - email: If changed, must be unique within the tenant (case-insensitive comparison)
 - phone: If provided, must be a valid phone number format
+- organization_id: The organization must exist within the tenant. The agency
+  must belong to at most one organization, otherwise the organization it is
+  moved from is ambiguous
+- organization_relationship: Cannot be combined with an empty organization_id.
+  Turning a main agency into a related one requires the agency to have a
+  principal
 
 Returns:
 Empty response on success.
 
 Common Error Codes:
-- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+- NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+  requested organization doesn't exist
 - ALREADY_EXISTS: Email already exists within tenant
-- INVALID_ARGUMENT: Invalid phone number format or all address fields required
-  when creating new address
+- INVALID_ARGUMENT: Invalid phone number format, all address fields required
+  when creating new address, or organization_relationship combined with an
+  empty organization_id
+- FAILED_PRECONDITION: The agency belongs to more than one organization, a
+  relationship change was requested for an agency without an organization, or
+  a main agency without a principal was turned into a related agency
 
 #### Request: `UpdateAgencyRequest`
 
@@ -2905,6 +2608,335 @@ UpdateAgencyLocationResponse contains the updated location details.
 
 ---
 
+## AppointmentService
+
+AppointmentService manages license appointments through NIPR.
+
+The appointment flow in NIPR is as follows:
+1. A new appointment (or termination) is requested for a license number.
+2. Some time later, NIPR processes the request and returns the final result.
+
+Since NIPR does not return results immediately, RequestAppointment and
+TerminateAppointment RPCs will return a processing status of IN_PROGRESS if
+the request is accepted by NIPR. When the appointment is finally processed by
+NIPR, ProducerFlow will notify via a webhook of the final result. Also, any
+call from this point on to ListAppointments or GetAppointment will also
+return the final result.
+
+IMPORTANT: Appointments in registry states or with capacity carriers
+(carriers that do not have NIPR integration) are processed automatically
+without going through NIPR. In these cases:
+- RequestAppointment will immediately return APPOINTED status.
+- TerminateAppointment will immediately return TERMINATED status.
+
+Any call to this service must be authenticated using an API key in the
+request headers. The API key can be found in the ProducerFlow API key
+section of the ProducerFlow UI and it identifies the tenant that is making
+the request.
+
+
+### GetAppointment
+
+
+Retrieves the details of an appointment by its ID.
+
+#### Request: `GetAppointmentRequest`
+
+
+Request to retrieve an appointment by ID.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
+
+#### Response: `GetAppointmentResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment` | [Appointment](#appointment) |  | The appointment details. |
+
+---
+
+
+### GetAppointmentFees
+
+
+Retrieves the total fees associated with requesting an appointment for the given license.
+Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
+
+#### Request: `GetAppointmentFeesRequest`
+
+
+Request to get appointment fees.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
+
+#### Response: `GetAppointmentFeesResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
+
+---
+
+
+### GetAppointableCarriers
+
+
+Retrieves the carriers that are available to appoint licenses for the tenant.
+
+#### Request: `GetAppointableCarriersRequest`
+
+
+Request to retrieve carriers that are available to be appointed.
+
+
+*This message has no fields.*
+
+#### Response: `GetAppointableCarriersResponse`
+
+
+Response containing carriers that are available to be appointed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `carriers` | [Carrier](#carrier) | repeated | The list of carriers that are available to be appointed. |
+
+---
+
+
+### GetTerminationFees
+
+
+Retrieves the total fees associated with terminating an appointment for the given license.
+Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
+
+#### Request: `GetTerminationFeesRequest`
+
+
+Request to get termination fees.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
+
+#### Response: `GetTerminationFeesResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
+
+---
+
+
+### ListAppointments
+
+
+Lists appointments for the tenant, optionally filtered by processing status.
+
+#### Request: `ListAppointmentsRequest`
+
+
+Request to list appointments, optionally filtered by processing status.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
+| `producer_id` | [string](#string) |  |  |
+| `agency_id` | [string](#string) |  |  |
+| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
+| `pagination` | [producerflow.producer.v1.Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters. If not provided, defaults to page_size=50. Maximum page_size is 200. |
+
+#### Response: `ListAppointmentsResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointments` | [Appointment](#appointment) | repeated | List of appointments. |
+| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. Empty when there are no more results. |
+
+---
+
+
+### ListEligibleLicenses
+
+
+Returns a list of licenses that are eligible to be appointed.
+
+#### Request: `ListEligibleLicensesRequest`
+
+
+Request to retrieve a list of licenses that are eligible to be appointed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `producer_id` | [string](#string) |  |  |
+| `agency_id` | [string](#string) |  |  |
+
+#### Response: `ListEligibleLicensesResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `licenses` | [License](#license) | repeated | List of licenses that are eligible to be appointed. |
+
+---
+
+
+### RequestAppointment
+
+
+Requests a new appointment for a license that is eligible to be appointed.
+
+The simpler way to do this is to call ListEligibleLicenses to get a list of
+licenses that are eligible to be appointed. Then, call RequestAppointment
+for the licenses in the list that you want to appoint.
+
+Processing behavior varies based on the license state and carrier NIPR
+integration:
+
+For NIPR-integrated carriers in non-registry states:
+- If the request is accepted by NIPR, the appointment will have
+  IN_PROGRESS processing status.
+- If rejected, it will have REJECTED status and reasons will be provided
+  in not_eligible_reasons.
+- Final result will be delivered via webhook when NIPR completes
+  processing.
+
+For registry states or capacity carriers (carriers without NIPR
+integration):
+- The appointment is processed automatically and immediately.
+- Returns APPOINTED status immediately upon successful processing.
+
+Requesting an appointment that already exists for the same license and
+carrier is refused with ALREADY_EXISTS, unless that appointment is
+TERMINATED or REJECTED. Both of those are sent to the state again, reusing
+the existing appointment's ID and moving it back to IN_PROGRESS, so the
+result reads the same as a first request.
+
+Before re-sending a REJECTED appointment, fix whatever caused the
+rejection: an unchanged appointment gets the same answer from the state
+and is charged again.
+
+Either re-send is refused when the underlying license is inactive or
+expired, since the state would reject it anyway, and when a NIPR
+transaction is already in flight for the appointment.
+
+#### Request: `RequestAppointmentRequest`
+
+
+Request to create a new appointment.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
+| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
+
+#### Response: `RequestAppointmentResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
+| `processing_status` | [ProcessingStatus](#processingstatus) |  | Processing status of the appointment request.  For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected.  For registry states or non-NIPR carriers: APPOINTED if successful. |
+| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why. Only populated when processing_status is REJECTED. |
+
+---
+
+
+### TerminateAppointment
+
+
+Terminates an existing appointment, permanently ending the relationship
+between the license holder and the carrier.
+
+Before calling this method, you must:
+1. Ensure the appointment exists and is in APPOINTED status.
+2. Call ListTerminationReasons to get valid termination reasons for the
+   license's state.
+3. Select an appropriate termination reason from the state-specific list.
+
+Processing behavior varies based on the license state and carrier NIPR
+integration:
+
+For NIPR-integrated carriers in non-registry states:
+- The request is submitted to NIPR for processing.
+- Once NIPR completes processing, the status becomes TERMINATED.
+- If rejected by NIPR, the appointment remains in its current status.
+- You will receive webhook notifications when the termination is processed
+  by NIPR.
+
+For registry states, capacity carriers (carriers without NIPR
+integration), or synthetic appointments:
+- The termination is processed automatically and immediately.
+- Returns TERMINATED status immediately upon successful processing.
+
+Important considerations:
+- Termination is permanent and cannot be undone.
+- Termination reasons must be valid for the specific state where the
+  license is issued.
+- Some terminations may incur fees (check GetTerminationFees first).
+- The response indicates whether the termination request was successfully
+  submitted, not whether the actual termination was completed (since NIPR
+  processes asynchronously).
+
+#### Request: `TerminateAppointmentRequest`
+
+
+Request to terminate an appointment.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
+| `reason` | [TerminationReason](#terminationreason) |  | Reason for termination. This must be a valid termination reason for the state where the license is issued. Call ListTerminationReasons first to get the list of valid reasons for the specific state. |
+
+#### Response: `TerminateAppointmentResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed.  For NIPR-integrated carriers: - Indicates whether the termination request was successfully submitted to   NIPR. - This does not indicate that the appointment has been terminated, only   that the request has been accepted for processing. - The actual termination will be processed asynchronously by NIPR, and   you will be notified via webhook when the process completes.  For registry states or non-NIPR carriers: - Indicates whether the termination was successfully completed immediately. |
+
+---
+
+
+### ListTerminationReasons
+
+
+Lists the valid termination reasons for appointments in a specific state.
+
+When terminating an appointment, you must provide a valid termination
+reason that is accepted by NIPR for the state where the license is
+issued. Termination reasons vary by state, so you should call this method
+first to retrieve the list of valid reasons before calling
+TerminateAppointment.
+
+The termination reasons returned are based on NIPR's valid termination
+codes for the specified state. Each reason corresponds to a specific
+business scenario for why an appointment might be terminated (e.g.,
+voluntary termination, inadequate production, company merger, etc.).
+
+#### Request: `ListTerminationReasonsRequest`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve valid termination reasons. Different states may have different sets of valid termination reasons accepted by NIPR. |
+
+#### Response: `ListTerminationReasonsResponse`
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `termination_reasons` | [TerminationReason](#terminationreason) | repeated | The list of valid termination reasons for the specified state. These reasons can be used when calling TerminateAppointment for licenses issued in this state. |
+
+---
+
 ## TestingService
 
 ============================================================================
@@ -3009,226 +3041,6 @@ Errors:
 
 These types are used across multiple API methods.
 
-
-### producerflow/appointment/v1/appointment.proto
-
-
-#### Appointment
-
-Represents a managed appointment for a license, tracked through the
-ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
-on the Producer/Agency messages, this represents appointments that are
-actively managed (requested, terminated) through the AppointmentService.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | Unique identifier for the appointment (UUID format). |
-| `license` | [License](#license) |  | Information about the license being appointed. |
-| `name` | [string](#string) |  | The license number of the license being appointed. This is a denormalized copy of license.license_number for convenience. |
-| `agency_id` | [string](#string) |  | The UUID of the agency that holds this appointment. |
-| `producer_id` | [string](#string) | optional | Optional. The UUID of the producer that holds this appointment, if any. When empty, this is an agency-level appointment. |
-| `carrier` | [string](#string) |  | The name of the carrier to which the license is appointed. Examples: "State Farm", "Allstate", "Progressive" |
-| `appointment_type` | [AppointmentType](#appointmenttype) |  | Type of appointment (registry, up-front, just-in-time, or synthetic). Determines how the appointment was established and processed. |
-| `processing_status` | [ProcessingStatus](#processingstatus) |  | Current processing status of the appointment in the NIPR pipeline. See ProcessingStatus for the complete lifecycle documentation. |
-| `comments` | [string](#string) |  | Optional. Comments or notes related to the appointment. May include NIPR processing notes or rejection details. |
-| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of when the appointment became or becomes effective. |
-| `termination_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) | optional | Optional. Timestamp of when the appointment was terminated. Only populated when processing_status is TERMINATED. |
-| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to this appointment record. |
-| `operational_status` | [AppointmentOperationalStatus](#appointmentoperationalstatus) |  | Operational status information for the appointment. Provides insight into the current operational health and any risk factors (e.g., expired license, inactive E&O) that may affect the appointment's continued validity. |
-| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) for regulatory reporting. Format: Typically a 5-digit numeric string. Reference: https://naic.org |
-| `parent_appointment_id` | [string](#string) |  | Optional. The UUID of the parent appointment, if this is a synthetic appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic appointments. Synthetic appointments inherit properties from and are terminated with their parent appointment. |
-
-#### AppointmentOperationalStatus
-
-AppointmentOperationalStatus contains operational status information for an appointment.
-This message provides detailed information about the current operational state
-and any risk factors that may affect the appointment's continued validity.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `status` | [OperationalStatus](#operationalstatus) |  | The current operational status of the appointment. |
-| `risk_reasons` | [RiskReason](#riskreason) | repeated | Specific reason(s) why the appointment is at risk, if applicable. This field is only populated when status is AT_RISK. |
-| `last_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the operational status was last updated. This helps track when status changes occurred. |
-
-#### Carrier
-
-Represents a carrier that is available to be appointed.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `carrier_id` | [string](#string) |  | The ID of the carrier. |
-| `name` | [string](#string) |  | The name of the carrier. |
-| `npn` | [string](#string) |  | National Producer Number (NPN) of the carrier. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Reference: https://nipr.com |
-| `fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the carrier. Format: 9-digit number assigned by the IRS for tax identification. Example: "123456789" |
-| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) to each insurance company for regulatory reporting. Format: Typically a 5-digit numeric string. Example: "12345" Reference: https://naic.org |
-| `has_nipr_integration` | [bool](#bool) |  | Indicates whether this carrier has NIPR integration enabled. Capacity carriers (carriers without NIPR integration) process appointments and terminations automatically without going through NIPR. |
-
-#### GetAppointableCarriersRequest
-
-Request to retrieve carriers that are available to be appointed.
-
-
-#### GetAppointableCarriersResponse
-
-Response containing carriers that are available to be appointed.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `carriers` | [Carrier](#carrier) | repeated | The list of carriers that are available to be appointed. |
-
-#### GetAppointmentFeesRequest
-
-Request to get appointment fees.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
-
-#### GetAppointmentFeesResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
-
-#### GetAppointmentRequest
-
-Request to retrieve an appointment by ID.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
-
-#### GetAppointmentResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment` | [Appointment](#appointment) |  | The appointment details. |
-
-#### GetTerminationFeesRequest
-
-Request to get termination fees.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
-
-#### GetTerminationFeesResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
-
-#### License
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | The ID of the license. |
-| `license_number` | [string](#string) |  | The license number assigned by the state Department of Insurance (DOI). Format varies by state (e.g., numeric, alphanumeric, or with prefixes). Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL) This is a state-specific identifier, not globally unique across states. |
-| `producer_id` | [string](#string) |  |  |
-| `agency_id` | [string](#string) |  |  |
-| `state` | [string](#string) |  | The two-letter US state or territory code that issued the license. Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY"). |
-| `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers Values vary by state as each DOI defines its own license classes. |
-| `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state. Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
-| `carrier_id` | [string](#string) |  | The ID of the carrier associated with this license. |
-| `expiration_date` | [google.type.Date](#googletypedate) |  | The date the license expires. |
-| `issue_date` | [google.type.Date](#googletypedate) |  | The date the license was issued. |
-
-#### ListAppointmentsRequest
-
-Request to list appointments, optionally filtered by processing status.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
-| `producer_id` | [string](#string) |  |  |
-| `agency_id` | [string](#string) |  |  |
-| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
-
-#### ListAppointmentsResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointments` | [Appointment](#appointment) | repeated | List of appointments. |
-| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. |
-
-#### ListEligibleLicensesRequest
-
-Request to retrieve a list of licenses that are eligible to be appointed.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `producer_id` | [string](#string) |  |  |
-| `agency_id` | [string](#string) |  |  |
-
-#### ListEligibleLicensesResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `licenses` | [License](#license) | repeated | List of licenses that are eligible to be appointed. |
-
-#### ListTerminationReasonsRequest
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve valid termination reasons. Different states may have different sets of valid termination reasons accepted by NIPR. |
-
-#### ListTerminationReasonsResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `termination_reasons` | [TerminationReason](#terminationreason) | repeated | The list of valid termination reasons for the specified state. These reasons can be used when calling TerminateAppointment for licenses issued in this state. |
-
-#### RequestAppointmentRequest
-
-Request to create a new appointment.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
-| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
-
-#### RequestAppointmentResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
-| `processing_status` | [ProcessingStatus](#processingstatus) |  | Processing status of the appointment request.  For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected.  For registry states or non-NIPR carriers: APPOINTED if successful. |
-| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why. Only populated when processing_status is REJECTED. |
-
-#### TerminateAppointmentRequest
-
-Request to terminate an appointment.
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
-| `reason` | [TerminationReason](#terminationreason) |  | Reason for termination. This must be a valid termination reason for the state where the license is issued. Call ListTerminationReasons first to get the list of valid reasons for the specific state. |
-
-#### TerminateAppointmentResponse
-
-
-
-| Field | Type | Label | Description |
-|-------|------|-------|-------------|
-| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed.  For NIPR-integrated carriers: - Indicates whether the termination request was successfully submitted to   NIPR. - This does not indicate that the appointment has been terminated, only   that the request has been accepted for processing. - The actual termination will be processed asynchronously by NIPR, and   you will be notified via webhook when the process completes.  For registry states or non-NIPR carriers: - Indicates whether the termination was successfully completed immediately. |
 
 ### producerflow/producer/v1/producer.proto
 
@@ -5170,7 +4982,8 @@ All fields are optional, allowing partial updates.
 | `physical_address` | [UpdateAgencyRequest.Agency.Address](#updateagencyrequestagencyaddress) | optional | Physical address of the agency. |
 | `external_metadata` | [UpdateAgencyRequest.Agency.ExternalMetadataEntry](#updateagencyrequestagencyexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
 | `ivans_account` | [UpdateAgencyRequest.Agency.IvansAccount](#updateagencyrequestagencyivansaccount) |  | IVANS account information for electronic carrier communication. This is optional and only used if the agency uses IVANS.  Update behavior: - If not provided (null): existing IVANS account is preserved unchanged - If provided with all fields: IVANS account is created or completely replaced - Partial updates are supported: only specified fields will be updated |
-| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | Relationship the agency has with the organization it belongs to: - MAIN: The agency owns or manages the organization. - RELATED: The agency is part of the organization but not the primary owner.  Update behavior: - If not provided (null): the current relationship is preserved unchanged - If provided: the relationship with the agency's current organization is   switched to the requested value (no-op if it already matches)  The agency must already belong to an organization; otherwise the request fails with FAILED_PRECONDITION. This field cannot be used to attach an agency to an organization or detach it from one. |
+| `organization_relationship` | [AgencyOrganizationRelationship](#agencyorganizationrelationship) | optional | Relationship the agency has with the organization it belongs to: - MAIN: The agency owns or manages the organization. - RELATED: The agency is part of the organization but not the primary owner.  Update behavior: - If not provided (null): the current relationship is preserved unchanged - If provided together with organization_id: the agency is moved to that   organization with the requested relationship - If provided on its own: the relationship with the agency's current   organization is switched to the requested value (no-op if it already   matches). The agency must already belong to an organization; otherwise   the request fails with FAILED_PRECONDITION  Turning a main agency into a related one requires the agency to have a principal, otherwise the request fails with FAILED_PRECONDITION.  Cannot be combined with an empty organization_id, which detaches the agency and leaves it with no relationship at all. |
+| `organization_id` | [string](#string) | optional | Organization the agency belongs to. Use the ListOrganizations RPC to get valid organization IDs. The producers under the agency follow it, since a producer's organization is derived from its agency.  Update behavior: - If not provided (null): the current organization is preserved unchanged - If provided with an organization ID: the agency is moved to that   organization (no-op if it already belongs to it), or attached to it if   it had no organization. The relationship comes from   organization_relationship when set, and is otherwise preserved from the   organization the agency is moved from (RELATED when it had none) - If provided as an empty string: the agency is detached from its   organization  The agency must belong to at most one organization, otherwise the organization it is moved from is ambiguous and the request fails with FAILED_PRECONDITION. Detaching is exempt, as it removes every membership. |
 
 #### UpdateAgencyRequest.Agency.Address
 
@@ -5338,6 +5151,227 @@ ValidateProducerNPNResponse contains the result of validating a producer's NPN.
 |-------|------|-------|-------------|
 | `valid` | [bool](#bool) | optional | Indicates whether the NPN is valid. True if the NPN exists in NIPR (and name matches, if provided). False if the NPN does not exist or the name does not match. Marked optional so the field is always emitted in JSON, even when false. |
 
+### producerflow/appointment/v1/appointment.proto
+
+
+#### Appointment
+
+Represents a managed appointment for a license, tracked through the
+ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+on the Producer/Agency messages, this represents appointments that are
+actively managed (requested, terminated) through the AppointmentService.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | Unique identifier for the appointment (UUID format). |
+| `license` | [License](#license) |  | Information about the license being appointed. |
+| `name` | [string](#string) |  | The license number of the license being appointed. This is a denormalized copy of license.license_number for convenience. |
+| `agency_id` | [string](#string) |  | The UUID of the agency that holds this appointment. |
+| `producer_id` | [string](#string) | optional | Optional. The UUID of the producer that holds this appointment, if any. When empty, this is an agency-level appointment. |
+| `carrier` | [string](#string) |  | The name of the carrier to which the license is appointed. Examples: "State Farm", "Allstate", "Progressive" |
+| `appointment_type` | [AppointmentType](#appointmenttype) |  | Type of appointment (registry, up-front, just-in-time, or synthetic). Determines how the appointment was established and processed. |
+| `processing_status` | [ProcessingStatus](#processingstatus) |  | Current processing status of the appointment in the NIPR pipeline. See ProcessingStatus for the complete lifecycle documentation. |
+| `comments` | [string](#string) |  | Optional. Comments or notes related to the appointment. May include NIPR processing notes or rejection details. |
+| `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of when the appointment became or becomes effective. |
+| `termination_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) | optional | Optional. Timestamp of when the appointment was terminated. Only populated when processing_status is TERMINATED. |
+| `updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp of the last update to this appointment record. |
+| `operational_status` | [AppointmentOperationalStatus](#appointmentoperationalstatus) |  | Operational status information for the appointment. Provides insight into the current operational health and any risk factors (e.g., expired license, inactive E&O) that may affect the appointment's continued validity. |
+| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) for regulatory reporting. Format: Typically a 5-digit numeric string. Reference: https://naic.org |
+| `parent_appointment_id` | [string](#string) |  | Optional. The UUID of the parent appointment, if this is a synthetic appointment (APPOINTMENT_TYPE_SYNTHETIC). Empty for non-synthetic appointments. Synthetic appointments inherit properties from and are terminated with their parent appointment. |
+
+#### AppointmentOperationalStatus
+
+AppointmentOperationalStatus contains operational status information for an appointment.
+This message provides detailed information about the current operational state
+and any risk factors that may affect the appointment's continued validity.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `status` | [OperationalStatus](#operationalstatus) |  | The current operational status of the appointment. |
+| `risk_reasons` | [RiskReason](#riskreason) | repeated | Specific reason(s) why the appointment is at risk, if applicable. This field is only populated when status is AT_RISK. |
+| `last_updated` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the operational status was last updated. This helps track when status changes occurred. |
+
+#### Carrier
+
+Represents a carrier that is available to be appointed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `carrier_id` | [string](#string) |  | The ID of the carrier. |
+| `name` | [string](#string) |  | The name of the carrier. |
+| `npn` | [string](#string) |  | National Producer Number (NPN) of the carrier. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Reference: https://nipr.com |
+| `fein` | [string](#string) |  | Federal Employer Identification Number (FEIN) of the carrier. Format: 9-digit number assigned by the IRS for tax identification. Example: "123456789" |
+| `cocode` | [string](#string) |  | NAIC Company Code (CoCode) of the carrier. A unique identifier assigned by the National Association of Insurance Commissioners (NAIC) to each insurance company for regulatory reporting. Format: Typically a 5-digit numeric string. Example: "12345" Reference: https://naic.org |
+| `has_nipr_integration` | [bool](#bool) |  | Indicates whether this carrier has NIPR integration enabled. Capacity carriers (carriers without NIPR integration) process appointments and terminations automatically without going through NIPR. |
+
+#### GetAppointableCarriersRequest
+
+Request to retrieve carriers that are available to be appointed.
+
+
+#### GetAppointableCarriersResponse
+
+Response containing carriers that are available to be appointed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `carriers` | [Carrier](#carrier) | repeated | The list of carriers that are available to be appointed. |
+
+#### GetAppointmentFeesRequest
+
+Request to get appointment fees.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to get the appointment fee for. |
+
+#### GetAppointmentFeesResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `fee_in_cents` | [int64](#int64) |  | Total fee for the appointment in cents. |
+
+#### GetAppointmentRequest
+
+Request to retrieve an appointment by ID.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | Required. The ID of the appointment to retrieve. |
+
+#### GetAppointmentResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment` | [Appointment](#appointment) |  | The appointment details. |
+
+#### GetTerminationFeesRequest
+
+Request to get termination fees.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to get the termination fee for. |
+
+#### GetTerminationFeesResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `fee_in_cents` | [int64](#int64) |  | Total fee for the termination in cents. |
+
+#### License
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | The ID of the license. |
+| `license_number` | [string](#string) |  | The license number assigned by the state Department of Insurance (DOI). Format varies by state (e.g., numeric, alphanumeric, or with prefixes). Examples: "0A12345" (CA), "BR-1234567" (TX), "100012345" (FL) This is a state-specific identifier, not globally unique across states. |
+| `producer_id` | [string](#string) |  |  |
+| `agency_id` | [string](#string) |  |  |
+| `state` | [string](#string) |  | The two-letter US state or territory code that issued the license. Format: ISO 3166-2 subdivision code (e.g., "CA", "TX", "NY"). |
+| `license_class` | [string](#string) |  | License class description as defined by the state DOI. Describes the broad category of insurance the license covers. Common classes include: - "Insurance Producer": General license to sell insurance - "Limited Lines Producer": Restricted to specific product types - "Surplus Lines Broker": Authorized for non-admitted carriers Values vary by state as each DOI defines its own license classes. |
+| `is_registry_state` | [bool](#bool) |  | Indicates whether this license is in a registry state. Licenses in registry states and capacity carriers are processed automatically without going through NIPR. |
+| `carrier_id` | [string](#string) |  | The ID of the carrier associated with this license. |
+| `expiration_date` | [google.type.Date](#googletypedate) |  | The date the license expires. |
+| `issue_date` | [google.type.Date](#googletypedate) |  | The date the license was issued. |
+
+#### ListAppointmentsRequest
+
+Request to list appointments, optionally filtered by processing status.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `processing_status` | [ProcessingStatus](#processingstatus) | repeated | Optional. Filter results by processing status. |
+| `producer_id` | [string](#string) |  |  |
+| `agency_id` | [string](#string) |  |  |
+| `operational_status` | [OperationalStatus](#operationalstatus) | repeated | Optional. Filter results by operational status. |
+| `pagination` | [producerflow.producer.v1.Pagination](#producerflowproducerv1pagination) |  | Optional. Pagination parameters. If not provided, defaults to page_size=50. Maximum page_size is 200. |
+
+#### ListAppointmentsResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointments` | [Appointment](#appointment) | repeated | List of appointments. |
+| `next_page_token` | [string](#string) |  | Token for fetching the next page of results. Empty when there are no more results. |
+
+#### ListEligibleLicensesRequest
+
+Request to retrieve a list of licenses that are eligible to be appointed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `producer_id` | [string](#string) |  |  |
+| `agency_id` | [string](#string) |  |  |
+
+#### ListEligibleLicensesResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `licenses` | [License](#license) | repeated | List of licenses that are eligible to be appointed. |
+
+#### ListTerminationReasonsRequest
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `state` | [string](#string) |  | Required. The two-letter state code of the license for which you want to retrieve valid termination reasons. Different states may have different sets of valid termination reasons accepted by NIPR. |
+
+#### ListTerminationReasonsResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `termination_reasons` | [TerminationReason](#terminationreason) | repeated | The list of valid termination reasons for the specified state. These reasons can be used when calling TerminateAppointment for licenses issued in this state. |
+
+#### RequestAppointmentRequest
+
+Request to create a new appointment.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `license_id` | [string](#string) |  | Required. The ID of the license to appoint. |
+| `carrier_id` | [string](#string) |  | Required. The ID of the carrier to appoint the license with. |
+
+#### RequestAppointmentResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | The ID of the created appointment. |
+| `processing_status` | [ProcessingStatus](#processingstatus) |  | Processing status of the appointment request.  For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if rejected.  For registry states or non-NIPR carriers: APPOINTED if successful. |
+| `not_eligible_reasons` | [string](#string) | repeated | If the appointment was rejected or ineligible, these reasons explain why. Only populated when processing_status is REJECTED. |
+
+#### TerminateAppointmentRequest
+
+Request to terminate an appointment.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `appointment_id` | [string](#string) |  | ID of the appointment to terminate. |
+| `reason` | [TerminationReason](#terminationreason) |  | Reason for termination. This must be a valid termination reason for the state where the license is issued. Call ListTerminationReasons first to get the list of valid reasons for the specific state. |
+
+#### TerminateAppointmentResponse
+
+
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed.  For NIPR-integrated carriers: - Indicates whether the termination request was successfully submitted to   NIPR. - This does not indicate that the appointment has been terminated, only   that the request has been accepted for processing. - The actual termination will be processed asynchronously by NIPR, and   you will be notified via webhook when the process completes.  For registry states or non-NIPR carriers: - Indicates whether the termination was successfully completed immediately. |
+
 ### producerflow/testing/v1/testing.proto
 
 
@@ -5376,121 +5410,6 @@ Empty response
 ---
 
 ## Enums
-
-
-### producerflow/appointment/v1/appointment.proto
-
-
-#### AppointmentType
-
-AppointmentType categorizes how the appointment was established and
-processed.
-
-The appointment type determines the processing behavior:
-- Registry and Synthetic appointments are processed automatically
-- Up-front appointments go through NIPR's standard processing pipeline
-- Just-in-time appointments are created on demand when needed
-
-| Name | Number | Description |
-|------|--------|-------------|
-| `APPOINTMENT_TYPE_UNSPECIFIED` | 0 |  |
-| `APPOINTMENT_TYPE_REGISTRY` | 1 | Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process. |
-| `APPOINTMENT_TYPE_UP_FRONT` | 2 | Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state. |
-| `APPOINTMENT_TYPE_JUST_IN_TIME` | 3 | Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment. |
-| `APPOINTMENT_TYPE_SYNTHETIC` | 4 | Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated. |
-
-
-#### OperationalStatus
-
-OperationalStatus represents the current operational status of an appointment.
-This indicates whether the appointment is actively functioning or at risk of termination.
-
-| Name | Number | Description |
-|------|--------|-------------|
-| `OPERATIONAL_STATUS_UNSPECIFIED` | 0 |  |
-| `OPERATIONAL_STATUS_ACTIVE` | 1 | Appointment is actively functioning and meeting all requirements. |
-| `OPERATIONAL_STATUS_AT_RISK` | 2 | Appointment is at risk of termination due to various factors. |
-
-
-#### ProcessingStatus
-
-ProcessingStatus represents the lifecycle state of an appointment as it
-moves through the NIPR processing pipeline.
-
-Appointment Lifecycle:
-
-  RequestAppointment
-        |
-        v
-  IN_PROGRESS -----> APPOINTED (active appointment)
-        |                  |
-        v                  v (TerminateAppointment)
-    REJECTED         TERMINATION_REQUESTED --> TERMINATED
-
-For registry states or capacity carriers (no NIPR integration):
-  RequestAppointment --> APPOINTED (immediate)
-  TerminateAppointment --> TERMINATED (immediate)
-
-Reference: https://pdb.nipr.com/Gateway
-
-| Name | Number | Description |
-|------|--------|-------------|
-| `PROCESSING_STATUS_UNSPECIFIED` | 0 |  |
-| `PROCESSING_STATUS_IN_PROGRESS` | 1 | Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook. |
-| `PROCESSING_STATUS_APPOINTED` | 2 | Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority. |
-| `PROCESSING_STATUS_TERMINATED` | 3 | Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state. |
-| `PROCESSING_STATUS_REJECTED` | 4 | Appointment request was rejected by NIPR. Check not_eligible_reasons for details. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions. |
-| `PROCESSING_STATUS_MISSING_LICENSE` | 5 | The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed. |
-| `PROCESSING_STATUS_TERMINATION_REQUESTED` | 6 | A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook. |
-
-
-#### RiskReason
-
-RiskReason represents the specific reason why an appointment is considered at risk.
-These reasons correspond to business rules and compliance requirements that may
-trigger operational status changes.
-
-| Name | Number | Description |
-|------|--------|-------------|
-| `RISK_REASON_UNSPECIFIED` | 0 |  |
-| `RISK_REASON_LICENSE_INACTIVE` | 1 | License is inactive (License Active = false). |
-| `RISK_REASON_LICENSE_EXPIRED` | 2 | License has expired (License ExpirationDate < current date). |
-| `RISK_REASON_EO_NOT_FOUND` | 3 | No E&O coverage exists for agency. |
-| `RISK_REASON_EO_INACTIVE` | 4 | E&O Status is not "Active". |
-| `RISK_REASON_EO_EXPIRED` | 5 | E&O coverage has expired (E&O ExpirationDate < current date). |
-| `RISK_REASON_STATE_APPOINTMENT_TERMINATED` | 6 | A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active. |
-| `RISK_REASON_REGULATORY_ACTION` | 7 | An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state. |
-
-
-#### TerminationReason
-
-TerminationReason represents the reason for the termination of an appointment.
-
-These reasons correspond to NIPR's valid termination codes and vary by
-state. Not all reasons are valid in every state - use ListTerminationReasons
-to get the valid reasons for a specific state before calling
-TerminateAppointment.
-
-Reference: https://pdb.nipr.com/Gateway/ValidTerms
-
-| Name | Number | Description |
-|------|--------|-------------|
-| `TERMINATION_REASON_UNSPECIFIED` | 0 |  |
-| `TERMINATION_REASON_VOLUNTARY_TERMINATION` | 1 | Producer or agency voluntarily chose to end the appointment. |
-| `TERMINATION_REASON_INADEQUATE_PRODUCTION` | 2 | Carrier terminated due to insufficient premium production or sales volume. |
-| `TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT` | 3 | Appointment was cancelled by the managing general agent (MGA). |
-| `TERMINATION_REASON_DEATH` | 4 | Producer has passed away. |
-| `TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION` | 5 | Insurance company has ceased operations or entered liquidation. |
-| `TERMINATION_REASON_COMPANY_INDEBTEDNESS` | 6 | Producer owes money to the insurance company (e.g., unremitted premiums). |
-| `TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE` | 7 | Carrier terminated due to poor service to policyholders. |
-| `TERMINATION_REASON_AGENT_MOVED` | 8 | Producer relocated to a different jurisdiction. |
-| `TERMINATION_REASON_APPOINTED_IN_ERROR` | 9 | Appointment was created in error and is being corrected. |
-| `TERMINATION_REASON_CANCELLED` | 10 | General cancellation without a more specific reason. |
-| `TERMINATION_REASON_CANCELLED_FOR_CAUSE` | 11 | Carrier terminated for cause (e.g., misconduct, policy violations). |
-| `TERMINATION_REASON_COMPANY_MERGER` | 12 | Insurance company merged with another company. |
-| `TERMINATION_REASON_REVOKED` | 13 | Producer's license has been revoked by a regulatory authority. |
-| `TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE` | 14 | Producer's license has been suspended for compliance issues. |
-| `TERMINATION_REASON_REQUEST_REGULATORY_REVIEW` | 15 | Termination is being submitted for regulatory review by the state DOI. |
 
 
 ### producerflow/producer/v1/producer.proto
@@ -5647,6 +5566,121 @@ LicenseStatus defines the current state of an insurance license.
 | `LICENSE_STATUS_EXPIRED` | 1 | The license has expired and is no longer valid for selling insurance. The producer must renew the license before conducting business in this state. |
 | `LICENSE_STATUS_VALID` | 2 | License is currently active and in good standing. The producer can sell insurance in this state according to their LOAs. |
 | `LICENSE_STATUS_NOT_ACTIVE` | 3 | The license exists but is not currently active. Reasons include: suspension, revocation, lapsed (not renewed), or voluntarily inactive. The producer cannot sell insurance in this state until the license is reinstated. |
+
+
+### producerflow/appointment/v1/appointment.proto
+
+
+#### AppointmentType
+
+AppointmentType categorizes how the appointment was established and
+processed.
+
+The appointment type determines the processing behavior:
+- Registry and Synthetic appointments are processed automatically
+- Up-front appointments go through NIPR's standard processing pipeline
+- Just-in-time appointments are created on demand when needed
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `APPOINTMENT_TYPE_UNSPECIFIED` | 0 |  |
+| `APPOINTMENT_TYPE_REGISTRY` | 1 | Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process. |
+| `APPOINTMENT_TYPE_UP_FRONT` | 2 | Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state. |
+| `APPOINTMENT_TYPE_JUST_IN_TIME` | 3 | Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment. |
+| `APPOINTMENT_TYPE_SYNTHETIC` | 4 | Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated. |
+
+
+#### OperationalStatus
+
+OperationalStatus represents the current operational status of an appointment.
+This indicates whether the appointment is actively functioning or at risk of termination.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `OPERATIONAL_STATUS_UNSPECIFIED` | 0 |  |
+| `OPERATIONAL_STATUS_ACTIVE` | 1 | Appointment is actively functioning and meeting all requirements. |
+| `OPERATIONAL_STATUS_AT_RISK` | 2 | Appointment is at risk of termination due to various factors. |
+
+
+#### ProcessingStatus
+
+ProcessingStatus represents the lifecycle state of an appointment as it
+moves through the NIPR processing pipeline.
+
+Appointment Lifecycle:
+
+  RequestAppointment
+        |
+        v
+  IN_PROGRESS -----> APPOINTED (active appointment)
+        |                  |
+        v                  v (TerminateAppointment)
+    REJECTED         TERMINATION_REQUESTED --> TERMINATED
+
+For registry states or capacity carriers (no NIPR integration):
+  RequestAppointment --> APPOINTED (immediate)
+  TerminateAppointment --> TERMINATED (immediate)
+
+Reference: https://pdb.nipr.com/Gateway
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `PROCESSING_STATUS_UNSPECIFIED` | 0 |  |
+| `PROCESSING_STATUS_IN_PROGRESS` | 1 | Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook. |
+| `PROCESSING_STATUS_APPOINTED` | 2 | Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority. |
+| `PROCESSING_STATUS_TERMINATED` | 3 | Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state. |
+| `PROCESSING_STATUS_REJECTED` | 4 | Appointment request was rejected by NIPR. Check not_eligible_reasons for details. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions. |
+| `PROCESSING_STATUS_MISSING_LICENSE` | 5 | The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed. |
+| `PROCESSING_STATUS_TERMINATION_REQUESTED` | 6 | A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook. |
+
+
+#### RiskReason
+
+RiskReason represents the specific reason why an appointment is considered at risk.
+These reasons correspond to business rules and compliance requirements that may
+trigger operational status changes.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `RISK_REASON_UNSPECIFIED` | 0 |  |
+| `RISK_REASON_LICENSE_INACTIVE` | 1 | License is inactive (License Active = false). |
+| `RISK_REASON_LICENSE_EXPIRED` | 2 | License has expired (License ExpirationDate < current date). |
+| `RISK_REASON_EO_NOT_FOUND` | 3 | No E&O coverage exists for agency. |
+| `RISK_REASON_EO_INACTIVE` | 4 | E&O Status is not "Active". |
+| `RISK_REASON_EO_EXPIRED` | 5 | E&O coverage has expired (E&O ExpirationDate < current date). |
+| `RISK_REASON_STATE_APPOINTMENT_TERMINATED` | 6 | A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active. |
+| `RISK_REASON_REGULATORY_ACTION` | 7 | An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state. |
+
+
+#### TerminationReason
+
+TerminationReason represents the reason for the termination of an appointment.
+
+These reasons correspond to NIPR's valid termination codes and vary by
+state. Not all reasons are valid in every state - use ListTerminationReasons
+to get the valid reasons for a specific state before calling
+TerminateAppointment.
+
+Reference: https://pdb.nipr.com/Gateway/ValidTerms
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `TERMINATION_REASON_UNSPECIFIED` | 0 |  |
+| `TERMINATION_REASON_VOLUNTARY_TERMINATION` | 1 | Producer or agency voluntarily chose to end the appointment. |
+| `TERMINATION_REASON_INADEQUATE_PRODUCTION` | 2 | Carrier terminated due to insufficient premium production or sales volume. |
+| `TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT` | 3 | Appointment was cancelled by the managing general agent (MGA). |
+| `TERMINATION_REASON_DEATH` | 4 | Producer has passed away. |
+| `TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION` | 5 | Insurance company has ceased operations or entered liquidation. |
+| `TERMINATION_REASON_COMPANY_INDEBTEDNESS` | 6 | Producer owes money to the insurance company (e.g., unremitted premiums). |
+| `TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE` | 7 | Carrier terminated due to poor service to policyholders. |
+| `TERMINATION_REASON_AGENT_MOVED` | 8 | Producer relocated to a different jurisdiction. |
+| `TERMINATION_REASON_APPOINTED_IN_ERROR` | 9 | Appointment was created in error and is being corrected. |
+| `TERMINATION_REASON_CANCELLED` | 10 | General cancellation without a more specific reason. |
+| `TERMINATION_REASON_CANCELLED_FOR_CAUSE` | 11 | Carrier terminated for cause (e.g., misconduct, policy violations). |
+| `TERMINATION_REASON_COMPANY_MERGER` | 12 | Insurance company merged with another company. |
+| `TERMINATION_REASON_REVOKED` | 13 | Producer's license has been revoked by a regulatory authority. |
+| `TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE` | 14 | Producer's license has been suspended for compliance issues. |
+| `TERMINATION_REASON_REQUEST_REGULATORY_REVIEW` | 15 | Termination is being submitted for regulatory review by the state DOI. |
 
 
 

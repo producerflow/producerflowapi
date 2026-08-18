@@ -131,6 +131,7 @@ public object ListAppointmentsResponseKt {
     /**
      * ```
      * Token for fetching the next page of results.
+     * Empty when there are no more results.
      * ```
      *
      * `string next_page_token = 2 [json_name = "nextPageToken"];`
@@ -145,6 +146,7 @@ public object ListAppointmentsResponseKt {
     /**
      * ```
      * Token for fetching the next page of results.
+     * Empty when there are no more results.
      * ```
      *
      * `string next_page_token = 2 [json_name = "nextPageToken"];`

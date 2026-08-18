@@ -672,12 +672,18 @@ public object UpdateAgencyRequestKt {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * ```
        *
        * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
@@ -704,12 +710,18 @@ public object UpdateAgencyRequestKt {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * ```
        *
        * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
@@ -725,12 +737,18 @@ public object UpdateAgencyRequestKt {
        *
        * Update behavior:
        * - If not provided (null): the current relationship is preserved unchanged
-       * - If provided: the relationship with the agency's current organization is
-       * switched to the requested value (no-op if it already matches)
+       * - If provided together with organization_id: the agency is moved to that
+       * organization with the requested relationship
+       * - If provided on its own: the relationship with the agency's current
+       * organization is switched to the requested value (no-op if it already
+       * matches). The agency must already belong to an organization; otherwise
+       * the request fails with FAILED_PRECONDITION
        *
-       * The agency must already belong to an organization; otherwise the request
-       * fails with FAILED_PRECONDITION. This field cannot be used to attach an
-       * agency to an organization or detach it from one.
+       * Turning a main agency into a related one requires the agency to have a
+       * principal, otherwise the request fails with FAILED_PRECONDITION.
+       *
+       * Cannot be combined with an empty organization_id, which detaches the
+       * agency and leaves it with no relationship at all.
        * ```
        *
        * `optional .producerflow.producer.v1.AgencyOrganizationRelationship organization_relationship = 10 [json_name = "organizationRelationship", (.buf.validate.field) = { ... }`
@@ -738,6 +756,90 @@ public object UpdateAgencyRequestKt {
        */
       public fun hasOrganizationRelationship(): kotlin.Boolean {
         return _builder.hasOrganizationRelationship()
+      }
+
+      /**
+       * ```
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * ```
+       *
+       * `optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }`
+       */
+      public var organizationId: kotlin.String
+        @JvmName("getOrganizationId")
+        get() = _builder.organizationId
+        @JvmName("setOrganizationId")
+        set(value) {
+          _builder.organizationId = value
+        }
+      /**
+       * ```
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * ```
+       *
+       * `optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }`
+       */
+      public fun clearOrganizationId() {
+        _builder.clearOrganizationId()
+      }
+      /**
+       * ```
+       * Organization the agency belongs to. Use the ListOrganizations RPC to get
+       * valid organization IDs. The producers under the agency follow it, since a
+       * producer's organization is derived from its agency.
+       *
+       * Update behavior:
+       * - If not provided (null): the current organization is preserved unchanged
+       * - If provided with an organization ID: the agency is moved to that
+       * organization (no-op if it already belongs to it), or attached to it if
+       * it had no organization. The relationship comes from
+       * organization_relationship when set, and is otherwise preserved from the
+       * organization the agency is moved from (RELATED when it had none)
+       * - If provided as an empty string: the agency is detached from its
+       * organization
+       *
+       * The agency must belong to at most one organization, otherwise the
+       * organization it is moved from is ambiguous and the request fails with
+       * FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+       * ```
+       *
+       * `optional string organization_id = 11 [json_name = "organizationId", (.buf.validate.field) = { ... }`
+       * @return Whether the organizationId field is set.
+       */
+      public fun hasOrganizationId(): kotlin.Boolean {
+        return _builder.hasOrganizationId()
       }
     }
     @kotlin.jvm.JvmName("-initializeaddress")
