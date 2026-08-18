@@ -625,6 +625,9 @@ service ProducerService {
   // - Requested appointments (state codes)
   // - Notes
   // - External metadata (for tenant-specific data)
+  // - IVANS account
+  // - Organization membership (organization_id) and the relationship the agency
+  //   has with it (organization_relationship)
   //
   // All fields are optional - only provide the fields you want to update.
   // Unchanged fields retain their current values.
@@ -649,20 +652,34 @@ service ProducerService {
   //     - state: If provided, must be exactly 2 characters
   //     - zip: If provided, must be 1-10 characters
   //   - external_metadata: Map of key-value pairs for tenant-specific data
+  //   - organization_id: If provided, maximum 36 characters; an empty string
+  //     detaches the agency from its organization
+  //   - organization_relationship: If provided, must be MAIN or RELATED
   //
   // Business logic validation:
   // - agency_id: Agency must exist and belong to the authenticated tenant
   // - email: If changed, must be unique within the tenant (case-insensitive comparison)
   // - phone: If provided, must be a valid phone number format
+  // - organization_id: The organization must exist within the tenant. The agency
+  //   must belong to at most one organization, otherwise the organization it is
+  //   moved from is ambiguous
+  // - organization_relationship: Cannot be combined with an empty organization_id.
+  //   Turning a main agency into a related one requires the agency to have a
+  //   principal
   //
   // Returns:
   // Empty response on success.
   //
   // Common Error Codes:
-  // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
+  // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant, or the
+  //   requested organization doesn't exist
   // - ALREADY_EXISTS: Email already exists within tenant
-  // - INVALID_ARGUMENT: Invalid phone number format or all address fields required
-  //   when creating new address
+  // - INVALID_ARGUMENT: Invalid phone number format, all address fields required
+  //   when creating new address, or organization_relationship combined with an
+  //   empty organization_id
+  // - FAILED_PRECONDITION: The agency belongs to more than one organization, a
+  //   relationship change was requested for an agency without an organization, or
+  //   a main agency without a principal was turned into a related agency
   //
   rpc UpdateAgency(UpdateAgencyRequest) returns (UpdateAgencyResponse) {}
 
@@ -2608,18 +2625,43 @@ message UpdateAgencyRequest {
     //
     // Update behavior:
     // - If not provided (null): the current relationship is preserved unchanged
-    // - If provided: the relationship with the agency's current organization is
-    //   switched to the requested value (no-op if it already matches)
+    // - If provided together with organization_id: the agency is moved to that
+    //   organization with the requested relationship
+    // - If provided on its own: the relationship with the agency's current
+    //   organization is switched to the requested value (no-op if it already
+    //   matches). The agency must already belong to an organization; otherwise
+    //   the request fails with FAILED_PRECONDITION
     //
-    // The agency must already belong to an organization; otherwise the request
-    // fails with FAILED_PRECONDITION. This field cannot be used to attach an
-    // agency to an organization or detach it from one.
+    // Turning a main agency into a related one requires the agency to have a
+    // principal, otherwise the request fails with FAILED_PRECONDITION.
+    //
+    // Cannot be combined with an empty organization_id, which detaches the
+    // agency and leaves it with no relationship at all.
     optional AgencyOrganizationRelationship organization_relationship = 10 [(buf.validate.field).enum = {
       in: [
         1,
         2
       ]
     }];
+
+    // Organization the agency belongs to. Use the ListOrganizations RPC to get
+    // valid organization IDs. The producers under the agency follow it, since a
+    // producer's organization is derived from its agency.
+    //
+    // Update behavior:
+    // - If not provided (null): the current organization is preserved unchanged
+    // - If provided with an organization ID: the agency is moved to that
+    //   organization (no-op if it already belongs to it), or attached to it if
+    //   it had no organization. The relationship comes from
+    //   organization_relationship when set, and is otherwise preserved from the
+    //   organization the agency is moved from (RELATED when it had none)
+    // - If provided as an empty string: the agency is detached from its
+    //   organization
+    //
+    // The agency must belong to at most one organization, otherwise the
+    // organization it is moved from is ambiguous and the request fails with
+    // FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
+    optional string organization_id = 11 [(buf.validate.field).string.max_len = 36];
   }
 
   // The agency information to update.
