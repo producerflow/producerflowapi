@@ -20,11 +20,13 @@
     - [Ongoing Events After Agency Creation](#ongoing-events-after-agency-creation)
   - [7. Webhook Payload](#7-webhook-payload)
     - [Common Payload Structure](#common-payload-structure)
+    - [Payload Compression](#payload-compression)
     - [Webhook Types and Event Types](#webhook-types-and-event-types)
       - [Agency Webhooks](#agency-webhooks)
       - [Producer Webhooks](#producer-webhooks)
       - [Contact Webhooks](#contact-webhooks)
       - [Appointment Webhooks](#appointment-webhooks)
+      - [Organization Webhooks](#organization-webhooks)
     - [Key Elements](#key-elements)
       - [Required Fields](#required-fields)
       - [Identifier Fields](#identifier-fields)
@@ -63,7 +65,7 @@ A Webhook is an HTTP callback that is triggered when a specified event occurs in
 
 - **Endpoint**: You will provide an HTTPS endpoint for us to call when an event occurs.
 - **Timeout**: Webhook calls must be processed within **10 seconds**.
-- **Retries**: If a call fails, we will retry up to **3 times**.
+- **Retries**: If a call fails, we make **3 attempts in total** (the initial call plus 2 retries) for most events, and up to 15 attempts for a few event types. See [8. Response and Retries](#8-response-and-retries).
 
 ## 4. Webhook Configuration
 
@@ -92,7 +94,8 @@ To configure the webhook:
 
 - A resync event can be triggered manually from the Producerflow UI for any of the entities
 - This will trigger a similar event to the creation one that will contain all information sections documented below per entity if there is data available for them
-- The event type will be Resync
+- The event type is `agency.synced` or `producer.synced`
+- A `synced` event means only that the entity's current state was re-sent in full on request. It carries no signal about NIPR. NIPR sync results arrive as `agency.updated` / `producer.updated`, so subscribe to the `updated` events if you want NIPR data
 
 ## 6. Agency Onboarding Webhook Flow
 
@@ -242,14 +245,26 @@ All webhook payloads share a common base structure with the following fields:
 }
 ```
 
+### Payload Compression
+
+Compressed delivery is configured per tenant. When it is enabled for your tenant:
+
+- The request body is gzip-compressed and the request carries `Content-Encoding: gzip`.
+- **The signature covers the bytes as sent, so it is computed over the compressed body.** Verify the signature against the raw body exactly as you received it, and inflate afterwards. Middleware that transparently decompresses the body before your handler runs will break verification unless you capture the raw bytes first.
+- Once inflated, the JSON is byte-identical to what an uncompressed delivery would have carried.
+
+The rule is the same either way: hash the body you received.
+
 ### Webhook Types and Event Types
 
 #### Agency Webhooks
 
 **Event Types:**
 
-- `agency.created` - New agency record created
-- `agency.updated` - Existing agency record modified  
+- `agency.created` - New agency record created (the agency finished onboarding)
+- `agency.updated` - Existing agency record modified, or a NIPR sync completed
+- `agency.deleted` - Agency record removed
+- `agency.synced` - The agency's full record was re-sent on request (see [Resync Events](#resync-events))
 
 **Schema Reference**: [agency_schema.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/schema/agency_schema.json)  
 **Example Payload**: [agency_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/agency_example.json)
@@ -258,11 +273,17 @@ All webhook payloads share a common base structure with the following fields:
 
 **Event Types:**
 
-- `producer.created` - New producer record created
-- `producer.updated` - Existing producer record modified
+- `producer.created` - New producer record created (the producer finished onboarding)
+- `producer.updated` - Existing producer record modified, or a NIPR sync completed
+- `producer.deleted` - Producer record removed
+- `producer.synced` - The producer's full record was re-sent on request (see [Resync Events](#resync-events))
+- `producer.transferred` - Producer moved from one agency to another within the same tenant. `agency_id` is the target agency; `source_agency_id` is the previous one
 
 **Schema Reference**: [producer_schema.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/schema/producer_schema.json)  
-**Example Payload**: [producer_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/producer_example.json)
+**Example Payloads**:
+
+- [producer_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/producer_example.json) - Basic producer event
+- [producer_transferred_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/producer_transferred_example.json) - Producer transferred between agencies
 
 #### Contact Webhooks
 
@@ -286,6 +307,7 @@ Appointment webhooks deliver real-time notifications when producer-carrier appoi
 
 - `appointment.created` - New appointment record created (NIPR accepted request or direct creation)
 - `appointment.updated` - Appointment status changed (NIPR processing results or admin updates)
+- `appointment.deleted` - Appointment record removed
 
 **Schema Reference**: [appointment_schema.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/schema/appointment_schema.json)  
 **Example Payloads**:
@@ -306,6 +328,20 @@ Appointment webhooks deliver real-time notifications when producer-carrier appoi
 **📋 For comprehensive appointment webhook documentation, including detailed examples, integration patterns, and handling of both NIPR and direct integrations, see: [Appointment Webhook Events](Appointment-events.md)**
 
 **⚕️ For appointment health and compliance monitoring, including operational status tracking and risk management, see: [Appointment Operational Status](Appointment-Operational-Status.md)**
+
+#### Organization Webhooks
+
+Organization events are emitted by the organization create and update handlers (portal, public API, and CSV import) rather than by the change stream.
+
+Changes to the agencies linked to an organization do not produce `organization.*` events; they produce `agency.updated` events for each linked agency.
+
+**Event Types:**
+
+- `organization.created` - New organization created
+- `organization.updated` - Existing organization modified
+
+**Schema Reference**: [organization_schema.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/schema/organization_schema.json)  
+**Example Payload**: [organization_example.json](https://github.com/producerflow/producerflowapi/blob/main/webhooks/examples/organization_example.json)
 
 ### Key Elements
 
@@ -388,7 +424,7 @@ Expected Response:
 - **Success (200 OK)**: The request was processed successfully.
 - **Failure**: If the request cannot be processed, a status code in the 4xx or 5xx range should be returned.
 
-If the response is a failure or if the 10-second deadline is exceeded, our system will retry the Webhook call up to **two more times using exponential backoff**. This means there will be progressively longer delays between retry attempts.
+If the response is a failure or if the 10-second deadline is exceeded, our system will retry the Webhook call up to **two more times**, for **3 attempts in total**.
 
 If all retries fail, the event will be marked as **undelivered**. Undelivered events will not be retried again, and they will be discarded. In the future we will add a way to check for undelivered events in the API.
 
@@ -397,20 +433,30 @@ If all retries fail, the event will be marked as **undelivered**. Undelivered ev
 - Once an event is successfully acknowledged (200 OK), **no further redelivery will occur**.
 - While an event is outstanding (not yet acknowledged or deadline expired), **no additional redeliveries** will be initiated.
 
-**Exponential Backoff for Retries**:
+**Retry Schedule**:
 
-Exponential backoff is a strategy where the time between retries increases progressively. In this case, if the initial Webhook call fails, the retries will follow these delays:
+The delay between attempts grows, but it is measured in seconds rather than minutes. A failed attempt is retried after **30 seconds**, and if that also fails, after a further **60 seconds**. With the 10-second response deadline applying to each of the three attempts, that sequence spans roughly **90 to 120 seconds** from the first attempt to the last, and it is abandoned after **3 minutes** in any case.
 
-- **First retry**: After 1 minute.
-- **Second retry**: After an additional **5 minutes**.
+A few event types are not delivered from the change feed but by internal workflows, and those retry the whole sequence above up to **5 times**, waiting 10, 20, 40 and 80 seconds between sequences. This applies to NIPR sync results, agency principal and NPN changes, `producer.transferred`, `appointment.deleted`, and all `organization.*` events. For those types a persistently failing endpoint can see up to **15 attempts spread over roughly 12 minutes**, against 3 attempts in about 2 minutes for everything else.
 
-This strategy helps to avoid overwhelming your system and allows it time to recover in case of transient failures.
+If your endpoint answers `429 Too Many Requests` or `503 Service Unavailable` with a `Retry-After` header, we honour that header in place of the delay above.
+
+Size any deduplication or reconciliation window against the longer of these two figures: a redelivery of an event you have already processed can arrive up to about 12 minutes after the original.
+
+**What Triggers a Retry**:
+
+- **Retried**: `5xx` responses, `429 Too Many Requests`, and connection failures (DNS, TCP, TLS, or the 10-second deadline being exceeded).
+- **Not retried**: any other `4xx`. A `400` or `404` marks the event undelivered on the first attempt, with no further redelivery. Return a `5xx` if you want us to try again.
 
 **Flow Control**:
 
-To prevent overloading your system, we will limit the number of outstanding events (i.e., events that are not yet acknowledged) to **100**. Once this limit is reached, no new events will be delivered until some outstanding events are acknowledged or marked as failed.
+For events delivered from the change feed we cap how many deliveries are in flight for your tenant: at most **10 requests** are outstanding (sent but not yet answered) at any one moment. A queued event is only dispatched once one of those slots frees up. For tenants where we additionally enable pacing, deliveries are also rate limited to **5 requests per second** with a burst of 10.
 
-This mechanism ensures that your system does not become overwhelmed by too many concurrent requests and helps maintain stability under high load.
+Events delivered by the internal workflows described above do not pass through that queue and are not subject to either limit.
+
+**Event Ordering**:
+
+**No ordering guarantee is offered.** Deliveries run concurrently, each attempt sequence retries on its own schedule, and the two delivery routes above are independent of one another, so events can reach you in a different order from the one in which the underlying changes happened. Use the `timestamp` field and your own record of entity state to resolve ordering rather than relying on arrival order.
 
 ## 9. Error Handling and Troubleshooting
 
@@ -513,15 +559,22 @@ export function signPayload(payload: Buffer | string, secret: string): string {
 /**
  * Verifies the incoming request's signature.
  * @param payload - The raw body of the request (as a Buffer).
- * @param receivedSignature - The signature received from the request's `X-Signature` header.
+ * @param receivedSignature - The signature received from the request's `Producerflow-Signature` header.
  * @param secret - The shared secret used to verify the signature.
  * @returns Boolean indicating if the signatures match.
  */
 function verifySignature(payload: Buffer, receivedSignature: string, secret: string): boolean {
-  const computedSignature = signPayload(payload, secret);
+  const computed = Buffer.from(signPayload(payload, secret));
+  const received = Buffer.from(receivedSignature);
+
+  // timingSafeEqual throws when the buffers differ in length, so reject a
+  // malformed signature before comparing rather than letting it raise.
+  if (computed.length !== received.length) {
+    return false;
+  }
 
   // Use time-safe comparison to avoid timing attacks
-  return timingSafeEqual(Buffer.from(computedSignature), Buffer.from(receivedSignature));
+  return timingSafeEqual(computed, received);
 }
 
 ```
@@ -529,6 +582,6 @@ function verifySignature(payload: Buffer, receivedSignature: string, secret: str
 ## 12. Frequently Asked Questions
 
 - **Q1**: What happens if my Webhook is down during an event?
-  - **A1**: We will attempt to retry the Webhook call up to 3 times before marking it as undelivered.
+  - **A1**: We make 3 attempts in total (the initial call plus 2 retries, 30 and 60 seconds apart) before marking the event as undelivered. A few event types retry that sequence up to 5 times; see [8. Response and Retries](#8-response-and-retries).
 - **Q2**: Can I send a delayed response?
   - **A2**: Responses must be returned within 10 seconds; otherwise, the request will be considered failed.
