@@ -58,3 +58,8 @@ plugins:
     out: wiki
     opt: templates/markdown-api.tmpl,API-Reference.md
     strategy: all
+  # Fumadocs reference page (generated as MDX into the docs site).
+  - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
+    out: docs/content/docs/reference
+    opt: templates/fumadocs-api.tmpl,api-reference.mdx
+    strategy: all
