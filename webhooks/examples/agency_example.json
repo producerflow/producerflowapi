@@ -110,6 +110,20 @@
       "zip_code": "60601"
     }
   ],
+  "agency_nipr_regulatory_actions": [
+    {
+      "state": "IL",
+      "reason_for_action": "Failure to respond to inquiry",
+      "disposition": "Fine",
+      "date_of_action": "2024-02-15",
+      "effective_date": "2024-03-01",
+      "enter_date": "2024-02-20",
+      "file_reference": "2024-000123",
+      "penalty_fine_forfeiture": "500",
+      "length_of_order": "12 months",
+      "origin_of_action": "State Regulatory Agency"
+    }
+  ],
   "requested_appointment_states": ["OH", "FL"],
   "nipr_sync_status": "active",
   "nipr_sync_status_updated_at": "2024-03-20T15:30:45Z",

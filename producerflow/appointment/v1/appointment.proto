@@ -7,6 +7,11 @@ import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
 import "producerflow/producer/v1/producer.proto";
 
+// Declared explicitly, not left to buf managed mode, so that protoc-gen-go
+// derives the same Go package name under Bazel as it does under buf. Managed
+// mode overrides this option with an identical value.
+option go_package = "github.com/producerflow/mono/gen/go/producerflow/appointment/v1;appointmentv1";
+
 // AppointmentService manages license appointments through NIPR.
 //
 // The appointment flow in NIPR is as follows:

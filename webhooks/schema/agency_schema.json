@@ -12,7 +12,7 @@
     "event_type": {
       "type": "string",
       "minLength": 1,
-      "description": "Type of event that occurred (e.g., 'agency.updated', 'agency.synced')"
+      "description": "Type of event that occurred (e.g., 'agency.updated', 'agency.synced', 'agency.retired')"
     },
     "origin": {
       "type": "string",
@@ -84,7 +84,7 @@
     },
     "agency_eo": {
       "type": "object",
-      "description": "Present when agency is created or when E&O coverage changes. Contains E&O insurance information for the agency",
+      "description": "Present when agency is created or when E&O coverage changes. Contains the agency's effective E&O insurance information. When the agency belongs to an organization that shares its own E&O, these are the organization's coverage values rather than the agency's own record. An empty object means the agency has no E&O in effect: an omitted section means unchanged, so a coverage that went away is reported as an empty one",
       "properties": {
         "carrier": { "type": "string" },
         "expiration_date": { "type": "string", "format": "date" },
@@ -186,6 +186,25 @@
           "state": { "type": "string" },
           "street": { "type": "string" },
           "zip_code": { "type": "string" }
+        }
+      }
+    },
+    "agency_nipr_regulatory_actions": {
+      "type": "array",
+      "description": "Present when NIPR data is synced for the agency. Contains all regulatory actions from NIPR",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": { "type": "string" },
+          "reason_for_action": { "type": "string" },
+          "disposition": { "type": "string" },
+          "date_of_action": { "type": "string", "format": "date" },
+          "effective_date": { "type": "string", "format": "date" },
+          "enter_date": { "type": "string", "format": "date" },
+          "file_reference": { "type": "string" },
+          "penalty_fine_forfeiture": { "type": "string" },
+          "length_of_order": { "type": "string" },
+          "origin_of_action": { "type": "string" }
         }
       }
     },
@@ -354,6 +373,19 @@
       "type": "string",
       "enum": ["unsigned", "sent", "signed", "failed"],
       "description": "Present when agency contract status changes. Current status of the agency's contract"
+    },
+    "replacement_agency_id": {
+      "type": "string",
+      "description": "Present only for 'agency.retired', when another agency replaced it in a legal entity change. ID of the replacement agency"
+    },
+    "external_replacement_agency_id": {
+      "type": "string",
+      "description": "Present only for 'agency.retired', when filled in by tenant. External ID of the replacement agency"
+    },
+    "reason": {
+      "type": "string",
+      "enum": ["acquired", "merged"],
+      "description": "Present only for 'agency.retired'. Why the agency retired"
     }
   },
   "required": ["id", "event_type", "origin", "timestamp", "agency_id"],

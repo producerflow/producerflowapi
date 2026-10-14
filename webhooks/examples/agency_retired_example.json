@@ -1,0 +1,14 @@
+{
+  "id": "chg_123456789",
+  "event_type": "agency.retired",
+  "origin": "ProducerFlowPortal",
+  "timestamp": "2026-05-11T15:30:00Z",
+  "agency_id": "agcy_retired_123",
+  "external_id": "ext_agcy_retired_123",
+  "fein": "12-3456789",
+  "npn": "1234567",
+  "nipr_sync_status": "disabled",
+  "replacement_agency_id": "agcy_replacement_456",
+  "external_replacement_agency_id": "ext_agcy_replacement_456",
+  "reason": "acquired"
+}

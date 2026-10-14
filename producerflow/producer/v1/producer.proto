@@ -8,6 +8,11 @@ import "google/type/date.proto";
 import "google/type/dayofweek.proto";
 import "google/type/timeofday.proto";
 
+// Declared explicitly, not left to buf managed mode, so that protoc-gen-go
+// derives the same Go package name under Bazel as it does under buf. Managed
+// mode overrides this option with an identical value.
+option go_package = "github.com/producerflow/mono/gen/go/producerflow/producer/v1;producerv1";
+
 // ProducerService provides a comprehensive API for managing insurance
 // producers and agencies. This service simplifies producer and agency
 // onboarding, data synchronization, and integration with the National Insurance
@@ -142,7 +147,8 @@ service ProducerService {
   // Proto validation (format checks):
   // - agency: Required field containing all agency information
   // - agency.name: Required, must be non-empty
-  // - agency.email: Required, must be a valid email format
+  // - agency.email: Required unless the tenant makes the agency email optional,
+  //   must be a valid email format when provided
   // - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
   // - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
   //   ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
@@ -213,7 +219,7 @@ service ProducerService {
   // - Search: Free-text search across agency name, NPN, and email
   // - Agency Type: Filter by internal (tenant) vs external agencies
   // - Entity Type: Filter by sole proprietor vs standard agency
-  // - NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+  // - NIPR Sync Status: Filter by values from NIPRSyncState
   //
   // The response uses cursor-based pagination for efficient data retrieval:
   // - Default page size is 50 if not specified
@@ -583,6 +589,8 @@ service ProducerService {
   //
   // Validation:
   // - Email must be unique within tenant if changed
+  // - An internal producer's email (one who signs in to ProducerFlow) cannot be
+  //   changed: the producer changes it through email verification
   // - All field format validations apply (e.g., valid email format, phone pattern)
   //
   // Validation Rules:
@@ -608,6 +616,8 @@ service ProducerService {
   // Common Error Codes:
   // - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
   // - INVALID_ARGUMENT: Producer field is missing in request
+  // - ALREADY_EXISTS: Email is already used by another producer in your tenant
+  // - FAILED_PRECONDITION: Email change requested for an internal producer
   //
   rpc UpdateProducer(UpdateProducerRequest) returns (UpdateProducerResponse) {}
 
@@ -1874,8 +1884,12 @@ message NewAgencyRequest {
     // The name of the agency.
     string name = 1 [(buf.validate.field).string.min_len = 1];
 
-    // The email address of the agency.
-    string email = 2 [(buf.validate.field).string.email = true];
+    // The email address of the agency. Required unless the tenant makes the
+    // agency email optional.
+    string email = 2 [
+      (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED,
+      (buf.validate.field).string.email = true
+    ];
 
     // National Producer Number (NPN) for the agency.
     // A unique NAIC identifier assigned to business entities during the
@@ -1984,16 +1998,25 @@ message NewAgencyRequest {
 
     // EOInfo contains Errors & Omissions insurance information
     message EOInfo {
-      // Insurance carrier providing the E&O coverage
-      string carrier = 1 [(buf.validate.field).string.min_len = 1];
+      // Insurance carrier providing the E&O coverage, up to 100 characters
+      string carrier = 1 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).string.max_len = 100
+      ];
       // Date when the E&O coverage will expire
       google.protobuf.Timestamp expiration_date = 2 [(buf.validate.field).timestamp.gt_now = true];
-      // Amount of coverage provided by the E&O policy (aggregate limit)
-      string coverage_amount = 3 [(buf.validate.field).string.min_len = 1];
+      // Amount of coverage provided by the E&O policy (aggregate limit), up to 16 digits
+      string coverage_amount = 3 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).string.pattern = "^[^0-9]*([0-9][^0-9]*){1,16}$"
+      ];
       // Date when the E&O coverage will become effective
       google.protobuf.Timestamp effective_date = 4 [(buf.validate.field).required = true];
-      // Per occurrence limit for the E&O policy
-      string per_occurrence = 5 [(buf.validate.field).string.min_len = 1];
+      // Per occurrence limit for the E&O policy, up to 16 digits
+      string per_occurrence = 5 [
+        (buf.validate.field).string.min_len = 1,
+        (buf.validate.field).string.pattern = "^[^0-9]*([0-9][^0-9]*){1,16}$"
+      ];
     }
     EOInfo eo_info = 10;
 
@@ -2159,6 +2182,25 @@ message NewAgencyResponse {
 
   // IDs of the locations created for the agency (if any were provided in the request)
   repeated string location_ids = 4;
+
+  // Whether the records named above can be read back yet. PROCESSING means
+  // the IDs are final but the agency is still being created; sending the same
+  // request again returns these IDs once it is done.
+  OnboardingState state = 5;
+}
+
+// OnboardingState says whether the records a create returned exist yet.
+enum OnboardingState {
+  // Sent by a server that predates this field. Read it as COMPLETED.
+  ONBOARDING_STATE_UNSPECIFIED = 0;
+  // The IDs are final, but the records are still being created and may not
+  // be readable yet. Sending the same request again returns the same IDs.
+  // A producer created with location_ids is never answered PROCESSING: the
+  // request times out instead, and sending it again applies them.
+  ONBOARDING_STATE_PROCESSING = 1;
+  // The records exist and can be read back. An agency whose listed producers
+  // do not all exist yet is answered PROCESSING.
+  ONBOARDING_STATE_COMPLETED = 2;
 }
 
 // AgencyAlreadyExistsErrorDetail identifies the agency that already exists
@@ -2409,6 +2451,9 @@ message UpdateProducerRequest {
     // Email address of the producer.
     // If provided, must be a valid email format.
     // Must be unique within the tenant.
+    // An internal producer's email cannot be changed here: it is their login,
+    // so the producer changes it through email verification in ProducerFlow.
+    // Sending the email they already have is accepted.
     optional string email = 3 [(buf.validate.field).string.email = true];
 
     // National Producer Number (NPN) of the producer.
@@ -2472,6 +2517,9 @@ message UpdateProducerRequest {
     // If provided, updates the producer's onboarding status.
     // If not provided, the onboarding status remains unchanged.
     // When set, the onboarding_status_updated_at timestamp is automatically updated.
+    //
+    // A tenant can be set up to use only some of the statuses. A status the
+    // tenant does not use is rejected with INVALID_ARGUMENT.
     optional OnboardingStatus onboarding_status = 15;
 
     // Tenant-defined role label for the producer (e.g. "Licensed Producer",
@@ -3844,7 +3892,7 @@ message Producer {
     repeated Appointment appointments = 10;
 
     // Current synchronization status with NIPR.
-    // Indicates whether NIPR data sync is active, failing, pending, or disabled.
+    // See NIPRSyncState for the full set of states this field can carry.
     NIPRSyncState nipr_sync_status = 11;
 
     // Timestamp when the NIPR sync status was last updated.
@@ -4159,6 +4207,9 @@ message NewProducerResponse {
   // The UUID of the created producer.
   // Must be a valid UUID format.
   string producer_id = 1 [(buf.validate.field).string.uuid = true];
+
+  // Whether the producer can be read back yet. See OnboardingState.
+  OnboardingState state = 2;
 }
 
 // NewProducersRequest creates multiple producers and associates them with a single agency.
@@ -4168,13 +4219,18 @@ message NewProducerResponse {
 // with the same agency, making this ideal for onboarding producer teams.
 //
 // Operation Behavior:
-// Producers are created sequentially. If a producer fails validation, the request
-// returns an error, but any producers created before the failure will remain in
-// the system.
+// Producers are created sequentially. If a producer fails, the request returns
+// an error and the producers after it are not attempted. The producers created
+// before the failure remain in the system, and the error carries a
+// NewProducersPartialFailureErrorDetail naming them and the index that failed.
+// Sending the same request again is safe: the producers already created are
+// returned rather than created twice.
 //
 // Request Limits:
 // - Minimum producers: 1 (enforced by validation)
 // - All producers must be for the same agency
+// - Two producers with the same NPN, or with no NPN and the same email, are
+//   refused as INVALID_ARGUMENT
 //
 // Each producer in the list can specify:
 // - Basic information (name, email, phone)
@@ -4238,6 +4294,30 @@ message NewProducersResponse {
   // The array length will always match the number of producers in the request.
   // Order is guaranteed to match the request's producer array order.
   repeated string producer_ids = 1;
+
+  // One entry per producer in the request, in the same order: its ID and
+  // whether it can be read back yet.
+  repeated NewProducersResult results = 2;
+}
+
+// NewProducersResult is the outcome of one producer in a NewProducers request.
+message NewProducersResult {
+  // The UUID of the producer.
+  string producer_id = 1;
+
+  // Whether the producer can be read back yet. See OnboardingState.
+  OnboardingState state = 2;
+}
+
+// NewProducersPartialFailureErrorDetail is attached to a NewProducers error
+// when some producers were created before the one that failed.
+message NewProducersPartialFailureErrorDetail {
+  // The producers created before the failure, in request order from index 0.
+  repeated NewProducersResult results = 1;
+
+  // The index in the request of the producer that failed. The producers after
+  // it were not attempted.
+  int32 failed_index = 2;
 }
 
 // NewContact represents the data needed to create a new contact in the system.
@@ -4823,7 +4903,7 @@ message ListAgenciesRequest {
   // Optional. Filter by NIPR synchronization status.
   // Multiple statuses can be specified to match agencies in any of those states.
   // Useful for monitoring sync health and identifying agencies needing attention.
-  // Valid values: ACTIVE, FAILING, PENDING, DISABLED
+  // See NIPRSyncState for valid values.
   // If empty, returns agencies in all sync states.
   repeated NIPRSyncState nipr_sync_statuses = 6;
 
