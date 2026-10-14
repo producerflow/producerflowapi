@@ -25,12 +25,16 @@ Organizations provide a way to group multiple agencies within ProducerFlow. An o
 Triggered when agency data is created, updated, or synchronized from external sources.
 
 **Schema**: [agency_schema.json](./schema/agency_schema.json)
-**Example Payload**: [agency_example.json](./examples/agency_example.json)
+**Example Payloads**:
+
+- [agency_example.json](./examples/agency_example.json) - Basic agency event
+- [agency_retired_example.json](./examples/agency_retired_example.json) - Agency retired
 
 **Event Types:**
 
 - `agency.created` - New agency record created
 - `agency.updated` - Existing agency record modified
+- `agency.retired` - Agency retired. It is kept for history and cannot be reactivated
 
 **Key Data Included:**
 
@@ -38,10 +42,11 @@ Triggered when agency data is created, updated, or synchronized from external so
 - Federal Employer Identification Number (FEIN) and National Producer Number (NPN)
 - Business addresses and bank account information
 - Physical locations associated with the agency
-- Errors & Omissions insurance details
+- Errors & Omissions insurance details, reporting the agency's effective coverage. When the agency belongs to an organization that shares its own E&O, these are the organization's coverage values rather than the agency's own record, and `inherited_from_organization_id` names that organization. An agency left with no coverage in effect reports an empty `agency_eo` object: an omitted section means unchanged, so a coverage that went away is sent empty rather than left out
 - IVANS account configuration
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) information
+- NIPR regulatory actions taken against the agency
 - Organization information (organization ID, name, and external ID)
 - Custom additional questions and answers as key-value pairs (tenant_additional_questions)
 - Legacy custom metadata questions (metadata_questions) - deprecated, use tenant_additional_questions instead
@@ -71,6 +76,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 - NIPR licensing data including appointments and licenses
 - Lines of Authority (LOA) and continuing education status
 - License expiration dates and compliance information
+- NIPR regulatory actions taken against the producer
 - Organization information (inherited from associated agency)
 - Custom additional questions and answers as key-value pairs (tenant_additional_questions)
 - Legacy custom metadata questions (metadata_questions) - deprecated, use tenant_additional_questions instead
@@ -139,6 +145,8 @@ Triggered when an organization is created or updated. Organization events are on
 - External identifier for the organization (if set by the tenant)
 - Whether the organization is a wholesaler
 
+**Shared coverages:** an organization can share one E&O with its member agencies. When that coverage or the sharing switch changes, every onboarded member agency receives an `agency.updated` carrying the `agency_eo` it is now judged on. The organization itself receives no event: no field of `organization.updated` reports the coverage.
+
 ## Common Payload Structure
 
 All webhook payloads share a common base structure:
@@ -179,6 +187,7 @@ The `event_type` field follows a consistent pattern: `{object}.{action}`. Here a
 |------------|-------------|
 | `agency.created` | A new agency record was created |
 | `agency.updated` | An existing agency record was modified |
+| `agency.retired` | An agency retired and its NIPR sync stopped. `replacement_agency_id` is present when another agency replaced it in a legal entity change. A producer that moved out is sent as its own `producer.transferred` event |
 | `producer.created` | A new producer record was created |
 | `producer.updated` | An existing producer record was modified |
 | `producer.transferred` | A producer was moved from one agency to another within the same tenant. `agency_id` is the target agency; `source_agency_id` is the previous agency |
@@ -297,12 +306,13 @@ This data is critical for compliance and regulatory reporting in the insurance i
 
 ### NIPR payload categories
 
-The NIPR sections of an event are grouped into four categories a tenant can
+The NIPR sections of an event are grouped into five categories a tenant can
 subscribe to independently: `nipr.demographics` (the `*_nipr_data` section,
 registered name included), `nipr.licenses` (licenses and their LOAs),
-`nipr.appointments` and `nipr.addresses`. All four are subscribed by default;
-unsubscribing removes that category's sections from your webhook payloads. An
-absent section and an empty one look the same on the wire, as they always have.
+`nipr.appointments`, `nipr.addresses` and `nipr.regulatory_actions`. All five
+are subscribed by default; unsubscribing removes that category's sections from
+your webhook payloads. An absent section and an empty one look the same on the
+wire, as they always have.
 
 Events reporting a NIPR change also carry only the sections that changed, so a
 subscribed section may still be absent from any given event: absence means "not
@@ -316,7 +326,7 @@ When a NIPR sync finishes, the entity receives a single `agency.updated` or
 the same message, so there is nothing to correlate: an event carrying NIPR data
 is never stamped `pending`, and the completion is never announced separately
 with an empty payload. Unsubscribing from categories narrows the data half but
-never suppresses the message: a tenant unsubscribed from all four still
+never suppresses the message: a tenant unsubscribed from all five still
 receives the completion event carrying `nipr_sync_status`.
 
 A sync that does not complete reports its outcome the usual way, as an update

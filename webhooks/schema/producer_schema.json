@@ -186,6 +186,25 @@
         }
       }
     },
+    "producer_nipr_regulatory_actions": {
+      "type": "array",
+      "description": "Present when NIPR data is synced for the producer. Contains all regulatory actions from NIPR",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": { "type": "string" },
+          "reason_for_action": { "type": "string" },
+          "disposition": { "type": "string" },
+          "date_of_action": { "type": "string", "format": "date" },
+          "effective_date": { "type": "string", "format": "date" },
+          "enter_date": { "type": "string", "format": "date" },
+          "file_reference": { "type": "string" },
+          "penalty_fine_forfeiture": { "type": "string" },
+          "length_of_order": { "type": "string" },
+          "origin_of_action": { "type": "string" }
+        }
+      }
+    },
     "requested_appointment_states": {
       "type": "array",
       "description": "Present when producer is created or when the requested appointment states are updated. Contains the list of US state codes where appointments are requested. When present, this field is always an array (never null); an empty array indicates all requested states have been cleared",
