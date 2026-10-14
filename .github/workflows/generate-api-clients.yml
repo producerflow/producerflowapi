@@ -74,6 +74,9 @@ jobs:
                        -m "- Updated TypeScript client libraries" \
                        -m "- Updated Kotlin client libraries"
             
+            # Rebase first: another push can land on main while buf generate runs.
+            git pull --rebase origin ${{ github.ref_name }}
+
             # Push to the branch that triggered the workflow
             git push origin HEAD:${{ github.ref_name }}
             
