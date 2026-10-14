@@ -197,7 +197,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * Optional. Filter by NIPR synchronization status.
    * Multiple statuses can be specified to match agencies in any of those states.
    * Useful for monitoring sync health and identifying agencies needing attention.
-   * Valid values: ACTIVE, FAILING, PENDING, DISABLED
+   * See NIPRSyncState for valid values.
    * If empty, returns agencies in all sync states.
    * </pre>
    *
@@ -210,7 +210,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * Optional. Filter by NIPR synchronization status.
    * Multiple statuses can be specified to match agencies in any of those states.
    * Useful for monitoring sync health and identifying agencies needing attention.
-   * Valid values: ACTIVE, FAILING, PENDING, DISABLED
+   * See NIPRSyncState for valid values.
    * If empty, returns agencies in all sync states.
    * </pre>
    *
@@ -223,7 +223,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * Optional. Filter by NIPR synchronization status.
    * Multiple statuses can be specified to match agencies in any of those states.
    * Useful for monitoring sync health and identifying agencies needing attention.
-   * Valid values: ACTIVE, FAILING, PENDING, DISABLED
+   * See NIPRSyncState for valid values.
    * If empty, returns agencies in all sync states.
    * </pre>
    *
@@ -237,7 +237,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * Optional. Filter by NIPR synchronization status.
    * Multiple statuses can be specified to match agencies in any of those states.
    * Useful for monitoring sync health and identifying agencies needing attention.
-   * Valid values: ACTIVE, FAILING, PENDING, DISABLED
+   * See NIPRSyncState for valid values.
    * If empty, returns agencies in all sync states.
    * </pre>
    *
@@ -251,7 +251,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * Optional. Filter by NIPR synchronization status.
    * Multiple statuses can be specified to match agencies in any of those states.
    * Useful for monitoring sync health and identifying agencies needing attention.
-   * Valid values: ACTIVE, FAILING, PENDING, DISABLED
+   * See NIPRSyncState for valid values.
    * If empty, returns agencies in all sync states.
    * </pre>
    *

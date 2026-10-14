@@ -37,6 +37,7 @@ private static final long serialVersionUID = 0L;
     principalId_ = "";
     locationIds_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    state_ = 0;
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -252,6 +253,36 @@ private static final long serialVersionUID = 0L;
     return locationIds_.getByteString(index);
   }
 
+  public static final int STATE_FIELD_NUMBER = 5;
+  private int state_ = 0;
+  /**
+   * <pre>
+   * Whether the records named above can be read back yet. PROCESSING means
+   * the IDs are final but the agency is still being created; sending the same
+   * request again returns these IDs once it is done.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  @java.lang.Override public int getStateValue() {
+    return state_;
+  }
+  /**
+   * <pre>
+   * Whether the records named above can be read back yet. PROCESSING means
+   * the IDs are final but the agency is still being created; sending the same
+   * request again returns these IDs once it is done.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+   * @return The state.
+   */
+  @java.lang.Override public com.producerflow.producer.v1.OnboardingState getState() {
+    com.producerflow.producer.v1.OnboardingState result = com.producerflow.producer.v1.OnboardingState.forNumber(state_);
+    return result == null ? com.producerflow.producer.v1.OnboardingState.UNRECOGNIZED : result;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -277,6 +308,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < locationIds_.size(); i++) {
       com.google.protobuf.GeneratedMessage.writeString(output, 4, locationIds_.getRaw(i));
+    }
+    if (state_ != com.producerflow.producer.v1.OnboardingState.ONBOARDING_STATE_UNSPECIFIED.getNumber()) {
+      output.writeEnum(5, state_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -309,6 +343,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getLocationIdsList().size();
     }
+    if (state_ != com.producerflow.producer.v1.OnboardingState.ONBOARDING_STATE_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(5, state_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -332,6 +370,7 @@ private static final long serialVersionUID = 0L;
         .equals(other.getPrincipalId())) return false;
     if (!getLocationIdsList()
         .equals(other.getLocationIdsList())) return false;
+    if (state_ != other.state_) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -355,6 +394,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + LOCATION_IDS_FIELD_NUMBER;
       hash = (53 * hash) + getLocationIdsList().hashCode();
     }
+    hash = (37 * hash) + STATE_FIELD_NUMBER;
+    hash = (53 * hash) + state_;
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -496,6 +537,7 @@ private static final long serialVersionUID = 0L;
       principalId_ = "";
       locationIds_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      state_ = 0;
       return this;
     }
 
@@ -543,6 +585,9 @@ private static final long serialVersionUID = 0L;
         locationIds_.makeImmutable();
         result.locationIds_ = locationIds_;
       }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.state_ = state_;
+      }
     }
 
     @java.lang.Override
@@ -586,6 +631,9 @@ private static final long serialVersionUID = 0L;
           locationIds_.addAll(other.locationIds_);
         }
         onChanged();
+      }
+      if (other.state_ != 0) {
+        setStateValue(other.getStateValue());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -635,6 +683,11 @@ private static final long serialVersionUID = 0L;
               locationIds_.add(s);
               break;
             } // case 34
+            case 40: {
+              state_ = input.readEnum();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 40
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1126,6 +1179,89 @@ private static final long serialVersionUID = 0L;
       ensureLocationIdsIsMutable();
       locationIds_.add(value);
       bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+
+    private int state_ = 0;
+    /**
+     * <pre>
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <pre>
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+     * @param value The enum numeric value on the wire for state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateValue(int value) {
+      state_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+     * @return The state.
+     */
+    @java.lang.Override
+    public com.producerflow.producer.v1.OnboardingState getState() {
+      com.producerflow.producer.v1.OnboardingState result = com.producerflow.producer.v1.OnboardingState.forNumber(state_);
+      return result == null ? com.producerflow.producer.v1.OnboardingState.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+     * @param value The state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setState(com.producerflow.producer.v1.OnboardingState value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000010;
+      state_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearState() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      state_ = 0;
       onChanged();
       return this;
     }

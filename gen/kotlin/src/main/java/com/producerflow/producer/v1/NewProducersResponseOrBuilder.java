@@ -61,4 +61,53 @@ public interface NewProducersResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getProducerIdsBytes(int index);
+
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  java.util.List<com.producerflow.producer.v1.NewProducersResult> 
+      getResultsList();
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  com.producerflow.producer.v1.NewProducersResult getResults(int index);
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  int getResultsCount();
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  java.util.List<? extends com.producerflow.producer.v1.NewProducersResultOrBuilder> 
+      getResultsOrBuilderList();
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  com.producerflow.producer.v1.NewProducersResultOrBuilder getResultsOrBuilder(
+      int index);
 }

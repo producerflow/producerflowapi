@@ -72,7 +72,8 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
-     * The email address of the agency.
+     * The email address of the agency. Required unless the tenant makes the
+     * agency email optional.
      * </pre>
      *
      * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -81,7 +82,8 @@ private static final long serialVersionUID = 0L;
     java.lang.String getEmail();
     /**
      * <pre>
-     * The email address of the agency.
+     * The email address of the agency. Required unless the tenant makes the
+     * agency email optional.
      * </pre>
      *
      * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -5099,7 +5101,7 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Insurance carrier providing the E&amp;O coverage
+       * Insurance carrier providing the E&amp;O coverage, up to 100 characters
        * </pre>
        *
        * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5108,7 +5110,7 @@ java.lang.String defaultValue) {
       java.lang.String getCarrier();
       /**
        * <pre>
-       * Insurance carrier providing the E&amp;O coverage
+       * Insurance carrier providing the E&amp;O coverage, up to 100 characters
        * </pre>
        *
        * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5146,7 +5148,7 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+       * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
        * </pre>
        *
        * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -5155,7 +5157,7 @@ java.lang.String defaultValue) {
       java.lang.String getCoverageAmount();
       /**
        * <pre>
-       * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+       * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
        * </pre>
        *
        * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -5193,7 +5195,7 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Per occurrence limit for the E&amp;O policy
+       * Per occurrence limit for the E&amp;O policy, up to 16 digits
        * </pre>
        *
        * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -5202,7 +5204,7 @@ java.lang.String defaultValue) {
       java.lang.String getPerOccurrence();
       /**
        * <pre>
-       * Per occurrence limit for the E&amp;O policy
+       * Per occurrence limit for the E&amp;O policy, up to 16 digits
        * </pre>
        *
        * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -5261,7 +5263,7 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object carrier_ = "";
       /**
        * <pre>
-       * Insurance carrier providing the E&amp;O coverage
+       * Insurance carrier providing the E&amp;O coverage, up to 100 characters
        * </pre>
        *
        * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5282,7 +5284,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Insurance carrier providing the E&amp;O coverage
+       * Insurance carrier providing the E&amp;O coverage, up to 100 characters
        * </pre>
        *
        * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5346,7 +5348,7 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object coverageAmount_ = "";
       /**
        * <pre>
-       * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+       * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
        * </pre>
        *
        * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -5367,7 +5369,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+       * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
        * </pre>
        *
        * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -5431,7 +5433,7 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object perOccurrence_ = "";
       /**
        * <pre>
-       * Per occurrence limit for the E&amp;O policy
+       * Per occurrence limit for the E&amp;O policy, up to 16 digits
        * </pre>
        *
        * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -5452,7 +5454,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Per occurrence limit for the E&amp;O policy
+       * Per occurrence limit for the E&amp;O policy, up to 16 digits
        * </pre>
        *
        * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -5905,7 +5907,7 @@ java.lang.String defaultValue) {
         private java.lang.Object carrier_ = "";
         /**
          * <pre>
-         * Insurance carrier providing the E&amp;O coverage
+         * Insurance carrier providing the E&amp;O coverage, up to 100 characters
          * </pre>
          *
          * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5925,7 +5927,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Insurance carrier providing the E&amp;O coverage
+         * Insurance carrier providing the E&amp;O coverage, up to 100 characters
          * </pre>
          *
          * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5946,7 +5948,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Insurance carrier providing the E&amp;O coverage
+         * Insurance carrier providing the E&amp;O coverage, up to 100 characters
          * </pre>
          *
          * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5963,7 +5965,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Insurance carrier providing the E&amp;O coverage
+         * Insurance carrier providing the E&amp;O coverage, up to 100 characters
          * </pre>
          *
          * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -5977,7 +5979,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Insurance carrier providing the E&amp;O coverage
+         * Insurance carrier providing the E&amp;O coverage, up to 100 characters
          * </pre>
          *
          * <code>string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }</code>
@@ -6154,7 +6156,7 @@ java.lang.String defaultValue) {
         private java.lang.Object coverageAmount_ = "";
         /**
          * <pre>
-         * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+         * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
          * </pre>
          *
          * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -6174,7 +6176,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+         * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
          * </pre>
          *
          * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -6195,7 +6197,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+         * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
          * </pre>
          *
          * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -6212,7 +6214,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+         * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
          * </pre>
          *
          * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -6226,7 +6228,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Amount of coverage provided by the E&amp;O policy (aggregate limit)
+         * Amount of coverage provided by the E&amp;O policy (aggregate limit), up to 16 digits
          * </pre>
          *
          * <code>string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }</code>
@@ -6403,7 +6405,7 @@ java.lang.String defaultValue) {
         private java.lang.Object perOccurrence_ = "";
         /**
          * <pre>
-         * Per occurrence limit for the E&amp;O policy
+         * Per occurrence limit for the E&amp;O policy, up to 16 digits
          * </pre>
          *
          * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -6423,7 +6425,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Per occurrence limit for the E&amp;O policy
+         * Per occurrence limit for the E&amp;O policy, up to 16 digits
          * </pre>
          *
          * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -6444,7 +6446,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Per occurrence limit for the E&amp;O policy
+         * Per occurrence limit for the E&amp;O policy, up to 16 digits
          * </pre>
          *
          * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -6461,7 +6463,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Per occurrence limit for the E&amp;O policy
+         * Per occurrence limit for the E&amp;O policy, up to 16 digits
          * </pre>
          *
          * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -6475,7 +6477,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Per occurrence limit for the E&amp;O policy
+         * Per occurrence limit for the E&amp;O policy, up to 16 digits
          * </pre>
          *
          * <code>string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }</code>
@@ -10835,7 +10837,8 @@ java.lang.String defaultValue) {
     private volatile java.lang.Object email_ = "";
     /**
      * <pre>
-     * The email address of the agency.
+     * The email address of the agency. Required unless the tenant makes the
+     * agency email optional.
      * </pre>
      *
      * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -10856,7 +10859,8 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * The email address of the agency.
+     * The email address of the agency. Required unless the tenant makes the
+     * agency email optional.
      * </pre>
      *
      * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -13364,7 +13368,8 @@ java.lang.String defaultValue) {
       private java.lang.Object email_ = "";
       /**
        * <pre>
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * </pre>
        *
        * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -13384,7 +13389,8 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * </pre>
        *
        * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -13405,7 +13411,8 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * </pre>
        *
        * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -13422,7 +13429,8 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * </pre>
        *
        * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>
@@ -13436,7 +13444,8 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * </pre>
        *
        * <code>string email = 2 [json_name = "email", (.buf.validate.field) = { ... }</code>

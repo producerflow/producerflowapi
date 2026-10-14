@@ -168,7 +168,114 @@ public object NewProducersResponseKt {
     @kotlin.jvm.JvmName("clearProducerIds")
     public fun com.google.protobuf.kotlin.DslList<kotlin.String, ProducerIdsProxy>.clear() {
       _builder.clearProducerIds()
-    }}
+    }
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class ResultsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     */
+     public val results: com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.resultsList
+      )
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     * @param value The results to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addResults")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.add(value: com.producerflow.producer.v1.NewProducersResult) {
+      _builder.addResults(value)
+    }
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     * @param value The results to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignResults")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.plusAssign(value: com.producerflow.producer.v1.NewProducersResult) {
+      add(value)
+    }
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     * @param values The results to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllResults")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.addAll(values: kotlin.collections.Iterable<com.producerflow.producer.v1.NewProducersResult>) {
+      _builder.addAllResults(values)
+    }
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     * @param values The results to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllResults")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.plusAssign(values: kotlin.collections.Iterable<com.producerflow.producer.v1.NewProducersResult>) {
+      addAll(values)
+    }
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     * @param index The index to set the value at.
+     * @param value The results to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setResults")
+    public operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.set(index: kotlin.Int, value: com.producerflow.producer.v1.NewProducersResult) {
+      _builder.setResults(index, value)
+    }
+    /**
+     * ```
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearResults")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.NewProducersResult, ResultsProxy>.clear() {
+      _builder.clearResults()
+    }
+
+  }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.producer.v1.NewProducersResponse.copy(block: `com.producerflow.producer.v1`.NewProducersResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewProducersResponse =
