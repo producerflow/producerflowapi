@@ -4,6 +4,11 @@ package producerflow.testing.v1;
 
 import "buf/validate/validate.proto";
 
+// Declared explicitly, not left to buf managed mode, so that protoc-gen-go
+// derives the same Go package name under Bazel as it does under buf. Managed
+// mode overrides this option with an identical value.
+option go_package = "github.com/producerflow/mono/gen/go/producerflow/testing/v1;testingv1";
+
 // ============================================================================
 // DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
 // Every method on this service is enabled exclusively in the dev and UAT
