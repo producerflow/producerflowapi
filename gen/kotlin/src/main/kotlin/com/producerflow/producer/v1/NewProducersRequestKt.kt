@@ -18,13 +18,18 @@ public inline fun newProducersRequest(block: com.producerflow.producer.v1.NewPro
  * with the same agency, making this ideal for onboarding producer teams.
  *
  * Operation Behavior:
- * Producers are created sequentially. If a producer fails validation, the request
- * returns an error, but any producers created before the failure will remain in
- * the system.
+ * Producers are created sequentially. If a producer fails, the request returns
+ * an error and the producers after it are not attempted. The producers created
+ * before the failure remain in the system, and the error carries a
+ * NewProducersPartialFailureErrorDetail naming them and the index that failed.
+ * Sending the same request again is safe: the producers already created are
+ * returned rather than created twice.
  *
  * Request Limits:
  * - Minimum producers: 1 (enforced by validation)
  * - All producers must be for the same agency
+ * - Two producers with the same NPN, or with no NPN and the same email, are
+ * refused as INVALID_ARGUMENT
  *
  * Each producer in the list can specify:
  * - Basic information (name, email, phone)

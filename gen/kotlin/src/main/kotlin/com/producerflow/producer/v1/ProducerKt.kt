@@ -1737,7 +1737,7 @@ public object ProducerKt {
       /**
        * ```
        * Current synchronization status with NIPR.
-       * Indicates whether NIPR data sync is active, failing, pending, or disabled.
+       * See NIPRSyncState for the full set of states this field can carry.
        * ```
        *
        * `.producerflow.producer.v1.NIPRSyncState nipr_sync_status = 11 [json_name = "niprSyncStatus"];`
@@ -1759,7 +1759,7 @@ public object ProducerKt {
       /**
        * ```
        * Current synchronization status with NIPR.
-       * Indicates whether NIPR data sync is active, failing, pending, or disabled.
+       * See NIPRSyncState for the full set of states this field can carry.
        * ```
        *
        * `.producerflow.producer.v1.NIPRSyncState nipr_sync_status = 11 [json_name = "niprSyncStatus"];`

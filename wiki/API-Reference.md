@@ -273,7 +273,8 @@ Validation Rules:
 Proto validation (format checks):
 - agency: Required field containing all agency information
 - agency.name: Required, must be non-empty
-- agency.email: Required, must be a valid email format
+- agency.email: Required unless the tenant makes the agency email optional,
+  must be a valid email format when provided
 - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
   ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
@@ -351,6 +352,7 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 | `producer_ids` | [string](#string) | repeated | List of unique identifiers for any producers created with the agency |
 | `principal_id` | [string](#string) |  | Unique identifier for the principal producer |
 | `location_ids` | [string](#string) | repeated | IDs of the locations created for the agency (if any were provided in the request) |
+| `state` | [OnboardingState](#onboardingstate) |  | Whether the records named above can be read back yet. PROCESSING means the IDs are final but the agency is still being created; sending the same request again returns these IDs once it is done. |
 
 ---
 
@@ -370,7 +372,7 @@ Filtering Capabilities:
 - Search: Free-text search across agency name, NPN, and email
 - Agency Type: Filter by internal (tenant) vs external agencies
 - Entity Type: Filter by sole proprietor vs standard agency
-- NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+- NIPR Sync Status: Filter by values from NIPRSyncState
 
 The response uses cursor-based pagination for efficient data retrieval:
 - Default page size is 50 if not specified
@@ -417,7 +419,7 @@ Example Use Cases:
 | `pagination` | [Pagination](#pagination) |  | Optional. Pagination parameters for controlling result set size and navigation. If not provided, defaults to page_size=50 with no offset. Maximum allowed page_size is 200; values above this will be capped. |
 | `agency_type` | [AgencyType](#agencytype) | optional | Optional. Filter by agency classification (internal vs external). - AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant - AGENCY_TYPE_EXTERNAL: Partner or third-party agencies If not specified, returns both internal and external agencies. |
 | `entity_type` | [EntityType](#entitytype) | optional | Optional. Filter by business entity structure. - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies - ENTITY_TYPE_AGENCY: Standard multi-producer agencies If not specified, returns both sole proprietors and standard agencies. |
-| `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. Valid values: ACTIVE, FAILING, PENDING, DISABLED If empty, returns agencies in all sync states. |
+| `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. See NIPRSyncState for valid values. If empty, returns agencies in all sync states. |
 | `resident_states` | [string](#string) | repeated | Optional. Filter by resident license state. Returns agencies whose resident license is in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 | `licensed_states` | [string](#string) | repeated | Optional. Filter by any active license state. Returns agencies that hold any active license (resident or non-resident) in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 
@@ -680,6 +682,7 @@ NewProducerResponse contains the ID of the created producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_id` | [string](#string) |  | The UUID of the created producer. Must be a valid UUID format. |
+| `state` | [OnboardingState](#onboardingstate) |  | Whether the producer can be read back yet. See OnboardingState. |
 
 ---
 
@@ -759,13 +762,18 @@ multiple individual NewProducer calls. All producers in the request will be asso
 with the same agency, making this ideal for onboarding producer teams.
 
 Operation Behavior:
-Producers are created sequentially. If a producer fails validation, the request
-returns an error, but any producers created before the failure will remain in
-the system.
+Producers are created sequentially. If a producer fails, the request returns
+an error and the producers after it are not attempted. The producers created
+before the failure remain in the system, and the error carries a
+NewProducersPartialFailureErrorDetail naming them and the index that failed.
+Sending the same request again is safe: the producers already created are
+returned rather than created twice.
 
 Request Limits:
 - Minimum producers: 1 (enforced by validation)
 - All producers must be for the same agency
+- Two producers with the same NPN, or with no NPN and the same email, are
+  refused as INVALID_ARGUMENT
 
 Each producer in the list can specify:
 - Basic information (name, email, phone)
@@ -813,6 +821,7 @@ After receiving this response, you can:
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_ids` | [string](#string) | repeated | List of UUIDs for the newly created producers. These IDs are immediately available for use in subsequent API calls. The array length will always match the number of producers in the request. Order is guaranteed to match the request's producer array order. |
+| `results` | [NewProducersResult](#newproducersresult) | repeated | One entry per producer in the request, in the same order: its ID and whether it can be read back yet. |
 
 ---
 
@@ -1123,6 +1132,8 @@ in UpdateProducerRequest.Producer and will be ignored.
 
 Validation:
 - Email must be unique within tenant if changed
+- An internal producer's email (one who signs in to ProducerFlow) cannot be
+  changed: the producer changes it through email verification
 - All field format validations apply (e.g., valid email format, phone pattern)
 
 Validation Rules:
@@ -1148,6 +1159,8 @@ Empty response on success.
 Common Error Codes:
 - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
 - INVALID_ARGUMENT: Producer field is missing in request
+- ALREADY_EXISTS: Email is already used by another producer in your tenant
+- FAILED_PRECONDITION: Email change requested for an internal producer
 
 #### Request: `UpdateProducerRequest`
 
@@ -3874,7 +3887,7 @@ Example Use Cases:
 | `pagination` | [Pagination](#pagination) |  | Optional. Pagination parameters for controlling result set size and navigation. If not provided, defaults to page_size=50 with no offset. Maximum allowed page_size is 200; values above this will be capped. |
 | `agency_type` | [AgencyType](#agencytype) | optional | Optional. Filter by agency classification (internal vs external). - AGENCY_TYPE_INTERNAL: Agencies owned/operated by the tenant - AGENCY_TYPE_EXTERNAL: Partner or third-party agencies If not specified, returns both internal and external agencies. |
 | `entity_type` | [EntityType](#entitytype) | optional | Optional. Filter by business entity structure. - ENTITY_TYPE_SOLE_PROPRIETOR: Individual producers as agencies - ENTITY_TYPE_AGENCY: Standard multi-producer agencies If not specified, returns both sole proprietors and standard agencies. |
-| `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. Valid values: ACTIVE, FAILING, PENDING, DISABLED If empty, returns agencies in all sync states. |
+| `nipr_sync_statuses` | [NIPRSyncState](#niprsyncstate) | repeated | Optional. Filter by NIPR synchronization status. Multiple statuses can be specified to match agencies in any of those states. Useful for monitoring sync health and identifying agencies needing attention. See NIPRSyncState for valid values. If empty, returns agencies in all sync states. |
 | `resident_states` | [string](#string) | repeated | Optional. Filter by resident license state. Returns agencies whose resident license is in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 | `licensed_states` | [string](#string) | repeated | Optional. Filter by any active license state. Returns agencies that hold any active license (resident or non-resident) in the selected state(s). Multiple states can be specified (OR logic within this filter). |
 
@@ -4060,7 +4073,7 @@ Agency contains all information about the agency to be created
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `name` | [string](#string) |  | The name of the agency. |
-| `email` | [string](#string) |  | The email address of the agency. |
+| `email` | [string](#string) |  | The email address of the agency. Required unless the tenant makes the agency email optional. |
 | `npn` | [string](#string) |  | National Producer Number (NPN) for the agency. A unique NAIC identifier assigned to business entities during the licensing application process and stored in the NIPR Producer Database (PDB). Format: 1-10 digit numeric string. Example: "1234567890" Required for ENTITY_TYPE_AGENCY if FEIN is not provided. Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR (sole proprietors use the principal's NPN). Validated against NIPR's database via free NIPR NPN Lookup API. Reference: https://nipr.com |
 | `phone` | [string](#string) | optional | The phone number of the agency. |
 | `website` | [string](#string) |  | The website of the agency. |
@@ -4121,11 +4134,11 @@ EOInfo contains Errors & Omissions insurance information
 
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
-| `carrier` | [string](#string) |  | Insurance carrier providing the E&O coverage |
+| `carrier` | [string](#string) |  | Insurance carrier providing the E&O coverage, up to 100 characters |
 | `expiration_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will expire |
-| `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit) |
+| `coverage_amount` | [string](#string) |  | Amount of coverage provided by the E&O policy (aggregate limit), up to 16 digits |
 | `effective_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the E&O coverage will become effective |
-| `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy |
+| `per_occurrence` | [string](#string) |  | Per occurrence limit for the E&O policy, up to 16 digits |
 
 #### NewAgencyRequest.Agency.ExternalMetadataEntry
 
@@ -4227,6 +4240,7 @@ NewAgencyResponse contains the IDs of created resources after a successful agenc
 | `producer_ids` | [string](#string) | repeated | List of unique identifiers for any producers created with the agency |
 | `principal_id` | [string](#string) |  | Unique identifier for the principal producer |
 | `location_ids` | [string](#string) | repeated | IDs of the locations created for the agency (if any were provided in the request) |
+| `state` | [OnboardingState](#onboardingstate) |  | Whether the records named above can be read back yet. PROCESSING means the IDs are final but the agency is still being created; sending the same request again returns these IDs once it is done. |
 
 #### NewContact
 
@@ -4377,6 +4391,17 @@ NewProducerResponse contains the ID of the created producer.
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_id` | [string](#string) |  | The UUID of the created producer. Must be a valid UUID format. |
+| `state` | [OnboardingState](#onboardingstate) |  | Whether the producer can be read back yet. See OnboardingState. |
+
+#### NewProducersPartialFailureErrorDetail
+
+NewProducersPartialFailureErrorDetail is attached to a NewProducers error
+when some producers were created before the one that failed.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `results` | [NewProducersResult](#newproducersresult) | repeated | The producers created before the failure, in request order from index 0. |
+| `failed_index` | [int32](#int32) |  | The index in the request of the producer that failed. The producers after it were not attempted. |
 
 #### NewProducersRequest
 
@@ -4387,13 +4412,18 @@ multiple individual NewProducer calls. All producers in the request will be asso
 with the same agency, making this ideal for onboarding producer teams.
 
 Operation Behavior:
-Producers are created sequentially. If a producer fails validation, the request
-returns an error, but any producers created before the failure will remain in
-the system.
+Producers are created sequentially. If a producer fails, the request returns
+an error and the producers after it are not attempted. The producers created
+before the failure remain in the system, and the error carries a
+NewProducersPartialFailureErrorDetail naming them and the index that failed.
+Sending the same request again is safe: the producers already created are
+returned rather than created twice.
 
 Request Limits:
 - Minimum producers: 1 (enforced by validation)
 - All producers must be for the same agency
+- Two producers with the same NPN, or with no NPN and the same email, are
+  refused as INVALID_ARGUMENT
 
 Each producer in the list can specify:
 - Basic information (name, email, phone)
@@ -4440,6 +4470,16 @@ After receiving this response, you can:
 | Field | Type | Label | Description |
 |-------|------|-------|-------------|
 | `producer_ids` | [string](#string) | repeated | List of UUIDs for the newly created producers. These IDs are immediately available for use in subsequent API calls. The array length will always match the number of producers in the request. Order is guaranteed to match the request's producer array order. |
+| `results` | [NewProducersResult](#newproducersresult) | repeated | One entry per producer in the request, in the same order: its ID and whether it can be read back yet. |
+
+#### NewProducersResult
+
+NewProducersResult is the outcome of one producer in a NewProducers request.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `producer_id` | [string](#string) |  | The UUID of the producer. |
+| `state` | [OnboardingState](#onboardingstate) |  | Whether the producer can be read back yet. See OnboardingState. |
 
 #### Organization
 
@@ -4580,7 +4620,7 @@ NIPR contains data synchronized from the National Insurance Producer Registry.
 | `biographic` | [Producer.NIPR.Biographic](#producerniprbiographic) |  | Biographic information of the producer from NIPR |
 | `regulatory_info` | [Producer.NIPR.ProducerRegulatoryInfo](#producerniprproducerregulatoryinfo) |  | Producer's regulatory information from NIPR |
 | `appointments` | [Producer.NIPR.Appointment](#producerniprappointment) | repeated | List of carrier appointments held by the producer.  Each appointment represents authorization to sell a specific carrier's products for a specific line of authority. A producer typically has multiple appointments across different carriers and LOAs.  Before allowing a producer to quote or sell a product: 1. Verify they have an active appointment with that carrier 2. Verify the appointment's LOA matches the product type 3. Check the appointment renewal date hasn't passed  This data is synchronized from NIPR and is read-only. |
-| `nipr_sync_status` | [NIPRSyncState](#niprsyncstate) |  | Current synchronization status with NIPR. Indicates whether NIPR data sync is active, failing, pending, or disabled. |
+| `nipr_sync_status` | [NIPRSyncState](#niprsyncstate) |  | Current synchronization status with NIPR. See NIPRSyncState for the full set of states this field can carry. |
 | `nipr_sync_status_updated_at` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Timestamp when the NIPR sync status was last updated. |
 
 #### Producer.NIPR.Appointment
@@ -5086,7 +5126,7 @@ All fields are optional, allowing partial updates.
 | `first_name` | [string](#string) | optional | First name of the producer. If provided, must be non-empty. |
 | `last_name` | [string](#string) | optional | Last name of the producer. If provided, must be non-empty. |
 | `middle_name` | [string](#string) | optional | Middle name of the producer. If provided, must be non-empty. |
-| `email` | [string](#string) | optional | Email address of the producer. If provided, must be a valid email format. Must be unique within the tenant. |
+| `email` | [string](#string) | optional | Email address of the producer. If provided, must be a valid email format. Must be unique within the tenant. An internal producer's email cannot be changed here: it is their login, so the producer changes it through email verification in ProducerFlow. Sending the email they already have is accepted. |
 | `npn` | [string](#string) | optional | **Deprecated.** National Producer Number (NPN) of the producer. If provided, must be non-empty. Deprecated: NPN cannot be updated. This field is ignored and will be removed in a future version. |
 | `phone` | [string](#string) | optional | Phone number of the producer. If provided, must be a valid phone number format. |
 | `street` | [string](#string) | optional | **Deprecated.** Deprecated: Use address_line_1 instead. |
@@ -5096,7 +5136,7 @@ All fields are optional, allowing partial updates.
 | `state` | [string](#string) | optional | State of the producer. If provided, must be a valid 2-letter US state code. |
 | `zip` | [string](#string) | optional | ZIP code of the producer's address. If provided, must be at least 5 characters. |
 | `external_metadata` | [UpdateProducerRequest.Producer.ExternalMetadataEntry](#updateproducerrequestproducerexternalmetadataentry) | repeated | ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model. This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic, reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems. Common use cases include: - Storing references to external system states or categories - Adding custom tags or classifications - Maintaining tenant-specific business attributes - Storing computed values or derived data The map key is the metadata field name, and the value is the associated data.  Update behavior: - If not provided (null): existing metadata is preserved unchanged - If provided as empty map {}: existing metadata is cleared - If provided with values: existing metadata is completely replaced with the new values |
-| `onboarding_status` | [OnboardingStatus](#onboardingstatus) | optional | The onboarding status of the producer. If provided, updates the producer's onboarding status. If not provided, the onboarding status remains unchanged. When set, the onboarding_status_updated_at timestamp is automatically updated. |
+| `onboarding_status` | [OnboardingStatus](#onboardingstatus) | optional | The onboarding status of the producer. If provided, updates the producer's onboarding status. If not provided, the onboarding status remains unchanged. When set, the onboarding_status_updated_at timestamp is automatically updated.  A tenant can be set up to use only some of the statuses. A status the tenant does not use is rejected with INVALID_ARGUMENT. |
 | `role` | [string](#string) | optional | Tenant-defined role label for the producer (e.g. "Licensed Producer", "CSR", "Agency Principal").  Update behavior: - If not provided (null): the existing role is preserved unchanged. - If provided as empty string: the role is cleared. - If provided with a value: the value must match one of the role labels   configured in the tenant's settings; otherwise the request is rejected   with INVALID_ARGUMENT. |
 
 #### UpdateProducerRequest.Producer.ExternalMetadataEntry
@@ -5537,6 +5577,17 @@ NIPRSyncState defines the synchronization state with the NIPR system.
 | `COMMUNICATION_ROLE_SALES` | 4 | Sales role |
 | `COMMUNICATION_ROLE_CUSTOMER_SERVICE` | 5 | Customer service role |
 | `COMMUNICATION_ROLE_ALL` | 6 | All roles |
+
+
+#### OnboardingState
+
+OnboardingState says whether the records a create returned exist yet.
+
+| Name | Number | Description |
+|------|--------|-------------|
+| `ONBOARDING_STATE_UNSPECIFIED` | 0 | Sent by a server that predates this field. Read it as COMPLETED. |
+| `ONBOARDING_STATE_PROCESSING` | 1 | The IDs are final, but the records are still being created and may not be readable yet. Sending the same request again returns the same IDs. A producer created with location_ids is never answered PROCESSING: the request times out instead, and sending it again applies them. |
+| `ONBOARDING_STATE_COMPLETED` | 2 | The records exist and can be read back. An agency whose listed producers do not all exist yet is answered PROCESSING. |
 
 
 #### OnboardingStatus

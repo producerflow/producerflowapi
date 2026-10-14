@@ -153,7 +153,8 @@ public object NewAgencyRequestKt {
 
       /**
        * ```
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * ```
        *
        * `string email = 2 [json_name = "email", (.buf.validate.field) = { ... }`
@@ -167,7 +168,8 @@ public object NewAgencyRequestKt {
         }
       /**
        * ```
-       * The email address of the agency.
+       * The email address of the agency. Required unless the tenant makes the
+       * agency email optional.
        * ```
        *
        * `string email = 2 [json_name = "email", (.buf.validate.field) = { ... }`
@@ -2006,7 +2008,7 @@ public object NewAgencyRequestKt {
 
         /**
          * ```
-         * Insurance carrier providing the E&O coverage
+         * Insurance carrier providing the E&O coverage, up to 100 characters
          * ```
          *
          * `string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }`
@@ -2020,7 +2022,7 @@ public object NewAgencyRequestKt {
           }
         /**
          * ```
-         * Insurance carrier providing the E&O coverage
+         * Insurance carrier providing the E&O coverage, up to 100 characters
          * ```
          *
          * `string carrier = 1 [json_name = "carrier", (.buf.validate.field) = { ... }`
@@ -2069,7 +2071,7 @@ public object NewAgencyRequestKt {
 
         /**
          * ```
-         * Amount of coverage provided by the E&O policy (aggregate limit)
+         * Amount of coverage provided by the E&O policy (aggregate limit), up to 16 digits
          * ```
          *
          * `string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }`
@@ -2083,7 +2085,7 @@ public object NewAgencyRequestKt {
           }
         /**
          * ```
-         * Amount of coverage provided by the E&O policy (aggregate limit)
+         * Amount of coverage provided by the E&O policy (aggregate limit), up to 16 digits
          * ```
          *
          * `string coverage_amount = 3 [json_name = "coverageAmount", (.buf.validate.field) = { ... }`
@@ -2132,7 +2134,7 @@ public object NewAgencyRequestKt {
 
         /**
          * ```
-         * Per occurrence limit for the E&O policy
+         * Per occurrence limit for the E&O policy, up to 16 digits
          * ```
          *
          * `string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }`
@@ -2146,7 +2148,7 @@ public object NewAgencyRequestKt {
           }
         /**
          * ```
-         * Per occurrence limit for the E&O policy
+         * Per occurrence limit for the E&O policy, up to 16 digits
          * ```
          *
          * `string per_occurrence = 5 [json_name = "perOccurrence", (.buf.validate.field) = { ... }`

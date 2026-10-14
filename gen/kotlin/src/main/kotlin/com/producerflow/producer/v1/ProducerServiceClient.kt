@@ -274,7 +274,8 @@ public class ProducerServiceClient(
    *  Proto validation (format checks):
    *  - agency: Required field containing all agency information
    *  - agency.name: Required, must be non-empty
-   *  - agency.email: Required, must be a valid email format
+   *  - agency.email: Required unless the tenant makes the agency email optional,
+   *    must be a valid email format when provided
    *  - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
    *  - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
    *    ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
@@ -374,7 +375,8 @@ public class ProducerServiceClient(
    *  Proto validation (format checks):
    *  - agency: Required field containing all agency information
    *  - agency.name: Required, must be non-empty
-   *  - agency.email: Required, must be a valid email format
+   *  - agency.email: Required unless the tenant makes the agency email optional,
+   *    must be a valid email format when provided
    *  - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
    *  - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
    *    ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
@@ -456,7 +458,7 @@ public class ProducerServiceClient(
    *  - Search: Free-text search across agency name, NPN, and email
    *  - Agency Type: Filter by internal (tenant) vs external agencies
    *  - Entity Type: Filter by sole proprietor vs standard agency
-   *  - NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+   *  - NIPR Sync Status: Filter by values from NIPRSyncState
    *
    *  The response uses cursor-based pagination for efficient data retrieval:
    *  - Default page size is 50 if not specified
@@ -504,7 +506,7 @@ public class ProducerServiceClient(
    *  - Search: Free-text search across agency name, NPN, and email
    *  - Agency Type: Filter by internal (tenant) vs external agencies
    *  - Entity Type: Filter by sole proprietor vs standard agency
-   *  - NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+   *  - NIPR Sync Status: Filter by values from NIPRSyncState
    *
    *  The response uses cursor-based pagination for efficient data retrieval:
    *  - Default page size is 50 if not specified
@@ -1454,6 +1456,8 @@ public class ProducerServiceClient(
    *
    *  Validation:
    *  - Email must be unique within tenant if changed
+   *  - An internal producer's email (one who signs in to ProducerFlow) cannot be
+   *    changed: the producer changes it through email verification
    *  - All field format validations apply (e.g., valid email format, phone pattern)
    *
    *  Validation Rules:
@@ -1479,6 +1483,8 @@ public class ProducerServiceClient(
    *  Common Error Codes:
    *  - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
    *  - INVALID_ARGUMENT: Producer field is missing in request
+   *  - ALREADY_EXISTS: Email is already used by another producer in your tenant
+   *  - FAILED_PRECONDITION: Email change requested for an internal producer
    */
   override suspend fun updateProducer(request: UpdateProducerRequest, headers: Headers): ResponseMessage<UpdateProducerResponse> = client.unary(
     request,
@@ -1510,6 +1516,8 @@ public class ProducerServiceClient(
    *
    *  Validation:
    *  - Email must be unique within tenant if changed
+   *  - An internal producer's email (one who signs in to ProducerFlow) cannot be
+   *    changed: the producer changes it through email verification
    *  - All field format validations apply (e.g., valid email format, phone pattern)
    *
    *  Validation Rules:
@@ -1535,6 +1543,8 @@ public class ProducerServiceClient(
    *  Common Error Codes:
    *  - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
    *  - INVALID_ARGUMENT: Producer field is missing in request
+   *  - ALREADY_EXISTS: Email is already used by another producer in your tenant
+   *  - FAILED_PRECONDITION: Email change requested for an internal producer
    */
   override fun updateProducerBlocking(request: UpdateProducerRequest, headers: Headers): UnaryBlockingCall<UpdateProducerResponse> = client.unaryBlocking(
     request,

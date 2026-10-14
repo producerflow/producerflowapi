@@ -251,6 +251,9 @@ public object UpdateProducerRequestKt {
        * Email address of the producer.
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
+       * An internal producer's email cannot be changed here: it is their login,
+       * so the producer changes it through email verification in ProducerFlow.
+       * Sending the email they already have is accepted.
        * ```
        *
        * `optional string email = 3 [json_name = "email", (.buf.validate.field) = { ... }`
@@ -267,6 +270,9 @@ public object UpdateProducerRequestKt {
        * Email address of the producer.
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
+       * An internal producer's email cannot be changed here: it is their login,
+       * so the producer changes it through email verification in ProducerFlow.
+       * Sending the email they already have is accepted.
        * ```
        *
        * `optional string email = 3 [json_name = "email", (.buf.validate.field) = { ... }`
@@ -279,6 +285,9 @@ public object UpdateProducerRequestKt {
        * Email address of the producer.
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
+       * An internal producer's email cannot be changed here: it is their login,
+       * so the producer changes it through email verification in ProducerFlow.
+       * Sending the email they already have is accepted.
        * ```
        *
        * `optional string email = 3 [json_name = "email", (.buf.validate.field) = { ... }`
@@ -769,6 +778,9 @@ public object UpdateProducerRequestKt {
        * If provided, updates the producer's onboarding status.
        * If not provided, the onboarding status remains unchanged.
        * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       *
+       * A tenant can be set up to use only some of the statuses. A status the
+       * tenant does not use is rejected with INVALID_ARGUMENT.
        * ```
        *
        * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`
@@ -793,6 +805,9 @@ public object UpdateProducerRequestKt {
        * If provided, updates the producer's onboarding status.
        * If not provided, the onboarding status remains unchanged.
        * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       *
+       * A tenant can be set up to use only some of the statuses. A status the
+       * tenant does not use is rejected with INVALID_ARGUMENT.
        * ```
        *
        * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`
@@ -806,6 +821,9 @@ public object UpdateProducerRequestKt {
        * If provided, updates the producer's onboarding status.
        * If not provided, the onboarding status remains unchanged.
        * When set, the onboarding_status_updated_at timestamp is automatically updated.
+       *
+       * A tenant can be set up to use only some of the statuses. A status the
+       * tenant does not use is rejected with INVALID_ARGUMENT.
        * ```
        *
        * `optional .producerflow.producer.v1.OnboardingStatus onboarding_status = 15 [json_name = "onboardingStatus"];`

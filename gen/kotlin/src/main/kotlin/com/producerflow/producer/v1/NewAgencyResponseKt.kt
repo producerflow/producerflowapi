@@ -277,7 +277,43 @@ public object NewAgencyResponseKt {
     @kotlin.jvm.JvmName("clearLocationIds")
     public fun com.google.protobuf.kotlin.DslList<kotlin.String, LocationIdsProxy>.clear() {
       _builder.clearLocationIds()
-    }}
+    }
+    /**
+     * ```
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * ```
+     *
+     * `.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];`
+     */
+    public var state: com.producerflow.producer.v1.OnboardingState
+      @JvmName("getState")
+      get() = _builder.state
+      @JvmName("setState")
+      set(value) {
+        _builder.state = value
+      }
+    public var stateValue: kotlin.Int
+      @JvmName("getStateValue")
+      get() = _builder.stateValue
+      @JvmName("setStateValue")
+      set(value) {
+        _builder.stateValue = value
+      }
+    /**
+     * ```
+     * Whether the records named above can be read back yet. PROCESSING means
+     * the IDs are final but the agency is still being created; sending the same
+     * request again returns these IDs once it is done.
+     * ```
+     *
+     * `.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];`
+     */
+    public fun clearState() {
+      _builder.clearState()
+    }
+  }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.producer.v1.NewAgencyResponse.copy(block: `com.producerflow.producer.v1`.NewAgencyResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.NewAgencyResponse =

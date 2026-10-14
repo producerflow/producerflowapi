@@ -130,4 +130,27 @@ public interface NewAgencyResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getLocationIdsBytes(int index);
+
+  /**
+   * <pre>
+   * Whether the records named above can be read back yet. PROCESSING means
+   * the IDs are final but the agency is still being created; sending the same
+   * request again returns these IDs once it is done.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  int getStateValue();
+  /**
+   * <pre>
+   * Whether the records named above can be read back yet. PROCESSING means
+   * the IDs are final but the agency is still being created; sending the same
+   * request again returns these IDs once it is done.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 5 [json_name = "state"];</code>
+   * @return The state.
+   */
+  com.producerflow.producer.v1.OnboardingState getState();
 }

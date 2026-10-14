@@ -58,6 +58,38 @@ public object NewProducerResponseKt {
     public fun clearProducerId() {
       _builder.clearProducerId()
     }
+
+    /**
+     * ```
+     * Whether the producer can be read back yet. See OnboardingState.
+     * ```
+     *
+     * `.producerflow.producer.v1.OnboardingState state = 2 [json_name = "state"];`
+     */
+    public var state: com.producerflow.producer.v1.OnboardingState
+      @JvmName("getState")
+      get() = _builder.state
+      @JvmName("setState")
+      set(value) {
+        _builder.state = value
+      }
+    public var stateValue: kotlin.Int
+      @JvmName("getStateValue")
+      get() = _builder.stateValue
+      @JvmName("setStateValue")
+      set(value) {
+        _builder.stateValue = value
+      }
+    /**
+     * ```
+     * Whether the producer can be read back yet. See OnboardingState.
+     * ```
+     *
+     * `.producerflow.producer.v1.OnboardingState state = 2 [json_name = "state"];`
+     */
+    public fun clearState() {
+      _builder.clearState()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

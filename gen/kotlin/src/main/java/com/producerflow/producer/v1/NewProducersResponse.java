@@ -51,6 +51,7 @@ private static final long serialVersionUID = 0L;
   private NewProducersResponse() {
     producerIds_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
+    results_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -131,6 +132,72 @@ private static final long serialVersionUID = 0L;
     return producerIds_.getByteString(index);
   }
 
+  public static final int RESULTS_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private java.util.List<com.producerflow.producer.v1.NewProducersResult> results_;
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<com.producerflow.producer.v1.NewProducersResult> getResultsList() {
+    return results_;
+  }
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends com.producerflow.producer.v1.NewProducersResultOrBuilder> 
+      getResultsOrBuilderList() {
+    return results_;
+  }
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  @java.lang.Override
+  public int getResultsCount() {
+    return results_.size();
+  }
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.NewProducersResult getResults(int index) {
+    return results_.get(index);
+  }
+  /**
+   * <pre>
+   * One entry per producer in the request, in the same order: its ID and
+   * whether it can be read back yet.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.NewProducersResultOrBuilder getResultsOrBuilder(
+      int index) {
+    return results_.get(index);
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -147,6 +214,9 @@ private static final long serialVersionUID = 0L;
                       throws java.io.IOException {
     for (int i = 0; i < producerIds_.size(); i++) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, producerIds_.getRaw(i));
+    }
+    for (int i = 0; i < results_.size(); i++) {
+      output.writeMessage(2, results_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -165,6 +235,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getProducerIdsList().size();
     }
+    for (int i = 0; i < results_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, results_.get(i));
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -182,6 +256,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getProducerIdsList()
         .equals(other.getProducerIdsList())) return false;
+    if (!getResultsList()
+        .equals(other.getResultsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -196,6 +272,10 @@ private static final long serialVersionUID = 0L;
     if (getProducerIdsCount() > 0) {
       hash = (37 * hash) + PRODUCER_IDS_FIELD_NUMBER;
       hash = (53 * hash) + getProducerIdsList().hashCode();
+    }
+    if (getResultsCount() > 0) {
+      hash = (37 * hash) + RESULTS_FIELD_NUMBER;
+      hash = (53 * hash) + getResultsList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -352,6 +432,13 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       producerIds_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
+      if (resultsBuilder_ == null) {
+        results_ = java.util.Collections.emptyList();
+      } else {
+        results_ = null;
+        resultsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -378,9 +465,22 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.producerflow.producer.v1.NewProducersResponse buildPartial() {
       com.producerflow.producer.v1.NewProducersResponse result = new com.producerflow.producer.v1.NewProducersResponse(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(com.producerflow.producer.v1.NewProducersResponse result) {
+      if (resultsBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0)) {
+          results_ = java.util.Collections.unmodifiableList(results_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.results_ = results_;
+      } else {
+        result.results_ = resultsBuilder_.build();
+      }
     }
 
     private void buildPartial0(com.producerflow.producer.v1.NewProducersResponse result) {
@@ -412,6 +512,32 @@ private static final long serialVersionUID = 0L;
           producerIds_.addAll(other.producerIds_);
         }
         onChanged();
+      }
+      if (resultsBuilder_ == null) {
+        if (!other.results_.isEmpty()) {
+          if (results_.isEmpty()) {
+            results_ = other.results_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureResultsIsMutable();
+            results_.addAll(other.results_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.results_.isEmpty()) {
+          if (resultsBuilder_.isEmpty()) {
+            resultsBuilder_.dispose();
+            resultsBuilder_ = null;
+            results_ = other.results_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            resultsBuilder_ = 
+              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                 getResultsFieldBuilder() : null;
+          } else {
+            resultsBuilder_.addAllMessages(other.results_);
+          }
+        }
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -445,6 +571,19 @@ private static final long serialVersionUID = 0L;
               producerIds_.add(s);
               break;
             } // case 10
+            case 18: {
+              com.producerflow.producer.v1.NewProducersResult m =
+                  input.readMessage(
+                      com.producerflow.producer.v1.NewProducersResult.parser(),
+                      extensionRegistry);
+              if (resultsBuilder_ == null) {
+                ensureResultsIsMutable();
+                results_.add(m);
+              } else {
+                resultsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -634,6 +773,336 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
+    }
+
+    private java.util.List<com.producerflow.producer.v1.NewProducersResult> results_ =
+      java.util.Collections.emptyList();
+    private void ensureResultsIsMutable() {
+      if (!((bitField0_ & 0x00000002) != 0)) {
+        results_ = new java.util.ArrayList<com.producerflow.producer.v1.NewProducersResult>(results_);
+        bitField0_ |= 0x00000002;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.NewProducersResult, com.producerflow.producer.v1.NewProducersResult.Builder, com.producerflow.producer.v1.NewProducersResultOrBuilder> resultsBuilder_;
+
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.NewProducersResult> getResultsList() {
+      if (resultsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(results_);
+      } else {
+        return resultsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public int getResultsCount() {
+      if (resultsBuilder_ == null) {
+        return results_.size();
+      } else {
+        return resultsBuilder_.getCount();
+      }
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public com.producerflow.producer.v1.NewProducersResult getResults(int index) {
+      if (resultsBuilder_ == null) {
+        return results_.get(index);
+      } else {
+        return resultsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder setResults(
+        int index, com.producerflow.producer.v1.NewProducersResult value) {
+      if (resultsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureResultsIsMutable();
+        results_.set(index, value);
+        onChanged();
+      } else {
+        resultsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder setResults(
+        int index, com.producerflow.producer.v1.NewProducersResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder addResults(com.producerflow.producer.v1.NewProducersResult value) {
+      if (resultsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureResultsIsMutable();
+        results_.add(value);
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        int index, com.producerflow.producer.v1.NewProducersResult value) {
+      if (resultsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureResultsIsMutable();
+        results_.add(index, value);
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        com.producerflow.producer.v1.NewProducersResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.add(builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder addResults(
+        int index, com.producerflow.producer.v1.NewProducersResult.Builder builderForValue) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        resultsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder addAllResults(
+        java.lang.Iterable<? extends com.producerflow.producer.v1.NewProducersResult> values) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, results_);
+        onChanged();
+      } else {
+        resultsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder clearResults() {
+      if (resultsBuilder_ == null) {
+        results_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+      } else {
+        resultsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public Builder removeResults(int index) {
+      if (resultsBuilder_ == null) {
+        ensureResultsIsMutable();
+        results_.remove(index);
+        onChanged();
+      } else {
+        resultsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public com.producerflow.producer.v1.NewProducersResult.Builder getResultsBuilder(
+        int index) {
+      return getResultsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public com.producerflow.producer.v1.NewProducersResultOrBuilder getResultsOrBuilder(
+        int index) {
+      if (resultsBuilder_ == null) {
+        return results_.get(index);  } else {
+        return resultsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public java.util.List<? extends com.producerflow.producer.v1.NewProducersResultOrBuilder> 
+         getResultsOrBuilderList() {
+      if (resultsBuilder_ != null) {
+        return resultsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(results_);
+      }
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public com.producerflow.producer.v1.NewProducersResult.Builder addResultsBuilder() {
+      return getResultsFieldBuilder().addBuilder(
+          com.producerflow.producer.v1.NewProducersResult.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public com.producerflow.producer.v1.NewProducersResult.Builder addResultsBuilder(
+        int index) {
+      return getResultsFieldBuilder().addBuilder(
+          index, com.producerflow.producer.v1.NewProducersResult.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * One entry per producer in the request, in the same order: its ID and
+     * whether it can be read back yet.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.NewProducersResult results = 2 [json_name = "results"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.NewProducersResult.Builder> 
+         getResultsBuilderList() {
+      return getResultsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.NewProducersResult, com.producerflow.producer.v1.NewProducersResult.Builder, com.producerflow.producer.v1.NewProducersResultOrBuilder> 
+        getResultsFieldBuilder() {
+      if (resultsBuilder_ == null) {
+        resultsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            com.producerflow.producer.v1.NewProducersResult, com.producerflow.producer.v1.NewProducersResult.Builder, com.producerflow.producer.v1.NewProducersResultOrBuilder>(
+                results_,
+                ((bitField0_ & 0x00000002) != 0),
+                getParentForChildren(),
+                isClean());
+        results_ = null;
+      }
+      return resultsBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.NewProducersResponse)

@@ -30,4 +30,23 @@ public interface NewProducerResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getProducerIdBytes();
+
+  /**
+   * <pre>
+   * Whether the producer can be read back yet. See OnboardingState.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 2 [json_name = "state"];</code>
+   * @return The enum numeric value on the wire for state.
+   */
+  int getStateValue();
+  /**
+   * <pre>
+   * Whether the producer can be read back yet. See OnboardingState.
+   * </pre>
+   *
+   * <code>.producerflow.producer.v1.OnboardingState state = 2 [json_name = "state"];</code>
+   * @return The state.
+   */
+  com.producerflow.producer.v1.OnboardingState getState();
 }

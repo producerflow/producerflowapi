@@ -1020,6 +1020,10 @@ from the user during the onboarding process through the generated URL.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -1117,6 +1121,10 @@ from the user during the onboarding process through the generated URL.</p>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -1789,6 +1797,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -2148,6 +2160,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -2188,7 +2204,8 @@ Validation Rules:
 Proto validation (format checks):
 - agency: Required field containing all agency information
 - agency.name: Required, must be non-empty
-- agency.email: Required, must be a valid email format
+- agency.email: Required unless the tenant makes the agency email optional,
+  must be a valid email format when provided
 - agency.phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 - agency.entity_type: Required, must be ENTITY_TYPE_SOLE_PROPRIETOR (1) or
   ENTITY_TYPE_AGENCY (2). ENTITY_TYPE_ASK_DURING_ONBOARDING is NOT valid here.
@@ -2610,6 +2627,10 @@ If specified, this value takes precedence over the tenant's default behavior. </
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -2843,9 +2864,22 @@ If specified, this value takes precedence over the tenant's default behavior. </
                                 <td>IDs of the locations created for the agency (if any were provided in the request) </td>
                               </tr>
                             
+                              <tr>
+                                <td><code>state</code></td>
+                                <td><a href="#producerflow.producer.v1.OnboardingState">OnboardingState</a></td>
+                                <td></td>
+                                <td>Whether the records named above can be read back yet. PROCESSING means
+the IDs are final but the agency is still being created; sending the same
+request again returns these IDs once it is done. </td>
+                              </tr>
+                            
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -3012,7 +3046,7 @@ Filtering Capabilities:
 - Search: Free-text search across agency name, NPN, and email
 - Agency Type: Filter by internal (tenant) vs external agencies
 - Entity Type: Filter by sole proprietor vs standard agency
-- NIPR Sync Status: Filter by synchronization state (active, failing, pending, disabled)
+- NIPR Sync Status: Filter by values from NIPRSyncState
 
 The response uses cursor-based pagination for efficient data retrieval:
 - Default page size is 50 if not specified
@@ -3245,7 +3279,7 @@ If not specified, returns both sole proprietors and standard agencies. </td>
                                 <td>Optional. Filter by NIPR synchronization status.
 Multiple statuses can be specified to match agencies in any of those states.
 Useful for monitoring sync health and identifying agencies needing attention.
-Valid values: ACTIVE, FAILING, PENDING, DISABLED
+See NIPRSyncState for valid values.
 If empty, returns agencies in all sync states. </td>
                               </tr>
                             
@@ -3270,6 +3304,10 @@ Multiple states can be specified (OR logic within this filter). </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -3665,6 +3703,10 @@ Will be 0 if no agencies match the specified filters. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -4275,6 +4317,10 @@ If omitted, returns the first 50 organizations. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -4498,6 +4544,10 @@ organizations are added or removed between calls. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -5082,6 +5132,10 @@ Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -5223,6 +5277,10 @@ Format: Standard UUID v4 (e.g., "123e4567-e89b-12d3-a456-426614174000") </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -5845,6 +5903,10 @@ This is the identifier used by the tenant's system to identify the organization.
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -5946,6 +6008,10 @@ This is the identifier used by the tenant's system to identify the organization.
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -6640,6 +6706,10 @@ If specified, this value takes precedence over the tenant's default behavior. </
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -6877,9 +6947,20 @@ If specified, this value takes precedence over the tenant's default behavior. </
 Must be a valid UUID format. </td>
                               </tr>
                             
+                              <tr>
+                                <td><code>state</code></td>
+                                <td><a href="#producerflow.producer.v1.OnboardingState">OnboardingState</a></td>
+                                <td></td>
+                                <td>Whether the producer can be read back yet. See OnboardingState. </td>
+                              </tr>
+                            
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -7292,6 +7373,8 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
                       <p class="message-description">NewProducersRequest creates multiple producers and associates them with a single agency.
 
 This request supports bulk creation of producers, which is more efficient than making
@@ -7299,13 +7382,18 @@ multiple individual NewProducer calls. All producers in the request will be asso
 with the same agency, making this ideal for onboarding producer teams.
 
 Operation Behavior:
-Producers are created sequentially. If a producer fails validation, the request
-returns an error, but any producers created before the failure will remain in
-the system.
+Producers are created sequentially. If a producer fails, the request returns
+an error and the producers after it are not attempted. The producers created
+before the failure remain in the system, and the error carries a
+NewProducersPartialFailureErrorDetail naming them and the index that failed.
+Sending the same request again is safe: the producers already created are
+returned rather than created twice.
 
 Request Limits:
 - Minimum producers: 1 (enforced by validation)
 - All producers must be for the same agency
+- Two producers with the same NPN, or with no NPN and the same email, are
+  refused as INVALID_ARGUMENT
 
 Each producer in the list can specify:
 - Basic information (name, email, phone)
@@ -7364,6 +7452,8 @@ or when you plan to sync later via SyncProducerWithNIPR. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
                     
                   
                     
@@ -7707,6 +7797,8 @@ or when you plan to sync later via SyncProducerWithNIPR. </td>
                     
                   
                     
+                  
+                    
                       <p class="message-description">NewProducersResponse contains the IDs of all successfully created producers.
 
 The response provides a list of producer IDs that directly corresponds to the
@@ -7743,9 +7835,19 @@ The array length will always match the number of producers in the request.
 Order is guaranteed to match the request's producer array order. </td>
                               </tr>
                             
+                              <tr>
+                                <td><code>results</code></td>
+                                <td><a href="#producerflow.producer.v1.NewProducersResult">NewProducersResult</a></td>
+                                <td>repeated</td>
+                                <td>One entry per producer in the request, in the same order: its ID and
+whether it can be read back yet. </td>
+                              </tr>
+                            
                           </tbody>
                         </table>
                       
+                    
+                  
                     
                   
                     
@@ -8238,6 +8340,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -8358,6 +8464,10 @@ Common Error Codes:
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -9001,6 +9111,10 @@ If not provided, defaults to page_size=50. Maximum page_size is 200. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -9130,6 +9244,10 @@ Empty when there are no more results. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -9766,6 +9884,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -9896,6 +10018,10 @@ bank account, E&O coverage, NIPR data, and locations. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -10547,6 +10673,10 @@ possible lookup methods: by ID, by NPN, by email address, or by external ID.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -10701,6 +10831,10 @@ and NIPR data. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -11277,6 +11411,10 @@ The tenant is determined from the authenticated API key.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -11639,6 +11777,10 @@ configured any roles. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -11784,6 +11926,10 @@ Must be a valid UUID format. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -12423,6 +12569,10 @@ providing financial security for clients. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -12450,6 +12600,8 @@ in UpdateProducerRequest.Producer and will be ignored.
 
 Validation:
 - Email must be unique within tenant if changed
+- An internal producer's email (one who signs in to ProducerFlow) cannot be
+  changed: the producer changes it through email verification
 - All field format validations apply (e.g., valid email format, phone pattern)
 
 Validation Rules:
@@ -12474,7 +12626,9 @@ Empty response on success.
 
 Common Error Codes:
 - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
-- INVALID_ARGUMENT: Producer field is missing in request</p>
+- INVALID_ARGUMENT: Producer field is missing in request
+- ALREADY_EXISTS: Email is already used by another producer in your tenant
+- FAILED_PRECONDITION: Email change requested for an internal producer</p>
 
                 
                 <div class="message-section">
@@ -12482,6 +12636,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateProducerRequest">UpdateProducerRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -12852,6 +13010,10 @@ The field is required. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateProducerResponse">UpdateProducerResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -13570,6 +13732,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateAgencyRequest contains the fields that can be updated in an agency record.
 Only information collected during the onboarding process can be updated.
 Information from NIPR and other third-party sources cannot be updated directly.
@@ -13644,6 +13810,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateAgencyResponse">UpdateAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -14398,6 +14568,10 @@ Must be a valid UUID format. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -14620,6 +14794,10 @@ Must be a valid UUID format. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -15187,6 +15365,10 @@ This field is required and must contain at least one contact. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -15413,6 +15595,10 @@ The order matches the order of contacts in the request. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -15941,6 +16127,10 @@ Must be a valid UUID format. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -16102,6 +16292,10 @@ Must be a valid UUID format. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -16700,6 +16894,10 @@ be known in advance. Exactly one lookup method must be provided.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -17059,6 +17257,10 @@ be known in advance. Exactly one lookup method must be provided.</p>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -17125,6 +17327,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateContactRequest">UpdateContactRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -17807,6 +18013,10 @@ The field is required. </td>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateContactResponse is the empty response returned after successfully updating a contact.</p>
                       
                         <p class="no-fields">This message has no fields.</p>
@@ -17894,6 +18104,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.SetExternalIDRequest">SetExternalIDRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -18284,6 +18498,10 @@ Only one entity type can be specified.</p>
                     <span class="message-type-name" id="producerflow.producer.v1.SetExternalIDResponse">SetExternalIDResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -18994,6 +19212,10 @@ in NIPR (and name matches, if provided), false otherwise.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ValidateProducerNPNRequest is used to validate a producer's National Producer
 Number (NPN) against the NIPR database.
 This is a FREE operation using the NIPR NPN Lookup service.</p>
@@ -19040,6 +19262,10 @@ If omitted, only NPN existence is verified. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ValidateProducerNPNResponse">ValidateProducerNPNResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -19756,6 +19982,10 @@ exists in NIPR, false otherwise.</p>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ValidateAgencyNPNRequest is used to validate an agency's National Producer
 Number (NPN) against the NIPR database.
 This is a FREE operation using the NIPR NPN Lookup service.</p>
@@ -19797,6 +20027,10 @@ Reference: https://nipr.com </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ValidateAgencyNPNResponse">ValidateAgencyNPNResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -20554,6 +20788,10 @@ This is the tax identification number assigned by the IRS. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -20917,6 +21155,10 @@ Empty string if no matching NPN was found. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -20940,6 +21182,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.ResyncProducerRequest">ResyncProducerRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -21566,6 +21812,10 @@ Must be a valid UUID format. </td>
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">ResyncProducerResponse is the empty response returned after successfully triggering a resynchronization.</p>
                       
                         <p class="no-fields">This message has no fields.</p>
@@ -21658,6 +21908,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.ResyncAgencyRequest">ResyncAgencyRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -22019,6 +22273,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.ResyncAgencyResponse">ResyncAgencyResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -22704,6 +22962,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">SyncProducerWithNIPRRequest is used to synchronize a producer's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -22780,6 +23042,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.SyncProducerWithNIPRResponse">SyncProducerWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -23468,6 +23734,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">SyncAgencyWithNIPRRequest is used to synchronize an agency's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -23556,6 +23826,10 @@ If false, only the agency will be synchronized. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.SyncAgencyWithNIPRResponse">SyncAgencyWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -24213,6 +24487,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">StopSyncProducerWithNIPRRequest is used to stop synchronizing a producer's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -24297,6 +24575,10 @@ Must be a valid UUID format. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.StopSyncProducerWithNIPRResponse">StopSyncProducerWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -24958,6 +25240,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">StopSyncAgencyWithNIPRRequest is used to stop synchronizing an agency's data with the NIPR API.</p>
                       
                         <table class="field-table">
@@ -25054,6 +25340,10 @@ If false, only the agency will be stopped from synchronizing. </td>
                     <span class="message-type-name" id="producerflow.producer.v1.StopSyncAgencyWithNIPRResponse">StopSyncAgencyWithNIPRResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -25806,6 +26096,10 @@ Required and must be a valid NPN format (numeric string between 2-10 digits). </
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -26166,6 +26460,10 @@ The URL is time-limited and includes necessary security tokens. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -26257,6 +26555,10 @@ Common Error Codes:
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -26946,6 +27248,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -26995,6 +27301,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.RemoveAgencyLocationsRequest">RemoveAgencyLocationsRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -27361,6 +27671,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.RemoveAgencyLocationsResponse">RemoveAgencyLocationsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -28101,6 +28415,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
 
                 
@@ -28460,6 +28778,10 @@ Common Error Codes:
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -28595,6 +28917,10 @@ These locations must belong to the same agency as the producer. </td>
                           </tbody>
                         </table>
                       
+                    
+                  
+                    
+                  
                     
                   
                     
@@ -29232,6 +29558,10 @@ These locations must belong to the same agency as the producer. </td>
                   
                     
                   
+                    
+                  
+                    
+                  
                 </div>
               </div>
             </details>
@@ -29281,6 +29611,10 @@ Common Error Codes:
                     <span class="message-type-label request-label">Request</span>
                     <span class="message-type-name" id="producerflow.producer.v1.UnassignProducerFromLocationsRequest">UnassignProducerFromLocationsRequest</span>
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -29647,6 +29981,10 @@ Common Error Codes:
                     <span class="message-type-name" id="producerflow.producer.v1.UnassignProducerFromLocationsResponse">UnassignProducerFromLocationsResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -30352,6 +30690,10 @@ Common Error Codes:
                     
                   
                     
+                  
+                    
+                  
+                    
                       <p class="message-description">UpdateAgencyLocationRequest updates an existing agency location.</p>
                       
                         <table class="field-table">
@@ -30469,6 +30811,10 @@ Must be unique within the tenant when set. Pass an empty string to clear it. </t
                     <span class="message-type-name" id="producerflow.producer.v1.UpdateAgencyLocationResponse">UpdateAgencyLocationResponse</span>
                     
                   </h4>
+                  
+                    
+                  
+                    
                   
                     
                   
@@ -36124,7 +36470,7 @@ If not specified, returns both sole proprietors and standard agencies. </td>
                           <td>Optional. Filter by NIPR synchronization status.
 Multiple statuses can be specified to match agencies in any of those states.
 Useful for monitoring sync health and identifying agencies needing attention.
-Valid values: ACTIVE, FAILING, PENDING, DISABLED
+See NIPRSyncState for valid values.
 If empty, returns agencies in all sync states. </td>
                         </tr>
                       
@@ -36777,7 +37123,8 @@ If specified, this value takes precedence over the tenant's default behavior. </
                           <td><code>email</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>The email address of the agency. </td>
+                          <td>The email address of the agency. Required unless the tenant makes the
+agency email optional. </td>
                         </tr>
                       
                         <tr>
@@ -37110,7 +37457,7 @@ This is used to store the bank account information for the agency</div>
                           <td><code>carrier</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Insurance carrier providing the E&O coverage </td>
+                          <td>Insurance carrier providing the E&O coverage, up to 100 characters </td>
                         </tr>
                       
                         <tr>
@@ -37124,7 +37471,7 @@ This is used to store the bank account information for the agency</div>
                           <td><code>coverage_amount</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Amount of coverage provided by the E&O policy (aggregate limit) </td>
+                          <td>Amount of coverage provided by the E&O policy (aggregate limit), up to 16 digits </td>
                         </tr>
                       
                         <tr>
@@ -37138,7 +37485,7 @@ This is used to store the bank account information for the agency</div>
                           <td><code>per_occurrence</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>Per occurrence limit for the E&O policy </td>
+                          <td>Per occurrence limit for the E&O policy, up to 16 digits </td>
                         </tr>
                       
                     </tbody>
@@ -37550,6 +37897,15 @@ principal is unlicensed (no NPN), the metadata is stored on the principal Contac
                           <td><a href="#string">string</a></td>
                           <td>repeated</td>
                           <td>IDs of the locations created for the agency (if any were provided in the request) </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#producerflow.producer.v1.OnboardingState">OnboardingState</a></td>
+                          <td></td>
+                          <td>Whether the records named above can be read back yet. PROCESSING means
+the IDs are final but the agency is still being created; sending the same
+request again returns these IDs once it is done. </td>
                         </tr>
                       
                     </tbody>
@@ -38229,6 +38585,48 @@ If specified, this value takes precedence over the tenant's default behavior. </
 Must be a valid UUID format. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#producerflow.producer.v1.OnboardingState">OnboardingState</a></td>
+                          <td></td>
+                          <td>Whether the producer can be read back yet. See OnboardingState. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.producer.v1.NewProducersPartialFailureErrorDetail">NewProducersPartialFailureErrorDetail</h3>
+                <div class="description-content">NewProducersPartialFailureErrorDetail is attached to a NewProducers error
+when some producers were created before the one that failed.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>results</code></td>
+                          <td><a href="#producerflow.producer.v1.NewProducersResult">NewProducersResult</a></td>
+                          <td>repeated</td>
+                          <td>The producers created before the failure, in request order from index 0. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>failed_index</code></td>
+                          <td><a href="#int32">int32</a></td>
+                          <td></td>
+                          <td>The index in the request of the producer that failed. The producers after
+it were not attempted. </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -38246,13 +38644,18 @@ multiple individual NewProducer calls. All producers in the request will be asso
 with the same agency, making this ideal for onboarding producer teams.
 
 Operation Behavior:
-Producers are created sequentially. If a producer fails validation, the request
-returns an error, but any producers created before the failure will remain in
-the system.
+Producers are created sequentially. If a producer fails, the request returns
+an error and the producers after it are not attempted. The producers created
+before the failure remain in the system, and the error carries a
+NewProducersPartialFailureErrorDetail naming them and the index that failed.
+Sending the same request again is safe: the producers already created are
+returned rather than created twice.
 
 Request Limits:
 - Minimum producers: 1 (enforced by validation)
 - All producers must be for the same agency
+- Two producers with the same NPN, or with no NPN and the same email, are
+  refused as INVALID_ARGUMENT
 
 Each producer in the list can specify:
 - Basic information (name, email, phone)
@@ -38354,6 +38757,47 @@ After receiving this response, you can:
 These IDs are immediately available for use in subsequent API calls.
 The array length will always match the number of producers in the request.
 Order is guaranteed to match the request's producer array order. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>results</code></td>
+                          <td><a href="#producerflow.producer.v1.NewProducersResult">NewProducersResult</a></td>
+                          <td>repeated</td>
+                          <td>One entry per producer in the request, in the same order: its ID and
+whether it can be read back yet. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.producer.v1.NewProducersResult">NewProducersResult</h3>
+                <div class="description-content">NewProducersResult is the outcome of one producer in a NewProducers request.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>producer_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>The UUID of the producer. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#producerflow.producer.v1.OnboardingState">OnboardingState</a></td>
+                          <td></td>
+                          <td>Whether the producer can be read back yet. See OnboardingState. </td>
                         </tr>
                       
                     </tbody>
@@ -38991,7 +39435,7 @@ This data is synchronized from NIPR and is read-only. </td>
                           <td><a href="#producerflow.producer.v1.NIPRSyncState">NIPRSyncState</a></td>
                           <td></td>
                           <td>Current synchronization status with NIPR.
-Indicates whether NIPR data sync is active, failing, pending, or disabled. </td>
+See NIPRSyncState for the full set of states this field can carry. </td>
                         </tr>
                       
                         <tr>
@@ -41007,7 +41451,10 @@ If provided, must be non-empty. </td>
                           <td>optional</td>
                           <td>Email address of the producer.
 If provided, must be a valid email format.
-Must be unique within the tenant. </td>
+Must be unique within the tenant.
+An internal producer's email cannot be changed here: it is their login,
+so the producer changes it through email verification in ProducerFlow.
+Sending the email they already have is accepted. </td>
                         </tr>
                       
                         <tr>
@@ -41101,7 +41548,10 @@ Update behavior:
                           <td>The onboarding status of the producer.
 If provided, updates the producer's onboarding status.
 If not provided, the onboarding status remains unchanged.
-When set, the onboarding_status_updated_at timestamp is automatically updated. </td>
+When set, the onboarding_status_updated_at timestamp is automatically updated.
+
+A tenant can be set up to use only some of the statuses. A status the
+tenant does not use is rejected with INVALID_ARGUMENT. </td>
                         </tr>
                       
                         <tr>
@@ -42744,6 +43194,39 @@ apart from a genuine sync failure.</p></td>
                       <td>COMMUNICATION_ROLE_ALL</td>
                       <td>6</td>
                       <td><p>All roles</p></td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            
+              <h3 id="producerflow.producer.v1.OnboardingState">OnboardingState</h3>
+              <div class="description-content">OnboardingState says whether the records a create returned exist yet.</div>
+              <table class="enum-table">
+                <thead>
+                  <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+                </thead>
+                <tbody>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATE_UNSPECIFIED</td>
+                      <td>0</td>
+                      <td><p>Sent by a server that predates this field. Read it as COMPLETED.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATE_PROCESSING</td>
+                      <td>1</td>
+                      <td><p>The IDs are final, but the records are still being created and may not
+be readable yet. Sending the same request again returns the same IDs.
+A producer created with location_ids is never answered PROCESSING: the
+request times out instead, and sending it again applies them.</p></td>
+                    </tr>
+                  
+                    <tr>
+                      <td>ONBOARDING_STATE_COMPLETED</td>
+                      <td>2</td>
+                      <td><p>The records exist and can be read back. An agency whose listed producers
+do not all exist yet is answered PROCESSING.</p></td>
                     </tr>
                   
                 </tbody>
