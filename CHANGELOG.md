@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.30] - 2026-10-14
+
+### Added
+
+#### ProducerService
+
+- **`state` on `NewAgencyResponse`, `NewProducerResponse` and `NewProducersResult`** — an `OnboardingState` saying whether the records the returned IDs name can be read back yet. `PROCESSING` means the IDs are final but the records are still being created; sending the same request again returns the same IDs once it is done. `COMPLETED` means they can be read back. `UNSPECIFIED` comes from a server that predates the field and reads as `COMPLETED`. A producer created with `location_ids` is never answered `PROCESSING`: the request times out instead, and sending it again applies them
+- **`results` on `NewProducersResponse`** — one `NewProducersResult` per producer in the request, in request order, carrying its `producer_id` and `state`. `producer_ids` is unchanged
+- **`NewProducersPartialFailureErrorDetail`** — attached to a `NewProducers` error when some producers were created before the one that failed. Carries `results` for the producers created before the failure, in request order from index 0, and `failed_index`, the request index of the producer that failed. The producers after it are not attempted
+
+#### Webhooks
+
+- **`agency.retired` event** — sent when an agency retires and its NIPR sync stops. The agency is kept for history and cannot be reactivated. Carries `reason` (`acquired` or `merged`), and `replacement_agency_id` plus `external_replacement_agency_id` when another agency replaced it in a legal entity change. A producer that moved out is sent as its own `producer.transferred` event. Example payload in `webhooks/examples/agency_retired_example.json`
+- **`agency_nipr_regulatory_actions` and `producer_nipr_regulatory_actions`** — the regulatory actions NIPR reports against the agency or producer: state, reason, disposition, dates, file reference, penalty, length of order and origin. Present when NIPR data is synced
+- **`nipr.regulatory_actions` payload category** — a fifth independently subscribable NIPR category, subscribed by default like the other four. Unsubscribing removes the regulatory action sections but never suppresses the sync-completion event
+- **Documented shared E&O coverage** — `agency_eo` reports the agency's effective coverage. When the agency belongs to an organization that shares its own E&O, these are the organization's values and `inherited_from_organization_id` names that organization. An agency left with no coverage in effect reports an empty `agency_eo` object, since an omitted section means unchanged. When an organization's shared coverage or its sharing switch changes, every onboarded member agency receives an `agency.updated`; the organization itself receives no event
+
+### Changed
+
+#### ProducerService
+
+- **`agency.email` on `NewAgencyRequest` is optional when the tenant allows it** — an empty email passes validation; when provided it must still be a valid address
+- **E&O limits on `NewAgencyRequest.EOInfo`** — `carrier` is at most 100 characters; `coverage_amount` and `per_occurrence` may contain at most 16 digits
+- **`NewProducers` partial failure and retries** — when a producer fails, the error carries `NewProducersPartialFailureErrorDetail` and resending the same request returns the already-created producers instead of creating them twice. Two producers in one request with the same NPN, or with no NPN and the same email, are refused with `INVALID_ARGUMENT`
+- **`UpdateProducer` email rules** — an internal producer's email (one who signs in to ProducerFlow) cannot be changed through the API because it is their login; the request fails with `FAILED_PRECONDITION`. Sending the email they already have is accepted. An email already used by another producer in the tenant fails with `ALREADY_EXISTS`
+- **`onboarding_status` on `UpdateProducerRequest`** — a tenant can be set up to use only some statuses; a status the tenant does not use is rejected with `INVALID_ARGUMENT`
+- `ListAgencies` and `Producer.nipr_sync_status` documentation now point at `NIPRSyncState` for the full set of values, which also includes `IN_PROGRESS`, `STOPPING` and `NO_LICENSE_FOUND`
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.29] - 2026-08-18
 
 ### Added
