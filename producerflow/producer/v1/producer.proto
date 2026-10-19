@@ -2421,12 +2421,16 @@ message GetAgencyFilesResponse {
   // URL of the license document.
   // An identification document that shows that the agency
   // is licensed to carry out its operations in the relevant jurisdictions.
-  string license_doc_url = 4;
+  // Deprecated: ProducerFlow does not collect this document, so it is always
+  // empty.
+  string license_doc_url = 4 [deprecated = true];
 
   // URL of the broker bond document.
   // It's a surety bond that a broker needs to operate legally,
   // providing financial security for clients.
-  string broker_bond_doc_url = 5;
+  // Deprecated: ProducerFlow does not collect this document, so it is always
+  // empty.
+  string broker_bond_doc_url = 5 [deprecated = true];
 }
 
 // UpdateProducerRequest contains the fields that can be updated in a producer record.
@@ -3357,6 +3361,12 @@ message Agency {
       // This may include special designations, sub-agency relationships,
       // or other relationship details.
       string agency_affiliations = 11;
+
+      // Two-letter code of the state that issued this appointment.
+      // NIPR appointments are per state: the same carrier and LOA can appear
+      // once per state the agency is appointed in.
+      // Example: "TX"
+      string state = 12;
     }
 
     // List of carrier appointments held by the agency in NIPR.
@@ -3875,6 +3885,12 @@ message Producer {
       // Additional affiliations or roles the producer has with the agency.
       // This may include special designations or relationship details.
       string agency_affiliations = 11;
+
+      // Two-letter code of the state that issued this appointment.
+      // NIPR appointments are per state: the same carrier and LOA can appear
+      // once per state the producer is appointed in.
+      // Example: "TX"
+      string state = 12;
     }
 
     // List of carrier appointments held by the producer.
