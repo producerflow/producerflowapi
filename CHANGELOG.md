@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.31] - 2026-10-19
+
+### Added
+
+#### EventService (`producerflow.event.v2`)
+
+- **`EventService`** — new service that reads the tenant's change log: which entity changed, which of its fields, and the value each one now holds. Current state still comes from the resource APIs; the log says what to read again
+- **`ListEvents`** — returns events after a `checkpoint`, in log order, with the next `checkpoint` and `has_more`. Without a checkpoint it returns no events and the present position. `page_size` defaults to 100 (max 1000), and events committed together are never split across responses. The log reaches 90 days back: an older checkpoint is `OUT_OF_RANGE`, and an unreadable or future one is `INVALID_ARGUMENT`
+- **`GetEvent`** — returns one event by UUID. `NOT_FOUND` outside the 90-day window
+- **`Event`** — `id` (dedup key), `event_type` (`<object>.<action>`), `origin`, `create_time`, the IDs of the entity and its parents, `organization`, `changes` (`FieldChange`: field path + new value, with sensitive values masked to their last four characters) and `event_data` (transfer and status-transition context)
+
+#### ProducerService
+
+- **`state` on `Agency.NIPR.Appointment` and `Producer.NIPR.Appointment`** — two-letter code of the state that issued the appointment. The same carrier and LOA can appear once per state
+
+### Changed
+
+#### ProducerService
+
+- **`GetAgencyFilesResponse.license_doc_url` and `broker_bond_doc_url` deprecated** — ProducerFlow does not collect these documents, so they are always empty
+
+#### AppointmentService
+
+- `RISK_REASON_EO_NOT_FOUND` and `RISK_REASON_EO_INACTIVE` docs now describe the E&O in effect (the organization's shared coverage when shared, otherwise the agency's own) and say "inactive" means pending review or rejected
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.30] - 2026-10-14
 
 ### Added
