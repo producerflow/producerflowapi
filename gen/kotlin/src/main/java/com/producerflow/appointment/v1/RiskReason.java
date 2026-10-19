@@ -38,7 +38,9 @@ public enum RiskReason
   RISK_REASON_LICENSE_EXPIRED(2),
   /**
    * <pre>
-   * No E&amp;O coverage exists for agency.
+   * The agency has no E&amp;O in effect. The E&amp;O in effect is the shared coverage
+   * of the agency's organization while it shares coverages, the agency's own
+   * otherwise.
    * </pre>
    *
    * <code>RISK_REASON_EO_NOT_FOUND = 3;</code>
@@ -46,7 +48,8 @@ public enum RiskReason
   RISK_REASON_EO_NOT_FOUND(3),
   /**
    * <pre>
-   * E&amp;O Status is not "Active".
+   * The agency's E&amp;O in effect is not approved: it is pending review or
+   * rejected. There is no "active" E&amp;O status.
    * </pre>
    *
    * <code>RISK_REASON_EO_INACTIVE = 4;</code>
@@ -112,7 +115,9 @@ public enum RiskReason
   public static final int RISK_REASON_LICENSE_EXPIRED_VALUE = 2;
   /**
    * <pre>
-   * No E&amp;O coverage exists for agency.
+   * The agency has no E&amp;O in effect. The E&amp;O in effect is the shared coverage
+   * of the agency's organization while it shares coverages, the agency's own
+   * otherwise.
    * </pre>
    *
    * <code>RISK_REASON_EO_NOT_FOUND = 3;</code>
@@ -120,7 +125,8 @@ public enum RiskReason
   public static final int RISK_REASON_EO_NOT_FOUND_VALUE = 3;
   /**
    * <pre>
-   * E&amp;O Status is not "Active".
+   * The agency's E&amp;O in effect is not approved: it is pending review or
+   * rejected. There is no "active" E&amp;O status.
    * </pre>
    *
    * <code>RISK_REASON_EO_INACTIVE = 4;</code>

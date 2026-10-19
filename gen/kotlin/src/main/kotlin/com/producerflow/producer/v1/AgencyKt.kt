@@ -5645,6 +5645,37 @@ public object AgencyKt {
         public fun clearAgencyAffiliations() {
           _builder.clearAgencyAffiliations()
         }
+
+        /**
+         * ```
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the agency is appointed in.
+         * Example: "TX"
+         * ```
+         *
+         * `string state = 12 [json_name = "state"];`
+         */
+        public var state: kotlin.String
+          @JvmName("getState")
+          get() = _builder.state
+          @JvmName("setState")
+          set(value) {
+            _builder.state = value
+          }
+        /**
+         * ```
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the agency is appointed in.
+         * Example: "TX"
+         * ```
+         *
+         * `string state = 12 [json_name = "state"];`
+         */
+        public fun clearState() {
+          _builder.clearState()
+        }
       }
     }
   }

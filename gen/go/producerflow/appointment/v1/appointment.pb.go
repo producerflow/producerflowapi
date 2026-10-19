@@ -89,9 +89,12 @@ const (
 	RiskReason_RISK_REASON_LICENSE_INACTIVE RiskReason = 1
 	// License has expired (License ExpirationDate < current date).
 	RiskReason_RISK_REASON_LICENSE_EXPIRED RiskReason = 2
-	// No E&O coverage exists for agency.
+	// The agency has no E&O in effect. The E&O in effect is the shared coverage
+	// of the agency's organization while it shares coverages, the agency's own
+	// otherwise.
 	RiskReason_RISK_REASON_EO_NOT_FOUND RiskReason = 3
-	// E&O Status is not "Active".
+	// The agency's E&O in effect is not approved: it is pending review or
+	// rejected. There is no "active" E&O status.
 	RiskReason_RISK_REASON_EO_INACTIVE RiskReason = 4
 	// E&O coverage has expired (E&O ExpirationDate < current date).
 	RiskReason_RISK_REASON_EO_EXPIRED RiskReason = 5

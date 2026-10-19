@@ -885,14 +885,17 @@ export enum RiskReason {
   LICENSE_EXPIRED = 2,
 
   /**
-   * No E&O coverage exists for agency.
+   * The agency has no E&O in effect. The E&O in effect is the shared coverage
+   * of the agency's organization while it shares coverages, the agency's own
+   * otherwise.
    *
    * @generated from enum value: RISK_REASON_EO_NOT_FOUND = 3;
    */
   EO_NOT_FOUND = 3,
 
   /**
-   * E&O Status is not "Active".
+   * The agency's E&O in effect is not approved: it is pending review or
+   * rejected. There is no "active" E&O status.
    *
    * @generated from enum value: RISK_REASON_EO_INACTIVE = 4;
    */

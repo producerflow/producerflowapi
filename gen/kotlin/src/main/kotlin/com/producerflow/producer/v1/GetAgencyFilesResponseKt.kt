@@ -120,11 +120,13 @@ public object GetAgencyFilesResponseKt {
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * ```
      *
-     * `string license_doc_url = 4 [json_name = "licenseDocUrl"];`
+     * `string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];`
      */
-    public var licenseDocUrl: kotlin.String
+    @kotlin.Deprecated(message = "Field licenseDocUrl is deprecated") public var licenseDocUrl: kotlin.String
       @JvmName("getLicenseDocUrl")
       get() = _builder.licenseDocUrl
       @JvmName("setLicenseDocUrl")
@@ -136,9 +138,11 @@ public object GetAgencyFilesResponseKt {
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * ```
      *
-     * `string license_doc_url = 4 [json_name = "licenseDocUrl"];`
+     * `string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];`
      */
     public fun clearLicenseDocUrl() {
       _builder.clearLicenseDocUrl()
@@ -149,11 +153,13 @@ public object GetAgencyFilesResponseKt {
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * ```
      *
-     * `string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];`
+     * `string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];`
      */
-    public var brokerBondDocUrl: kotlin.String
+    @kotlin.Deprecated(message = "Field brokerBondDocUrl is deprecated") public var brokerBondDocUrl: kotlin.String
       @JvmName("getBrokerBondDocUrl")
       get() = _builder.brokerBondDocUrl
       @JvmName("setBrokerBondDocUrl")
@@ -165,9 +171,11 @@ public object GetAgencyFilesResponseKt {
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * ```
      *
-     * `string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];`
+     * `string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];`
      */
     public fun clearBrokerBondDocUrl() {
       _builder.clearBrokerBondDocUrl()

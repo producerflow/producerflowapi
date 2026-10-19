@@ -208,13 +208,17 @@ private static final long serialVersionUID = 0L;
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2425
    * @return The licenseDocUrl.
    */
   @java.lang.Override
-  public java.lang.String getLicenseDocUrl() {
+  @java.lang.Deprecated public java.lang.String getLicenseDocUrl() {
     java.lang.Object ref = licenseDocUrl_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
@@ -231,13 +235,17 @@ private static final long serialVersionUID = 0L;
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2425
    * @return The bytes for licenseDocUrl.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
+  @java.lang.Deprecated public com.google.protobuf.ByteString
       getLicenseDocUrlBytes() {
     java.lang.Object ref = licenseDocUrl_;
     if (ref instanceof java.lang.String) {
@@ -259,13 +267,17 @@ private static final long serialVersionUID = 0L;
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2432
    * @return The brokerBondDocUrl.
    */
   @java.lang.Override
-  public java.lang.String getBrokerBondDocUrl() {
+  @java.lang.Deprecated public java.lang.String getBrokerBondDocUrl() {
     java.lang.Object ref = brokerBondDocUrl_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
@@ -282,13 +294,17 @@ private static final long serialVersionUID = 0L;
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2432
    * @return The bytes for brokerBondDocUrl.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
+  @java.lang.Deprecated public com.google.protobuf.ByteString
       getBrokerBondDocUrlBytes() {
     java.lang.Object ref = brokerBondDocUrl_;
     if (ref instanceof java.lang.String) {
@@ -998,12 +1014,16 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2425
      * @return The licenseDocUrl.
      */
-    public java.lang.String getLicenseDocUrl() {
+    @java.lang.Deprecated public java.lang.String getLicenseDocUrl() {
       java.lang.Object ref = licenseDocUrl_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
@@ -1020,12 +1040,16 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2425
      * @return The bytes for licenseDocUrl.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getLicenseDocUrlBytes() {
       java.lang.Object ref = licenseDocUrl_;
       if (ref instanceof String) {
@@ -1043,13 +1067,17 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2425
      * @param value The licenseDocUrl to set.
      * @return This builder for chaining.
      */
-    public Builder setLicenseDocUrl(
+    @java.lang.Deprecated public Builder setLicenseDocUrl(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       licenseDocUrl_ = value;
@@ -1062,12 +1090,16 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2425
      * @return This builder for chaining.
      */
-    public Builder clearLicenseDocUrl() {
+    @java.lang.Deprecated public Builder clearLicenseDocUrl() {
       licenseDocUrl_ = getDefaultInstance().getLicenseDocUrl();
       bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
@@ -1078,13 +1110,17 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+     * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2425
      * @param value The bytes for licenseDocUrl to set.
      * @return This builder for chaining.
      */
-    public Builder setLicenseDocUrlBytes(
+    @java.lang.Deprecated public Builder setLicenseDocUrlBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
@@ -1100,12 +1136,16 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2432
      * @return The brokerBondDocUrl.
      */
-    public java.lang.String getBrokerBondDocUrl() {
+    @java.lang.Deprecated public java.lang.String getBrokerBondDocUrl() {
       java.lang.Object ref = brokerBondDocUrl_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
@@ -1122,12 +1162,16 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2432
      * @return The bytes for brokerBondDocUrl.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getBrokerBondDocUrlBytes() {
       java.lang.Object ref = brokerBondDocUrl_;
       if (ref instanceof String) {
@@ -1145,13 +1189,17 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2432
      * @param value The brokerBondDocUrl to set.
      * @return This builder for chaining.
      */
-    public Builder setBrokerBondDocUrl(
+    @java.lang.Deprecated public Builder setBrokerBondDocUrl(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       brokerBondDocUrl_ = value;
@@ -1164,12 +1212,16 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2432
      * @return This builder for chaining.
      */
-    public Builder clearBrokerBondDocUrl() {
+    @java.lang.Deprecated public Builder clearBrokerBondDocUrl() {
       brokerBondDocUrl_ = getDefaultInstance().getBrokerBondDocUrl();
       bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
@@ -1180,13 +1232,17 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
+     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * empty.
      * </pre>
      *
-     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+     * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+     * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+     *     See producerflow/producer/v1/producer.proto;l=2432
      * @param value The bytes for brokerBondDocUrl to set.
      * @return This builder for chaining.
      */
-    public Builder setBrokerBondDocUrlBytes(
+    @java.lang.Deprecated public Builder setBrokerBondDocUrlBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);

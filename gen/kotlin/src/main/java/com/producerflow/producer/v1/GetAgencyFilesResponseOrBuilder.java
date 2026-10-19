@@ -82,23 +82,31 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2425
    * @return The licenseDocUrl.
    */
-  java.lang.String getLicenseDocUrl();
+  @java.lang.Deprecated java.lang.String getLicenseDocUrl();
   /**
    * <pre>
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl"];</code>
+   * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2425
    * @return The bytes for licenseDocUrl.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getLicenseDocUrlBytes();
 
   /**
@@ -106,22 +114,30 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2432
    * @return The brokerBondDocUrl.
    */
-  java.lang.String getBrokerBondDocUrl();
+  @java.lang.Deprecated java.lang.String getBrokerBondDocUrl();
   /**
    * <pre>
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
+   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * empty.
    * </pre>
    *
-   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl"];</code>
+   * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
+   * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
+   *     See producerflow/producer/v1/producer.proto;l=2432
    * @return The bytes for brokerBondDocUrl.
    */
-  com.google.protobuf.ByteString
+  @java.lang.Deprecated com.google.protobuf.ByteString
       getBrokerBondDocUrlBytes();
 }

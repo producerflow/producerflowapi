@@ -2176,10 +2176,18 @@ type GetAgencyFilesResponse struct {
 	// URL of the license document.
 	// An identification document that shows that the agency
 	// is licensed to carry out its operations in the relevant jurisdictions.
+	// Deprecated: ProducerFlow does not collect this document, so it is always
+	// empty.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	LicenseDocUrl string `protobuf:"bytes,4,opt,name=license_doc_url,json=licenseDocUrl,proto3" json:"license_doc_url,omitempty"`
 	// URL of the broker bond document.
 	// It's a surety bond that a broker needs to operate legally,
 	// providing financial security for clients.
+	// Deprecated: ProducerFlow does not collect this document, so it is always
+	// empty.
+	//
+	// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 	BrokerBondDocUrl string `protobuf:"bytes,5,opt,name=broker_bond_doc_url,json=brokerBondDocUrl,proto3" json:"broker_bond_doc_url,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -2236,6 +2244,7 @@ func (x *GetAgencyFilesResponse) GetW9DocUrl() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *GetAgencyFilesResponse) GetLicenseDocUrl() string {
 	if x != nil {
 		return x.LicenseDocUrl
@@ -2243,6 +2252,7 @@ func (x *GetAgencyFilesResponse) GetLicenseDocUrl() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/producer/v1/producer.proto.
 func (x *GetAgencyFilesResponse) GetBrokerBondDocUrl() string {
 	if x != nil {
 		return x.BrokerBondDocUrl
@@ -11045,8 +11055,13 @@ type Agency_NIPR_Appointment struct {
 	// This may include special designations, sub-agency relationships,
 	// or other relationship details.
 	AgencyAffiliations string `protobuf:"bytes,11,opt,name=agency_affiliations,json=agencyAffiliations,proto3" json:"agency_affiliations,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Two-letter code of the state that issued this appointment.
+	// NIPR appointments are per state: the same carrier and LOA can appear
+	// once per state the agency is appointed in.
+	// Example: "TX"
+	State         string `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Agency_NIPR_Appointment) Reset() {
@@ -11152,6 +11167,13 @@ func (x *Agency_NIPR_Appointment) GetAppointmentRenewalDate() *timestamppb.Times
 func (x *Agency_NIPR_Appointment) GetAgencyAffiliations() string {
 	if x != nil {
 		return x.AgencyAffiliations
+	}
+	return ""
+}
+
+func (x *Agency_NIPR_Appointment) GetState() string {
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
@@ -12178,8 +12200,13 @@ type Producer_NIPR_Appointment struct {
 	// Additional affiliations or roles the producer has with the agency.
 	// This may include special designations or relationship details.
 	AgencyAffiliations string `protobuf:"bytes,11,opt,name=agency_affiliations,json=agencyAffiliations,proto3" json:"agency_affiliations,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Two-letter code of the state that issued this appointment.
+	// NIPR appointments are per state: the same carrier and LOA can appear
+	// once per state the producer is appointed in.
+	// Example: "TX"
+	State         string `protobuf:"bytes,12,opt,name=state,proto3" json:"state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Producer_NIPR_Appointment) Reset() {
@@ -12285,6 +12312,13 @@ func (x *Producer_NIPR_Appointment) GetAppointmentRenewalDate() *timestamppb.Tim
 func (x *Producer_NIPR_Appointment) GetAgencyAffiliations() string {
 	if x != nil {
 		return x.AgencyAffiliations
+	}
+	return ""
+}
+
+func (x *Producer_NIPR_Appointment) GetState() string {
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
@@ -13231,15 +13265,15 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\tproducers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\tproducers\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\">\n" +
 	"\x15GetAgencyFilesRequest\x12%\n" +
-	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"\xdc\x01\n" +
+	"\tagency_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\bagencyId\"\xe4\x01\n" +
 	"\x16GetAgencyFilesResponse\x12\x1c\n" +
 	"\n" +
 	"eo_doc_url\x18\x01 \x01(\tR\beoDocUrl\x12/\n" +
 	"\x14voided_check_doc_url\x18\x02 \x01(\tR\x11voidedCheckDocUrl\x12\x1c\n" +
 	"\n" +
-	"w9_doc_url\x18\x03 \x01(\tR\bw9DocUrl\x12&\n" +
-	"\x0flicense_doc_url\x18\x04 \x01(\tR\rlicenseDocUrl\x12-\n" +
-	"\x13broker_bond_doc_url\x18\x05 \x01(\tR\x10brokerBondDocUrl\"\x96\t\n" +
+	"w9_doc_url\x18\x03 \x01(\tR\bw9DocUrl\x12*\n" +
+	"\x0flicense_doc_url\x18\x04 \x01(\tB\x02\x18\x01R\rlicenseDocUrl\x121\n" +
+	"\x13broker_bond_doc_url\x18\x05 \x01(\tB\x02\x18\x01R\x10brokerBondDocUrl\"\x96\t\n" +
 	"\x15UpdateProducerRequest\x12)\n" +
 	"\vproducer_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\n" +
 	"producerId\x12\\\n" +
@@ -13343,7 +13377,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\n" +
 	"_agency_id\"c\n" +
 	"\x18ListNewProducersResponse\x12G\n" +
-	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xe78\n" +
+	"\rnew_producers\x18\x01 \x03(\v2\".producerflow.producer.v1.ProducerR\fnewProducers\"\xfd8\n" +
 	"\x06Agency\x12\x1b\n" +
 	"\tagency_id\x18\x01 \x01(\tR\bagencyId\x12L\n" +
 	"\vagency_info\x18\x02 \x01(\v2+.producerflow.producer.v1.Agency.AgencyInfoR\n" +
@@ -13443,7 +13477,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\fBusinessHour\x123\n" +
 	"\tweek_days\x18\x01 \x03(\x0e2\x16.google.type.DayOfWeekR\bweekDays\x129\n" +
 	"\fopening_time\x18\x02 \x01(\v2\x16.google.type.TimeOfDayR\vopeningTime\x129\n" +
-	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\x8d\x1a\n" +
+	"\fclosing_time\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\vclosingTime\x1a\xa3\x1a\n" +
 	"\x04NIPR\x12P\n" +
 	"\n" +
 	"biographic\x18\x01 \x01(\v20.producerflow.producer.v1.Agency.NIPR.BiographicR\n" +
@@ -13524,7 +13558,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\bfile_ref\x18\b \x01(\tR\afileRef\x126\n" +
 	"\x17penalty_fine_forfeiture\x18\t \x01(\tR\x15penaltyFineForfeiture\x12&\n" +
 	"\x0flength_of_order\x18\n" +
-	" \x01(\tR\rlengthOfOrder\x1a\xd9\x03\n" +
+	" \x01(\tR\rlengthOfOrder\x1a\xef\x03\n" +
 	"\vAppointment\x12\x1b\n" +
 	"\tbranch_id\x18\x01 \x01(\tR\bbranchId\x12!\n" +
 	"\fcompany_name\x18\x02 \x01(\tR\vcompanyName\x12\x12\n" +
@@ -13537,8 +13571,9 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliationsB\x1c\n" +
-	"\x1a_organization_relationship\"\xe2)\n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\x12\x14\n" +
+	"\x05state\x18\f \x01(\tR\x05stateB\x1c\n" +
+	"\x1a_organization_relationship\"\xf8)\n" +
 	"\bProducer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -13573,7 +13608,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x11external_metadata\x18\x04 \x03(\v2?.producerflow.producer.v1.Producer.Agency.ExternalMetadataEntryR\x10externalMetadata\x1aC\n" +
 	"\x15ExternalMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xc7\x1a\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xdd\x1a\n" +
 	"\x04NIPR\x12K\n" +
 	"\blicenses\x18\x06 \x03(\v2/.producerflow.producer.v1.Producer.NIPR.LicenseR\blicenses\x12R\n" +
 	"\n" +
@@ -13646,7 +13681,7 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"state_code\x18\v \x01(\tR\tstateCode\x1a\x9c\x01\n" +
 	"\x1dRegulatoryActionsByStateEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12e\n" +
-	"\x05value\x18\x02 \x01(\v2O.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionR\x05value:\x028\x01\x1a\xd9\x03\n" +
+	"\x05value\x18\x02 \x01(\v2O.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActionR\x05value:\x028\x01\x1a\xef\x03\n" +
 	"\vAppointment\x12\x1b\n" +
 	"\tbranch_id\x18\x01 \x01(\tR\bbranchId\x12!\n" +
 	"\fcompany_name\x18\x02 \x01(\tR\vcompanyName\x12\x12\n" +
@@ -13659,7 +13694,8 @@ const file_producerflow_producer_v1_producer_proto_rawDesc = "" +
 	"\x12status_reason_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10statusReasonDate\x12T\n" +
 	"\x18appointment_renewal_date\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x16appointmentRenewalDate\x12/\n" +
-	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\x1a\xce\x01\n" +
+	"\x13agency_affiliations\x18\v \x01(\tR\x12agencyAffiliations\x12\x14\n" +
+	"\x05state\x18\f \x01(\tR\x05state\x1a\xce\x01\n" +
 	"\aAddress\x12\x1a\n" +
 	"\x06street\x18\x01 \x01(\tB\x02\x18\x01R\x06street\x12\x12\n" +
 	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +

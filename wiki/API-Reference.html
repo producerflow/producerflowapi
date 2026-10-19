@@ -562,6 +562,19 @@
         
           
             <li>
+              <a href="#producerflow.event.v2.EventService"><span class="badge">S</span>EventService</a>
+              <ul>
+                
+                  <li><a href="#producerflow.event.v2.EventService.ListEvents">ListEvents</a></li>
+                
+                  <li><a href="#producerflow.event.v2.EventService.GetEvent">GetEvent</a></li>
+                
+              </ul>
+            </li>
+          
+        
+          
+            <li>
               <a href="#producerflow.testing.v1.TestingService"><span class="badge">S</span>TestingService</a>
               <ul>
                 
@@ -12310,18 +12323,22 @@ document used in the onboarding process for tax reporting purposes. </td>
                                 <td><code>license_doc_url</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>URL of the license document.
+                                <td><strong>Deprecated.</strong> URL of the license document.
 An identification document that shows that the agency
-is licensed to carry out its operations in the relevant jurisdictions. </td>
+is licensed to carry out its operations in the relevant jurisdictions.
+Deprecated: ProducerFlow does not collect this document, so it is always
+empty. </td>
                               </tr>
                             
                               <tr>
                                 <td><code>broker_bond_doc_url</code></td>
                                 <td><a href="#string">string</a></td>
                                 <td></td>
-                                <td>URL of the broker bond document.
+                                <td><strong>Deprecated.</strong> URL of the broker bond document.
 It's a surety bond that a broker needs to operate legally,
-providing financial security for clients. </td>
+providing financial security for clients.
+Deprecated: ProducerFlow does not collect this document, so it is always
+empty. </td>
                               </tr>
                             
                           </tbody>
@@ -32765,6 +32782,259 @@ in this state. </td>
       
         <div class="service-section">
           <div class="service-heading">
+            <h2 id="producerflow.event.v2.EventService">EventService</h2><a href="#title">Top</a>
+          </div>
+
+          <div class="description-content">
+            EventService reads the log of changes to the account of the tenant the API
+key belongs to: which entity changed, which of its fields, and what each one
+changed to. Current state comes from the resource APIs; the log says what to
+read again.
+
+A consumer deduplicates on the event id, applies events in the order they
+are returned, persists the checkpoint every response carries and passes it
+back, and ignores an event type or a field it does not recognise.
+          </div>
+
+          
+            <details class="method-details" id="producerflow.event.v2.EventService.ListEvents">
+              <summary>
+                <span class="method-name">ListEvents</span>
+                
+              </summary>
+              <div class="details-content">
+                <p class="method-description">ListEvents returns the events after a checkpoint, in log order. Without a
+checkpoint it returns no events and the present position: take it before
+reading current state through the resource APIs, then read forward from
+it.
+
+An update whose every change is to a field the entity's resource does not
+carry says nothing to apply, and is not returned.
+
+The log can be read 90 days back. A checkpoint older than that is
+OUT_OF_RANGE: read current state again and take a new checkpoint. A
+checkpoint that cannot be read, or one ahead of the log, is
+INVALID_ARGUMENT.</p>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label request-label">Request</span>
+                    <span class="message-type-name" id="producerflow.event.v2.ListEventsRequest">ListEventsRequest</span>
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">Request message for ListEvents.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>checkpoint</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>Position to read from, as returned by an earlier response. Omit it to
+take the present position. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>page_size</code></td>
+                                <td><a href="#int32">int32</a></td>
+                                <td></td>
+                                <td>Maximum number of events to return. 0 means 100; the maximum is 1000.
+Events committed together are never split across responses, so a
+response can hold more when a single commit does. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                </div>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label response-label">Response</span>
+                    <span class="message-type-name" id="producerflow.event.v2.ListEventsResponse">ListEventsResponse</span>
+                    
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">Response message for ListEvents.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>events</code></td>
+                                <td><a href="#producerflow.event.v2.Event">Event</a></td>
+                                <td>repeated</td>
+                                <td>Events after the requested checkpoint, in log order. Among events
+committed together, an entity's events come before those of the entities
+that belong to it, except deletions, which come last and in the reverse
+order. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>checkpoint</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>Position this read reached, set on every response. Persist it and pass it
+back. </td>
+                              </tr>
+                            
+                              <tr>
+                                <td><code>has_more</code></td>
+                                <td><a href="#bool">bool</a></td>
+                                <td></td>
+                                <td>Whether more events follow the returned checkpoint. A response can hold
+no events while it is true: keep reading until it is false. False means
+caught up, not that nothing further will arrive. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                </div>
+              </div>
+            </details>
+          
+            <details class="method-details" id="producerflow.event.v2.EventService.GetEvent">
+              <summary>
+                <span class="method-name">GetEvent</span>
+                
+              </summary>
+              <div class="details-content">
+                <p class="method-description">GetEvent returns one event by id. NOT_FOUND means the tenant has no such
+event in the last 90 days that ListEvents returns.</p>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label request-label">Request</span>
+                    <span class="message-type-name" id="producerflow.event.v2.GetEventRequest">GetEventRequest</span>
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">Request message for GetEvent.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>id</code></td>
+                                <td><a href="#string">string</a></td>
+                                <td></td>
+                                <td>ID of the event. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+
+                
+                <div class="message-section">
+                  <h4 class="message-header">
+                    <span class="message-type-label response-label">Response</span>
+                    <span class="message-type-name" id="producerflow.event.v2.GetEventResponse">GetEventResponse</span>
+                    
+                  </h4>
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                  
+                    
+                      <p class="message-description">Response message for GetEvent.</p>
+                      
+                        <table class="field-table">
+                          <thead>
+                            <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr>
+                                <td><code>event</code></td>
+                                <td><a href="#producerflow.event.v2.Event">Event</a></td>
+                                <td></td>
+                                <td>The event. </td>
+                              </tr>
+                            
+                          </tbody>
+                        </table>
+                      
+                    
+                  
+                    
+                  
+                    
+                  
+                </div>
+              </div>
+            </details>
+          
+        </div>
+      
+    
+      
+        <div class="service-section">
+          <div class="service-heading">
             <h2 id="producerflow.testing.v1.TestingService">TestingService</h2><a href="#title">Top</a>
           </div>
 
@@ -34124,6 +34394,16 @@ renewals to ensure continuous authorization. </td>
                           <td>Additional affiliations or roles the agency has with the carrier.
 This may include special designations, sub-agency relationships,
 or other relationship details. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Two-letter code of the state that issued this appointment.
+NIPR appointments are per state: the same carrier and LOA can appear
+once per state the agency is appointed in.
+Example: "TX" </td>
                         </tr>
                       
                     </tbody>
@@ -35824,18 +36104,22 @@ document used in the onboarding process for tax reporting purposes. </td>
                           <td><code>license_doc_url</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>URL of the license document.
+                          <td><strong>Deprecated.</strong> URL of the license document.
 An identification document that shows that the agency
-is licensed to carry out its operations in the relevant jurisdictions. </td>
+is licensed to carry out its operations in the relevant jurisdictions.
+Deprecated: ProducerFlow does not collect this document, so it is always
+empty. </td>
                         </tr>
                       
                         <tr>
                           <td><code>broker_bond_doc_url</code></td>
                           <td><a href="#string">string</a></td>
                           <td></td>
-                          <td>URL of the broker bond document.
+                          <td><strong>Deprecated.</strong> URL of the broker bond document.
 It's a surety bond that a broker needs to operate legally,
-providing financial security for clients. </td>
+providing financial security for clients.
+Deprecated: ProducerFlow does not collect this document, so it is always
+empty. </td>
                         </tr>
                       
                     </tbody>
@@ -39593,6 +39877,16 @@ renewals. </td>
 This may include special designations or relationship details. </td>
                         </tr>
                       
+                        <tr>
+                          <td><code>state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Two-letter code of the state that issued this appointment.
+NIPR appointments are per state: the same carrier and LOA can appear
+once per state the producer is appointed in.
+Example: "TX" </td>
+                        </tr>
+                      
                     </tbody>
                   </table>
                 
@@ -42683,6 +42977,413 @@ For registry states or non-NIPR carriers:
     
       
         <details>
+          <summary>producerflow/event/v2/event.proto - Types</summary>
+          <div class="details-content">
+            
+              
+              
+                <h3 id="producerflow.event.v2.Event">Event</h3>
+                <div class="description-content">Event records that an entity changed. Its identifiers name the entity and
+the entities it belonged to when the change happened; changes say what is
+now true of it. Each *_id is the last segment of the entity's resource name,
+for example agency_id in "agencies/{agency_id}". Which identifiers an event
+carries depends on its object, and one it does not carry is empty.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>A UUID, unique and stable: the key to deduplicate on. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>event_type</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>"<object>.<action>", for example "license.updated". Both halves can grow:
+ignore a type you do not handle. The object names the entity the event is
+about, whose id is the field "<object>_id". </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>origin</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Where the change came from: ProducerFlowAPI, ProducerFlowPortal,
+ProducerFlowSupport, ProducerPass, NIPR, Salesforce or BindHQ. More can be
+added. Empty when the change recorded none. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>create_time</code></td>
+                          <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                          <td></td>
+                          <td>Time the change was committed. Events committed together share it, so it
+orders the log but does not name a position in it: the checkpoint does. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>agency_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the agency the event is about or belongs to. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>producer_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the producer the event is about or belongs to. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>contact_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the contact the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>organization_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the organization the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>appointment_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the appointment the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>license_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the license the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>location_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the location the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Identifier the tenant assigned, in its own systems, to the entity the
+event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_agency_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Identifier the tenant assigned to the agency. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_producer_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Identifier the tenant assigned to the producer. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>npn</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>National Producer Number of the entity the event is about. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>license_state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>USPS two-letter code of the state that issued the license. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>carrier_cocode</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>NAIC company code of the appointment's carrier. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>appointment_state</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>USPS two-letter code of the state the appointment is in. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>parent_appointment_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the agency appointment a producer's appointment was derived from. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>organization</code></td>
+                          <td><a href="#producerflow.event.v2.EventOrganization">EventOrganization</a></td>
+                          <td></td>
+                          <td>Organization of the event's agency, on agency, producer, contact and
+license events. Absent when that agency belongs to none, and on the other
+events. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>changes</code></td>
+                          <td><a href="#producerflow.event.v2.FieldChange">FieldChange</a></td>
+                          <td>repeated</td>
+                          <td>Fields of the entity that changed, each with the value it now holds.
+Empty on an event whose identifiers and event_data say all that changed. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>event_data</code></td>
+                          <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                          <td></td>
+                          <td>Context of the transition, on the events that document it. When a
+producer moves to another agency, the producer.updated, license.updated
+and appointment.updated events of the move carry transfer_id and
+source_agency_id, and their agency_id is the agency moved to; the
+appointment.deleted events of the move carry transfer_id. When an
+appointment's operational status moves, appointment.updated carries
+previous_status, the status it moved off, in the form
+operational_status.status takes. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.EventOrganization">EventOrganization</h3>
+                <div class="description-content">EventOrganization is an organization reduced to its identifiers.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>organization_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the organization. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>external_id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Identifier the tenant assigned to the organization. Empty when it has
+none. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.FieldChange">FieldChange</h3>
+                <div class="description-content">FieldChange is one field of the entity and the value it now holds.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>field</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Path of the field on the entity's resource, dotted for nested messages,
+for example "operational_status.status". On an entity whose resource the
+API does not serve yet, the path can change when it does. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>value</code></td>
+                          <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                          <td></td>
+                          <td>Value the field now holds. A null value means the field was cleared. A
+sensitive value is a string of asterisks ending in its last four
+characters, or only asterisks when it has four or fewer. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.GetEventRequest">GetEventRequest</h3>
+                <div class="description-content">Request message for GetEvent.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>id</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>ID of the event. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.GetEventResponse">GetEventResponse</h3>
+                <div class="description-content">Response message for GetEvent.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>event</code></td>
+                          <td><a href="#producerflow.event.v2.Event">Event</a></td>
+                          <td></td>
+                          <td>The event. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.ListEventsRequest">ListEventsRequest</h3>
+                <div class="description-content">Request message for ListEvents.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>checkpoint</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Position to read from, as returned by an earlier response. Omit it to
+take the present position. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>page_size</code></td>
+                          <td><a href="#int32">int32</a></td>
+                          <td></td>
+                          <td>Maximum number of events to return. 0 means 100; the maximum is 1000.
+Events committed together are never split across responses, so a
+response can hold more when a single commit does. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+              
+              
+                <h3 id="producerflow.event.v2.ListEventsResponse">ListEventsResponse</h3>
+                <div class="description-content">Response message for ListEvents.</div>
+
+                
+                  <table class="field-table">
+                    <thead>
+                      <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+                    </thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td><code>events</code></td>
+                          <td><a href="#producerflow.event.v2.Event">Event</a></td>
+                          <td>repeated</td>
+                          <td>Events after the requested checkpoint, in log order. Among events
+committed together, an entity's events come before those of the entities
+that belong to it, except deletions, which come last and in the reverse
+order. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>checkpoint</code></td>
+                          <td><a href="#string">string</a></td>
+                          <td></td>
+                          <td>Position this read reached, set on every response. Persist it and pass it
+back. </td>
+                        </tr>
+                      
+                        <tr>
+                          <td><code>has_more</code></td>
+                          <td><a href="#bool">bool</a></td>
+                          <td></td>
+                          <td>Whether more events follow the returned checkpoint. A response can hold
+no events while it is true: keep reading until it is false. False means
+caught up, not that nothing further will arrive. </td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                
+
+                
+              
+            
+          </div>
+        </details>
+      
+    
+      
+        <details>
           <summary>producerflow/testing/v1/testing.proto - Types</summary>
           <div class="details-content">
             
@@ -43527,13 +44228,16 @@ trigger operational status changes.</div>
                     <tr>
                       <td>RISK_REASON_EO_NOT_FOUND</td>
                       <td>3</td>
-                      <td><p>No E&O coverage exists for agency.</p></td>
+                      <td><p>The agency has no E&O in effect. The E&O in effect is the shared coverage
+of the agency's organization while it shares coverages, the agency's own
+otherwise.</p></td>
                     </tr>
                   
                     <tr>
                       <td>RISK_REASON_EO_INACTIVE</td>
                       <td>4</td>
-                      <td><p>E&O Status is not "Active".</p></td>
+                      <td><p>The agency's E&O in effect is not approved: it is pending review or
+rejected. There is no "active" E&O status.</p></td>
                     </tr>
                   
                     <tr>
@@ -43679,8 +44383,12 @@ Reference: https://pdb.nipr.com/Gateway/ValidTerms</div>
     
       
     
+      
+    
 
     
+    
+      
     
       
     

@@ -1875,7 +1875,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3557
+       *     See producerflow/producer/v1/producer.proto;l=3567
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1886,7 +1886,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3557
+       *     See producerflow/producer/v1/producer.proto;l=3567
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -2435,7 +2435,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3607
+         *     See producerflow/producer/v1/producer.proto;l=3617
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -2446,7 +2446,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3607
+         *     See producerflow/producer/v1/producer.proto;l=3617
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -2654,7 +2654,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3607
+         *     See producerflow/producer/v1/producer.proto;l=3617
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -2668,7 +2668,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3607
+         *     See producerflow/producer/v1/producer.proto;l=3617
          * @return The issueDate.
          */
         @java.lang.Override
@@ -3377,7 +3377,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3607
+           *     See producerflow/producer/v1/producer.proto;l=3617
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -3390,7 +3390,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3607
+           *     See producerflow/producer/v1/producer.proto;l=3617
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3958,7 +3958,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3557
+       *     See producerflow/producer/v1/producer.proto;l=3567
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3972,7 +3972,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3557
+       *     See producerflow/producer/v1/producer.proto;l=3567
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -5460,7 +5460,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3557
+         *     See producerflow/producer/v1/producer.proto;l=3567
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -5473,7 +5473,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3557
+         *     See producerflow/producer/v1/producer.proto;l=3567
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -6846,7 +6846,7 @@ java.lang.String defaultValue) {
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3665
+       *     See producerflow/producer/v1/producer.proto;l=3675
        * @return The fein.
        */
       @java.lang.Deprecated java.lang.String getFein();
@@ -6858,7 +6858,7 @@ java.lang.String defaultValue) {
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3665
+       *     See producerflow/producer/v1/producer.proto;l=3675
        * @return The bytes for fein.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6872,7 +6872,7 @@ java.lang.String defaultValue) {
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3669
+       *     See producerflow/producer/v1/producer.proto;l=3679
        * @return The companyName.
        */
       @java.lang.Deprecated java.lang.String getCompanyName();
@@ -6884,7 +6884,7 @@ java.lang.String defaultValue) {
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3669
+       *     See producerflow/producer/v1/producer.proto;l=3679
        * @return The bytes for companyName.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6898,7 +6898,7 @@ java.lang.String defaultValue) {
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3673
+       *     See producerflow/producer/v1/producer.proto;l=3683
        * @return The stateDomicile.
        */
       @java.lang.Deprecated java.lang.String getStateDomicile();
@@ -6910,7 +6910,7 @@ java.lang.String defaultValue) {
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3673
+       *     See producerflow/producer/v1/producer.proto;l=3683
        * @return The bytes for stateDomicile.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -7154,7 +7154,7 @@ java.lang.String defaultValue) {
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3665
+       *     See producerflow/producer/v1/producer.proto;l=3675
        * @return The fein.
        */
       @java.lang.Override
@@ -7178,7 +7178,7 @@ java.lang.String defaultValue) {
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3665
+       *     See producerflow/producer/v1/producer.proto;l=3675
        * @return The bytes for fein.
        */
       @java.lang.Override
@@ -7207,7 +7207,7 @@ java.lang.String defaultValue) {
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3669
+       *     See producerflow/producer/v1/producer.proto;l=3679
        * @return The companyName.
        */
       @java.lang.Override
@@ -7231,7 +7231,7 @@ java.lang.String defaultValue) {
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3669
+       *     See producerflow/producer/v1/producer.proto;l=3679
        * @return The bytes for companyName.
        */
       @java.lang.Override
@@ -7260,7 +7260,7 @@ java.lang.String defaultValue) {
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3673
+       *     See producerflow/producer/v1/producer.proto;l=3683
        * @return The stateDomicile.
        */
       @java.lang.Override
@@ -7284,7 +7284,7 @@ java.lang.String defaultValue) {
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3673
+       *     See producerflow/producer/v1/producer.proto;l=3683
        * @return The bytes for stateDomicile.
        */
       @java.lang.Override
@@ -8207,7 +8207,7 @@ java.lang.String defaultValue) {
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3665
+         *     See producerflow/producer/v1/producer.proto;l=3675
          * @return The fein.
          */
         @java.lang.Deprecated public java.lang.String getFein() {
@@ -8230,7 +8230,7 @@ java.lang.String defaultValue) {
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3665
+         *     See producerflow/producer/v1/producer.proto;l=3675
          * @return The bytes for fein.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8254,7 +8254,7 @@ java.lang.String defaultValue) {
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3665
+         *     See producerflow/producer/v1/producer.proto;l=3675
          * @param value The fein to set.
          * @return This builder for chaining.
          */
@@ -8274,7 +8274,7 @@ java.lang.String defaultValue) {
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3665
+         *     See producerflow/producer/v1/producer.proto;l=3675
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearFein() {
@@ -8291,7 +8291,7 @@ java.lang.String defaultValue) {
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3665
+         *     See producerflow/producer/v1/producer.proto;l=3675
          * @param value The bytes for fein to set.
          * @return This builder for chaining.
          */
@@ -8314,7 +8314,7 @@ java.lang.String defaultValue) {
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3669
+         *     See producerflow/producer/v1/producer.proto;l=3679
          * @return The companyName.
          */
         @java.lang.Deprecated public java.lang.String getCompanyName() {
@@ -8337,7 +8337,7 @@ java.lang.String defaultValue) {
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3669
+         *     See producerflow/producer/v1/producer.proto;l=3679
          * @return The bytes for companyName.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8361,7 +8361,7 @@ java.lang.String defaultValue) {
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3669
+         *     See producerflow/producer/v1/producer.proto;l=3679
          * @param value The companyName to set.
          * @return This builder for chaining.
          */
@@ -8381,7 +8381,7 @@ java.lang.String defaultValue) {
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3669
+         *     See producerflow/producer/v1/producer.proto;l=3679
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearCompanyName() {
@@ -8398,7 +8398,7 @@ java.lang.String defaultValue) {
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3669
+         *     See producerflow/producer/v1/producer.proto;l=3679
          * @param value The bytes for companyName to set.
          * @return This builder for chaining.
          */
@@ -8421,7 +8421,7 @@ java.lang.String defaultValue) {
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3673
+         *     See producerflow/producer/v1/producer.proto;l=3683
          * @return The stateDomicile.
          */
         @java.lang.Deprecated public java.lang.String getStateDomicile() {
@@ -8444,7 +8444,7 @@ java.lang.String defaultValue) {
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3673
+         *     See producerflow/producer/v1/producer.proto;l=3683
          * @return The bytes for stateDomicile.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8468,7 +8468,7 @@ java.lang.String defaultValue) {
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3673
+         *     See producerflow/producer/v1/producer.proto;l=3683
          * @param value The stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -8488,7 +8488,7 @@ java.lang.String defaultValue) {
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3673
+         *     See producerflow/producer/v1/producer.proto;l=3683
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStateDomicile() {
@@ -8505,7 +8505,7 @@ java.lang.String defaultValue) {
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3673
+         *     See producerflow/producer/v1/producer.proto;l=3683
          * @param value The bytes for stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -13647,6 +13647,32 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        */
       com.google.protobuf.ByteString
           getAgencyAffiliationsBytes();
+
+      /**
+       * <pre>
+       * Two-letter code of the state that issued this appointment.
+       * NIPR appointments are per state: the same carrier and LOA can appear
+       * once per state the producer is appointed in.
+       * Example: "TX"
+       * </pre>
+       *
+       * <code>string state = 12 [json_name = "state"];</code>
+       * @return The state.
+       */
+      java.lang.String getState();
+      /**
+       * <pre>
+       * Two-letter code of the state that issued this appointment.
+       * NIPR appointments are per state: the same carrier and LOA can appear
+       * once per state the producer is appointed in.
+       * Example: "TX"
+       * </pre>
+       *
+       * <code>string state = 12 [json_name = "state"];</code>
+       * @return The bytes for state.
+       */
+      com.google.protobuf.ByteString
+          getStateBytes();
     }
     /**
      * <pre>
@@ -13703,6 +13729,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         status_ = "";
         terminationReason_ = "";
         agencyAffiliations_ = "";
+        state_ = "";
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -14285,6 +14312,59 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
       }
 
+      public static final int STATE_FIELD_NUMBER = 12;
+      @SuppressWarnings("serial")
+      private volatile java.lang.Object state_ = "";
+      /**
+       * <pre>
+       * Two-letter code of the state that issued this appointment.
+       * NIPR appointments are per state: the same carrier and LOA can appear
+       * once per state the producer is appointed in.
+       * Example: "TX"
+       * </pre>
+       *
+       * <code>string state = 12 [json_name = "state"];</code>
+       * @return The state.
+       */
+      @java.lang.Override
+      public java.lang.String getState() {
+        java.lang.Object ref = state_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          state_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * Two-letter code of the state that issued this appointment.
+       * NIPR appointments are per state: the same carrier and LOA can appear
+       * once per state the producer is appointed in.
+       * Example: "TX"
+       * </pre>
+       *
+       * <code>string state = 12 [json_name = "state"];</code>
+       * @return The bytes for state.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString
+          getStateBytes() {
+        java.lang.Object ref = state_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          state_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
       private byte memoizedIsInitialized = -1;
       @java.lang.Override
       public final boolean isInitialized() {
@@ -14332,6 +14412,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyAffiliations_)) {
           com.google.protobuf.GeneratedMessage.writeString(output, 11, agencyAffiliations_);
         }
+        if (!com.google.protobuf.GeneratedMessage.isStringEmpty(state_)) {
+          com.google.protobuf.GeneratedMessage.writeString(output, 12, state_);
+        }
         getUnknownFields().writeTo(output);
       }
 
@@ -14376,6 +14459,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         if (!com.google.protobuf.GeneratedMessage.isStringEmpty(agencyAffiliations_)) {
           size += com.google.protobuf.GeneratedMessage.computeStringSize(11, agencyAffiliations_);
         }
+        if (!com.google.protobuf.GeneratedMessage.isStringEmpty(state_)) {
+          size += com.google.protobuf.GeneratedMessage.computeStringSize(12, state_);
+        }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
         return size;
@@ -14419,6 +14505,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         if (!getAgencyAffiliations()
             .equals(other.getAgencyAffiliations())) return false;
+        if (!getState()
+            .equals(other.getState())) return false;
         if (!getUnknownFields().equals(other.getUnknownFields())) return false;
         return true;
       }
@@ -14456,6 +14544,8 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
         }
         hash = (37 * hash) + AGENCY_AFFILIATIONS_FIELD_NUMBER;
         hash = (53 * hash) + getAgencyAffiliations().hashCode();
+        hash = (37 * hash) + STATE_FIELD_NUMBER;
+        hash = (53 * hash) + getState().hashCode();
         hash = (29 * hash) + getUnknownFields().hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -14637,6 +14727,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
             appointmentRenewalDateBuilder_ = null;
           }
           agencyAffiliations_ = "";
+          state_ = "";
           return this;
         }
 
@@ -14710,6 +14801,9 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           if (((from_bitField0_ & 0x00000400) != 0)) {
             result.agencyAffiliations_ = agencyAffiliations_;
           }
+          if (((from_bitField0_ & 0x00000800) != 0)) {
+            result.state_ = state_;
+          }
           result.bitField0_ |= to_bitField0_;
         }
 
@@ -14774,6 +14868,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           if (!other.getAgencyAffiliations().isEmpty()) {
             agencyAffiliations_ = other.agencyAffiliations_;
             bitField0_ |= 0x00000400;
+            onChanged();
+          }
+          if (!other.getState().isEmpty()) {
+            state_ = other.state_;
+            bitField0_ |= 0x00000800;
             onChanged();
           }
           this.mergeUnknownFields(other.getUnknownFields());
@@ -14861,6 +14960,11 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
                   bitField0_ |= 0x00000400;
                   break;
                 } // case 90
+                case 98: {
+                  state_ = input.readStringRequireUtf8();
+                  bitField0_ |= 0x00000800;
+                  break;
+                } // case 98
                 default: {
                   if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                     done = true; // was an endgroup tag
@@ -16188,6 +16292,113 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
           checkByteStringIsUtf8(value);
           agencyAffiliations_ = value;
           bitField0_ |= 0x00000400;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object state_ = "";
+        /**
+         * <pre>
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the producer is appointed in.
+         * Example: "TX"
+         * </pre>
+         *
+         * <code>string state = 12 [json_name = "state"];</code>
+         * @return The state.
+         */
+        public java.lang.String getState() {
+          java.lang.Object ref = state_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            state_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the producer is appointed in.
+         * Example: "TX"
+         * </pre>
+         *
+         * <code>string state = 12 [json_name = "state"];</code>
+         * @return The bytes for state.
+         */
+        public com.google.protobuf.ByteString
+            getStateBytes() {
+          java.lang.Object ref = state_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            state_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the producer is appointed in.
+         * Example: "TX"
+         * </pre>
+         *
+         * <code>string state = 12 [json_name = "state"];</code>
+         * @param value The state to set.
+         * @return This builder for chaining.
+         */
+        public Builder setState(
+            java.lang.String value) {
+          if (value == null) { throw new NullPointerException(); }
+          state_ = value;
+          bitField0_ |= 0x00000800;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the producer is appointed in.
+         * Example: "TX"
+         * </pre>
+         *
+         * <code>string state = 12 [json_name = "state"];</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearState() {
+          state_ = getDefaultInstance().getState();
+          bitField0_ = (bitField0_ & ~0x00000800);
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * Two-letter code of the state that issued this appointment.
+         * NIPR appointments are per state: the same carrier and LOA can appear
+         * once per state the producer is appointed in.
+         * Example: "TX"
+         * </pre>
+         *
+         * <code>string state = 12 [json_name = "state"];</code>
+         * @param value The bytes for state to set.
+         * @return This builder for chaining.
+         */
+        public Builder setStateBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) { throw new NullPointerException(); }
+          checkByteStringIsUtf8(value);
+          state_ = value;
+          bitField0_ |= 0x00000800;
           onChanged();
           return this;
         }
@@ -18555,7 +18766,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3916
+     *     See producerflow/producer/v1/producer.proto;l=3932
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -18566,7 +18777,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3916
+     *     See producerflow/producer/v1/producer.proto;l=3932
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -18739,7 +18950,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3916
+     *     See producerflow/producer/v1/producer.proto;l=3932
      * @return The street.
      */
     @java.lang.Override
@@ -18762,7 +18973,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3916
+     *     See producerflow/producer/v1/producer.proto;l=3932
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -19461,7 +19672,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3916
+       *     See producerflow/producer/v1/producer.proto;l=3932
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -19483,7 +19694,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3916
+       *     See producerflow/producer/v1/producer.proto;l=3932
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -19506,7 +19717,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3916
+       *     See producerflow/producer/v1/producer.proto;l=3932
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -19525,7 +19736,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3916
+       *     See producerflow/producer/v1/producer.proto;l=3932
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -19541,7 +19752,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3916
+       *     See producerflow/producer/v1/producer.proto;l=3932
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */

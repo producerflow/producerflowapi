@@ -79,6 +79,9 @@ visit the main pages of the [Producerflow Wiki](https://github.com/producerflow/
   - [RequestAppointment](#requestappointment)
   - [TerminateAppointment](#terminateappointment)
   - [ListTerminationReasons](#listterminationreasons)
+- [EventService](#eventservice)
+  - [ListEvents](#listevents)
+  - [GetEvent](#getevent)
 - [TestingService](#testingservice)
   - [DeleteAgency](#deleteagency)
   - [DeleteAppointment](#deleteappointment)
@@ -1106,8 +1109,8 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | `eo_doc_url` | [string](#string) |  | URL of the Errors & Omissions (E&O) insurance document. |
 | `voided_check_doc_url` | [string](#string) |  | URL of the bank voided check document. It's used to safely share bank account information for electronic transfers. |
 | `w9_doc_url` | [string](#string) |  | URL of the W9 form document. It's a U.S. internal revenue service form, an identification document used in the onboarding process for tax reporting purposes. |
-| `license_doc_url` | [string](#string) |  | URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. |
-| `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. |
+| `license_doc_url` | [string](#string) |  | **Deprecated.** URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. Deprecated: ProducerFlow does not collect this document, so it is always empty. |
+| `broker_bond_doc_url` | [string](#string) |  | **Deprecated.** URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. Deprecated: ProducerFlow does not collect this document, so it is always empty. |
 
 ---
 
@@ -2950,6 +2953,84 @@ voluntary termination, inadequate production, company merger, etc.).
 
 ---
 
+## EventService
+
+EventService reads the log of changes to the account of the tenant the API
+key belongs to: which entity changed, which of its fields, and what each one
+changed to. Current state comes from the resource APIs; the log says what to
+read again.
+
+A consumer deduplicates on the event id, applies events in the order they
+are returned, persists the checkpoint every response carries and passes it
+back, and ignores an event type or a field it does not recognise.
+
+
+### ListEvents
+
+
+ListEvents returns the events after a checkpoint, in log order. Without a
+checkpoint it returns no events and the present position: take it before
+reading current state through the resource APIs, then read forward from
+it.
+
+An update whose every change is to a field the entity's resource does not
+carry says nothing to apply, and is not returned.
+
+The log can be read 90 days back. A checkpoint older than that is
+OUT_OF_RANGE: read current state again and take a new checkpoint. A
+checkpoint that cannot be read, or one ahead of the log, is
+INVALID_ARGUMENT.
+
+#### Request: `ListEventsRequest`
+
+
+Request message for ListEvents.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `checkpoint` | [string](#string) |  | Position to read from, as returned by an earlier response. Omit it to take the present position. |
+| `page_size` | [int32](#int32) |  | Maximum number of events to return. 0 means 100; the maximum is 1000. Events committed together are never split across responses, so a response can hold more when a single commit does. |
+
+#### Response: `ListEventsResponse`
+
+
+Response message for ListEvents.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `events` | [Event](#event) | repeated | Events after the requested checkpoint, in log order. Among events committed together, an entity's events come before those of the entities that belong to it, except deletions, which come last and in the reverse order. |
+| `checkpoint` | [string](#string) |  | Position this read reached, set on every response. Persist it and pass it back. |
+| `has_more` | [bool](#bool) |  | Whether more events follow the returned checkpoint. A response can hold no events while it is true: keep reading until it is false. False means caught up, not that nothing further will arrive. |
+
+---
+
+
+### GetEvent
+
+
+GetEvent returns one event by id. NOT_FOUND means the tenant has no such
+event in the last 90 days that ListEvents returns.
+
+#### Request: `GetEventRequest`
+
+
+Request message for GetEvent.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `id` | [string](#string) |  | ID of the event. |
+
+#### Response: `GetEventResponse`
+
+
+Response message for GetEvent.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `event` | [Event](#event) |  | The event. |
+
+---
+
 ## TestingService
 
 ============================================================================
@@ -3301,6 +3382,7 @@ Use Cases:
 | `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the status or termination reason became effective. For terminated appointments, this is when the termination occurred. For active appointments, this may indicate when the current status was last confirmed. |
 | `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. Appointments typically renew annually. Monitor this date for upcoming renewals to ensure continuous authorization. |
 | `agency_affiliations` | [string](#string) |  | Additional affiliations or roles the agency has with the carrier. This may include special designations, sub-agency relationships, or other relationship details. |
+| `state` | [string](#string) |  | Two-letter code of the state that issued this appointment. NIPR appointments are per state: the same carrier and LOA can appear once per state the agency is appointed in. Example: "TX" |
 
 #### Agency.NIPR.Biographic
 
@@ -3704,8 +3786,8 @@ GetAgencyFilesResponse contains URLs for various documents associated with an ag
 | `eo_doc_url` | [string](#string) |  | URL of the Errors & Omissions (E&O) insurance document. |
 | `voided_check_doc_url` | [string](#string) |  | URL of the bank voided check document. It's used to safely share bank account information for electronic transfers. |
 | `w9_doc_url` | [string](#string) |  | URL of the W9 form document. It's a U.S. internal revenue service form, an identification document used in the onboarding process for tax reporting purposes. |
-| `license_doc_url` | [string](#string) |  | URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. |
-| `broker_bond_doc_url` | [string](#string) |  | URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. |
+| `license_doc_url` | [string](#string) |  | **Deprecated.** URL of the license document. An identification document that shows that the agency is licensed to carry out its operations in the relevant jurisdictions. Deprecated: ProducerFlow does not collect this document, so it is always empty. |
+| `broker_bond_doc_url` | [string](#string) |  | **Deprecated.** URL of the broker bond document. It's a surety bond that a broker needs to operate legally, providing financial security for clients. Deprecated: ProducerFlow does not collect this document, so it is always empty. |
 
 #### GetAgencyProducersRequest
 
@@ -4660,6 +4742,7 @@ Use Cases:
 | `status_reason_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the status or termination reason became effective. For terminated appointments, this is when the termination occurred. |
 | `appointment_renewal_date` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Date when the appointment will renew. Appointments typically renew annually. Monitor this date for upcoming renewals. |
 | `agency_affiliations` | [string](#string) |  | Additional affiliations or roles the producer has with the agency. This may include special designations or relationship details. |
+| `state` | [string](#string) |  | Two-letter code of the state that issued this appointment. NIPR appointments are per state: the same carrier and LOA can appear once per state the producer is appointed in. Example: "TX" |
 
 #### Producer.NIPR.Biographic
 
@@ -5412,6 +5495,95 @@ Request to terminate an appointment.
 |-------|------|-------|-------------|
 | `success` | [bool](#bool) |  | Indicates whether the termination request was successfully processed.  For NIPR-integrated carriers: - Indicates whether the termination request was successfully submitted to   NIPR. - This does not indicate that the appointment has been terminated, only   that the request has been accepted for processing. - The actual termination will be processed asynchronously by NIPR, and   you will be notified via webhook when the process completes.  For registry states or non-NIPR carriers: - Indicates whether the termination was successfully completed immediately. |
 
+### producerflow/event/v2/event.proto
+
+
+#### Event
+
+Event records that an entity changed. Its identifiers name the entity and
+the entities it belonged to when the change happened; changes say what is
+now true of it. Each *_id is the last segment of the entity's resource name,
+for example agency_id in "agencies/{agency_id}". Which identifiers an event
+carries depends on its object, and one it does not carry is empty.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `id` | [string](#string) |  | A UUID, unique and stable: the key to deduplicate on. |
+| `event_type` | [string](#string) |  | "<object>.<action>", for example "license.updated". Both halves can grow: ignore a type you do not handle. The object names the entity the event is about, whose id is the field "<object>_id". |
+| `origin` | [string](#string) |  | Where the change came from: ProducerFlowAPI, ProducerFlowPortal, ProducerFlowSupport, ProducerPass, NIPR, Salesforce or BindHQ. More can be added. Empty when the change recorded none. |
+| `create_time` | [google.protobuf.Timestamp](#googleprotobuftimestamp) |  | Time the change was committed. Events committed together share it, so it orders the log but does not name a position in it: the checkpoint does. |
+| `agency_id` | [string](#string) |  | ID of the agency the event is about or belongs to. |
+| `producer_id` | [string](#string) |  | ID of the producer the event is about or belongs to. |
+| `contact_id` | [string](#string) |  | ID of the contact the event is about. |
+| `organization_id` | [string](#string) |  | ID of the organization the event is about. |
+| `appointment_id` | [string](#string) |  | ID of the appointment the event is about. |
+| `license_id` | [string](#string) |  | ID of the license the event is about. |
+| `location_id` | [string](#string) |  | ID of the location the event is about. |
+| `external_id` | [string](#string) |  | Identifier the tenant assigned, in its own systems, to the entity the event is about. |
+| `external_agency_id` | [string](#string) |  | Identifier the tenant assigned to the agency. |
+| `external_producer_id` | [string](#string) |  | Identifier the tenant assigned to the producer. |
+| `npn` | [string](#string) |  | National Producer Number of the entity the event is about. |
+| `license_state` | [string](#string) |  | USPS two-letter code of the state that issued the license. |
+| `carrier_cocode` | [string](#string) |  | NAIC company code of the appointment's carrier. |
+| `appointment_state` | [string](#string) |  | USPS two-letter code of the state the appointment is in. |
+| `parent_appointment_id` | [string](#string) |  | ID of the agency appointment a producer's appointment was derived from. |
+| `organization` | [EventOrganization](#eventorganization) |  | Organization of the event's agency, on agency, producer, contact and license events. Absent when that agency belongs to none, and on the other events. |
+| `changes` | [FieldChange](#fieldchange) | repeated | Fields of the entity that changed, each with the value it now holds. Empty on an event whose identifiers and event_data say all that changed. |
+| `event_data` | [google.protobuf.Struct](#googleprotobufstruct) |  | Context of the transition, on the events that document it. When a producer moves to another agency, the producer.updated, license.updated and appointment.updated events of the move carry transfer_id and source_agency_id, and their agency_id is the agency moved to; the appointment.deleted events of the move carry transfer_id. When an appointment's operational status moves, appointment.updated carries previous_status, the status it moved off, in the form operational_status.status takes. |
+
+#### EventOrganization
+
+EventOrganization is an organization reduced to its identifiers.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `organization_id` | [string](#string) |  | ID of the organization. |
+| `external_id` | [string](#string) |  | Identifier the tenant assigned to the organization. Empty when it has none. |
+
+#### FieldChange
+
+FieldChange is one field of the entity and the value it now holds.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `field` | [string](#string) |  | Path of the field on the entity's resource, dotted for nested messages, for example "operational_status.status". On an entity whose resource the API does not serve yet, the path can change when it does. |
+| `value` | [google.protobuf.Value](#googleprotobufvalue) |  | Value the field now holds. A null value means the field was cleared. A sensitive value is a string of asterisks ending in its last four characters, or only asterisks when it has four or fewer. |
+
+#### GetEventRequest
+
+Request message for GetEvent.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `id` | [string](#string) |  | ID of the event. |
+
+#### GetEventResponse
+
+Response message for GetEvent.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `event` | [Event](#event) |  | The event. |
+
+#### ListEventsRequest
+
+Request message for ListEvents.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `checkpoint` | [string](#string) |  | Position to read from, as returned by an earlier response. Omit it to take the present position. |
+| `page_size` | [int32](#int32) |  | Maximum number of events to return. 0 means 100; the maximum is 1000. Events committed together are never split across responses, so a response can hold more when a single commit does. |
+
+#### ListEventsResponse
+
+Response message for ListEvents.
+
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+| `events` | [Event](#event) | repeated | Events after the requested checkpoint, in log order. Among events committed together, an entity's events come before those of the entities that belong to it, except deletions, which come last and in the reverse order. |
+| `checkpoint` | [string](#string) |  | Position this read reached, set on every response. Persist it and pass it back. |
+| `has_more` | [bool](#bool) |  | Whether more events follow the returned checkpoint. A response can hold no events while it is true: keep reading until it is false. False means caught up, not that nothing further will arrive. |
+
 ### producerflow/testing/v1/testing.proto
 
 
@@ -5696,8 +5868,8 @@ trigger operational status changes.
 | `RISK_REASON_UNSPECIFIED` | 0 |  |
 | `RISK_REASON_LICENSE_INACTIVE` | 1 | License is inactive (License Active = false). |
 | `RISK_REASON_LICENSE_EXPIRED` | 2 | License has expired (License ExpirationDate < current date). |
-| `RISK_REASON_EO_NOT_FOUND` | 3 | No E&O coverage exists for agency. |
-| `RISK_REASON_EO_INACTIVE` | 4 | E&O Status is not "Active". |
+| `RISK_REASON_EO_NOT_FOUND` | 3 | The agency has no E&O in effect. The E&O in effect is the shared coverage of the agency's organization while it shares coverages, the agency's own otherwise. |
+| `RISK_REASON_EO_INACTIVE` | 4 | The agency's E&O in effect is not approved: it is pending review or rejected. There is no "active" E&O status. |
 | `RISK_REASON_EO_EXPIRED` | 5 | E&O coverage has expired (E&O ExpirationDate < current date). |
 | `RISK_REASON_STATE_APPOINTMENT_TERMINATED` | 6 | A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active. |
 | `RISK_REASON_REGULATORY_ACTION` | 7 | An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state. |
