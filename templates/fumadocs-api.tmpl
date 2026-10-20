@@ -1,0 +1,136 @@
+---
+title: API reference
+description: Complete protocol documentation generated from Producerflow's Protocol Buffers.
+---
+
+This page is automatically generated from the Protocol Buffers definitions that power the API,
+ensuring that the information you see here is always up-to-date and consistent with the actual
+service implementation.
+
+The Producerflow API provides programmatic access to the core onboarding, licensing, appointment,
+and compliance capabilities of the Producerflow platform. It allows carriers, MGAs, agencies, and
+technology partners to automate:
+
+- Producer onboarding and data ingestion
+- Agency creation and updates
+- License synchronization and real-time compliance checks
+- Appointment submission, tracking, and termination
+- Management of locations, bank accounts, E&O data, and other agency-level information
+
+This document serves as the definitive schema reference for:
+
+- All API services and their RPC methods
+- Request and response message structures
+- Shared types reused across the API
+- Enumerations and field-level definitions (including deprecations)
+
+The goal of this reference is to help developers understand the exact shape of the
+API and how to interact with it at the type level. It does not cover integration patterns,
+end-to-end flows, webhooks, or domain explanations. For those topics, see the
+[guides](/guides/api-workflows) and [webhooks](/webhooks) sections.
+
+{{range $file := .Files}}
+{{- range .Services}}
+## {{.Name}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+{{range $method := .Methods}}
+
+### {{.Name}}
+{{if .RequestStreaming}}
+**STREAMING**
+{{- end}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+
+#### Request: `{{.RequestLongType}}`
+{{range $file.Messages}}
+{{- if eq .FullName $method.RequestFullType}}
+{{- if .Description}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+{{- end}}
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{- range .Fields}}
+| `{{.Name}}` | `{{.LongType}}` | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " " | replace "|" "\\|" | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- else}}
+
+_This message has no fields._
+{{- end}}
+{{- end}}
+{{- end}}
+
+#### Response: `{{.ResponseLongType}}`{{if .ResponseStreaming}} **STREAMING**{{end}}
+{{range $file.Messages}}
+{{- if eq .FullName $method.ResponseFullType}}
+{{- if .Description}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+{{- end}}
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{- range .Fields}}
+| `{{.Name}}` | `{{.LongType}}` | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " " | replace "|" "\\|" | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- else}}
+
+_This message has no fields._
+{{- end}}
+{{- end}}
+{{- end}}
+
+---
+{{end}}
+{{- end}}
+{{- end}}
+
+## Shared types
+
+These types are used across multiple API methods.
+{{range .Files}}
+{{- if .HasMessages}}
+
+### {{.Name}}
+{{range .Messages}}
+{{- if not (or (hasSuffix .Name "Request") (hasSuffix .Name "Response"))}}
+
+#### {{.LongName}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+{{if .HasFields}}
+| Field | Type | Label | Description |
+|-------|------|-------|-------------|
+{{- range .Fields}}
+| `{{.Name}}` | `{{.LongType}}` | {{.Label}} | {{if (index .Options "deprecated"|default false)}}**Deprecated.** {{end}}{{.Description | replace "\n" " " | replace "|" "\\|" | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}{{if .DefaultValue}} Default: {{.DefaultValue}}{{end}} |
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+{{- end}}
+
+---
+
+## Enums
+{{range .Files}}
+{{- if .HasEnums}}
+
+### {{.Name}}
+{{range .Enums}}
+
+#### {{.LongName}}
+
+{{.Description | replace "\n" " " | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}}
+
+| Name | Number | Description |
+|------|--------|-------------|
+{{- range .Values}}
+| `{{.Name}}` | {{.Number}} | {{.Description | replace "\n" " " | replace "|" "\\|" | replace "<" "&lt;" | replace ">" "&gt;" | replace "{" "&#123;" | replace "}" "&#125;"}} |
+{{- end}}
+{{end}}
+{{- end}}
+{{- end}}
