@@ -7,7 +7,7 @@ package com.producerflow.producer.v1;
 
 /**
  * <pre>
- * Producer represents an insurance producer (agent) with complete licensing
+ * Producer represents an insurance producer with complete licensing
  * information.
  *
  * This message contains comprehensive producer information including:
@@ -169,7 +169,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -180,7 +180,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -198,7 +198,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -210,7 +210,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -225,7 +225,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -467,7 +467,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -491,7 +491,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -505,7 +505,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -526,7 +526,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * ExternalMetadata contains additional custom information that the tenant
-     * stores in ProducerFlow's data model for the associated agency. The map
+     * stores in Producerflow's data model for the associated agency. The map
      * key is the metadata field name, and the value is the associated data.
      * Exposed here so callers do not need an extra GetAgency call to read it.
      * </pre>
@@ -1272,7 +1272,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1296,7 +1296,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1310,7 +1310,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1331,7 +1331,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1358,7 +1358,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1384,7 +1384,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1404,7 +1404,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * </pre>
@@ -1820,7 +1820,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
-       * Values are typically "Resident" or "Non-Resident".
+       * Values: "RESIDENT" or "NON_RESIDENT".
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -1830,7 +1830,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
-       * Values are typically "Resident" or "Non-Resident".
+       * Values: "RESIDENT" or "NON_RESIDENT".
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -1875,7 +1875,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3567
+       *     See producerflow/producer/v1/producer.proto;l=3688
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Deprecated boolean hasExpirationDate();
@@ -1886,7 +1886,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3567
+       *     See producerflow/producer/v1/producer.proto;l=3688
        * @return The expirationDate.
        */
       @java.lang.Deprecated com.google.protobuf.Timestamp getExpirationDate();
@@ -2435,7 +2435,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3617
+         *     See producerflow/producer/v1/producer.proto;l=3738
          * @return Whether the issueDate field is set.
          */
         @java.lang.Deprecated boolean hasIssueDate();
@@ -2446,7 +2446,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3617
+         *     See producerflow/producer/v1/producer.proto;l=3738
          * @return The issueDate.
          */
         @java.lang.Deprecated com.google.protobuf.Timestamp getIssueDate();
@@ -2654,7 +2654,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3617
+         *     See producerflow/producer/v1/producer.proto;l=3738
          * @return Whether the issueDate field is set.
          */
         @java.lang.Override
@@ -2668,7 +2668,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3617
+         *     See producerflow/producer/v1/producer.proto;l=3738
          * @return The issueDate.
          */
         @java.lang.Override
@@ -3377,7 +3377,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3617
+           *     See producerflow/producer/v1/producer.proto;l=3738
            * @return Whether the issueDate field is set.
            */
           @java.lang.Deprecated public boolean hasIssueDate() {
@@ -3390,7 +3390,7 @@ java.lang.String defaultValue) {
            *
            * <code>.google.protobuf.Timestamp issue_date = 3 [json_name = "issueDate", deprecated = true];</code>
            * @deprecated producerflow.producer.v1.Producer.NIPR.License.LineOfAuthority.issue_date is deprecated.
-           *     See producerflow/producer/v1/producer.proto;l=3617
+           *     See producerflow/producer/v1/producer.proto;l=3738
            * @return The issueDate.
            */
           @java.lang.Deprecated public com.google.protobuf.Timestamp getIssueDate() {
@@ -3865,7 +3865,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
-       * Values are typically "Resident" or "Non-Resident".
+       * Values: "RESIDENT" or "NON_RESIDENT".
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -3887,7 +3887,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * Indicates whether this is a resident or non-resident license.
-       * Values are typically "Resident" or "Non-Resident".
+       * Values: "RESIDENT" or "NON_RESIDENT".
        * </pre>
        *
        * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -3958,7 +3958,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3567
+       *     See producerflow/producer/v1/producer.proto;l=3688
        * @return Whether the expirationDate field is set.
        */
       @java.lang.Override
@@ -3972,7 +3972,7 @@ java.lang.String defaultValue) {
        *
        * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3567
+       *     See producerflow/producer/v1/producer.proto;l=3688
        * @return The expirationDate.
        */
       @java.lang.Override
@@ -5240,7 +5240,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -5261,7 +5261,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -5283,7 +5283,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -5301,7 +5301,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -5316,7 +5316,7 @@ java.lang.String defaultValue) {
         /**
          * <pre>
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * </pre>
          *
          * <code>string residency_status = 3 [json_name = "residencyStatus"];</code>
@@ -5460,7 +5460,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3567
+         *     See producerflow/producer/v1/producer.proto;l=3688
          * @return Whether the expirationDate field is set.
          */
         @java.lang.Deprecated public boolean hasExpirationDate() {
@@ -5473,7 +5473,7 @@ java.lang.String defaultValue) {
          *
          * <code>.google.protobuf.Timestamp expiration_date = 6 [json_name = "expirationDate", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.License.expiration_date is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3567
+         *     See producerflow/producer/v1/producer.proto;l=3688
          * @return The expirationDate.
          */
         @java.lang.Deprecated public com.google.protobuf.Timestamp getExpirationDate() {
@@ -6840,25 +6840,25 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-       * return FEIN for individual agents; this field will always be empty.
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
+       * return FEIN for individual producers; this field will always be empty.
        * </pre>
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3675
+       *     See producerflow/producer/v1/producer.proto;l=3796
        * @return The fein.
        */
       @java.lang.Deprecated java.lang.String getFein();
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-       * return FEIN for individual agents; this field will always be empty.
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
+       * return FEIN for individual producers; this field will always be empty.
        * </pre>
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3675
+       *     See producerflow/producer/v1/producer.proto;l=3796
        * @return The bytes for fein.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6866,25 +6866,25 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return a company name for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3679
+       *     See producerflow/producer/v1/producer.proto;l=3800
        * @return The companyName.
        */
       @java.lang.Deprecated java.lang.String getCompanyName();
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return a company name for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3679
+       *     See producerflow/producer/v1/producer.proto;l=3800
        * @return The bytes for companyName.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -6892,25 +6892,25 @@ java.lang.String defaultValue) {
 
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return state of domicile for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3683
+       *     See producerflow/producer/v1/producer.proto;l=3804
        * @return The stateDomicile.
        */
       @java.lang.Deprecated java.lang.String getStateDomicile();
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return state of domicile for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3683
+       *     See producerflow/producer/v1/producer.proto;l=3804
        * @return The bytes for stateDomicile.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -7148,13 +7148,13 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object fein_ = "";
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-       * return FEIN for individual agents; this field will always be empty.
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
+       * return FEIN for individual producers; this field will always be empty.
        * </pre>
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3675
+       *     See producerflow/producer/v1/producer.proto;l=3796
        * @return The fein.
        */
       @java.lang.Override
@@ -7172,13 +7172,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-       * return FEIN for individual agents; this field will always be empty.
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
+       * return FEIN for individual producers; this field will always be empty.
        * </pre>
        *
        * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3675
+       *     See producerflow/producer/v1/producer.proto;l=3796
        * @return The bytes for fein.
        */
       @java.lang.Override
@@ -7201,13 +7201,13 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object companyName_ = "";
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return a company name for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3679
+       *     See producerflow/producer/v1/producer.proto;l=3800
        * @return The companyName.
        */
       @java.lang.Override
@@ -7225,13 +7225,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return a company name for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3679
+       *     See producerflow/producer/v1/producer.proto;l=3800
        * @return The bytes for companyName.
        */
       @java.lang.Override
@@ -7254,13 +7254,13 @@ java.lang.String defaultValue) {
       private volatile java.lang.Object stateDomicile_ = "";
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return state of domicile for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3683
+       *     See producerflow/producer/v1/producer.proto;l=3804
        * @return The stateDomicile.
        */
       @java.lang.Override
@@ -7278,13 +7278,13 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+       * Deprecated: producers in Producerflow are always individuals. NIPR does not
        * return state of domicile for individual agents; this field will always be empty.
        * </pre>
        *
        * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3683
+       *     See producerflow/producer/v1/producer.proto;l=3804
        * @return The bytes for stateDomicile.
        */
       @java.lang.Override
@@ -8201,13 +8201,13 @@ java.lang.String defaultValue) {
         private java.lang.Object fein_ = "";
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * </pre>
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3675
+         *     See producerflow/producer/v1/producer.proto;l=3796
          * @return The fein.
          */
         @java.lang.Deprecated public java.lang.String getFein() {
@@ -8224,13 +8224,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * </pre>
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3675
+         *     See producerflow/producer/v1/producer.proto;l=3796
          * @return The bytes for fein.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8248,13 +8248,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * </pre>
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3675
+         *     See producerflow/producer/v1/producer.proto;l=3796
          * @param value The fein to set.
          * @return This builder for chaining.
          */
@@ -8268,13 +8268,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * </pre>
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3675
+         *     See producerflow/producer/v1/producer.proto;l=3796
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearFein() {
@@ -8285,13 +8285,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * </pre>
          *
          * <code>string fein = 7 [json_name = "fein", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.fein is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3675
+         *     See producerflow/producer/v1/producer.proto;l=3796
          * @param value The bytes for fein to set.
          * @return This builder for chaining.
          */
@@ -8308,13 +8308,13 @@ java.lang.String defaultValue) {
         private java.lang.Object companyName_ = "";
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3679
+         *     See producerflow/producer/v1/producer.proto;l=3800
          * @return The companyName.
          */
         @java.lang.Deprecated public java.lang.String getCompanyName() {
@@ -8331,13 +8331,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3679
+         *     See producerflow/producer/v1/producer.proto;l=3800
          * @return The bytes for companyName.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8355,13 +8355,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3679
+         *     See producerflow/producer/v1/producer.proto;l=3800
          * @param value The companyName to set.
          * @return This builder for chaining.
          */
@@ -8375,13 +8375,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3679
+         *     See producerflow/producer/v1/producer.proto;l=3800
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearCompanyName() {
@@ -8392,13 +8392,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string company_name = 8 [json_name = "companyName", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.company_name is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3679
+         *     See producerflow/producer/v1/producer.proto;l=3800
          * @param value The bytes for companyName to set.
          * @return This builder for chaining.
          */
@@ -8415,13 +8415,13 @@ java.lang.String defaultValue) {
         private java.lang.Object stateDomicile_ = "";
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3683
+         *     See producerflow/producer/v1/producer.proto;l=3804
          * @return The stateDomicile.
          */
         @java.lang.Deprecated public java.lang.String getStateDomicile() {
@@ -8438,13 +8438,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3683
+         *     See producerflow/producer/v1/producer.proto;l=3804
          * @return The bytes for stateDomicile.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -8462,13 +8462,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3683
+         *     See producerflow/producer/v1/producer.proto;l=3804
          * @param value The stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -8482,13 +8482,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3683
+         *     See producerflow/producer/v1/producer.proto;l=3804
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStateDomicile() {
@@ -8499,13 +8499,13 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * </pre>
          *
          * <code>string state_domicile = 9 [json_name = "stateDomicile", deprecated = true];</code>
          * @deprecated producerflow.producer.v1.Producer.NIPR.Biographic.state_domicile is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=3683
+         *     See producerflow/producer/v1/producer.proto;l=3804
          * @param value The bytes for stateDomicile to set.
          * @return This builder for chaining.
          */
@@ -18766,7 +18766,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3932
+     *     See producerflow/producer/v1/producer.proto;l=4053
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -18777,7 +18777,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3932
+     *     See producerflow/producer/v1/producer.proto;l=4053
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -18950,7 +18950,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3932
+     *     See producerflow/producer/v1/producer.proto;l=4053
      * @return The street.
      */
     @java.lang.Override
@@ -18973,7 +18973,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
      *
      * <code>string street = 1 [json_name = "street", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=3932
+     *     See producerflow/producer/v1/producer.proto;l=4053
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -19672,7 +19672,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3932
+       *     See producerflow/producer/v1/producer.proto;l=4053
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -19694,7 +19694,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3932
+       *     See producerflow/producer/v1/producer.proto;l=4053
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -19717,7 +19717,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3932
+       *     See producerflow/producer/v1/producer.proto;l=4053
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -19736,7 +19736,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3932
+       *     See producerflow/producer/v1/producer.proto;l=4053
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -19752,7 +19752,7 @@ com.producerflow.producer.v1.Producer.NIPR.ProducerRegulatoryInfo.RegulatoryActi
        *
        * <code>string street = 1 [json_name = "street", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.Producer.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=3932
+       *     See producerflow/producer/v1/producer.proto;l=4053
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -21038,7 +21038,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -21067,7 +21067,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -21086,7 +21086,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -21112,7 +21112,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -21917,7 +21917,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * Producer represents an insurance producer (agent) with complete licensing
+   * Producer represents an insurance producer with complete licensing
    * information.
    *
    * This message contains comprehensive producer information including:
@@ -24444,7 +24444,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24473,7 +24473,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24492,7 +24492,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24518,7 +24518,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24550,7 +24550,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24581,7 +24581,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -24606,7 +24606,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:

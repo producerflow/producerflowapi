@@ -44,13 +44,13 @@ type EventServiceClient interface {
 	// An update whose every change is to a field the entity's resource does not
 	// carry says nothing to apply, and is not returned.
 	//
-	// The log can be read 90 days back. A checkpoint older than that is
+	// The log can be read 30 days back. A checkpoint older than that is
 	// OUT_OF_RANGE: read current state again and take a new checkpoint. A
 	// checkpoint that cannot be read, or one ahead of the log, is
 	// INVALID_ARGUMENT.
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 	// GetEvent returns one event by id. NOT_FOUND means the tenant has no such
-	// event in the last 90 days that ListEvents returns.
+	// event in the last 30 days that ListEvents returns.
 	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventResponse, error)
 }
 
@@ -103,13 +103,13 @@ type EventServiceServer interface {
 	// An update whose every change is to a field the entity's resource does not
 	// carry says nothing to apply, and is not returned.
 	//
-	// The log can be read 90 days back. A checkpoint older than that is
+	// The log can be read 30 days back. A checkpoint older than that is
 	// OUT_OF_RANGE: read current state again and take a new checkpoint. A
 	// checkpoint that cannot be read, or one ahead of the log, is
 	// INVALID_ARGUMENT.
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	// GetEvent returns one event by id. NOT_FOUND means the tenant has no such
-	// event in the last 90 days that ListEvents returns.
+	// event in the last 30 days that ListEvents returns.
 	GetEvent(context.Context, *GetEventRequest) (*GetEventResponse, error)
 	mustEmbedUnimplementedEventServiceServer()
 }

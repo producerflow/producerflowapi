@@ -173,8 +173,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -185,8 +184,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -196,8 +194,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -208,8 +205,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -265,7 +261,7 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -286,7 +282,7 @@ private static final long serialVersionUID = 0L;
     int getExternalMetadataCount();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -314,7 +310,7 @@ private static final long serialVersionUID = 0L;
     getExternalMetadata();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -336,7 +332,7 @@ private static final long serialVersionUID = 0L;
     getExternalMetadataMap();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -361,7 +357,7 @@ java.lang.String getExternalMetadataOrDefault(
 java.lang.String defaultValue);
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -582,6 +578,68 @@ java.lang.String defaultValue);
      */
     com.google.protobuf.ByteString
         getOrganizationIdBytes();
+
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return Whether the fein field is set.
+     */
+    boolean hasFein();
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return The fein.
+     */
+    java.lang.String getFein();
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for fein.
+     */
+    com.google.protobuf.ByteString
+        getFeinBytes();
   }
   /**
    * <pre>
@@ -619,6 +677,7 @@ java.lang.String defaultValue);
       notes_ = "";
       organizationRelationship_ = 0;
       organizationId_ = "";
+      fein_ = "";
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
@@ -657,7 +716,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated boolean hasStreet();
@@ -668,7 +727,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return The street.
        */
       @java.lang.Deprecated java.lang.String getStreet();
@@ -679,7 +738,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return The bytes for street.
        */
       @java.lang.Deprecated com.google.protobuf.ByteString
@@ -905,7 +964,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return Whether the street field is set.
        */
       @java.lang.Override
@@ -919,7 +978,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return The street.
        */
       @java.lang.Override
@@ -942,7 +1001,7 @@ java.lang.String defaultValue);
        *
        * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2569
+       *     See producerflow/producer/v1/producer.proto;l=2674
        * @return The bytes for street.
        */
       @java.lang.Override
@@ -1736,7 +1795,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @return Whether the street field is set.
          */
         @java.lang.Deprecated public boolean hasStreet() {
@@ -1749,7 +1808,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @return The street.
          */
         @java.lang.Deprecated public java.lang.String getStreet() {
@@ -1771,7 +1830,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @return The bytes for street.
          */
         @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1794,7 +1853,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @param value The street to set.
          * @return This builder for chaining.
          */
@@ -1813,7 +1872,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @return This builder for chaining.
          */
         @java.lang.Deprecated public Builder clearStreet() {
@@ -1829,7 +1888,7 @@ java.lang.String defaultValue);
          *
          * <code>optional string street = 1 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
          * @deprecated producerflow.producer.v1.UpdateAgencyRequest.Agency.Address.street is deprecated.
-         *     See producerflow/producer/v1/producer.proto;l=2569
+         *     See producerflow/producer/v1/producer.proto;l=2674
          * @param value The bytes for street to set.
          * @return This builder for chaining.
          */
@@ -4006,8 +4065,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -4020,8 +4078,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -4033,8 +4090,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -4047,8 +4103,7 @@ java.lang.String defaultValue);
     /**
      * <pre>
      * List of requested appointments for the agency (state codes).
-     * The list contains a list of two-lettercd  country codes where the appointments are requested.
-     * The only valid values are the U.S country codes.
+     * Two-letter US state codes where the appointments are requested.
      * </pre>
      *
      * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -4173,7 +4228,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -4207,7 +4262,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -4231,7 +4286,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -4262,7 +4317,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -4543,6 +4598,98 @@ java.lang.String defaultValue) {
       }
     }
 
+    public static final int FEIN_FIELD_NUMBER = 12;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fein_ = "";
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return Whether the fein field is set.
+     */
+    @java.lang.Override
+    public boolean hasFein() {
+      return ((bitField0_ & 0x00000200) != 0);
+    }
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return The fein.
+     */
+    @java.lang.Override
+    public java.lang.String getFein() {
+      java.lang.Object ref = fein_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fein_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Federal Employer Identification Number (FEIN) of an agency that has none,
+     * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+     * states.
+     *
+     * Update behavior:
+     * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+     * - If the agency has no FEIN: it is set, unless NIPR registers it under
+     * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+     * (internal or external) already holds it (ALREADY_EXISTS)
+     * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+     * FEIN cannot be changed
+     * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+     * </pre>
+     *
+     * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+     * @return The bytes for fein.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFeinBytes() {
+      java.lang.Object ref = fein_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fein_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4592,6 +4739,9 @@ java.lang.String defaultValue) {
       }
       if (((bitField0_ & 0x00000100) != 0)) {
         com.google.protobuf.GeneratedMessage.writeString(output, 11, organizationId_);
+      }
+      if (((bitField0_ & 0x00000200) != 0)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 12, fein_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4649,6 +4799,9 @@ java.lang.String defaultValue) {
       }
       if (((bitField0_ & 0x00000100) != 0)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(11, organizationId_);
+      }
+      if (((bitField0_ & 0x00000200) != 0)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(12, fein_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -4713,6 +4866,11 @@ java.lang.String defaultValue) {
         if (!getOrganizationId()
             .equals(other.getOrganizationId())) return false;
       }
+      if (hasFein() != other.hasFein()) return false;
+      if (hasFein()) {
+        if (!getFein()
+            .equals(other.getFein())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4767,6 +4925,10 @@ java.lang.String defaultValue) {
       if (hasOrganizationId()) {
         hash = (37 * hash) + ORGANIZATION_ID_FIELD_NUMBER;
         hash = (53 * hash) + getOrganizationId().hashCode();
+      }
+      if (hasFein()) {
+        hash = (37 * hash) + FEIN_FIELD_NUMBER;
+        hash = (53 * hash) + getFein().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -4953,6 +5115,7 @@ java.lang.String defaultValue) {
         }
         organizationRelationship_ = 0;
         organizationId_ = "";
+        fein_ = "";
         return this;
       }
 
@@ -5035,6 +5198,10 @@ java.lang.String defaultValue) {
           result.organizationId_ = organizationId_;
           to_bitField0_ |= 0x00000100;
         }
+        if (((from_bitField0_ & 0x00000800) != 0)) {
+          result.fein_ = fein_;
+          to_bitField0_ |= 0x00000200;
+        }
         result.bitField0_ |= to_bitField0_;
       }
 
@@ -5100,6 +5267,11 @@ java.lang.String defaultValue) {
         if (other.hasOrganizationId()) {
           organizationId_ = other.organizationId_;
           bitField0_ |= 0x00000400;
+          onChanged();
+        }
+        if (other.hasFein()) {
+          fein_ = other.fein_;
+          bitField0_ |= 0x00000800;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -5192,6 +5364,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00000400;
                 break;
               } // case 90
+              case 98: {
+                fein_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000800;
+                break;
+              } // case 98
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -5632,8 +5809,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5647,8 +5823,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5660,8 +5835,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5674,8 +5848,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5689,8 +5862,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5710,8 +5882,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5730,8 +5901,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5750,8 +5920,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -5767,8 +5936,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * </pre>
        *
        * <code>repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }</code>
@@ -6050,7 +6218,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6084,7 +6252,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6108,7 +6276,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6139,7 +6307,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6176,7 +6344,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6212,7 +6380,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6242,7 +6410,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -6860,6 +7028,175 @@ java.lang.String defaultValue) {
         checkByteStringIsUtf8(value);
         organizationId_ = value;
         bitField0_ |= 0x00000400;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fein_ = "";
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @return Whether the fein field is set.
+       */
+      public boolean hasFein() {
+        return ((bitField0_ & 0x00000800) != 0);
+      }
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @return The fein.
+       */
+      public java.lang.String getFein() {
+        java.lang.Object ref = fein_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fein_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @return The bytes for fein.
+       */
+      public com.google.protobuf.ByteString
+          getFeinBytes() {
+        java.lang.Object ref = fein_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fein_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @param value The fein to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFein(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        fein_ = value;
+        bitField0_ |= 0x00000800;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFein() {
+        fein_ = getDefaultInstance().getFein();
+        bitField0_ = (bitField0_ & ~0x00000800);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * </pre>
+       *
+       * <code>optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }</code>
+       * @param value The bytes for fein to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFeinBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        fein_ = value;
+        bitField0_ |= 0x00000800;
         onChanged();
         return this;
       }

@@ -55,12 +55,11 @@ public object RequestAppointmentResponseKt {
 
     /**
      * ```
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * ```
      *
      * `.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];`
@@ -81,12 +80,11 @@ public object RequestAppointmentResponseKt {
       }
     /**
      * ```
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * ```
      *
      * `.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];`
@@ -103,25 +101,27 @@ public object RequestAppointmentResponseKt {
     public class NotEligibleReasonsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @return A list containing the notEligibleReasons.
      */
-    public val notEligibleReasons: com.google.protobuf.kotlin.DslList<kotlin.String, NotEligibleReasonsProxy>
+    @kotlin.Deprecated(message = "Field notEligibleReasons is deprecated") public val notEligibleReasons: com.google.protobuf.kotlin.DslList<kotlin.String, NotEligibleReasonsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.notEligibleReasonsList
       )
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @param value The notEligibleReasons to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -131,11 +131,12 @@ public object RequestAppointmentResponseKt {
     }
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @param value The notEligibleReasons to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -146,11 +147,12 @@ public object RequestAppointmentResponseKt {
     }
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @param values The notEligibleReasons to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -160,11 +162,12 @@ public object RequestAppointmentResponseKt {
     }
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @param values The notEligibleReasons to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -175,11 +178,12 @@ public object RequestAppointmentResponseKt {
     }
     /**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      * @param index The index to set the value at.
      * @param value The notEligibleReasons to set.
      */
@@ -189,11 +193,12 @@ public object RequestAppointmentResponseKt {
       _builder.setNotEligibleReasons(index, value)
     }/**
      * ```
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * ```
      *
-     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];`
+     * `repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];`
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearNotEligibleReasons")

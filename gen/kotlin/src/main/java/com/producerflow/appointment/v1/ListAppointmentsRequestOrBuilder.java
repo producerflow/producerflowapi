@@ -11,7 +11,10 @@ public interface ListAppointmentsRequestOrBuilder extends
 
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -20,7 +23,10 @@ public interface ListAppointmentsRequestOrBuilder extends
   java.util.List<com.producerflow.appointment.v1.ProcessingStatus> getProcessingStatusList();
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -29,7 +35,10 @@ public interface ListAppointmentsRequestOrBuilder extends
   int getProcessingStatusCount();
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -39,7 +48,10 @@ public interface ListAppointmentsRequestOrBuilder extends
   com.producerflow.appointment.v1.ProcessingStatus getProcessingStatus(int index);
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -49,7 +61,10 @@ public interface ListAppointmentsRequestOrBuilder extends
   getProcessingStatusValueList();
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>

@@ -11,8 +11,8 @@ public interface DeleteAgencyRequestOrBuilder extends
 
   /**
    * <pre>
-   * UUID of the Agencies row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+   * ID of the agency to delete. Must belong to the tenant resolved from the
+   * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -21,8 +21,8 @@ public interface DeleteAgencyRequestOrBuilder extends
   java.lang.String getAgencyId();
   /**
    * <pre>
-   * UUID of the Agencies row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+   * ID of the agency to delete. Must belong to the tenant resolved from the
+   * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>

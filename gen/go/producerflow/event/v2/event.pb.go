@@ -459,7 +459,8 @@ type ListEventsResponse struct {
 	// Events after the requested checkpoint, in log order. Among events
 	// committed together, an entity's events come before those of the entities
 	// that belong to it, except deletions, which come last and in the reverse
-	// order.
+	// order. A consumer that replays an older checkpoint sees events again, so
+	// deduplicate on id.
 	Events []*Event `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
 	// Position this read reached, set on every response. Persist it and pass it
 	// back.
@@ -673,11 +674,11 @@ const file_producerflow_event_v2_event_proto_rawDesc = "" +
 	"\x0fGetEventRequest\x12\x1b\n" +
 	"\x02id\x18\x01 \x01(\tB\v\xe0A\x02\xbaH\x05r\x03\xb0\x01\x01R\x02id\"F\n" +
 	"\x10GetEventResponse\x122\n" +
-	"\x05event\x18\x01 \x01(\v2\x1c.producerflow.event.v2.EventR\x05event2\xce\x01\n" +
-	"\fEventService\x12a\n" +
+	"\x05event\x18\x01 \x01(\v2\x1c.producerflow.event.v2.EventR\x05event2\xd2\x01\n" +
+	"\fEventService\x12c\n" +
 	"\n" +
-	"ListEvents\x12(.producerflow.event.v2.ListEventsRequest\x1a).producerflow.event.v2.ListEventsResponse\x12[\n" +
-	"\bGetEvent\x12&.producerflow.event.v2.GetEventRequest\x1a'.producerflow.event.v2.GetEventResponseB\xeb\x01\n" +
+	"ListEvents\x12(.producerflow.event.v2.ListEventsRequest\x1a).producerflow.event.v2.ListEventsResponse\"\x00\x12]\n" +
+	"\bGetEvent\x12&.producerflow.event.v2.GetEventRequest\x1a'.producerflow.event.v2.GetEventResponse\"\x00B\xeb\x01\n" +
 	"\x19com.producerflow.event.v2B\n" +
 	"EventProtoP\x01ZLgithub.com/producerflow/producerflowapi/gen/go/producerflow/event/v2;eventv2\xa2\x02\x03PEX\xaa\x02\x15Producerflow.Event.V2\xca\x02\x15Producerflow\\Event\\V2\xe2\x02!Producerflow\\Event\\V2\\GPBMetadata\xea\x02\x17Producerflow::Event::V2b\x06proto3"
 

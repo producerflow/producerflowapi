@@ -367,7 +367,7 @@ public object ContactKt {
     public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -383,7 +383,7 @@ public object ContactKt {
       )
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -398,7 +398,7 @@ public object ContactKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -415,7 +415,7 @@ public object ContactKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -431,7 +431,7 @@ public object ContactKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -447,7 +447,7 @@ public object ContactKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.

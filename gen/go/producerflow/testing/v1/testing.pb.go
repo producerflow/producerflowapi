@@ -24,8 +24,8 @@ const (
 
 type DeleteAgencyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// UUID of the Agencies row to delete. Must belong to the tenant resolved
-	// from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+	// ID of the agency to delete. Must belong to the tenant resolved from the
+	// API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
 	AgencyId      string `protobuf:"bytes,1,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -106,8 +106,8 @@ func (*DeleteAgencyResponse) Descriptor() ([]byte, []int) {
 
 type DeleteAppointmentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// UUID of the Appointments row to delete. Must belong to the tenant resolved
-	// from the API key; a cross-tenant or unknown appointment_id returns
+	// ID of the appointment to delete. Must belong to the tenant resolved from
+	// the API key; an unknown appointment_id, or one of another tenant, returns
 	// NOT_FOUND.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -153,7 +153,7 @@ func (x *DeleteAppointmentRequest) GetAppointmentId() string {
 
 type DeleteAppointmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// State of the deleted appointment, echoed back for confirmation.
+	// Two-letter state code of the deleted appointment, echoed back for confirmation.
 	State string `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
 	// Agency the deleted appointment belonged to, echoed back for confirmation.
 	AgencyId      string `protobuf:"bytes,2,opt,name=agency_id,json=agencyId,proto3" json:"agency_id,omitempty"`

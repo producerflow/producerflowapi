@@ -109,18 +109,18 @@ public final class EventProto {
       "\003 \001(\010R\007hasMore\".\n\017GetEventRequest\022\033\n\002id\030" +
       "\001 \001(\tB\013\340A\002\272H\005r\003\260\001\001R\002id\"F\n\020GetEventRespon" +
       "se\0222\n\005event\030\001 \001(\0132\034.producerflow.event.v" +
-      "2.EventR\005event2\316\001\n\014EventService\022a\n\nListE" +
+      "2.EventR\005event2\322\001\n\014EventService\022c\n\nListE" +
       "vents\022(.producerflow.event.v2.ListEvents" +
       "Request\032).producerflow.event.v2.ListEven" +
-      "tsResponse\022[\n\010GetEvent\022&.producerflow.ev" +
-      "ent.v2.GetEventRequest\032\'.producerflow.ev" +
-      "ent.v2.GetEventResponseB\353\001\n\031com.producer" +
-      "flow.event.v2B\nEventProtoP\001ZLgithub.com/" +
-      "producerflow/producerflowapi/gen/go/prod" +
-      "ucerflow/event/v2;eventv2\242\002\003PEX\252\002\025Produc" +
-      "erflow.Event.V2\312\002\025Producerflow\\Event\\V2\342" +
-      "\002!Producerflow\\Event\\V2\\GPBMetadata\352\002\027Pr" +
-      "oducerflow::Event::V2b\006proto3"
+      "tsResponse\"\000\022]\n\010GetEvent\022&.producerflow." +
+      "event.v2.GetEventRequest\032\'.producerflow." +
+      "event.v2.GetEventResponse\"\000B\353\001\n\031com.prod" +
+      "ucerflow.event.v2B\nEventProtoP\001ZLgithub." +
+      "com/producerflow/producerflowapi/gen/go/" +
+      "producerflow/event/v2;eventv2\242\002\003PEX\252\002\025Pr" +
+      "oducerflow.Event.V2\312\002\025Producerflow\\Event" +
+      "\\V2\342\002!Producerflow\\Event\\V2\\GPBMetadata\352" +
+      "\002\027Producerflow::Event::V2b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

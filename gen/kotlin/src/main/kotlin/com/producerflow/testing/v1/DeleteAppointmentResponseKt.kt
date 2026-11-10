@@ -30,7 +30,7 @@ public object DeleteAppointmentResponseKt {
 
     /**
      * ```
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * ```
      *
      * `string state = 1 [json_name = "state"];`
@@ -44,7 +44,7 @@ public object DeleteAppointmentResponseKt {
       }
     /**
      * ```
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * ```
      *
      * `string state = 1 [json_name = "state"];`

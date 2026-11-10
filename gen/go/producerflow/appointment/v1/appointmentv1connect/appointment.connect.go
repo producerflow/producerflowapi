@@ -69,6 +69,16 @@ type AppointmentServiceClient interface {
 	GetAppointment(context.Context, *connect.Request[v1.GetAppointmentRequest]) (*connect.Response[v1.GetAppointmentResponse], error)
 	// Retrieves the total fees associated with requesting an appointment for the given license.
 	// Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
+	//
+	// The quote is the state filing fee for this license, charged when the
+	// request is filed with NIPR. A registry state is quoted 0; so is a
+	// synthetic producer appointment when synthetic producer appointments are
+	// enabled for your tenant, and a synthetic agency appointment gets an empty
+	// response when synthetic agency appointments are enabled; otherwise the
+	// state fee is quoted. A carrier without NIPR integration is still quoted the fee,
+	// because this call takes no carrier, although nothing is charged for it.
+	// Fails with FAILED_PRECONDITION when the license has no resident license
+	// or no fee is configured for it.
 	GetAppointmentFees(context.Context, *connect.Request[v1.GetAppointmentFeesRequest]) (*connect.Response[v1.GetAppointmentFeesResponse], error)
 	// Retrieves the carriers that are available to appoint licenses for the tenant.
 	GetAppointableCarriers(context.Context, *connect.Request[v1.GetAppointableCarriersRequest]) (*connect.Response[v1.GetAppointableCarriersResponse], error)
@@ -77,7 +87,19 @@ type AppointmentServiceClient interface {
 	GetTerminationFees(context.Context, *connect.Request[v1.GetTerminationFeesRequest]) (*connect.Response[v1.GetTerminationFeesResponse], error)
 	// Lists appointments for the tenant, optionally filtered by processing status.
 	ListAppointments(context.Context, *connect.Request[v1.ListAppointmentsRequest]) (*connect.Response[v1.ListAppointmentsResponse], error)
-	// Returns a list of licenses that are eligible to be appointed.
+	// Returns the licenses that can be appointed right now, one entry per
+	// license and carrier pair; pass an entry's license_id and carrier_id to
+	// RequestAppointment.
+	//
+	// A license is eligible when it is active and unexpired, its owner's NIPR
+	// sync is active, a carrier enabled for your tenant accepts the license's
+	// state, class, entity type and at least one active line of authority, no
+	// appointment exists yet for that license and carrier, and the owner is not
+	// already appointed or terminated with that carrier in that state on
+	// another license. For an agency only
+	// the agency's own licenses are returned, not its producers'. An unknown
+	// owner, an owner of another tenant, or an internal agency yields an empty
+	// list rather than an error.
 	ListEligibleLicenses(context.Context, *connect.Request[v1.ListEligibleLicensesRequest]) (*connect.Response[v1.ListEligibleLicensesResponse], error)
 	// Requests a new appointment for a license that is eligible to be appointed.
 	//
@@ -89,23 +111,30 @@ type AppointmentServiceClient interface {
 	// integration:
 	//
 	// For NIPR-integrated carriers in non-registry states:
-	//   - If the request is accepted by NIPR, the appointment will have
+	//   - The request is filed with NIPR and the appointment is returned with
 	//     IN_PROGRESS processing status.
-	//   - If rejected, it will have REJECTED status and reasons will be provided
-	//     in not_eligible_reasons.
-	//   - Final result will be delivered via webhook when NIPR completes
-	//     processing.
+	//   - NIPR processes it later. The final result, APPOINTED or REJECTED,
+	//     arrives through the appointment.updated webhook event and is visible
+	//     through GetAppointment and ListAppointments.
+	//   - A request that cannot be filed fails with one of the errors below; the
+	//     call never returns REJECTED itself.
 	//
-	// For registry states or capacity carriers (carriers without NIPR
-	// integration):
-	// - The appointment is processed automatically and immediately.
-	// - Returns APPOINTED status immediately upon successful processing.
+	// For registry states (states that need no NIPR filing), carriers without
+	// NIPR integration, and synthetic agency appointments:
+	// - The appointment is recorded immediately with APPOINTED status.
+	//
+	// In CA, DC, HI, KY, LA, MA, MT, UT and WA only agencies are appointed and
+	// producers inherit the agency's appointment. When synthetic producer
+	// appointments are enabled for your tenant, a request for a producer there
+	// fails with INVALID_ARGUMENT unless the producer is a sole proprietor;
+	// otherwise the request is filed with NIPR.
 	//
 	// Requesting an appointment that already exists for the same license and
 	// carrier is refused with ALREADY_EXISTS, unless that appointment is
 	// TERMINATED or REJECTED. Both of those are sent to the state again, reusing
-	// the existing appointment's ID and moving it back to IN_PROGRESS, so the
-	// result reads the same as a first request.
+	// the existing appointment's ID and moving it back to IN_PROGRESS (or to
+	// APPOINTED at once for a registry state or a carrier without NIPR
+	// integration), so the result reads the same as a first request.
 	//
 	// Before re-sending a REJECTED appointment, fix whatever caused the
 	// rejection: an unchanged appointment gets the same answer from the state
@@ -114,6 +143,19 @@ type AppointmentServiceClient interface {
 	// Either re-send is refused when the underlying license is inactive or
 	// expired, since the state would reject it anyway, and when a NIPR
 	// transaction is already in flight for the appointment.
+	//
+	// Errors:
+	//   - NOT_FOUND: the license or carrier does not exist for your tenant.
+	//   - ALREADY_EXISTS: an appointment for this license and carrier exists and
+	//     is not TERMINATED or REJECTED.
+	//   - FAILED_PRECONDITION: the carrier is disabled, the agency is retired or
+	//     in a legal entity change, the license has no resident license, the
+	//     license class cannot be appointed electronically in its state, a
+	//     re-send targets an inactive or expired license, a NIPR transaction is
+	//     already in progress, or the filing fails validation before it is sent.
+	//   - INVALID_ARGUMENT: a producer appointment in a state that appoints
+	//     agencies only.
+	//   - UNAVAILABLE: NIPR is in maintenance; retry later.
 	RequestAppointment(context.Context, *connect.Request[v1.RequestAppointmentRequest]) (*connect.Response[v1.RequestAppointmentResponse], error)
 	// Terminates an existing appointment, permanently ending the relationship
 	// between the license holder and the carrier.
@@ -130,13 +172,16 @@ type AppointmentServiceClient interface {
 	// For NIPR-integrated carriers in non-registry states:
 	//   - The request is submitted to NIPR for processing.
 	//   - Once NIPR completes processing, the status becomes TERMINATED.
-	//   - If rejected by NIPR, the appointment remains in its current status.
+	//   - If NIPR rejects the termination it is not applied: the appointment stays
+	//     TERMINATION_REQUESTED and no webhook event reports the rejection. Check
+	//     GetAppointment and contact support to resolve it.
 	//   - You will receive webhook notifications when the termination is processed
 	//     by NIPR.
 	//
 	// For registry states, capacity carriers (carriers without NIPR
-	// integration), or synthetic appointments:
-	// - The termination is processed automatically and immediately.
+	// integration), synthetic appointments, or an appointment the state has
+	// already reported as terminated (risk reason STATE_APPOINTMENT_TERMINATED):
+	// - The termination is recorded immediately, with no NIPR filing and no fee.
 	// - Returns TERMINATED status immediately upon successful processing.
 	//
 	// Important considerations:
@@ -299,6 +344,16 @@ type AppointmentServiceHandler interface {
 	GetAppointment(context.Context, *connect.Request[v1.GetAppointmentRequest]) (*connect.Response[v1.GetAppointmentResponse], error)
 	// Retrieves the total fees associated with requesting an appointment for the given license.
 	// Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
+	//
+	// The quote is the state filing fee for this license, charged when the
+	// request is filed with NIPR. A registry state is quoted 0; so is a
+	// synthetic producer appointment when synthetic producer appointments are
+	// enabled for your tenant, and a synthetic agency appointment gets an empty
+	// response when synthetic agency appointments are enabled; otherwise the
+	// state fee is quoted. A carrier without NIPR integration is still quoted the fee,
+	// because this call takes no carrier, although nothing is charged for it.
+	// Fails with FAILED_PRECONDITION when the license has no resident license
+	// or no fee is configured for it.
 	GetAppointmentFees(context.Context, *connect.Request[v1.GetAppointmentFeesRequest]) (*connect.Response[v1.GetAppointmentFeesResponse], error)
 	// Retrieves the carriers that are available to appoint licenses for the tenant.
 	GetAppointableCarriers(context.Context, *connect.Request[v1.GetAppointableCarriersRequest]) (*connect.Response[v1.GetAppointableCarriersResponse], error)
@@ -307,7 +362,19 @@ type AppointmentServiceHandler interface {
 	GetTerminationFees(context.Context, *connect.Request[v1.GetTerminationFeesRequest]) (*connect.Response[v1.GetTerminationFeesResponse], error)
 	// Lists appointments for the tenant, optionally filtered by processing status.
 	ListAppointments(context.Context, *connect.Request[v1.ListAppointmentsRequest]) (*connect.Response[v1.ListAppointmentsResponse], error)
-	// Returns a list of licenses that are eligible to be appointed.
+	// Returns the licenses that can be appointed right now, one entry per
+	// license and carrier pair; pass an entry's license_id and carrier_id to
+	// RequestAppointment.
+	//
+	// A license is eligible when it is active and unexpired, its owner's NIPR
+	// sync is active, a carrier enabled for your tenant accepts the license's
+	// state, class, entity type and at least one active line of authority, no
+	// appointment exists yet for that license and carrier, and the owner is not
+	// already appointed or terminated with that carrier in that state on
+	// another license. For an agency only
+	// the agency's own licenses are returned, not its producers'. An unknown
+	// owner, an owner of another tenant, or an internal agency yields an empty
+	// list rather than an error.
 	ListEligibleLicenses(context.Context, *connect.Request[v1.ListEligibleLicensesRequest]) (*connect.Response[v1.ListEligibleLicensesResponse], error)
 	// Requests a new appointment for a license that is eligible to be appointed.
 	//
@@ -319,23 +386,30 @@ type AppointmentServiceHandler interface {
 	// integration:
 	//
 	// For NIPR-integrated carriers in non-registry states:
-	//   - If the request is accepted by NIPR, the appointment will have
+	//   - The request is filed with NIPR and the appointment is returned with
 	//     IN_PROGRESS processing status.
-	//   - If rejected, it will have REJECTED status and reasons will be provided
-	//     in not_eligible_reasons.
-	//   - Final result will be delivered via webhook when NIPR completes
-	//     processing.
+	//   - NIPR processes it later. The final result, APPOINTED or REJECTED,
+	//     arrives through the appointment.updated webhook event and is visible
+	//     through GetAppointment and ListAppointments.
+	//   - A request that cannot be filed fails with one of the errors below; the
+	//     call never returns REJECTED itself.
 	//
-	// For registry states or capacity carriers (carriers without NIPR
-	// integration):
-	// - The appointment is processed automatically and immediately.
-	// - Returns APPOINTED status immediately upon successful processing.
+	// For registry states (states that need no NIPR filing), carriers without
+	// NIPR integration, and synthetic agency appointments:
+	// - The appointment is recorded immediately with APPOINTED status.
+	//
+	// In CA, DC, HI, KY, LA, MA, MT, UT and WA only agencies are appointed and
+	// producers inherit the agency's appointment. When synthetic producer
+	// appointments are enabled for your tenant, a request for a producer there
+	// fails with INVALID_ARGUMENT unless the producer is a sole proprietor;
+	// otherwise the request is filed with NIPR.
 	//
 	// Requesting an appointment that already exists for the same license and
 	// carrier is refused with ALREADY_EXISTS, unless that appointment is
 	// TERMINATED or REJECTED. Both of those are sent to the state again, reusing
-	// the existing appointment's ID and moving it back to IN_PROGRESS, so the
-	// result reads the same as a first request.
+	// the existing appointment's ID and moving it back to IN_PROGRESS (or to
+	// APPOINTED at once for a registry state or a carrier without NIPR
+	// integration), so the result reads the same as a first request.
 	//
 	// Before re-sending a REJECTED appointment, fix whatever caused the
 	// rejection: an unchanged appointment gets the same answer from the state
@@ -344,6 +418,19 @@ type AppointmentServiceHandler interface {
 	// Either re-send is refused when the underlying license is inactive or
 	// expired, since the state would reject it anyway, and when a NIPR
 	// transaction is already in flight for the appointment.
+	//
+	// Errors:
+	//   - NOT_FOUND: the license or carrier does not exist for your tenant.
+	//   - ALREADY_EXISTS: an appointment for this license and carrier exists and
+	//     is not TERMINATED or REJECTED.
+	//   - FAILED_PRECONDITION: the carrier is disabled, the agency is retired or
+	//     in a legal entity change, the license has no resident license, the
+	//     license class cannot be appointed electronically in its state, a
+	//     re-send targets an inactive or expired license, a NIPR transaction is
+	//     already in progress, or the filing fails validation before it is sent.
+	//   - INVALID_ARGUMENT: a producer appointment in a state that appoints
+	//     agencies only.
+	//   - UNAVAILABLE: NIPR is in maintenance; retry later.
 	RequestAppointment(context.Context, *connect.Request[v1.RequestAppointmentRequest]) (*connect.Response[v1.RequestAppointmentResponse], error)
 	// Terminates an existing appointment, permanently ending the relationship
 	// between the license holder and the carrier.
@@ -360,13 +447,16 @@ type AppointmentServiceHandler interface {
 	// For NIPR-integrated carriers in non-registry states:
 	//   - The request is submitted to NIPR for processing.
 	//   - Once NIPR completes processing, the status becomes TERMINATED.
-	//   - If rejected by NIPR, the appointment remains in its current status.
+	//   - If NIPR rejects the termination it is not applied: the appointment stays
+	//     TERMINATION_REQUESTED and no webhook event reports the rejection. Check
+	//     GetAppointment and contact support to resolve it.
 	//   - You will receive webhook notifications when the termination is processed
 	//     by NIPR.
 	//
 	// For registry states, capacity carriers (carriers without NIPR
-	// integration), or synthetic appointments:
-	// - The termination is processed automatically and immediately.
+	// integration), synthetic appointments, or an appointment the state has
+	// already reported as terminated (risk reason STATE_APPOINTMENT_TERMINATED):
+	// - The termination is recorded immediately, with no NIPR filing and no fee.
 	// - Returns TERMINATED status immediately upon successful processing.
 	//
 	// Important considerations:

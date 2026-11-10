@@ -36,6 +36,8 @@ private static final long serialVersionUID = 0L;
     w9DocUrl_ = "";
     licenseDocUrl_ = "";
     brokerBondDocUrl_ = "";
+    contracts_ = java.util.Collections.emptyList();
+    otherDocuments_ = java.util.Collections.emptyList();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -49,6 +51,2967 @@ private static final long serialVersionUID = 0L;
     return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.producerflow.producer.v1.GetAgencyFilesResponse.class, com.producerflow.producer.v1.GetAgencyFilesResponse.Builder.class);
+  }
+
+  /**
+   * <pre>
+   * ContractProvider is the e-signature provider a contract was sent through.
+   * </pre>
+   *
+   * Protobuf enum {@code producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider}
+   */
+  public enum ContractProvider
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <pre>
+     * The contract was recorded by hand, not sent through a provider.
+     * </pre>
+     *
+     * <code>CONTRACT_PROVIDER_UNSPECIFIED = 0;</code>
+     */
+    CONTRACT_PROVIDER_UNSPECIFIED(0),
+    /**
+     * <code>CONTRACT_PROVIDER_DOCUSIGN = 1;</code>
+     */
+    CONTRACT_PROVIDER_DOCUSIGN(1),
+    /**
+     * <code>CONTRACT_PROVIDER_ADOBE_SIGN = 2;</code>
+     */
+    CONTRACT_PROVIDER_ADOBE_SIGN(2),
+    /**
+     * <code>CONTRACT_PROVIDER_DROPBOX_SIGN = 3;</code>
+     */
+    CONTRACT_PROVIDER_DROPBOX_SIGN(3),
+    /**
+     * <code>CONTRACT_PROVIDER_SERTIFI = 4;</code>
+     */
+    CONTRACT_PROVIDER_SERTIFI(4),
+    UNRECOGNIZED(-1),
+    ;
+
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 3,
+        /* suffix= */ "",
+        ContractProvider.class.getName());
+    }
+    /**
+     * <pre>
+     * The contract was recorded by hand, not sent through a provider.
+     * </pre>
+     *
+     * <code>CONTRACT_PROVIDER_UNSPECIFIED = 0;</code>
+     */
+    public static final int CONTRACT_PROVIDER_UNSPECIFIED_VALUE = 0;
+    /**
+     * <code>CONTRACT_PROVIDER_DOCUSIGN = 1;</code>
+     */
+    public static final int CONTRACT_PROVIDER_DOCUSIGN_VALUE = 1;
+    /**
+     * <code>CONTRACT_PROVIDER_ADOBE_SIGN = 2;</code>
+     */
+    public static final int CONTRACT_PROVIDER_ADOBE_SIGN_VALUE = 2;
+    /**
+     * <code>CONTRACT_PROVIDER_DROPBOX_SIGN = 3;</code>
+     */
+    public static final int CONTRACT_PROVIDER_DROPBOX_SIGN_VALUE = 3;
+    /**
+     * <code>CONTRACT_PROVIDER_SERTIFI = 4;</code>
+     */
+    public static final int CONTRACT_PROVIDER_SERTIFI_VALUE = 4;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ContractProvider valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ContractProvider forNumber(int value) {
+      switch (value) {
+        case 0: return CONTRACT_PROVIDER_UNSPECIFIED;
+        case 1: return CONTRACT_PROVIDER_DOCUSIGN;
+        case 2: return CONTRACT_PROVIDER_ADOBE_SIGN;
+        case 3: return CONTRACT_PROVIDER_DROPBOX_SIGN;
+        case 4: return CONTRACT_PROVIDER_SERTIFI;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ContractProvider>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ContractProvider> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ContractProvider>() {
+            public ContractProvider findValueByNumber(int number) {
+              return ContractProvider.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.producerflow.producer.v1.GetAgencyFilesResponse.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ContractProvider[] VALUES = values();
+
+    public static ContractProvider valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ContractProvider(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider)
+  }
+
+  public interface ContractOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.GetAgencyFilesResponse.Contract)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Unique identifier of the contract (UUID format).
+     * </pre>
+     *
+     * <code>string contract_id = 1 [json_name = "contractId"];</code>
+     * @return The contractId.
+     */
+    java.lang.String getContractId();
+    /**
+     * <pre>
+     * Unique identifier of the contract (UUID format).
+     * </pre>
+     *
+     * <code>string contract_id = 1 [json_name = "contractId"];</code>
+     * @return The bytes for contractId.
+     */
+    com.google.protobuf.ByteString
+        getContractIdBytes();
+
+    /**
+     * <pre>
+     * Name of the contract: the template's name when it was sent, or the name
+     * given when it was uploaded. Empty when no name was recorded.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * Name of the contract: the template's name when it was sent, or the name
+     * given when it was uploaded. Empty when no name was recorded.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * Provider the contract was sent through.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+     * @return The enum numeric value on the wire for provider.
+     */
+    int getProviderValue();
+    /**
+     * <pre>
+     * Provider the contract was sent through.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+     * @return The provider.
+     */
+    com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider getProvider();
+
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     * @return Whether the sentDate field is set.
+     */
+    boolean hasSentDate();
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     * @return The sentDate.
+     */
+    com.google.type.Date getSentDate();
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     */
+    com.google.type.DateOrBuilder getSentDateOrBuilder();
+
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     * @return Whether the signedDate field is set.
+     */
+    boolean hasSignedDate();
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     * @return The signedDate.
+     */
+    com.google.type.Date getSignedDate();
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     */
+    com.google.type.DateOrBuilder getSignedDateOrBuilder();
+
+    /**
+     * <pre>
+     * URL of the signed contract PDF.
+     * </pre>
+     *
+     * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+     * @return The downloadUrl.
+     */
+    java.lang.String getDownloadUrl();
+    /**
+     * <pre>
+     * URL of the signed contract PDF.
+     * </pre>
+     *
+     * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+     * @return The bytes for downloadUrl.
+     */
+    com.google.protobuf.ByteString
+        getDownloadUrlBytes();
+  }
+  /**
+   * <pre>
+   * Contract is a signed contract of the agency.
+   * </pre>
+   *
+   * Protobuf type {@code producerflow.producer.v1.GetAgencyFilesResponse.Contract}
+   */
+  public static final class Contract extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetAgencyFilesResponse.Contract)
+      ContractOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 3,
+        /* suffix= */ "",
+        Contract.class.getName());
+    }
+    // Use Contract.newBuilder() to construct.
+    private Contract(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private Contract() {
+      contractId_ = "";
+      name_ = "";
+      provider_ = 0;
+      downloadUrl_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Contract_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Contract_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.class, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CONTRACT_ID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object contractId_ = "";
+    /**
+     * <pre>
+     * Unique identifier of the contract (UUID format).
+     * </pre>
+     *
+     * <code>string contract_id = 1 [json_name = "contractId"];</code>
+     * @return The contractId.
+     */
+    @java.lang.Override
+    public java.lang.String getContractId() {
+      java.lang.Object ref = contractId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        contractId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Unique identifier of the contract (UUID format).
+     * </pre>
+     *
+     * <code>string contract_id = 1 [json_name = "contractId"];</code>
+     * @return The bytes for contractId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getContractIdBytes() {
+      java.lang.Object ref = contractId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        contractId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object name_ = "";
+    /**
+     * <pre>
+     * Name of the contract: the template's name when it was sent, or the name
+     * given when it was uploaded. Empty when no name was recorded.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Name of the contract: the template's name when it was sent, or the name
+     * given when it was uploaded. Empty when no name was recorded.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PROVIDER_FIELD_NUMBER = 3;
+    private int provider_ = 0;
+    /**
+     * <pre>
+     * Provider the contract was sent through.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+     * @return The enum numeric value on the wire for provider.
+     */
+    @java.lang.Override public int getProviderValue() {
+      return provider_;
+    }
+    /**
+     * <pre>
+     * Provider the contract was sent through.
+     * </pre>
+     *
+     * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+     * @return The provider.
+     */
+    @java.lang.Override public com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider getProvider() {
+      com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider result = com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.forNumber(provider_);
+      return result == null ? com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.UNRECOGNIZED : result;
+    }
+
+    public static final int SENT_DATE_FIELD_NUMBER = 4;
+    private com.google.type.Date sentDate_;
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     * @return Whether the sentDate field is set.
+     */
+    @java.lang.Override
+    public boolean hasSentDate() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     * @return The sentDate.
+     */
+    @java.lang.Override
+    public com.google.type.Date getSentDate() {
+      return sentDate_ == null ? com.google.type.Date.getDefaultInstance() : sentDate_;
+    }
+    /**
+     * <pre>
+     * UTC day the provider sent the contract. Unset for a contract recorded by
+     * hand.
+     * </pre>
+     *
+     * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+     */
+    @java.lang.Override
+    public com.google.type.DateOrBuilder getSentDateOrBuilder() {
+      return sentDate_ == null ? com.google.type.Date.getDefaultInstance() : sentDate_;
+    }
+
+    public static final int SIGNED_DATE_FIELD_NUMBER = 5;
+    private com.google.type.Date signedDate_;
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     * @return Whether the signedDate field is set.
+     */
+    @java.lang.Override
+    public boolean hasSignedDate() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     * @return The signedDate.
+     */
+    @java.lang.Override
+    public com.google.type.Date getSignedDate() {
+      return signedDate_ == null ? com.google.type.Date.getDefaultInstance() : signedDate_;
+    }
+    /**
+     * <pre>
+     * UTC day the contract was signed. Unset when no date was recorded.
+     * </pre>
+     *
+     * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+     */
+    @java.lang.Override
+    public com.google.type.DateOrBuilder getSignedDateOrBuilder() {
+      return signedDate_ == null ? com.google.type.Date.getDefaultInstance() : signedDate_;
+    }
+
+    public static final int DOWNLOAD_URL_FIELD_NUMBER = 6;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object downloadUrl_ = "";
+    /**
+     * <pre>
+     * URL of the signed contract PDF.
+     * </pre>
+     *
+     * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+     * @return The downloadUrl.
+     */
+    @java.lang.Override
+    public java.lang.String getDownloadUrl() {
+      java.lang.Object ref = downloadUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        downloadUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * URL of the signed contract PDF.
+     * </pre>
+     *
+     * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+     * @return The bytes for downloadUrl.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDownloadUrlBytes() {
+      java.lang.Object ref = downloadUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        downloadUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contractId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, contractId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
+      }
+      if (provider_ != com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.CONTRACT_PROVIDER_UNSPECIFIED.getNumber()) {
+        output.writeEnum(3, provider_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(4, getSentDate());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeMessage(5, getSignedDate());
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(downloadUrl_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 6, downloadUrl_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(contractId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, contractId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+      }
+      if (provider_ != com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.CONTRACT_PROVIDER_UNSPECIFIED.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, provider_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getSentDate());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getSignedDate());
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(downloadUrl_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(6, downloadUrl_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.producerflow.producer.v1.GetAgencyFilesResponse.Contract)) {
+        return super.equals(obj);
+      }
+      com.producerflow.producer.v1.GetAgencyFilesResponse.Contract other = (com.producerflow.producer.v1.GetAgencyFilesResponse.Contract) obj;
+
+      if (!getContractId()
+          .equals(other.getContractId())) return false;
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (provider_ != other.provider_) return false;
+      if (hasSentDate() != other.hasSentDate()) return false;
+      if (hasSentDate()) {
+        if (!getSentDate()
+            .equals(other.getSentDate())) return false;
+      }
+      if (hasSignedDate() != other.hasSignedDate()) return false;
+      if (hasSignedDate()) {
+        if (!getSignedDate()
+            .equals(other.getSignedDate())) return false;
+      }
+      if (!getDownloadUrl()
+          .equals(other.getDownloadUrl())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CONTRACT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getContractId().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + PROVIDER_FIELD_NUMBER;
+      hash = (53 * hash) + provider_;
+      if (hasSentDate()) {
+        hash = (37 * hash) + SENT_DATE_FIELD_NUMBER;
+        hash = (53 * hash) + getSentDate().hashCode();
+      }
+      if (hasSignedDate()) {
+        hash = (37 * hash) + SIGNED_DATE_FIELD_NUMBER;
+        hash = (53 * hash) + getSignedDate().hashCode();
+      }
+      hash = (37 * hash) + DOWNLOAD_URL_FIELD_NUMBER;
+      hash = (53 * hash) + getDownloadUrl().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.producerflow.producer.v1.GetAgencyFilesResponse.Contract prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Contract is a signed contract of the agency.
+     * </pre>
+     *
+     * Protobuf type {@code producerflow.producer.v1.GetAgencyFilesResponse.Contract}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.GetAgencyFilesResponse.Contract)
+        com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Contract_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Contract_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.class, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder.class);
+      }
+
+      // Construct using com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getSentDateFieldBuilder();
+          getSignedDateFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        contractId_ = "";
+        name_ = "";
+        provider_ = 0;
+        sentDate_ = null;
+        if (sentDateBuilder_ != null) {
+          sentDateBuilder_.dispose();
+          sentDateBuilder_ = null;
+        }
+        signedDate_ = null;
+        if (signedDateBuilder_ != null) {
+          signedDateBuilder_.dispose();
+          signedDateBuilder_ = null;
+        }
+        downloadUrl_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Contract_descriptor;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getDefaultInstanceForType() {
+        return com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract build() {
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Contract result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract buildPartial() {
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Contract result = new com.producerflow.producer.v1.GetAgencyFilesResponse.Contract(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.producerflow.producer.v1.GetAgencyFilesResponse.Contract result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.contractId_ = contractId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.provider_ = provider_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.sentDate_ = sentDateBuilder_ == null
+              ? sentDate_
+              : sentDateBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.signedDate_ = signedDateBuilder_ == null
+              ? signedDate_
+              : signedDateBuilder_.build();
+          to_bitField0_ |= 0x00000002;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.downloadUrl_ = downloadUrl_;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.producerflow.producer.v1.GetAgencyFilesResponse.Contract) {
+          return mergeFrom((com.producerflow.producer.v1.GetAgencyFilesResponse.Contract)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.producerflow.producer.v1.GetAgencyFilesResponse.Contract other) {
+        if (other == com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.getDefaultInstance()) return this;
+        if (!other.getContractId().isEmpty()) {
+          contractId_ = other.contractId_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (other.provider_ != 0) {
+          setProviderValue(other.getProviderValue());
+        }
+        if (other.hasSentDate()) {
+          mergeSentDate(other.getSentDate());
+        }
+        if (other.hasSignedDate()) {
+          mergeSignedDate(other.getSignedDate());
+        }
+        if (!other.getDownloadUrl().isEmpty()) {
+          downloadUrl_ = other.downloadUrl_;
+          bitField0_ |= 0x00000020;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                contractId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                name_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                provider_ = input.readEnum();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                input.readMessage(
+                    getSentDateFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                input.readMessage(
+                    getSignedDateFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                downloadUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object contractId_ = "";
+      /**
+       * <pre>
+       * Unique identifier of the contract (UUID format).
+       * </pre>
+       *
+       * <code>string contract_id = 1 [json_name = "contractId"];</code>
+       * @return The contractId.
+       */
+      public java.lang.String getContractId() {
+        java.lang.Object ref = contractId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          contractId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier of the contract (UUID format).
+       * </pre>
+       *
+       * <code>string contract_id = 1 [json_name = "contractId"];</code>
+       * @return The bytes for contractId.
+       */
+      public com.google.protobuf.ByteString
+          getContractIdBytes() {
+        java.lang.Object ref = contractId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          contractId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier of the contract (UUID format).
+       * </pre>
+       *
+       * <code>string contract_id = 1 [json_name = "contractId"];</code>
+       * @param value The contractId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContractId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        contractId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier of the contract (UUID format).
+       * </pre>
+       *
+       * <code>string contract_id = 1 [json_name = "contractId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearContractId() {
+        contractId_ = getDefaultInstance().getContractId();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier of the contract (UUID format).
+       * </pre>
+       *
+       * <code>string contract_id = 1 [json_name = "contractId"];</code>
+       * @param value The bytes for contractId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContractIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        contractId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The name.
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The bytes for name.
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private int provider_ = 0;
+      /**
+       * <pre>
+       * Provider the contract was sent through.
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+       * @return The enum numeric value on the wire for provider.
+       */
+      @java.lang.Override public int getProviderValue() {
+        return provider_;
+      }
+      /**
+       * <pre>
+       * Provider the contract was sent through.
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+       * @param value The enum numeric value on the wire for provider to set.
+       * @return This builder for chaining.
+       */
+      public Builder setProviderValue(int value) {
+        provider_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Provider the contract was sent through.
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+       * @return The provider.
+       */
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider getProvider() {
+        com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider result = com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.forNumber(provider_);
+        return result == null ? com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Provider the contract was sent through.
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+       * @param value The provider to set.
+       * @return This builder for chaining.
+       */
+      public Builder setProvider(com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        provider_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Provider the contract was sent through.
+       * </pre>
+       *
+       * <code>.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearProvider() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        provider_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.type.Date sentDate_;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> sentDateBuilder_;
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       * @return Whether the sentDate field is set.
+       */
+      public boolean hasSentDate() {
+        return ((bitField0_ & 0x00000008) != 0);
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       * @return The sentDate.
+       */
+      public com.google.type.Date getSentDate() {
+        if (sentDateBuilder_ == null) {
+          return sentDate_ == null ? com.google.type.Date.getDefaultInstance() : sentDate_;
+        } else {
+          return sentDateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public Builder setSentDate(com.google.type.Date value) {
+        if (sentDateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sentDate_ = value;
+        } else {
+          sentDateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public Builder setSentDate(
+          com.google.type.Date.Builder builderForValue) {
+        if (sentDateBuilder_ == null) {
+          sentDate_ = builderForValue.build();
+        } else {
+          sentDateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public Builder mergeSentDate(com.google.type.Date value) {
+        if (sentDateBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) != 0) &&
+            sentDate_ != null &&
+            sentDate_ != com.google.type.Date.getDefaultInstance()) {
+            getSentDateBuilder().mergeFrom(value);
+          } else {
+            sentDate_ = value;
+          }
+        } else {
+          sentDateBuilder_.mergeFrom(value);
+        }
+        if (sentDate_ != null) {
+          bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public Builder clearSentDate() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        sentDate_ = null;
+        if (sentDateBuilder_ != null) {
+          sentDateBuilder_.dispose();
+          sentDateBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public com.google.type.Date.Builder getSentDateBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getSentDateFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      public com.google.type.DateOrBuilder getSentDateOrBuilder() {
+        if (sentDateBuilder_ != null) {
+          return sentDateBuilder_.getMessageOrBuilder();
+        } else {
+          return sentDate_ == null ?
+              com.google.type.Date.getDefaultInstance() : sentDate_;
+        }
+      }
+      /**
+       * <pre>
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * </pre>
+       *
+       * <code>.google.type.Date sent_date = 4 [json_name = "sentDate"];</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> 
+          getSentDateFieldBuilder() {
+        if (sentDateBuilder_ == null) {
+          sentDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder>(
+                  getSentDate(),
+                  getParentForChildren(),
+                  isClean());
+          sentDate_ = null;
+        }
+        return sentDateBuilder_;
+      }
+
+      private com.google.type.Date signedDate_;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> signedDateBuilder_;
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       * @return Whether the signedDate field is set.
+       */
+      public boolean hasSignedDate() {
+        return ((bitField0_ & 0x00000010) != 0);
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       * @return The signedDate.
+       */
+      public com.google.type.Date getSignedDate() {
+        if (signedDateBuilder_ == null) {
+          return signedDate_ == null ? com.google.type.Date.getDefaultInstance() : signedDate_;
+        } else {
+          return signedDateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public Builder setSignedDate(com.google.type.Date value) {
+        if (signedDateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          signedDate_ = value;
+        } else {
+          signedDateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public Builder setSignedDate(
+          com.google.type.Date.Builder builderForValue) {
+        if (signedDateBuilder_ == null) {
+          signedDate_ = builderForValue.build();
+        } else {
+          signedDateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public Builder mergeSignedDate(com.google.type.Date value) {
+        if (signedDateBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) != 0) &&
+            signedDate_ != null &&
+            signedDate_ != com.google.type.Date.getDefaultInstance()) {
+            getSignedDateBuilder().mergeFrom(value);
+          } else {
+            signedDate_ = value;
+          }
+        } else {
+          signedDateBuilder_.mergeFrom(value);
+        }
+        if (signedDate_ != null) {
+          bitField0_ |= 0x00000010;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public Builder clearSignedDate() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        signedDate_ = null;
+        if (signedDateBuilder_ != null) {
+          signedDateBuilder_.dispose();
+          signedDateBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public com.google.type.Date.Builder getSignedDateBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getSignedDateFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      public com.google.type.DateOrBuilder getSignedDateOrBuilder() {
+        if (signedDateBuilder_ != null) {
+          return signedDateBuilder_.getMessageOrBuilder();
+        } else {
+          return signedDate_ == null ?
+              com.google.type.Date.getDefaultInstance() : signedDate_;
+        }
+      }
+      /**
+       * <pre>
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * </pre>
+       *
+       * <code>.google.type.Date signed_date = 5 [json_name = "signedDate"];</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder> 
+          getSignedDateFieldBuilder() {
+        if (signedDateBuilder_ == null) {
+          signedDateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.google.type.Date, com.google.type.Date.Builder, com.google.type.DateOrBuilder>(
+                  getSignedDate(),
+                  getParentForChildren(),
+                  isClean());
+          signedDate_ = null;
+        }
+        return signedDateBuilder_;
+      }
+
+      private java.lang.Object downloadUrl_ = "";
+      /**
+       * <pre>
+       * URL of the signed contract PDF.
+       * </pre>
+       *
+       * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+       * @return The downloadUrl.
+       */
+      public java.lang.String getDownloadUrl() {
+        java.lang.Object ref = downloadUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          downloadUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * URL of the signed contract PDF.
+       * </pre>
+       *
+       * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+       * @return The bytes for downloadUrl.
+       */
+      public com.google.protobuf.ByteString
+          getDownloadUrlBytes() {
+        java.lang.Object ref = downloadUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          downloadUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * URL of the signed contract PDF.
+       * </pre>
+       *
+       * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+       * @param value The downloadUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDownloadUrl(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        downloadUrl_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * URL of the signed contract PDF.
+       * </pre>
+       *
+       * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDownloadUrl() {
+        downloadUrl_ = getDefaultInstance().getDownloadUrl();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * URL of the signed contract PDF.
+       * </pre>
+       *
+       * <code>string download_url = 6 [json_name = "downloadUrl"];</code>
+       * @param value The bytes for downloadUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDownloadUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        downloadUrl_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetAgencyFilesResponse.Contract)
+    }
+
+    // @@protoc_insertion_point(class_scope:producerflow.producer.v1.GetAgencyFilesResponse.Contract)
+    private static final com.producerflow.producer.v1.GetAgencyFilesResponse.Contract DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.producerflow.producer.v1.GetAgencyFilesResponse.Contract();
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Contract>
+        PARSER = new com.google.protobuf.AbstractParser<Contract>() {
+      @java.lang.Override
+      public Contract parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<Contract> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Contract> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DocumentOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:producerflow.producer.v1.GetAgencyFilesResponse.Document)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Unique identifier of the document (UUID format).
+     * </pre>
+     *
+     * <code>string document_id = 1 [json_name = "documentId"];</code>
+     * @return The documentId.
+     */
+    java.lang.String getDocumentId();
+    /**
+     * <pre>
+     * Unique identifier of the document (UUID format).
+     * </pre>
+     *
+     * <code>string document_id = 1 [json_name = "documentId"];</code>
+     * @return The bytes for documentId.
+     */
+    com.google.protobuf.ByteString
+        getDocumentIdBytes();
+
+    /**
+     * <pre>
+     * Name the document is shown with in Producerflow.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * Name the document is shown with in Producerflow.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     * @return Whether the updatedAt field is set.
+     */
+    boolean hasUpdatedAt();
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     * @return The updatedAt.
+     */
+    com.google.protobuf.Timestamp getUpdatedAt();
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder();
+
+    /**
+     * <pre>
+     * URL of the document.
+     * </pre>
+     *
+     * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+     * @return The downloadUrl.
+     */
+    java.lang.String getDownloadUrl();
+    /**
+     * <pre>
+     * URL of the document.
+     * </pre>
+     *
+     * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+     * @return The bytes for downloadUrl.
+     */
+    com.google.protobuf.ByteString
+        getDownloadUrlBytes();
+  }
+  /**
+   * <pre>
+   * Document is a file uploaded to the agency under "Other documents".
+   * </pre>
+   *
+   * Protobuf type {@code producerflow.producer.v1.GetAgencyFilesResponse.Document}
+   */
+  public static final class Document extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:producerflow.producer.v1.GetAgencyFilesResponse.Document)
+      DocumentOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 28,
+        /* patch= */ 3,
+        /* suffix= */ "",
+        Document.class.getName());
+    }
+    // Use Document.newBuilder() to construct.
+    private Document(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private Document() {
+      documentId_ = "";
+      name_ = "";
+      downloadUrl_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Document_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Document_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.producerflow.producer.v1.GetAgencyFilesResponse.Document.class, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int DOCUMENT_ID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object documentId_ = "";
+    /**
+     * <pre>
+     * Unique identifier of the document (UUID format).
+     * </pre>
+     *
+     * <code>string document_id = 1 [json_name = "documentId"];</code>
+     * @return The documentId.
+     */
+    @java.lang.Override
+    public java.lang.String getDocumentId() {
+      java.lang.Object ref = documentId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        documentId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Unique identifier of the document (UUID format).
+     * </pre>
+     *
+     * <code>string document_id = 1 [json_name = "documentId"];</code>
+     * @return The bytes for documentId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDocumentIdBytes() {
+      java.lang.Object ref = documentId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        documentId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object name_ = "";
+    /**
+     * <pre>
+     * Name the document is shown with in Producerflow.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Name the document is shown with in Producerflow.
+     * </pre>
+     *
+     * <code>string name = 2 [json_name = "name"];</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int UPDATED_AT_FIELD_NUMBER = 3;
+    private com.google.protobuf.Timestamp updatedAt_;
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     * @return Whether the updatedAt field is set.
+     */
+    @java.lang.Override
+    public boolean hasUpdatedAt() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     * @return The updatedAt.
+     */
+    @java.lang.Override
+    public com.google.protobuf.Timestamp getUpdatedAt() {
+      return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+    }
+    /**
+     * <pre>
+     * When the document was last updated.
+     * </pre>
+     *
+     * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder() {
+      return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+    }
+
+    public static final int DOWNLOAD_URL_FIELD_NUMBER = 4;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object downloadUrl_ = "";
+    /**
+     * <pre>
+     * URL of the document.
+     * </pre>
+     *
+     * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+     * @return The downloadUrl.
+     */
+    @java.lang.Override
+    public java.lang.String getDownloadUrl() {
+      java.lang.Object ref = downloadUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        downloadUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * URL of the document.
+     * </pre>
+     *
+     * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+     * @return The bytes for downloadUrl.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDownloadUrlBytes() {
+      java.lang.Object ref = downloadUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        downloadUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(documentId_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, documentId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, name_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(3, getUpdatedAt());
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(downloadUrl_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 4, downloadUrl_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(documentId_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, documentId_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getUpdatedAt());
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(downloadUrl_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, downloadUrl_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.producerflow.producer.v1.GetAgencyFilesResponse.Document)) {
+        return super.equals(obj);
+      }
+      com.producerflow.producer.v1.GetAgencyFilesResponse.Document other = (com.producerflow.producer.v1.GetAgencyFilesResponse.Document) obj;
+
+      if (!getDocumentId()
+          .equals(other.getDocumentId())) return false;
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (hasUpdatedAt() != other.hasUpdatedAt()) return false;
+      if (hasUpdatedAt()) {
+        if (!getUpdatedAt()
+            .equals(other.getUpdatedAt())) return false;
+      }
+      if (!getDownloadUrl()
+          .equals(other.getDownloadUrl())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DOCUMENT_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getDocumentId().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      if (hasUpdatedAt()) {
+        hash = (37 * hash) + UPDATED_AT_FIELD_NUMBER;
+        hash = (53 * hash) + getUpdatedAt().hashCode();
+      }
+      hash = (37 * hash) + DOWNLOAD_URL_FIELD_NUMBER;
+      hash = (53 * hash) + getDownloadUrl().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.producerflow.producer.v1.GetAgencyFilesResponse.Document prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Document is a file uploaded to the agency under "Other documents".
+     * </pre>
+     *
+     * Protobuf type {@code producerflow.producer.v1.GetAgencyFilesResponse.Document}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:producerflow.producer.v1.GetAgencyFilesResponse.Document)
+        com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Document_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Document_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.producerflow.producer.v1.GetAgencyFilesResponse.Document.class, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder.class);
+      }
+
+      // Construct using com.producerflow.producer.v1.GetAgencyFilesResponse.Document.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage
+                .alwaysUseFieldBuilders) {
+          getUpdatedAtFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        documentId_ = "";
+        name_ = "";
+        updatedAt_ = null;
+        if (updatedAtBuilder_ != null) {
+          updatedAtBuilder_.dispose();
+          updatedAtBuilder_ = null;
+        }
+        downloadUrl_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.producerflow.producer.v1.ProducerProto.internal_static_producerflow_producer_v1_GetAgencyFilesResponse_Document_descriptor;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Document getDefaultInstanceForType() {
+        return com.producerflow.producer.v1.GetAgencyFilesResponse.Document.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Document build() {
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Document result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.producerflow.producer.v1.GetAgencyFilesResponse.Document buildPartial() {
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Document result = new com.producerflow.producer.v1.GetAgencyFilesResponse.Document(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.producerflow.producer.v1.GetAgencyFilesResponse.Document result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.documentId_ = documentId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.name_ = name_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.updatedAt_ = updatedAtBuilder_ == null
+              ? updatedAt_
+              : updatedAtBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.downloadUrl_ = downloadUrl_;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.producerflow.producer.v1.GetAgencyFilesResponse.Document) {
+          return mergeFrom((com.producerflow.producer.v1.GetAgencyFilesResponse.Document)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.producerflow.producer.v1.GetAgencyFilesResponse.Document other) {
+        if (other == com.producerflow.producer.v1.GetAgencyFilesResponse.Document.getDefaultInstance()) return this;
+        if (!other.getDocumentId().isEmpty()) {
+          documentId_ = other.documentId_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (other.hasUpdatedAt()) {
+          mergeUpdatedAt(other.getUpdatedAt());
+        }
+        if (!other.getDownloadUrl().isEmpty()) {
+          downloadUrl_ = other.downloadUrl_;
+          bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                documentId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                name_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                input.readMessage(
+                    getUpdatedAtFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                downloadUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object documentId_ = "";
+      /**
+       * <pre>
+       * Unique identifier of the document (UUID format).
+       * </pre>
+       *
+       * <code>string document_id = 1 [json_name = "documentId"];</code>
+       * @return The documentId.
+       */
+      public java.lang.String getDocumentId() {
+        java.lang.Object ref = documentId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          documentId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier of the document (UUID format).
+       * </pre>
+       *
+       * <code>string document_id = 1 [json_name = "documentId"];</code>
+       * @return The bytes for documentId.
+       */
+      public com.google.protobuf.ByteString
+          getDocumentIdBytes() {
+        java.lang.Object ref = documentId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          documentId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Unique identifier of the document (UUID format).
+       * </pre>
+       *
+       * <code>string document_id = 1 [json_name = "documentId"];</code>
+       * @param value The documentId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDocumentId(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        documentId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier of the document (UUID format).
+       * </pre>
+       *
+       * <code>string document_id = 1 [json_name = "documentId"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDocumentId() {
+        documentId_ = getDefaultInstance().getDocumentId();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Unique identifier of the document (UUID format).
+       * </pre>
+       *
+       * <code>string document_id = 1 [json_name = "documentId"];</code>
+       * @param value The bytes for documentId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDocumentIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        documentId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * Name the document is shown with in Producerflow.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The name.
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name the document is shown with in Producerflow.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return The bytes for name.
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Name the document is shown with in Producerflow.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name the document is shown with in Producerflow.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Name the document is shown with in Producerflow.
+       * </pre>
+       *
+       * <code>string name = 2 [json_name = "name"];</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        name_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.Timestamp updatedAt_;
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> updatedAtBuilder_;
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       * @return Whether the updatedAt field is set.
+       */
+      public boolean hasUpdatedAt() {
+        return ((bitField0_ & 0x00000004) != 0);
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       * @return The updatedAt.
+       */
+      public com.google.protobuf.Timestamp getUpdatedAt() {
+        if (updatedAtBuilder_ == null) {
+          return updatedAt_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+        } else {
+          return updatedAtBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public Builder setUpdatedAt(com.google.protobuf.Timestamp value) {
+        if (updatedAtBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          updatedAt_ = value;
+        } else {
+          updatedAtBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public Builder setUpdatedAt(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (updatedAtBuilder_ == null) {
+          updatedAt_ = builderForValue.build();
+        } else {
+          updatedAtBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public Builder mergeUpdatedAt(com.google.protobuf.Timestamp value) {
+        if (updatedAtBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) != 0) &&
+            updatedAt_ != null &&
+            updatedAt_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
+            getUpdatedAtBuilder().mergeFrom(value);
+          } else {
+            updatedAt_ = value;
+          }
+        } else {
+          updatedAtBuilder_.mergeFrom(value);
+        }
+        if (updatedAt_ != null) {
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public Builder clearUpdatedAt() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        updatedAt_ = null;
+        if (updatedAtBuilder_ != null) {
+          updatedAtBuilder_.dispose();
+          updatedAtBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getUpdatedAtBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getUpdatedAtFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getUpdatedAtOrBuilder() {
+        if (updatedAtBuilder_ != null) {
+          return updatedAtBuilder_.getMessageOrBuilder();
+        } else {
+          return updatedAt_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : updatedAt_;
+        }
+      }
+      /**
+       * <pre>
+       * When the document was last updated.
+       * </pre>
+       *
+       * <code>.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getUpdatedAtFieldBuilder() {
+        if (updatedAtBuilder_ == null) {
+          updatedAtBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getUpdatedAt(),
+                  getParentForChildren(),
+                  isClean());
+          updatedAt_ = null;
+        }
+        return updatedAtBuilder_;
+      }
+
+      private java.lang.Object downloadUrl_ = "";
+      /**
+       * <pre>
+       * URL of the document.
+       * </pre>
+       *
+       * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+       * @return The downloadUrl.
+       */
+      public java.lang.String getDownloadUrl() {
+        java.lang.Object ref = downloadUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          downloadUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * URL of the document.
+       * </pre>
+       *
+       * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+       * @return The bytes for downloadUrl.
+       */
+      public com.google.protobuf.ByteString
+          getDownloadUrlBytes() {
+        java.lang.Object ref = downloadUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          downloadUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * URL of the document.
+       * </pre>
+       *
+       * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+       * @param value The downloadUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDownloadUrl(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        downloadUrl_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * URL of the document.
+       * </pre>
+       *
+       * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDownloadUrl() {
+        downloadUrl_ = getDefaultInstance().getDownloadUrl();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * URL of the document.
+       * </pre>
+       *
+       * <code>string download_url = 4 [json_name = "downloadUrl"];</code>
+       * @param value The bytes for downloadUrl to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDownloadUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        downloadUrl_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetAgencyFilesResponse.Document)
+    }
+
+    // @@protoc_insertion_point(class_scope:producerflow.producer.v1.GetAgencyFilesResponse.Document)
+    private static final com.producerflow.producer.v1.GetAgencyFilesResponse.Document DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.producerflow.producer.v1.GetAgencyFilesResponse.Document();
+    }
+
+    public static com.producerflow.producer.v1.GetAgencyFilesResponse.Document getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Document>
+        PARSER = new com.google.protobuf.AbstractParser<Document>() {
+      @java.lang.Override
+      public Document parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<Document> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Document> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Document getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
   public static final int EO_DOC_URL_FIELD_NUMBER = 1;
@@ -208,13 +3171,13 @@ private static final long serialVersionUID = 0L;
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2425
+   *     See producerflow/producer/v1/producer.proto;l=2472
    * @return The licenseDocUrl.
    */
   @java.lang.Override
@@ -235,13 +3198,13 @@ private static final long serialVersionUID = 0L;
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2425
+   *     See producerflow/producer/v1/producer.proto;l=2472
    * @return The bytes for licenseDocUrl.
    */
   @java.lang.Override
@@ -267,13 +3230,13 @@ private static final long serialVersionUID = 0L;
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2432
+   *     See producerflow/producer/v1/producer.proto;l=2479
    * @return The brokerBondDocUrl.
    */
   @java.lang.Override
@@ -294,13 +3257,13 @@ private static final long serialVersionUID = 0L;
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2432
+   *     See producerflow/producer/v1/producer.proto;l=2479
    * @return The bytes for brokerBondDocUrl.
    */
   @java.lang.Override
@@ -316,6 +3279,148 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int CONTRACTS_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> contracts_;
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> getContractsList() {
+    return contracts_;
+  }
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder> 
+      getContractsOrBuilderList() {
+    return contracts_;
+  }
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  @java.lang.Override
+  public int getContractsCount() {
+    return contracts_.size();
+  }
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getContracts(int index) {
+    return contracts_.get(index);
+  }
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder getContractsOrBuilder(
+      int index) {
+    return contracts_.get(index);
+  }
+
+  public static final int OTHER_DOCUMENTS_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
+  private java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document> otherDocuments_;
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document> getOtherDocumentsList() {
+    return otherDocuments_;
+  }
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  @java.lang.Override
+  public java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder> 
+      getOtherDocumentsOrBuilderList() {
+    return otherDocuments_;
+  }
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  @java.lang.Override
+  public int getOtherDocumentsCount() {
+    return otherDocuments_.size();
+  }
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetAgencyFilesResponse.Document getOtherDocuments(int index) {
+    return otherDocuments_.get(index);
+  }
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  @java.lang.Override
+  public com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder getOtherDocumentsOrBuilder(
+      int index) {
+    return otherDocuments_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -347,6 +3452,12 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(brokerBondDocUrl_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 5, brokerBondDocUrl_);
     }
+    for (int i = 0; i < contracts_.size(); i++) {
+      output.writeMessage(6, contracts_.get(i));
+    }
+    for (int i = 0; i < otherDocuments_.size(); i++) {
+      output.writeMessage(7, otherDocuments_.get(i));
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -370,6 +3481,14 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(brokerBondDocUrl_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(5, brokerBondDocUrl_);
+    }
+    for (int i = 0; i < contracts_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(6, contracts_.get(i));
+    }
+    for (int i = 0; i < otherDocuments_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, otherDocuments_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -396,6 +3515,10 @@ private static final long serialVersionUID = 0L;
         .equals(other.getLicenseDocUrl())) return false;
     if (!getBrokerBondDocUrl()
         .equals(other.getBrokerBondDocUrl())) return false;
+    if (!getContractsList()
+        .equals(other.getContractsList())) return false;
+    if (!getOtherDocumentsList()
+        .equals(other.getOtherDocumentsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -417,6 +3540,14 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getLicenseDocUrl().hashCode();
     hash = (37 * hash) + BROKER_BOND_DOC_URL_FIELD_NUMBER;
     hash = (53 * hash) + getBrokerBondDocUrl().hashCode();
+    if (getContractsCount() > 0) {
+      hash = (37 * hash) + CONTRACTS_FIELD_NUMBER;
+      hash = (53 * hash) + getContractsList().hashCode();
+    }
+    if (getOtherDocumentsCount() > 0) {
+      hash = (37 * hash) + OTHER_DOCUMENTS_FIELD_NUMBER;
+      hash = (53 * hash) + getOtherDocumentsList().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -557,6 +3688,20 @@ private static final long serialVersionUID = 0L;
       w9DocUrl_ = "";
       licenseDocUrl_ = "";
       brokerBondDocUrl_ = "";
+      if (contractsBuilder_ == null) {
+        contracts_ = java.util.Collections.emptyList();
+      } else {
+        contracts_ = null;
+        contractsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000020);
+      if (otherDocumentsBuilder_ == null) {
+        otherDocuments_ = java.util.Collections.emptyList();
+      } else {
+        otherDocuments_ = null;
+        otherDocumentsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000040);
       return this;
     }
 
@@ -583,9 +3728,31 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.producerflow.producer.v1.GetAgencyFilesResponse buildPartial() {
       com.producerflow.producer.v1.GetAgencyFilesResponse result = new com.producerflow.producer.v1.GetAgencyFilesResponse(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(com.producerflow.producer.v1.GetAgencyFilesResponse result) {
+      if (contractsBuilder_ == null) {
+        if (((bitField0_ & 0x00000020) != 0)) {
+          contracts_ = java.util.Collections.unmodifiableList(contracts_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.contracts_ = contracts_;
+      } else {
+        result.contracts_ = contractsBuilder_.build();
+      }
+      if (otherDocumentsBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0)) {
+          otherDocuments_ = java.util.Collections.unmodifiableList(otherDocuments_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.otherDocuments_ = otherDocuments_;
+      } else {
+        result.otherDocuments_ = otherDocumentsBuilder_.build();
+      }
     }
 
     private void buildPartial0(com.producerflow.producer.v1.GetAgencyFilesResponse result) {
@@ -644,6 +3811,58 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000010;
         onChanged();
       }
+      if (contractsBuilder_ == null) {
+        if (!other.contracts_.isEmpty()) {
+          if (contracts_.isEmpty()) {
+            contracts_ = other.contracts_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureContractsIsMutable();
+            contracts_.addAll(other.contracts_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.contracts_.isEmpty()) {
+          if (contractsBuilder_.isEmpty()) {
+            contractsBuilder_.dispose();
+            contractsBuilder_ = null;
+            contracts_ = other.contracts_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+            contractsBuilder_ = 
+              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                 getContractsFieldBuilder() : null;
+          } else {
+            contractsBuilder_.addAllMessages(other.contracts_);
+          }
+        }
+      }
+      if (otherDocumentsBuilder_ == null) {
+        if (!other.otherDocuments_.isEmpty()) {
+          if (otherDocuments_.isEmpty()) {
+            otherDocuments_ = other.otherDocuments_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureOtherDocumentsIsMutable();
+            otherDocuments_.addAll(other.otherDocuments_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.otherDocuments_.isEmpty()) {
+          if (otherDocumentsBuilder_.isEmpty()) {
+            otherDocumentsBuilder_.dispose();
+            otherDocumentsBuilder_ = null;
+            otherDocuments_ = other.otherDocuments_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+            otherDocumentsBuilder_ = 
+              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                 getOtherDocumentsFieldBuilder() : null;
+          } else {
+            otherDocumentsBuilder_.addAllMessages(other.otherDocuments_);
+          }
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -695,6 +3914,32 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 50: {
+              com.producerflow.producer.v1.GetAgencyFilesResponse.Contract m =
+                  input.readMessage(
+                      com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.parser(),
+                      extensionRegistry);
+              if (contractsBuilder_ == null) {
+                ensureContractsIsMutable();
+                contracts_.add(m);
+              } else {
+                contractsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 50
+            case 58: {
+              com.producerflow.producer.v1.GetAgencyFilesResponse.Document m =
+                  input.readMessage(
+                      com.producerflow.producer.v1.GetAgencyFilesResponse.Document.parser(),
+                      extensionRegistry);
+              if (otherDocumentsBuilder_ == null) {
+                ensureOtherDocumentsIsMutable();
+                otherDocuments_.add(m);
+              } else {
+                otherDocumentsBuilder_.addMessage(m);
+              }
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1014,13 +4259,13 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2425
+     *     See producerflow/producer/v1/producer.proto;l=2472
      * @return The licenseDocUrl.
      */
     @java.lang.Deprecated public java.lang.String getLicenseDocUrl() {
@@ -1040,13 +4285,13 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2425
+     *     See producerflow/producer/v1/producer.proto;l=2472
      * @return The bytes for licenseDocUrl.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1067,13 +4312,13 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2425
+     *     See producerflow/producer/v1/producer.proto;l=2472
      * @param value The licenseDocUrl to set.
      * @return This builder for chaining.
      */
@@ -1090,13 +4335,13 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2425
+     *     See producerflow/producer/v1/producer.proto;l=2472
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearLicenseDocUrl() {
@@ -1110,13 +4355,13 @@ private static final long serialVersionUID = 0L;
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2425
+     *     See producerflow/producer/v1/producer.proto;l=2472
      * @param value The bytes for licenseDocUrl to set.
      * @return This builder for chaining.
      */
@@ -1136,13 +4381,13 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2432
+     *     See producerflow/producer/v1/producer.proto;l=2479
      * @return The brokerBondDocUrl.
      */
     @java.lang.Deprecated public java.lang.String getBrokerBondDocUrl() {
@@ -1162,13 +4407,13 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2432
+     *     See producerflow/producer/v1/producer.proto;l=2479
      * @return The bytes for brokerBondDocUrl.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -1189,13 +4434,13 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2432
+     *     See producerflow/producer/v1/producer.proto;l=2479
      * @param value The brokerBondDocUrl to set.
      * @return This builder for chaining.
      */
@@ -1212,13 +4457,13 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2432
+     *     See producerflow/producer/v1/producer.proto;l=2479
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearBrokerBondDocUrl() {
@@ -1232,13 +4477,13 @@ private static final long serialVersionUID = 0L;
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * </pre>
      *
      * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2432
+     *     See producerflow/producer/v1/producer.proto;l=2479
      * @param value The bytes for brokerBondDocUrl to set.
      * @return This builder for chaining.
      */
@@ -1250,6 +4495,702 @@ private static final long serialVersionUID = 0L;
       bitField0_ |= 0x00000010;
       onChanged();
       return this;
+    }
+
+    private java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> contracts_ =
+      java.util.Collections.emptyList();
+    private void ensureContractsIsMutable() {
+      if (!((bitField0_ & 0x00000020) != 0)) {
+        contracts_ = new java.util.ArrayList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract>(contracts_);
+        bitField0_ |= 0x00000020;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder> contractsBuilder_;
+
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> getContractsList() {
+      if (contractsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(contracts_);
+      } else {
+        return contractsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public int getContractsCount() {
+      if (contractsBuilder_ == null) {
+        return contracts_.size();
+      } else {
+        return contractsBuilder_.getCount();
+      }
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getContracts(int index) {
+      if (contractsBuilder_ == null) {
+        return contracts_.get(index);
+      } else {
+        return contractsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder setContracts(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract value) {
+      if (contractsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureContractsIsMutable();
+        contracts_.set(index, value);
+        onChanged();
+      } else {
+        contractsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder setContracts(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder builderForValue) {
+      if (contractsBuilder_ == null) {
+        ensureContractsIsMutable();
+        contracts_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        contractsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder addContracts(com.producerflow.producer.v1.GetAgencyFilesResponse.Contract value) {
+      if (contractsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureContractsIsMutable();
+        contracts_.add(value);
+        onChanged();
+      } else {
+        contractsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder addContracts(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract value) {
+      if (contractsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureContractsIsMutable();
+        contracts_.add(index, value);
+        onChanged();
+      } else {
+        contractsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder addContracts(
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder builderForValue) {
+      if (contractsBuilder_ == null) {
+        ensureContractsIsMutable();
+        contracts_.add(builderForValue.build());
+        onChanged();
+      } else {
+        contractsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder addContracts(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder builderForValue) {
+      if (contractsBuilder_ == null) {
+        ensureContractsIsMutable();
+        contracts_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        contractsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder addAllContracts(
+        java.lang.Iterable<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> values) {
+      if (contractsBuilder_ == null) {
+        ensureContractsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, contracts_);
+        onChanged();
+      } else {
+        contractsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder clearContracts() {
+      if (contractsBuilder_ == null) {
+        contracts_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+      } else {
+        contractsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public Builder removeContracts(int index) {
+      if (contractsBuilder_ == null) {
+        ensureContractsIsMutable();
+        contracts_.remove(index);
+        onChanged();
+      } else {
+        contractsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder getContractsBuilder(
+        int index) {
+      return getContractsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder getContractsOrBuilder(
+        int index) {
+      if (contractsBuilder_ == null) {
+        return contracts_.get(index);  } else {
+        return contractsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder> 
+         getContractsOrBuilderList() {
+      if (contractsBuilder_ != null) {
+        return contractsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(contracts_);
+      }
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder addContractsBuilder() {
+      return getContractsFieldBuilder().addBuilder(
+          com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder addContractsBuilder(
+        int index) {
+      return getContractsFieldBuilder().addBuilder(
+          index, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder> 
+         getContractsBuilderList() {
+      return getContractsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder> 
+        getContractsFieldBuilder() {
+      if (contractsBuilder_ == null) {
+        contractsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder>(
+                contracts_,
+                ((bitField0_ & 0x00000020) != 0),
+                getParentForChildren(),
+                isClean());
+        contracts_ = null;
+      }
+      return contractsBuilder_;
+    }
+
+    private java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document> otherDocuments_ =
+      java.util.Collections.emptyList();
+    private void ensureOtherDocumentsIsMutable() {
+      if (!((bitField0_ & 0x00000040) != 0)) {
+        otherDocuments_ = new java.util.ArrayList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document>(otherDocuments_);
+        bitField0_ |= 0x00000040;
+       }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Document, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder> otherDocumentsBuilder_;
+
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document> getOtherDocumentsList() {
+      if (otherDocumentsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(otherDocuments_);
+      } else {
+        return otherDocumentsBuilder_.getMessageList();
+      }
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public int getOtherDocumentsCount() {
+      if (otherDocumentsBuilder_ == null) {
+        return otherDocuments_.size();
+      } else {
+        return otherDocumentsBuilder_.getCount();
+      }
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Document getOtherDocuments(int index) {
+      if (otherDocumentsBuilder_ == null) {
+        return otherDocuments_.get(index);
+      } else {
+        return otherDocumentsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder setOtherDocuments(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Document value) {
+      if (otherDocumentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.set(index, value);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.setMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder setOtherDocuments(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder builderForValue) {
+      if (otherDocumentsBuilder_ == null) {
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.setMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder addOtherDocuments(com.producerflow.producer.v1.GetAgencyFilesResponse.Document value) {
+      if (otherDocumentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.add(value);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder addOtherDocuments(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Document value) {
+      if (otherDocumentsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.add(index, value);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder addOtherDocuments(
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder builderForValue) {
+      if (otherDocumentsBuilder_ == null) {
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.add(builderForValue.build());
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder addOtherDocuments(
+        int index, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder builderForValue) {
+      if (otherDocumentsBuilder_ == null) {
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder addAllOtherDocuments(
+        java.lang.Iterable<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.Document> values) {
+      if (otherDocumentsBuilder_ == null) {
+        ensureOtherDocumentsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, otherDocuments_);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder clearOtherDocuments() {
+      if (otherDocumentsBuilder_ == null) {
+        otherDocuments_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public Builder removeOtherDocuments(int index) {
+      if (otherDocumentsBuilder_ == null) {
+        ensureOtherDocumentsIsMutable();
+        otherDocuments_.remove(index);
+        onChanged();
+      } else {
+        otherDocumentsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder getOtherDocumentsBuilder(
+        int index) {
+      return getOtherDocumentsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder getOtherDocumentsOrBuilder(
+        int index) {
+      if (otherDocumentsBuilder_ == null) {
+        return otherDocuments_.get(index);  } else {
+        return otherDocumentsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder> 
+         getOtherDocumentsOrBuilderList() {
+      if (otherDocumentsBuilder_ != null) {
+        return otherDocumentsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(otherDocuments_);
+      }
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder addOtherDocumentsBuilder() {
+      return getOtherDocumentsFieldBuilder().addBuilder(
+          com.producerflow.producer.v1.GetAgencyFilesResponse.Document.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder addOtherDocumentsBuilder(
+        int index) {
+      return getOtherDocumentsFieldBuilder().addBuilder(
+          index, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.getDefaultInstance());
+    }
+    /**
+     * <pre>
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * </pre>
+     *
+     * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+     */
+    public java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder> 
+         getOtherDocumentsBuilderList() {
+      return getOtherDocumentsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilder<
+        com.producerflow.producer.v1.GetAgencyFilesResponse.Document, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder> 
+        getOtherDocumentsFieldBuilder() {
+      if (otherDocumentsBuilder_ == null) {
+        otherDocumentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            com.producerflow.producer.v1.GetAgencyFilesResponse.Document, com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder, com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder>(
+                otherDocuments_,
+                ((bitField0_ & 0x00000040) != 0),
+                getParentForChildren(),
+                isClean());
+        otherDocuments_ = null;
+      }
+      return otherDocumentsBuilder_;
     }
 
     // @@protoc_insertion_point(builder_scope:producerflow.producer.v1.GetAgencyFilesResponse)

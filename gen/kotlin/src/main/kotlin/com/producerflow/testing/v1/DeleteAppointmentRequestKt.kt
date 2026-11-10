@@ -30,8 +30,8 @@ public object DeleteAppointmentRequestKt {
 
     /**
      * ```
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * ```
      *
@@ -46,8 +46,8 @@ public object DeleteAppointmentRequestKt {
       }
     /**
      * ```
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * ```
      *

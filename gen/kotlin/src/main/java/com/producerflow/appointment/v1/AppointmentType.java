@@ -14,6 +14,13 @@ package com.producerflow.appointment.v1;
  * - Registry and Synthetic appointments are processed automatically
  * - Up-front appointments go through NIPR's standard processing pipeline
  * - Just-in-time appointments are created on demand when needed
+ *
+ * Values:
+ * - APPOINTMENT_TYPE_UNSPECIFIED: the type could not be derived.
+ * - APPOINTMENT_TYPE_REGISTRY: Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process.
+ * - APPOINTMENT_TYPE_UP_FRONT: Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state.
+ * - APPOINTMENT_TYPE_JUST_IN_TIME: Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment.
+ * - APPOINTMENT_TYPE_SYNTHETIC: Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated.
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.AppointmentType}

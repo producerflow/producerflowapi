@@ -145,15 +145,16 @@ public interface LicenseOrBuilder extends
 
   /**
    * <pre>
-   * Indicates whether this license is in a registry state. Licenses in
-   * registry states and capacity carriers are processed automatically without
-   * going through NIPR.
+   * Not populated today; always false. To predict whether a request completes
+   * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
    * </pre>
    *
-   * <code>bool is_registry_state = 7 [json_name = "isRegistryState"];</code>
+   * <code>bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.License.is_registry_state is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=650
    * @return The isRegistryState.
    */
-  boolean getIsRegistryState();
+  @java.lang.Deprecated boolean getIsRegistryState();
 
   /**
    * <pre>

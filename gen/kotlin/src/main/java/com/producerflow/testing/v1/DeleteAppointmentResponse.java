@@ -49,7 +49,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object state_ = "";
   /**
    * <pre>
-   * State of the deleted appointment, echoed back for confirmation.
+   * Two-letter state code of the deleted appointment, echoed back for confirmation.
    * </pre>
    *
    * <code>string state = 1 [json_name = "state"];</code>
@@ -70,7 +70,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * State of the deleted appointment, echoed back for confirmation.
+   * Two-letter state code of the deleted appointment, echoed back for confirmation.
    * </pre>
    *
    * <code>string state = 1 [json_name = "state"];</code>
@@ -459,7 +459,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object state_ = "";
     /**
      * <pre>
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * </pre>
      *
      * <code>string state = 1 [json_name = "state"];</code>
@@ -479,7 +479,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * </pre>
      *
      * <code>string state = 1 [json_name = "state"];</code>
@@ -500,7 +500,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * </pre>
      *
      * <code>string state = 1 [json_name = "state"];</code>
@@ -517,7 +517,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * </pre>
      *
      * <code>string state = 1 [json_name = "state"];</code>
@@ -531,7 +531,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * State of the deleted appointment, echoed back for confirmation.
+     * Two-letter state code of the deleted appointment, echoed back for confirmation.
      * </pre>
      *
      * <code>string state = 1 [json_name = "state"];</code>

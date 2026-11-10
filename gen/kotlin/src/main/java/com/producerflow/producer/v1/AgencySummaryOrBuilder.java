@@ -12,7 +12,7 @@ public interface AgencySummaryOrBuilder extends
   /**
    * <pre>
    * Unique identifier for the agency (UUID format).
-   * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+   * Use this ID to retrieve full agency details via GetAgency.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -22,7 +22,7 @@ public interface AgencySummaryOrBuilder extends
   /**
    * <pre>
    * Unique identifier for the agency (UUID format).
-   * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+   * Use this ID to retrieve full agency details via GetAgency.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId"];</code>

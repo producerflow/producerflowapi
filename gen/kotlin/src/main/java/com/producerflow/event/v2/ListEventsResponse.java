@@ -56,7 +56,8 @@ private static final long serialVersionUID = 0L;
    * Events after the requested checkpoint, in log order. Among events
    * committed together, an entity's events come before those of the entities
    * that belong to it, except deletions, which come last and in the reverse
-   * order.
+   * order. A consumer that replays an older checkpoint sees events again, so
+   * deduplicate on id.
    * </pre>
    *
    * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -70,7 +71,8 @@ private static final long serialVersionUID = 0L;
    * Events after the requested checkpoint, in log order. Among events
    * committed together, an entity's events come before those of the entities
    * that belong to it, except deletions, which come last and in the reverse
-   * order.
+   * order. A consumer that replays an older checkpoint sees events again, so
+   * deduplicate on id.
    * </pre>
    *
    * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -85,7 +87,8 @@ private static final long serialVersionUID = 0L;
    * Events after the requested checkpoint, in log order. Among events
    * committed together, an entity's events come before those of the entities
    * that belong to it, except deletions, which come last and in the reverse
-   * order.
+   * order. A consumer that replays an older checkpoint sees events again, so
+   * deduplicate on id.
    * </pre>
    *
    * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -99,7 +102,8 @@ private static final long serialVersionUID = 0L;
    * Events after the requested checkpoint, in log order. Among events
    * committed together, an entity's events come before those of the entities
    * that belong to it, except deletions, which come last and in the reverse
-   * order.
+   * order. A consumer that replays an older checkpoint sees events again, so
+   * deduplicate on id.
    * </pre>
    *
    * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -113,7 +117,8 @@ private static final long serialVersionUID = 0L;
    * Events after the requested checkpoint, in log order. Among events
    * committed together, an entity's events come before those of the entities
    * that belong to it, except deletions, which come last and in the reverse
-   * order.
+   * order. A consumer that replays an older checkpoint sees events again, so
+   * deduplicate on id.
    * </pre>
    *
    * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -601,7 +606,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -618,7 +624,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -635,7 +642,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -652,7 +660,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -676,7 +685,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -697,7 +707,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -720,7 +731,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -744,7 +756,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -765,7 +778,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -786,7 +800,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -808,7 +823,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -828,7 +844,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -848,7 +865,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -862,7 +880,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -879,7 +898,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -897,7 +917,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -911,7 +932,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>
@@ -926,7 +948,8 @@ private static final long serialVersionUID = 0L;
      * Events after the requested checkpoint, in log order. Among events
      * committed together, an entity's events come before those of the entities
      * that belong to it, except deletions, which come last and in the reverse
-     * order.
+     * order. A consumer that replays an older checkpoint sees events again, so
+     * deduplicate on id.
      * </pre>
      *
      * <code>repeated .producerflow.event.v2.Event events = 1 [json_name = "events"];</code>

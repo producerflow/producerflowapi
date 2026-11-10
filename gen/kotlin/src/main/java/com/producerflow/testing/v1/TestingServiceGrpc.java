@@ -5,10 +5,10 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  * <pre>
  * ============================================================================
- * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
- * Every method on this service is enabled exclusively in the dev and UAT
- * test environments. In production, every call is rejected with
- * PERMISSION_DENIED, regardless of the API key or arguments.
+ * NOT AVAILABLE IN PRODUCTION.
+ * Every method on this service is available in the UAT test environment. In
+ * production, every call is rejected with PERMISSION_DENIED, regardless of the
+ * API key or arguments.
  * ============================================================================
  * TestingService provides cleanup utilities that let tenants reset their test
  * environments between automated runs. For example, deleting an agency frees
@@ -17,8 +17,8 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * intended solely for preparing and cleaning up automated test scenarios and
  * have no production use.
  * Any call to this service must be authenticated using an API key in the
- * request headers. The API key can be found in the ProducerFlow API key
- * section of the ProducerFlow UI and it identifies the tenant that is making
+ * request headers. The API key can be found in the Producerflow API key
+ * section of the Producerflow portal and it identifies the tenant that is making
  * the request.
  * </pre>
  */
@@ -142,10 +142,10 @@ public final class TestingServiceGrpc {
   /**
    * <pre>
    * ============================================================================
-   * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
-   * Every method on this service is enabled exclusively in the dev and UAT
-   * test environments. In production, every call is rejected with
-   * PERMISSION_DENIED, regardless of the API key or arguments.
+   * NOT AVAILABLE IN PRODUCTION.
+   * Every method on this service is available in the UAT test environment. In
+   * production, every call is rejected with PERMISSION_DENIED, regardless of the
+   * API key or arguments.
    * ============================================================================
    * TestingService provides cleanup utilities that let tenants reset their test
    * environments between automated runs. For example, deleting an agency frees
@@ -154,8 +154,8 @@ public final class TestingServiceGrpc {
    * intended solely for preparing and cleaning up automated test scenarios and
    * have no production use.
    * Any call to this service must be authenticated using an API key in the
-   * request headers. The API key can be found in the ProducerFlow API key
-   * section of the ProducerFlow UI and it identifies the tenant that is making
+   * request headers. The API key can be found in the Producerflow API key
+   * section of the Producerflow portal and it identifies the tenant that is making
    * the request.
    * </pre>
    */
@@ -164,19 +164,22 @@ public final class TestingServiceGrpc {
     /**
      * <pre>
      * DeleteAgency permanently removes an agency and every producer,
-     * appointment, and NIPR record scoped to it, freeing the underlying
-     * licenses to be appointed again. It lets tenants reset the same agency
+     * appointment, contact, location, onboarding record, NIPR record and
+     * uploaded file scoped to it, freeing the underlying licenses to be
+     * appointed again. It lets tenants reset the same agency
      * between automated test runs instead of provisioning a new one each time.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The agency must belong to the tenant resolved from the request's API key.
-     * Tenant (internal) agencies cannot be deleted — they hold per-tenant
-     * configuration. The operation is irreversible and emits no events.
+     * Your own internal agency (the one that represents your organization)
+     * cannot be deleted. The operation is irreversible. It records one
+     * license.deleted per NIPR license the agency held and then agency.deleted
+     * on the Events API.
      * Errors:
      * - NOT_FOUND: no agency with the given ID exists for the tenant.
-     * - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+     * - FAILED_PRECONDITION: the agency is your own internal agency.
      * - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     default void deleteAgency(com.producerflow.testing.v1.DeleteAgencyRequest request,
@@ -188,18 +191,21 @@ public final class TestingServiceGrpc {
      * <pre>
      * DeleteAppointment permanently removes a single appointment, freeing the
      * underlying license to be appointed again. Unlike terminating an
-     * appointment — which leaves a TERMINATED record that still blocks the
-     * license from being re-appointed — deleting it removes the row entirely so
-     * the same license can be reused across automated test runs.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * appointment, which keeps the appointment and its history so that a later
+     * RequestAppointment re-sends it as a re-appointment, deleting it removes
+     * the appointment and its status history so the next request behaves like
+     * a first one.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The appointment must belong to the tenant resolved from the request's API
-     * key. Its interleaved history is removed with it. The operation is
-     * irreversible, emits no events, and sends nothing to NIPR.
+     * key. The operation is irreversible, records appointment.deleted on the
+     * Events API, and sends nothing to NIPR: a filing already made for an
+     * IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+     * delete settled appointments only.
      * Errors:
      * - NOT_FOUND: no appointment with the given ID exists for the tenant.
      * - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     default void deleteAppointment(com.producerflow.testing.v1.DeleteAppointmentRequest request,
@@ -212,10 +218,10 @@ public final class TestingServiceGrpc {
    * Base class for the server implementation of the service TestingService.
    * <pre>
    * ============================================================================
-   * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
-   * Every method on this service is enabled exclusively in the dev and UAT
-   * test environments. In production, every call is rejected with
-   * PERMISSION_DENIED, regardless of the API key or arguments.
+   * NOT AVAILABLE IN PRODUCTION.
+   * Every method on this service is available in the UAT test environment. In
+   * production, every call is rejected with PERMISSION_DENIED, regardless of the
+   * API key or arguments.
    * ============================================================================
    * TestingService provides cleanup utilities that let tenants reset their test
    * environments between automated runs. For example, deleting an agency frees
@@ -224,8 +230,8 @@ public final class TestingServiceGrpc {
    * intended solely for preparing and cleaning up automated test scenarios and
    * have no production use.
    * Any call to this service must be authenticated using an API key in the
-   * request headers. The API key can be found in the ProducerFlow API key
-   * section of the ProducerFlow UI and it identifies the tenant that is making
+   * request headers. The API key can be found in the Producerflow API key
+   * section of the Producerflow portal and it identifies the tenant that is making
    * the request.
    * </pre>
    */
@@ -241,10 +247,10 @@ public final class TestingServiceGrpc {
    * A stub to allow clients to do asynchronous rpc calls to service TestingService.
    * <pre>
    * ============================================================================
-   * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
-   * Every method on this service is enabled exclusively in the dev and UAT
-   * test environments. In production, every call is rejected with
-   * PERMISSION_DENIED, regardless of the API key or arguments.
+   * NOT AVAILABLE IN PRODUCTION.
+   * Every method on this service is available in the UAT test environment. In
+   * production, every call is rejected with PERMISSION_DENIED, regardless of the
+   * API key or arguments.
    * ============================================================================
    * TestingService provides cleanup utilities that let tenants reset their test
    * environments between automated runs. For example, deleting an agency frees
@@ -253,8 +259,8 @@ public final class TestingServiceGrpc {
    * intended solely for preparing and cleaning up automated test scenarios and
    * have no production use.
    * Any call to this service must be authenticated using an API key in the
-   * request headers. The API key can be found in the ProducerFlow API key
-   * section of the ProducerFlow UI and it identifies the tenant that is making
+   * request headers. The API key can be found in the Producerflow API key
+   * section of the Producerflow portal and it identifies the tenant that is making
    * the request.
    * </pre>
    */
@@ -274,19 +280,22 @@ public final class TestingServiceGrpc {
     /**
      * <pre>
      * DeleteAgency permanently removes an agency and every producer,
-     * appointment, and NIPR record scoped to it, freeing the underlying
-     * licenses to be appointed again. It lets tenants reset the same agency
+     * appointment, contact, location, onboarding record, NIPR record and
+     * uploaded file scoped to it, freeing the underlying licenses to be
+     * appointed again. It lets tenants reset the same agency
      * between automated test runs instead of provisioning a new one each time.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The agency must belong to the tenant resolved from the request's API key.
-     * Tenant (internal) agencies cannot be deleted — they hold per-tenant
-     * configuration. The operation is irreversible and emits no events.
+     * Your own internal agency (the one that represents your organization)
+     * cannot be deleted. The operation is irreversible. It records one
+     * license.deleted per NIPR license the agency held and then agency.deleted
+     * on the Events API.
      * Errors:
      * - NOT_FOUND: no agency with the given ID exists for the tenant.
-     * - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+     * - FAILED_PRECONDITION: the agency is your own internal agency.
      * - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public void deleteAgency(com.producerflow.testing.v1.DeleteAgencyRequest request,
@@ -299,18 +308,21 @@ public final class TestingServiceGrpc {
      * <pre>
      * DeleteAppointment permanently removes a single appointment, freeing the
      * underlying license to be appointed again. Unlike terminating an
-     * appointment — which leaves a TERMINATED record that still blocks the
-     * license from being re-appointed — deleting it removes the row entirely so
-     * the same license can be reused across automated test runs.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * appointment, which keeps the appointment and its history so that a later
+     * RequestAppointment re-sends it as a re-appointment, deleting it removes
+     * the appointment and its status history so the next request behaves like
+     * a first one.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The appointment must belong to the tenant resolved from the request's API
-     * key. Its interleaved history is removed with it. The operation is
-     * irreversible, emits no events, and sends nothing to NIPR.
+     * key. The operation is irreversible, records appointment.deleted on the
+     * Events API, and sends nothing to NIPR: a filing already made for an
+     * IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+     * delete settled appointments only.
      * Errors:
      * - NOT_FOUND: no appointment with the given ID exists for the tenant.
      * - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public void deleteAppointment(com.producerflow.testing.v1.DeleteAppointmentRequest request,
@@ -324,10 +336,10 @@ public final class TestingServiceGrpc {
    * A stub to allow clients to do synchronous rpc calls to service TestingService.
    * <pre>
    * ============================================================================
-   * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
-   * Every method on this service is enabled exclusively in the dev and UAT
-   * test environments. In production, every call is rejected with
-   * PERMISSION_DENIED, regardless of the API key or arguments.
+   * NOT AVAILABLE IN PRODUCTION.
+   * Every method on this service is available in the UAT test environment. In
+   * production, every call is rejected with PERMISSION_DENIED, regardless of the
+   * API key or arguments.
    * ============================================================================
    * TestingService provides cleanup utilities that let tenants reset their test
    * environments between automated runs. For example, deleting an agency frees
@@ -336,8 +348,8 @@ public final class TestingServiceGrpc {
    * intended solely for preparing and cleaning up automated test scenarios and
    * have no production use.
    * Any call to this service must be authenticated using an API key in the
-   * request headers. The API key can be found in the ProducerFlow API key
-   * section of the ProducerFlow UI and it identifies the tenant that is making
+   * request headers. The API key can be found in the Producerflow API key
+   * section of the Producerflow portal and it identifies the tenant that is making
    * the request.
    * </pre>
    */
@@ -357,19 +369,22 @@ public final class TestingServiceGrpc {
     /**
      * <pre>
      * DeleteAgency permanently removes an agency and every producer,
-     * appointment, and NIPR record scoped to it, freeing the underlying
-     * licenses to be appointed again. It lets tenants reset the same agency
+     * appointment, contact, location, onboarding record, NIPR record and
+     * uploaded file scoped to it, freeing the underlying licenses to be
+     * appointed again. It lets tenants reset the same agency
      * between automated test runs instead of provisioning a new one each time.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The agency must belong to the tenant resolved from the request's API key.
-     * Tenant (internal) agencies cannot be deleted — they hold per-tenant
-     * configuration. The operation is irreversible and emits no events.
+     * Your own internal agency (the one that represents your organization)
+     * cannot be deleted. The operation is irreversible. It records one
+     * license.deleted per NIPR license the agency held and then agency.deleted
+     * on the Events API.
      * Errors:
      * - NOT_FOUND: no agency with the given ID exists for the tenant.
-     * - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+     * - FAILED_PRECONDITION: the agency is your own internal agency.
      * - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public com.producerflow.testing.v1.DeleteAgencyResponse deleteAgency(com.producerflow.testing.v1.DeleteAgencyRequest request) {
@@ -381,18 +396,21 @@ public final class TestingServiceGrpc {
      * <pre>
      * DeleteAppointment permanently removes a single appointment, freeing the
      * underlying license to be appointed again. Unlike terminating an
-     * appointment — which leaves a TERMINATED record that still blocks the
-     * license from being re-appointed — deleting it removes the row entirely so
-     * the same license can be reused across automated test runs.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * appointment, which keeps the appointment and its history so that a later
+     * RequestAppointment re-sends it as a re-appointment, deleting it removes
+     * the appointment and its status history so the next request behaves like
+     * a first one.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The appointment must belong to the tenant resolved from the request's API
-     * key. Its interleaved history is removed with it. The operation is
-     * irreversible, emits no events, and sends nothing to NIPR.
+     * key. The operation is irreversible, records appointment.deleted on the
+     * Events API, and sends nothing to NIPR: a filing already made for an
+     * IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+     * delete settled appointments only.
      * Errors:
      * - NOT_FOUND: no appointment with the given ID exists for the tenant.
      * - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public com.producerflow.testing.v1.DeleteAppointmentResponse deleteAppointment(com.producerflow.testing.v1.DeleteAppointmentRequest request) {
@@ -405,10 +423,10 @@ public final class TestingServiceGrpc {
    * A stub to allow clients to do ListenableFuture-style rpc calls to service TestingService.
    * <pre>
    * ============================================================================
-   * DEV AND UAT ONLY — NOT AVAILABLE IN PRODUCTION.
-   * Every method on this service is enabled exclusively in the dev and UAT
-   * test environments. In production, every call is rejected with
-   * PERMISSION_DENIED, regardless of the API key or arguments.
+   * NOT AVAILABLE IN PRODUCTION.
+   * Every method on this service is available in the UAT test environment. In
+   * production, every call is rejected with PERMISSION_DENIED, regardless of the
+   * API key or arguments.
    * ============================================================================
    * TestingService provides cleanup utilities that let tenants reset their test
    * environments between automated runs. For example, deleting an agency frees
@@ -417,8 +435,8 @@ public final class TestingServiceGrpc {
    * intended solely for preparing and cleaning up automated test scenarios and
    * have no production use.
    * Any call to this service must be authenticated using an API key in the
-   * request headers. The API key can be found in the ProducerFlow API key
-   * section of the ProducerFlow UI and it identifies the tenant that is making
+   * request headers. The API key can be found in the Producerflow API key
+   * section of the Producerflow portal and it identifies the tenant that is making
    * the request.
    * </pre>
    */
@@ -438,19 +456,22 @@ public final class TestingServiceGrpc {
     /**
      * <pre>
      * DeleteAgency permanently removes an agency and every producer,
-     * appointment, and NIPR record scoped to it, freeing the underlying
-     * licenses to be appointed again. It lets tenants reset the same agency
+     * appointment, contact, location, onboarding record, NIPR record and
+     * uploaded file scoped to it, freeing the underlying licenses to be
+     * appointed again. It lets tenants reset the same agency
      * between automated test runs instead of provisioning a new one each time.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The agency must belong to the tenant resolved from the request's API key.
-     * Tenant (internal) agencies cannot be deleted — they hold per-tenant
-     * configuration. The operation is irreversible and emits no events.
+     * Your own internal agency (the one that represents your organization)
+     * cannot be deleted. The operation is irreversible. It records one
+     * license.deleted per NIPR license the agency held and then agency.deleted
+     * on the Events API.
      * Errors:
      * - NOT_FOUND: no agency with the given ID exists for the tenant.
-     * - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+     * - FAILED_PRECONDITION: the agency is your own internal agency.
      * - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.testing.v1.DeleteAgencyResponse> deleteAgency(
@@ -463,18 +484,21 @@ public final class TestingServiceGrpc {
      * <pre>
      * DeleteAppointment permanently removes a single appointment, freeing the
      * underlying license to be appointed again. Unlike terminating an
-     * appointment — which leaves a TERMINATED record that still blocks the
-     * license from being re-appointed — deleting it removes the row entirely so
-     * the same license can be reused across automated test runs.
-     * DEV AND UAT ONLY: this method is not available in production. Calls made
-     * in production are always rejected with PERMISSION_DENIED.
+     * appointment, which keeps the appointment and its history so that a later
+     * RequestAppointment re-sends it as a re-appointment, deleting it removes
+     * the appointment and its status history so the next request behaves like
+     * a first one.
+     * UAT ONLY: this method is not available in production. Calls made in
+     * production are always rejected with PERMISSION_DENIED.
      * The appointment must belong to the tenant resolved from the request's API
-     * key. Its interleaved history is removed with it. The operation is
-     * irreversible, emits no events, and sends nothing to NIPR.
+     * key. The operation is irreversible, records appointment.deleted on the
+     * Events API, and sends nothing to NIPR: a filing already made for an
+     * IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+     * delete settled appointments only.
      * Errors:
      * - NOT_FOUND: no appointment with the given ID exists for the tenant.
      * - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-     * - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+     * - PERMISSION_DENIED: the call was made in production.
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.producerflow.testing.v1.DeleteAppointmentResponse> deleteAppointment(

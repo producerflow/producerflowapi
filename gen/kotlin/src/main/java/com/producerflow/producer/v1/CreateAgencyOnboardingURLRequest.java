@@ -125,7 +125,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1737
+     *     See producerflow/producer/v1/producer.proto;l=1784
      * @return The docusignTemplateId.
      */
     @java.lang.Deprecated java.lang.String getDocusignTemplateId();
@@ -137,7 +137,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1737
+     *     See producerflow/producer/v1/producer.proto;l=1784
      * @return The bytes for docusignTemplateId.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -541,7 +541,7 @@ private static final long serialVersionUID = 0L;
 
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -550,7 +550,7 @@ private static final long serialVersionUID = 0L;
       java.lang.String getTenantId();
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -771,7 +771,7 @@ private static final long serialVersionUID = 0L;
       private volatile java.lang.Object tenantId_ = "";
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -792,7 +792,7 @@ private static final long serialVersionUID = 0L;
       }
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1634,7 +1634,7 @@ private static final long serialVersionUID = 0L;
         private java.lang.Object tenantId_ = "";
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1654,7 +1654,7 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1675,7 +1675,7 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1692,7 +1692,7 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1706,7 +1706,7 @@ private static final long serialVersionUID = 0L;
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 1 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -2642,7 +2642,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1737
+     *     See producerflow/producer/v1/producer.proto;l=1784
      * @return The docusignTemplateId.
      */
     @java.lang.Override
@@ -2666,7 +2666,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=1737
+     *     See producerflow/producer/v1/producer.proto;l=1784
      * @return The bytes for docusignTemplateId.
      */
     @java.lang.Override
@@ -4318,7 +4318,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1737
+       *     See producerflow/producer/v1/producer.proto;l=1784
        * @return The docusignTemplateId.
        */
       @java.lang.Deprecated public java.lang.String getDocusignTemplateId() {
@@ -4341,7 +4341,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1737
+       *     See producerflow/producer/v1/producer.proto;l=1784
        * @return The bytes for docusignTemplateId.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -4365,7 +4365,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1737
+       *     See producerflow/producer/v1/producer.proto;l=1784
        * @param value The docusignTemplateId to set.
        * @return This builder for chaining.
        */
@@ -4385,7 +4385,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1737
+       *     See producerflow/producer/v1/producer.proto;l=1784
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearDocusignTemplateId() {
@@ -4402,7 +4402,7 @@ private static final long serialVersionUID = 0L;
        *
        * <code>string docusign_template_id = 4 [json_name = "docusignTemplateId", deprecated = true];</code>
        * @deprecated producerflow.producer.v1.CreateAgencyOnboardingURLRequest.Agency.docusign_template_id is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=1737
+       *     See producerflow/producer/v1/producer.proto;l=1784
        * @param value The bytes for docusignTemplateId to set.
        * @return This builder for chaining.
        */

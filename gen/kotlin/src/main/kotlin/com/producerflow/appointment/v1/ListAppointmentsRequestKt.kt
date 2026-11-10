@@ -40,7 +40,10 @@ public object ListAppointmentsRequestKt {
     public class ProcessingStatusProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -52,7 +55,10 @@ public object ListAppointmentsRequestKt {
       )
     /**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -64,7 +70,10 @@ public object ListAppointmentsRequestKt {
       _builder.addProcessingStatus(value)
     }/**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -77,7 +86,10 @@ public object ListAppointmentsRequestKt {
       add(value)
     }/**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -89,7 +101,10 @@ public object ListAppointmentsRequestKt {
       _builder.addAllProcessingStatus(values)
     }/**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -102,7 +117,10 @@ public object ListAppointmentsRequestKt {
       addAll(values)
     }/**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`
@@ -115,7 +133,10 @@ public object ListAppointmentsRequestKt {
       _builder.setProcessingStatus(index, value)
     }/**
      * ```
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * ```
      *
      * `repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];`

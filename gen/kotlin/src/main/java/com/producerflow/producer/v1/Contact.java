@@ -1316,7 +1316,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4452
+   *     See producerflow/producer/v1/producer.proto;l=4573
    * @return The role.
    */
   @java.lang.Override
@@ -1340,7 +1340,7 @@ private static final long serialVersionUID = 0L;
    *
    * <code>string role = 7 [json_name = "role", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=4452
+   *     See producerflow/producer/v1/producer.proto;l=4573
    * @return The bytes for role.
    */
   @java.lang.Override
@@ -1549,7 +1549,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
    * reporting, or integration needs.
    * The map key is the metadata field name, and the value is the associated data.
@@ -1573,7 +1573,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
    * reporting, or integration needs.
    * The map key is the metadata field name, and the value is the associated data.
@@ -1587,7 +1587,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
    * reporting, or integration needs.
    * The map key is the metadata field name, and the value is the associated data.
@@ -1608,7 +1608,7 @@ java.lang.String defaultValue) {
   }
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
    * reporting, or integration needs.
    * The map key is the metadata field name, and the value is the associated data.
@@ -3060,7 +3060,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4452
+     *     See producerflow/producer/v1/producer.proto;l=4573
      * @return The role.
      */
     @java.lang.Deprecated public java.lang.String getRole() {
@@ -3083,7 +3083,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4452
+     *     See producerflow/producer/v1/producer.proto;l=4573
      * @return The bytes for role.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -3107,7 +3107,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4452
+     *     See producerflow/producer/v1/producer.proto;l=4573
      * @param value The role to set.
      * @return This builder for chaining.
      */
@@ -3127,7 +3127,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4452
+     *     See producerflow/producer/v1/producer.proto;l=4573
      * @return This builder for chaining.
      */
     @java.lang.Deprecated public Builder clearRole() {
@@ -3144,7 +3144,7 @@ java.lang.String defaultValue) {
      *
      * <code>string role = 7 [json_name = "role", deprecated = true];</code>
      * @deprecated producerflow.producer.v1.Contact.role is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=4452
+     *     See producerflow/producer/v1/producer.proto;l=4573
      * @param value The bytes for role to set.
      * @return This builder for chaining.
      */
@@ -3700,7 +3700,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3724,7 +3724,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3738,7 +3738,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3759,7 +3759,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3786,7 +3786,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3812,7 +3812,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.
@@ -3832,7 +3832,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
      * reporting, or integration needs.
      * The map key is the metadata field name, and the value is the associated data.

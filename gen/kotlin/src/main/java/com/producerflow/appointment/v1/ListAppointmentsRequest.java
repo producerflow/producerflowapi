@@ -105,7 +105,10 @@ private static final long serialVersionUID = 0L;
           };
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -118,7 +121,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -130,7 +136,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -143,7 +152,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -156,7 +168,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    * </pre>
    *
    * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -931,7 +946,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -943,7 +961,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -954,7 +975,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -966,7 +990,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -986,7 +1013,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1004,7 +1034,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1022,7 +1055,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1036,7 +1072,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1048,7 +1087,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1060,7 +1102,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1077,7 +1122,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>
@@ -1092,7 +1140,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Optional. Filter results by processing status.
+     * Optional. Filter results by processing status. Without it only
+     * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+     * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+     * Several values are combined with OR.
      * </pre>
      *
      * <code>repeated .producerflow.appointment.v1.ProcessingStatus processing_status = 1 [json_name = "processingStatus"];</code>

@@ -433,7 +433,7 @@ java.lang.String defaultValue);
 
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -449,7 +449,7 @@ java.lang.String defaultValue);
   int getExternalMetadataCount();
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -472,7 +472,7 @@ java.lang.String defaultValue);
   getExternalMetadata();
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -489,7 +489,7 @@ java.lang.String defaultValue);
   getExternalMetadataMap();
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:
@@ -509,7 +509,7 @@ java.lang.String getExternalMetadataOrDefault(
 java.lang.String defaultValue);
   /**
    * <pre>
-   * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+   * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
    * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
    * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
    * Common use cases include:

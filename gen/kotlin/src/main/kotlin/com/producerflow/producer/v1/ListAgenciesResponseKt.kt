@@ -15,8 +15,8 @@ public inline fun listAgenciesResponse(block: com.producerflow.producer.v1.ListA
  * navigation and total counts.
  *
  * The response is optimized for UI display with summary data only. For complete
- * agency information including NIPR data, use GetAgencyAndProducers with the
- * agency_id from the summary.
+ * agency information including NIPR data, use GetAgency with the agency_id
+ * from the summary.
  *
  * Pagination Notes:
  * - Results are always ordered by creation date (newest first)

@@ -280,8 +280,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -295,8 +294,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -310,8 +308,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -326,8 +323,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -341,8 +337,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -357,8 +352,7 @@ public object UpdateAgencyRequestKt {
       /**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -372,8 +366,7 @@ public object UpdateAgencyRequestKt {
       }/**
        * ```
        * List of requested appointments for the agency (state codes).
-       * The list contains a list of two-lettercd  country codes where the appointments are requested.
-       * The only valid values are the U.S country codes.
+       * Two-letter US state codes where the appointments are requested.
        * ```
        *
        * `repeated string requested_appointments = 5 [json_name = "requestedAppointments", (.buf.validate.field) = { ... }`
@@ -453,7 +446,7 @@ public object UpdateAgencyRequestKt {
       public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -479,7 +472,7 @@ public object UpdateAgencyRequestKt {
         )
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -504,7 +497,7 @@ public object UpdateAgencyRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -531,7 +524,7 @@ public object UpdateAgencyRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -557,7 +550,7 @@ public object UpdateAgencyRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -583,7 +576,7 @@ public object UpdateAgencyRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -840,6 +833,75 @@ public object UpdateAgencyRequestKt {
        */
       public fun hasOrganizationId(): kotlin.Boolean {
         return _builder.hasOrganizationId()
+      }
+
+      /**
+       * ```
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * ```
+       *
+       * `optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }`
+       */
+      public var fein: kotlin.String
+        @JvmName("getFein")
+        get() = _builder.fein
+        @JvmName("setFein")
+        set(value) {
+          _builder.fein = value
+        }
+      /**
+       * ```
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * ```
+       *
+       * `optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }`
+       */
+      public fun clearFein() {
+        _builder.clearFein()
+      }
+      /**
+       * ```
+       * Federal Employer Identification Number (FEIN) of an agency that has none,
+       * as 9 digits. NIPR requires it to appoint or terminate the agency in many
+       * states.
+       *
+       * Update behavior:
+       * - If not provided, empty, or equal to the agency's FEIN: nothing changes
+       * - If the agency has no FEIN: it is set, unless NIPR registers it under
+       * another NPN (INVALID_ARGUMENT) or another agency of the same kind
+       * (internal or external) already holds it (ALREADY_EXISTS)
+       * - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+       * FEIN cannot be changed
+       * - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+       * ```
+       *
+       * `optional string fein = 12 [json_name = "fein", (.buf.validate.field) = { ... }`
+       * @return Whether the fein field is set.
+       */
+      public fun hasFein(): kotlin.Boolean {
+        return _builder.hasFein()
       }
     }
     @kotlin.jvm.JvmName("-initializeaddress")

@@ -198,14 +198,13 @@ public object LicenseKt {
 
     /**
      * ```
-     * Indicates whether this license is in a registry state. Licenses in
-     * registry states and capacity carriers are processed automatically without
-     * going through NIPR.
+     * Not populated today; always false. To predict whether a request completes
+     * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
      * ```
      *
-     * `bool is_registry_state = 7 [json_name = "isRegistryState"];`
+     * `bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];`
      */
-    public var isRegistryState: kotlin.Boolean
+    @kotlin.Deprecated(message = "Field isRegistryState is deprecated") public var isRegistryState: kotlin.Boolean
       @JvmName("getIsRegistryState")
       get() = _builder.isRegistryState
       @JvmName("setIsRegistryState")
@@ -214,12 +213,11 @@ public object LicenseKt {
       }
     /**
      * ```
-     * Indicates whether this license is in a registry state. Licenses in
-     * registry states and capacity carriers are processed automatically without
-     * going through NIPR.
+     * Not populated today; always false. To predict whether a request completes
+     * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
      * ```
      *
-     * `bool is_registry_state = 7 [json_name = "isRegistryState"];`
+     * `bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];`
      */
     public fun clearIsRegistryState() {
       _builder.clearIsRegistryState()

@@ -89,7 +89,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * <pre>
    * Optional. Pagination parameters for controlling result set size and navigation.
    * If not provided, defaults to page_size=50 with no offset.
-   * Maximum allowed page_size is 200; values above this will be capped.
+   * Maximum allowed page_size is 200; values above this will be rejected.
    * </pre>
    *
    * <code>.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];</code>
@@ -100,7 +100,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * <pre>
    * Optional. Pagination parameters for controlling result set size and navigation.
    * If not provided, defaults to page_size=50 with no offset.
-   * Maximum allowed page_size is 200; values above this will be capped.
+   * Maximum allowed page_size is 200; values above this will be rejected.
    * </pre>
    *
    * <code>.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];</code>
@@ -111,7 +111,7 @@ public interface ListAgenciesRequestOrBuilder extends
    * <pre>
    * Optional. Pagination parameters for controlling result set size and navigation.
    * If not provided, defaults to page_size=50 with no offset.
-   * Maximum allowed page_size is 200; values above this will be capped.
+   * Maximum allowed page_size is 200; values above this will be rejected.
    * </pre>
    *
    * <code>.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];</code>

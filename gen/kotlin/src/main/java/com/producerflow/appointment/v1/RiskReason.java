@@ -10,6 +10,15 @@ package com.producerflow.appointment.v1;
  * RiskReason represents the specific reason why an appointment is considered at risk.
  * These reasons correspond to business rules and compliance requirements that may
  * trigger operational status changes.
+ *
+ * Values:
+ * - RISK_REASON_LICENSE_INACTIVE: License is inactive (License Active = false).
+ * - RISK_REASON_LICENSE_EXPIRED: License has expired (License ExpirationDate &lt; current date).
+ * - RISK_REASON_EO_NOT_FOUND: The agency has no E&amp;O in effect. The E&amp;O in effect is the shared coverage of the agency's organization while it shares coverages, the agency's own otherwise.
+ * - RISK_REASON_EO_INACTIVE: The agency's E&amp;O in effect is not approved: it is pending review or rejected. There is no "active" E&amp;O status.
+ * - RISK_REASON_EO_EXPIRED: E&amp;O coverage has expired (E&amp;O ExpirationDate &lt; current date).
+ * - RISK_REASON_STATE_APPOINTMENT_TERMINATED: A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active.
+ * - RISK_REASON_REGULATORY_ACTION: An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state.
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.RiskReason}

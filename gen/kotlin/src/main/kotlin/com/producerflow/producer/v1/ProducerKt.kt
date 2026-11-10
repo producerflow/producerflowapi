@@ -11,7 +11,7 @@ public inline fun producer(block: com.producerflow.producer.v1.ProducerKt.Dsl.()
   com.producerflow.producer.v1.ProducerKt.Dsl._create(com.producerflow.producer.v1.Producer.newBuilder()).apply { block() }._build()
 /**
  * ```
- * Producer represents an insurance producer (agent) with complete licensing
+ * Producer represents an insurance producer with complete licensing
  * information.
  *
  * This message contains comprehensive producer information including:
@@ -731,7 +731,7 @@ public object ProducerKt {
     public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -752,7 +752,7 @@ public object ProducerKt {
       )
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -772,7 +772,7 @@ public object ProducerKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -794,7 +794,7 @@ public object ProducerKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -815,7 +815,7 @@ public object ProducerKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -836,7 +836,7 @@ public object ProducerKt {
        }
     /**
      * ```
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -1260,7 +1260,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1276,7 +1276,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1291,7 +1291,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1308,7 +1308,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1324,7 +1324,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1340,7 +1340,7 @@ public object ProducerKt {
       /**
        * ```
        * ExternalMetadata contains additional custom information that the tenant
-       * stores in ProducerFlow's data model for the associated agency. The map
+       * stores in Producerflow's data model for the associated agency. The map
        * key is the metadata field name, and the value is the associated data.
        * Exposed here so callers do not need an extra GetAgency call to read it.
        * ```
@@ -1913,7 +1913,7 @@ public object ProducerKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * ```
          *
          * `string residency_status = 3 [json_name = "residencyStatus"];`
@@ -1928,7 +1928,7 @@ public object ProducerKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
-         * Values are typically "Resident" or "Non-Resident".
+         * Values: "RESIDENT" or "NON_RESIDENT".
          * ```
          *
          * `string residency_status = 3 [json_name = "residencyStatus"];`
@@ -2715,8 +2715,8 @@ public object ProducerKt {
 
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * ```
          *
          * `string fein = 7 [json_name = "fein", deprecated = true];`
@@ -2730,8 +2730,8 @@ public object ProducerKt {
           }
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-         * return FEIN for individual agents; this field will always be empty.
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
+         * return FEIN for individual producers; this field will always be empty.
          * ```
          *
          * `string fein = 7 [json_name = "fein", deprecated = true];`
@@ -2742,7 +2742,7 @@ public object ProducerKt {
 
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * ```
          *
@@ -2757,7 +2757,7 @@ public object ProducerKt {
           }
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return a company name for individual agents; this field will always be empty.
          * ```
          *
@@ -2769,7 +2769,7 @@ public object ProducerKt {
 
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * ```
          *
@@ -2784,7 +2784,7 @@ public object ProducerKt {
           }
         /**
          * ```
-         * Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+         * Deprecated: producers in Producerflow are always individuals. NIPR does not
          * return state of domicile for individual agents; this field will always be empty.
          * ```
          *

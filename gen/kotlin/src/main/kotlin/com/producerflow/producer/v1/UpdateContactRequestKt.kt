@@ -426,7 +426,7 @@ public object UpdateContactRequestKt {
       public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -452,7 +452,7 @@ public object UpdateContactRequestKt {
         )
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -477,7 +477,7 @@ public object UpdateContactRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -504,7 +504,7 @@ public object UpdateContactRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -530,7 +530,7 @@ public object UpdateContactRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -556,7 +556,7 @@ public object UpdateContactRequestKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:

@@ -134,7 +134,7 @@ private static final long serialVersionUID = 0L;
    * - Include geographic or business unit identifiers when relevant
    * - Avoid special characters that may cause display issues
    *
-   * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+   * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -165,7 +165,7 @@ private static final long serialVersionUID = 0L;
    * - Include geographic or business unit identifiers when relevant
    * - Avoid special characters that may cause display issues
    *
-   * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+   * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
    * </pre>
    *
    * <code>string name = 2 [json_name = "name"];</code>
@@ -193,7 +193,7 @@ private static final long serialVersionUID = 0L;
    * <pre>
    * External identifier for the organization.
    *
-   * This field maps the ProducerFlow organization to your internal system's
+   * This field maps the Producerflow organization to your internal system's
    * organization ID, enabling bi-directional synchronization and integration.
    *
    * Use Cases:
@@ -225,7 +225,7 @@ private static final long serialVersionUID = 0L;
    * <pre>
    * External identifier for the organization.
    *
-   * This field maps the ProducerFlow organization to your internal system's
+   * This field maps the Producerflow organization to your internal system's
    * organization ID, enabling bi-directional synchronization and integration.
    *
    * Use Cases:
@@ -826,7 +826,7 @@ private static final long serialVersionUID = 0L;
      * - Include geographic or business unit identifiers when relevant
      * - Avoid special characters that may cause display issues
      *
-     * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+     * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -856,7 +856,7 @@ private static final long serialVersionUID = 0L;
      * - Include geographic or business unit identifiers when relevant
      * - Avoid special characters that may cause display issues
      *
-     * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+     * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -887,7 +887,7 @@ private static final long serialVersionUID = 0L;
      * - Include geographic or business unit identifiers when relevant
      * - Avoid special characters that may cause display issues
      *
-     * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+     * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -914,7 +914,7 @@ private static final long serialVersionUID = 0L;
      * - Include geographic or business unit identifiers when relevant
      * - Avoid special characters that may cause display issues
      *
-     * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+     * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -938,7 +938,7 @@ private static final long serialVersionUID = 0L;
      * - Include geographic or business unit identifiers when relevant
      * - Avoid special characters that may cause display issues
      *
-     * Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+     * Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
      * </pre>
      *
      * <code>string name = 2 [json_name = "name"];</code>
@@ -960,7 +960,7 @@ private static final long serialVersionUID = 0L;
      * <pre>
      * External identifier for the organization.
      *
-     * This field maps the ProducerFlow organization to your internal system's
+     * This field maps the Producerflow organization to your internal system's
      * organization ID, enabling bi-directional synchronization and integration.
      *
      * Use Cases:
@@ -991,7 +991,7 @@ private static final long serialVersionUID = 0L;
      * <pre>
      * External identifier for the organization.
      *
-     * This field maps the ProducerFlow organization to your internal system's
+     * This field maps the Producerflow organization to your internal system's
      * organization ID, enabling bi-directional synchronization and integration.
      *
      * Use Cases:
@@ -1023,7 +1023,7 @@ private static final long serialVersionUID = 0L;
      * <pre>
      * External identifier for the organization.
      *
-     * This field maps the ProducerFlow organization to your internal system's
+     * This field maps the Producerflow organization to your internal system's
      * organization ID, enabling bi-directional synchronization and integration.
      *
      * Use Cases:
@@ -1051,7 +1051,7 @@ private static final long serialVersionUID = 0L;
      * <pre>
      * External identifier for the organization.
      *
-     * This field maps the ProducerFlow organization to your internal system's
+     * This field maps the Producerflow organization to your internal system's
      * organization ID, enabling bi-directional synchronization and integration.
      *
      * Use Cases:
@@ -1076,7 +1076,7 @@ private static final long serialVersionUID = 0L;
      * <pre>
      * External identifier for the organization.
      *
-     * This field maps the ProducerFlow organization to your internal system's
+     * This field maps the Producerflow organization to your internal system's
      * organization ID, enabling bi-directional synchronization and integration.
      *
      * Use Cases:

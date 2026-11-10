@@ -111,6 +111,9 @@ const (
 	// ProducerServiceLookupNPNByFEINProcedure is the fully-qualified name of the ProducerService's
 	// LookupNPNByFEIN RPC.
 	ProducerServiceLookupNPNByFEINProcedure = "/producerflow.producer.v1.ProducerService/LookupNPNByFEIN"
+	// ProducerServiceLookupNPNByLicenseProcedure is the fully-qualified name of the ProducerService's
+	// LookupNPNByLicense RPC.
+	ProducerServiceLookupNPNByLicenseProcedure = "/producerflow.producer.v1.ProducerService/LookupNPNByLicense"
 	// ProducerServiceResyncProducerProcedure is the fully-qualified name of the ProducerService's
 	// ResyncProducer RPC.
 	ProducerServiceResyncProducerProcedure = "/producerflow.producer.v1.ProducerService/ResyncProducer"
@@ -215,8 +218,8 @@ type ProducerServiceClient interface {
 	//   - agency_id: Required. must be a valid UUID of an agency belonging
 	//     to your tenant.
 	//   - producer_data: All fields are optional. When provided:
-	//   - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
-	//     against NIPR occurs during onboarding, not during URL generation.
+	//   - npn: Must be a valid NPN format (1-10 characters) and exist in NIPR;
+	//     the NPN is verified when the URL is generated.
 	//   - email: Must be a valid email format if provided
 	//   - mailing_address.state: Must be exactly 2 characters (state code) if provided
 	//   - mailing_address.zip: Must be 1-10 characters if provided
@@ -307,6 +310,15 @@ type ProducerServiceClient interface {
 	// Returns:
 	// IDs of the created agency, principal, optional producers, and locations (if provided).
 	//
+	// Completion:
+	// The IDs are final as soon as the call returns, but the records may still be
+	// created in the background: state is PROCESSING until then, and GetAgency
+	// may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+	// send the identical request again; it returns the same IDs and never
+	// creates a second agency. A different payload under the same identity
+	// replaces the staged one while nothing has been created yet, and is refused
+	// with INVALID_ARGUMENT once the agency exists.
+	//
 	// Common Error Codes:
 	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
 	//     NPN not found in NIPR
@@ -331,7 +343,8 @@ type ProducerServiceClient interface {
 	// - Entity Type: Filter by sole proprietor vs standard agency
 	// - NIPR Sync Status: Filter by values from NIPRSyncState
 	//
-	// The response uses cursor-based pagination for efficient data retrieval:
+	// The response is paginated (the token encodes an offset, so an agency
+	// created while you paginate can appear on two pages):
 	// - Default page size is 50 if not specified
 	// - Maximum page size is 200
 	// - Results are ordered by creation date, most recent first
@@ -349,8 +362,8 @@ type ProducerServiceClient interface {
 	//
 	// Returns:
 	// A paginated list of AgencySummary objects containing essential agency
-	// information without full NIPR data. Use GetAgencyAndProducers for complete
-	// agency details including NIPR data.
+	// information without full NIPR data. Use GetAgency for complete agency
+	// details including NIPR data.
 	ListAgencies(context.Context, *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error)
 	// ListOrganizations retrieves all organizations accessible to your tenant.
 	//
@@ -376,19 +389,15 @@ type ProducerServiceClient interface {
 	ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error)
 	// GetOrganization retrieves comprehensive details about a specific organization.
 	//
-	// This endpoint returns complete organization information including all
-	// agencies assigned to it. For each agency, it provides summary data including
-	// appointment overview statistics and NIPR synchronization status. This allows
-	// you to understand the full scope of an organization's agency network in a
-	// single API call.
+	// This endpoint returns the organization's id, name, external_id and email.
+	// For the agencies assigned to it, call ListAgencies with organization_id.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - organization_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Complete organization details including all assigned agencies with their
-	// appointment overviews and sync statuses.
+	// The organization's id, name, external_id and email.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Organization doesn't exist or doesn't belong to tenant
@@ -439,10 +448,10 @@ type ProducerServiceClient interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, used for NIPR validation
+	//   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -461,11 +470,22 @@ type ProducerServiceClient interface {
 	// Returns:
 	// The UUID of the created producer.
 	//
+	// Completion:
+	// The ID is final as soon as the call returns, but the record may still be
+	// created in the background: state is PROCESSING until then, and GetProducer
+	// may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+	// send the identical request again; it returns the same ID and never
+	// creates a second producer.
+	//
 	// Common Error Codes:
-	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
-	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
-	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
-	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+	//   - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	//   - ALREADY_EXISTS: Producer with email or NPN already exists in tenant, or
+	//     this producer has already been onboarded
+	//   - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is
+	//     enabled), or the agency is an internal agency
+	//   - FAILED_PRECONDITION: Producer name does not match NIPR records for the
+	//     provided NPN, the NPN belongs to an agency, or the agency is retired or
+	//     in a legal entity change
 	NewProducer(context.Context, *connect.Request[v1.NewProducerRequest]) (*connect.Response[v1.NewProducerResponse], error)
 	// NewProducers creates multiple producers in bulk and associates them with a single agency.
 	//
@@ -499,10 +519,10 @@ type ProducerServiceClient interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, used for NIPR validation
+	//   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -512,12 +532,10 @@ type ProducerServiceClient interface {
 	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting for all producers
 	//
 	// Business logic validation:
-	//   - agency_id: Agency must exist and belong to the authenticated tenant
-	//   - All producer emails must be unique within the tenant
-	//   - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
-	//   - All location_ids must exist and belong to the specified agency
-	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
-	//     are created
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - All producer emails must be unique within the tenant
+	// - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
+	// - All location_ids must exist and belong to the specified agency
 	//
 	// Returns:
 	// List of UUIDs for all created producers in the same order as the request. This
@@ -542,7 +560,9 @@ type ProducerServiceClient interface {
 	//
 	// Deprecated: do not use.
 	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
-	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	// GetAgencyProducers retrieves one page of the producers associated with a
+	// specific agency: 50 by default, 200 at most, oldest first. Follow
+	// next_page_token for the rest.
 	//
 	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
 	// only the producer data without the full agency details. Use this when you
@@ -559,7 +579,9 @@ type ProducerServiceClient interface {
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// List of all producers associated with the specified agency.
+	// One page of the producers associated with the specified agency and the
+	// next_page_token, empty on the last page. A malformed page token fails
+	// with INVALID_ARGUMENT.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
@@ -574,7 +596,7 @@ type ProducerServiceClient interface {
 	// addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
 	//
 	// Use this when you need full agency information without the list of associated producers.
-	// For agencies with their producers, use GetAgencyAndProducers instead.
+	// For the agency's producers, use GetAgencyProducers.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -587,7 +609,6 @@ type ProducerServiceClient interface {
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	// - PERMISSION_DENIED: Tenant doesn't have access to the agency
 	GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
@@ -646,11 +667,12 @@ type ProducerServiceClient interface {
 	// - Errors & Omissions (E&O) insurance certificate
 	// - Voided check for ACH commission payments
 	// - W9 tax form
-	// - License documents
-	// - Broker bond documents
+	// - Signed contracts whose PDF is stored in Producerflow
+	// - Files uploaded to the agency under "Other documents"
 	//
-	// The URLs are time-limited and grant temporary read access to the documents.
-	// Empty strings are returned for documents that haven't been uploaded.
+	// The URLs are valid for 24 hours and grant temporary read access to the
+	// documents. An empty string is returned for an E&O, voided check or W9
+	// that hasn't been uploaded.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -679,7 +701,7 @@ type ProducerServiceClient interface {
 	//
 	// Validation:
 	//   - Email must be unique within tenant if changed
-	//   - An internal producer's email (one who signs in to ProducerFlow) cannot be
+	//   - An internal producer's email (one who signs in to Producerflow) cannot be
 	//     changed: the producer changes it through email verification
 	//   - All field format validations apply (e.g., valid email format, phone pattern)
 	//
@@ -693,7 +715,7 @@ type ProducerServiceClient interface {
 	//   - email: If provided, must be a valid email format
 	//   - npn: Deprecated and ignored - NPN cannot be updated after creation
 	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be at most 2 characters
 	//   - zip: If provided, must be at least 5 characters
@@ -744,7 +766,7 @@ type ProducerServiceClient interface {
 	//   - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
 	//   - notes: If provided, maximum 500 characters
 	//   - physical_address (optional, if provided):
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters
 	//   - zip: If provided, must be 1-10 characters
@@ -802,7 +824,7 @@ type ProducerServiceClient interface {
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - middle_name: Optional
 	//   - address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -853,7 +875,7 @@ type ProducerServiceClient interface {
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - middle_name: Optional
 	//   - address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -981,7 +1003,7 @@ type ProducerServiceClient interface {
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
-	// Use this endpoint to link ProducerFlow entities to corresponding records in
+	// Use this endpoint to link Producerflow entities to corresponding records in
 	// your external systems (CRM, AMS, legacy databases). This enables bi-directional
 	// synchronization and lookups across systems.
 	//
@@ -1105,24 +1127,54 @@ type ProducerServiceClient interface {
 	// Common Error Codes:
 	// - NOT_FOUND: No agency found in NIPR with the given FEIN
 	LookupNPNByFEIN(context.Context, *connect.Request[v1.LookupNPNByFEINRequest]) (*connect.Response[v1.LookupNPNByFEINResponse], error)
+	// LookupNPNByLicense finds the NPN of the producer or agency that holds a state
+	// license number.
+	//
+	// Use this endpoint when you only have a producer's or agency's state license
+	// number.
+	// Each holder comes back with its name and whether it is a producer or an
+	// agency, so you can check it is the one you expect.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the EntityInfo lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - license_number: Required, must be non-empty string
+	// - state: Required, must be a 2-letter state code
+	//
+	// Returns:
+	// Every producer and agency NIPR finds holding the license in the state. NIPR
+	// returns the holder even when the license is inactive or expired, and does
+	// not say whether the license is active.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No producer or agency found in NIPR with the license in the state
+	LookupNPNByLicense(context.Context, *connect.Request[v1.LookupNPNByLicenseRequest]) (*connect.Response[v1.LookupNPNByLicenseResponse], error)
 	// ResyncProducer triggers a manual resynchronization of a producer's data.
-	// This can be used to refresh data after external change
+	// ResyncProducer re-sends the producer's full current record to your
+	// webhook as a producer.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a
+	// missed delivery. It does not contact NIPR; to start syncing with NIPR, see
+	// SyncProducerWithNIPR.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
 	// - INVALID_ARGUMENT: Producer ID is empty
 	ResyncProducer(context.Context, *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error)
-	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar
-	// to ResyncProducer, this can be used to refresh data after external changes.
+	// ResyncAgency re-sends the agency's full current record to your webhook as
+	// an agency.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a missed
+	// delivery. It does not contact NIPR; to start syncing with NIPR, see
+	// SyncAgencyWithNIPR.
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	// - INVALID_ARGUMENT: Agency ID is empty or request is empty
 	ResyncAgency(context.Context, *connect.Request[v1.ResyncAgencyRequest]) (*connect.Response[v1.ResyncAgencyResponse], error)
 	// SyncProducerWithNIPR synchronizes a producer's data with NIPR.
 	//
-	// Use this endpoint to manually trigger an immediate refresh of producer data
-	// from NIPR. The operation validates the producer NPN exists in NIPR before
-	// syncing.
+	// Use this endpoint to start syncing a producer that was created without
+	// NIPR sync, or whose sync was stopped. The operation validates the producer
+	// NPN exists in NIPR before syncing.
 	//
 	// What Gets Synchronized:
 	// - State licenses with expiration dates and Lines of Authority
@@ -1152,8 +1204,12 @@ type ProducerServiceClient interface {
 	// - Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
 	// - Producer must not already be in ACTIVE sync state (prevents redundant syncs)
 	//
-	// Timeout: 30 seconds. If NIPR takes longer, you'll receive a
-	// DEADLINE_EXCEEDED error.
+	// Completion:
+	// The call starts the sync and returns at once. nipr_sync_status moves to
+	// IN_PROGRESS and then to ACTIVE, FAILING or NO_LICENSE_FOUND; the data
+	// arrives as a producer.updated webhook event with origin NIPR, or through
+	// GetProducer. A producer whose sync is already ACTIVE is kept current by
+	// NIPR alerts and cannot be re-synced through this call.
 	//
 	// Returns:
 	// Empty response on success.
@@ -1163,15 +1219,16 @@ type ProducerServiceClient interface {
 	//     not be found in NIPR. If the NPN cannot be found, the error message will
 	//     be "producer NPN could not be found in NIPR".
 	//   - INVALID_ARGUMENT: Producer has no NPN.
-	//   - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
-	//   - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
+	//   - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync
+	//     state), the producer's NPN belongs to an agency, another producer with
+	//     the same email is already synced, or an NPN change is in progress.
 	//   - INTERNAL: Unexpected error during NIPR lookup or sync process
 	SyncProducerWithNIPR(context.Context, *connect.Request[v1.SyncProducerWithNIPRRequest]) (*connect.Response[v1.SyncProducerWithNIPRResponse], error)
 	// SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
 	//
-	// Use this endpoint to manually trigger an immediate refresh of agency data
-	// from NIPR. The operation validates the agency NPN exists in NIPR before
-	// syncing.
+	// Use this endpoint to start or restart syncing an agency with NIPR. The
+	// call starts the sync and returns at once; the data arrives as an
+	// agency.updated webhook event with origin NIPR, or through GetAgency.
 	//
 	// What Gets Synchronized:
 	// - Agency biographic information (company name, FEIN, contact details)
@@ -1189,14 +1246,12 @@ type ProducerServiceClient interface {
 	//
 	// Bulk Producer Sync:
 	// When sync_all_producers is set to true, the system will also sync all
-	// producers associated with the agency. This extends the timeout to 10
-	// minutes to accommodate the additional operations. Each producer sync is
-	// a separate billable NIPR lookup.
+	// producers associated with the agency. Each producer sync is a separate
+	// billable NIPR lookup.
 	//
 	// Preconditions:
 	// - Agency must exist and belong to the authenticated tenant
-	// - Agency must have a valid NPN registered in NIPR
-	// - Agency must not already be in active sync state
+	// - Agency must not be retired or in a legal entity change
 	// - Agency must not be a sole proprietor (sync the underlying producer instead)
 	//
 	// Validation Rules:
@@ -1206,22 +1261,15 @@ type ProducerServiceClient interface {
 	//
 	// Business logic validation:
 	// - agency_id: Agency must exist and belong to the authenticated tenant
-	// - Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
-	// - Agency must not already be in ACTIVE sync state (prevents redundant syncs)
-	//
-	// Timeout:
-	// - 30 seconds when syncing agency only
-	// - 10 minutes when sync_all_producers is true
 	//
 	// Returns:
 	// Empty response on success.
 	//
 	// Common Error Codes:
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	//   - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-	//   - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
-	//     or the agency is a sole proprietor (sync the underlying producer instead)
-	//   - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
+	//   - FAILED_PRECONDITION: the agency is a sole proprietor (sync the
+	//     underlying producer instead), is retired or in a legal entity change,
+	//     or an NPN change is in progress
 	SyncAgencyWithNIPR(context.Context, *connect.Request[v1.SyncAgencyWithNIPRRequest]) (*connect.Response[v1.SyncAgencyWithNIPRResponse], error)
 	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
 	//
@@ -1301,8 +1349,8 @@ type ProducerServiceClient interface {
 	// data (typically via CSV or spreadsheet format).
 	//
 	// The agency is identified by its National Producer Number (NPN), which must
-	// already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
-	// look up agency NPNs if needed.
+	// already exist in your tenant. Use ListAgencies or GetAgency to look up
+	// agency NPNs if needed.
 	//
 	// Typical Workflow:
 	//  1. Generate producer upload URL using the agency's NPN
@@ -1361,7 +1409,7 @@ type ProducerServiceClient interface {
 	// - locations: Required, 1-100 locations. Each location:
 	//   - name: Required, must be non-empty (unique within agency)
 	//   - address: Required
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -1476,7 +1524,7 @@ type ProducerServiceClient interface {
 	// List of location IDs that were successfully assigned to the producer.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Request is missing
+	//   - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required
 	//   - NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
 	//     locations don't exist
 	//   - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
@@ -1491,7 +1539,7 @@ type ProducerServiceClient interface {
 	// Producer Preservation:
 	// This operation only removes the location assignments - the producer remains
 	// active and associated with the agency. To fully remove a producer, use the
-	// appropriate producer deletion endpoint.
+	// agency's administrator in the portal; this API does not delete producers.
 	//
 	// Validation Performed:
 	// - Producer exists and belongs to the authenticated tenant
@@ -1511,7 +1559,7 @@ type ProducerServiceClient interface {
 	// List of location IDs that were successfully unassigned from the producer.
 	//
 	// Common Error Codes:
-	// - INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+	// - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required, producer_id is empty, or no location_ids provided
 	// - NOT_FOUND: Producer doesn't exist or specified locations don't exist
 	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
 	// UpdateAgencyLocation updates an existing agency location.
@@ -1539,7 +1587,7 @@ type ProducerServiceClient interface {
 	// - location_id: Required, must be a valid UUID format
 	// - name: If provided, must be non-empty (unique within agency)
 	// - address: If provided (all fields optional within):
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters (state code)
 	//   - zip: If provided, must be 1-10 characters
@@ -1731,6 +1779,12 @@ func NewProducerServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(producerServiceMethods.ByName("LookupNPNByFEIN")),
 			connect.WithClientOptions(opts...),
 		),
+		lookupNPNByLicense: connect.NewClient[v1.LookupNPNByLicenseRequest, v1.LookupNPNByLicenseResponse](
+			httpClient,
+			baseURL+ProducerServiceLookupNPNByLicenseProcedure,
+			connect.WithSchema(producerServiceMethods.ByName("LookupNPNByLicense")),
+			connect.WithClientOptions(opts...),
+		),
 		resyncProducer: connect.NewClient[v1.ResyncProducerRequest, v1.ResyncProducerResponse](
 			httpClient,
 			baseURL+ProducerServiceResyncProducerProcedure,
@@ -1840,6 +1894,7 @@ type producerServiceClient struct {
 	validateProducerNPN           *connect.Client[v1.ValidateProducerNPNRequest, v1.ValidateProducerNPNResponse]
 	validateAgencyNPN             *connect.Client[v1.ValidateAgencyNPNRequest, v1.ValidateAgencyNPNResponse]
 	lookupNPNByFEIN               *connect.Client[v1.LookupNPNByFEINRequest, v1.LookupNPNByFEINResponse]
+	lookupNPNByLicense            *connect.Client[v1.LookupNPNByLicenseRequest, v1.LookupNPNByLicenseResponse]
 	resyncProducer                *connect.Client[v1.ResyncProducerRequest, v1.ResyncProducerResponse]
 	resyncAgency                  *connect.Client[v1.ResyncAgencyRequest, v1.ResyncAgencyResponse]
 	syncProducerWithNIPR          *connect.Client[v1.SyncProducerWithNIPRRequest, v1.SyncProducerWithNIPRResponse]
@@ -1989,6 +2044,11 @@ func (c *producerServiceClient) LookupNPNByFEIN(ctx context.Context, req *connec
 	return c.lookupNPNByFEIN.CallUnary(ctx, req)
 }
 
+// LookupNPNByLicense calls producerflow.producer.v1.ProducerService.LookupNPNByLicense.
+func (c *producerServiceClient) LookupNPNByLicense(ctx context.Context, req *connect.Request[v1.LookupNPNByLicenseRequest]) (*connect.Response[v1.LookupNPNByLicenseResponse], error) {
+	return c.lookupNPNByLicense.CallUnary(ctx, req)
+}
+
 // ResyncProducer calls producerflow.producer.v1.ProducerService.ResyncProducer.
 func (c *producerServiceClient) ResyncProducer(ctx context.Context, req *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error) {
 	return c.resyncProducer.CallUnary(ctx, req)
@@ -2120,8 +2180,8 @@ type ProducerServiceHandler interface {
 	//   - agency_id: Required. must be a valid UUID of an agency belonging
 	//     to your tenant.
 	//   - producer_data: All fields are optional. When provided:
-	//   - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
-	//     against NIPR occurs during onboarding, not during URL generation.
+	//   - npn: Must be a valid NPN format (1-10 characters) and exist in NIPR;
+	//     the NPN is verified when the URL is generated.
 	//   - email: Must be a valid email format if provided
 	//   - mailing_address.state: Must be exactly 2 characters (state code) if provided
 	//   - mailing_address.zip: Must be 1-10 characters if provided
@@ -2212,6 +2272,15 @@ type ProducerServiceHandler interface {
 	// Returns:
 	// IDs of the created agency, principal, optional producers, and locations (if provided).
 	//
+	// Completion:
+	// The IDs are final as soon as the call returns, but the records may still be
+	// created in the background: state is PROCESSING until then, and GetAgency
+	// may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+	// send the identical request again; it returns the same IDs and never
+	// creates a second agency. A different payload under the same identity
+	// replaces the staged one while nothing has been created yet, and is refused
+	// with INVALID_ARGUMENT once the agency exists.
+	//
 	// Common Error Codes:
 	//   - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
 	//     NPN not found in NIPR
@@ -2236,7 +2305,8 @@ type ProducerServiceHandler interface {
 	// - Entity Type: Filter by sole proprietor vs standard agency
 	// - NIPR Sync Status: Filter by values from NIPRSyncState
 	//
-	// The response uses cursor-based pagination for efficient data retrieval:
+	// The response is paginated (the token encodes an offset, so an agency
+	// created while you paginate can appear on two pages):
 	// - Default page size is 50 if not specified
 	// - Maximum page size is 200
 	// - Results are ordered by creation date, most recent first
@@ -2254,8 +2324,8 @@ type ProducerServiceHandler interface {
 	//
 	// Returns:
 	// A paginated list of AgencySummary objects containing essential agency
-	// information without full NIPR data. Use GetAgencyAndProducers for complete
-	// agency details including NIPR data.
+	// information without full NIPR data. Use GetAgency for complete agency
+	// details including NIPR data.
 	ListAgencies(context.Context, *connect.Request[v1.ListAgenciesRequest]) (*connect.Response[v1.ListAgenciesResponse], error)
 	// ListOrganizations retrieves all organizations accessible to your tenant.
 	//
@@ -2281,19 +2351,15 @@ type ProducerServiceHandler interface {
 	ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error)
 	// GetOrganization retrieves comprehensive details about a specific organization.
 	//
-	// This endpoint returns complete organization information including all
-	// agencies assigned to it. For each agency, it provides summary data including
-	// appointment overview statistics and NIPR synchronization status. This allows
-	// you to understand the full scope of an organization's agency network in a
-	// single API call.
+	// This endpoint returns the organization's id, name, external_id and email.
+	// For the agencies assigned to it, call ListAgencies with organization_id.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
 	// - organization_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// Complete organization details including all assigned agencies with their
-	// appointment overviews and sync statuses.
+	// The organization's id, name, external_id and email.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Organization doesn't exist or doesn't belong to tenant
@@ -2344,10 +2410,10 @@ type ProducerServiceHandler interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, used for NIPR validation
+	//   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -2366,11 +2432,22 @@ type ProducerServiceHandler interface {
 	// Returns:
 	// The UUID of the created producer.
 	//
+	// Completion:
+	// The ID is final as soon as the call returns, but the record may still be
+	// created in the background: state is PROCESSING until then, and GetProducer
+	// may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+	// send the identical request again; it returns the same ID and never
+	// creates a second producer.
+	//
 	// Common Error Codes:
-	// - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
-	// - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
-	// - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
-	// - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+	//   - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
+	//   - ALREADY_EXISTS: Producer with email or NPN already exists in tenant, or
+	//     this producer has already been onboarded
+	//   - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is
+	//     enabled), or the agency is an internal agency
+	//   - FAILED_PRECONDITION: Producer name does not match NIPR records for the
+	//     provided NPN, the NPN belongs to an agency, or the agency is retired or
+	//     in a legal entity change
 	NewProducer(context.Context, *connect.Request[v1.NewProducerRequest]) (*connect.Response[v1.NewProducerResponse], error)
 	// NewProducers creates multiple producers in bulk and associates them with a single agency.
 	//
@@ -2404,10 +2481,10 @@ type ProducerServiceHandler interface {
 	//   - first_name: Required, must be non-empty
 	//   - last_name: Required, must be non-empty
 	//   - email: Required, must be a valid email format
-	//   - npn: Required, used for NIPR validation
+	//   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - mailing_address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -2417,12 +2494,10 @@ type ProducerServiceHandler interface {
 	// - sync_with_nipr: Optional, overrides tenant default NIPR sync setting for all producers
 	//
 	// Business logic validation:
-	//   - agency_id: Agency must exist and belong to the authenticated tenant
-	//   - All producer emails must be unique within the tenant
-	//   - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
-	//   - All location_ids must exist and belong to the specified agency
-	//   - This is an all-or-nothing operation: if any producer fails validation, no producers
-	//     are created
+	// - agency_id: Agency must exist and belong to the authenticated tenant
+	// - All producer emails must be unique within the tenant
+	// - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
+	// - All location_ids must exist and belong to the specified agency
 	//
 	// Returns:
 	// List of UUIDs for all created producers in the same order as the request. This
@@ -2447,7 +2522,9 @@ type ProducerServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	GetAgencyAndProducers(context.Context, *connect.Request[v1.GetAgencyAndProducersRequest]) (*connect.Response[v1.GetAgencyAndProducersResponse], error)
-	// GetAgencyProducers retrieves all producers associated with a specific agency.
+	// GetAgencyProducers retrieves one page of the producers associated with a
+	// specific agency: 50 by default, 200 at most, oldest first. Follow
+	// next_page_token for the rest.
 	//
 	// This is a lighter-weight alternative to GetAgencyAndProducers that returns
 	// only the producer data without the full agency details. Use this when you
@@ -2464,7 +2541,9 @@ type ProducerServiceHandler interface {
 	// - agency_id: Required, must be a valid UUID format
 	//
 	// Returns:
-	// List of all producers associated with the specified agency.
+	// One page of the producers associated with the specified agency and the
+	// next_page_token, empty on the last page. A malformed page token fails
+	// with INVALID_ARGUMENT.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
@@ -2479,7 +2558,7 @@ type ProducerServiceHandler interface {
 	// addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
 	//
 	// Use this when you need full agency information without the list of associated producers.
-	// For agencies with their producers, use GetAgencyAndProducers instead.
+	// For the agency's producers, use GetAgencyProducers.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2492,7 +2571,6 @@ type ProducerServiceHandler interface {
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	// - PERMISSION_DENIED: Tenant doesn't have access to the agency
 	GetAgency(context.Context, *connect.Request[v1.GetAgencyRequest]) (*connect.Response[v1.GetAgencyResponse], error)
 	// GetProducer retrieves detailed information about a specific producer.
 	//
@@ -2551,11 +2629,12 @@ type ProducerServiceHandler interface {
 	// - Errors & Omissions (E&O) insurance certificate
 	// - Voided check for ACH commission payments
 	// - W9 tax form
-	// - License documents
-	// - Broker bond documents
+	// - Signed contracts whose PDF is stored in Producerflow
+	// - Files uploaded to the agency under "Other documents"
 	//
-	// The URLs are time-limited and grant temporary read access to the documents.
-	// Empty strings are returned for documents that haven't been uploaded.
+	// The URLs are valid for 24 hours and grant temporary read access to the
+	// documents. An empty string is returned for an E&O, voided check or W9
+	// that hasn't been uploaded.
 	//
 	// Validation Rules:
 	// Proto validation (format checks):
@@ -2584,7 +2663,7 @@ type ProducerServiceHandler interface {
 	//
 	// Validation:
 	//   - Email must be unique within tenant if changed
-	//   - An internal producer's email (one who signs in to ProducerFlow) cannot be
+	//   - An internal producer's email (one who signs in to Producerflow) cannot be
 	//     changed: the producer changes it through email verification
 	//   - All field format validations apply (e.g., valid email format, phone pattern)
 	//
@@ -2598,7 +2677,7 @@ type ProducerServiceHandler interface {
 	//   - email: If provided, must be a valid email format
 	//   - npn: Deprecated and ignored - NPN cannot be updated after creation
 	//   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be at most 2 characters
 	//   - zip: If provided, must be at least 5 characters
@@ -2649,7 +2728,7 @@ type ProducerServiceHandler interface {
 	//   - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
 	//   - notes: If provided, maximum 500 characters
 	//   - physical_address (optional, if provided):
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters
 	//   - zip: If provided, must be 1-10 characters
@@ -2707,7 +2786,7 @@ type ProducerServiceHandler interface {
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - middle_name: Optional
 	//   - address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -2758,7 +2837,7 @@ type ProducerServiceHandler interface {
 	//   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
 	//   - middle_name: Optional
 	//   - address (optional, if provided):
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -2886,7 +2965,7 @@ type ProducerServiceHandler interface {
 	// SetExternalID sets an external identifier for a producer, agency, contact,
 	// or organization.
 	//
-	// Use this endpoint to link ProducerFlow entities to corresponding records in
+	// Use this endpoint to link Producerflow entities to corresponding records in
 	// your external systems (CRM, AMS, legacy databases). This enables bi-directional
 	// synchronization and lookups across systems.
 	//
@@ -3010,24 +3089,54 @@ type ProducerServiceHandler interface {
 	// Common Error Codes:
 	// - NOT_FOUND: No agency found in NIPR with the given FEIN
 	LookupNPNByFEIN(context.Context, *connect.Request[v1.LookupNPNByFEINRequest]) (*connect.Response[v1.LookupNPNByFEINResponse], error)
+	// LookupNPNByLicense finds the NPN of the producer or agency that holds a state
+	// license number.
+	//
+	// Use this endpoint when you only have a producer's or agency's state license
+	// number.
+	// Each holder comes back with its name and whether it is a producer or an
+	// agency, so you can check it is the one you expect.
+	//
+	// NIPR Billing:
+	// This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+	// incur charges, unlike the EntityInfo lookups used during sync operations.
+	//
+	// Validation Rules:
+	// Proto validation (format checks):
+	// - license_number: Required, must be non-empty string
+	// - state: Required, must be a 2-letter state code
+	//
+	// Returns:
+	// Every producer and agency NIPR finds holding the license in the state. NIPR
+	// returns the holder even when the license is inactive or expired, and does
+	// not say whether the license is active.
+	//
+	// Common Error Codes:
+	// - NOT_FOUND: No producer or agency found in NIPR with the license in the state
+	LookupNPNByLicense(context.Context, *connect.Request[v1.LookupNPNByLicenseRequest]) (*connect.Response[v1.LookupNPNByLicenseResponse], error)
 	// ResyncProducer triggers a manual resynchronization of a producer's data.
-	// This can be used to refresh data after external change
+	// ResyncProducer re-sends the producer's full current record to your
+	// webhook as a producer.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a
+	// missed delivery. It does not contact NIPR; to start syncing with NIPR, see
+	// SyncProducerWithNIPR.
 	//
 	// Common Error Codes:
 	// - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
 	// - INVALID_ARGUMENT: Producer ID is empty
 	ResyncProducer(context.Context, *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error)
-	// ResyncAgency triggers a manual resynchronization of an agency's data. Similar
-	// to ResyncProducer, this can be used to refresh data after external changes.
+	// ResyncAgency re-sends the agency's full current record to your webhook as
+	// an agency.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a missed
+	// delivery. It does not contact NIPR; to start syncing with NIPR, see
+	// SyncAgencyWithNIPR.
 	// Common Error Codes:
 	// - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
 	// - INVALID_ARGUMENT: Agency ID is empty or request is empty
 	ResyncAgency(context.Context, *connect.Request[v1.ResyncAgencyRequest]) (*connect.Response[v1.ResyncAgencyResponse], error)
 	// SyncProducerWithNIPR synchronizes a producer's data with NIPR.
 	//
-	// Use this endpoint to manually trigger an immediate refresh of producer data
-	// from NIPR. The operation validates the producer NPN exists in NIPR before
-	// syncing.
+	// Use this endpoint to start syncing a producer that was created without
+	// NIPR sync, or whose sync was stopped. The operation validates the producer
+	// NPN exists in NIPR before syncing.
 	//
 	// What Gets Synchronized:
 	// - State licenses with expiration dates and Lines of Authority
@@ -3057,8 +3166,12 @@ type ProducerServiceHandler interface {
 	// - Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
 	// - Producer must not already be in ACTIVE sync state (prevents redundant syncs)
 	//
-	// Timeout: 30 seconds. If NIPR takes longer, you'll receive a
-	// DEADLINE_EXCEEDED error.
+	// Completion:
+	// The call starts the sync and returns at once. nipr_sync_status moves to
+	// IN_PROGRESS and then to ACTIVE, FAILING or NO_LICENSE_FOUND; the data
+	// arrives as a producer.updated webhook event with origin NIPR, or through
+	// GetProducer. A producer whose sync is already ACTIVE is kept current by
+	// NIPR alerts and cannot be re-synced through this call.
 	//
 	// Returns:
 	// Empty response on success.
@@ -3068,15 +3181,16 @@ type ProducerServiceHandler interface {
 	//     not be found in NIPR. If the NPN cannot be found, the error message will
 	//     be "producer NPN could not be found in NIPR".
 	//   - INVALID_ARGUMENT: Producer has no NPN.
-	//   - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
-	//   - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
+	//   - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync
+	//     state), the producer's NPN belongs to an agency, another producer with
+	//     the same email is already synced, or an NPN change is in progress.
 	//   - INTERNAL: Unexpected error during NIPR lookup or sync process
 	SyncProducerWithNIPR(context.Context, *connect.Request[v1.SyncProducerWithNIPRRequest]) (*connect.Response[v1.SyncProducerWithNIPRResponse], error)
 	// SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
 	//
-	// Use this endpoint to manually trigger an immediate refresh of agency data
-	// from NIPR. The operation validates the agency NPN exists in NIPR before
-	// syncing.
+	// Use this endpoint to start or restart syncing an agency with NIPR. The
+	// call starts the sync and returns at once; the data arrives as an
+	// agency.updated webhook event with origin NIPR, or through GetAgency.
 	//
 	// What Gets Synchronized:
 	// - Agency biographic information (company name, FEIN, contact details)
@@ -3094,14 +3208,12 @@ type ProducerServiceHandler interface {
 	//
 	// Bulk Producer Sync:
 	// When sync_all_producers is set to true, the system will also sync all
-	// producers associated with the agency. This extends the timeout to 10
-	// minutes to accommodate the additional operations. Each producer sync is
-	// a separate billable NIPR lookup.
+	// producers associated with the agency. Each producer sync is a separate
+	// billable NIPR lookup.
 	//
 	// Preconditions:
 	// - Agency must exist and belong to the authenticated tenant
-	// - Agency must have a valid NPN registered in NIPR
-	// - Agency must not already be in active sync state
+	// - Agency must not be retired or in a legal entity change
 	// - Agency must not be a sole proprietor (sync the underlying producer instead)
 	//
 	// Validation Rules:
@@ -3111,22 +3223,15 @@ type ProducerServiceHandler interface {
 	//
 	// Business logic validation:
 	// - agency_id: Agency must exist and belong to the authenticated tenant
-	// - Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
-	// - Agency must not already be in ACTIVE sync state (prevents redundant syncs)
-	//
-	// Timeout:
-	// - 30 seconds when syncing agency only
-	// - 10 minutes when sync_all_producers is true
 	//
 	// Returns:
 	// Empty response on success.
 	//
 	// Common Error Codes:
 	//   - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-	//   - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-	//   - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
-	//     or the agency is a sole proprietor (sync the underlying producer instead)
-	//   - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
+	//   - FAILED_PRECONDITION: the agency is a sole proprietor (sync the
+	//     underlying producer instead), is retired or in a legal entity change,
+	//     or an NPN change is in progress
 	SyncAgencyWithNIPR(context.Context, *connect.Request[v1.SyncAgencyWithNIPRRequest]) (*connect.Response[v1.SyncAgencyWithNIPRResponse], error)
 	// StopSyncProducerWithNIPR disables automatic NIPR synchronization for a producer.
 	//
@@ -3206,8 +3311,8 @@ type ProducerServiceHandler interface {
 	// data (typically via CSV or spreadsheet format).
 	//
 	// The agency is identified by its National Producer Number (NPN), which must
-	// already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
-	// look up agency NPNs if needed.
+	// already exist in your tenant. Use ListAgencies or GetAgency to look up
+	// agency NPNs if needed.
 	//
 	// Typical Workflow:
 	//  1. Generate producer upload URL using the agency's NPN
@@ -3266,7 +3371,7 @@ type ProducerServiceHandler interface {
 	// - locations: Required, 1-100 locations. Each location:
 	//   - name: Required, must be non-empty (unique within agency)
 	//   - address: Required
-	//   - street: Required, must be non-empty
+	//   - address_line_1: Required, must be non-empty
 	//   - city: Required, must be non-empty
 	//   - state: Required, must be exactly 2 characters (state code)
 	//   - zip: Required, must be 1-10 characters
@@ -3381,7 +3486,7 @@ type ProducerServiceHandler interface {
 	// List of location IDs that were successfully assigned to the producer.
 	//
 	// Common Error Codes:
-	//   - INVALID_ARGUMENT: Request is missing
+	//   - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required
 	//   - NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
 	//     locations don't exist
 	//   - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
@@ -3396,7 +3501,7 @@ type ProducerServiceHandler interface {
 	// Producer Preservation:
 	// This operation only removes the location assignments - the producer remains
 	// active and associated with the agency. To fully remove a producer, use the
-	// appropriate producer deletion endpoint.
+	// agency's administrator in the portal; this API does not delete producers.
 	//
 	// Validation Performed:
 	// - Producer exists and belongs to the authenticated tenant
@@ -3416,7 +3521,7 @@ type ProducerServiceHandler interface {
 	// List of location IDs that were successfully unassigned from the producer.
 	//
 	// Common Error Codes:
-	// - INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+	// - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required, producer_id is empty, or no location_ids provided
 	// - NOT_FOUND: Producer doesn't exist or specified locations don't exist
 	UnassignProducerFromLocations(context.Context, *connect.Request[v1.UnassignProducerFromLocationsRequest]) (*connect.Response[v1.UnassignProducerFromLocationsResponse], error)
 	// UpdateAgencyLocation updates an existing agency location.
@@ -3444,7 +3549,7 @@ type ProducerServiceHandler interface {
 	// - location_id: Required, must be a valid UUID format
 	// - name: If provided, must be non-empty (unique within agency)
 	// - address: If provided (all fields optional within):
-	//   - street: If provided, must be non-empty
+	//   - address_line_1: If provided, must be non-empty
 	//   - city: If provided, must be non-empty
 	//   - state: If provided, must be exactly 2 characters (state code)
 	//   - zip: If provided, must be 1-10 characters
@@ -3632,6 +3737,12 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 		connect.WithSchema(producerServiceMethods.ByName("LookupNPNByFEIN")),
 		connect.WithHandlerOptions(opts...),
 	)
+	producerServiceLookupNPNByLicenseHandler := connect.NewUnaryHandler(
+		ProducerServiceLookupNPNByLicenseProcedure,
+		svc.LookupNPNByLicense,
+		connect.WithSchema(producerServiceMethods.ByName("LookupNPNByLicense")),
+		connect.WithHandlerOptions(opts...),
+	)
 	producerServiceResyncProducerHandler := connect.NewUnaryHandler(
 		ProducerServiceResyncProducerProcedure,
 		svc.ResyncProducer,
@@ -3764,6 +3875,8 @@ func NewProducerServiceHandler(svc ProducerServiceHandler, opts ...connect.Handl
 			producerServiceValidateAgencyNPNHandler.ServeHTTP(w, r)
 		case ProducerServiceLookupNPNByFEINProcedure:
 			producerServiceLookupNPNByFEINHandler.ServeHTTP(w, r)
+		case ProducerServiceLookupNPNByLicenseProcedure:
+			producerServiceLookupNPNByLicenseHandler.ServeHTTP(w, r)
 		case ProducerServiceResyncProducerProcedure:
 			producerServiceResyncProducerHandler.ServeHTTP(w, r)
 		case ProducerServiceResyncAgencyProcedure:
@@ -3901,6 +4014,10 @@ func (UnimplementedProducerServiceHandler) ValidateAgencyNPN(context.Context, *c
 
 func (UnimplementedProducerServiceHandler) LookupNPNByFEIN(context.Context, *connect.Request[v1.LookupNPNByFEINRequest]) (*connect.Response[v1.LookupNPNByFEINResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.LookupNPNByFEIN is not implemented"))
+}
+
+func (UnimplementedProducerServiceHandler) LookupNPNByLicense(context.Context, *connect.Request[v1.LookupNPNByLicenseRequest]) (*connect.Response[v1.LookupNPNByLicenseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("producerflow.producer.v1.ProducerService.LookupNPNByLicense is not implemented"))
 }
 
 func (UnimplementedProducerServiceHandler) ResyncProducer(context.Context, *connect.Request[v1.ResyncProducerRequest]) (*connect.Response[v1.ResyncProducerResponse], error) {

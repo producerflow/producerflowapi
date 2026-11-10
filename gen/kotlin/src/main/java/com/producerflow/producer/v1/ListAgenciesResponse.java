@@ -11,8 +11,8 @@ package com.producerflow.producer.v1;
  * navigation and total counts.
  *
  * The response is optimized for UI display with summary data only. For complete
- * agency information including NIPR data, use GetAgencyAndProducers with the
- * agency_id from the summary.
+ * agency information including NIPR data, use GetAgency with the agency_id
+ * from the summary.
  *
  * Pagination Notes:
  * - Results are always ordered by creation date (newest first)
@@ -392,8 +392,8 @@ private static final long serialVersionUID = 0L;
    * navigation and total counts.
    *
    * The response is optimized for UI display with summary data only. For complete
-   * agency information including NIPR data, use GetAgencyAndProducers with the
-   * agency_id from the summary.
+   * agency information including NIPR data, use GetAgency with the agency_id
+   * from the summary.
    *
    * Pagination Notes:
    * - Results are always ordered by creation date (newest first)

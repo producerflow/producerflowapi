@@ -15,8 +15,8 @@ package com.producerflow.producer.v1;
  * most commonly needed fields for agency identification and basic contact
  * information.
  *
- * For complete agency information including NIPR data, licenses, appointments,
- * and associated producers, use the GetAgencyAndProducers RPC.
+ * For complete agency information including NIPR data, licenses and
+ * appointments, use GetAgency; for its producers, GetAgencyProducers.
  * </pre>
  *
  * Protobuf type {@code producerflow.producer.v1.AgencySummary}
@@ -71,7 +71,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Unique identifier for the agency (UUID format).
-   * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+   * Use this ID to retrieve full agency details via GetAgency.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -93,7 +93,7 @@ private static final long serialVersionUID = 0L;
   /**
    * <pre>
    * Unique identifier for the agency (UUID format).
-   * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+   * Use this ID to retrieve full agency details via GetAgency.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -925,8 +925,8 @@ private static final long serialVersionUID = 0L;
    * most commonly needed fields for agency identification and basic contact
    * information.
    *
-   * For complete agency information including NIPR data, licenses, appointments,
-   * and associated producers, use the GetAgencyAndProducers RPC.
+   * For complete agency information including NIPR data, licenses and
+   * appointments, use GetAgency; for its producers, GetAgencyProducers.
    * </pre>
    *
    * Protobuf type {@code producerflow.producer.v1.AgencySummary}
@@ -1235,7 +1235,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Unique identifier for the agency (UUID format).
-     * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+     * Use this ID to retrieve full agency details via GetAgency.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -1256,7 +1256,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Unique identifier for the agency (UUID format).
-     * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+     * Use this ID to retrieve full agency details via GetAgency.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -1278,7 +1278,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Unique identifier for the agency (UUID format).
-     * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+     * Use this ID to retrieve full agency details via GetAgency.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -1296,7 +1296,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Unique identifier for the agency (UUID format).
-     * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+     * Use this ID to retrieve full agency details via GetAgency.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId"];</code>
@@ -1311,7 +1311,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * Unique identifier for the agency (UUID format).
-     * Use this ID to retrieve full agency details via GetAgencyAndProducers.
+     * Use this ID to retrieve full agency details via GetAgency.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId"];</code>

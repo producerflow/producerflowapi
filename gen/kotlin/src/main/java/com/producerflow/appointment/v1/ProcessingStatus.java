@@ -25,6 +25,15 @@ package com.producerflow.appointment.v1;
  * TerminateAppointment --&gt; TERMINATED (immediate)
  *
  * Reference: https://pdb.nipr.com/Gateway
+ *
+ * Values:
+ * - PROCESSING_STATUS_UNSPECIFIED: never returned for an appointment.
+ * - PROCESSING_STATUS_IN_PROGRESS: Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook.
+ * - PROCESSING_STATUS_APPOINTED: Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority.
+ * - PROCESSING_STATUS_TERMINATED: Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state.
+ * - PROCESSING_STATUS_REJECTED: Appointment request was rejected by NIPR. The API does not carry the reason. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions.
+ * - PROCESSING_STATUS_MISSING_LICENSE: The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed.
+ * - PROCESSING_STATUS_TERMINATION_REQUESTED: A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook.
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.ProcessingStatus}
@@ -64,8 +73,8 @@ public enum ProcessingStatus
   PROCESSING_STATUS_TERMINATED(3),
   /**
    * <pre>
-   * Appointment request was rejected by NIPR. Check not_eligible_reasons for
-   * details. Common reasons include: missing resident license, unmet
+   * Appointment request was rejected by NIPR. The API does not carry the
+   * reason. Common reasons include: missing resident license, unmet
    * continuing education requirements, or outstanding regulatory actions.
    * </pre>
    *
@@ -137,8 +146,8 @@ public enum ProcessingStatus
   public static final int PROCESSING_STATUS_TERMINATED_VALUE = 3;
   /**
    * <pre>
-   * Appointment request was rejected by NIPR. Check not_eligible_reasons for
-   * details. Common reasons include: missing resident license, unmet
+   * Appointment request was rejected by NIPR. The API does not carry the
+   * reason. Common reasons include: missing resident license, unmet
    * continuing education requirements, or outstanding regulatory actions.
    * </pre>
    *

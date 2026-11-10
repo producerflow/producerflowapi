@@ -15,6 +15,23 @@ package com.producerflow.appointment.v1;
  * TerminateAppointment.
  *
  * Reference: https://pdb.nipr.com/Gateway/ValidTerms
+ *
+ * Values:
+ * - TERMINATION_REASON_VOLUNTARY_TERMINATION: Producer or agency voluntarily chose to end the appointment.
+ * - TERMINATION_REASON_INADEQUATE_PRODUCTION: Carrier terminated due to insufficient premium production or sales volume.
+ * - TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT: Appointment was cancelled by the managing general agent (MGA).
+ * - TERMINATION_REASON_DEATH: Producer has passed away.
+ * - TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION: Insurance company has ceased operations or entered liquidation.
+ * - TERMINATION_REASON_COMPANY_INDEBTEDNESS: Producer owes money to the insurance company (e.g., unremitted premiums).
+ * - TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE: Carrier terminated due to poor service to policyholders.
+ * - TERMINATION_REASON_AGENT_MOVED: Producer relocated to a different jurisdiction.
+ * - TERMINATION_REASON_APPOINTED_IN_ERROR: Appointment was created in error and is being corrected.
+ * - TERMINATION_REASON_CANCELLED: General cancellation without a more specific reason.
+ * - TERMINATION_REASON_CANCELLED_FOR_CAUSE: Carrier terminated for cause (e.g., misconduct, policy violations).
+ * - TERMINATION_REASON_COMPANY_MERGER: Insurance company merged with another company.
+ * - TERMINATION_REASON_REVOKED: Producer's license has been revoked by a regulatory authority.
+ * - TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE: Producer's license has been suspended for compliance issues.
+ * - TERMINATION_REASON_REQUEST_REGULATORY_REVIEW: Termination is being submitted for regulatory review by the state DOI.
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.TerminationReason}

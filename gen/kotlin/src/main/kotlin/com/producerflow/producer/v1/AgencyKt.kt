@@ -1217,7 +1217,7 @@ public object AgencyKt {
       public class ExternalMetadataProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -1238,7 +1238,7 @@ public object AgencyKt {
         )
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -1258,7 +1258,7 @@ public object AgencyKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -1280,7 +1280,7 @@ public object AgencyKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -1301,7 +1301,7 @@ public object AgencyKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -1322,7 +1322,7 @@ public object AgencyKt {
          }
       /**
        * ```
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -3883,8 +3883,8 @@ public object AgencyKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
-         * Values: "Resident" (license in the producer's home/domicile state) or
-         * "Non-Resident" (license in a state other than the home state).
+         * Values: "RESIDENT" (license in the producer's home/domicile state) or
+         * "NON_RESIDENT" (license in a state other than the home state).
          * A producer typically has one resident license and may hold multiple
          * non-resident licenses in other states where they conduct business.
          * ```
@@ -3901,8 +3901,8 @@ public object AgencyKt {
         /**
          * ```
          * Indicates whether this is a resident or non-resident license.
-         * Values: "Resident" (license in the producer's home/domicile state) or
-         * "Non-Resident" (license in a state other than the home state).
+         * Values: "RESIDENT" (license in the producer's home/domicile state) or
+         * "NON_RESIDENT" (license in a state other than the home state).
          * A producer typically has one resident license and may hold multiple
          * non-resident licenses in other states where they conduct business.
          * ```

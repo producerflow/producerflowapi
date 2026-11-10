@@ -27,6 +27,11 @@ const (
 
 // OperationalStatus represents the current operational status of an appointment.
 // This indicates whether the appointment is actively functioning or at risk of termination.
+//
+// Values:
+//   - OPERATIONAL_STATUS_UNSPECIFIED: the appointment has not been evaluated yet.
+//   - OPERATIONAL_STATUS_ACTIVE: Appointment is actively functioning and meeting all requirements.
+//   - OPERATIONAL_STATUS_AT_RISK: Appointment is at risk of termination due to various factors.
 type OperationalStatus int32
 
 const (
@@ -81,6 +86,15 @@ func (OperationalStatus) EnumDescriptor() ([]byte, []int) {
 // RiskReason represents the specific reason why an appointment is considered at risk.
 // These reasons correspond to business rules and compliance requirements that may
 // trigger operational status changes.
+//
+// Values:
+//   - RISK_REASON_LICENSE_INACTIVE: License is inactive (License Active = false).
+//   - RISK_REASON_LICENSE_EXPIRED: License has expired (License ExpirationDate < current date).
+//   - RISK_REASON_EO_NOT_FOUND: The agency has no E&O in effect. The E&O in effect is the shared coverage of the agency's organization while it shares coverages, the agency's own otherwise.
+//   - RISK_REASON_EO_INACTIVE: The agency's E&O in effect is not approved: it is pending review or rejected. There is no "active" E&O status.
+//   - RISK_REASON_EO_EXPIRED: E&O coverage has expired (E&O ExpirationDate < current date).
+//   - RISK_REASON_STATE_APPOINTMENT_TERMINATED: A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active.
+//   - RISK_REASON_REGULATORY_ACTION: An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state.
 type RiskReason int32
 
 const (
@@ -176,6 +190,15 @@ func (RiskReason) EnumDescriptor() ([]byte, []int) {
 //	TerminateAppointment --> TERMINATED (immediate)
 //
 // Reference: https://pdb.nipr.com/Gateway
+//
+// Values:
+//   - PROCESSING_STATUS_UNSPECIFIED: never returned for an appointment.
+//   - PROCESSING_STATUS_IN_PROGRESS: Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook.
+//   - PROCESSING_STATUS_APPOINTED: Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority.
+//   - PROCESSING_STATUS_TERMINATED: Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state.
+//   - PROCESSING_STATUS_REJECTED: Appointment request was rejected by NIPR. The API does not carry the reason. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions.
+//   - PROCESSING_STATUS_MISSING_LICENSE: The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed.
+//   - PROCESSING_STATUS_TERMINATION_REQUESTED: A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook.
 type ProcessingStatus int32
 
 const (
@@ -189,8 +212,8 @@ const (
 	// Appointment has been terminated. The producer/agency can no longer sell
 	// this carrier's products. This is a terminal state.
 	ProcessingStatus_PROCESSING_STATUS_TERMINATED ProcessingStatus = 3
-	// Appointment request was rejected by NIPR. Check not_eligible_reasons for
-	// details. Common reasons include: missing resident license, unmet
+	// Appointment request was rejected by NIPR. The API does not carry the
+	// reason. Common reasons include: missing resident license, unmet
 	// continuing education requirements, or outstanding regulatory actions.
 	ProcessingStatus_PROCESSING_STATUS_REJECTED ProcessingStatus = 4
 	// The license required for this appointment is missing or could not be found.
@@ -259,6 +282,13 @@ func (ProcessingStatus) EnumDescriptor() ([]byte, []int) {
 // - Registry and Synthetic appointments are processed automatically
 // - Up-front appointments go through NIPR's standard processing pipeline
 // - Just-in-time appointments are created on demand when needed
+//
+// Values:
+//   - APPOINTMENT_TYPE_UNSPECIFIED: the type could not be derived.
+//   - APPOINTMENT_TYPE_REGISTRY: Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process.
+//   - APPOINTMENT_TYPE_UP_FRONT: Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state.
+//   - APPOINTMENT_TYPE_JUST_IN_TIME: Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment.
+//   - APPOINTMENT_TYPE_SYNTHETIC: Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated.
 type AppointmentType int32
 
 const (
@@ -338,6 +368,23 @@ func (AppointmentType) EnumDescriptor() ([]byte, []int) {
 // TerminateAppointment.
 //
 // Reference: https://pdb.nipr.com/Gateway/ValidTerms
+//
+// Values:
+//   - TERMINATION_REASON_VOLUNTARY_TERMINATION: Producer or agency voluntarily chose to end the appointment.
+//   - TERMINATION_REASON_INADEQUATE_PRODUCTION: Carrier terminated due to insufficient premium production or sales volume.
+//   - TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT: Appointment was cancelled by the managing general agent (MGA).
+//   - TERMINATION_REASON_DEATH: Producer has passed away.
+//   - TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION: Insurance company has ceased operations or entered liquidation.
+//   - TERMINATION_REASON_COMPANY_INDEBTEDNESS: Producer owes money to the insurance company (e.g., unremitted premiums).
+//   - TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE: Carrier terminated due to poor service to policyholders.
+//   - TERMINATION_REASON_AGENT_MOVED: Producer relocated to a different jurisdiction.
+//   - TERMINATION_REASON_APPOINTED_IN_ERROR: Appointment was created in error and is being corrected.
+//   - TERMINATION_REASON_CANCELLED: General cancellation without a more specific reason.
+//   - TERMINATION_REASON_CANCELLED_FOR_CAUSE: Carrier terminated for cause (e.g., misconduct, policy violations).
+//   - TERMINATION_REASON_COMPANY_MERGER: Insurance company merged with another company.
+//   - TERMINATION_REASON_REVOKED: Producer's license has been revoked by a regulatory authority.
+//   - TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE: Producer's license has been suspended for compliance issues.
+//   - TERMINATION_REASON_REQUEST_REGULATORY_REVIEW: Termination is being submitted for regulatory review by the state DOI.
 type TerminationReason int32
 
 const (
@@ -500,15 +547,17 @@ type RequestAppointmentResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The ID of the created appointment.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
-	// Processing status of the appointment request.
-	//
-	// For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-	// rejected.
-	//
-	// For registry states or non-NIPR carriers: APPOINTED if successful.
+	// Processing status of the appointment request: IN_PROGRESS when the
+	// request was filed with NIPR, APPOINTED when it was recorded immediately
+	// (registry state, carrier without NIPR integration, synthetic appointment).
+	// A NIPR rejection arrives later as REJECTED through the webhook and the
+	// read operations.
 	ProcessingStatus ProcessingStatus `protobuf:"varint,2,opt,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
-	// If the appointment was rejected or ineligible, these reasons explain why.
-	// Only populated when processing_status is REJECTED.
+	// Unused. The call fails with an error instead of returning reasons; a
+	// later NIPR rejection is reported through the appointment.updated webhook
+	// event.
+	//
+	// Deprecated: Marked as deprecated in producerflow/appointment/v1/appointment.proto.
 	NotEligibleReasons []string `protobuf:"bytes,3,rep,name=not_eligible_reasons,json=notEligibleReasons,proto3" json:"not_eligible_reasons,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -558,6 +607,7 @@ func (x *RequestAppointmentResponse) GetProcessingStatus() ProcessingStatus {
 	return ProcessingStatus_PROCESSING_STATUS_UNSPECIFIED
 }
 
+// Deprecated: Marked as deprecated in producerflow/appointment/v1/appointment.proto.
 func (x *RequestAppointmentResponse) GetNotEligibleReasons() []string {
 	if x != nil {
 		return x.NotEligibleReasons
@@ -659,7 +709,10 @@ func (x *GetAppointmentResponse) GetAppointment() *Appointment {
 // Request to list appointments, optionally filtered by processing status.
 type ListAppointmentsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional. Filter results by processing status.
+	// Optional. Filter results by processing status. Without it only
+	// IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+	// pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+	// Several values are combined with OR.
 	ProcessingStatus []ProcessingStatus `protobuf:"varint,1,rep,packed,name=processing_status,json=processingStatus,proto3,enum=producerflow.appointment.v1.ProcessingStatus" json:"processing_status,omitempty"`
 	// Required. The producer or agency whose appointments to list.
 	//
@@ -829,9 +882,11 @@ type TerminateAppointmentRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the appointment to terminate.
 	AppointmentId string `protobuf:"bytes,1,opt,name=appointment_id,json=appointmentId,proto3" json:"appointment_id,omitempty"`
-	// Reason for termination. This must be a valid termination reason for the
-	// state where the license is issued. Call ListTerminationReasons first to
-	// get the list of valid reasons for the specific state.
+	// Required. Reason for termination. This must be a valid termination reason
+	// for the state where the license is issued. Call ListTerminationReasons
+	// first to get the list of valid reasons for the specific state; a reason
+	// the state does not accept is refused by NIPR when the termination is
+	// filed.
 	Reason        TerminationReason `protobuf:"varint,2,opt,name=reason,proto3,enum=producerflow.appointment.v1.TerminationReason" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1506,7 +1561,7 @@ func (x *AppointmentOperationalStatus) GetLastUpdated() *timestamppb.Timestamp {
 }
 
 // Represents a managed appointment for a license, tracked through the
-// ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+// Producerflow appointment lifecycle. Unlike NIPR-sourced appointment data
 // on the Producer/Agency messages, this represents appointments that are
 // actively managed (requested, terminated) through the AppointmentService.
 type Appointment struct {
@@ -1723,9 +1778,10 @@ type License struct {
 	// - "Surplus Lines Broker": Authorized for non-admitted carriers
 	// Values vary by state as each DOI defines its own license classes.
 	LicenseClass string `protobuf:"bytes,6,opt,name=license_class,json=licenseClass,proto3" json:"license_class,omitempty"`
-	// Indicates whether this license is in a registry state. Licenses in
-	// registry states and capacity carriers are processed automatically without
-	// going through NIPR.
+	// Not populated today; always false. To predict whether a request completes
+	// immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
+	//
+	// Deprecated: Marked as deprecated in producerflow/appointment/v1/appointment.proto.
 	IsRegistryState bool `protobuf:"varint,7,opt,name=is_registry_state,json=isRegistryState,proto3" json:"is_registry_state,omitempty"`
 	// The ID of the carrier associated with this license.
 	CarrierId string `protobuf:"bytes,8,opt,name=carrier_id,json=carrierId,proto3" json:"carrier_id,omitempty"`
@@ -1820,6 +1876,7 @@ func (x *License) GetLicenseClass() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in producerflow/appointment/v1/appointment.proto.
 func (x *License) GetIsRegistryState() bool {
 	if x != nil {
 		return x.IsRegistryState
@@ -1967,11 +2024,11 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x12'\n" +
 	"\n" +
-	"carrier_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierId\"\xd1\x01\n" +
+	"carrier_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierId\"\xd5\x01\n" +
 	"\x1aRequestAppointmentResponse\x12%\n" +
 	"\x0eappointment_id\x18\x01 \x01(\tR\rappointmentId\x12Z\n" +
-	"\x11processing_status\x18\x02 \x01(\x0e2-.producerflow.appointment.v1.ProcessingStatusR\x10processingStatus\x120\n" +
-	"\x14not_eligible_reasons\x18\x03 \x03(\tR\x12notEligibleReasons\"H\n" +
+	"\x11processing_status\x18\x02 \x01(\x0e2-.producerflow.appointment.v1.ProcessingStatusR\x10processingStatus\x124\n" +
+	"\x14not_eligible_reasons\x18\x03 \x03(\tB\x02\x18\x01R\x12notEligibleReasons\"H\n" +
 	"\x15GetAppointmentRequest\x12/\n" +
 	"\x0eappointment_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\rappointmentId\"d\n" +
 	"\x16GetAppointmentResponse\x12J\n" +
@@ -2048,7 +2105,7 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"\x06cocode\x18\x0e \x01(\tR\x06cocode\x122\n" +
 	"\x15parent_appointment_id\x18\x0f \x01(\tR\x13parentAppointmentIdB\x0e\n" +
 	"\f_producer_idB\x13\n" +
-	"\x11_termination_date\"\xd3\x03\n" +
+	"\x11_termination_date\"\xd7\x03\n" +
 	"\aLicense\x12'\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tlicenseId\x120\n" +
@@ -2057,8 +2114,8 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"producerId\x12'\n" +
 	"\tagency_id\x18\x04 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x00R\bagencyId\x12\x1e\n" +
 	"\x05state\x18\x05 \x01(\tB\b\xbaH\x05r\x03\x98\x01\x02R\x05state\x12#\n" +
-	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12*\n" +
-	"\x11is_registry_state\x18\a \x01(\bR\x0fisRegistryState\x12'\n" +
+	"\rlicense_class\x18\x06 \x01(\tR\flicenseClass\x12.\n" +
+	"\x11is_registry_state\x18\a \x01(\bB\x02\x18\x01R\x0fisRegistryState\x12'\n" +
 	"\n" +
 	"carrier_id\x18\b \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\tcarrierId\x12:\n" +
 	"\x0fexpiration_date\x18\t \x01(\v2\x11.google.type.DateR\x0eexpirationDate\x120\n" +
@@ -2115,17 +2172,17 @@ const file_producerflow_appointment_v1_appointment_proto_rawDesc = "" +
 	"!TERMINATION_REASON_COMPANY_MERGER\x10\f\x12\x1e\n" +
 	"\x1aTERMINATION_REASON_REVOKED\x10\r\x12/\n" +
 	"+TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE\x10\x0e\x120\n" +
-	",TERMINATION_REASON_REQUEST_REGULATORY_REVIEW\x10\x0f2\xf0\t\n" +
-	"\x12AppointmentService\x12y\n" +
-	"\x0eGetAppointment\x122.producerflow.appointment.v1.GetAppointmentRequest\x1a3.producerflow.appointment.v1.GetAppointmentResponse\x12\x85\x01\n" +
-	"\x12GetAppointmentFees\x126.producerflow.appointment.v1.GetAppointmentFeesRequest\x1a7.producerflow.appointment.v1.GetAppointmentFeesResponse\x12\x91\x01\n" +
-	"\x16GetAppointableCarriers\x12:.producerflow.appointment.v1.GetAppointableCarriersRequest\x1a;.producerflow.appointment.v1.GetAppointableCarriersResponse\x12\x85\x01\n" +
-	"\x12GetTerminationFees\x126.producerflow.appointment.v1.GetTerminationFeesRequest\x1a7.producerflow.appointment.v1.GetTerminationFeesResponse\x12\x7f\n" +
-	"\x10ListAppointments\x124.producerflow.appointment.v1.ListAppointmentsRequest\x1a5.producerflow.appointment.v1.ListAppointmentsResponse\x12\x8b\x01\n" +
-	"\x14ListEligibleLicenses\x128.producerflow.appointment.v1.ListEligibleLicensesRequest\x1a9.producerflow.appointment.v1.ListEligibleLicensesResponse\x12\x87\x01\n" +
+	",TERMINATION_REASON_REQUEST_REGULATORY_REVIEW\x10\x0f2\xff\t\n" +
+	"\x12AppointmentService\x12{\n" +
+	"\x0eGetAppointment\x122.producerflow.appointment.v1.GetAppointmentRequest\x1a3.producerflow.appointment.v1.GetAppointmentResponse\"\x00\x12\x87\x01\n" +
+	"\x12GetAppointmentFees\x126.producerflow.appointment.v1.GetAppointmentFeesRequest\x1a7.producerflow.appointment.v1.GetAppointmentFeesResponse\"\x00\x12\x93\x01\n" +
+	"\x16GetAppointableCarriers\x12:.producerflow.appointment.v1.GetAppointableCarriersRequest\x1a;.producerflow.appointment.v1.GetAppointableCarriersResponse\"\x00\x12\x87\x01\n" +
+	"\x12GetTerminationFees\x126.producerflow.appointment.v1.GetTerminationFeesRequest\x1a7.producerflow.appointment.v1.GetTerminationFeesResponse\"\x00\x12\x81\x01\n" +
+	"\x10ListAppointments\x124.producerflow.appointment.v1.ListAppointmentsRequest\x1a5.producerflow.appointment.v1.ListAppointmentsResponse\"\x00\x12\x8d\x01\n" +
+	"\x14ListEligibleLicenses\x128.producerflow.appointment.v1.ListEligibleLicensesRequest\x1a9.producerflow.appointment.v1.ListEligibleLicensesResponse\"\x00\x12\x87\x01\n" +
 	"\x12RequestAppointment\x126.producerflow.appointment.v1.RequestAppointmentRequest\x1a7.producerflow.appointment.v1.RequestAppointmentResponse\"\x00\x12\x8d\x01\n" +
-	"\x14TerminateAppointment\x128.producerflow.appointment.v1.TerminateAppointmentRequest\x1a9.producerflow.appointment.v1.TerminateAppointmentResponse\"\x00\x12\x91\x01\n" +
-	"\x16ListTerminationReasons\x12:.producerflow.appointment.v1.ListTerminationReasonsRequest\x1a;.producerflow.appointment.v1.ListTerminationReasonsResponseB\x9b\x02\n" +
+	"\x14TerminateAppointment\x128.producerflow.appointment.v1.TerminateAppointmentRequest\x1a9.producerflow.appointment.v1.TerminateAppointmentResponse\"\x00\x12\x93\x01\n" +
+	"\x16ListTerminationReasons\x12:.producerflow.appointment.v1.ListTerminationReasonsRequest\x1a;.producerflow.appointment.v1.ListTerminationReasonsResponse\"\x00B\x9b\x02\n" +
 	"\x1fcom.producerflow.appointment.v1B\x10AppointmentProtoP\x01ZXgithub.com/producerflow/producerflowapi/gen/go/producerflow/appointment/v1;appointmentv1\xa2\x02\x03PAX\xaa\x02\x1bProducerflow.Appointment.V1\xca\x02\x1bProducerflow\\Appointment\\V1\xe2\x02'Producerflow\\Appointment\\V1\\GPBMetadata\xea\x02\x1dProducerflow::Appointment::V1b\x06proto3"
 
 var (

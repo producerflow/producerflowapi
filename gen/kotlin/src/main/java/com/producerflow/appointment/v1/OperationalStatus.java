@@ -9,6 +9,11 @@ package com.producerflow.appointment.v1;
  * <pre>
  * OperationalStatus represents the current operational status of an appointment.
  * This indicates whether the appointment is actively functioning or at risk of termination.
+ *
+ * Values:
+ * - OPERATIONAL_STATUS_UNSPECIFIED: the appointment has not been evaluated yet.
+ * - OPERATIONAL_STATUS_ACTIVE: Appointment is actively functioning and meeting all requirements.
+ * - OPERATIONAL_STATUS_AT_RISK: Appointment is at risk of termination due to various factors.
  * </pre>
  *
  * Protobuf enum {@code producerflow.appointment.v1.OperationalStatus}

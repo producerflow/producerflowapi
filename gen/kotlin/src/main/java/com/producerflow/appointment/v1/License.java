@@ -406,16 +406,17 @@ private static final long serialVersionUID = 0L;
   private boolean isRegistryState_ = false;
   /**
    * <pre>
-   * Indicates whether this license is in a registry state. Licenses in
-   * registry states and capacity carriers are processed automatically without
-   * going through NIPR.
+   * Not populated today; always false. To predict whether a request completes
+   * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
    * </pre>
    *
-   * <code>bool is_registry_state = 7 [json_name = "isRegistryState"];</code>
+   * <code>bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.License.is_registry_state is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=650
    * @return The isRegistryState.
    */
   @java.lang.Override
-  public boolean getIsRegistryState() {
+  @java.lang.Deprecated public boolean getIsRegistryState() {
     return isRegistryState_;
   }
 
@@ -1735,30 +1736,32 @@ private static final long serialVersionUID = 0L;
     private boolean isRegistryState_ ;
     /**
      * <pre>
-     * Indicates whether this license is in a registry state. Licenses in
-     * registry states and capacity carriers are processed automatically without
-     * going through NIPR.
+     * Not populated today; always false. To predict whether a request completes
+     * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
      * </pre>
      *
-     * <code>bool is_registry_state = 7 [json_name = "isRegistryState"];</code>
+     * <code>bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.License.is_registry_state is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=650
      * @return The isRegistryState.
      */
     @java.lang.Override
-    public boolean getIsRegistryState() {
+    @java.lang.Deprecated public boolean getIsRegistryState() {
       return isRegistryState_;
     }
     /**
      * <pre>
-     * Indicates whether this license is in a registry state. Licenses in
-     * registry states and capacity carriers are processed automatically without
-     * going through NIPR.
+     * Not populated today; always false. To predict whether a request completes
+     * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
      * </pre>
      *
-     * <code>bool is_registry_state = 7 [json_name = "isRegistryState"];</code>
+     * <code>bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.License.is_registry_state is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=650
      * @param value The isRegistryState to set.
      * @return This builder for chaining.
      */
-    public Builder setIsRegistryState(boolean value) {
+    @java.lang.Deprecated public Builder setIsRegistryState(boolean value) {
 
       isRegistryState_ = value;
       bitField0_ |= 0x00000040;
@@ -1767,15 +1770,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Indicates whether this license is in a registry state. Licenses in
-     * registry states and capacity carriers are processed automatically without
-     * going through NIPR.
+     * Not populated today; always false. To predict whether a request completes
+     * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
      * </pre>
      *
-     * <code>bool is_registry_state = 7 [json_name = "isRegistryState"];</code>
+     * <code>bool is_registry_state = 7 [json_name = "isRegistryState", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.License.is_registry_state is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=650
      * @return This builder for chaining.
      */
-    public Builder clearIsRegistryState() {
+    @java.lang.Deprecated public Builder clearIsRegistryState() {
       bitField0_ = (bitField0_ & ~0x00000040);
       isRegistryState_ = false;
       onChanged();

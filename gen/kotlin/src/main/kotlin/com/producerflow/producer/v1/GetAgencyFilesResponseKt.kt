@@ -120,7 +120,7 @@ public object GetAgencyFilesResponseKt {
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * ```
      *
@@ -138,7 +138,7 @@ public object GetAgencyFilesResponseKt {
      * URL of the license document.
      * An identification document that shows that the agency
      * is licensed to carry out its operations in the relevant jurisdictions.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * ```
      *
@@ -153,7 +153,7 @@ public object GetAgencyFilesResponseKt {
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * ```
      *
@@ -171,7 +171,7 @@ public object GetAgencyFilesResponseKt {
      * URL of the broker bond document.
      * It's a surety bond that a broker needs to operate legally,
      * providing financial security for clients.
-     * Deprecated: ProducerFlow does not collect this document, so it is always
+     * Deprecated: Producerflow does not collect this document, so it is always
      * empty.
      * ```
      *
@@ -180,9 +180,609 @@ public object GetAgencyFilesResponseKt {
     public fun clearBrokerBondDocUrl() {
       _builder.clearBrokerBondDocUrl()
     }
+
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class ContractsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     */
+     public val contracts: com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.contractsList
+      )
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     * @param value The contracts to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addContracts")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.add(value: com.producerflow.producer.v1.GetAgencyFilesResponse.Contract) {
+      _builder.addContracts(value)
+    }
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     * @param value The contracts to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignContracts")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.plusAssign(value: com.producerflow.producer.v1.GetAgencyFilesResponse.Contract) {
+      add(value)
+    }
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     * @param values The contracts to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllContracts")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.addAll(values: kotlin.collections.Iterable<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract>) {
+      _builder.addAllContracts(values)
+    }
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     * @param values The contracts to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllContracts")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.plusAssign(values: kotlin.collections.Iterable<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract>) {
+      addAll(values)
+    }
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     * @param index The index to set the value at.
+     * @param value The contracts to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setContracts")
+    public operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.set(index: kotlin.Int, value: com.producerflow.producer.v1.GetAgencyFilesResponse.Contract) {
+      _builder.setContracts(index, value)
+    }
+    /**
+     * ```
+     * Signed contracts of the agency, most recently sent or recorded first.
+     * Only contracts whose signed PDF is stored in Producerflow are returned: a
+     * contract that is not signed yet, or one marked as signed without a PDF,
+     * is left out.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearContracts")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract, ContractsProxy>.clear() {
+      _builder.clearContracts()
+    }
+
+
+    /**
+     * An uninstantiable, behaviorless type to represent the field in
+     * generics.
+     */
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    public class OtherDocumentsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     */
+     public val otherDocuments: com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>
+      @kotlin.jvm.JvmSynthetic
+      get() = com.google.protobuf.kotlin.DslList(
+        _builder.otherDocumentsList
+      )
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     * @param value The otherDocuments to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addOtherDocuments")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.add(value: com.producerflow.producer.v1.GetAgencyFilesResponse.Document) {
+      _builder.addOtherDocuments(value)
+    }
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     * @param value The otherDocuments to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignOtherDocuments")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.plusAssign(value: com.producerflow.producer.v1.GetAgencyFilesResponse.Document) {
+      add(value)
+    }
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     * @param values The otherDocuments to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("addAllOtherDocuments")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.addAll(values: kotlin.collections.Iterable<com.producerflow.producer.v1.GetAgencyFilesResponse.Document>) {
+      _builder.addAllOtherDocuments(values)
+    }
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     * @param values The otherDocuments to add.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("plusAssignAllOtherDocuments")
+    @Suppress("NOTHING_TO_INLINE")
+    public inline operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.plusAssign(values: kotlin.collections.Iterable<com.producerflow.producer.v1.GetAgencyFilesResponse.Document>) {
+      addAll(values)
+    }
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     * @param index The index to set the value at.
+     * @param value The otherDocuments to set.
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("setOtherDocuments")
+    public operator fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.set(index: kotlin.Int, value: com.producerflow.producer.v1.GetAgencyFilesResponse.Document) {
+      _builder.setOtherDocuments(index, value)
+    }
+    /**
+     * ```
+     * Files uploaded to the agency under "Other documents", most recently
+     * created first. Documents of the agency's producers are not included.
+     * ```
+     *
+     * `repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];`
+     */
+    @kotlin.jvm.JvmSynthetic
+    @kotlin.jvm.JvmName("clearOtherDocuments")
+    public fun com.google.protobuf.kotlin.DslList<com.producerflow.producer.v1.GetAgencyFilesResponse.Document, OtherDocumentsProxy>.clear() {
+      _builder.clearOtherDocuments()
+    }
+
+  }
+  @kotlin.jvm.JvmName("-initializecontract")
+  public inline fun contract(block: com.producerflow.producer.v1.GetAgencyFilesResponseKt.ContractKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyFilesResponse.Contract =
+    com.producerflow.producer.v1.GetAgencyFilesResponseKt.ContractKt.Dsl._create(com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.newBuilder()).apply { block() }._build()
+  /**
+   * ```
+   * Contract is a signed contract of the agency.
+   * ```
+   *
+   * Protobuf type `producerflow.producer.v1.GetAgencyFilesResponse.Contract`
+   */
+  public object ContractKt {
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    @com.google.protobuf.kotlin.ProtoDslMarker
+    public class Dsl private constructor(
+      private val _builder: com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder
+    ) {
+      public companion object {
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _create(builder: com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.Builder): Dsl = Dsl(builder)
+      }
+
+      @kotlin.jvm.JvmSynthetic
+      @kotlin.PublishedApi
+      internal fun _build(): com.producerflow.producer.v1.GetAgencyFilesResponse.Contract = _builder.build()
+
+      /**
+       * ```
+       * Unique identifier of the contract (UUID format).
+       * ```
+       *
+       * `string contract_id = 1 [json_name = "contractId"];`
+       */
+      public var contractId: kotlin.String
+        @JvmName("getContractId")
+        get() = _builder.contractId
+        @JvmName("setContractId")
+        set(value) {
+          _builder.contractId = value
+        }
+      /**
+       * ```
+       * Unique identifier of the contract (UUID format).
+       * ```
+       *
+       * `string contract_id = 1 [json_name = "contractId"];`
+       */
+      public fun clearContractId() {
+        _builder.clearContractId()
+      }
+
+      /**
+       * ```
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public var name: kotlin.String
+        @JvmName("getName")
+        get() = _builder.name
+        @JvmName("setName")
+        set(value) {
+          _builder.name = value
+        }
+      /**
+       * ```
+       * Name of the contract: the template's name when it was sent, or the name
+       * given when it was uploaded. Empty when no name was recorded.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public fun clearName() {
+        _builder.clearName()
+      }
+
+      /**
+       * ```
+       * Provider the contract was sent through.
+       * ```
+       *
+       * `.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];`
+       */
+      public var provider: com.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider
+        @JvmName("getProvider")
+        get() = _builder.provider
+        @JvmName("setProvider")
+        set(value) {
+          _builder.provider = value
+        }
+      public var providerValue: kotlin.Int
+        @JvmName("getProviderValue")
+        get() = _builder.providerValue
+        @JvmName("setProviderValue")
+        set(value) {
+          _builder.providerValue = value
+        }
+      /**
+       * ```
+       * Provider the contract was sent through.
+       * ```
+       *
+       * `.producerflow.producer.v1.GetAgencyFilesResponse.ContractProvider provider = 3 [json_name = "provider"];`
+       */
+      public fun clearProvider() {
+        _builder.clearProvider()
+      }
+
+      /**
+       * ```
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * ```
+       *
+       * `.google.type.Date sent_date = 4 [json_name = "sentDate"];`
+       */
+      public var sentDate: com.google.type.Date
+        @JvmName("getSentDate")
+        get() = _builder.sentDate
+        @JvmName("setSentDate")
+        set(value) {
+          _builder.sentDate = value
+        }
+      /**
+       * ```
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * ```
+       *
+       * `.google.type.Date sent_date = 4 [json_name = "sentDate"];`
+       */
+      public fun clearSentDate() {
+        _builder.clearSentDate()
+      }
+      /**
+       * ```
+       * UTC day the provider sent the contract. Unset for a contract recorded by
+       * hand.
+       * ```
+       *
+       * `.google.type.Date sent_date = 4 [json_name = "sentDate"];`
+       * @return Whether the sentDate field is set.
+       */
+      public fun hasSentDate(): kotlin.Boolean {
+        return _builder.hasSentDate()
+      }
+      public val ContractKt.Dsl.sentDateOrNull: com.google.type.Date?
+        get() = _builder.sentDateOrNull
+
+      /**
+       * ```
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * ```
+       *
+       * `.google.type.Date signed_date = 5 [json_name = "signedDate"];`
+       */
+      public var signedDate: com.google.type.Date
+        @JvmName("getSignedDate")
+        get() = _builder.signedDate
+        @JvmName("setSignedDate")
+        set(value) {
+          _builder.signedDate = value
+        }
+      /**
+       * ```
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * ```
+       *
+       * `.google.type.Date signed_date = 5 [json_name = "signedDate"];`
+       */
+      public fun clearSignedDate() {
+        _builder.clearSignedDate()
+      }
+      /**
+       * ```
+       * UTC day the contract was signed. Unset when no date was recorded.
+       * ```
+       *
+       * `.google.type.Date signed_date = 5 [json_name = "signedDate"];`
+       * @return Whether the signedDate field is set.
+       */
+      public fun hasSignedDate(): kotlin.Boolean {
+        return _builder.hasSignedDate()
+      }
+      public val ContractKt.Dsl.signedDateOrNull: com.google.type.Date?
+        get() = _builder.signedDateOrNull
+
+      /**
+       * ```
+       * URL of the signed contract PDF.
+       * ```
+       *
+       * `string download_url = 6 [json_name = "downloadUrl"];`
+       */
+      public var downloadUrl: kotlin.String
+        @JvmName("getDownloadUrl")
+        get() = _builder.downloadUrl
+        @JvmName("setDownloadUrl")
+        set(value) {
+          _builder.downloadUrl = value
+        }
+      /**
+       * ```
+       * URL of the signed contract PDF.
+       * ```
+       *
+       * `string download_url = 6 [json_name = "downloadUrl"];`
+       */
+      public fun clearDownloadUrl() {
+        _builder.clearDownloadUrl()
+      }
+    }
+  }
+  @kotlin.jvm.JvmName("-initializedocument")
+  public inline fun document(block: com.producerflow.producer.v1.GetAgencyFilesResponseKt.DocumentKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyFilesResponse.Document =
+    com.producerflow.producer.v1.GetAgencyFilesResponseKt.DocumentKt.Dsl._create(com.producerflow.producer.v1.GetAgencyFilesResponse.Document.newBuilder()).apply { block() }._build()
+  /**
+   * ```
+   * Document is a file uploaded to the agency under "Other documents".
+   * ```
+   *
+   * Protobuf type `producerflow.producer.v1.GetAgencyFilesResponse.Document`
+   */
+  public object DocumentKt {
+    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
+    @com.google.protobuf.kotlin.ProtoDslMarker
+    public class Dsl private constructor(
+      private val _builder: com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder
+    ) {
+      public companion object {
+        @kotlin.jvm.JvmSynthetic
+        @kotlin.PublishedApi
+        internal fun _create(builder: com.producerflow.producer.v1.GetAgencyFilesResponse.Document.Builder): Dsl = Dsl(builder)
+      }
+
+      @kotlin.jvm.JvmSynthetic
+      @kotlin.PublishedApi
+      internal fun _build(): com.producerflow.producer.v1.GetAgencyFilesResponse.Document = _builder.build()
+
+      /**
+       * ```
+       * Unique identifier of the document (UUID format).
+       * ```
+       *
+       * `string document_id = 1 [json_name = "documentId"];`
+       */
+      public var documentId: kotlin.String
+        @JvmName("getDocumentId")
+        get() = _builder.documentId
+        @JvmName("setDocumentId")
+        set(value) {
+          _builder.documentId = value
+        }
+      /**
+       * ```
+       * Unique identifier of the document (UUID format).
+       * ```
+       *
+       * `string document_id = 1 [json_name = "documentId"];`
+       */
+      public fun clearDocumentId() {
+        _builder.clearDocumentId()
+      }
+
+      /**
+       * ```
+       * Name the document is shown with in Producerflow.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public var name: kotlin.String
+        @JvmName("getName")
+        get() = _builder.name
+        @JvmName("setName")
+        set(value) {
+          _builder.name = value
+        }
+      /**
+       * ```
+       * Name the document is shown with in Producerflow.
+       * ```
+       *
+       * `string name = 2 [json_name = "name"];`
+       */
+      public fun clearName() {
+        _builder.clearName()
+      }
+
+      /**
+       * ```
+       * When the document was last updated.
+       * ```
+       *
+       * `.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];`
+       */
+      public var updatedAt: com.google.protobuf.Timestamp
+        @JvmName("getUpdatedAt")
+        get() = _builder.updatedAt
+        @JvmName("setUpdatedAt")
+        set(value) {
+          _builder.updatedAt = value
+        }
+      /**
+       * ```
+       * When the document was last updated.
+       * ```
+       *
+       * `.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];`
+       */
+      public fun clearUpdatedAt() {
+        _builder.clearUpdatedAt()
+      }
+      /**
+       * ```
+       * When the document was last updated.
+       * ```
+       *
+       * `.google.protobuf.Timestamp updated_at = 3 [json_name = "updatedAt"];`
+       * @return Whether the updatedAt field is set.
+       */
+      public fun hasUpdatedAt(): kotlin.Boolean {
+        return _builder.hasUpdatedAt()
+      }
+      public val DocumentKt.Dsl.updatedAtOrNull: com.google.protobuf.Timestamp?
+        get() = _builder.updatedAtOrNull
+
+      /**
+       * ```
+       * URL of the document.
+       * ```
+       *
+       * `string download_url = 4 [json_name = "downloadUrl"];`
+       */
+      public var downloadUrl: kotlin.String
+        @JvmName("getDownloadUrl")
+        get() = _builder.downloadUrl
+        @JvmName("setDownloadUrl")
+        set(value) {
+          _builder.downloadUrl = value
+        }
+      /**
+       * ```
+       * URL of the document.
+       * ```
+       *
+       * `string download_url = 4 [json_name = "downloadUrl"];`
+       */
+      public fun clearDownloadUrl() {
+        _builder.clearDownloadUrl()
+      }
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun com.producerflow.producer.v1.GetAgencyFilesResponse.copy(block: `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyFilesResponse =
   `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.GetAgencyFilesResponse.Contract.copy(block: `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.ContractKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyFilesResponse.Contract =
+  `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.ContractKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder.sentDateOrNull: com.google.type.Date?
+  get() = if (hasSentDate()) getSentDate() else null
+
+public val com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder.signedDateOrNull: com.google.type.Date?
+  get() = if (hasSignedDate()) getSignedDate() else null
+
+@kotlin.jvm.JvmSynthetic
+public inline fun com.producerflow.producer.v1.GetAgencyFilesResponse.Document.copy(block: `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.DocumentKt.Dsl.() -> kotlin.Unit): com.producerflow.producer.v1.GetAgencyFilesResponse.Document =
+  `com.producerflow.producer.v1`.GetAgencyFilesResponseKt.DocumentKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder.updatedAtOrNull: com.google.protobuf.Timestamp?
+  get() = if (hasUpdatedAt()) getUpdatedAt() else null
 

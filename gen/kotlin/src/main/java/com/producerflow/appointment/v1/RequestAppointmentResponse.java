@@ -97,12 +97,11 @@ private static final long serialVersionUID = 0L;
   private int processingStatus_ = 0;
   /**
    * <pre>
-   * Processing status of the appointment request.
-   *
-   * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-   * rejected.
-   *
-   * For registry states or non-NIPR carriers: APPOINTED if successful.
+   * Processing status of the appointment request: IN_PROGRESS when the
+   * request was filed with NIPR, APPOINTED when it was recorded immediately
+   * (registry state, carrier without NIPR integration, synthetic appointment).
+   * A NIPR rejection arrives later as REJECTED through the webhook and the
+   * read operations.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -113,12 +112,11 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Processing status of the appointment request.
-   *
-   * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-   * rejected.
-   *
-   * For registry states or non-NIPR carriers: APPOINTED if successful.
+   * Processing status of the appointment request: IN_PROGRESS when the
+   * request was filed with NIPR, APPOINTED when it was recorded immediately
+   * (registry state, carrier without NIPR integration, synthetic appointment).
+   * A NIPR rejection arrives later as REJECTED through the webhook and the
+   * read operations.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -135,53 +133,65 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.LazyStringArrayList.emptyList();
   /**
    * <pre>
-   * If the appointment was rejected or ineligible, these reasons explain why.
-   * Only populated when processing_status is REJECTED.
+   * Unused. The call fails with an error instead of returning reasons; a
+   * later NIPR rejection is reported through the appointment.updated webhook
+   * event.
    * </pre>
    *
-   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=227
    * @return A list containing the notEligibleReasons.
    */
-  public com.google.protobuf.ProtocolStringList
+  @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
       getNotEligibleReasonsList() {
     return notEligibleReasons_;
   }
   /**
    * <pre>
-   * If the appointment was rejected or ineligible, these reasons explain why.
-   * Only populated when processing_status is REJECTED.
+   * Unused. The call fails with an error instead of returning reasons; a
+   * later NIPR rejection is reported through the appointment.updated webhook
+   * event.
    * </pre>
    *
-   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=227
    * @return The count of notEligibleReasons.
    */
-  public int getNotEligibleReasonsCount() {
+  @java.lang.Deprecated public int getNotEligibleReasonsCount() {
     return notEligibleReasons_.size();
   }
   /**
    * <pre>
-   * If the appointment was rejected or ineligible, these reasons explain why.
-   * Only populated when processing_status is REJECTED.
+   * Unused. The call fails with an error instead of returning reasons; a
+   * later NIPR rejection is reported through the appointment.updated webhook
+   * event.
    * </pre>
    *
-   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=227
    * @param index The index of the element to return.
    * @return The notEligibleReasons at the given index.
    */
-  public java.lang.String getNotEligibleReasons(int index) {
+  @java.lang.Deprecated public java.lang.String getNotEligibleReasons(int index) {
     return notEligibleReasons_.get(index);
   }
   /**
    * <pre>
-   * If the appointment was rejected or ineligible, these reasons explain why.
-   * Only populated when processing_status is REJECTED.
+   * Unused. The call fails with an error instead of returning reasons; a
+   * later NIPR rejection is reported through the appointment.updated webhook
+   * event.
    * </pre>
    *
-   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+   * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+   * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+   *     See producerflow/appointment/v1/appointment.proto;l=227
    * @param index The index of the value to return.
    * @return The bytes of the notEligibleReasons at the given index.
    */
-  public com.google.protobuf.ByteString
+  @java.lang.Deprecated public com.google.protobuf.ByteString
       getNotEligibleReasonsBytes(int index) {
     return notEligibleReasons_.getByteString(index);
   }
@@ -636,12 +646,11 @@ private static final long serialVersionUID = 0L;
     private int processingStatus_ = 0;
     /**
      * <pre>
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -652,12 +661,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -672,12 +680,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -690,12 +697,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -713,12 +719,11 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Processing status of the appointment request.
-     *
-     * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-     * rejected.
-     *
-     * For registry states or non-NIPR carriers: APPOINTED if successful.
+     * Processing status of the appointment request: IN_PROGRESS when the
+     * request was filed with NIPR, APPOINTED when it was recorded immediately
+     * (registry state, carrier without NIPR integration, synthetic appointment).
+     * A NIPR rejection arrives later as REJECTED through the webhook and the
+     * read operations.
      * </pre>
      *
      * <code>.producerflow.appointment.v1.ProcessingStatus processing_status = 2 [json_name = "processingStatus"];</code>
@@ -741,69 +746,84 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @return A list containing the notEligibleReasons.
      */
-    public com.google.protobuf.ProtocolStringList
+    @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
         getNotEligibleReasonsList() {
       notEligibleReasons_.makeImmutable();
       return notEligibleReasons_;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @return The count of notEligibleReasons.
      */
-    public int getNotEligibleReasonsCount() {
+    @java.lang.Deprecated public int getNotEligibleReasonsCount() {
       return notEligibleReasons_.size();
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param index The index of the element to return.
      * @return The notEligibleReasons at the given index.
      */
-    public java.lang.String getNotEligibleReasons(int index) {
+    @java.lang.Deprecated public java.lang.String getNotEligibleReasons(int index) {
       return notEligibleReasons_.get(index);
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param index The index of the value to return.
      * @return The bytes of the notEligibleReasons at the given index.
      */
-    public com.google.protobuf.ByteString
+    @java.lang.Deprecated public com.google.protobuf.ByteString
         getNotEligibleReasonsBytes(int index) {
       return notEligibleReasons_.getByteString(index);
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param index The index to set the value at.
      * @param value The notEligibleReasons to set.
      * @return This builder for chaining.
      */
-    public Builder setNotEligibleReasons(
+    @java.lang.Deprecated public Builder setNotEligibleReasons(
         int index, java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       ensureNotEligibleReasonsIsMutable();
@@ -814,15 +834,18 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param value The notEligibleReasons to add.
      * @return This builder for chaining.
      */
-    public Builder addNotEligibleReasons(
+    @java.lang.Deprecated public Builder addNotEligibleReasons(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       ensureNotEligibleReasonsIsMutable();
@@ -833,15 +856,18 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param values The notEligibleReasons to add.
      * @return This builder for chaining.
      */
-    public Builder addAllNotEligibleReasons(
+    @java.lang.Deprecated public Builder addAllNotEligibleReasons(
         java.lang.Iterable<java.lang.String> values) {
       ensureNotEligibleReasonsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -852,14 +878,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @return This builder for chaining.
      */
-    public Builder clearNotEligibleReasons() {
+    @java.lang.Deprecated public Builder clearNotEligibleReasons() {
       notEligibleReasons_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
       bitField0_ = (bitField0_ & ~0x00000004);;
@@ -868,15 +897,18 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * If the appointment was rejected or ineligible, these reasons explain why.
-     * Only populated when processing_status is REJECTED.
+     * Unused. The call fails with an error instead of returning reasons; a
+     * later NIPR rejection is reported through the appointment.updated webhook
+     * event.
      * </pre>
      *
-     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons"];</code>
+     * <code>repeated string not_eligible_reasons = 3 [json_name = "notEligibleReasons", deprecated = true];</code>
+     * @deprecated producerflow.appointment.v1.RequestAppointmentResponse.not_eligible_reasons is deprecated.
+     *     See producerflow/appointment/v1/appointment.proto;l=227
      * @param value The bytes of the notEligibleReasons to add.
      * @return This builder for chaining.
      */
-    public Builder addNotEligibleReasonsBytes(
+    @java.lang.Deprecated public Builder addNotEligibleReasonsBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);

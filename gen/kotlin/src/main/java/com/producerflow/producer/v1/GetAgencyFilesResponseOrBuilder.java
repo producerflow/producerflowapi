@@ -82,13 +82,13 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2425
+   *     See producerflow/producer/v1/producer.proto;l=2472
    * @return The licenseDocUrl.
    */
   @java.lang.Deprecated java.lang.String getLicenseDocUrl();
@@ -97,13 +97,13 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the license document.
    * An identification document that shows that the agency
    * is licensed to carry out its operations in the relevant jurisdictions.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string license_doc_url = 4 [json_name = "licenseDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.license_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2425
+   *     See producerflow/producer/v1/producer.proto;l=2472
    * @return The bytes for licenseDocUrl.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
@@ -114,13 +114,13 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2432
+   *     See producerflow/producer/v1/producer.proto;l=2479
    * @return The brokerBondDocUrl.
    */
   @java.lang.Deprecated java.lang.String getBrokerBondDocUrl();
@@ -129,15 +129,123 @@ public interface GetAgencyFilesResponseOrBuilder extends
    * URL of the broker bond document.
    * It's a surety bond that a broker needs to operate legally,
    * providing financial security for clients.
-   * Deprecated: ProducerFlow does not collect this document, so it is always
+   * Deprecated: Producerflow does not collect this document, so it is always
    * empty.
    * </pre>
    *
    * <code>string broker_bond_doc_url = 5 [json_name = "brokerBondDocUrl", deprecated = true];</code>
    * @deprecated producerflow.producer.v1.GetAgencyFilesResponse.broker_bond_doc_url is deprecated.
-   *     See producerflow/producer/v1/producer.proto;l=2432
+   *     See producerflow/producer/v1/producer.proto;l=2479
    * @return The bytes for brokerBondDocUrl.
    */
   @java.lang.Deprecated com.google.protobuf.ByteString
       getBrokerBondDocUrlBytes();
+
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Contract> 
+      getContractsList();
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  com.producerflow.producer.v1.GetAgencyFilesResponse.Contract getContracts(int index);
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  int getContractsCount();
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder> 
+      getContractsOrBuilderList();
+  /**
+   * <pre>
+   * Signed contracts of the agency, most recently sent or recorded first.
+   * Only contracts whose signed PDF is stored in Producerflow are returned: a
+   * contract that is not signed yet, or one marked as signed without a PDF,
+   * is left out.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Contract contracts = 6 [json_name = "contracts"];</code>
+   */
+  com.producerflow.producer.v1.GetAgencyFilesResponse.ContractOrBuilder getContractsOrBuilder(
+      int index);
+
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  java.util.List<com.producerflow.producer.v1.GetAgencyFilesResponse.Document> 
+      getOtherDocumentsList();
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  com.producerflow.producer.v1.GetAgencyFilesResponse.Document getOtherDocuments(int index);
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  int getOtherDocumentsCount();
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  java.util.List<? extends com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder> 
+      getOtherDocumentsOrBuilderList();
+  /**
+   * <pre>
+   * Files uploaded to the agency under "Other documents", most recently
+   * created first. Documents of the agency's producers are not included.
+   * </pre>
+   *
+   * <code>repeated .producerflow.producer.v1.GetAgencyFilesResponse.Document other_documents = 7 [json_name = "otherDocuments"];</code>
+   */
+  com.producerflow.producer.v1.GetAgencyFilesResponse.DocumentOrBuilder getOtherDocumentsOrBuilder(
+      int index);
 }

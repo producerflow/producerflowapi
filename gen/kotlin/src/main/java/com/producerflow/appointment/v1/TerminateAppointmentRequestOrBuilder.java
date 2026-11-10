@@ -31,9 +31,11 @@ public interface TerminateAppointmentRequestOrBuilder extends
 
   /**
    * <pre>
-   * Reason for termination. This must be a valid termination reason for the
-   * state where the license is issued. Call ListTerminationReasons first to
-   * get the list of valid reasons for the specific state.
+   * Required. Reason for termination. This must be a valid termination reason
+   * for the state where the license is issued. Call ListTerminationReasons
+   * first to get the list of valid reasons for the specific state; a reason
+   * the state does not accept is refused by NIPR when the termination is
+   * filed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.TerminationReason reason = 2 [json_name = "reason", (.buf.validate.field) = { ... }</code>
@@ -42,9 +44,11 @@ public interface TerminateAppointmentRequestOrBuilder extends
   int getReasonValue();
   /**
    * <pre>
-   * Reason for termination. This must be a valid termination reason for the
-   * state where the license is issued. Call ListTerminationReasons first to
-   * get the list of valid reasons for the specific state.
+   * Required. Reason for termination. This must be a valid termination reason
+   * for the state where the license is issued. Call ListTerminationReasons
+   * first to get the list of valid reasons for the specific state; a reason
+   * the state does not accept is refused by NIPR when the termination is
+   * filed.
    * </pre>
    *
    * <code>.producerflow.appointment.v1.TerminationReason reason = 2 [json_name = "reason", (.buf.validate.field) = { ... }</code>

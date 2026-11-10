@@ -44,40 +44,46 @@ const (
 // TestingServiceClient is a client for the producerflow.testing.v1.TestingService service.
 type TestingServiceClient interface {
 	// DeleteAgency permanently removes an agency and every producer,
-	// appointment, and NIPR record scoped to it, freeing the underlying
-	// licenses to be appointed again. It lets tenants reset the same agency
+	// appointment, contact, location, onboarding record, NIPR record and
+	// uploaded file scoped to it, freeing the underlying licenses to be
+	// appointed again. It lets tenants reset the same agency
 	// between automated test runs instead of provisioning a new one each time.
 	//
-	// DEV AND UAT ONLY: this method is not available in production. Calls made
-	// in production are always rejected with PERMISSION_DENIED.
+	// UAT ONLY: this method is not available in production. Calls made in
+	// production are always rejected with PERMISSION_DENIED.
 	//
 	// The agency must belong to the tenant resolved from the request's API key.
-	// Tenant (internal) agencies cannot be deleted — they hold per-tenant
-	// configuration. The operation is irreversible and emits no events.
+	// Your own internal agency (the one that represents your organization)
+	// cannot be deleted. The operation is irreversible. It records one
+	// license.deleted per NIPR license the agency held and then agency.deleted
+	// on the Events API.
 	//
 	// Errors:
 	// - NOT_FOUND: no agency with the given ID exists for the tenant.
-	// - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+	// - FAILED_PRECONDITION: the agency is your own internal agency.
 	// - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-	// - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+	// - PERMISSION_DENIED: the call was made in production.
 	DeleteAgency(context.Context, *connect.Request[v1.DeleteAgencyRequest]) (*connect.Response[v1.DeleteAgencyResponse], error)
 	// DeleteAppointment permanently removes a single appointment, freeing the
 	// underlying license to be appointed again. Unlike terminating an
-	// appointment — which leaves a TERMINATED record that still blocks the
-	// license from being re-appointed — deleting it removes the row entirely so
-	// the same license can be reused across automated test runs.
+	// appointment, which keeps the appointment and its history so that a later
+	// RequestAppointment re-sends it as a re-appointment, deleting it removes
+	// the appointment and its status history so the next request behaves like
+	// a first one.
 	//
-	// DEV AND UAT ONLY: this method is not available in production. Calls made
-	// in production are always rejected with PERMISSION_DENIED.
+	// UAT ONLY: this method is not available in production. Calls made in
+	// production are always rejected with PERMISSION_DENIED.
 	//
 	// The appointment must belong to the tenant resolved from the request's API
-	// key. Its interleaved history is removed with it. The operation is
-	// irreversible, emits no events, and sends nothing to NIPR.
+	// key. The operation is irreversible, records appointment.deleted on the
+	// Events API, and sends nothing to NIPR: a filing already made for an
+	// IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+	// delete settled appointments only.
 	//
 	// Errors:
 	// - NOT_FOUND: no appointment with the given ID exists for the tenant.
 	// - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-	// - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+	// - PERMISSION_DENIED: the call was made in production.
 	DeleteAppointment(context.Context, *connect.Request[v1.DeleteAppointmentRequest]) (*connect.Response[v1.DeleteAppointmentResponse], error)
 }
 
@@ -126,40 +132,46 @@ func (c *testingServiceClient) DeleteAppointment(ctx context.Context, req *conne
 // TestingServiceHandler is an implementation of the producerflow.testing.v1.TestingService service.
 type TestingServiceHandler interface {
 	// DeleteAgency permanently removes an agency and every producer,
-	// appointment, and NIPR record scoped to it, freeing the underlying
-	// licenses to be appointed again. It lets tenants reset the same agency
+	// appointment, contact, location, onboarding record, NIPR record and
+	// uploaded file scoped to it, freeing the underlying licenses to be
+	// appointed again. It lets tenants reset the same agency
 	// between automated test runs instead of provisioning a new one each time.
 	//
-	// DEV AND UAT ONLY: this method is not available in production. Calls made
-	// in production are always rejected with PERMISSION_DENIED.
+	// UAT ONLY: this method is not available in production. Calls made in
+	// production are always rejected with PERMISSION_DENIED.
 	//
 	// The agency must belong to the tenant resolved from the request's API key.
-	// Tenant (internal) agencies cannot be deleted — they hold per-tenant
-	// configuration. The operation is irreversible and emits no events.
+	// Your own internal agency (the one that represents your organization)
+	// cannot be deleted. The operation is irreversible. It records one
+	// license.deleted per NIPR license the agency held and then agency.deleted
+	// on the Events API.
 	//
 	// Errors:
 	// - NOT_FOUND: no agency with the given ID exists for the tenant.
-	// - FAILED_PRECONDITION: the agency is a tenant (internal) agency.
+	// - FAILED_PRECONDITION: the agency is your own internal agency.
 	// - INVALID_ARGUMENT: agency_id is missing or is not a valid UUID.
-	// - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+	// - PERMISSION_DENIED: the call was made in production.
 	DeleteAgency(context.Context, *connect.Request[v1.DeleteAgencyRequest]) (*connect.Response[v1.DeleteAgencyResponse], error)
 	// DeleteAppointment permanently removes a single appointment, freeing the
 	// underlying license to be appointed again. Unlike terminating an
-	// appointment — which leaves a TERMINATED record that still blocks the
-	// license from being re-appointed — deleting it removes the row entirely so
-	// the same license can be reused across automated test runs.
+	// appointment, which keeps the appointment and its history so that a later
+	// RequestAppointment re-sends it as a re-appointment, deleting it removes
+	// the appointment and its status history so the next request behaves like
+	// a first one.
 	//
-	// DEV AND UAT ONLY: this method is not available in production. Calls made
-	// in production are always rejected with PERMISSION_DENIED.
+	// UAT ONLY: this method is not available in production. Calls made in
+	// production are always rejected with PERMISSION_DENIED.
 	//
 	// The appointment must belong to the tenant resolved from the request's API
-	// key. Its interleaved history is removed with it. The operation is
-	// irreversible, emits no events, and sends nothing to NIPR.
+	// key. The operation is irreversible, records appointment.deleted on the
+	// Events API, and sends nothing to NIPR: a filing already made for an
+	// IN_PROGRESS or TERMINATION_REQUESTED appointment is not withdrawn, so
+	// delete settled appointments only.
 	//
 	// Errors:
 	// - NOT_FOUND: no appointment with the given ID exists for the tenant.
 	// - INVALID_ARGUMENT: appointment_id is missing or is not a valid UUID.
-	// - PERMISSION_DENIED: the call was made outside dev/UAT (e.g. production).
+	// - PERMISSION_DENIED: the call was made in production.
 	DeleteAppointment(context.Context, *connect.Request[v1.DeleteAppointmentRequest]) (*connect.Response[v1.DeleteAppointmentResponse], error)
 }
 

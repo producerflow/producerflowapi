@@ -11,7 +11,7 @@ public interface DeleteAppointmentResponseOrBuilder extends
 
   /**
    * <pre>
-   * State of the deleted appointment, echoed back for confirmation.
+   * Two-letter state code of the deleted appointment, echoed back for confirmation.
    * </pre>
    *
    * <code>string state = 1 [json_name = "state"];</code>
@@ -20,7 +20,7 @@ public interface DeleteAppointmentResponseOrBuilder extends
   java.lang.String getState();
   /**
    * <pre>
-   * State of the deleted appointment, echoed back for confirmation.
+   * Two-letter state code of the deleted appointment, echoed back for confirmation.
    * </pre>
    *
    * <code>string state = 1 [json_name = "state"];</code>

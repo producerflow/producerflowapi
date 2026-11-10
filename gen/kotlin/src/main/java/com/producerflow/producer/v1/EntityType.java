@@ -36,7 +36,7 @@ public enum EntityType
    * - The principal producer IS the agency
    * - FEIN is optional
    *
-   * Use this type for independent agents who operate alone.
+   * Use this type for independent producers who operate alone.
    * </pre>
    *
    * <code>ENTITY_TYPE_SOLE_PROPRIETOR = 1;</code>
@@ -52,7 +52,7 @@ public enum EntityType
    * - The agency is a separate legal entity from its producers
    * - Typically has business structure (LLC, Corporation, Partnership, etc.)
    *
-   * Use this type for traditional insurance agencies with multiple agents.
+   * Use this type for traditional insurance agencies with multiple producers.
    * </pre>
    *
    * <code>ENTITY_TYPE_AGENCY = 2;</code>
@@ -104,7 +104,7 @@ public enum EntityType
    * - The principal producer IS the agency
    * - FEIN is optional
    *
-   * Use this type for independent agents who operate alone.
+   * Use this type for independent producers who operate alone.
    * </pre>
    *
    * <code>ENTITY_TYPE_SOLE_PROPRIETOR = 1;</code>
@@ -120,7 +120,7 @@ public enum EntityType
    * - The agency is a separate legal entity from its producers
    * - Typically has business structure (LLC, Corporation, Partnership, etc.)
    *
-   * Use this type for traditional insurance agencies with multiple agents.
+   * Use this type for traditional insurance agencies with multiple producers.
    * </pre>
    *
    * <code>ENTITY_TYPE_AGENCY = 2;</code>

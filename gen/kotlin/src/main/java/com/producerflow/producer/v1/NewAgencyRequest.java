@@ -327,7 +327,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -340,7 +340,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -353,7 +353,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -433,8 +433,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -444,8 +444,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -455,8 +455,8 @@ private static final long serialVersionUID = 0L;
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -1056,7 +1056,7 @@ java.lang.String defaultValue);
 
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1065,7 +1065,7 @@ java.lang.String defaultValue);
       java.lang.String getTenantId();
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1641,7 +1641,7 @@ java.lang.String defaultValue);
       private volatile java.lang.Object tenantId_ = "";
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -1662,7 +1662,7 @@ java.lang.String defaultValue);
       }
       /**
        * <pre>
-       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+       * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
        * </pre>
        *
        * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -3194,7 +3194,7 @@ java.lang.String defaultValue) {
         private java.lang.Object tenantId_ = "";
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -3214,7 +3214,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -3235,7 +3235,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -3252,7 +3252,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -3266,7 +3266,7 @@ java.lang.String defaultValue) {
         }
         /**
          * <pre>
-         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+         * Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
          * </pre>
          *
          * <code>string tenant_id = 6 [json_name = "tenantId", (.buf.validate.field) = { ... }</code>
@@ -11281,7 +11281,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -11297,7 +11297,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -11322,7 +11322,7 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-     * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+     * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
      * We currently don't support multiple levels of organizations or agencies.
      * Agencies are not always part of an organization, so this field is optional.
      * To get valid organization IDs, use the ListOrganizations RPC.
@@ -11433,8 +11433,8 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -11447,8 +11447,8 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -11470,8 +11470,8 @@ java.lang.String defaultValue) {
     /**
      * <pre>
      * FEIN represents the Federal Employer Identification Number of the agency.
-     * Required for ENTITY_TYPE_AGENCY
-     * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+     * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+     * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
      * </pre>
      *
      * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -14884,7 +14884,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -14899,7 +14899,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -14923,7 +14923,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -14948,7 +14948,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -14969,7 +14969,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -14987,7 +14987,7 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * RootOrganizationID represents the ID of the root organization that the agency belongs to.
-       * An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+       * An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
        * We currently don't support multiple levels of organizations or agencies.
        * Agencies are not always part of an organization, so this field is optional.
        * To get valid organization IDs, use the ListOrganizations RPC.
@@ -15204,8 +15204,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -15217,8 +15217,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -15239,8 +15239,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -15262,8 +15262,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -15281,8 +15281,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>
@@ -15297,8 +15297,8 @@ java.lang.String defaultValue) {
       /**
        * <pre>
        * FEIN represents the Federal Employer Identification Number of the agency.
-       * Required for ENTITY_TYPE_AGENCY
-       * Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+       * Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+       * Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
        * </pre>
        *
        * <code>optional string fein = 16 [json_name = "fein", (.buf.validate.field) = { ... }</code>

@@ -12,7 +12,7 @@ public inline fun appointment(block: com.producerflow.appointment.v1.Appointment
 /**
  * ```
  * Represents a managed appointment for a license, tracked through the
- * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+ * Producerflow appointment lifecycle. Unlike NIPR-sourced appointment data
  * on the Producer/Agency messages, this represents appointments that are
  * actively managed (requested, terminated) through the AppointmentService.
  * ```

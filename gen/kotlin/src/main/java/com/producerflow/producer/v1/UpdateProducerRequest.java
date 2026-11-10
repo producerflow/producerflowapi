@@ -155,7 +155,7 @@ private static final long serialVersionUID = 0L;
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -169,7 +169,7 @@ private static final long serialVersionUID = 0L;
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -183,7 +183,7 @@ private static final long serialVersionUID = 0L;
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -202,7 +202,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return Whether the npn field is set.
      */
     @java.lang.Deprecated boolean hasNpn();
@@ -215,7 +215,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return The npn.
      */
     @java.lang.Deprecated java.lang.String getNpn();
@@ -228,7 +228,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return The bytes for npn.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -273,7 +273,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return Whether the street field is set.
      */
     @java.lang.Deprecated boolean hasStreet();
@@ -284,7 +284,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return The street.
      */
     @java.lang.Deprecated java.lang.String getStreet();
@@ -295,7 +295,7 @@ private static final long serialVersionUID = 0L;
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return The bytes for street.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
@@ -463,7 +463,7 @@ private static final long serialVersionUID = 0L;
 
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -484,7 +484,7 @@ private static final long serialVersionUID = 0L;
     int getExternalMetadataCount();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -512,7 +512,7 @@ private static final long serialVersionUID = 0L;
     getExternalMetadata();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -534,7 +534,7 @@ private static final long serialVersionUID = 0L;
     getExternalMetadataMap();
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -559,7 +559,7 @@ java.lang.String getExternalMetadataOrDefault(
 java.lang.String defaultValue);
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -943,7 +943,7 @@ java.lang.String defaultValue);
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -960,7 +960,7 @@ java.lang.String defaultValue);
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -986,7 +986,7 @@ java.lang.String defaultValue);
      * If provided, must be a valid email format.
      * Must be unique within the tenant.
      * An internal producer's email cannot be changed here: it is their login,
-     * so the producer changes it through email verification in ProducerFlow.
+     * so the producer changes it through email verification in Producerflow.
      * Sending the email they already have is accepted.
      * </pre>
      *
@@ -1020,7 +1020,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return Whether the npn field is set.
      */
     @java.lang.Override
@@ -1036,7 +1036,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return The npn.
      */
     @java.lang.Override
@@ -1061,7 +1061,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2465
+     *     See producerflow/producer/v1/producer.proto;l=2570
      * @return The bytes for npn.
      */
     @java.lang.Override
@@ -1151,7 +1151,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return Whether the street field is set.
      */
     @java.lang.Override
@@ -1165,7 +1165,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return The street.
      */
     @java.lang.Override
@@ -1188,7 +1188,7 @@ java.lang.String defaultValue);
      *
      * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
      * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-     *     See producerflow/producer/v1/producer.proto;l=2478
+     *     See producerflow/producer/v1/producer.proto;l=2583
      * @return The bytes for street.
      */
     @java.lang.Override
@@ -1544,7 +1544,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -1578,7 +1578,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -1602,7 +1602,7 @@ java.lang.String defaultValue);
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -1633,7 +1633,7 @@ java.lang.String defaultValue) {
     }
     /**
      * <pre>
-     * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+     * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
      * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
      * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
      * Common use cases include:
@@ -2891,7 +2891,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -2907,7 +2907,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -2932,7 +2932,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -2958,7 +2958,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -2980,7 +2980,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -2999,7 +2999,7 @@ java.lang.String defaultValue) {
        * If provided, must be a valid email format.
        * Must be unique within the tenant.
        * An internal producer's email cannot be changed here: it is their login,
-       * so the producer changes it through email verification in ProducerFlow.
+       * so the producer changes it through email verification in Producerflow.
        * Sending the email they already have is accepted.
        * </pre>
        *
@@ -3027,7 +3027,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @return Whether the npn field is set.
        */
       @java.lang.Deprecated public boolean hasNpn() {
@@ -3042,7 +3042,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @return The npn.
        */
       @java.lang.Deprecated public java.lang.String getNpn() {
@@ -3066,7 +3066,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @return The bytes for npn.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -3091,7 +3091,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @param value The npn to set.
        * @return This builder for chaining.
        */
@@ -3112,7 +3112,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearNpn() {
@@ -3130,7 +3130,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string npn = 4 [json_name = "npn", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.npn is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2465
+       *     See producerflow/producer/v1/producer.proto;l=2570
        * @param value The bytes for npn to set.
        * @return This builder for chaining.
        */
@@ -3261,7 +3261,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @return Whether the street field is set.
        */
       @java.lang.Deprecated public boolean hasStreet() {
@@ -3274,7 +3274,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @return The street.
        */
       @java.lang.Deprecated public java.lang.String getStreet() {
@@ -3296,7 +3296,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @return The bytes for street.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
@@ -3319,7 +3319,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @param value The street to set.
        * @return This builder for chaining.
        */
@@ -3338,7 +3338,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearStreet() {
@@ -3354,7 +3354,7 @@ java.lang.String defaultValue) {
        *
        * <code>optional string street = 6 [json_name = "street", deprecated = true, (.buf.validate.field) = { ... }</code>
        * @deprecated producerflow.producer.v1.UpdateProducerRequest.Producer.street is deprecated.
-       *     See producerflow/producer/v1/producer.proto;l=2478
+       *     See producerflow/producer/v1/producer.proto;l=2583
        * @param value The bytes for street to set.
        * @return This builder for chaining.
        */
@@ -3941,7 +3941,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -3975,7 +3975,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -3999,7 +3999,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -4030,7 +4030,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -4067,7 +4067,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -4103,7 +4103,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:
@@ -4133,7 +4133,7 @@ java.lang.String defaultValue) {
       }
       /**
        * <pre>
-       * ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+       * ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
        * This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
        * reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
        * Common use cases include:

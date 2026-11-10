@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file producerflow/appointment/v1/appointment.proto.
  */
 export const file_producerflow_appointment_v1_appointment: GenFile = /*@__PURE__*/
-  fileDesc("Ci1wcm9kdWNlcmZsb3cvYXBwb2ludG1lbnQvdjEvYXBwb2ludG1lbnQucHJvdG8SG3Byb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MSJXChlSZXF1ZXN0QXBwb2ludG1lbnRSZXF1ZXN0EhwKCmxpY2Vuc2VfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNhcnJpZXJfaWQYAiABKAlCCLpIBXIDsAEBIpwBChpSZXF1ZXN0QXBwb2ludG1lbnRSZXNwb25zZRIWCg5hcHBvaW50bWVudF9pZBgBIAEoCRJIChFwcm9jZXNzaW5nX3N0YXR1cxgCIAEoDjItLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5Qcm9jZXNzaW5nU3RhdHVzEhwKFG5vdF9lbGlnaWJsZV9yZWFzb25zGAMgAygJIjkKFUdldEFwcG9pbnRtZW50UmVxdWVzdBIgCg5hcHBvaW50bWVudF9pZBgBIAEoCUIIukgFcgOwAQEiVwoWR2V0QXBwb2ludG1lbnRSZXNwb25zZRI9CgthcHBvaW50bWVudBgBIAEoCzIoLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5BcHBvaW50bWVudCLBAgoXTGlzdEFwcG9pbnRtZW50c1JlcXVlc3QSSAoRcHJvY2Vzc2luZ19zdGF0dXMYASADKA4yLS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuUHJvY2Vzc2luZ1N0YXR1cxIfCgtwcm9kdWNlcl9pZBgCIAEoCUIIukgFcgOwAQFIABIdCglhZ2VuY3lfaWQYAyABKAlCCLpIBXIDsAEBSAASSgoSb3BlcmF0aW9uYWxfc3RhdHVzGAQgAygOMi4ucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLk9wZXJhdGlvbmFsU3RhdHVzEjgKCnBhZ2luYXRpb24YBSABKAsyJC5wcm9kdWNlcmZsb3cucHJvZHVjZXIudjEuUGFnaW5hdGlvbkIWCg1saWNlbnNlX293bmVyEgW6SAIIASJzChhMaXN0QXBwb2ludG1lbnRzUmVzcG9uc2USPgoMYXBwb2ludG1lbnRzGAEgAygLMigucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkFwcG9pbnRtZW50EhcKD25leHRfcGFnZV90b2tlbhgCIAEoCSKJAQobVGVybWluYXRlQXBwb2ludG1lbnRSZXF1ZXN0EiAKDmFwcG9pbnRtZW50X2lkGAEgASgJQgi6SAVyA7ABARJICgZyZWFzb24YAiABKA4yLi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuVGVybWluYXRpb25SZWFzb25CCLpIBYIBAhABIi8KHFRlcm1pbmF0ZUFwcG9pbnRtZW50UmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCCJxChtMaXN0RWxpZ2libGVMaWNlbnNlc1JlcXVlc3QSHwoLcHJvZHVjZXJfaWQYASABKAlCCLpIBXIDsAEBSAASHQoJYWdlbmN5X2lkGAIgASgJQgi6SAVyA7ABAUgAQhIKCWFwcGxpY2FudBIFukgCCAEiVgocTGlzdEVsaWdpYmxlTGljZW5zZXNSZXNwb25zZRI2CghsaWNlbnNlcxgBIAMoCzIkLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaWNlbnNlIjkKGUdldEFwcG9pbnRtZW50RmVlc1JlcXVlc3QSHAoKbGljZW5zZV9pZBgBIAEoCUIIukgFcgOwAQEiMgoaR2V0QXBwb2ludG1lbnRGZWVzUmVzcG9uc2USFAoMZmVlX2luX2NlbnRzGAEgASgDIjkKGUdldFRlcm1pbmF0aW9uRmVlc1JlcXVlc3QSHAoKbGljZW5zZV9pZBgBIAEoCUIIukgFcgOwAQEiMgoaR2V0VGVybWluYXRpb25GZWVzUmVzcG9uc2USFAoMZmVlX2luX2NlbnRzGAEgASgDIh8KHUdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXF1ZXN0IlgKHkdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXNwb25zZRI2CghjYXJyaWVycxgBIAMoCzIkLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5DYXJyaWVyInQKB0NhcnJpZXISEgoKY2Fycmllcl9pZBgBIAEoCRIMCgRuYW1lGAIgASgJEgsKA25wbhgDIAEoCRIMCgRmZWluGAQgASgJEg4KBmNvY29kZRgFIAEoCRIcChRoYXNfbmlwcl9pbnRlZ3JhdGlvbhgGIAEoCCLPAQocQXBwb2ludG1lbnRPcGVyYXRpb25hbFN0YXR1cxI+CgZzdGF0dXMYASABKA4yLi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuT3BlcmF0aW9uYWxTdGF0dXMSPQoMcmlza19yZWFzb25zGAIgAygOMicucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLlJpc2tSZWFzb24SMAoMbGFzdF91cGRhdGVkGAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKWBQoLQXBwb2ludG1lbnQSFgoOYXBwb2ludG1lbnRfaWQYASABKAkSNQoHbGljZW5zZRgCIAEoCzIkLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaWNlbnNlEgwKBG5hbWUYAyABKAkSEQoJYWdlbmN5X2lkGAQgASgJEhgKC3Byb2R1Y2VyX2lkGAUgASgJSACIAQESDwoHY2FycmllchgGIAEoCRJGChBhcHBvaW50bWVudF90eXBlGAcgASgOMiwucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkFwcG9pbnRtZW50VHlwZRJIChFwcm9jZXNzaW5nX3N0YXR1cxgIIAEoDjItLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5Qcm9jZXNzaW5nU3RhdHVzEhAKCGNvbW1lbnRzGAkgASgJEjIKDmVmZmVjdGl2ZV9kYXRlGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI5ChB0ZXJtaW5hdGlvbl9kYXRlGAsgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgBiAEBEi4KCnVwZGF0ZWRfYXQYDCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wElUKEm9wZXJhdGlvbmFsX3N0YXR1cxgNIAEoCzI5LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5BcHBvaW50bWVudE9wZXJhdGlvbmFsU3RhdHVzEg4KBmNvY29kZRgOIAEoCRIdChVwYXJlbnRfYXBwb2ludG1lbnRfaWQYDyABKAlCDgoMX3Byb2R1Y2VyX2lkQhMKEV90ZXJtaW5hdGlvbl9kYXRlItcCCgdMaWNlbnNlEhwKCmxpY2Vuc2VfaWQYASABKAlCCLpIBXIDsAEBEiEKDmxpY2Vuc2VfbnVtYmVyGAIgASgJQgm6SAZyBBABGDISHwoLcHJvZHVjZXJfaWQYAyABKAlCCLpIBXIDsAEBSAASHQoJYWdlbmN5X2lkGAQgASgJQgi6SAVyA7ABAUgAEhcKBXN0YXRlGAUgASgJQgi6SAVyA5gBAhIVCg1saWNlbnNlX2NsYXNzGAYgASgJEhkKEWlzX3JlZ2lzdHJ5X3N0YXRlGAcgASgIEhwKCmNhcnJpZXJfaWQYCCABKAlCCLpIBXIDsAEBEioKD2V4cGlyYXRpb25fZGF0ZRgJIAEoCzIRLmdvb2dsZS50eXBlLkRhdGUSJQoKaXNzdWVfZGF0ZRgKIAEoCzIRLmdvb2dsZS50eXBlLkRhdGVCDwoNbGljZW5zZV9vd25lciI4Ch1MaXN0VGVybWluYXRpb25SZWFzb25zUmVxdWVzdBIXCgVzdGF0ZRgBIAEoCUIIukgFcgOYAQIibQoeTGlzdFRlcm1pbmF0aW9uUmVhc29uc1Jlc3BvbnNlEksKE3Rlcm1pbmF0aW9uX3JlYXNvbnMYASADKA4yLi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuVGVybWluYXRpb25SZWFzb24qdgoRT3BlcmF0aW9uYWxTdGF0dXMSIgoeT1BFUkFUSU9OQUxfU1RBVFVTX1VOU1BFQ0lGSUVEEAASHQoZT1BFUkFUSU9OQUxfU1RBVFVTX0FDVElWRRABEh4KGk9QRVJBVElPTkFMX1NUQVRVU19BVF9SSVNLEAIqlAIKClJpc2tSZWFzb24SGwoXUklTS19SRUFTT05fVU5TUEVDSUZJRUQQABIgChxSSVNLX1JFQVNPTl9MSUNFTlNFX0lOQUNUSVZFEAESHwobUklTS19SRUFTT05fTElDRU5TRV9FWFBJUkVEEAISHAoYUklTS19SRUFTT05fRU9fTk9UX0ZPVU5EEAMSGwoXUklTS19SRUFTT05fRU9fSU5BQ1RJVkUQBBIaChZSSVNLX1JFQVNPTl9FT19FWFBJUkVEEAUSLAooUklTS19SRUFTT05fU1RBVEVfQVBQT0lOVE1FTlRfVEVSTUlOQVRFRBAGEiEKHVJJU0tfUkVBU09OX1JFR1VMQVRPUllfQUNUSU9OEAcqjwIKEFByb2Nlc3NpbmdTdGF0dXMSIQodUFJPQ0VTU0lOR19TVEFUVVNfVU5TUEVDSUZJRUQQABIhCh1QUk9DRVNTSU5HX1NUQVRVU19JTl9QUk9HUkVTUxABEh8KG1BST0NFU1NJTkdfU1RBVFVTX0FQUE9JTlRFRBACEiAKHFBST0NFU1NJTkdfU1RBVFVTX1RFUk1JTkFURUQQAxIeChpQUk9DRVNTSU5HX1NUQVRVU19SRUpFQ1RFRBAEEiUKIVBST0NFU1NJTkdfU1RBVFVTX01JU1NJTkdfTElDRU5TRRAFEisKJ1BST0NFU1NJTkdfU1RBVFVTX1RFUk1JTkFUSU9OX1JFUVVFU1RFRBAGKrQBCg9BcHBvaW50bWVudFR5cGUSIAocQVBQT0lOVE1FTlRfVFlQRV9VTlNQRUNJRklFRBAAEh0KGUFQUE9JTlRNRU5UX1RZUEVfUkVHSVNUUlkQARIdChlBUFBPSU5UTUVOVF9UWVBFX1VQX0ZST05UEAISIQodQVBQT0lOVE1FTlRfVFlQRV9KVVNUX0lOX1RJTUUQAxIeChpBUFBPSU5UTUVOVF9UWVBFX1NZTlRIRVRJQxAEKsEFChFUZXJtaW5hdGlvblJlYXNvbhIiCh5URVJNSU5BVElPTl9SRUFTT05fVU5TUEVDSUZJRUQQABIsCihURVJNSU5BVElPTl9SRUFTT05fVk9MVU5UQVJZX1RFUk1JTkFUSU9OEAESLAooVEVSTUlOQVRJT05fUkVBU09OX0lOQURFUVVBVEVfUFJPRFVDVElPThACEjEKLVRFUk1JTkFUSU9OX1JFQVNPTl9DQU5DRUxMRURfQllfR0VORVJBTF9BR0VOVBADEhwKGFRFUk1JTkFUSU9OX1JFQVNPTl9ERUFUSBAEEjUKMVRFUk1JTkFUSU9OX1JFQVNPTl9DT01QQU5ZX0RFRlVOQ1RfT1JfTElRVUlEQVRJT04QBRIrCidURVJNSU5BVElPTl9SRUFTT05fQ09NUEFOWV9JTkRFQlRFRE5FU1MQBhIwCixURVJNSU5BVElPTl9SRUFTT05fUE9PUl9QT0xJQ1lIT0xERVJfU0VSVklDRRAHEiIKHlRFUk1JTkFUSU9OX1JFQVNPTl9BR0VOVF9NT1ZFRBAIEikKJVRFUk1JTkFUSU9OX1JFQVNPTl9BUFBPSU5URURfSU5fRVJST1IQCRIgChxURVJNSU5BVElPTl9SRUFTT05fQ0FOQ0VMTEVEEAoSKgomVEVSTUlOQVRJT05fUkVBU09OX0NBTkNFTExFRF9GT1JfQ0FVU0UQCxIlCiFURVJNSU5BVElPTl9SRUFTT05fQ09NUEFOWV9NRVJHRVIQDBIeChpURVJNSU5BVElPTl9SRUFTT05fUkVWT0tFRBANEi8KK1RFUk1JTkFUSU9OX1JFQVNPTl9TVVNQRU5ERURfRk9SX0NPTVBMSUFOQ0UQDhIwCixURVJNSU5BVElPTl9SRUFTT05fUkVRVUVTVF9SRUdVTEFUT1JZX1JFVklFVxAPMvAJChJBcHBvaW50bWVudFNlcnZpY2USeQoOR2V0QXBwb2ludG1lbnQSMi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuR2V0QXBwb2ludG1lbnRSZXF1ZXN0GjMucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRtZW50UmVzcG9uc2UShQEKEkdldEFwcG9pbnRtZW50RmVlcxI2LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5HZXRBcHBvaW50bWVudEZlZXNSZXF1ZXN0GjcucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRtZW50RmVlc1Jlc3BvbnNlEpEBChZHZXRBcHBvaW50YWJsZUNhcnJpZXJzEjoucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXF1ZXN0GjsucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXNwb25zZRKFAQoSR2V0VGVybWluYXRpb25GZWVzEjYucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldFRlcm1pbmF0aW9uRmVlc1JlcXVlc3QaNy5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuR2V0VGVybWluYXRpb25GZWVzUmVzcG9uc2USfwoQTGlzdEFwcG9pbnRtZW50cxI0LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaXN0QXBwb2ludG1lbnRzUmVxdWVzdBo1LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaXN0QXBwb2ludG1lbnRzUmVzcG9uc2USiwEKFExpc3RFbGlnaWJsZUxpY2Vuc2VzEjgucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RFbGlnaWJsZUxpY2Vuc2VzUmVxdWVzdBo5LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaXN0RWxpZ2libGVMaWNlbnNlc1Jlc3BvbnNlEocBChJSZXF1ZXN0QXBwb2ludG1lbnQSNi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuUmVxdWVzdEFwcG9pbnRtZW50UmVxdWVzdBo3LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5SZXF1ZXN0QXBwb2ludG1lbnRSZXNwb25zZSIAEo0BChRUZXJtaW5hdGVBcHBvaW50bWVudBI4LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5UZXJtaW5hdGVBcHBvaW50bWVudFJlcXVlc3QaOS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuVGVybWluYXRlQXBwb2ludG1lbnRSZXNwb25zZSIAEpEBChZMaXN0VGVybWluYXRpb25SZWFzb25zEjoucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RUZXJtaW5hdGlvblJlYXNvbnNSZXF1ZXN0GjsucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RUZXJtaW5hdGlvblJlYXNvbnNSZXNwb25zZUKbAgofY29tLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MUIQQXBwb2ludG1lbnRQcm90b1ABWlhnaXRodWIuY29tL3Byb2R1Y2VyZmxvdy9wcm9kdWNlcmZsb3dhcGkvZ2VuL2dvL3Byb2R1Y2VyZmxvdy9hcHBvaW50bWVudC92MTthcHBvaW50bWVudHYxogIDUEFYqgIbUHJvZHVjZXJmbG93LkFwcG9pbnRtZW50LlYxygIbUHJvZHVjZXJmbG93XEFwcG9pbnRtZW50XFYx4gInUHJvZHVjZXJmbG93XEFwcG9pbnRtZW50XFYxXEdQQk1ldGFkYXRh6gIdUHJvZHVjZXJmbG93OjpBcHBvaW50bWVudDo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_protobuf_timestamp, file_google_type_date, file_producerflow_producer_v1_producer]);
+  fileDesc("Ci1wcm9kdWNlcmZsb3cvYXBwb2ludG1lbnQvdjEvYXBwb2ludG1lbnQucHJvdG8SG3Byb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MSJXChlSZXF1ZXN0QXBwb2ludG1lbnRSZXF1ZXN0EhwKCmxpY2Vuc2VfaWQYASABKAlCCLpIBXIDsAEBEhwKCmNhcnJpZXJfaWQYAiABKAlCCLpIBXIDsAEBIqABChpSZXF1ZXN0QXBwb2ludG1lbnRSZXNwb25zZRIWCg5hcHBvaW50bWVudF9pZBgBIAEoCRJIChFwcm9jZXNzaW5nX3N0YXR1cxgCIAEoDjItLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5Qcm9jZXNzaW5nU3RhdHVzEiAKFG5vdF9lbGlnaWJsZV9yZWFzb25zGAMgAygJQgIYASI5ChVHZXRBcHBvaW50bWVudFJlcXVlc3QSIAoOYXBwb2ludG1lbnRfaWQYASABKAlCCLpIBXIDsAEBIlcKFkdldEFwcG9pbnRtZW50UmVzcG9uc2USPQoLYXBwb2ludG1lbnQYASABKAsyKC5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuQXBwb2ludG1lbnQiwQIKF0xpc3RBcHBvaW50bWVudHNSZXF1ZXN0EkgKEXByb2Nlc3Npbmdfc3RhdHVzGAEgAygOMi0ucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLlByb2Nlc3NpbmdTdGF0dXMSHwoLcHJvZHVjZXJfaWQYAiABKAlCCLpIBXIDsAEBSAASHQoJYWdlbmN5X2lkGAMgASgJQgi6SAVyA7ABAUgAEkoKEm9wZXJhdGlvbmFsX3N0YXR1cxgEIAMoDjIuLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5PcGVyYXRpb25hbFN0YXR1cxI4CgpwYWdpbmF0aW9uGAUgASgLMiQucHJvZHVjZXJmbG93LnByb2R1Y2VyLnYxLlBhZ2luYXRpb25CFgoNbGljZW5zZV9vd25lchIFukgCCAEicwoYTGlzdEFwcG9pbnRtZW50c1Jlc3BvbnNlEj4KDGFwcG9pbnRtZW50cxgBIAMoCzIoLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5BcHBvaW50bWVudBIXCg9uZXh0X3BhZ2VfdG9rZW4YAiABKAkiiQEKG1Rlcm1pbmF0ZUFwcG9pbnRtZW50UmVxdWVzdBIgCg5hcHBvaW50bWVudF9pZBgBIAEoCUIIukgFcgOwAQESSAoGcmVhc29uGAIgASgOMi4ucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLlRlcm1pbmF0aW9uUmVhc29uQgi6SAWCAQIQASIvChxUZXJtaW5hdGVBcHBvaW50bWVudFJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgicQobTGlzdEVsaWdpYmxlTGljZW5zZXNSZXF1ZXN0Eh8KC3Byb2R1Y2VyX2lkGAEgASgJQgi6SAVyA7ABAUgAEh0KCWFnZW5jeV9pZBgCIAEoCUIIukgFcgOwAQFIAEISCglhcHBsaWNhbnQSBbpIAggBIlYKHExpc3RFbGlnaWJsZUxpY2Vuc2VzUmVzcG9uc2USNgoIbGljZW5zZXMYASADKAsyJC5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuTGljZW5zZSI5ChlHZXRBcHBvaW50bWVudEZlZXNSZXF1ZXN0EhwKCmxpY2Vuc2VfaWQYASABKAlCCLpIBXIDsAEBIjIKGkdldEFwcG9pbnRtZW50RmVlc1Jlc3BvbnNlEhQKDGZlZV9pbl9jZW50cxgBIAEoAyI5ChlHZXRUZXJtaW5hdGlvbkZlZXNSZXF1ZXN0EhwKCmxpY2Vuc2VfaWQYASABKAlCCLpIBXIDsAEBIjIKGkdldFRlcm1pbmF0aW9uRmVlc1Jlc3BvbnNlEhQKDGZlZV9pbl9jZW50cxgBIAEoAyIfCh1HZXRBcHBvaW50YWJsZUNhcnJpZXJzUmVxdWVzdCJYCh5HZXRBcHBvaW50YWJsZUNhcnJpZXJzUmVzcG9uc2USNgoIY2FycmllcnMYASADKAsyJC5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuQ2FycmllciJ0CgdDYXJyaWVyEhIKCmNhcnJpZXJfaWQYASABKAkSDAoEbmFtZRgCIAEoCRILCgNucG4YAyABKAkSDAoEZmVpbhgEIAEoCRIOCgZjb2NvZGUYBSABKAkSHAoUaGFzX25pcHJfaW50ZWdyYXRpb24YBiABKAgizwEKHEFwcG9pbnRtZW50T3BlcmF0aW9uYWxTdGF0dXMSPgoGc3RhdHVzGAEgASgOMi4ucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLk9wZXJhdGlvbmFsU3RhdHVzEj0KDHJpc2tfcmVhc29ucxgCIAMoDjInLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5SaXNrUmVhc29uEjAKDGxhc3RfdXBkYXRlZBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAilgUKC0FwcG9pbnRtZW50EhYKDmFwcG9pbnRtZW50X2lkGAEgASgJEjUKB2xpY2Vuc2UYAiABKAsyJC5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuTGljZW5zZRIMCgRuYW1lGAMgASgJEhEKCWFnZW5jeV9pZBgEIAEoCRIYCgtwcm9kdWNlcl9pZBgFIAEoCUgAiAEBEg8KB2NhcnJpZXIYBiABKAkSRgoQYXBwb2ludG1lbnRfdHlwZRgHIAEoDjIsLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5BcHBvaW50bWVudFR5cGUSSAoRcHJvY2Vzc2luZ19zdGF0dXMYCCABKA4yLS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuUHJvY2Vzc2luZ1N0YXR1cxIQCghjb21tZW50cxgJIAEoCRIyCg5lZmZlY3RpdmVfZGF0ZRgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASOQoQdGVybWluYXRpb25fZGF0ZRgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAYgBARIuCgp1cGRhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBJVChJvcGVyYXRpb25hbF9zdGF0dXMYDSABKAsyOS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuQXBwb2ludG1lbnRPcGVyYXRpb25hbFN0YXR1cxIOCgZjb2NvZGUYDiABKAkSHQoVcGFyZW50X2FwcG9pbnRtZW50X2lkGA8gASgJQg4KDF9wcm9kdWNlcl9pZEITChFfdGVybWluYXRpb25fZGF0ZSLbAgoHTGljZW5zZRIcCgpsaWNlbnNlX2lkGAEgASgJQgi6SAVyA7ABARIhCg5saWNlbnNlX251bWJlchgCIAEoCUIJukgGcgQQARgyEh8KC3Byb2R1Y2VyX2lkGAMgASgJQgi6SAVyA7ABAUgAEh0KCWFnZW5jeV9pZBgEIAEoCUIIukgFcgOwAQFIABIXCgVzdGF0ZRgFIAEoCUIIukgFcgOYAQISFQoNbGljZW5zZV9jbGFzcxgGIAEoCRIdChFpc19yZWdpc3RyeV9zdGF0ZRgHIAEoCEICGAESHAoKY2Fycmllcl9pZBgIIAEoCUIIukgFcgOwAQESKgoPZXhwaXJhdGlvbl9kYXRlGAkgASgLMhEuZ29vZ2xlLnR5cGUuRGF0ZRIlCgppc3N1ZV9kYXRlGAogASgLMhEuZ29vZ2xlLnR5cGUuRGF0ZUIPCg1saWNlbnNlX293bmVyIjgKHUxpc3RUZXJtaW5hdGlvblJlYXNvbnNSZXF1ZXN0EhcKBXN0YXRlGAEgASgJQgi6SAVyA5gBAiJtCh5MaXN0VGVybWluYXRpb25SZWFzb25zUmVzcG9uc2USSwoTdGVybWluYXRpb25fcmVhc29ucxgBIAMoDjIuLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5UZXJtaW5hdGlvblJlYXNvbip2ChFPcGVyYXRpb25hbFN0YXR1cxIiCh5PUEVSQVRJT05BTF9TVEFUVVNfVU5TUEVDSUZJRUQQABIdChlPUEVSQVRJT05BTF9TVEFUVVNfQUNUSVZFEAESHgoaT1BFUkFUSU9OQUxfU1RBVFVTX0FUX1JJU0sQAiqUAgoKUmlza1JlYXNvbhIbChdSSVNLX1JFQVNPTl9VTlNQRUNJRklFRBAAEiAKHFJJU0tfUkVBU09OX0xJQ0VOU0VfSU5BQ1RJVkUQARIfChtSSVNLX1JFQVNPTl9MSUNFTlNFX0VYUElSRUQQAhIcChhSSVNLX1JFQVNPTl9FT19OT1RfRk9VTkQQAxIbChdSSVNLX1JFQVNPTl9FT19JTkFDVElWRRAEEhoKFlJJU0tfUkVBU09OX0VPX0VYUElSRUQQBRIsCihSSVNLX1JFQVNPTl9TVEFURV9BUFBPSU5UTUVOVF9URVJNSU5BVEVEEAYSIQodUklTS19SRUFTT05fUkVHVUxBVE9SWV9BQ1RJT04QByqPAgoQUHJvY2Vzc2luZ1N0YXR1cxIhCh1QUk9DRVNTSU5HX1NUQVRVU19VTlNQRUNJRklFRBAAEiEKHVBST0NFU1NJTkdfU1RBVFVTX0lOX1BST0dSRVNTEAESHwobUFJPQ0VTU0lOR19TVEFUVVNfQVBQT0lOVEVEEAISIAocUFJPQ0VTU0lOR19TVEFUVVNfVEVSTUlOQVRFRBADEh4KGlBST0NFU1NJTkdfU1RBVFVTX1JFSkVDVEVEEAQSJQohUFJPQ0VTU0lOR19TVEFUVVNfTUlTU0lOR19MSUNFTlNFEAUSKwonUFJPQ0VTU0lOR19TVEFUVVNfVEVSTUlOQVRJT05fUkVRVUVTVEVEEAYqtAEKD0FwcG9pbnRtZW50VHlwZRIgChxBUFBPSU5UTUVOVF9UWVBFX1VOU1BFQ0lGSUVEEAASHQoZQVBQT0lOVE1FTlRfVFlQRV9SRUdJU1RSWRABEh0KGUFQUE9JTlRNRU5UX1RZUEVfVVBfRlJPTlQQAhIhCh1BUFBPSU5UTUVOVF9UWVBFX0pVU1RfSU5fVElNRRADEh4KGkFQUE9JTlRNRU5UX1RZUEVfU1lOVEhFVElDEAQqwQUKEVRlcm1pbmF0aW9uUmVhc29uEiIKHlRFUk1JTkFUSU9OX1JFQVNPTl9VTlNQRUNJRklFRBAAEiwKKFRFUk1JTkFUSU9OX1JFQVNPTl9WT0xVTlRBUllfVEVSTUlOQVRJT04QARIsCihURVJNSU5BVElPTl9SRUFTT05fSU5BREVRVUFURV9QUk9EVUNUSU9OEAISMQotVEVSTUlOQVRJT05fUkVBU09OX0NBTkNFTExFRF9CWV9HRU5FUkFMX0FHRU5UEAMSHAoYVEVSTUlOQVRJT05fUkVBU09OX0RFQVRIEAQSNQoxVEVSTUlOQVRJT05fUkVBU09OX0NPTVBBTllfREVGVU5DVF9PUl9MSVFVSURBVElPThAFEisKJ1RFUk1JTkFUSU9OX1JFQVNPTl9DT01QQU5ZX0lOREVCVEVETkVTUxAGEjAKLFRFUk1JTkFUSU9OX1JFQVNPTl9QT09SX1BPTElDWUhPTERFUl9TRVJWSUNFEAcSIgoeVEVSTUlOQVRJT05fUkVBU09OX0FHRU5UX01PVkVEEAgSKQolVEVSTUlOQVRJT05fUkVBU09OX0FQUE9JTlRFRF9JTl9FUlJPUhAJEiAKHFRFUk1JTkFUSU9OX1JFQVNPTl9DQU5DRUxMRUQQChIqCiZURVJNSU5BVElPTl9SRUFTT05fQ0FOQ0VMTEVEX0ZPUl9DQVVTRRALEiUKIVRFUk1JTkFUSU9OX1JFQVNPTl9DT01QQU5ZX01FUkdFUhAMEh4KGlRFUk1JTkFUSU9OX1JFQVNPTl9SRVZPS0VEEA0SLworVEVSTUlOQVRJT05fUkVBU09OX1NVU1BFTkRFRF9GT1JfQ09NUExJQU5DRRAOEjAKLFRFUk1JTkFUSU9OX1JFQVNPTl9SRVFVRVNUX1JFR1VMQVRPUllfUkVWSUVXEA8y/wkKEkFwcG9pbnRtZW50U2VydmljZRJ7Cg5HZXRBcHBvaW50bWVudBIyLnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5HZXRBcHBvaW50bWVudFJlcXVlc3QaMy5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuR2V0QXBwb2ludG1lbnRSZXNwb25zZSIAEocBChJHZXRBcHBvaW50bWVudEZlZXMSNi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuR2V0QXBwb2ludG1lbnRGZWVzUmVxdWVzdBo3LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5HZXRBcHBvaW50bWVudEZlZXNSZXNwb25zZSIAEpMBChZHZXRBcHBvaW50YWJsZUNhcnJpZXJzEjoucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXF1ZXN0GjsucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkdldEFwcG9pbnRhYmxlQ2FycmllcnNSZXNwb25zZSIAEocBChJHZXRUZXJtaW5hdGlvbkZlZXMSNi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuR2V0VGVybWluYXRpb25GZWVzUmVxdWVzdBo3LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5HZXRUZXJtaW5hdGlvbkZlZXNSZXNwb25zZSIAEoEBChBMaXN0QXBwb2ludG1lbnRzEjQucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RBcHBvaW50bWVudHNSZXF1ZXN0GjUucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RBcHBvaW50bWVudHNSZXNwb25zZSIAEo0BChRMaXN0RWxpZ2libGVMaWNlbnNlcxI4LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5MaXN0RWxpZ2libGVMaWNlbnNlc1JlcXVlc3QaOS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuTGlzdEVsaWdpYmxlTGljZW5zZXNSZXNwb25zZSIAEocBChJSZXF1ZXN0QXBwb2ludG1lbnQSNi5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuUmVxdWVzdEFwcG9pbnRtZW50UmVxdWVzdBo3LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5SZXF1ZXN0QXBwb2ludG1lbnRSZXNwb25zZSIAEo0BChRUZXJtaW5hdGVBcHBvaW50bWVudBI4LnByb2R1Y2VyZmxvdy5hcHBvaW50bWVudC52MS5UZXJtaW5hdGVBcHBvaW50bWVudFJlcXVlc3QaOS5wcm9kdWNlcmZsb3cuYXBwb2ludG1lbnQudjEuVGVybWluYXRlQXBwb2ludG1lbnRSZXNwb25zZSIAEpMBChZMaXN0VGVybWluYXRpb25SZWFzb25zEjoucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RUZXJtaW5hdGlvblJlYXNvbnNSZXF1ZXN0GjsucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxLkxpc3RUZXJtaW5hdGlvblJlYXNvbnNSZXNwb25zZSIAQpsCCh9jb20ucHJvZHVjZXJmbG93LmFwcG9pbnRtZW50LnYxQhBBcHBvaW50bWVudFByb3RvUAFaWGdpdGh1Yi5jb20vcHJvZHVjZXJmbG93L3Byb2R1Y2VyZmxvd2FwaS9nZW4vZ28vcHJvZHVjZXJmbG93L2FwcG9pbnRtZW50L3YxO2FwcG9pbnRtZW50djGiAgNQQViqAhtQcm9kdWNlcmZsb3cuQXBwb2ludG1lbnQuVjHKAhtQcm9kdWNlcmZsb3dcQXBwb2ludG1lbnRcVjHiAidQcm9kdWNlcmZsb3dcQXBwb2ludG1lbnRcVjFcR1BCTWV0YWRhdGHqAh1Qcm9kdWNlcmZsb3c6OkFwcG9pbnRtZW50OjpWMWIGcHJvdG8z", [file_buf_validate_validate, file_google_protobuf_timestamp, file_google_type_date, file_producerflow_producer_v1_producer]);
 
 /**
  * Request to create a new appointment.
@@ -59,22 +59,23 @@ export type RequestAppointmentResponse = Message<"producerflow.appointment.v1.Re
   appointmentId: string;
 
   /**
-   * Processing status of the appointment request.
-   *
-   * For NIPR-integrated carriers: IN_PROGRESS if accepted, REJECTED if
-   * rejected.
-   *
-   * For registry states or non-NIPR carriers: APPOINTED if successful.
+   * Processing status of the appointment request: IN_PROGRESS when the
+   * request was filed with NIPR, APPOINTED when it was recorded immediately
+   * (registry state, carrier without NIPR integration, synthetic appointment).
+   * A NIPR rejection arrives later as REJECTED through the webhook and the
+   * read operations.
    *
    * @generated from field: producerflow.appointment.v1.ProcessingStatus processing_status = 2;
    */
   processingStatus: ProcessingStatus;
 
   /**
-   * If the appointment was rejected or ineligible, these reasons explain why.
-   * Only populated when processing_status is REJECTED.
+   * Unused. The call fails with an error instead of returning reasons; a
+   * later NIPR rejection is reported through the appointment.updated webhook
+   * event.
    *
-   * @generated from field: repeated string not_eligible_reasons = 3;
+   * @generated from field: repeated string not_eligible_reasons = 3 [deprecated = true];
+   * @deprecated
    */
   notEligibleReasons: string[];
 };
@@ -133,7 +134,10 @@ export const GetAppointmentResponseSchema: GenMessage<GetAppointmentResponse> = 
  */
 export type ListAppointmentsRequest = Message<"producerflow.appointment.v1.ListAppointmentsRequest"> & {
   /**
-   * Optional. Filter results by processing status.
+   * Optional. Filter results by processing status. Without it only
+   * IN_PROGRESS, APPOINTED, TERMINATED and REJECTED appointments are returned;
+   * pass TERMINATION_REQUESTED or MISSING_LICENSE explicitly to see those.
+   * Several values are combined with OR.
    *
    * @generated from field: repeated producerflow.appointment.v1.ProcessingStatus processing_status = 1;
    */
@@ -222,9 +226,11 @@ export type TerminateAppointmentRequest = Message<"producerflow.appointment.v1.T
   appointmentId: string;
 
   /**
-   * Reason for termination. This must be a valid termination reason for the
-   * state where the license is issued. Call ListTerminationReasons first to
-   * get the list of valid reasons for the specific state.
+   * Required. Reason for termination. This must be a valid termination reason
+   * for the state where the license is issued. Call ListTerminationReasons
+   * first to get the list of valid reasons for the specific state; a reason
+   * the state does not accept is refused by NIPR when the termination is
+   * filed.
    *
    * @generated from field: producerflow.appointment.v1.TerminationReason reason = 2;
    */
@@ -547,7 +553,7 @@ export const AppointmentOperationalStatusSchema: GenMessage<AppointmentOperation
 
 /**
  * Represents a managed appointment for a license, tracked through the
- * ProducerFlow appointment lifecycle. Unlike NIPR-sourced appointment data
+ * Producerflow appointment lifecycle. Unlike NIPR-sourced appointment data
  * on the Producer/Agency messages, this represents appointments that are
  * actively managed (requested, terminated) through the AppointmentService.
  *
@@ -745,11 +751,11 @@ export type License = Message<"producerflow.appointment.v1.License"> & {
   licenseClass: string;
 
   /**
-   * Indicates whether this license is in a registry state. Licenses in
-   * registry states and capacity carriers are processed automatically without
-   * going through NIPR.
+   * Not populated today; always false. To predict whether a request completes
+   * immediately, use Carrier.has_nipr_integration from GetAppointableCarriers.
    *
-   * @generated from field: bool is_registry_state = 7;
+   * @generated from field: bool is_registry_state = 7 [deprecated = true];
+   * @deprecated
    */
   isRegistryState: boolean;
 
@@ -828,6 +834,11 @@ export const ListTerminationReasonsResponseSchema: GenMessage<ListTerminationRea
  * OperationalStatus represents the current operational status of an appointment.
  * This indicates whether the appointment is actively functioning or at risk of termination.
  *
+ * Values:
+ *   - OPERATIONAL_STATUS_UNSPECIFIED: the appointment has not been evaluated yet.
+ *   - OPERATIONAL_STATUS_ACTIVE: Appointment is actively functioning and meeting all requirements.
+ *   - OPERATIONAL_STATUS_AT_RISK: Appointment is at risk of termination due to various factors.
+ *
  * @generated from enum producerflow.appointment.v1.OperationalStatus
  */
 export enum OperationalStatus {
@@ -861,6 +872,15 @@ export const OperationalStatusSchema: GenEnum<OperationalStatus> = /*@__PURE__*/
  * RiskReason represents the specific reason why an appointment is considered at risk.
  * These reasons correspond to business rules and compliance requirements that may
  * trigger operational status changes.
+ *
+ * Values:
+ *   - RISK_REASON_LICENSE_INACTIVE: License is inactive (License Active = false).
+ *   - RISK_REASON_LICENSE_EXPIRED: License has expired (License ExpirationDate < current date).
+ *   - RISK_REASON_EO_NOT_FOUND: The agency has no E&O in effect. The E&O in effect is the shared coverage of the agency's organization while it shares coverages, the agency's own otherwise.
+ *   - RISK_REASON_EO_INACTIVE: The agency's E&O in effect is not approved: it is pending review or rejected. There is no "active" E&O status.
+ *   - RISK_REASON_EO_EXPIRED: E&O coverage has expired (E&O ExpirationDate < current date).
+ *   - RISK_REASON_STATE_APPOINTMENT_TERMINATED: A state has terminated the appointment (reported via NIPR) while producerflow still shows it as active.
+ *   - RISK_REASON_REGULATORY_ACTION: An undismissed regulatory action exists (reported via NIPR) against the appointment's producer or agency in the appointment's state.
  *
  * @generated from enum producerflow.appointment.v1.RiskReason
  */
@@ -951,6 +971,15 @@ export const RiskReasonSchema: GenEnum<RiskReason> = /*@__PURE__*/
  *
  * Reference: https://pdb.nipr.com/Gateway
  *
+ * Values:
+ *   - PROCESSING_STATUS_UNSPECIFIED: never returned for an appointment.
+ *   - PROCESSING_STATUS_IN_PROGRESS: Appointment request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result will be delivered via webhook.
+ *   - PROCESSING_STATUS_APPOINTED: Appointment has been approved and is active. The producer/agency can sell this carrier's products for the specified Line of Authority.
+ *   - PROCESSING_STATUS_TERMINATED: Appointment has been terminated. The producer/agency can no longer sell this carrier's products. This is a terminal state.
+ *   - PROCESSING_STATUS_REJECTED: Appointment request was rejected by NIPR. The API does not carry the reason. Common reasons include: missing resident license, unmet continuing education requirements, or outstanding regulatory actions.
+ *   - PROCESSING_STATUS_MISSING_LICENSE: The license required for this appointment is missing or could not be found. The producer/agency needs to obtain the appropriate license before the appointment can be processed.
+ *   - PROCESSING_STATUS_TERMINATION_REQUESTED: A termination request has been submitted to NIPR and is awaiting processing. This is a transient state; the final result (TERMINATED) will be delivered via webhook.
+ *
  * @generated from enum producerflow.appointment.v1.ProcessingStatus
  */
 export enum ProcessingStatus {
@@ -984,8 +1013,8 @@ export enum ProcessingStatus {
   TERMINATED = 3,
 
   /**
-   * Appointment request was rejected by NIPR. Check not_eligible_reasons for
-   * details. Common reasons include: missing resident license, unmet
+   * Appointment request was rejected by NIPR. The API does not carry the
+   * reason. Common reasons include: missing resident license, unmet
    * continuing education requirements, or outstanding regulatory actions.
    *
    * @generated from enum value: PROCESSING_STATUS_REJECTED = 4;
@@ -1025,6 +1054,13 @@ export const ProcessingStatusSchema: GenEnum<ProcessingStatus> = /*@__PURE__*/
  * - Registry and Synthetic appointments are processed automatically
  * - Up-front appointments go through NIPR's standard processing pipeline
  * - Just-in-time appointments are created on demand when needed
+ *
+ * Values:
+ *   - APPOINTMENT_TYPE_UNSPECIFIED: the type could not be derived.
+ *   - APPOINTMENT_TYPE_REGISTRY: Registry appointment: Processed automatically for licenses in registry states. Registry states allow appointments without going through NIPR's standard appointment process.
+ *   - APPOINTMENT_TYPE_UP_FRONT: Up-front appointment: Standard appointment processed through NIPR. These require NIPR approval and may take time to process. The carrier pays appointment fees to NIPR/state.
+ *   - APPOINTMENT_TYPE_JUST_IN_TIME: Just-in-time appointment: Created on demand when a producer needs to sell a product but doesn't have a pre-existing appointment.
+ *   - APPOINTMENT_TYPE_SYNTHETIC: Synthetic appointment: Programmatically created for individual producers in states where only agency-level appointments are permitted (CA, DC, HI, KY, LA, MA, MT, UT, WA). They are automatically created when an agency appointment is approved and inherit properties from the parent agency appointment. The parent_appointment_id field links to the parent agency appointment. Synthetic appointments do not require separate regulatory approval and are terminated when the parent appointment is terminated.
  *
  * @generated from enum producerflow.appointment.v1.AppointmentType
  */
@@ -1090,6 +1126,23 @@ export const AppointmentTypeSchema: GenEnum<AppointmentType> = /*@__PURE__*/
  * TerminateAppointment.
  *
  * Reference: https://pdb.nipr.com/Gateway/ValidTerms
+ *
+ * Values:
+ *   - TERMINATION_REASON_VOLUNTARY_TERMINATION: Producer or agency voluntarily chose to end the appointment.
+ *   - TERMINATION_REASON_INADEQUATE_PRODUCTION: Carrier terminated due to insufficient premium production or sales volume.
+ *   - TERMINATION_REASON_CANCELLED_BY_GENERAL_AGENT: Appointment was cancelled by the managing general agent (MGA).
+ *   - TERMINATION_REASON_DEATH: Producer has passed away.
+ *   - TERMINATION_REASON_COMPANY_DEFUNCT_OR_LIQUIDATION: Insurance company has ceased operations or entered liquidation.
+ *   - TERMINATION_REASON_COMPANY_INDEBTEDNESS: Producer owes money to the insurance company (e.g., unremitted premiums).
+ *   - TERMINATION_REASON_POOR_POLICYHOLDER_SERVICE: Carrier terminated due to poor service to policyholders.
+ *   - TERMINATION_REASON_AGENT_MOVED: Producer relocated to a different jurisdiction.
+ *   - TERMINATION_REASON_APPOINTED_IN_ERROR: Appointment was created in error and is being corrected.
+ *   - TERMINATION_REASON_CANCELLED: General cancellation without a more specific reason.
+ *   - TERMINATION_REASON_CANCELLED_FOR_CAUSE: Carrier terminated for cause (e.g., misconduct, policy violations).
+ *   - TERMINATION_REASON_COMPANY_MERGER: Insurance company merged with another company.
+ *   - TERMINATION_REASON_REVOKED: Producer's license has been revoked by a regulatory authority.
+ *   - TERMINATION_REASON_SUSPENDED_FOR_COMPLIANCE: Producer's license has been suspended for compliance issues.
+ *   - TERMINATION_REASON_REQUEST_REGULATORY_REVIEW: Termination is being submitted for regulatory review by the state DOI.
  *
  * @generated from enum producerflow.appointment.v1.TerminationReason
  */
@@ -1214,6 +1267,21 @@ export const TerminationReasonSchema: GenEnum<TerminationReason> = /*@__PURE__*/
 /**
  * AppointmentService manages license appointments through NIPR.
  *
+ * Terms used throughout this service: a registry state is a state where no
+ * NIPR filing is needed, so an appointment is recorded immediately; a capacity
+ * carrier is a carrier whose has_nipr_integration is false, handled the same
+ * way; a synthetic appointment is one recorded in Producerflow without a
+ * filing because the state does not appoint that kind of entity: a producer's
+ * appointment derived from the agency's in the states that appoint agencies
+ * only (CA, DC, HI, KY, LA, MA, MT, UT, WA), or an agency's appointment in
+ * the states that appoint producers only (GA, IA, MN, MS, NC, NM, RI, SC, TN,
+ * WI), each when enabled for your tenant; an internal agency is your own
+ * tenant's agency. Appointments of
+ * internal agencies are served only once Producerflow enables internal
+ * appointments for your tenant: until then reads of them fail with
+ * FAILED_PRECONDITION and ListAppointments omits them. ListEligibleLicenses
+ * never lists an internal agency's licenses, whatever the setting.
+ *
  * The appointment flow in NIPR is as follows:
  * 1. A new appointment (or termination) is requested for a license number.
  * 2. Some time later, NIPR processes the request and returns the final result.
@@ -1221,7 +1289,7 @@ export const TerminationReasonSchema: GenEnum<TerminationReason> = /*@__PURE__*/
  * Since NIPR does not return results immediately, RequestAppointment and
  * TerminateAppointment RPCs will return a processing status of IN_PROGRESS if
  * the request is accepted by NIPR. When the appointment is finally processed by
- * NIPR, ProducerFlow will notify via a webhook of the final result. Also, any
+ * NIPR, Producerflow will notify via a webhook of the final result. Also, any
  * call from this point on to ListAppointments or GetAppointment will also
  * return the final result.
  *
@@ -1232,8 +1300,8 @@ export const TerminationReasonSchema: GenEnum<TerminationReason> = /*@__PURE__*/
  * - TerminateAppointment will immediately return TERMINATED status.
  *
  * Any call to this service must be authenticated using an API key in the
- * request headers. The API key can be found in the ProducerFlow API key
- * section of the ProducerFlow UI and it identifies the tenant that is making
+ * request headers. The API key can be found in the Producerflow API key
+ * section of the Producerflow UI and it identifies the tenant that is making
  * the request.
  *
  * @generated from service producerflow.appointment.v1.AppointmentService
@@ -1252,6 +1320,16 @@ export const AppointmentService: GenService<{
   /**
    * Retrieves the total fees associated with requesting an appointment for the given license.
    * Fee amounts are represented as integer values in cents. E.g. $10.34 is sent as 1034.
+   *
+   * The quote is the state filing fee for this license, charged when the
+   * request is filed with NIPR. A registry state is quoted 0; so is a
+   * synthetic producer appointment when synthetic producer appointments are
+   * enabled for your tenant, and a synthetic agency appointment gets an empty
+   * response when synthetic agency appointments are enabled; otherwise the
+   * state fee is quoted. A carrier without NIPR integration is still quoted the fee,
+   * because this call takes no carrier, although nothing is charged for it.
+   * Fails with FAILED_PRECONDITION when the license has no resident license
+   * or no fee is configured for it.
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.GetAppointmentFees
    */
@@ -1292,7 +1370,19 @@ export const AppointmentService: GenService<{
     output: typeof ListAppointmentsResponseSchema;
   },
   /**
-   * Returns a list of licenses that are eligible to be appointed.
+   * Returns the licenses that can be appointed right now, one entry per
+   * license and carrier pair; pass an entry's license_id and carrier_id to
+   * RequestAppointment.
+   *
+   * A license is eligible when it is active and unexpired, its owner's NIPR
+   * sync is active, a carrier enabled for your tenant accepts the license's
+   * state, class, entity type and at least one active line of authority, no
+   * appointment exists yet for that license and carrier, and the owner is not
+   * already appointed or terminated with that carrier in that state on
+   * another license. For an agency only
+   * the agency's own licenses are returned, not its producers'. An unknown
+   * owner, an owner of another tenant, or an internal agency yields an empty
+   * list rather than an error.
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.ListEligibleLicenses
    */
@@ -1312,23 +1402,30 @@ export const AppointmentService: GenService<{
    * integration:
    *
    * For NIPR-integrated carriers in non-registry states:
-   * - If the request is accepted by NIPR, the appointment will have
+   * - The request is filed with NIPR and the appointment is returned with
    *   IN_PROGRESS processing status.
-   * - If rejected, it will have REJECTED status and reasons will be provided
-   *   in not_eligible_reasons.
-   * - Final result will be delivered via webhook when NIPR completes
-   *   processing.
+   * - NIPR processes it later. The final result, APPOINTED or REJECTED,
+   *   arrives through the appointment.updated webhook event and is visible
+   *   through GetAppointment and ListAppointments.
+   * - A request that cannot be filed fails with one of the errors below; the
+   *   call never returns REJECTED itself.
    *
-   * For registry states or capacity carriers (carriers without NIPR
-   * integration):
-   * - The appointment is processed automatically and immediately.
-   * - Returns APPOINTED status immediately upon successful processing.
+   * For registry states (states that need no NIPR filing), carriers without
+   * NIPR integration, and synthetic agency appointments:
+   * - The appointment is recorded immediately with APPOINTED status.
+   *
+   * In CA, DC, HI, KY, LA, MA, MT, UT and WA only agencies are appointed and
+   * producers inherit the agency's appointment. When synthetic producer
+   * appointments are enabled for your tenant, a request for a producer there
+   * fails with INVALID_ARGUMENT unless the producer is a sole proprietor;
+   * otherwise the request is filed with NIPR.
    *
    * Requesting an appointment that already exists for the same license and
    * carrier is refused with ALREADY_EXISTS, unless that appointment is
    * TERMINATED or REJECTED. Both of those are sent to the state again, reusing
-   * the existing appointment's ID and moving it back to IN_PROGRESS, so the
-   * result reads the same as a first request.
+   * the existing appointment's ID and moving it back to IN_PROGRESS (or to
+   * APPOINTED at once for a registry state or a carrier without NIPR
+   * integration), so the result reads the same as a first request.
    *
    * Before re-sending a REJECTED appointment, fix whatever caused the
    * rejection: an unchanged appointment gets the same answer from the state
@@ -1337,6 +1434,19 @@ export const AppointmentService: GenService<{
    * Either re-send is refused when the underlying license is inactive or
    * expired, since the state would reject it anyway, and when a NIPR
    * transaction is already in flight for the appointment.
+   *
+   * Errors:
+   * - NOT_FOUND: the license or carrier does not exist for your tenant.
+   * - ALREADY_EXISTS: an appointment for this license and carrier exists and
+   *   is not TERMINATED or REJECTED.
+   * - FAILED_PRECONDITION: the carrier is disabled, the agency is retired or
+   *   in a legal entity change, the license has no resident license, the
+   *   license class cannot be appointed electronically in its state, a
+   *   re-send targets an inactive or expired license, a NIPR transaction is
+   *   already in progress, or the filing fails validation before it is sent.
+   * - INVALID_ARGUMENT: a producer appointment in a state that appoints
+   *   agencies only.
+   * - UNAVAILABLE: NIPR is in maintenance; retry later.
    *
    * @generated from rpc producerflow.appointment.v1.AppointmentService.RequestAppointment
    */
@@ -1361,13 +1471,16 @@ export const AppointmentService: GenService<{
    * For NIPR-integrated carriers in non-registry states:
    * - The request is submitted to NIPR for processing.
    * - Once NIPR completes processing, the status becomes TERMINATED.
-   * - If rejected by NIPR, the appointment remains in its current status.
+   * - If NIPR rejects the termination it is not applied: the appointment stays
+   *   TERMINATION_REQUESTED and no webhook event reports the rejection. Check
+   *   GetAppointment and contact support to resolve it.
    * - You will receive webhook notifications when the termination is processed
    *   by NIPR.
    *
    * For registry states, capacity carriers (carriers without NIPR
-   * integration), or synthetic appointments:
-   * - The termination is processed automatically and immediately.
+   * integration), synthetic appointments, or an appointment the state has
+   * already reported as terminated (risk reason STATE_APPOINTMENT_TERMINATED):
+   * - The termination is recorded immediately, with no NIPR filing and no fee.
    * - Returns TERMINATED status immediately upon successful processing.
    *
    * Important considerations:

@@ -138,7 +138,7 @@ public object ListAgenciesRequestKt {
      * ```
      * Optional. Pagination parameters for controlling result set size and navigation.
      * If not provided, defaults to page_size=50 with no offset.
-     * Maximum allowed page_size is 200; values above this will be capped.
+     * Maximum allowed page_size is 200; values above this will be rejected.
      * ```
      *
      * `.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];`
@@ -154,7 +154,7 @@ public object ListAgenciesRequestKt {
      * ```
      * Optional. Pagination parameters for controlling result set size and navigation.
      * If not provided, defaults to page_size=50 with no offset.
-     * Maximum allowed page_size is 200; values above this will be capped.
+     * Maximum allowed page_size is 200; values above this will be rejected.
      * ```
      *
      * `.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];`
@@ -166,7 +166,7 @@ public object ListAgenciesRequestKt {
      * ```
      * Optional. Pagination parameters for controlling result set size and navigation.
      * If not provided, defaults to page_size=50 with no offset.
-     * Maximum allowed page_size is 200; values above this will be capped.
+     * Maximum allowed page_size is 200; values above this will be rejected.
      * ```
      *
      * `.producerflow.producer.v1.Pagination pagination = 3 [json_name = "pagination"];`

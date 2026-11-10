@@ -13,8 +13,8 @@ public inline fun getOrganizationRequest(block: com.producerflow.producer.v1.Get
  * ```
  * GetOrganizationRequest specifies which organization to retrieve detailed information for.
  *
- * Use this request to fetch comprehensive details about a specific organization,
- * including all agencies assigned to it and their current status.
+ * Use this request to fetch an organization's id, name, external_id and
+ * email.
  * ```
  *
  * Protobuf type `producerflow.producer.v1.GetOrganizationRequest`

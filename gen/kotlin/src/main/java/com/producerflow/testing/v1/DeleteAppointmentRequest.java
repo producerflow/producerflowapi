@@ -48,8 +48,8 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object appointmentId_ = "";
   /**
    * <pre>
-   * UUID of the Appointments row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown appointment_id returns
+   * ID of the appointment to delete. Must belong to the tenant resolved from
+   * the API key; an unknown appointment_id, or one of another tenant, returns
    * NOT_FOUND.
    * </pre>
    *
@@ -71,8 +71,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * UUID of the Appointments row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown appointment_id returns
+   * ID of the appointment to delete. Must belong to the tenant resolved from
+   * the API key; an unknown appointment_id, or one of another tenant, returns
    * NOT_FOUND.
    * </pre>
    *
@@ -391,8 +391,8 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object appointmentId_ = "";
     /**
      * <pre>
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * </pre>
      *
@@ -413,8 +413,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * </pre>
      *
@@ -436,8 +436,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * </pre>
      *
@@ -455,8 +455,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * </pre>
      *
@@ -471,8 +471,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Appointments row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown appointment_id returns
+     * ID of the appointment to delete. Must belong to the tenant resolved from
+     * the API key; an unknown appointment_id, or one of another tenant, returns
      * NOT_FOUND.
      * </pre>
      *

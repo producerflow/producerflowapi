@@ -48,8 +48,8 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object agencyId_ = "";
   /**
    * <pre>
-   * UUID of the Agencies row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+   * ID of the agency to delete. Must belong to the tenant resolved from the
+   * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -70,8 +70,8 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * UUID of the Agencies row to delete. Must belong to the tenant resolved
-   * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+   * ID of the agency to delete. Must belong to the tenant resolved from the
+   * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
    * </pre>
    *
    * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -389,8 +389,8 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object agencyId_ = "";
     /**
      * <pre>
-     * UUID of the Agencies row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+     * ID of the agency to delete. Must belong to the tenant resolved from the
+     * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -410,8 +410,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Agencies row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+     * ID of the agency to delete. Must belong to the tenant resolved from the
+     * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -432,8 +432,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Agencies row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+     * ID of the agency to delete. Must belong to the tenant resolved from the
+     * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -450,8 +450,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Agencies row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+     * ID of the agency to delete. Must belong to the tenant resolved from the
+     * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
@@ -465,8 +465,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * UUID of the Agencies row to delete. Must belong to the tenant resolved
-     * from the API key; a cross-tenant or unknown agency_id returns NOT_FOUND.
+     * ID of the agency to delete. Must belong to the tenant resolved from the
+     * API key; an unknown agency_id, or one of another tenant, returns NOT_FOUND.
      * </pre>
      *
      * <code>string agency_id = 1 [json_name = "agencyId", (.buf.validate.field) = { ... }</code>
