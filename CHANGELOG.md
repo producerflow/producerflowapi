@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.32] - 2026-11-10
+
+### Added
+
+#### ProducerService
+
+- **`LookupNPNByLicense`** — returns the NPN of every producer and agency NIPR finds holding a state license number (`license_number` + two-letter `state`). Each `LicenseHolder` carries `npn`, `name` and `type` (`TYPE_PRODUCER` or `TYPE_AGENCY`). Free NIPR lookup; `NOT_FOUND` when nobody holds the license in the state
+- **`contracts` on `GetAgencyFilesResponse`** — the agency's signed contracts whose PDF is stored in Producerflow: `contract_id`, `name`, `provider` (`ContractProvider`: DocuSign, Adobe Sign, Dropbox Sign, Sertifi, or unspecified when recorded by hand), `sent_date`, `signed_date` and `download_url`
+- **`other_documents` on `GetAgencyFilesResponse`** — files uploaded to the agency under "Other documents", most recent first: `document_id`, `name`, `updated_at` and `download_url`
+
+### Changed
+
+#### EventService (`producerflow.event.v2`)
+
+- **The log can now be read 30 days back, not 90.** A `checkpoint` older than 30 days is `OUT_OF_RANGE`, and `GetEvent` returns `NOT_FOUND` for events older than 30 days. Replaying an older checkpoint returns events again, so deduplicate on `id`
+
+#### AppointmentService
+
+- **`RequestAppointmentResponse.not_eligible_reasons` deprecated** — never populated: a request that cannot be filed fails with an error, and a later NIPR rejection arrives through the `appointment.updated` webhook event
+- **`is_registry_state` deprecated** — always false. Use `Carrier.has_nipr_integration` from `GetAppointableCarriers` to predict whether a request completes immediately
+- Docs now describe the handlers as they behave: eligibility rules for `ListEligibleLicenses`, the errors of `RequestAppointment`, fee quotes for registry states and synthetic appointments, the default `processing_status` filter of `ListAppointments`, and terminations NIPR rejects
+
+#### ProducerService
+
+- Docs now describe the handlers as they behave, including agencies in the NPN lookups
+
+#### TestingService
+
+- `DeleteAgency` docs: the service is available in UAT only, the call also deletes the agency's contacts, locations, onboarding record and uploaded files, and it records `license.deleted` and `agency.deleted` on the Events API
+- Regenerated client libraries with latest proto changes
+
+---
+
 ## [1.0.31] - 2026-10-19
 
 ### Added
