@@ -26,15 +26,15 @@ service EventService {
   // An update whose every change is to a field the entity's resource does not
   // carry says nothing to apply, and is not returned.
   //
-  // The log can be read 90 days back. A checkpoint older than that is
+  // The log can be read 30 days back. A checkpoint older than that is
   // OUT_OF_RANGE: read current state again and take a new checkpoint. A
   // checkpoint that cannot be read, or one ahead of the log, is
   // INVALID_ARGUMENT.
-  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse);
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {}
 
   // GetEvent returns one event by id. NOT_FOUND means the tenant has no such
-  // event in the last 90 days that ListEvents returns.
-  rpc GetEvent(GetEventRequest) returns (GetEventResponse);
+  // event in the last 30 days that ListEvents returns.
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse) {}
 }
 
 // Event records that an entity changed. Its identifiers name the entity and
@@ -156,7 +156,8 @@ message ListEventsResponse {
   // Events after the requested checkpoint, in log order. Among events
   // committed together, an entity's events come before those of the entities
   // that belong to it, except deletions, which come last and in the reverse
-  // order.
+  // order. A consumer that replays an older checkpoint sees events again, so
+  // deduplicate on id.
   repeated Event events = 1;
 
   // Position this read reached, set on every response. Persist it and pass it

@@ -101,8 +101,8 @@ service ProducerService {
   // - agency_id: Required. must be a valid UUID of an agency belonging
   //   to your tenant.
   // - producer_data: All fields are optional. When provided:
-  //   - npn: Must be a valid NPN format (1-10 characters). Note that NPN validation
-  //     against NIPR occurs during onboarding, not during URL generation.
+  //   - npn: Must be a valid NPN format (1-10 characters) and exist in NIPR;
+  //     the NPN is verified when the URL is generated.
   //   - email: Must be a valid email format if provided
   //   - mailing_address.state: Must be exactly 2 characters (state code) if provided
   //   - mailing_address.zip: Must be 1-10 characters if provided
@@ -195,6 +195,15 @@ service ProducerService {
   // Returns:
   // IDs of the created agency, principal, optional producers, and locations (if provided).
   //
+  // Completion:
+  // The IDs are final as soon as the call returns, but the records may still be
+  // created in the background: state is PROCESSING until then, and GetAgency
+  // may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+  // send the identical request again; it returns the same IDs and never
+  // creates a second agency. A different payload under the same identity
+  // replaces the staged one while nothing has been created yet, and is refused
+  // with INVALID_ARGUMENT once the agency exists.
+  //
   // Common Error Codes:
   // - INVALID_ARGUMENT: Missing required fields, entity type rule violations, or
   //   NPN not found in NIPR
@@ -221,7 +230,8 @@ service ProducerService {
   // - Entity Type: Filter by sole proprietor vs standard agency
   // - NIPR Sync Status: Filter by values from NIPRSyncState
   //
-  // The response uses cursor-based pagination for efficient data retrieval:
+  // The response is paginated (the token encodes an offset, so an agency
+  // created while you paginate can appear on two pages):
   // - Default page size is 50 if not specified
   // - Maximum page size is 200
   // - Results are ordered by creation date, most recent first
@@ -239,8 +249,8 @@ service ProducerService {
   //
   // Returns:
   // A paginated list of AgencySummary objects containing essential agency
-  // information without full NIPR data. Use GetAgencyAndProducers for complete
-  // agency details including NIPR data.
+  // information without full NIPR data. Use GetAgency for complete agency
+  // details including NIPR data.
   //
   rpc ListAgencies(ListAgenciesRequest) returns (ListAgenciesResponse) {}
 
@@ -266,28 +276,24 @@ service ProducerService {
   // names and external identifiers. Organizations are
   // returned in alphabetical order by name for consistent presentation.
   //
-  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {}
 
   // GetOrganization retrieves comprehensive details about a specific organization.
   //
-  // This endpoint returns complete organization information including all
-  // agencies assigned to it. For each agency, it provides summary data including
-  // appointment overview statistics and NIPR synchronization status. This allows
-  // you to understand the full scope of an organization's agency network in a
-  // single API call.
+  // This endpoint returns the organization's id, name, external_id and email.
+  // For the agencies assigned to it, call ListAgencies with organization_id.
   //
   // Validation Rules:
   // Proto validation (format checks):
   // - organization_id: Required, must be a valid UUID format
   //
   // Returns:
-  // Complete organization details including all assigned agencies with their
-  // appointment overviews and sync statuses.
+  // The organization's id, name, external_id and email.
   //
   // Common Error Codes:
   // - NOT_FOUND: Organization doesn't exist or doesn't belong to tenant
   //
-  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse) {}
 
   // CreateOrganization creates a new organization for the authenticated tenant.
   //
@@ -336,10 +342,10 @@ service ProducerService {
   //   - first_name: Required, must be non-empty
   //   - last_name: Required, must be non-empty
   //   - email: Required, must be a valid email format
-  //   - npn: Required, used for NIPR validation
+  //   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
   //   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
   //   - mailing_address (optional, if provided):
-  //     - street: Required, must be non-empty
+  //     - address_line_1: Required, must be non-empty
   //     - city: Required, must be non-empty
   //     - state: Required, must be exactly 2 characters (state code)
   //     - zip: Required, must be 1-10 characters
@@ -357,11 +363,22 @@ service ProducerService {
   // Returns:
   // The UUID of the created producer.
   //
+  // Completion:
+  // The ID is final as soon as the call returns, but the record may still be
+  // created in the background: state is PROCESSING until then, and GetProducer
+  // may answer NOT_FOUND meanwhile. If the call fails with DEADLINE_EXCEEDED,
+  // send the identical request again; it returns the same ID and never
+  // creates a second producer.
+  //
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or producer NPN not found in NIPR
-  // - ALREADY_EXISTS: Producer with email or NPN already exists in tenant
-  // - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is enabled)
-  // - FAILED_PRECONDITION: Producer name does not match NIPR records for the provided NPN
+  // - ALREADY_EXISTS: Producer with email or NPN already exists in tenant, or
+  //   this producer has already been onboarded
+  // - INVALID_ARGUMENT: Producer NPN is required (when NPN validation is
+  //   enabled), or the agency is an internal agency
+  // - FAILED_PRECONDITION: Producer name does not match NIPR records for the
+  //   provided NPN, the NPN belongs to an agency, or the agency is retired or
+  //   in a legal entity change
   //
   rpc NewProducer(NewProducerRequest) returns (NewProducerResponse) {}
 
@@ -397,10 +414,10 @@ service ProducerService {
   //   - first_name: Required, must be non-empty
   //   - last_name: Required, must be non-empty
   //   - email: Required, must be a valid email format
-  //   - npn: Required, used for NIPR validation
+  //   - npn: Required unless your tenant allows producers without an NPN; used for NIPR validation
   //   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
   //   - mailing_address (optional, if provided):
-  //     - street: Required, must be non-empty
+  //     - address_line_1: Required, must be non-empty
   //     - city: Required, must be non-empty
   //     - state: Required, must be exactly 2 characters (state code)
   //     - zip: Required, must be 1-10 characters
@@ -413,8 +430,6 @@ service ProducerService {
   // - All producer emails must be unique within the tenant
   // - All producer NPNs must exist in NIPR, match the provided last name, and be unique within the tenant
   // - All location_ids must exist and belong to the specified agency
-  // - This is an all-or-nothing operation: if any producer fails validation, no producers
-  //   are created
   //
   // Returns:
   // List of UUIDs for all created producers in the same order as the request. This
@@ -443,7 +458,9 @@ service ProducerService {
     option deprecated = true;
   }
 
-  // GetAgencyProducers retrieves all producers associated with a specific agency.
+  // GetAgencyProducers retrieves one page of the producers associated with a
+  // specific agency: 50 by default, 200 at most, oldest first. Follow
+  // next_page_token for the rest.
   //
   // This is a lighter-weight alternative to GetAgencyAndProducers that returns
   // only the producer data without the full agency details. Use this when you
@@ -460,12 +477,14 @@ service ProducerService {
   // - agency_id: Required, must be a valid UUID format
   //
   // Returns:
-  // List of all producers associated with the specified agency.
+  // One page of the producers associated with the specified agency and the
+  // next_page_token, empty on the last page. A malformed page token fails
+  // with INVALID_ARGUMENT.
   //
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
-  rpc GetAgencyProducers(GetAgencyProducersRequest) returns (GetAgencyProducersResponse);
+  rpc GetAgencyProducers(GetAgencyProducersRequest) returns (GetAgencyProducersResponse) {}
 
   // GetAgency retrieves detailed information about a specific agency.
   //
@@ -477,7 +496,7 @@ service ProducerService {
   // addresses, bank account, E&O coverage, principal information, NIPR data, and locations.
   //
   // Use this when you need full agency information without the list of associated producers.
-  // For agencies with their producers, use GetAgencyAndProducers instead.
+  // For the agency's producers, use GetAgencyProducers.
   //
   // Validation Rules:
   // Proto validation (format checks):
@@ -490,9 +509,8 @@ service ProducerService {
   //
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-  // - PERMISSION_DENIED: Tenant doesn't have access to the agency
   //
-  rpc GetAgency(GetAgencyRequest) returns (GetAgencyResponse);
+  rpc GetAgency(GetAgencyRequest) returns (GetAgencyResponse) {}
 
   // GetProducer retrieves detailed information about a specific producer.
   //
@@ -527,7 +545,7 @@ service ProducerService {
   // - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant, or
   //   associated agency not found
   //
-  rpc GetProducer(GetProducerRequest) returns (GetProducerResponse);
+  rpc GetProducer(GetProducerRequest) returns (GetProducerResponse) {}
 
   // ListProducerRoles returns the producer role labels configured for the
   // authenticated tenant.
@@ -546,7 +564,7 @@ service ProducerService {
   // order they were configured. Empty when the tenant has not configured any
   // roles.
   //
-  rpc ListProducerRoles(ListProducerRolesRequest) returns (ListProducerRolesResponse);
+  rpc ListProducerRoles(ListProducerRolesRequest) returns (ListProducerRolesResponse) {}
 
   // GetAgencyFiles retrieves signed URLs for accessing agency documents.
   //
@@ -554,11 +572,12 @@ service ProducerService {
   // - Errors & Omissions (E&O) insurance certificate
   // - Voided check for ACH commission payments
   // - W9 tax form
-  // - License documents
-  // - Broker bond documents
+  // - Signed contracts whose PDF is stored in Producerflow
+  // - Files uploaded to the agency under "Other documents"
   //
-  // The URLs are time-limited and grant temporary read access to the documents.
-  // Empty strings are returned for documents that haven't been uploaded.
+  // The URLs are valid for 24 hours and grant temporary read access to the
+  // documents. An empty string is returned for an E&O, voided check or W9
+  // that hasn't been uploaded.
   //
   // Validation Rules:
   // Proto validation (format checks):
@@ -570,7 +589,7 @@ service ProducerService {
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
-  rpc GetAgencyFiles(GetAgencyFilesRequest) returns (GetAgencyFilesResponse);
+  rpc GetAgencyFiles(GetAgencyFilesRequest) returns (GetAgencyFilesResponse) {}
 
   // UpdateProducer updates editable fields for an existing producer.
   //
@@ -589,7 +608,7 @@ service ProducerService {
   //
   // Validation:
   // - Email must be unique within tenant if changed
-  // - An internal producer's email (one who signs in to ProducerFlow) cannot be
+  // - An internal producer's email (one who signs in to Producerflow) cannot be
   //   changed: the producer changes it through email verification
   // - All field format validations apply (e.g., valid email format, phone pattern)
   //
@@ -603,7 +622,7 @@ service ProducerService {
   //   - email: If provided, must be a valid email format
   //   - npn: Deprecated and ignored - NPN cannot be updated after creation
   //   - phone: If provided, must match E.164 pattern (e.g., +15551234567)
-  //   - street: If provided, must be non-empty
+  //   - address_line_1: If provided, must be non-empty
   //   - city: If provided, must be non-empty
   //   - state: If provided, must be at most 2 characters
   //   - zip: If provided, must be at least 5 characters
@@ -657,7 +676,7 @@ service ProducerService {
   //   - requested_appointments: Array of unique 2-letter state codes (e.g., ["CA", "NY"])
   //   - notes: If provided, maximum 500 characters
   //   - physical_address (optional, if provided):
-  //     - street: If provided, must be non-empty
+  //     - address_line_1: If provided, must be non-empty
   //     - city: If provided, must be non-empty
   //     - state: If provided, must be exactly 2 characters
   //     - zip: If provided, must be 1-10 characters
@@ -717,7 +736,7 @@ service ProducerService {
   //   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
   //   - middle_name: Optional
   //   - address (optional, if provided):
-  //     - street: Required, must be non-empty
+  //     - address_line_1: Required, must be non-empty
   //     - city: Required, must be non-empty
   //     - state: Required, must be exactly 2 characters (state code)
   //     - zip: Required, must be 1-10 characters
@@ -770,7 +789,7 @@ service ProducerService {
   //   - phone: Optional, if provided must match E.164 pattern (e.g., +15551234567)
   //   - middle_name: Optional
   //   - address (optional, if provided):
-  //     - street: Required, must be non-empty
+  //     - address_line_1: Required, must be non-empty
   //     - city: Required, must be non-empty
   //     - state: Required, must be exactly 2 characters (state code)
   //     - zip: Required, must be 1-10 characters
@@ -821,7 +840,7 @@ service ProducerService {
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
-  rpc ListAgencyContacts(ListAgencyContactsRequest) returns (ListAgencyContactsResponse);
+  rpc ListAgencyContacts(ListAgencyContactsRequest) returns (ListAgencyContactsResponse) {}
 
   // GetContact retrieves a single contact.
   //
@@ -849,7 +868,7 @@ service ProducerService {
   // Common Error Codes:
   // - NOT_FOUND: Contact doesn't exist or doesn't belong to tenant
   //
-  rpc GetContact(GetContactRequest) returns (GetContactResponse);
+  rpc GetContact(GetContactRequest) returns (GetContactResponse) {}
 
   // UpdateContact updates editable fields for an existing contact.
   //
@@ -906,7 +925,7 @@ service ProducerService {
   // SetExternalID sets an external identifier for a producer, agency, contact,
   // or organization.
   //
-  // Use this endpoint to link ProducerFlow entities to corresponding records in
+  // Use this endpoint to link Producerflow entities to corresponding records in
   // your external systems (CRM, AMS, legacy databases). This enables bi-directional
   // synchronization and lookups across systems.
   //
@@ -984,7 +1003,7 @@ service ProducerService {
   // A boolean indicating whether the NPN is valid. Returns true if the NPN exists
   // in NIPR (and name matches, if provided), false otherwise.
   //
-  rpc ValidateProducerNPN(ValidateProducerNPNRequest) returns (ValidateProducerNPNResponse);
+  rpc ValidateProducerNPN(ValidateProducerNPNRequest) returns (ValidateProducerNPNResponse) {}
 
   // ValidateAgencyNPN checks whether an agency's National Producer Number (NPN)
   // exists in NIPR.
@@ -1009,7 +1028,7 @@ service ProducerService {
   // A boolean indicating whether the agency NPN is valid. Returns true if the NPN
   // exists in NIPR, false otherwise.
   //
-  rpc ValidateAgencyNPN(ValidateAgencyNPNRequest) returns (ValidateAgencyNPNResponse);
+  rpc ValidateAgencyNPN(ValidateAgencyNPNRequest) returns (ValidateAgencyNPNResponse) {}
 
   // LookupNPNByFEIN finds an agency's NPN using their Federal Employer
   // Identification Number (FEIN).
@@ -1036,10 +1055,40 @@ service ProducerService {
   // Common Error Codes:
   // - NOT_FOUND: No agency found in NIPR with the given FEIN
   //
-  rpc LookupNPNByFEIN(LookupNPNByFEINRequest) returns (LookupNPNByFEINResponse);
+  rpc LookupNPNByFEIN(LookupNPNByFEINRequest) returns (LookupNPNByFEINResponse) {}
+
+  // LookupNPNByLicense finds the NPN of the producer or agency that holds a state
+  // license number.
+  //
+  // Use this endpoint when you only have a producer's or agency's state license
+  // number.
+  // Each holder comes back with its name and whether it is a producer or an
+  // agency, so you can check it is the one you expect.
+  //
+  // NIPR Billing:
+  // This is a FREE operation. It uses the NIPR NPN Lookup service which does not
+  // incur charges, unlike the EntityInfo lookups used during sync operations.
+  //
+  // Validation Rules:
+  // Proto validation (format checks):
+  // - license_number: Required, must be non-empty string
+  // - state: Required, must be a 2-letter state code
+  //
+  // Returns:
+  // Every producer and agency NIPR finds holding the license in the state. NIPR
+  // returns the holder even when the license is inactive or expired, and does
+  // not say whether the license is active.
+  //
+  // Common Error Codes:
+  // - NOT_FOUND: No producer or agency found in NIPR with the license in the state
+  //
+  rpc LookupNPNByLicense(LookupNPNByLicenseRequest) returns (LookupNPNByLicenseResponse) {}
 
   // ResyncProducer triggers a manual resynchronization of a producer's data.
-  // This can be used to refresh data after external change
+  // ResyncProducer re-sends the producer's full current record to your
+  // webhook as a producer.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a
+  // missed delivery. It does not contact NIPR; to start syncing with NIPR, see
+  // SyncProducerWithNIPR.
   //
   // Common Error Codes:
   // - NOT_FOUND: Producer doesn't exist or doesn't belong to tenant
@@ -1047,8 +1096,10 @@ service ProducerService {
   //
   rpc ResyncProducer(ResyncProducerRequest) returns (ResyncProducerResponse) {}
 
-  // ResyncAgency triggers a manual resynchronization of an agency's data. Similar
-  // to ResyncProducer, this can be used to refresh data after external changes.
+  // ResyncAgency re-sends the agency's full current record to your webhook as
+  // an agency.synced event with origin ProducerFlowPortal. Use it to rebuild your copy after a missed
+  // delivery. It does not contact NIPR; to start syncing with NIPR, see
+  // SyncAgencyWithNIPR.
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   // - INVALID_ARGUMENT: Agency ID is empty or request is empty
@@ -1057,9 +1108,9 @@ service ProducerService {
 
   // SyncProducerWithNIPR synchronizes a producer's data with NIPR.
   //
-  // Use this endpoint to manually trigger an immediate refresh of producer data
-  // from NIPR. The operation validates the producer NPN exists in NIPR before
-  // syncing.
+  // Use this endpoint to start syncing a producer that was created without
+  // NIPR sync, or whose sync was stopped. The operation validates the producer
+  // NPN exists in NIPR before syncing.
   //
   // What Gets Synchronized:
   // - State licenses with expiration dates and Lines of Authority
@@ -1089,8 +1140,12 @@ service ProducerService {
   // - Producer's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
   // - Producer must not already be in ACTIVE sync state (prevents redundant syncs)
   //
-  // Timeout: 30 seconds. If NIPR takes longer, you'll receive a
-  // DEADLINE_EXCEEDED error.
+  // Completion:
+  // The call starts the sync and returns at once. nipr_sync_status moves to
+  // IN_PROGRESS and then to ACTIVE, FAILING or NO_LICENSE_FOUND; the data
+  // arrives as a producer.updated webhook event with origin NIPR, or through
+  // GetProducer. A producer whose sync is already ACTIVE is kept current by
+  // NIPR alerts and cannot be re-synced through this call.
   //
   // Returns:
   // Empty response on success.
@@ -1100,17 +1155,18 @@ service ProducerService {
   //   not be found in NIPR. If the NPN cannot be found, the error message will
   //   be "producer NPN could not be found in NIPR".
   // - INVALID_ARGUMENT: Producer has no NPN.
-  // - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync state)
-  // - DEADLINE_EXCEEDED: NIPR sync took longer than 30 seconds
+  // - FAILED_PRECONDITION: Producer is already synced with NIPR (ACTIVE sync
+  //   state), the producer's NPN belongs to an agency, another producer with
+  //   the same email is already synced, or an NPN change is in progress.
   // - INTERNAL: Unexpected error during NIPR lookup or sync process
   //
   rpc SyncProducerWithNIPR(SyncProducerWithNIPRRequest) returns (SyncProducerWithNIPRResponse) {}
 
   // SyncAgencyWithNIPR synchronizes an agency's data with NIPR.
   //
-  // Use this endpoint to manually trigger an immediate refresh of agency data
-  // from NIPR. The operation validates the agency NPN exists in NIPR before
-  // syncing.
+  // Use this endpoint to start or restart syncing an agency with NIPR. The
+  // call starts the sync and returns at once; the data arrives as an
+  // agency.updated webhook event with origin NIPR, or through GetAgency.
   //
   // What Gets Synchronized:
   // - Agency biographic information (company name, FEIN, contact details)
@@ -1128,14 +1184,12 @@ service ProducerService {
   //
   // Bulk Producer Sync:
   // When sync_all_producers is set to true, the system will also sync all
-  // producers associated with the agency. This extends the timeout to 10
-  // minutes to accommodate the additional operations. Each producer sync is
-  // a separate billable NIPR lookup.
+  // producers associated with the agency. Each producer sync is a separate
+  // billable NIPR lookup.
   //
   // Preconditions:
   // - Agency must exist and belong to the authenticated tenant
-  // - Agency must have a valid NPN registered in NIPR
-  // - Agency must not already be in active sync state
+  // - Agency must not be retired or in a legal entity change
   // - Agency must not be a sole proprietor (sync the underlying producer instead)
   //
   // Validation Rules:
@@ -1145,22 +1199,15 @@ service ProducerService {
   //
   // Business logic validation:
   // - agency_id: Agency must exist and belong to the authenticated tenant
-  // - Agency's NPN must exist in NIPR (validated via NIPR NPN Lookup API)
-  // - Agency must not already be in ACTIVE sync state (prevents redundant syncs)
-  //
-  // Timeout:
-  // - 30 seconds when syncing agency only
-  // - 10 minutes when sync_all_producers is true
   //
   // Returns:
   // Empty response on success.
   //
   // Common Error Codes:
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
-  // - INVALID_ARGUMENT: Agency NPN is not valid (not found in NIPR)
-  // - FAILED_PRECONDITION: Agency is already synced with NIPR (ACTIVE sync state),
-  //   or the agency is a sole proprietor (sync the underlying producer instead)
-  // - DEADLINE_EXCEEDED: NIPR sync operation timed out (30s for agency only, 10m with sync_all_producers)
+  // - FAILED_PRECONDITION: the agency is a sole proprietor (sync the
+  //   underlying producer instead), is retired or in a legal entity change,
+  //   or an NPN change is in progress
   //
   rpc SyncAgencyWithNIPR(SyncAgencyWithNIPRRequest) returns (SyncAgencyWithNIPRResponse) {}
 
@@ -1246,8 +1293,8 @@ service ProducerService {
   // data (typically via CSV or spreadsheet format).
   //
   // The agency is identified by its National Producer Number (NPN), which must
-  // already exist in your tenant. Use ListAgencies or GetAgencyAndProducers to
-  // look up agency NPNs if needed.
+  // already exist in your tenant. Use ListAgencies or GetAgency to look up
+  // agency NPNs if needed.
   //
   // Typical Workflow:
   // 1. Generate producer upload URL using the agency's NPN
@@ -1308,7 +1355,7 @@ service ProducerService {
   // - locations: Required, 1-100 locations. Each location:
   //   - name: Required, must be non-empty (unique within agency)
   //   - address: Required
-  //     - street: Required, must be non-empty
+  //     - address_line_1: Required, must be non-empty
   //     - city: Required, must be non-empty
   //     - state: Required, must be exactly 2 characters (state code)
   //     - zip: Required, must be 1-10 characters
@@ -1393,7 +1440,7 @@ service ProducerService {
   // - INVALID_ARGUMENT: Invalid request
   // - NOT_FOUND: Agency doesn't exist or doesn't belong to tenant
   //
-  rpc ListAgencyLocations(ListAgencyLocationsRequest) returns (ListAgencyLocationsResponse);
+  rpc ListAgencyLocations(ListAgencyLocationsRequest) returns (ListAgencyLocationsResponse) {}
 
   // AssignProducerToLocations assigns one or more locations to a producer.
   //
@@ -1429,7 +1476,7 @@ service ProducerService {
   // List of location IDs that were successfully assigned to the producer.
   //
   // Common Error Codes:
-  // - INVALID_ARGUMENT: Request is missing
+  // - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required
   // - NOT_FOUND: Producer doesn't exist, agency doesn't exist, or specified
   //   locations don't exist
   // - PERMISSION_DENIED: Agency doesn't belong to the authenticated tenant
@@ -1446,7 +1493,7 @@ service ProducerService {
   // Producer Preservation:
   // This operation only removes the location assignments - the producer remains
   // active and associated with the agency. To fully remove a producer, use the
-  // appropriate producer deletion endpoint.
+  // agency's administrator in the portal; this API does not delete producers.
   //
   // Validation Performed:
   // - Producer exists and belongs to the authenticated tenant
@@ -1466,7 +1513,7 @@ service ProducerService {
   // List of location IDs that were successfully unassigned from the producer.
   //
   // Common Error Codes:
-  // - INVALID_ARGUMENT: Request is missing, producer_id is empty, or no location_ids provided
+  // - INVALID_ARGUMENT: between 1 and 100 location IDs, each a UUID, are required, producer_id is empty, or no location_ids provided
   // - NOT_FOUND: Producer doesn't exist or specified locations don't exist
   //
   rpc UnassignProducerFromLocations(UnassignProducerFromLocationsRequest) returns (UnassignProducerFromLocationsResponse) {}
@@ -1496,7 +1543,7 @@ service ProducerService {
   // - location_id: Required, must be a valid UUID format
   // - name: If provided, must be non-empty (unique within agency)
   // - address: If provided (all fields optional within):
-  //   - street: If provided, must be non-empty
+  //   - address_line_1: If provided, must be non-empty
   //   - city: If provided, must be non-empty
   //   - state: If provided, must be exactly 2 characters (state code)
   //   - zip: If provided, must be 1-10 characters
@@ -1575,7 +1622,7 @@ enum EntityType {
   // - The principal producer IS the agency
   // - FEIN is optional
   //
-  // Use this type for independent agents who operate alone.
+  // Use this type for independent producers who operate alone.
   ENTITY_TYPE_SOLE_PROPRIETOR = 1;
 
   // Standard insurance agency: A business entity with multiple producers.
@@ -1586,7 +1633,7 @@ enum EntityType {
   // - The agency is a separate legal entity from its producers
   // - Typically has business structure (LLC, Corporation, Partnership, etc.)
   //
-  // Use this type for traditional insurance agencies with multiple agents.
+  // Use this type for traditional insurance agencies with multiple producers.
   ENTITY_TYPE_AGENCY = 2;
 
   // Dynamic determination: Let the user select during onboarding.
@@ -1788,7 +1835,7 @@ message CreateAgencyOnboardingURLRequest {
     // Principal is the person responsible for the agency.
     // All fields within the Principal message are also optional.
     message Principal {
-      // Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+      // Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
       string tenant_id = 1 [(buf.validate.field) = {
         ignore: IGNORE_IF_DEFAULT_VALUE
         string: {max_len: 255}
@@ -1941,7 +1988,7 @@ message NewAgencyRequest {
         (buf.validate.field).string.min_len = 1,
         (buf.validate.field).string.max_len = 10
       ];
-      // Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
+      // Optional. External identifier for the principal in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this principal, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the principal in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Format: Any string identifier that is meaningful in your system (e.g., "USR-12345", "uuid"). Validation: Maximum length of 255 characters.
       string tenant_id = 6 [(buf.validate.field) = {
         ignore: IGNORE_IF_DEFAULT_VALUE
         string: {max_len: 255}
@@ -2073,7 +2120,7 @@ message NewAgencyRequest {
     repeated PointOfContact points_of_contact = 13;
 
     // RootOrganizationID represents the ID of the root organization that the agency belongs to.
-    // An example of a root organization is an Aggregator (Like AgencyHero) or an Agency Network.
+    // An example of a root organization is an Aggregator (Like Example Aggregator) or an Agency Network.
     // We currently don't support multiple levels of organizations or agencies.
     // Agencies are not always part of an organization, so this field is optional.
     // To get valid organization IDs, use the ListOrganizations RPC.
@@ -2106,8 +2153,8 @@ message NewAgencyRequest {
     }];
 
     // FEIN represents the Federal Employer Identification Number of the agency.
-    // Required for ENTITY_TYPE_AGENCY
-    // Not allowed for ENTITY_TYPE_SOLE_PROPRIETOR
+    // Required for ENTITY_TYPE_AGENCY if NPN is not provided.
+    // Accepted but not stored for ENTITY_TYPE_SOLE_PROPRIETOR.
     optional string fein = 16 [
       (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
       (buf.validate.field).string.len = 9
@@ -2421,16 +2468,74 @@ message GetAgencyFilesResponse {
   // URL of the license document.
   // An identification document that shows that the agency
   // is licensed to carry out its operations in the relevant jurisdictions.
-  // Deprecated: ProducerFlow does not collect this document, so it is always
+  // Deprecated: Producerflow does not collect this document, so it is always
   // empty.
   string license_doc_url = 4 [deprecated = true];
 
   // URL of the broker bond document.
   // It's a surety bond that a broker needs to operate legally,
   // providing financial security for clients.
-  // Deprecated: ProducerFlow does not collect this document, so it is always
+  // Deprecated: Producerflow does not collect this document, so it is always
   // empty.
   string broker_bond_doc_url = 5 [deprecated = true];
+
+  // ContractProvider is the e-signature provider a contract was sent through.
+  enum ContractProvider {
+    // The contract was recorded by hand, not sent through a provider.
+    CONTRACT_PROVIDER_UNSPECIFIED = 0;
+    CONTRACT_PROVIDER_DOCUSIGN = 1;
+    CONTRACT_PROVIDER_ADOBE_SIGN = 2;
+    CONTRACT_PROVIDER_DROPBOX_SIGN = 3;
+    CONTRACT_PROVIDER_SERTIFI = 4;
+  }
+
+  // Contract is a signed contract of the agency.
+  message Contract {
+    // Unique identifier of the contract (UUID format).
+    string contract_id = 1;
+
+    // Name of the contract: the template's name when it was sent, or the name
+    // given when it was uploaded. Empty when no name was recorded.
+    string name = 2;
+
+    // Provider the contract was sent through.
+    ContractProvider provider = 3;
+
+    // UTC day the provider sent the contract. Unset for a contract recorded by
+    // hand.
+    google.type.Date sent_date = 4;
+
+    // UTC day the contract was signed. Unset when no date was recorded.
+    google.type.Date signed_date = 5;
+
+    // URL of the signed contract PDF.
+    string download_url = 6;
+  }
+
+  // Document is a file uploaded to the agency under "Other documents".
+  message Document {
+    // Unique identifier of the document (UUID format).
+    string document_id = 1;
+
+    // Name the document is shown with in Producerflow.
+    string name = 2;
+
+    // When the document was last updated.
+    google.protobuf.Timestamp updated_at = 3;
+
+    // URL of the document.
+    string download_url = 4;
+  }
+
+  // Signed contracts of the agency, most recently sent or recorded first.
+  // Only contracts whose signed PDF is stored in Producerflow are returned: a
+  // contract that is not signed yet, or one marked as signed without a PDF,
+  // is left out.
+  repeated Contract contracts = 6;
+
+  // Files uploaded to the agency under "Other documents", most recently
+  // created first. Documents of the agency's producers are not included.
+  repeated Document other_documents = 7;
 }
 
 // UpdateProducerRequest contains the fields that can be updated in a producer record.
@@ -2456,7 +2561,7 @@ message UpdateProducerRequest {
     // If provided, must be a valid email format.
     // Must be unique within the tenant.
     // An internal producer's email cannot be changed here: it is their login,
-    // so the producer changes it through email verification in ProducerFlow.
+    // so the producer changes it through email verification in Producerflow.
     // Sending the email they already have is accepted.
     optional string email = 3 [(buf.validate.field).string.email = true];
 
@@ -2501,7 +2606,7 @@ message UpdateProducerRequest {
     // If provided, must be at least 5 characters.
     optional string zip = 9 [(buf.validate.field).string.min_len = 5];
 
-    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
     // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
     // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
     // Common use cases include:
@@ -2613,8 +2718,7 @@ message UpdateAgencyRequest {
     ];
 
     // List of requested appointments for the agency (state codes).
-    // The list contains a list of two-lettercd  country codes where the appointments are requested.
-    // The only valid values are the U.S country codes.
+    // Two-letter US state codes where the appointments are requested.
     repeated string requested_appointments = 5 [
       (buf.validate.field).repeated.unique = true,
       (buf.validate.field).repeated.items.string.pattern = "^[A-Z]{2}$"
@@ -2628,7 +2732,7 @@ message UpdateAgencyRequest {
     // Physical address of the agency.
     optional Address physical_address = 7;
 
-    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
     // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
     // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
     // Common use cases include:
@@ -2714,6 +2818,23 @@ message UpdateAgencyRequest {
     // organization it is moved from is ambiguous and the request fails with
     // FAILED_PRECONDITION. Detaching is exempt, as it removes every membership.
     optional string organization_id = 11 [(buf.validate.field).string.max_len = 36];
+
+    // Federal Employer Identification Number (FEIN) of an agency that has none,
+    // as 9 digits. NIPR requires it to appoint or terminate the agency in many
+    // states.
+    //
+    // Update behavior:
+    // - If not provided, empty, or equal to the agency's FEIN: nothing changes
+    // - If the agency has no FEIN: it is set, unless NIPR registers it under
+    //   another NPN (INVALID_ARGUMENT) or another agency of the same kind
+    //   (internal or external) already holds it (ALREADY_EXISTS)
+    // - If the agency already has a different FEIN: FAILED_PRECONDITION. A set
+    //   FEIN cannot be changed
+    // - For a sole proprietor, which has no agency FEIN: INVALID_ARGUMENT
+    optional string fein = 12 [
+      (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE,
+      (buf.validate.field).string.pattern = "^\\d{9}$"
+    ];
   }
 
   // The agency information to update.
@@ -2809,7 +2930,7 @@ message Agency {
     // This field is deprecated and will be removed in a future release.
     map<string, string> metadata_questions = 11 [deprecated = true];
 
-    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
     // This field allows tenants to attach arbitrary key-value pairs to agencies for their own business logic,
     // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
     // Common use cases include:
@@ -3075,8 +3196,8 @@ message Agency {
       string license_state = 2;
 
       // Indicates whether this is a resident or non-resident license.
-      // Values: "Resident" (license in the producer's home/domicile state) or
-      // "Non-Resident" (license in a state other than the home state).
+      // Values: "RESIDENT" (license in the producer's home/domicile state) or
+      // "NON_RESIDENT" (license in a state other than the home state).
       // A producer typically has one resident license and may hold multiple
       // non-resident licenses in other states where they conduct business.
       string residency_status = 3;
@@ -3417,7 +3538,7 @@ message Agency {
   optional AgencyOrganizationRelationship organization_relationship = 16;
 }
 
-// Producer represents an insurance producer (agent) with complete licensing
+// Producer represents an insurance producer with complete licensing
 // information.
 //
 // This message contains comprehensive producer information including:
@@ -3490,7 +3611,7 @@ message Producer {
     string external_id = 3;
 
     // ExternalMetadata contains additional custom information that the tenant
-    // stores in ProducerFlow's data model for the associated agency. The map
+    // stores in Producerflow's data model for the associated agency. The map
     // key is the metadata field name, and the value is the associated data.
     // Exposed here so callers do not need an extra GetAgency call to read it.
     map<string, string> external_metadata = 4;
@@ -3555,7 +3676,7 @@ message Producer {
       string license_state = 2;
 
       // Indicates whether this is a resident or non-resident license.
-      // Values are typically "Resident" or "Non-Resident".
+      // Values: "RESIDENT" or "NON_RESIDENT".
       string residency_status = 3;
 
       // Indicates whether the license is currently active.
@@ -3671,15 +3792,15 @@ message Producer {
 
       // Date of birth of the producer.
       google.protobuf.Timestamp date_of_birth = 4;
-      // Deprecated: producers in ProducerFlow are always individuals. NIPR does not
-      // return FEIN for individual agents; this field will always be empty.
+      // Deprecated: producers in Producerflow are always individuals. NIPR does not
+      // return FEIN for individual producers; this field will always be empty.
       string fein = 7 [deprecated = true];
 
-      // Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+      // Deprecated: producers in Producerflow are always individuals. NIPR does not
       // return a company name for individual agents; this field will always be empty.
       string company_name = 8 [deprecated = true];
 
-      // Deprecated: producers in ProducerFlow are always individuals. NIPR does not
+      // Deprecated: producers in Producerflow are always individuals. NIPR does not
       // return state of domicile for individual agents; this field will always be empty.
       string state_domicile = 9 [deprecated = true];
     }
@@ -3960,7 +4081,7 @@ message Producer {
   // This field is deprecated and will be removed in a future release.
   map<string, string> metadata_questions = 40 [deprecated = true];
 
-  // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+  // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
   // This field allows tenants to attach arbitrary key-value pairs to producers for their own business logic,
   // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
   // Common use cases include:
@@ -4109,9 +4230,9 @@ message NewProducer {
 
   // External identifier for the producer in the tenant's system.
   //
-  // Optional field that enables bi-directional synchronization between ProducerFlow
+  // Optional field that enables bi-directional synchronization between Producerflow
   // and your internal systems. This allows you to maintain your existing producer
-  // identifiers while leveraging ProducerFlow's capabilities.
+  // identifiers while leveraging Producerflow's capabilities.
   //
   // Usage Guidelines:
   // - Provide this when you have an existing identifier for the producer
@@ -4122,7 +4243,7 @@ message NewProducer {
   // Common Use Cases:
   // - Linking to an existing CRM or AMS system producer ID
   // - Maintaining synchronization with legacy systems
-  // - Enabling lookups from external systems back to ProducerFlow
+  // - Enabling lookups from external systems back to Producerflow
   // - Supporting data migration and system transitions
   //
   // Format: Any string identifier meaningful in your system (e.g., "PROD-12345", UUID)
@@ -4172,7 +4293,7 @@ message NewProducer {
   // - Specializations (e.g., "Areas of expertise")
   // - Internal classifications (e.g., "Producer tier", "Region")
   //
-  // Note: This data is stored but not validated by ProducerFlow. Ensure your
+  // Note: This data is stored but not validated by Producerflow. Ensure your
   // application handles any necessary validation of the responses.
   // Deprecated: Use tenant_additional_questions instead. This field will be removed in a future release.
   map<string, string> metadata_questions = 11 [deprecated = true];
@@ -4374,7 +4495,7 @@ message NewContact {
     not_in: [0]
   }];
 
-  // Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between ProducerFlow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to ProducerFlow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters
+  // Optional. External identifier for the contact in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for this contact, enabling bi-directional synchronization between Producerflow and the tenant's system. Usage: Provide this when you have an existing identifier for the contact in your system. Omit if you don't need to track a reference to your internal system. This is independent of Producerflow's internal IDs and the authentication tenant context. Can be used with SetExternalID RPC to update this value after creation. Common use cases: Linking to an existing CRM or AMS system contact ID. Maintaining synchronization with legacy systems. Enabling lookups from external systems back to Producerflow. Format: Any string identifier that is meaningful in your system (e.g., "CONT-12345", "uuid"). Validation: Maximum length of 255 characters
   string tenant_id = 8 [(buf.validate.field) = {
     ignore: IGNORE_IF_DEFAULT_VALUE
     string: {max_len: 255}
@@ -4471,7 +4592,7 @@ message Contact {
   // This field replaces the deprecated string-based 'role' field.
   ContactRole role_type = 11;
 
-  // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+  // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
   // This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
   // reporting, or integration needs.
   // The map key is the metadata field name, and the value is the associated data.
@@ -4593,7 +4714,7 @@ message UpdateContactRequest {
     // This replaces the entire address.
     optional Address address = 7;
 
-    // ExternalMetadata contains additional custom information that the tenant stores in ProducerFlow's data model.
+    // ExternalMetadata contains additional custom information that the tenant stores in Producerflow's data model.
     // This field allows tenants to attach arbitrary key-value pairs to contacts for their own business logic,
     // reporting, or integration needs. This field is populated programmatically via API calls by the tenant's systems.
     // Common use cases include:
@@ -4644,7 +4765,7 @@ message SetExternalIDRequest {
     option (buf.validate.oneof).required = true;
   }
 
-  // External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between ProducerFlow and the tenant's system. Purpose: Links ProducerFlow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of ProducerFlow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters
+  // External identifier to associate with the entity in the tenant's system. This field allows tenants to maintain a reference to their own internal ID for the specified entity (producer, agency, contact, or organization), enabling bi-directional synchronization between Producerflow and the tenant's system. Purpose: Links Producerflow entities to corresponding entities in external systems. Enables lookups and synchronization across systems. Maintains referential integrity with tenant's internal databases. Usage: Call this RPC after creating an entity if you need to add or update the external reference. This can also be provided during entity creation for producers and contacts. This is independent of Producerflow's internal IDs and the authentication tenant context. Relationship to authentication: The tenant context is determined by the API key used for authentication. This tenant_id field is purely for storing the tenant's own external identifier. Multiple tenants cannot share the same entity; each tenant has their own isolated data. Common use cases: Syncing with CRM systems (e.g., Salesforce IDs, HubSpot IDs). Integrating with AMS platforms (e.g., Applied Epic, Vertafore). Maintaining references to legacy system identifiers. Format: Any string identifier that is meaningful in your system (e.g., "SF-001234", "LEGACY-9876"). Validation: Must be non-empty, maximum length of 255 characters
   string tenant_id = 4 [(buf.validate.field).string = {
     min_len: 1
     max_len: 255
@@ -4725,6 +4846,54 @@ message LookupNPNByFEINResponse {
   string npn = 1;
 }
 
+// LookupNPNByLicenseRequest is used to look up the National Producer Number
+// (NPN) of the producer or agency holding a state license number.
+// This is a FREE operation using the NIPR NPN Lookup service.
+message LookupNPNByLicenseRequest {
+  // The license number issued by the state, as the state shows it.
+  // Dashes are ignored.
+  // Example: "0H12345"
+  string license_number = 1 [(buf.validate.field).string.min_len = 1];
+
+  // The two-letter code of the state that issued the license.
+  // Example: "CA"
+  string state = 2 [(buf.validate.field).string.len = 2];
+}
+
+// LookupNPNByLicenseResponse contains every producer and agency that NIPR finds
+// holding the license number in the state.
+message LookupNPNByLicenseResponse {
+  // LicenseHolder is a producer or agency that holds the license.
+  message LicenseHolder {
+    // Who NIPR issued the license to. A sole proprietor's own license comes
+    // back as TYPE_PRODUCER, even though Producerflow onboards it as an agency.
+    enum Type {
+      // Default unspecified value. Do not use.
+      TYPE_UNSPECIFIED = 0;
+
+      // An individual producer.
+      TYPE_PRODUCER = 1;
+
+      // An agency.
+      TYPE_AGENCY = 2;
+    }
+
+    // The National Producer Number (NPN) of the holder.
+    // Example: "1234567890"
+    string npn = 1;
+
+    // The holder's name as NIPR records it. Producers come as "Last, First Middle".
+    // Example: "Doe, John A"
+    string name = 2;
+
+    // Whether the holder is a producer or an agency.
+    Type type = 3;
+  }
+
+  // The holders found. Usually one.
+  repeated LicenseHolder holders = 1;
+}
+
 // ResyncAgencyRequest is used to trigger a manual resynchronization of agency data.
 // This will re-fetch all data from the NIPR API for the agency and all associated producers.
 message ResyncAgencyRequest {
@@ -4802,11 +4971,11 @@ message StopSyncAgencyWithNIPRResponse {}
 // most commonly needed fields for agency identification and basic contact
 // information.
 //
-// For complete agency information including NIPR data, licenses, appointments,
-// and associated producers, use the GetAgencyAndProducers RPC.
+// For complete agency information including NIPR data, licenses and
+// appointments, use GetAgency; for its producers, GetAgencyProducers.
 message AgencySummary {
   // Unique identifier for the agency (UUID format).
-  // Use this ID to retrieve full agency details via GetAgencyAndProducers.
+  // Use this ID to retrieve full agency details via GetAgency.
   string agency_id = 1;
 
   // The official name of the agency.
@@ -4901,7 +5070,7 @@ message ListAgenciesRequest {
 
   // Optional. Pagination parameters for controlling result set size and navigation.
   // If not provided, defaults to page_size=50 with no offset.
-  // Maximum allowed page_size is 200; values above this will be capped.
+  // Maximum allowed page_size is 200; values above this will be rejected.
   Pagination pagination = 3;
 
   // Optional. Filter by agency classification (internal vs external).
@@ -4938,8 +5107,8 @@ message ListAgenciesRequest {
 // navigation and total counts.
 //
 // The response is optimized for UI display with summary data only. For complete
-// agency information including NIPR data, use GetAgencyAndProducers with the
-// agency_id from the summary.
+// agency information including NIPR data, use GetAgency with the agency_id
+// from the summary.
 //
 // Pagination Notes:
 // - Results are always ordered by creation date (newest first)
@@ -5023,12 +5192,12 @@ message Organization {
   // - Include geographic or business unit identifiers when relevant
   // - Avoid special characters that may cause display issues
   //
-  // Examples: "West Coast Network", "AgencyHero Aggregator", "Premium Partners Group"
+  // Examples: "West Coast Network", "Example Aggregator", "Premium Partners Group"
   string name = 2;
 
   // External identifier for the organization.
   //
-  // This field maps the ProducerFlow organization to your internal system's
+  // This field maps the Producerflow organization to your internal system's
   // organization ID, enabling bi-directional synchronization and integration.
   //
   // Use Cases:
@@ -5097,8 +5266,8 @@ message ListOrganizationsResponse {
 
 // GetOrganizationRequest specifies which organization to retrieve detailed information for.
 //
-// Use this request to fetch comprehensive details about a specific organization,
-// including all agencies assigned to it and their current status.
+// Use this request to fetch an organization's id, name, external_id and
+// email.
 message GetOrganizationRequest {
   // Unique identifier of the organization to retrieve.
   //
