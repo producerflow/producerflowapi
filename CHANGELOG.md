@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### EventService (`producerflow.event.v2`)
 
-- **The log can now be read 30 days back, not 90.** A `checkpoint` older than 30 days is `OUT_OF_RANGE`, and `GetEvent` returns `NOT_FOUND` for events older than 30 days. Replaying an older checkpoint returns events again, so deduplicate on `id`
+- **The log can now be read 30 days back.** A `checkpoint` older than 30 days is `OUT_OF_RANGE`, and `GetEvent` returns `NOT_FOUND` for events older than 30 days. Replaying an older checkpoint returns events again, so deduplicate on `id`
 
 #### AppointmentService
 
