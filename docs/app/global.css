@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/* Cards with icons: pin icon to top, push title+description to bottom */
+[data-card] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-card] > div:first-child {
+  margin-bottom: 40px;
+}

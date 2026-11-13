@@ -1,0 +1,4 @@
+{
+  "title": "Appointments",
+  "pages": ["appointment-events", "operational-status"]
+}
