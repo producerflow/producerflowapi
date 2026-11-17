@@ -1,7 +1,7 @@
 {
   "id": "evt_appointment_987654321",
   "event_type": "appointment.updated",
-  "origin": "ProducerFlowAPI",
+  "origin": "ProducerFlowPortal",
   "timestamp": "2025-07-21T16:45:00Z",
   "appointment_id": "app_123456789",
   "producer_id": "prod_789123456",
@@ -17,7 +17,6 @@
     "status": "appointed",
     "license_number": "ca98765",
     "effective_date": "2025-01-15T00:00:00Z",
-    "termination_date": null,
     "reasons": ["license_verified", "background_check_passed"]
   },
   "operational_status": {

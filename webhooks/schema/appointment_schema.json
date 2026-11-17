@@ -14,6 +14,11 @@
       "minLength": 1,
       "description": "Type of event that occurred (e.g., 'appointment.updated', 'appointment.created')"
     },
+    "change_type": {
+      "type": "string",
+      "enum": ["Created", "Updated", "Deleted", "Transferred", "Retired"],
+      "description": "Deprecated: kept for compatibility with early consumers; use event_type"
+    },
     "origin": {
       "type": "string",
       "enum": ["ProducerFlowAPI", "ProducerFlowPortal"],
@@ -51,7 +56,7 @@
     },
     "producer_npn": {
       "type": "string",
-      "description": "Producer National Producer Number"
+      "description": "Producer National Producer Number, empty when the producer has none"
     },
     "appointment_data": {
       "type": "object",
@@ -118,7 +123,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["license_inactive", "license_expired", "eo_not_found", "eo_inactive", "eo_expired"]
+            "enum": ["license_inactive", "license_expired", "eo_not_found", "eo_inactive", "eo_expired", "state_appointment_terminated", "regulatory_action"]
           },
           "description": "Specific reasons why the appointment is considered at risk"
         },

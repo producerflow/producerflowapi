@@ -14,6 +14,11 @@
       "minLength": 1,
       "description": "Type of event that occurred (e.g., 'organization.created', 'organization.updated')"
     },
+    "change_type": {
+      "type": "string",
+      "enum": ["Created", "Updated", "Deleted", "Transferred", "Retired"],
+      "description": "Deprecated: kept for compatibility with early consumers; use event_type"
+    },
     "origin": {
       "type": "string",
       "description": "Source of the change",
