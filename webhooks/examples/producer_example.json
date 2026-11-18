@@ -25,6 +25,7 @@
     "address_line_2": "Apt 4B",
     "zip": "94105"
   },
+  "role": "Account Manager",
   "producer_nipr_data": {
     "birth_date": "1980-01-15",
     "business_email": "john.doe@business.com",

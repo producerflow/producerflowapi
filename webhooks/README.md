@@ -70,6 +70,7 @@ Triggered when producer/agent data is created, updated, or synchronized.
 **Key Data Included:**
 
 - Personal information (name, contact details, addresses)
+- Tenant-defined producer role (role), present on creation and resync when set, and on updates only when it changes
 - National Producer Number (NPN) and agency associations
 - Assigned physical locations where the producer operates
 - Background check results from Accurate Background

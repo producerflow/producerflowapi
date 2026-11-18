@@ -10,5 +10,5 @@
   "nipr_sync_status": "disabled",
   "replacement_agency_id": "agcy_replacement_456",
   "external_replacement_agency_id": "ext_agcy_replacement_456",
-  "reason": "acquired"
+  "reason": "acquired_or_merged"
 }

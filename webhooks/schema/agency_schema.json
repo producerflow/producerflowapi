@@ -389,7 +389,7 @@
     },
     "reason": {
       "type": "string",
-      "enum": ["acquired", "merged", "reorganized", "other"],
+      "enum": ["closed_business", "acquired_or_merged", "new_legal_entity", "stopped_working_with_us", "low_production", "license_or_compliance", "other"],
       "description": "Present only for 'agency.retired'. Why the agency retired"
     }
   },
